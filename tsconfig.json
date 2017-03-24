@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "removeComments": true,
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "target": "es5",
+        "strictNullChecks": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "baseUrl": ".",
+        "lib": [
+            "dom",
+            "es2015.promise",
+            "es2015.iterable",
+            "es2015.symbol"
+        ],
+        "typeRoots": [
+            "node_modules/@types",
+            "@types"
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

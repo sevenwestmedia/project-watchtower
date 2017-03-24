@@ -1,0 +1,29 @@
+{
+  "name": "project-watchtower",
+  "version": "0.0.1",
+  "description": "",
+  "publishConfig": {
+    "registry": "https://nexus.swmdigital.io/repository/js-private"
+  },
+  "scripts": {
+    "prepublish": "npm run build",
+    "lint": "./node_modules/.bin/tslint \"lib/**/**.ts?(x)\" -e \"**/*.d.ts\"",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "express": "^4.15.2",
+    "rimraf": "^2.5.4",
+    "sass-lint": "^1.10.2",
+    "tslint": "^4.3.1",
+    "tslint-react": "^2.5.0",
+    "typescript": "^2.2.1"
+  },
+  "peerDependencies": {
+    "express": "^4.15.2"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": "6.10.0"
+  }
+}
