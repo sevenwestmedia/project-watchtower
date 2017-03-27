@@ -1,0 +1,16 @@
+{
+  "name": "project-name",
+  "version": "0.0.1",
+  "description": "",
+  "publishConfig": {
+    "registry": "https://nexus.swmdigital.io/repository/js-private"
+  },
+  "scripts": {
+    "build": "project-watchtower build"
+  },
+  "keywords": [],
+  "dependencies": {},
+  "engines": {
+    "node": "6.10.0"
+  }
+}

@@ -17,19 +17,9 @@
             "es2015.promise",
             "es2015.iterable",
             "es2015.symbol"
-        ],
-        "typeRoots": [
-            "node_modules/@types",
-            "@types"
         ]
     },
     "exclude": [
-        "node_modules",
-        "skeleton",
-        "demo"
-    ],
-    "include": [
-        "bin",
-        "lib"
+        "node_modules"
     ]
 }
