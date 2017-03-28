@@ -1,64 +1,30 @@
-import * as fs from 'fs'
-import * as path from 'path'
 import * as webpack from 'webpack'
+import { printWebpackStats } from '../build/util'
+import { ENVIRONMENTS, getWebpackConfig } from '../build/build'
 
-const TARGETS = ['server', 'client']
-const ENVIRONMENTS = ['dev', 'prod']
+const buildTarget = (target: string, environment: string = 'prod') => (
+    new Promise((resolve, reject) => {
+        const config = getWebpackConfig(target, environment)
 
-const root = process.cwd()
-
-const buildTarget = (target: string, environment: string = 'prod') => {
-
-    if (TARGETS.indexOf(target) === -1) {
-        console.error(`Unknown target: "${target}"! `
-            + `Known values are: ${TARGETS.join(', ')}`)
-        return Promise.reject('')
-    }
-
-    if (ENVIRONMENTS.indexOf(environment) === -1) {
-        console.error(`Unknown environment: "${environment}"! `
-            + `Known values are: ${ENVIRONMENTS.join(', ')}`)
-        return Promise.reject('')
-    }
-
-    const configFileName = `webpack.${target}.${environment}`
-    const customConfigFile = path.resolve(root, 'config', configFileName)
-
-    let config: webpack.Configuration
-
-    try {
-        if (fs.existsSync(customConfigFile + '.js')) {
-            config = require(customConfigFile).default
-            // tslint:disable-next-line no-console
-            console.info('Using custom config file ' + customConfigFile)
-        } else {
-            // tslint:disable-next-line no-console
-            console.info('Building ' + configFileName + '...')
-            config = require('../build/config/' + configFileName).default
+        if (!config) {
+            return reject(`Could not load webpack configuration for ${target}/${environment}!`)
         }
-    } catch (e) {
-        console.error('Error loading webpack config!', e)
-        return Promise.reject(e)
-    }
 
-    const compiler = webpack(config)
+        const compiler = webpack(config)
 
-    return new Promise((resolve, reject) => {
         compiler.run((err, stats) => {
             if (err) {
                 console.error(err)
                 reject(err)
             } else {
-                // tslint:disable-next-line no-console
-                console.log(stats.toString())
+                printWebpackStats(stats)
                 resolve()
             }
         })
     })
-}
+)
 
 const build = (args: string[]) => {
-
     if (args.length && ENVIRONMENTS.indexOf(args[0]) !== -1) {
         return Promise.all([
             buildTarget('server', args[0]),
@@ -72,7 +38,6 @@ const build = (args: string[]) => {
             buildTarget('client', 'prod'),
         ])
     }
-
 }
 
 export default build

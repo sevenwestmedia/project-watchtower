@@ -40,10 +40,10 @@ By default, Project Watchtower uses its own webpack configuration files. If you 
 Example:
 
 ```ts
-import { extendWebpackConfig, clientDevConfig } from 'project-watchtower/lib/build'
+import { extendWebpackConfig, getDefaultWebpackConfig } from 'project-watchtower/lib/build'
 
 const config = extendWebpackConfig(
-    clientDevConfig,
+    getDefaultWebpackConfig('server', 'prod'),
     {
         // ...
     }
@@ -89,11 +89,12 @@ npm pack
 
 In the project you want to use it, add the `.tgz` file as a dependency:
 ```
-yarn add file:/../project-watchtower
+yarn add file:/../project-watchtower-0.0.1.tgz
 ```
 
 To update:
 ```
+yarn remove project-watchtower
 yarn cache clean
-yarn install
+yarn add file:/../project-watchtower-0.0.1.tgz
 ```
