@@ -6,6 +6,7 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "target": "es5",
+        "jsx": "react",
         "strictNullChecks": true,
         "noImplicitReturns": true,
         "noUnusedLocals": true,

@@ -7,18 +7,18 @@ const ENVIRONMENTS = ['dev', 'prod']
 
 const root = process.cwd()
 
-const buildTarget = (target: string, environment: string = ENVIRONMENTS[0]) => {
+const buildTarget = (target: string, environment: string = 'prod') => {
 
     if (TARGETS.indexOf(target) === -1) {
         console.error(`Unknown target: "${target}"! `
             + `Known values are: ${TARGETS.join(', ')}`)
-        return
+        return Promise.reject('')
     }
 
     if (ENVIRONMENTS.indexOf(environment) === -1) {
         console.error(`Unknown environment: "${environment}"! `
             + `Known values are: ${ENVIRONMENTS.join(', ')}`)
-        return
+        return Promise.reject('')
     }
 
     const configFileName = `webpack.${target}.${environment}`
@@ -26,35 +26,51 @@ const buildTarget = (target: string, environment: string = ENVIRONMENTS[0]) => {
 
     let config: webpack.Configuration
 
-    if (fs.existsSync(customConfigFile + '.js')) {
-        config = require(customConfigFile).default
-        // tslint:disable-next-line no-console
-        console.info('Using custom config file ' + customConfigFile)
-    } else {
-        // tslint:disable-next-line no-console
-        console.info('Building ' + configFileName + '...')
-        config = require('../build/' + configFileName).default
+    try {
+        if (fs.existsSync(customConfigFile + '.js')) {
+            config = require(customConfigFile).default
+            // tslint:disable-next-line no-console
+            console.info('Using custom config file ' + customConfigFile)
+        } else {
+            // tslint:disable-next-line no-console
+            console.info('Building ' + configFileName + '...')
+            config = require('../build/config/' + configFileName).default
+        }
+    } catch (e) {
+        console.error('Error loading webpack config!', e)
+        return Promise.reject(e)
     }
 
     const compiler = webpack(config)
 
-    compiler.run((err, stats) => {
-        if (err) {
-            console.error(err)
-        } else {
-            // tslint:disable-next-line no-console
-            console.log(stats.toString())
-        }
+    return new Promise((resolve, reject) => {
+        compiler.run((err, stats) => {
+            if (err) {
+                console.error(err)
+                reject(err)
+            } else {
+                // tslint:disable-next-line no-console
+                console.log(stats.toString())
+                resolve()
+            }
+        })
     })
 }
 
 const build = (args: string[]) => {
 
-    if (args.length) {
-        buildTarget(args[0], args[1])
+    if (args.length && ENVIRONMENTS.indexOf(args[0]) !== -1) {
+        return Promise.all([
+            buildTarget('server', args[0]),
+            buildTarget('client', args[0]),
+        ])
+    } else if (args.length >= 2) {
+        return buildTarget(args[0], args[1])
     } else {
-        buildTarget('server', 'prod')
-        buildTarget('client', 'prod')
+        return Promise.all([
+            buildTarget('server', 'prod'),
+            buildTarget('client', 'prod'),
+        ])
     }
 
 }

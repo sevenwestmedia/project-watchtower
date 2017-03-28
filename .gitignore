@@ -158,7 +158,8 @@ webpack-assets.json
 
 
 ### Generated files ###
-dist/
 .idea/
 
 lib/**/*.js
+lib/**/*.d.ts
+*.tgz

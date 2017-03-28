@@ -1,0 +1,7 @@
+.vscode
+@types
+demo/
+*.tgz
+*.ts
+*.tsx
+!*.d.ts

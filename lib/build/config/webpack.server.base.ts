@@ -3,19 +3,11 @@ import * as path from 'path'
 import * as webpack from 'webpack'
 import * as merge from 'webpack-merge'
 import baseConfig from './webpack.base'
-import PATHS from './paths'
+import PATHS from '../paths'
 
 const { SERVER_ENTRY, SERVER_OUTPUT, PUBLIC_PATH, BASE } = PATHS
 
-const getExternals = () => {
-    const nodeModules = fs.readdirSync(path.resolve(BASE, 'node_modules'))
-    const externals = nodeModules.reduce((ext: any, mod) => {
-        ext[mod] = `commonjs ${mod}`
-        return ext
-    }, {})
-
-    return externals
-}
+const nodeModules = fs.readdirSync(path.resolve(BASE, 'node_modules'))
 
 const serverBaseConfig = merge(baseConfig, {
     target: 'node',
@@ -41,7 +33,14 @@ const serverBaseConfig = merge(baseConfig, {
         __filename: true,
         __dirname: true,
     },
-    externals: getExternals(),
+    externals: (_context, request, callback) => {
+        const moduleName = request.split('/')[0]
+        if (nodeModules.indexOf(moduleName) !== -1) {
+            callback(null, 'commonjs ' + request)
+        } else {
+            (callback as any)()
+        }
+    },
     plugins: [
         new webpack.BannerPlugin({
             banner: 'require("source-map-support").install();',

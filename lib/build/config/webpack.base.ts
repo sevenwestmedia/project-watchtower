@@ -1,10 +1,10 @@
 import * as path from 'path'
 import * as webpack from 'webpack'
 import { CheckerPlugin } from 'awesome-typescript-loader'
-import PATHS from './paths'
+import PATHS from '../paths'
 
 const { BASE } = PATHS
-const DISABLE_TYPECHECK = process.env.DISABLE_TYPECHECK === 'true'
+const DISABLE_TYPECHECK = process.env.FAST_MODE === 'true'
 
 const baseConfig: webpack.Configuration = {
     devtool: 'source-map',
@@ -35,9 +35,7 @@ const baseConfig: webpack.Configuration = {
             {
                 test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader',
-                exclude: [
-                    path.resolve(BASE, 'node_modules'),
-                ],
+                exclude: /node_modules/,
                 options: {
                     transpileOnly: DISABLE_TYPECHECK,
                     useTranspileModule: DISABLE_TYPECHECK,
