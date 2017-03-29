@@ -1,3 +1,8 @@
-export { default as getAssetLocations } from './assets'
+import * as configModule from './config'
+import * as assetsModule from './assets'
+
 export { default as extendWebpackConfig } from './extend'
-export { getWebpackConfig, getDefaultWebpackConfig, TARGETS, ENVIRONMENTS } from './build'
+export { getWebpackConfig, getDefaultWebpackConfig } from './build'
+
+export const config = configModule
+export const assets = assetsModule

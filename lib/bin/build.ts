@@ -1,8 +1,9 @@
 import * as webpack from 'webpack'
 import { printWebpackStats } from '../build/util'
-import { ENVIRONMENTS, getWebpackConfig } from '../build/build'
+import { ENVIRONMENTS, getWebpackConfig, TARGETS } from '../build/build'
+import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
 
-const buildTarget = (target: string, environment: string = 'prod') => (
+const buildTarget = (target: BuildTarget, environment: BuildEnvironment = 'prod') => (
     new Promise((resolve, reject) => {
         const config = getWebpackConfig(target, environment)
 
@@ -24,20 +25,38 @@ const buildTarget = (target: string, environment: string = 'prod') => (
     })
 )
 
-const build = (...args: string[]) => {
-    if (args.length && ENVIRONMENTS.indexOf(args[0]) !== -1) {
-        return Promise.all([
-            buildTarget('server', args[0]),
-            buildTarget('client', args[0]),
-        ])
-    } else if (args.length >= 2) {
-        return buildTarget(args[0], args[1])
-    } else {
-        return Promise.all([
-            buildTarget('server', 'prod'),
-            buildTarget('client', 'prod'),
-        ])
+const getBuildEnvironment = (args: BuildParam[]) => {
+    for (const arg of args) {
+        if ((ENVIRONMENTS as string[]).indexOf(arg) !== -1) {
+            return arg as BuildEnvironment
+        }
     }
+    return 'prod'
+}
+
+const getBuildTargets = (args: BuildParam[]) => {
+    for (const arg of args) {
+        if ((TARGETS as string[]).indexOf(arg) !== -1) {
+            return [arg] as BuildTarget[]
+        }
+    }
+    return ['server', 'client'] as BuildTarget[]
+}
+
+/**
+ * Builds one or all targets in a specified environment
+ * @param args
+ *  [<target>] [<environment>]
+ *  - target defaults to both server and client
+ *  - environment defaults to prod
+ */
+const build = (...args: BuildParam[]) => {
+    const targets = getBuildTargets(args)
+    const environment = getBuildEnvironment(args)
+
+    return Promise.all(
+        targets.map((target) => buildTarget(target, environment)),
+    )
 }
 
 export default build

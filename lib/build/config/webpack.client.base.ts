@@ -6,6 +6,8 @@ import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as AssetsPlugin from 'assets-webpack-plugin'
 import baseConfig from './webpack.base'
 import PATHS from '../paths'
+import { updateAssetLocations } from '../assets'
+import { Assets } from '../../types'
 
 const { CLIENT_ENTRY, CLIENT_OUTPUT, CLIENT_POLYFILLS, PUBLIC_PATH } = PATHS
 
@@ -25,6 +27,12 @@ if (fs.existsSync(CLIENT_POLYFILLS)) {
     ]
 }
 
+/**
+ * Base webpack config for the client that is used both in development and production
+ * - Compile SCSS to CSS and extract into external assets
+ * - Create assets.json that maps the created assets to their locations
+ * -
+ */
 const clientBaseConfig = merge(baseConfig, {
     entry,
     output: {
@@ -65,14 +73,20 @@ const clientBaseConfig = merge(baseConfig, {
         ],
     },
     plugins: [
-        new AssetsPlugin({ filename: 'assets.json' }),
-        new ExtractTextPlugin('css/[name].[contenthash:8].css'),
+        new AssetsPlugin({
+            filename: 'assets.json',
+            processOutput: (assets: Assets) => {
+                updateAssetLocations(assets)
+                return JSON.stringify(assets)
+            },
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks: (module: { context: string }) => (
                 module.context
                 && module.context.indexOf('node_modules') !== -1
                 && module.context.indexOf('swm-component-library') === -1
+                && module.context.indexOf('redux-data-loader') === -1
             ),
         }),
     ]

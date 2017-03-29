@@ -5,9 +5,7 @@
   "private": true,
   "scripts": {
     "build": "pwt build",
-    "build:dev": "pwt build dev",
-    "start": "pwt start",
-    "start:watch": "pwt start watch"
+    "start": "pwt start"
   },
   "keywords": [],
   "dependencies": {

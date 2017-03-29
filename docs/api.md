@@ -20,11 +20,12 @@ Leaving the environment out builds for production by default
 ### start
 
 ```
-pwt start [watch] [fast]
+pwt start [watch] [fast] [prod]
 ```
 
 *   `watch`: Enable watch mode and rebuild client after changes
 *   `fast`: Disable TypeScript type checking for faster incremental builds
+*   `prod`: Set `NODE_ENV` to `"production"`
 
 ### Programmatic Usage
 
@@ -38,16 +39,41 @@ build('server', 'prod')
 
 ## JavaScript
 
-`project-watchtower/lib/build`
+All functional areas are available as a top-level import from the `project-watchtower` module. However, deep imports are preferred, which is especially important on the client where we don't want unnecessary code bundled up.
+
+`project-watchtower/lib/build/assets`
 
 ```ts
 getAssetLocations(): Assets
+
+getCssAssetHtml(): string
+
+getJsAssetHtml(): string
+
+addAssetsToHtml(html: string): string
+```
+
+`project-watchtower/lib/build/build`
+
+```ts
+getWebpackConfig(
+    target: BuildTarget,
+    environment: BuildEnvironment
+): webpack.Configuration
+
+getDefaultWebpackConfig(
+    target: BuildTarget,
+    environment: BuildEnvironment
+): webpack.Configuration
+```
+
+`project-watchtower/lib/build/extend`
+
+```ts
 extendWebpackConfig(
     baseConfig: webpack.Configuration,
-    newConfig: Partial<webpack.Configuration>,
+    newConfig: Partial<webpack.Configuration>
 ): webpack.Configuration
-getWebpackConfig(target, environment): webpack.Configuration
-getDefaultWebpackConfig(target, environment): webpack.Configuration
 ```
 
 ### Types

@@ -4,8 +4,14 @@ import { CheckerPlugin } from 'awesome-typescript-loader'
 import PATHS from '../paths'
 
 const { BASE } = PATHS
-const DISABLE_TYPECHECK = process.env.FAST_MODE === 'true'
+const disableTypeCheck = process.env.START_FAST_MODE === 'true'
 
+/**
+ * Base webpack configuration that is shared by the server and the client
+ * - load original source maps from custom SWM dependencies
+ * - compile TypeScript to JavaScript
+ * - handle static files (images and fonts)
+ */
 const baseConfig: webpack.Configuration = {
     devtool: 'source-map',
     resolve: {
@@ -37,8 +43,8 @@ const baseConfig: webpack.Configuration = {
                 loader: 'awesome-typescript-loader',
                 exclude: /node_modules/,
                 options: {
-                    transpileOnly: DISABLE_TYPECHECK,
-                    useTranspileModule: DISABLE_TYPECHECK,
+                    transpileOnly: disableTypeCheck,
+                    useTranspileModule: disableTypeCheck,
                 },
             },
             {

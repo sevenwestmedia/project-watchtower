@@ -65,3 +65,9 @@ export default customPaths
     pwt start [watch] [fast]
 
 Starts the server, using the environment variables defined in `.env`
+
+### Environment Variables
+
+*   `NODE_ENV`: set to `"production"` or `"development` depending on the `prod` flag
+*   `START_WATCH_MODE`: set to `"true"` by the `watch` flag
+*   `START_FAST_MODE`: set to `"true"` by the `fast` flag

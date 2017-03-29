@@ -9,6 +9,12 @@ const { SERVER_ENTRY, SERVER_OUTPUT, PUBLIC_PATH, BASE } = PATHS
 
 const nodeModules = fs.readdirSync(path.resolve(BASE, 'node_modules'))
 
+/**
+ * Base Webpack config for the server that is used in both development and production
+ * - Ignore SCSS files
+ * - treat everything in node_modules as an external dependency
+ * - add source-map-support to every file
+ */
 const serverBaseConfig = merge(baseConfig, {
     target: 'node',
     entry: {
@@ -34,6 +40,7 @@ const serverBaseConfig = merge(baseConfig, {
         __dirname: true,
     },
     externals: (_context, request, callback) => {
+        // treat deep imports as externals as well
         const moduleName = request.split('/')[0]
         if (nodeModules.indexOf(moduleName) !== -1) {
             callback(null, 'commonjs ' + request)

@@ -1,13 +1,31 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as webpack from 'webpack'
+import { BuildEnvironment, BuildTarget } from '../types'
 
-export const TARGETS = ['server', 'client']
-export const ENVIRONMENTS = ['dev', 'prod', 'base']
+export const TARGETS: BuildTarget[] = [
+    'server',
+    'client',
+]
+
+export const ENVIRONMENTS: BuildEnvironment[] = [
+    'dev',
+    'prod',
+    'base',
+]
 
 const root = process.cwd()
 
-export const getWebpackConfig = (target: string, environment: string, forceDefault = false) => {
+/**
+ * Get the webpack configuration for a given target and environment.
+ * This will be the custom configuration if a file is present in
+ * config/webpack.<target>.<environment>.js, or the default one otherwise
+ */
+export const getWebpackConfig = (
+    target: BuildTarget,
+    environment: BuildEnvironment,
+    forceDefault = false,
+) => {
     if (TARGETS.indexOf(target) === -1) {
         console.error(`Unknown target: "${target}"! `
             + `Known values are: ${TARGETS.join(', ')}`)
@@ -43,6 +61,10 @@ export const getWebpackConfig = (target: string, environment: string, forceDefau
     }
 }
 
-export const getDefaultWebpackConfig = (target: string, environment: string) => (
+/**
+ * Get the default webpack configuration for a given target and environment.
+ * Use this to create a custom configuration that extends the default one.
+ */
+export const getDefaultWebpackConfig = (target: BuildTarget, environment: BuildEnvironment) => (
     getWebpackConfig(target, environment, true)
 )

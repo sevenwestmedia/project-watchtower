@@ -1,11 +1,22 @@
 import * as fs from 'fs'
 import * as path from 'path'
+import PATHS from './paths'
 import { Assets } from '../types'
 
 const root = process.cwd()
 const assetsFile = path.resolve(root, 'assets.json')
+const watchMode = process.env.START_WATCH_MODE === 'true'
+const { PUBLIC_PATH } = PATHS
 
-let assets: Assets
+let assets: Assets = {
+    main: {
+        js: PUBLIC_PATH + 'main.js',
+        css: PUBLIC_PATH + 'main.css',
+    },
+    vendor: {
+        js: PUBLIC_PATH + 'vendor.js',
+    },
+}
 
 try {
     const assetsFileContents = fs.readFileSync(assetsFile)
@@ -14,6 +25,42 @@ try {
     console.error('Error reading assets.json!', e)
 }
 
-const getAssetLocations = () => assets
+export const updateAssetLocations = (newAssets: Assets) => {
+    assets = newAssets
+}
 
-export default getAssetLocations
+export const getAssetLocations = () => assets
+
+/**
+ * Returns a HTML snippet for all CSS assets
+ */
+export const getCssAssetHtml = () => (
+    `<link rel="stylesheet" type="text/css" href="${assets.main.css}${watchMode
+        ? '?' + Date.now()
+        : ''
+    }" />`
+)
+
+/**
+ * Returns a HTML snippet for all JavaScript assets
+ */
+export const getJsAssetHtml = () => (
+    `<script src="${assets.vendor.js}"></script>
+    <script src="${assets.main.js}" async></script>`
+)
+
+/**
+ * Inserts all assets into a given HTML document string
+ */
+export const addAssetsToHtml = (html: string) => {
+    let modifiedHtml = html
+    modifiedHtml = modifiedHtml.replace(
+        '</head>',
+        getCssAssetHtml() + '</head>',
+    )
+    modifiedHtml = modifiedHtml.replace(
+        '</body>',
+        getJsAssetHtml() + '</body>',
+    )
+    return modifiedHtml
+}

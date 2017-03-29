@@ -2,6 +2,9 @@ import * as webpack from 'webpack'
 import * as merge from 'webpack-merge'
 import serverBaseConfig from './webpack.server.base'
 
+/**
+ * Webpack config for the server in production
+ */
 const config = merge(serverBaseConfig, {
     plugins: [
         new webpack.DefinePlugin({
