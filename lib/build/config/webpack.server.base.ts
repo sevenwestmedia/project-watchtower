@@ -3,7 +3,7 @@ import * as path from 'path'
 import * as webpack from 'webpack'
 import * as merge from 'webpack-merge'
 import baseConfig from './webpack.base'
-import PATHS from '../paths'
+import PATHS from './paths'
 
 const { SERVER_ENTRY, SERVER_OUTPUT, PUBLIC_PATH, BASE } = PATHS
 

@@ -1,5 +1,5 @@
 import * as express from 'express'
-import { addAssetsToHtml } from 'project-watchtower/lib/build/assets'
+import { addAssetsToHtml } from 'project-watchtower/lib/server/assets'
 
 const app = express()
 app.use(express.static('public'))

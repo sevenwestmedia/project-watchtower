@@ -49,18 +49,6 @@ build('server', 'prod')
 
 All functional areas are available as a top-level import from the `project-watchtower` module. However, deep imports are preferred, which is especially important on the client where we don't want unnecessary code bundled up.
 
-`project-watchtower/lib/build/assets`
-
-```ts
-getAssetLocations(): Assets
-
-getCssAssetHtml(): string
-
-getJsAssetHtml(): string
-
-addAssetsToHtml(html: string): string
-```
-
 `project-watchtower/lib/build/build`
 
 ```ts
@@ -82,6 +70,24 @@ extendWebpackConfig(
     baseConfig: webpack.Configuration,
     newConfig: Partial<webpack.Configuration>
 ): webpack.Configuration
+```
+
+`project-watchtower/lib/clean`
+
+```ts
+default clean(paths: string | string[]) => Promise<any>
+```
+
+`project-watchtower/lib/server/assets`
+
+```ts
+getAssetLocations(): Assets
+
+getCssAssetHtml(): string
+
+getJsAssetHtml(): string
+
+addAssetsToHtml(html: string): string
 ```
 
 ### Types

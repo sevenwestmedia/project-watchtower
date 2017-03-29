@@ -1,5 +1,5 @@
-import doClean from '../build/clean'
-import PATHS from '../build/paths'
+import doClean from '../clean'
+import PATHS from '../build/config/paths'
 
 const { CLIENT_OUTPUT, SERVER_OUTPUT } = PATHS
 

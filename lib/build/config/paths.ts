@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { Paths, PathsOverride } from '../types'
+import { Paths, PathsOverride } from '../../types'
 
 const root = process.cwd()
 

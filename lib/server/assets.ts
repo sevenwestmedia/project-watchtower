@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import PATHS from './paths'
+import PATHS from '../build/config/paths'
 import { Assets } from '../types'
 
 const root = process.cwd()

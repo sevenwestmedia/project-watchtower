@@ -1,8 +1,8 @@
 import * as webpack from 'webpack'
 import { printWebpackStats } from '../build/util'
 import { ENVIRONMENTS, getWebpackConfig, TARGETS } from '../build/build'
-import clean from '../build/clean'
-import PATHS from '../build/paths'
+import clean from '../clean'
+import PATHS from '../build/config/paths'
 import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
 
 const { CLIENT_OUTPUT, SERVER_OUTPUT } = PATHS

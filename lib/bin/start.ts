@@ -1,6 +1,6 @@
 import * as path from 'path'
 import { EnvCmd } from 'env-cmd'
-import PATHS from '../build/paths'
+import PATHS from '../build/config/paths'
 import { StartParam } from '../types'
 
 const { SERVER_OUTPUT } = PATHS

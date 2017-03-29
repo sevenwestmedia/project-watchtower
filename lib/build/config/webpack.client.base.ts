@@ -5,8 +5,8 @@ import * as autoprefixer from 'autoprefixer'
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as AssetsPlugin from 'assets-webpack-plugin'
 import baseConfig from './webpack.base'
-import PATHS from '../paths'
-import { updateAssetLocations } from '../assets'
+import PATHS from './paths'
+import { updateAssetLocations } from '../../server/assets'
 import { Assets } from '../../types'
 
 const { CLIENT_ENTRY, CLIENT_OUTPUT, CLIENT_POLYFILLS, PUBLIC_PATH } = PATHS

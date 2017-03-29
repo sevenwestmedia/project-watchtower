@@ -10,3 +10,5 @@ export const bin = {
 }
 
 export const build = buildModule
+
+export { default as clean } from './clean'
