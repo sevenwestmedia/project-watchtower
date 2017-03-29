@@ -24,7 +24,7 @@ const buildTarget = (target: string, environment: string = 'prod') => (
     })
 )
 
-const build = (args: string[]) => {
+const build = (...args: string[]) => {
     if (args.length && ENVIRONMENTS.indexOf(args[0]) !== -1) {
         return Promise.all([
             buildTarget('server', args[0]),

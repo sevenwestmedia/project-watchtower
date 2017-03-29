@@ -9,11 +9,11 @@ const commandArgs = args.slice(1)
 switch (command) {
 
     case 'build':
-        build(commandArgs)
+        build(...commandArgs)
         break
 
     case 'start':
-        start(commandArgs)
+        start(...commandArgs)
         break
 
     default:
@@ -25,6 +25,8 @@ Scripts:
 
     build [<target> <environment>]
     start [watch] [fast]
+
+Refer to docs/api.md for the full API documentation
 `)
 
 }

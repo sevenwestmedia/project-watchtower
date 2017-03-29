@@ -4,7 +4,7 @@ import PATHS from '../build/paths'
 
 const { SERVER_OUTPUT } = PATHS
 
-export const start = (args: string[]) => {
+export const start = (...args: string[]) => {
 
     if (args.indexOf('watch') !== -1) {
         process.env.WATCH_MODE = 'true'
