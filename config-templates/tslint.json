@@ -1,0 +1,117 @@
+{
+    "extends": [
+        "tslint:latest",
+        "tslint-react"
+    ],
+    "rules": {
+        // react specific rules
+        "jsx-alignment": true,
+        "jsx-no-lambda": "never",
+        // @TODO decide if we want to use this rule
+        "jsx-no-multiline-js": false,
+        "jsx-no-string-ref": true,
+        "jsx-self-close": true,
+        "jsx-wrap-multiline": true,
+        // @TODO swap to using arrow parens with ban-single-arg-parens
+        // https://palantir.github.io/tslint/rules/arrow-parens/
+
+        // js rules
+        "class-name": true,
+        "comment-format": [
+            true,
+            "check-space"
+        ],
+        "curly": true,
+        "eofline": true,
+        "forin": true,
+        "indent": [
+            true,
+            "spaces"
+        ],
+        // @TODO decide if we want to use this rule
+        "interface-name": [
+            false
+        ],
+        "interface-over-type-literal": false,
+        "label-position": true,
+        "max-line-length": [
+            true,
+            100
+        ],
+        // @TODO decide if we want to use this rule
+        "member-access": false,
+        "no-arg": true,
+        "no-bitwise": true,
+        "no-console": [
+            true,
+            "log",
+            "debug",
+            "info",
+            "time",
+            "timeEnd",
+            "trace"
+        ],
+        "no-construct": true,
+        "no-debugger": true,
+        "no-duplicate-variable": true,
+        "no-empty": false,
+        "no-eval": true,
+        "no-shadowed-variable": true,
+        "no-string-literal": true,
+        "no-switch-case-fall-through": true,
+        "trailing-comma": [
+            true,
+            // @TODO investigate turning off for types
+            // https://palantir.github.io/tslint/rules/trailing-comma/
+            { "multiline": "always", "singleline": "never" }
+        ],
+        "no-trailing-whitespace": true,
+        "no-unused-expression": true,
+        "no-use-before-declare": true,
+        "no-var-keyword": true,
+        // @TODO decide if we want to use this rule
+        "object-literal-key-quotes": [true, "as-needed"],
+        // @TODO decide if we want to use this rule
+        "object-literal-sort-keys": false,
+        "one-line": [
+            true,
+            "check-open-brace",
+            "check-catch",
+            "check-else",
+            "check-whitespace"
+        ],
+        // @TODO decide if we want to use this rule
+        "ordered-imports": [
+            false
+        ],
+        "radix": true,
+        "semicolon": [
+            true,
+            "never"
+        ],
+        "triple-equals": [
+            true,
+            "allow-null-check"
+        ],
+        "variable-name": [
+            true,
+            "check-format",
+            "allow-leading-underscore",
+            "allow-pascal-case",
+            "ban-keywords"
+        ],
+        "whitespace": [
+            true,
+            "check-branch",
+            "check-decl",
+            "check-operator",
+            "check-separator",
+            "check-type"
+        ],
+        "quotemark": [
+            true,
+            "single",
+            "jsx-double"
+        ]
+    }
+}

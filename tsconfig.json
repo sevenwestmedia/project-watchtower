@@ -1,25 +1,10 @@
 {
+    "extends": "./config-templates/tsconfig.json",
     "compilerOptions": {
         "removeComments": false,
-        "sourceMap": true,
         "inlineSources": true,
-        "noImplicitAny": true,
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "target": "es5",
-        "strictNullChecks": true,
-        "noImplicitReturns": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
         "declaration": true,
         "baseUrl": ".",
-        "lib": [
-            "dom",
-            "es5",
-            "es2015.promise",
-            "es2015.iterable",
-            "es2015.symbol"
-        ],
         "typeRoots": [
             "node_modules/@types",
             "@types"

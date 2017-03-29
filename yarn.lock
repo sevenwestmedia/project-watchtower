@@ -3857,7 +3857,7 @@ tslint-react@^2.5.0:
   version "2.5.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/tslint-react/-/tslint-react-2.5.0.tgz#94cd6143f6ae825c47f242c5146fc89caeadeae2"
 
-tslint@^4.3.1:
+tslint@^4.5.1:
   version "4.5.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/tslint/-/tslint-4.5.1.tgz#05356871bef23a434906734006fc188336ba824b"
   dependencies:
@@ -3906,9 +3906,9 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://nexus.swmdigital.io/repository/js-combined/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript@^2.2.1:
-  version "2.2.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/typescript/-/typescript-2.2.1.tgz#4862b662b988a4c8ff691cc7969622d24db76ae9"
+typescript@^2.2.2:
+  version "2.2.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/typescript/-/typescript-2.2.2.tgz#606022508479b55ffa368b58fee963a03dfd7b0c"
 
 uglify-js@^2.8.5:
   version "2.8.16"
@@ -4123,13 +4123,9 @@ window-size@^0.2.0:
   version "0.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/window-size/-/window-size-0.2.0.tgz#b4315bb4214a3d7058ebeee892e13fa24d98b075"
 
-wordwrap@0.0.2:
+wordwrap@0.0.2, wordwrap@~0.0.2:
   version "0.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/wordwrap/-/wordwrap-0.0.2.tgz#b79669bb42ecb409f83d583cad52ca17eaa1643f"
-
-wordwrap@~0.0.2:
-  version "0.0.3"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/wordwrap/-/wordwrap-0.0.3.tgz#a3d5da6cd5c0bc0008d37234bbaf1bed63059107"
 
 wordwrap@~1.0.0:
   version "1.0.0"
