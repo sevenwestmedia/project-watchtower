@@ -21,6 +21,7 @@
   "keywords": [],
   "devDependencies": {
     "@types/autoprefixer": "^6.7.1",
+    "@types/express": "^4.0.35",
     "@types/extract-text-webpack-plugin": "^2.0.1",
     "@types/node": "^7.0.11",
     "@types/rimraf": "^0.0.28",
@@ -33,7 +34,6 @@
     "typescript": "^2.2.2"
   },
   "peerDependencies": {
-    "express": ">=4.0.0",
     "sass-lint": ">=1.10.0",
     "source-map-support": ">=0.4.0",
     "tslint": ">=4.5.0",
@@ -56,6 +56,9 @@
     "style-loader": "^0.16.1",
     "throng": "^4.0.0",
     "webpack": "^2.3.2",
+    "webpack-bundle-analyzer": "^2.3.1",
+    "webpack-dev-middleware": "^1.10.1",
+    "webpack-hot-middleware": "^2.17.1",
     "webpack-merge": "^4.1.0"
   },
   "engines": {

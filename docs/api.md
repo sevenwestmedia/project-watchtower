@@ -17,6 +17,30 @@ Leaving the target out builds both server and client.
 
 Leaving the environment out builds for production by default
 
+### clean
+
+```
+pwt clean [<glob> ...]
+```
+
+Cleans the default paths `SERVER_OUTPUT`, `CLIENT_OUTPUT` as well as all `.js` and `.maps` files in `/client`, `/server` and `/common`. You can pass in additional glob patterns to be cleaned.
+
+### explore-bundle
+
+```
+pwt explore-bundle
+```
+
+Opens the `webpack-bundle-analyzer` for the client production bundle.
+
+### lint
+
+```
+pwt lint [<glob> ...]
+```
+
+Runs `tslint` and `sass-lint` against the project. By default all `.ts`/`.tsx` and all `.scss` files are checked. You can supply custom glob patterns instead. Note that they have to contain either `.ts` or `.scss` to be mapped to the correct linter.
+
 ### start
 
 ```
@@ -27,21 +51,6 @@ pwt start [watch] [fast] [prod]
 *   `fast`: Disable TypeScript type checking for faster incremental builds
 *   `prod`: Set `NODE_ENV` to `"production"`
 
-### clean
-
-```
-pwt clean [<glob> ...]
-```
-
-Cleans the default paths `SERVER_OUTPUT`, `CLIENT_OUTPUT` as well as all `.js` and `.maps` files in `/client`, `/server` and `/common`. You can pass in additional glob patterns to be cleaned.
-
-### lint
-
-```
-pwt lint [<glob> ...]
-```
-
-Runs `tslint` and `sass-lint` against the project. By default all `.ts`/`.tsx` and all `.scss` files are checked. You can supply custom glob patterns instead. Note that they have to contain either `.ts` or `.scss` to be mapped to the correct linter.
 
 ### Programmatic Usage
 

@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 import build from './build'
-import start from './start'
 import clean from './clean'
+import exploreBundle from './explore-bundle'
 import lint from './lint'
+import start from './start'
+
 import { BuildParam, StartParam } from '../types'
 
 const args = process.argv.slice(2)
@@ -17,16 +19,20 @@ switch (command) {
         build(...commandArgs as BuildParam[])
         break
 
-    case 'start':
-        start(...commandArgs as StartParam[])
-        break
-
     case 'clean':
         clean(...commandArgs)
         break
 
+    case 'explore-bundle':
+        exploreBundle()
+        break
+
     case 'lint':
         lint(...commandArgs)
+        break
+
+    case 'start':
+        start(...commandArgs as StartParam[])
         break
 
     default:
@@ -37,9 +43,10 @@ switch (command) {
 Scripts:
 
     build [<target>] [<environment>]
-    start [watch] [fast] [prod]
     clean [<glob> ...]
+    explore-bundle
     lint [<glob> ...]
+    start [watch] [fast] [prod]
 
 Refer to docs/api.md for the full API documentation
 `)
