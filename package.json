@@ -6,7 +6,8 @@
     "registry": "https://nexus.swmdigital.io/repository/js-private"
   },
   "scripts": {
-    "prepublish": "npm run build",
+    "clean": "rimraf lib/**/*.{js,map,d.ts}",
+    "prepublish": "npm run clean && npm run build",
     "lint": "./node_modules/.bin/tslint \"lib/**/**.ts?(x)\" -e \"**/*.d.ts\"",
     "build": "tsc",
     "watch": "npm run build -- --watch"
@@ -21,6 +22,7 @@
     "@types/autoprefixer": "^6.7.1",
     "@types/extract-text-webpack-plugin": "^2.0.1",
     "@types/node": "^7.0.11",
+    "@types/rimraf": "^0.0.28",
     "@types/webpack": "^2.2.12",
     "@types/webpack-merge": "^0.0.4",
     "express": "^4.15.2",
@@ -30,14 +32,17 @@
     "typescript": "^2.2.2"
   },
   "peerDependencies": {
-    "express": "^4.15.2",
-    "source-map-support": "^0.4.14"
+    "express": ">=4.0.0",
+    "sass-lint": ">=1.10.0",
+    "source-map-support": ">=0.4.0",
+    "tslint": ">=4.5.0",
+    "tslint-react": ">=2.5.0",
+    "typescript": ">=2.2.0"
   },
   "dependencies": {
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^6.7.7",
     "awesome-typescript-loader": "^3.1.2",
-    "cpy": "^5.0.0",
     "css-loader": "^0.27.3",
     "env-cmd": "^5.0.0",
     "extract-text-webpack-plugin": "^2.1.0",

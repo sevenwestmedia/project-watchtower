@@ -4,6 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
+    "clean": "pwt clean",
     "build": "pwt build",
     "start": "pwt start"
   },

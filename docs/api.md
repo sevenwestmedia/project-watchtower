@@ -27,6 +27,14 @@ pwt start [watch] [fast] [prod]
 *   `fast`: Disable TypeScript type checking for faster incremental builds
 *   `prod`: Set `NODE_ENV` to `"production"`
 
+### clean
+
+```
+pwt clean [<glob> ...]
+```
+
+Cleans the default paths `SERVER_OUTPUT`, `CLIENT_OUTPUT` as well as all `.js` and `.maps` files in `/client`, `/server` and `/common`. You can pass in additional glob patterns to be cleaned.
+
 ### Programmatic Usage
 
 All CLI commands are available in `project-watchtower/lib/bin`. They take their parameters as strings:

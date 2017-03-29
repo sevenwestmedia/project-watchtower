@@ -1,8 +1,4 @@
-import * as React from 'react'
+import App from '../common/App'
 import * as ReactDOM from 'react-dom'
-
-import './main.scss'
-
-const App = <h1>Hello world</h1>
 
 ReactDOM.render(App, document.getElementById('app-root'))

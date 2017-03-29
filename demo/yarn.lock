@@ -63,17 +63,13 @@ acorn-jsx@^3.0.0:
   dependencies:
     acorn "^3.0.4"
 
-acorn@4.0.4:
+acorn@4.0.4, acorn@^4.0.3, acorn@^4.0.4:
   version "4.0.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/acorn/-/acorn-4.0.4.tgz#17a8d6a7a6c4ef538b814ec9abac2779293bf30a"
 
 acorn@^3.0.4:
   version "3.3.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
-
-acorn@^4.0.3, acorn@^4.0.4:
-  version "4.0.11"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/acorn/-/acorn-4.0.11.tgz#edcda3bd937e7556410d42ed5860f67399c794c0"
 
 adjust-sourcemap-loader@^1.1.0:
   version "1.1.0"
@@ -188,7 +184,7 @@ array-unique@^0.2.1:
   version "0.2.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/array-unique/-/array-unique-0.2.1.tgz#a1d97ccafcbc2625cc70fadceb36a50c58b01a53"
 
-arrify@^1.0.0, arrify@^1.0.1:
+arrify@^1.0.0:
   version "1.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
 
@@ -732,24 +728,6 @@ cosmiconfig@^2.1.0, cosmiconfig@^2.1.1:
     parse-json "^2.2.0"
     require-from-string "^1.1.0"
 
-cp-file@^4.1.0:
-  version "4.1.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/cp-file/-/cp-file-4.1.1.tgz#587169f34487d5ee4947899bb558cf1d7336e6ba"
-  dependencies:
-    graceful-fs "^4.1.2"
-    mkdirp "^0.5.0"
-    nested-error-stacks "^2.0.0"
-    pify "^2.3.0"
-
-cpy@^5.0.0:
-  version "5.0.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/cpy/-/cpy-5.0.0.tgz#80870985b8f508b518c5782fa7ca38965cf17d5a"
-  dependencies:
-    arrify "^1.0.1"
-    cp-file "^4.1.0"
-    globby "^6.0.0"
-    nested-error-stacks "^2.0.0"
-
 create-ecdh@^4.0.0:
   version "4.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/create-ecdh/-/create-ecdh-4.0.0.tgz#888c723596cdf7612f6498233eebd7a35301737d"
@@ -942,13 +920,13 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-debug@2.6.1:
+debug@2.6.1, debug@^2.1.1:
   version "2.6.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
   dependencies:
     ms "0.7.2"
 
-debug@2.6.3, debug@^2.1.1, debug@^2.2.0:
+debug@2.6.3, debug@^2.2.0:
   version "2.6.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/debug/-/debug-2.6.3.tgz#0f7eb8c30965ec08c72accfa0130c8b79984141d"
   dependencies:
@@ -1612,16 +1590,6 @@ globby@^5.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-globby@^6.0.0:
-  version "6.1.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/globby/-/globby-6.1.0.tgz#f5a6d70e8395e21c858fb0489d64df02424d506c"
-  dependencies:
-    array-union "^1.0.1"
-    glob "^7.0.3"
-    object-assign "^4.0.1"
-    pify "^2.0.0"
-    pinkie-promise "^2.0.0"
-
 globule@^1.0.0:
   version "1.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/globule/-/globule-1.1.0.tgz#c49352e4dc183d85893ee825385eb994bb6df45f"
@@ -1792,13 +1760,13 @@ inflight@^1.0.4:
     once "^1.3.0"
     wrappy "1"
 
-inherits@2, inherits@2.0.3, inherits@^2.0.1, inherits@^2.0.3, inherits@~2.0.0, inherits@~2.0.1:
-  version "2.0.3"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
-
-inherits@2.0.1:
+inherits@2, inherits@2.0.1:
   version "2.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/inherits/-/inherits-2.0.1.tgz#b17d08d326b4423e568eff719f91b0b1cbdf69f1"
+
+inherits@2.0.3, inherits@^2.0.1, inherits@^2.0.3, inherits@~2.0.0, inherits@~2.0.1:
+  version "2.0.3"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
 ini@~1.3.0:
   version "1.3.4"
@@ -2480,17 +2448,21 @@ minimalistic-crypto-utils@^1.0.0, minimalistic-crypto-utils@^1.0.1:
   dependencies:
     brace-expansion "^1.0.0"
 
-minimist@0.0.8, minimist@~0.0.1:
+minimist@0.0.8:
   version "0.0.8"
   resolved "https://nexus.swmdigital.io/repository/js-combined/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
 
-minimist@1.1.x:
+minimist@1.1.x, minimist@^1.1.3:
   version "1.1.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/minimist/-/minimist-1.1.3.tgz#3bedfd91a92d39016fcfaa1c681e8faa1a1efda8"
 
-minimist@^1.1.3, minimist@^1.2.0:
+minimist@^1.2.0:
   version "1.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
+
+minimist@~0.0.1:
+  version "0.0.10"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/minimist/-/minimist-0.0.10.tgz#de3f98543dbf96082be48ad1a0c7cda836301dcf"
 
 mixin-object@^2.0.1:
   version "2.0.1"
@@ -2520,12 +2492,6 @@ nan@^2.3.0, nan@^2.3.2:
 negotiator@0.6.1:
   version "0.6.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
-
-nested-error-stacks@^2.0.0:
-  version "2.0.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/nested-error-stacks/-/nested-error-stacks-2.0.0.tgz#98b2ffaefb4610fa3936f1e71435d30700de2840"
-  dependencies:
-    inherits "~2.0.1"
 
 node-fetch@^1.0.1:
   version "1.6.3"
@@ -3165,12 +3131,11 @@ progress@^1.1.8:
 
 "project-watchtower@file:/../project-watchtower-0.0.1.tgz":
   version "0.0.1"
-  resolved "/../project-watchtower-0.0.1.tgz#b97bba89c023059c42260660653fea6b67b0319a"
+  resolved "/../project-watchtower-0.0.1.tgz#01e9537ccb50331617f886a082d8a9533a58d872"
   dependencies:
     assets-webpack-plugin "^3.5.1"
     autoprefixer "^6.7.7"
     awesome-typescript-loader "^3.1.2"
-    cpy "^5.0.0"
     css-loader "^0.27.3"
     env-cmd "^5.0.0"
     extract-text-webpack-plugin "^2.1.0"
@@ -4219,9 +4184,13 @@ window-size@^0.2.0:
   version "0.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/window-size/-/window-size-0.2.0.tgz#b4315bb4214a3d7058ebeee892e13fa24d98b075"
 
-wordwrap@0.0.2, wordwrap@~0.0.2:
+wordwrap@0.0.2:
   version "0.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/wordwrap/-/wordwrap-0.0.2.tgz#b79669bb42ecb409f83d583cad52ca17eaa1643f"
+
+wordwrap@~0.0.2:
+  version "0.0.3"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/wordwrap/-/wordwrap-0.0.3.tgz#a3d5da6cd5c0bc0008d37234bbaf1bed63059107"
 
 wordwrap@~1.0.0:
   version "1.0.0"

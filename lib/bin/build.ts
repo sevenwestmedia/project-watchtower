@@ -1,7 +1,11 @@
 import * as webpack from 'webpack'
 import { printWebpackStats } from '../build/util'
 import { ENVIRONMENTS, getWebpackConfig, TARGETS } from '../build/build'
+import clean from '../build/clean'
+import PATHS from '../build/paths'
 import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
+
+const { CLIENT_OUTPUT, SERVER_OUTPUT } = PATHS
 
 const buildTarget = (target: BuildTarget, environment: BuildEnvironment = 'prod') => (
     new Promise((resolve, reject) => {
@@ -24,6 +28,14 @@ const buildTarget = (target: BuildTarget, environment: BuildEnvironment = 'prod'
         })
     })
 )
+
+const cleanAndBuild = (target: BuildTarget, environment: BuildEnvironment = 'prod') => {
+    const cleanTarget = target === 'server'
+        ? SERVER_OUTPUT
+        : CLIENT_OUTPUT
+
+    return clean(cleanTarget).then(() => buildTarget(target, environment))
+}
 
 const getBuildEnvironment = (args: BuildParam[]) => {
     for (const arg of args) {
@@ -55,7 +67,7 @@ const build = (...args: BuildParam[]) => {
     const environment = getBuildEnvironment(args)
 
     return Promise.all(
-        targets.map((target) => buildTarget(target, environment)),
+        targets.map((target) => cleanAndBuild(target, environment)),
     )
 }
 

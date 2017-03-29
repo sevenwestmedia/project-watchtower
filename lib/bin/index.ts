@@ -2,6 +2,7 @@
 
 import build from './build'
 import start from './start'
+import clean from './clean'
 import { BuildParam, StartParam } from '../types'
 
 const args = process.argv.slice(2)
@@ -19,6 +20,10 @@ switch (command) {
         start(...commandArgs as StartParam[])
         break
 
+    case 'clean':
+        clean(...commandArgs)
+        break
+
     default:
         // tslint:disable-next-line no-console
         console.log(`
@@ -28,6 +33,7 @@ Scripts:
 
     build [<target>] [<environment>]
     start [watch] [fast] [prod]
+    clean [<glob> ...]
 
 Refer to docs/api.md for the full API documentation
 `)

@@ -13,7 +13,7 @@ const { SERVER_OUTPUT } = PATHS
  * - fast: Disables server-side rendering and type checking
  * - prod: Sets NODE_ENV to "production"
  */
-export const start = (...args: StartParam[]) => {
+const start = (...args: StartParam[]) => {
 
     if (args.indexOf('watch') !== -1) {
         process.env.START_WATCH_MODE = 'true'
