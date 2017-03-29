@@ -3,6 +3,7 @@
 import build from './build'
 import start from './start'
 import clean from './clean'
+import lint from './lint'
 import { BuildParam, StartParam } from '../types'
 
 const args = process.argv.slice(2)
@@ -24,6 +25,10 @@ switch (command) {
         clean(...commandArgs)
         break
 
+    case 'lint':
+        lint(...commandArgs)
+        break
+
     default:
         // tslint:disable-next-line no-console
         console.log(`
@@ -34,6 +39,7 @@ Scripts:
     build [<target>] [<environment>]
     start [watch] [fast] [prod]
     clean [<glob> ...]
+    lint [<glob> ...]
 
 Refer to docs/api.md for the full API documentation
 `)

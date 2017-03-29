@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "clean": "pwt clean",
+    "lint": "pwt lint",
     "build": "pwt build",
     "start": "pwt start"
   },

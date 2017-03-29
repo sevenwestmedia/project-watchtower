@@ -8,7 +8,8 @@
   "scripts": {
     "clean": "rimraf lib/**/*.{js,map,d.ts}",
     "prepublish": "npm run clean && npm run build",
-    "lint": "./node_modules/.bin/tslint \"lib/**/**.ts?(x)\" -e \"**/*.d.ts\"",
+    "lint": "tslint lib/**/*.ts -e **/*.d.ts",
+    "sass-lint": "node lib/lint/sass-lint.js",
     "build": "tsc",
     "watch": "npm run build -- --watch"
   },

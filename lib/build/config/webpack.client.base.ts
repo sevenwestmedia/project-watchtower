@@ -12,7 +12,7 @@ import { Assets } from '../../types'
 const { CLIENT_ENTRY, CLIENT_OUTPUT, CLIENT_POLYFILLS, PUBLIC_PATH } = PATHS
 
 type EntryPoints = {
-    [name: string]: string[]
+    [name: string]: string[],
 }
 
 const entry: EntryPoints = {
@@ -89,7 +89,7 @@ const clientBaseConfig = merge(baseConfig, {
                 && module.context.indexOf('redux-data-loader') === -1
             ),
         }),
-    ]
+    ],
 })
 
 export default clientBaseConfig

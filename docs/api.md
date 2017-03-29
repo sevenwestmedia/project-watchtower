@@ -35,6 +35,14 @@ pwt clean [<glob> ...]
 
 Cleans the default paths `SERVER_OUTPUT`, `CLIENT_OUTPUT` as well as all `.js` and `.maps` files in `/client`, `/server` and `/common`. You can pass in additional glob patterns to be cleaned.
 
+### lint
+
+```
+pwt lint [<glob> ...]
+```
+
+Runs `tslint` and `sass-lint` against the project. By default all `.ts`/`.tsx` and all `.scss` files are checked. You can supply custom glob patterns instead. Note that they have to contain either `.ts` or `.scss` to be mapped to the correct linter.
+
 ### Programmatic Usage
 
 All CLI commands are available in `project-watchtower/lib/bin`. They take their parameters as strings:
@@ -76,6 +84,14 @@ extendWebpackConfig(
 
 ```ts
 default clean(paths: string | string[]) => Promise<any>
+```
+
+`project-watchtower/lib/lint`
+
+```ts
+tslint(...paths: string[]): Promise<any>
+
+sassLint(...paths: string[]): Promise<any>
 ```
 
 `project-watchtower/lib/server/assets`

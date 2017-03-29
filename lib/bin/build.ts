@@ -1,5 +1,5 @@
 import * as webpack from 'webpack'
-import { printWebpackStats } from '../build/util'
+import { printWebpackStats } from '../__util/webpack'
 import { ENVIRONMENTS, getWebpackConfig, TARGETS } from '../build/build'
 import clean from '../clean'
 import PATHS from '../build/config/paths'
@@ -68,7 +68,9 @@ const build = (...args: BuildParam[]) => {
 
     return Promise.all(
         targets.map((target) => cleanAndBuild(target, environment)),
-    )
+    ).catch((e) => {
+        throw e
+    })
 }
 
 export default build
