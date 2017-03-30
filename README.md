@@ -5,6 +5,7 @@ A unified basis for web applications.
 ## Features
 
 * Webpack build
+* Testing
 * Cleaning
 * Linting
 * Server middlewares and helpers

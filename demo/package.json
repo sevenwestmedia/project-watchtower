@@ -8,6 +8,8 @@
     "lint": "pwt lint",
     "build": "pwt build",
     "start": "pwt start",
+    "test": "pwt test",
+    "coverage": "pwt test --coverage",
     "pwt": "pwt"
   },
   "keywords": [],
@@ -23,11 +25,13 @@
   },
   "devDependencies": {
     "@types/express": "^4.0.35",
+    "@types/jest": "^19.2.2",
     "@types/react": "^15.0.20",
     "@types/react-dom": "^0.14.23",
     "@types/webpack-env": "^1.13.0",
     "sass-lint": "^1.10.2",
     "tslint": "^4.5.1",
+    "tslint-react": "^2.5.0",
     "typescript": "^2.2.2"
   },
   "sasslintConfig": "node_modules/project-watchtower/config-templates/.sass-lint.yml"

@@ -5,6 +5,7 @@ import clean from './clean'
 import exploreBundle from './explore-bundle'
 import lint from './lint'
 import start from './start'
+import test from './test'
 
 import { log } from '../__util/log'
 import { BuildParam, StartParam } from '../types'
@@ -36,6 +37,10 @@ switch (command) {
         start(...commandArgs as StartParam[])
         break
 
+    case 'test':
+        test(...commandArgs)
+        break
+
     default:
         log(`
 ## Project Watchtower
@@ -47,6 +52,7 @@ Scripts:
     explore-bundle
     lint [<glob> ...]
     start [watch] [fast] [prod]
+    test [<jest options> ...]
 
 Refer to docs/api.md for the full API documentation
 `)

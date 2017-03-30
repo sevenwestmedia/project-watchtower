@@ -51,6 +51,12 @@ pwt start [watch] [fast] [prod]
 *   `fast`: Disable TypeScript type checking for faster incremental builds
 *   `prod`: Set `NODE_ENV` to `"production"`
 
+### test
+
+```
+pwt test [<jest option> ...]
+```
+
 
 ### Programmatic Usage
 
