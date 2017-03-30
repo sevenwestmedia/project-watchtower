@@ -6,6 +6,7 @@ import exploreBundle from './explore-bundle'
 import lint from './lint'
 import start from './start'
 import test from './test'
+import watch from './watch'
 
 import { log, logError } from '../__util/log'
 import { BuildParam, StartParam } from '../types'
@@ -48,6 +49,10 @@ switch (command) {
         exitOnError(test(...commandArgs))
         break
 
+    case 'watch':
+        exitOnError(watch(...commandArgs))
+        break
+
     default:
         log(`
 ## Project Watchtower
@@ -60,6 +65,7 @@ Scripts:
     lint [<glob> ...]
     start [watch] [fast] [prod]
     test [<jest options> ...]
+    watch [server]
 
 Refer to docs/api.md for the full API documentation
 `)

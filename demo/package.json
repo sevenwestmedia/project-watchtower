@@ -8,6 +8,7 @@
     "lint": "pwt lint",
     "build": "pwt build",
     "start": "pwt start",
+    "watch": "pwt watch",
     "test": "pwt test",
     "coverage": "pwt test --coverage",
     "pwt": "pwt",

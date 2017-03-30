@@ -5,12 +5,21 @@ const root = process.cwd()
 const jestBin = path.resolve(root, 'node_modules', 'jest', 'bin', 'jest.js')
 
 const test = (...params: string[]) => {
-    return forkPromise(jestBin, [
-        '--silent',
-        '--config',
-        'node_modules/project-watchtower/config-templates/jest.json',
-        ...params,
-    ])
+    return forkPromise(
+        jestBin,
+        [
+            '--silent',
+            '--config',
+            'node_modules/project-watchtower/config-templates/jest.json',
+            ...params,
+        ],
+        {
+            env: {
+                ...process.env,
+                NODE_ENV: 'test',
+            },
+        },
+    )
 }
 
 export default test

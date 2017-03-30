@@ -1507,6 +1507,10 @@ event-emitter@~0.3.5:
     d "1"
     es5-ext "~0.10.14"
 
+eventemitter3@1.x.x:
+  version "1.2.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/eventemitter3/-/eventemitter3-1.2.0.tgz#1c86991d816ad1e504750e73874224ecf3bec508"
+
 events@^1.0.0:
   version "1.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/events/-/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
@@ -2109,6 +2113,22 @@ http-errors@~1.6.1:
     setprototypeof "1.0.3"
     statuses ">= 1.3.1 < 2"
 
+http-proxy-middleware@^0.17.4:
+  version "0.17.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/http-proxy-middleware/-/http-proxy-middleware-0.17.4.tgz#642e8848851d66f09d4f124912846dbaeb41b833"
+  dependencies:
+    http-proxy "^1.16.2"
+    is-glob "^3.1.0"
+    lodash "^4.17.2"
+    micromatch "^2.3.11"
+
+http-proxy@^1.16.2:
+  version "1.16.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/http-proxy/-/http-proxy-1.16.2.tgz#06dff292952bf64dbe8471fa9df73066d4f37742"
+  dependencies:
+    eventemitter3 "1.x.x"
+    requires-port "1.x.x"
+
 http-signature@~1.1.0:
   version "1.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/http-signature/-/http-signature-1.1.1.tgz#df72e267066cd0ac67fb76adf8e134a8fbcf91bf"
@@ -2266,6 +2286,10 @@ is-extglob@^1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/is-extglob/-/is-extglob-1.0.0.tgz#ac468177c4943405a092fc8f29760c6ffc6206c0"
 
+is-extglob@^2.1.0:
+  version "2.1.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/is-extglob/-/is-extglob-2.1.1.tgz#a88c02535791f02ed37c76a1b9ea9773c833f8c2"
+
 is-finite@^1.0.0:
   version "1.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/is-finite/-/is-finite-1.0.2.tgz#cc6677695602be550ef11e8b4aa6305342b6d0aa"
@@ -2287,6 +2311,12 @@ is-glob@^2.0.0, is-glob@^2.0.1:
   resolved "https://nexus.swmdigital.io/repository/js-combined/is-glob/-/is-glob-2.0.1.tgz#d096f926a3ded5600f3fdfd91198cb0888c2d863"
   dependencies:
     is-extglob "^1.0.0"
+
+is-glob@^3.1.0:
+  version "3.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/is-glob/-/is-glob-3.1.0.tgz#7ba5ae24217804ac70707b96922567486cc3e84a"
+  dependencies:
+    is-extglob "^2.1.0"
 
 is-my-json-valid@^2.10.0:
   version "2.16.0"
@@ -3124,7 +3154,7 @@ lodash@^4.0.0, lodash@^4.3.0, lodash@~4.16.4:
   version "4.16.6"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash/-/lodash-4.16.6.tgz#d22c9ac660288f3843e16ba7d2b5d06cca27d777"
 
-lodash@^4.14.0, lodash@^4.17.4, lodash@^4.2.0:
+lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0:
   version "4.17.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -4024,7 +4054,7 @@ progress@^1.1.8:
 
 "project-watchtower@file:/../project-watchtower-0.0.1.tgz":
   version "0.0.1"
-  resolved "/../project-watchtower-0.0.1.tgz#d4ae8195e65a590da65ab8b247abf4da99c8d93e"
+  resolved "/../project-watchtower-0.0.1.tgz#a8632734e03f5047716049c8d481fa964bf1a3ba"
   dependencies:
     assets-webpack-plugin "^3.5.1"
     autoprefixer "^6.7.7"
@@ -4032,6 +4062,7 @@ progress@^1.1.8:
     css-loader "^0.27.3"
     dotenv "^4.0.0"
     extract-text-webpack-plugin "^2.1.0"
+    http-proxy-middleware "^0.17.4"
     jest "^19.0.2"
     node-sass "^4.5.1"
     null-loader "^0.1.1"
@@ -4363,6 +4394,10 @@ require-uncached@^1.0.2:
   dependencies:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
+
+requires-port@1.x.x:
+  version "1.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
 
 resolve-from@^1.0.0:
   version "1.0.1"

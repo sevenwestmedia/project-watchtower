@@ -39,7 +39,7 @@ export const createServer: CreateServerType = (
 
     app.listen(port, () => {
         log(`Server listening on port ${port}`)
-        if (!isProduction) {
+        if (!isProduction && watchMode) {
             openBrowser(port)
         }
         if (callback) {

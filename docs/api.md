@@ -57,6 +57,16 @@ pwt start [watch] [fast] [prod]
 pwt test [<jest option> ...]
 ```
 
+### test
+
+```
+pwt watch [server]
+```
+
+Builds the server in dev mode, then watches and rebuilds the client
+
+* `server`: Also watches and rebuilds the server
+
 
 ### Programmatic Usage
 

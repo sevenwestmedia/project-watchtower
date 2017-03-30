@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv'
 import { log } from '../__util/log'
 
 dotenv.config()
+process.env.NODE_ENV = 'test'
 
 const root = process.cwd()
 const testSetupFile = path.resolve(root, 'config', 'test-setup')

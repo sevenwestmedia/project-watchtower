@@ -51,6 +51,7 @@
     "css-loader": "^0.27.3",
     "dotenv": "^4.0.0",
     "extract-text-webpack-plugin": "^2.1.0",
+    "http-proxy-middleware": "^0.17.4",
     "jest": "^19.0.2",
     "node-sass": "^4.5.1",
     "null-loader": "^0.1.1",
