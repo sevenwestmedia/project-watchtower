@@ -57,16 +57,16 @@ pwt start [watch] [fast] [prod]
 pwt test [<jest option> ...]
 ```
 
-### test
+### watch
 
 ```
-pwt watch [server]
+pwt watch [server] [fast]
 ```
 
 Builds the server in dev mode, then watches and rebuilds the client
 
 * `server`: Also watches and rebuilds the server
-
+* `fast`: Disable TypeScript type checking for faster incremental builds
 
 ### Programmatic Usage
 
