@@ -87,6 +87,12 @@ default merge(...configs: webpack.Configuration[]) => webpack.Configuration[]
 default clean(paths: string | string[]) => Promise<any>
 ```
 
+`project-watchtower/lib/client/dev`
+
+```ts
+cssHotReload()
+```
+
 `project-watchtower/lib/lint`
 
 ```ts
@@ -105,6 +111,25 @@ getCssAssetHtml(): string
 getJsAssetHtml(): string
 
 addAssetsToHtml(html: string): string
+```
+
+`project-watchtower/lib/server/dev`
+
+```ts
+getHotReloadMiddleware() => express.RequestHandler[]
+
+getDefaultHtmlMiddleware() => express.RequestHandler
+
+openBrowser(port?: number)
+```
+
+`project-watchtower/lib/server/server`
+
+```ts
+createServer(
+    middlewareHook?: (app: express.Express) => void,
+    callback?: () => void,
+) => express.Express
 ```
 
 ### Types

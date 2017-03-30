@@ -3,7 +3,7 @@ import { EnvCmd } from 'env-cmd'
 import CONFIG from '../build/config/config'
 import { StartParam } from '../types'
 
-const { SERVER_OUTPUT } = CONFIG
+const { HAS_SERVER, SERVER_OUTPUT } = CONFIG
 
 /**
  * Starts the pre-built server with the environment variables
@@ -27,7 +27,9 @@ const start = (...args: StartParam[]) => {
         ? 'production'
         : 'development'
 
-    const serverPath = path.resolve(SERVER_OUTPUT, 'server.js')
+    const serverPath = HAS_SERVER
+        ? path.resolve(SERVER_OUTPUT, 'server.js')
+        : path.resolve(__dirname, '..', 'server', 'start.js')
 
     EnvCmd(['.env', 'node', serverPath])
 }

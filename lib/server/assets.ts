@@ -32,27 +32,21 @@ export const updateAssetLocations = (newAssets: Assets) => {
 
 export const getAssetLocations = () => assets
 
-/**
- * Returns a HTML snippet for all CSS assets
- */
+/** Returns a HTML snippet for all CSS assets */
 export const getCssAssetHtml = () => (
-    `<link rel="stylesheet" type="text/css" href="${assets.main.css}${watchMode
+    `<link rel="stylesheet" type="text/css" id="css-main" href="${assets.main.css}${watchMode
         ? '?' + Date.now()
         : ''
     }" />`
 )
 
-/**
- * Returns a HTML snippet for all JavaScript assets
- */
+/** Returns a HTML snippet for all JavaScript assets */
 export const getJsAssetHtml = () => (
     `<script src="${assets.vendor.js}"></script>
     <script src="${assets.main.js}" async></script>`
 )
 
-/**
- * Inserts all assets into a given HTML document string
- */
+/** Inserts all assets into a given HTML document string */
 export const addAssetsToHtml = (html: string) => {
     let modifiedHtml = html
     modifiedHtml = modifiedHtml.replace(

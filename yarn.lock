@@ -35,6 +35,12 @@
   version "7.0.11"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/node/-/node-7.0.11.tgz#55680189f2335f080f0aeb57871f0b9823646d89"
 
+"@types/opn@^3.0.28":
+  version "3.0.28"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/opn/-/opn-3.0.28.tgz#097d0d1c9b5749573a5d96df132387bb6d02118a"
+  dependencies:
+    "@types/node" "*"
+
 "@types/rimraf@^0.0.28":
   version "0.0.28"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/rimraf/-/rimraf-0.0.28.tgz#5562519bc7963caca8abf7f128cae3b594d41d06"
@@ -97,7 +103,7 @@ acorn-jsx@^3.0.0:
   dependencies:
     acorn "^3.0.4"
 
-acorn@4.0.4, acorn@^4.0.3, acorn@^4.0.4:
+acorn@4.0.4, acorn@^4.0.4:
   version "4.0.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/acorn/-/acorn-4.0.4.tgz#17a8d6a7a6c4ef538b814ec9abac2779293bf30a"
 
@@ -105,7 +111,7 @@ acorn@^3.0.4:
   version "3.3.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
 
-acorn@^4.0.11:
+acorn@^4.0.11, acorn@^4.0.3:
   version "4.0.11"
   resolved "https://nexus.swmdigital.io/repository/js-combined/acorn/-/acorn-4.0.11.tgz#edcda3bd937e7556410d42ed5860f67399c794c0"
 
@@ -2697,6 +2703,13 @@ onetime@^1.0.0:
 opener@^1.4.2:
   version "1.4.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/opener/-/opener-1.4.3.tgz#5c6da2c5d7e5831e8ffa3964950f8d6674ac90b8"
+
+opn@^4.0.2:
+  version "4.0.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/opn/-/opn-4.0.2.tgz#7abc22e644dff63b0a96d5ab7f2790c0f01abc95"
+  dependencies:
+    object-assign "^4.0.1"
+    pinkie-promise "^2.0.0"
 
 optimist@~0.6.0:
   version "0.6.1"

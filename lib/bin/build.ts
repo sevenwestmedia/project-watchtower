@@ -6,7 +6,7 @@ import { logError } from '../__util/log'
 import { printWebpackStats } from '../__util/webpack'
 import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
 
-const { CLIENT_OUTPUT, SERVER_OUTPUT } = CONFIG
+const { CLIENT_OUTPUT, SERVER_OUTPUT, HAS_SERVER } = CONFIG
 
 const buildTarget = (target: BuildTarget, environment: BuildEnvironment = 'prod') => (
     new Promise((resolve, reject) => {
@@ -49,11 +49,19 @@ const getBuildEnvironment = (args: BuildParam[]) => {
 
 const getBuildTargets = (args: BuildParam[]) => {
     for (const arg of args) {
+        if (!HAS_SERVER && arg === 'server') {
+            continue
+        }
         if ((TARGETS as string[]).indexOf(arg) !== -1) {
             return [arg] as BuildTarget[]
         }
     }
-    return ['server', 'client'] as BuildTarget[]
+
+    const defaultTargets = HAS_SERVER
+        ? ['server', 'client']
+        : ['client']
+
+    return defaultTargets as BuildTarget[]
 }
 
 /**

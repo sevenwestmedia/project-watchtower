@@ -5,14 +5,17 @@ import baseConfig from './webpack.base'
 import clientBaseConfig from './webpack.client'
 import devConfig from './webpack.client.dev'
 
-/**
- * Webpack config for the client in development
- */
+/** Webpack config for the client in development */
 const config: webpack.Configuration = merge(
     baseConfig,
     clientBaseConfig,
     devConfig,
     {
+        entry: {
+            main: [
+                'webpack-hot-middleware/client',
+            ],
+        },
         output: {
             filename: '[name].js',
             chunkFilename: '[name].js',

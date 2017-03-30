@@ -7,12 +7,14 @@ const root = process.cwd()
 
 const defaultConfig: BuildConfig = {
     BASE: root,
+    HAS_SERVER: true,
     CLIENT_ENTRY: path.resolve(root, 'client', 'index.tsx'),
     CLIENT_OUTPUT: path.resolve(root, 'public', 'assets'),
     CLIENT_POLYFILLS: path.resolve(root, 'client', 'polyfills.ts'),
     SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
     SERVER_OUTPUT: path.resolve(root, 'build'),
     PUBLIC_PATH: '/assets/',
+    SERVER_PUBLIC_DIR: path.resolve(root, 'public'),
 }
 
 const customConfigFile = path.resolve(root, 'config', 'config.js')
