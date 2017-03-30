@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as webpack from 'webpack'
-import { logError } from '../__util/log'
+import { log, logError } from '../__util/log'
 import { BuildEnvironment, BuildTarget } from '../types'
 
 export const TARGETS: BuildTarget[] = [
@@ -45,11 +45,9 @@ export const getWebpackConfig = (
     try {
         if (fs.existsSync(customConfigFile + '.js')) {
             config = require(customConfigFile).default
-            // tslint:disable-next-line no-console
-            console.info('Using custom config file ' + customConfigFile)
+            log('Using custom config file ' + customConfigFile)
         } else {
-            // tslint:disable-next-line no-console
-            console.info('Building ' + configFileName + '...')
+            log('Building ' + configFileName + '...')
             config = require('./config/' + configFileName).default
         }
 

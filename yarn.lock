@@ -8,6 +8,12 @@
   dependencies:
     postcss "^5.2.15"
 
+"@types/dotenv@^2.0.20":
+  version "2.0.20"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/dotenv/-/dotenv-2.0.20.tgz#79ca51c9594cc889cc8a72427ea8db4ddfd32929"
+  dependencies:
+    "@types/node" "*"
+
 "@types/express-serve-static-core@*":
   version "4.0.44"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/express-serve-static-core/-/express-serve-static-core-4.0.44.tgz#a1c3bd5d80e93c72fba91a03f5412c47f21d4ae7"
@@ -1027,14 +1033,6 @@ cross-spawn@^3.0.0:
     lru-cache "^4.0.1"
     which "^1.2.9"
 
-cross-spawn@^5.0.1:
-  version "5.1.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
-  dependencies:
-    lru-cache "^4.0.1"
-    shebang-command "^1.2.0"
-    which "^1.2.9"
-
 cryptiles@2.x.x:
   version "2.0.5"
   resolved "https://nexus.swmdigital.io/repository/js-combined/cryptiles/-/cryptiles-2.0.5.tgz#3bdfecdc608147c1c67202fa291e7dca59eaa3b8"
@@ -1297,6 +1295,10 @@ dot-prop@^4.1.0:
   dependencies:
     is-obj "^1.0.0"
 
+dotenv@^4.0.0:
+  version "4.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
+
 duplexer2@0.0.2:
   version "0.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/duplexer2/-/duplexer2-0.0.2.tgz#c614dcf67e2fb14995a91711e5a617e8a60a31db"
@@ -1357,12 +1359,6 @@ enhanced-resolve@^3.0.0, enhanced-resolve@^3.1.0:
     memory-fs "^0.4.0"
     object-assign "^4.0.1"
     tapable "^0.2.5"
-
-env-cmd@^5.0.0:
-  version "5.0.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/env-cmd/-/env-cmd-5.0.0.tgz#c10892176a18bfcc5658cd9a2880add281de31ce"
-  dependencies:
-    cross-spawn "^5.0.1"
 
 "errno@>=0.1.1 <0.2.0-0", errno@^0.1.3:
   version "0.1.4"
@@ -4510,16 +4506,6 @@ shallow-clone@^0.1.2:
     kind-of "^2.0.1"
     lazy-cache "^0.2.3"
     mixin-object "^2.0.1"
-
-shebang-command@^1.2.0:
-  version "1.2.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"
-  dependencies:
-    shebang-regex "^1.0.0"
-
-shebang-regex@^1.0.0:
-  version "1.0.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/shebang-regex/-/shebang-regex-1.0.0.tgz#da42f49740c0b42db2ca9728571cb190c98efea3"
 
 shelljs@^0.6.0:
   version "0.6.1"

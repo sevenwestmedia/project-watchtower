@@ -1,6 +1,6 @@
 import tslint from '../lint/tslint'
 import sassLint from '../lint/sass-lint'
-import { log, logError } from '../__util/log'
+import { log } from '../__util/log'
 
 const lint = (...paths: string[]) => {
     const tslintPaths = paths.filter((p) => p.indexOf('.ts') !== -1)
@@ -11,9 +11,6 @@ const lint = (...paths: string[]) => {
         sassLint(...sassLintPaths),
     ]).then(() => {
         log('Linting finished without errors.')
-    }).catch((e) => {
-        logError('Linting finished with errors!')
-        throw e
     })
 }
 

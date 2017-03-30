@@ -10,7 +10,8 @@
     "start": "pwt start",
     "test": "pwt test",
     "coverage": "pwt test --coverage",
-    "pwt": "pwt"
+    "pwt": "pwt",
+    "postinstall": "tsc -p tsconfig-config.json"
   },
   "keywords": [],
   "dependencies": {

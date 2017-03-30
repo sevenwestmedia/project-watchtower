@@ -1,21 +1,22 @@
 {
-  "transform": {
-      ".tsx?": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-  },
-  "testRegex": "\\.(spec|test)\\.tsx?$",
-  "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json"
-  ],
-  "moduleDirectories": [
-      "node_modules",
-      "common",
-      "."
-  ],
-  "moduleNameMapper": {
-      "\\.(s?css|png|svg|jpg)$": "<rootDir>/node_modules/project-watchtower/lib/test/test-mapper.js"
-  },
-  "verbose": false
+    "setupTestFrameworkScriptFile": "<rootDir>/node_modules/project-watchtower/lib/test/setup-tests.js",
+    "transform": {
+        ".tsx?": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "\\.(spec|test)\\.tsx?$",
+    "moduleFileExtensions": [
+        "ts",
+        "tsx",
+        "js",
+        "json"
+    ],
+    "moduleDirectories": [
+        "node_modules",
+        "common",
+        "."
+    ],
+    "moduleNameMapper": {
+        "\\.(s?css|png|svg|jpg)$": "<rootDir>/node_modules/project-watchtower/lib/test/test-mapper.js"
+    },
+    "verbose": false
 }

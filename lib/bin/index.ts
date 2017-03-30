@@ -7,7 +7,7 @@ import lint from './lint'
 import start from './start'
 import test from './test'
 
-import { log } from '../__util/log'
+import { log, logError } from '../__util/log'
 import { BuildParam, StartParam } from '../types'
 
 const args = process.argv.slice(2)
@@ -15,30 +15,37 @@ const args = process.argv.slice(2)
 const command = args[0]
 const commandArgs = args.slice(1)
 
+const exitOnError = (result: Promise<any>) => {
+    result.catch((e) => {
+        logError(e)
+        process.exit(1)
+    })
+}
+
 switch (command) {
 
     case 'build':
-        build(...commandArgs as BuildParam[])
+        exitOnError(build(...commandArgs as BuildParam[]))
         break
 
     case 'clean':
-        clean(...commandArgs)
+        exitOnError(clean(...commandArgs))
         break
 
     case 'explore-bundle':
-        exploreBundle()
+        exitOnError(exploreBundle())
         break
 
     case 'lint':
-        lint(...commandArgs)
+        exitOnError(lint(...commandArgs))
         break
 
     case 'start':
-        start(...commandArgs as StartParam[])
+        exitOnError(start(...commandArgs as StartParam[]))
         break
 
     case 'test':
-        test(...commandArgs)
+        exitOnError(test(...commandArgs))
         break
 
     default:

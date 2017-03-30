@@ -77,9 +77,7 @@ const build = (...args: BuildParam[]) => {
 
     return Promise.all(
         targets.map((target) => cleanAndBuild(target, environment)),
-    ).catch((e) => {
-        throw e
-    })
+    )
 }
 
 export default build

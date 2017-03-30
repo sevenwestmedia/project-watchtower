@@ -1,6 +1,7 @@
 import * as path from 'path'
-import { EnvCmd } from 'env-cmd'
+import * as dotenv from 'dotenv'
 import CONFIG from '../build/config/config'
+import { forkPromise } from '../__util/process'
 import { StartParam } from '../types'
 
 const { HAS_SERVER, SERVER_OUTPUT } = CONFIG
@@ -31,7 +32,11 @@ const start = (...args: StartParam[]) => {
         ? path.resolve(SERVER_OUTPUT, 'server.js')
         : path.resolve(__dirname, '..', 'server', 'start.js')
 
-    EnvCmd(['.env', 'node', serverPath])
+    dotenv.config()
+
+    return forkPromise(serverPath, [], {
+        env: process.env,
+    })
 }
 
 export default start

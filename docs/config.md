@@ -6,9 +6,10 @@ See the [build documentation](./build.md) for details on how to customise the pr
 
 ### Source locations
 
-* config
+* config (optional. TypeScript has to be transpiled to JavaScript before building!)
     * webpack.[target].[environment].js: Override webpack configuration
     * config.js: Override default configuration
+    * setup-tests.ts/js: Jest test setup
 * client
     * index.tsx: Client entry file
     * polyfills.ts: Polyfills (optional)

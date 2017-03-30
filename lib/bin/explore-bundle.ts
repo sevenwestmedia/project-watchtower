@@ -2,14 +2,13 @@ import * as webpack from 'webpack'
 import * as merge from 'webpack-merge'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import { getWebpackConfig } from '../build/build'
-import { logError } from '../__util/log'
 import { printWebpackStats } from '../__util/webpack'
 
 const exploreBundle = () => {
     const baseConfig = getWebpackConfig('client', 'prod')
 
     if (!baseConfig) {
-        return
+        return Promise.reject('Error loading the webpack configuration!')
     }
 
     const config = merge(
@@ -21,12 +20,15 @@ const exploreBundle = () => {
         },
     )
 
-    webpack(config).run((err, stats) => {
-        if (err) {
-            logError(err)
-        } else {
-            printWebpackStats(stats)
-        }
+    return new Promise((resolve, reject) => {
+        webpack(config).run((err, stats) => {
+            if (err) {
+                reject(err)
+            } else {
+                printWebpackStats(stats)
+                resolve()
+            }
+        })
     })
 }
 

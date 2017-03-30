@@ -34,7 +34,7 @@ const createServer = () => {
     app.listen(port, () => {
         // tslint:disable-next-line no-console
         console.log(`Server listening on port ${port}`)
-        if (!production) {
+        if (!isProduction) {
             openBrowser(port)
         }
     })

@@ -9,9 +9,7 @@ const clean = (...paths: string[]) => (
         SERVER_OUTPUT,
         '{client,common,config,server}/**/*.{js,map}',
         ...paths,
-    ]).catch((e) => {
-        throw e
-    })
+    ])
 )
 
 export default clean
