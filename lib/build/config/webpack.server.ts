@@ -1,11 +1,9 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as webpack from 'webpack'
-import * as merge from 'webpack-merge'
-import baseConfig from './webpack.base'
-import PATHS from './paths'
+import CONFIG from './config'
 
-const { SERVER_ENTRY, SERVER_OUTPUT, PUBLIC_PATH, BASE } = PATHS
+const { SERVER_ENTRY, SERVER_OUTPUT, PUBLIC_PATH, BASE } = CONFIG
 
 const nodeModules = fs.readdirSync(path.resolve(BASE, 'node_modules'))
 
@@ -15,7 +13,7 @@ const nodeModules = fs.readdirSync(path.resolve(BASE, 'node_modules'))
  * - treat everything in node_modules as an external dependency
  * - add source-map-support to every file
  */
-const serverBaseConfig = merge(baseConfig, {
+const serverBaseConfig: webpack.Configuration = {
     target: 'node',
     entry: {
         main: [
@@ -55,6 +53,6 @@ const serverBaseConfig = merge(baseConfig, {
             entryOnly: false,
         }),
     ],
-})
+}
 
 export default serverBaseConfig

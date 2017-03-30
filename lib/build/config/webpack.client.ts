@@ -1,15 +1,13 @@
 import * as fs from 'fs'
 import * as webpack from 'webpack'
-import * as merge from 'webpack-merge'
 import * as autoprefixer from 'autoprefixer'
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as AssetsPlugin from 'assets-webpack-plugin'
-import baseConfig from './webpack.base'
-import PATHS from './paths'
+import CONFIG from './config'
 import { updateAssetLocations } from '../../server/assets'
 import { Assets } from '../../types'
 
-const { CLIENT_ENTRY, CLIENT_OUTPUT, CLIENT_POLYFILLS, PUBLIC_PATH } = PATHS
+const { CLIENT_ENTRY, CLIENT_OUTPUT, CLIENT_POLYFILLS, PUBLIC_PATH } = CONFIG
 
 type EntryPoints = {
     [name: string]: string[],
@@ -21,7 +19,7 @@ const entry: EntryPoints = {
     ],
 }
 
-if (fs.existsSync(CLIENT_POLYFILLS)) {
+if (CLIENT_POLYFILLS && fs.existsSync(CLIENT_POLYFILLS)) {
     entry.vendor = [
         CLIENT_POLYFILLS,
     ]
@@ -31,9 +29,9 @@ if (fs.existsSync(CLIENT_POLYFILLS)) {
  * Base webpack config for the client that is used both in development and production
  * - Compile SCSS to CSS and extract into external assets
  * - Create assets.json that maps the created assets to their locations
- * -
+ * - Create vendor chunk with everything from node_modules except for SWM modules
  */
-const clientBaseConfig = merge(baseConfig, {
+const clientBaseConfig: webpack.Configuration = {
     entry,
     output: {
         path: CLIENT_OUTPUT,
@@ -90,6 +88,6 @@ const clientBaseConfig = merge(baseConfig, {
             ),
         }),
     ],
-})
+}
 
 export default clientBaseConfig

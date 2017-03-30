@@ -1,27 +1,14 @@
 import * as webpack from 'webpack'
 import * as merge from 'webpack-merge'
-import serverBaseConfig from './webpack.server.base'
+import baseConfig from './webpack.base'
+import serverBaseConfig from './webpack.server'
+import prodConfig from './webpack.prod'
 
-/**
- * Webpack config for the server in production
- */
-const config = merge(serverBaseConfig, {
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production'),
-        }),
-        new webpack.optimize.AggressiveMergingPlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                screw_ie8: true,
-                warnings: false,
-            },
-            mangle: {
-                screw_ie8: true,
-            },
-            comments: false,
-        }),
-    ],
-})
+/** Webpack config for the server in production */
+const config: webpack.Configuration = merge(
+    baseConfig,
+    serverBaseConfig,
+    prodConfig,
+)
 
 export default config

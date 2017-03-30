@@ -1,7 +1,8 @@
 import * as webpack from 'webpack'
+import * as merge from 'webpack-merge'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
-import extendWebpackConfig from '../build/extend'
 import { getWebpackConfig } from '../build/build'
+import { logError } from '../__util/log'
 import { printWebpackStats } from '../__util/webpack'
 
 const exploreBundle = () => {
@@ -11,18 +12,18 @@ const exploreBundle = () => {
         return
     }
 
-    const config = extendWebpackConfig(
+    const config = merge(
         baseConfig,
         {
             plugins: [
-                new BundleAnalyzerPlugin()
+                new BundleAnalyzerPlugin(),
             ],
         },
     )
 
     webpack(config).run((err, stats) => {
         if (err) {
-            console.error(err)
+            logError(err)
         } else {
             printWebpackStats(stats)
         }

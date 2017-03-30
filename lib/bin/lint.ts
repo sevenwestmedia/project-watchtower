@@ -1,5 +1,6 @@
 import tslint from '../lint/tslint'
 import sassLint from '../lint/sass-lint'
+import { log, logError } from '../__util/log'
 
 const lint = (...paths: string[]) => {
     const tslintPaths = paths.filter((p) => p.indexOf('.ts') !== -1)
@@ -9,10 +10,9 @@ const lint = (...paths: string[]) => {
         tslint(...tslintPaths),
         sassLint(...sassLintPaths),
     ]).then(() => {
-        // tslint:disable-next-line no-console
-        console.log('Linting finished without errors.')
+        log('Linting finished without errors.')
     }).catch((e) => {
-        console.error('Linting finished with errors!')
+        logError('Linting finished with errors!')
         throw e
     })
 }

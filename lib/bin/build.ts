@@ -1,11 +1,12 @@
 import * as webpack from 'webpack'
-import { printWebpackStats } from '../__util/webpack'
 import { ENVIRONMENTS, getWebpackConfig, TARGETS } from '../build/build'
 import clean from '../clean'
-import PATHS from '../build/config/paths'
+import CONFIG from '../build/config/config'
+import { logError } from '../__util/log'
+import { printWebpackStats } from '../__util/webpack'
 import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
 
-const { CLIENT_OUTPUT, SERVER_OUTPUT } = PATHS
+const { CLIENT_OUTPUT, SERVER_OUTPUT } = CONFIG
 
 const buildTarget = (target: BuildTarget, environment: BuildEnvironment = 'prod') => (
     new Promise((resolve, reject) => {
@@ -19,7 +20,7 @@ const buildTarget = (target: BuildTarget, environment: BuildEnvironment = 'prod'
 
         compiler.run((err, stats) => {
             if (err) {
-                console.error(err)
+                logError(err)
                 reject(err)
             } else {
                 printWebpackStats(stats)

@@ -1,4 +1,5 @@
 import * as rimraf from 'rimraf'
+import { logError } from '../__util/log'
 
 const clean: (paths: string | string[]) => Promise<any> = (paths) => {
 
@@ -11,7 +12,7 @@ const clean: (paths: string | string[]) => Promise<any> = (paths) => {
     return new Promise((resolve, reject) => {
         rimraf(paths, (err) => {
             if (err) {
-                console.error('Clean error:', err)
+                logError('Clean error:', err)
                 reject(err)
             } else {
                 resolve()

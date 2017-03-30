@@ -6,6 +6,7 @@ import exploreBundle from './explore-bundle'
 import lint from './lint'
 import start from './start'
 
+import { log } from '../__util/log'
 import { BuildParam, StartParam } from '../types'
 
 const args = process.argv.slice(2)
@@ -36,8 +37,7 @@ switch (command) {
         break
 
     default:
-        // tslint:disable-next-line no-console
-        console.log(`
+        log(`
 ## Project Watchtower
 
 Scripts:

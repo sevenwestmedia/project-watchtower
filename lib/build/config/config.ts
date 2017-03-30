@@ -1,10 +1,11 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { Paths, PathsOverride } from '../../types'
+import { logError } from '../../__util/log'
+import { BuildConfig, BuildConfigOverride } from '../../types'
 
 const root = process.cwd()
 
-const defaultPaths: Paths = {
+const defaultConfig: BuildConfig = {
     BASE: root,
     CLIENT_ENTRY: path.resolve(root, 'client', 'index.tsx'),
     CLIENT_OUTPUT: path.resolve(root, 'public', 'assets'),
@@ -14,21 +15,21 @@ const defaultPaths: Paths = {
     PUBLIC_PATH: '/assets/',
 }
 
-const customPathsFile = path.resolve(root, 'config', 'paths.js')
-let customPaths: PathsOverride = {}
+const customConfigFile = path.resolve(root, 'config', 'config.js')
+let customConfig: BuildConfigOverride = {}
 
 try {
-    if (fs.existsSync(customPathsFile)) {
+    if (fs.existsSync(customConfigFile)) {
         // tslint:disable-next-line no-var-requires
-        customPaths = require(customPathsFile).default
+        customConfig = require(customConfigFile).default
     }
 } catch (e) {
-    console.error('Error reading config/paths.js!', e)
+    logError('Error reading config/config.js!', e)
 }
 
-const PATHS = {
-    ...defaultPaths,
-    ...customPaths,
+const CONFIG = {
+    ...defaultConfig,
+    ...customConfig,
 }
 
-export default PATHS
+export default CONFIG

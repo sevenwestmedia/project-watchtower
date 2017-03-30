@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as webpack from 'webpack'
+import { logError } from '../__util/log'
 import { BuildEnvironment, BuildTarget } from '../types'
 
 export const TARGETS: BuildTarget[] = [
@@ -11,7 +12,6 @@ export const TARGETS: BuildTarget[] = [
 export const ENVIRONMENTS: BuildEnvironment[] = [
     'dev',
     'prod',
-    'base',
 ]
 
 const root = process.cwd()
@@ -24,16 +24,15 @@ const root = process.cwd()
 export const getWebpackConfig = (
     target: BuildTarget,
     environment: BuildEnvironment,
-    forceDefault = false,
 ) => {
     if (TARGETS.indexOf(target) === -1) {
-        console.error(`Unknown target: "${target}"! `
+        logError(`Unknown target: "${target}"! `
             + `Known values are: ${TARGETS.join(', ')}`)
         return undefined
     }
 
     if (ENVIRONMENTS.indexOf(environment) === -1) {
-        console.error(`Unknown environment: "${environment}"! `
+        logError(`Unknown environment: "${environment}"! `
             + `Known values are: ${ENVIRONMENTS.join(', ')}`)
         return undefined
     }
@@ -44,7 +43,7 @@ export const getWebpackConfig = (
     let config: webpack.Configuration
 
     try {
-        if (!forceDefault && fs.existsSync(customConfigFile + '.js')) {
+        if (fs.existsSync(customConfigFile + '.js')) {
             config = require(customConfigFile).default
             // tslint:disable-next-line no-console
             console.info('Using custom config file ' + customConfigFile)
@@ -56,15 +55,7 @@ export const getWebpackConfig = (
 
         return config
     } catch (e) {
-        console.error('Error loading webpack config!', e)
+        logError('Error loading webpack config!', e)
         return undefined
     }
 }
-
-/**
- * Get the default webpack configuration for a given target and environment.
- * Use this to create a custom configuration that extends the default one.
- */
-export const getDefaultWebpackConfig = (target: BuildTarget, environment: BuildEnvironment) => (
-    getWebpackConfig(target, environment, true)
-)

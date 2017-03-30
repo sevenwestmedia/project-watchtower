@@ -1,7 +1,7 @@
 import doClean from '../clean'
-import PATHS from '../build/config/paths'
+import CONFIG from '../build/config/config'
 
-const { CLIENT_OUTPUT, SERVER_OUTPUT } = PATHS
+const { CLIENT_OUTPUT, SERVER_OUTPUT } = CONFIG
 
 const clean = (...paths: string[]) => (
     doClean([

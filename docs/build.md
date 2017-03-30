@@ -35,30 +35,45 @@ By default, Project Watchtower uses its own webpack configuration files. If you 
 Example:
 
 ```ts
-import { extendWebpackConfig, getDefaultWebpackConfig } from 'project-watchtower/lib/build'
+import { merge } from 'project-watchtower/lib/build'
+import baseConfig from 'project-watchtower/lib/build/config/webpack.base'
+import clientConfig from 'project-watchtower/lib/build/config/webpack.client'
+import clientDevConfig from 'project-watchtower/lib/build/config/webpack.client.dev'
 
-const config = extendWebpackConfig(
-    getDefaultWebpackConfig('server', 'prod'),
+// either extend one of the complete configurations
+const extendedConfig = merge(
+    clientDevConfig,
     {
         // ...
-    }
+    },
+)
+
+// or build your own with multiple building blocks
+const config = merge(
+    baseConfig,
+    clientConfig,
+    {
+        // ...
+    },
 )
 
 export default config
 ```
 
-If you want to change the default paths of the build process, you can add a `/config/paths.js` that overrides the paths used by the default webpack configuration:
+If you want to change the default configuration of the build process, you can add a `/config/config.js` that overrides the settings used by the default webpack configuration:
 
 ```ts
 import * as path from 'path'
-import { PathsOverride } from 'project-watchtower/lib/types'
+import { BuildConfigOverride } from 'project-watchtower/lib/types'
 
-const customPaths: PathsOverride = {
+const customConfig: BuildConfigOverride = {
     SERVER_OUTPUT: path.resolve(process.cwd(), 'dist')
 }
 
-export default customPaths
+export default customConfig
 ```
+
+The complete default configuration is located in `project-watchtower/lib/build/config/config`
 
 ## Running
 

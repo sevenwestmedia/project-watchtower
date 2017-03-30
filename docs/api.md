@@ -73,20 +73,12 @@ getWebpackConfig(
     target: BuildTarget,
     environment: BuildEnvironment
 ): webpack.Configuration
-
-getDefaultWebpackConfig(
-    target: BuildTarget,
-    environment: BuildEnvironment
-): webpack.Configuration
 ```
 
-`project-watchtower/lib/build/extend`
+`project-watchtower/lib/build/merge`
 
 ```ts
-extendWebpackConfig(
-    baseConfig: webpack.Configuration,
-    newConfig: Partial<webpack.Configuration>
-): webpack.Configuration
+default merge(...configs: webpack.Configuration[]) => webpack.Configuration[]
 ```
 
 `project-watchtower/lib/clean`
@@ -120,4 +112,4 @@ addAssetsToHtml(html: string): string
 `project-watchtower/lib/types`
 
 *   `Assets`: Mapping of webpack assets to file locations
-*   `Paths` / `PathsOverride`: Basic paths configuration for the project
+*   `BuildConfig` / `BuildConfigOverride`: Basic configuration for the project

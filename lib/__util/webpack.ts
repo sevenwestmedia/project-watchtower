@@ -1,4 +1,5 @@
 import * as webpack from 'webpack'
+import { log } from './log'
 
 export const printWebpackStats = (stats: webpack.Stats) => {
 
@@ -10,6 +11,5 @@ export const printWebpackStats = (stats: webpack.Stats) => {
         chunkModules: false,
     })
 
-    // tslint:disable-next-line no-console
-    console.log(statsString)
+    log(statsString)
 }

@@ -1,9 +1,9 @@
 import * as path from 'path'
 import { EnvCmd } from 'env-cmd'
-import PATHS from '../build/config/paths'
+import CONFIG from '../build/config/config'
 import { StartParam } from '../types'
 
-const { SERVER_OUTPUT } = PATHS
+const { SERVER_OUTPUT } = CONFIG
 
 /**
  * Starts the pre-built server with the environment variables

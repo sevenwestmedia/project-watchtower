@@ -1,12 +1,13 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import PATHS from '../build/config/paths'
+import CONFIG from '../build/config/config'
+import { logError } from '../__util/log'
 import { Assets } from '../types'
 
 const root = process.cwd()
 const assetsFile = path.resolve(root, 'assets.json')
 const watchMode = process.env.START_WATCH_MODE === 'true'
-const { PUBLIC_PATH } = PATHS
+const { PUBLIC_PATH } = CONFIG
 
 let assets: Assets = {
     main: {
@@ -22,7 +23,7 @@ try {
     const assetsFileContents = fs.readFileSync(assetsFile)
     assets = JSON.parse(assetsFileContents.toString())
 } catch (e) {
-    console.error('Error reading assets.json!', e)
+    logError('Error reading assets.json!', e)
 }
 
 export const updateAssetLocations = (newAssets: Assets) => {
