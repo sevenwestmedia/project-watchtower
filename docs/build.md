@@ -1,27 +1,5 @@
 # Webpack build process
 
-## Project structure
-
-* config
-    * webpack.[target].[environment].js: Override webpack configuration
-* client
-    * index.tsx: Client entry file
-    * polyfills.ts: Polyfills (optional)
-* server
-    * start.ts: Server entry file
-
-### Output locations
-
-* build: Server build output directory
-    * *server.js*: Main file generated for server
-    * ...
-* public
-    * assets: Client build output directory
-        * main.js (hashed in production build)
-        * vendor.js (hashed in production build)
-        * ...
-* assets.json: Mapping to the location of the generated assets
-
 ## Building
 
 ```
@@ -75,6 +53,8 @@ export default customConfig
 
 The complete default configuration is located in `project-watchtower/lib/build/config/config`
 
+See the [config documentation](./config.md) for an overview of the default project structure.
+
 ## Running
 
     pwt start [watch] [fast]
@@ -83,6 +63,6 @@ Starts the server, using the environment variables defined in `.env`
 
 ### Environment Variables
 
-*   `NODE_ENV`: set to `"production"` or `"development` depending on the `prod` flag
+*   `NODE_ENV`: set to `"production"` or `"development` depending on the `prod` flag 
 *   `START_WATCH_MODE`: set to `"true"` by the `watch` flag
 *   `START_FAST_MODE`: set to `"true"` by the `fast` flag
