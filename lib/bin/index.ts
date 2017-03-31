@@ -5,6 +5,7 @@ import clean from './clean'
 import exploreBundle from './explore-bundle'
 import lint from './lint'
 import start from './start'
+import stats from './stats'
 import test from './test'
 import watch from './watch'
 
@@ -49,6 +50,10 @@ switch (command) {
         exitOnError(start(...commandArgs as StartParam[]))
         break
 
+    case 'stats':
+        exitOnError(stats())
+        break
+
     case 'test':
         exitOnError(test(...commandArgs))
         break
@@ -69,6 +74,7 @@ Scripts:
     explore-bundle
     lint [<glob> ...]
     start [watch] [fast] [prod]
+    stats
     test [<jest options> ...]
     watch [server]
 

@@ -1,5 +1,4 @@
 import * as path from 'path'
-import * as net from 'net'
 import { fork, ChildProcess } from 'child_process'
 import * as express from 'express'
 import * as webpack from 'webpack'
@@ -7,25 +6,12 @@ import * as proxyMiddleware from 'http-proxy-middleware'
 import * as dotenv from 'dotenv'
 import { getWebpackConfig } from '../build/build'
 import { openBrowser, getHotReloadMiddleware } from '../server/dev'
+import { waitForConnection } from '../__util/network'
 import CONFIG from '../build/config/config'
 
 dotenv.config()
 
 const { SERVER_OUTPUT } = CONFIG
-
-const waitForServer = (port: number) => (
-    new Promise((resolve) => {
-        const connect = () => {
-            const socket = net.connect({ port }, () => {
-                resolve()
-            })
-            socket.on('error', () => {
-                setTimeout(connect, 2000)
-            })
-        }
-        connect()
-    })
-)
 
 const restartServer = (oldServer?: ChildProcess) => {
     if (oldServer) {
@@ -56,7 +42,7 @@ const watchServer = (port?: number) => (
             devServer = restartServer(devServer)
 
             setTimeout(() => {
-                devServerAvailable = waitForServer(serverPort)
+                devServerAvailable = waitForConnection(serverPort)
             }, 100)
         })
 

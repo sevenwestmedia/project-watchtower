@@ -58,6 +58,21 @@ pwt start [watch] [fast] [prod]
 *   `fast`: Disable TypeScript type checking for faster incremental builds
 *   `prod`: Set `NODE_ENV` to `"production"`
 
+### stats
+
+```
+pwt stats
+```
+
+Measures build metrics and saves them to `build-stats.csv`
+
+Example:
+
+```
+bundle_size_total,bundle_size_main,bundle_size_vendor,bundle_size_css,ssr_document_size,ssr_loadtime
+166.7,0.5,166.3,0.1,0.5,3
+```
+
 ### test
 
 ```

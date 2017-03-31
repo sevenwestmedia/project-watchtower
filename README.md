@@ -8,6 +8,7 @@ A unified basis for web applications.
 * Testing
 * Cleaning
 * Linting
+* Build metrics
 * Server middlewares and helpers
 * Standalone server for client-only applications
 
