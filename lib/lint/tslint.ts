@@ -10,6 +10,9 @@ const tslint = (...paths: string[]) => {
 
     const args = [
         ...usePaths,
+        '--type-check',
+        '--project',
+        './tsconfig.json',
         '-e',
         '**/*.d.ts',
         '-e',

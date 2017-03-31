@@ -11,7 +11,7 @@ const { PUBLIC_PATH } = CONFIG
 let assets: Assets = {
     main: {
         js: PUBLIC_PATH + 'main.js',
-        css: PUBLIC_PATH + '/css/main.css',
+        css: PUBLIC_PATH + 'css/main.css',
     },
     vendor: {
         js: PUBLIC_PATH + 'vendor.js',

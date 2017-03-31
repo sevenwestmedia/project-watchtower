@@ -17,7 +17,7 @@
   "keywords": [],
   "dependencies": {
     "express": "^4.15.2",
-    "project-watchtower": "file:/../project-watchtower-0.0.1.tgz",
+    "project-watchtower": "^0.0.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "source-map-support": "^0.4.14"
@@ -30,10 +30,8 @@
     "@types/jest": "^19.2.2",
     "@types/react": "^15.0.20",
     "@types/react-dom": "^0.14.23",
+    "@types/webpack": "^2.2.14",
     "@types/webpack-env": "^1.13.0",
-    "sass-lint": "^1.10.2",
-    "tslint": "^4.5.1",
-    "tslint-react": "^2.5.0",
     "typescript": "^2.2.2"
   },
   "sasslintConfig": "node_modules/project-watchtower/config-templates/.sass-lint.yml"
