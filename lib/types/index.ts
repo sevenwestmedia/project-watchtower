@@ -55,6 +55,7 @@ export type BuildEnvironment =
 export type BuildParam =
     | BuildTarget
     | BuildEnvironment
+    | 'complete'
 
 export type StartParam =
     | 'fast'

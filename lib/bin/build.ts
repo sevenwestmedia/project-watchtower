@@ -1,4 +1,7 @@
 import * as webpack from 'webpack'
+import cleanBin from './clean'
+import lint from './lint'
+import test from './test'
 import { ENVIRONMENTS, getWebpackConfig, TARGETS } from '../build/build'
 import clean from '../clean'
 import CONFIG from '../build/config/config'
@@ -67,17 +70,27 @@ const getBuildTargets = (args: BuildParam[]) => {
 /**
  * Builds one or all targets in a specified environment
  * @param args
- *  [<target>] [<environment>]
+ *  [complete] [<target>] [<environment>]
  *  - target defaults to both server and client
  *  - environment defaults to prod
+ *  - complete: runs clean, lint and test before building
  */
-const build = (...args: BuildParam[]) => {
+async function build(...args: BuildParam[]) {
     const targets = getBuildTargets(args)
     const environment = getBuildEnvironment(args)
 
-    return Promise.all(
-        targets.map((target) => cleanAndBuild(target, environment)),
-    )
+    if (args.indexOf('complete') !== -1) {
+        await cleanBin()
+        await lint()
+        await test()
+        return Promise.all(
+            targets.map((target) => buildTarget(target, environment)),
+        )
+    } else {
+        return Promise.all(
+            targets.map((target) => cleanAndBuild(target, environment)),
+        )
+    }
 }
 
 export default build

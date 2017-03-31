@@ -70,7 +70,7 @@
     "webpack-merge": "^4.1.0"
   },
   "engines": {
-    "node": "6.10.0"
+    "node": ">=6.10.0"
   },
   "sasslintConfig": "config-templates/.sass-lint.yml"
 }

@@ -8,6 +8,9 @@ const clean = (...paths: string[]) => (
         CLIENT_OUTPUT,
         SERVER_OUTPUT,
         '{client,common,config,server}/**/*.{js,map}',
+        'assets.json',
+        'build-stats.csv',
+        'coverage',
         ...paths,
     ])
 )

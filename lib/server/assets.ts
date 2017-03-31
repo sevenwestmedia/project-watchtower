@@ -1,7 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import CONFIG from '../build/config/config'
-import { logError } from '../__util/log'
 import { Assets } from '../types'
 
 const root = process.cwd()
@@ -12,42 +11,57 @@ const { PUBLIC_PATH } = CONFIG
 let assets: Assets = {
     main: {
         js: PUBLIC_PATH + 'main.js',
-        css: PUBLIC_PATH + 'main.css',
+        css: PUBLIC_PATH + '/css/main.css',
     },
     vendor: {
         js: PUBLIC_PATH + 'vendor.js',
     },
 }
 
-try {
-    const assetsFileContents = fs.readFileSync(assetsFile)
-    assets = JSON.parse(assetsFileContents.toString())
-} catch (e) {
-    logError('Error reading assets.json!', e)
+let assetsLoaded = false
+
+const ensureAssets = () => {
+    if (assetsLoaded) {
+        return
+    }
+    try {
+        const assetsFileContents = fs.readFileSync(assetsFile)
+        assets = JSON.parse(assetsFileContents.toString())
+        assetsLoaded = true
+    } catch (e) {
+        // do nothing
+    }
 }
 
 export const updateAssetLocations = (newAssets: Assets) => {
     assets = newAssets
+    assetsLoaded = true
 }
 
-export const getAssetLocations = () => assets
+export const getAssetLocations = () => {
+    ensureAssets()
+    return assets
+}
 
 /** Returns a HTML snippet for all CSS assets */
-export const getCssAssetHtml = () => (
-    `<link rel="stylesheet" type="text/css" id="css-main" href="${assets.main.css}${watchMode
+export const getCssAssetHtml = () => {
+    ensureAssets()
+    return `<link rel="stylesheet" type="text/css" id="css-main" href="${assets.main.css}${watchMode
         ? '?' + Date.now()
         : ''
     }" />`
-)
+}
 
 /** Returns a HTML snippet for all JavaScript assets */
-export const getJsAssetHtml = () => (
-    `<script src="${assets.vendor.js}"></script>
+export const getJsAssetHtml = () => {
+    ensureAssets()
+    return `<script src="${assets.vendor.js}"></script>
     <script src="${assets.main.js}" async></script>`
-)
+}
 
 /** Inserts all assets into a given HTML document string */
 export const addAssetsToHtml = (html: string) => {
+    ensureAssets()
     let modifiedHtml = html
     modifiedHtml = modifiedHtml.replace(
         '</head>',

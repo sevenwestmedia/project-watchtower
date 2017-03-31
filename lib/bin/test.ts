@@ -1,10 +1,16 @@
 import * as path from 'path'
+import clean from './clean'
 import { forkPromise } from '../__util/process'
 
 const root = process.cwd()
 const jestBin = path.resolve(root, 'node_modules', 'jest', 'bin', 'jest.js')
 
-const test = (...params: string[]) => {
+/**
+ * Runs the jest test runner
+ * @param params Jest options
+ */
+async function test(...params: string[]) {
+    await clean()
     return forkPromise(
         jestBin,
         [

@@ -7,15 +7,16 @@ Project Watchtower exposes the `project-watchtower` and `pwt` executables
 ### build
 
 ```
-pwt build [<target>] [<environment>]
+pwt build [complete] [<target>] [<environment>]
 ```
 
+* `complete`: Runs clean, lint and test before building
 * `target`: server, client
 * `environment`: dev, prod
 
 Leaving the target out builds both server and client.
 
-Leaving the environment out builds for production by default
+Leaving the environment out builds for production by default.
 
 ### clean
 
@@ -24,6 +25,12 @@ pwt clean [<glob> ...]
 ```
 
 Cleans the default paths `SERVER_OUTPUT`, `CLIENT_OUTPUT` as well as all `.js` and `.maps` files in `/client`, `/server` and `/common`. You can pass in additional glob patterns to be cleaned.
+
+### coverage
+
+```
+pwt coverage [<jest option> ...]
+```
 
 ### explore-bundle
 

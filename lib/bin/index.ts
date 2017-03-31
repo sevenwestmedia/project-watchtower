@@ -29,6 +29,10 @@ switch (command) {
         exitOnError(build(...commandArgs as BuildParam[]))
         break
 
+    case 'coverage':
+        exitOnError(test('--coverage', ...commandArgs))
+        break
+
     case 'clean':
         exitOnError(clean(...commandArgs))
         break
@@ -59,8 +63,9 @@ switch (command) {
 
 Scripts:
 
-    build [<target>] [<environment>]
+    build [complete] [<target>] [<environment>]
     clean [<glob> ...]
+    coverage [<jest options> ...]
     explore-bundle
     lint [<glob> ...]
     start [watch] [fast] [prod]

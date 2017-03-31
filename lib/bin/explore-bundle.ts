@@ -4,6 +4,9 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import { getWebpackConfig } from '../build/build'
 import { printWebpackStats } from '../__util/webpack'
 
+/**
+ * Opens the webpack-bundle-analyzer for the client production bundle
+ */
 const exploreBundle = () => {
     const baseConfig = getWebpackConfig('client', 'prod')
 

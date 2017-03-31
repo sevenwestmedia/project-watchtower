@@ -18,5 +18,11 @@
     "moduleNameMapper": {
         "\\.(s?css|png|svg|jpg)$": "<rootDir>/node_modules/project-watchtower/lib/test/test-mapper.js"
     },
-    "verbose": false
+    "verbose": false,
+    "collectCoverageFrom": [
+        "**/*.{ts,tsx}",
+        "!**/*.d.ts",
+        "!**/node_modules/**",
+        "!config/**"
+    ]
 }
