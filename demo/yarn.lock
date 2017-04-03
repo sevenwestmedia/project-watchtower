@@ -1745,6 +1745,12 @@ file-entry-cache@^1.1.1:
     flat-cache "^1.2.1"
     object-assign "^4.0.1"
 
+file-loader@^0.11.1:
+  version "0.11.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/file-loader/-/file-loader-0.11.1.tgz#6b328ee1234a729e4e47d36375dd6d35c0e1db84"
+  dependencies:
+    loader-utils "^1.0.2"
+
 filename-regex@^2.0.0:
   version "2.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/filename-regex/-/filename-regex-2.0.0.tgz#996e3e80479b98b9897f15a8a58b3d084e926775"
@@ -4210,9 +4216,9 @@ progress@^1.1.8:
   version "1.1.8"
   resolved "https://nexus.swmdigital.io/repository/js-combined/progress/-/progress-1.1.8.tgz#e260c78f6161cdd9b0e56cc3e0a85de17c7a57be"
 
-project-watchtower@^0.0.4:
-  version "0.0.4"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/project-watchtower/-/project-watchtower-0.0.4.tgz#51d4e6185dd66a9ad168b5dad2daf4a1da9d8555"
+project-watchtower@^0.0.5:
+  version "0.0.5"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/project-watchtower/-/project-watchtower-0.0.5.tgz#65c11e596760a8969ef69f367be9c3dfbb792078"
   dependencies:
     assets-webpack-plugin "^3.5.1"
     autoprefixer "^6.7.7"
@@ -4221,6 +4227,7 @@ project-watchtower@^0.0.4:
     dotenv "^4.0.0"
     enzyme-to-json "^1.5.0"
     extract-text-webpack-plugin "^2.1.0"
+    file-loader "^0.11.1"
     http-proxy-middleware "^0.17.4"
     jest "^19.0.2"
     node-sass "^4.5.1"
