@@ -40,7 +40,11 @@ const serverBaseConfig: webpack.Configuration = {
     externals: (_context, request, callback) => {
         // treat deep imports as externals as well
         const moduleName = request.split('/')[0]
-        if (nodeModules.indexOf(moduleName) !== -1) {
+
+        // the component library has to be included to resolve .scss imports
+        if (moduleName === 'swm-component-library') {
+            (callback as any)()
+        } else if (nodeModules.indexOf(moduleName) !== -1) {
             callback(null, 'commonjs ' + request)
         } else {
             (callback as any)()
