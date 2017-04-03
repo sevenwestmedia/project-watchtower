@@ -15,8 +15,8 @@
   },
   "main": "lib/index.js",
   "bin": {
-    "project-watchtower": "lib/bin/index.js",
-    "pwt": "lib/bin/index.js"
+    "project-watchtower": "bin/index.js",
+    "pwt": "bin/index.js"
   },
   "keywords": [],
   "devDependencies": {
