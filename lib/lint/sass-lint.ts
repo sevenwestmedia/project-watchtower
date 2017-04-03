@@ -22,7 +22,7 @@ const sassLint = (...paths: string[]) => {
         '--verbose',
         '--no-exit',
         '--ignore',
-        `'${ignore.join(' ')}'`,
+        ignore.join(', '),
     ]
 
     return forkPromise(executable, args)
