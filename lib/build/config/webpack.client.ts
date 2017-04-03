@@ -80,12 +80,23 @@ const clientBaseConfig: webpack.Configuration = {
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            minChunks: (module: { context: string }) => (
-                module.context
-                && module.context.indexOf('node_modules') !== -1
-                && module.context.indexOf('swm-component-library') === -1
-                && module.context.indexOf('redux-data-loader') === -1
-            ),
+            minChunks: (module: { context: string }) => {
+                if (!module.context) {
+                    return false
+                }
+
+                const modulePos = module.context.indexOf('node_modules')
+                if (modulePos === -1) {
+                    return false
+                }
+
+                const isSwmModule =
+                    module.context.indexOf('swm-component-library', modulePos) !== -1
+                    || module.context.indexOf('redux-data-loader', modulePos) !== -1
+                    || module.context.indexOf('project-watchtower', modulePos) !== -1
+
+                return !isSwmModule
+            },
         }),
     ],
 }
