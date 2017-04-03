@@ -16,6 +16,7 @@ const defaultConfig: BuildConfig = {
     PUBLIC_PATH: '/assets/',
     SERVER_PUBLIC_DIR: path.resolve(root, 'public'),
     STATIC_RESOURCE_NAMES: false,
+    LINT_EXCLUDE: [],
 }
 
 const customConfigFile = path.resolve(root, 'config', 'config.js')

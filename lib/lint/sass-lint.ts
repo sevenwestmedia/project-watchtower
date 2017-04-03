@@ -1,5 +1,8 @@
 import * as path from 'path'
+import CONFIG from '../build/config/config'
 import { forkPromise } from '../__util/process'
+
+const { LINT_EXCLUDE } = CONFIG
 
 const sassLint = (...paths: string[]) => {
     const usePaths = paths.length
@@ -9,12 +12,17 @@ const sassLint = (...paths: string[]) => {
     const executable = path.resolve(process.cwd(),
         'node_modules', 'sass-lint', 'bin', 'sass-lint.js')
 
+    const ignore = [
+        '**/node_modules/**',
+        ...LINT_EXCLUDE,
+    ]
+
     const args = [
         ...usePaths,
         '--verbose',
         '--no-exit',
         '--ignore',
-        '**/node_modules/**',
+        `'${ignore.join(' ')}'`,
     ]
 
     return forkPromise(executable, args)
