@@ -47,6 +47,7 @@
     "dotenv": "^4.0.0",
     "enzyme-to-json": "^1.5.0",
     "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
     "http-proxy-middleware": "^0.17.4",
     "jest": "^19.0.2",
     "node-sass": "^4.5.1",
