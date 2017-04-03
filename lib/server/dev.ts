@@ -8,7 +8,7 @@ import * as opn from 'opn'
 import { addAssetsToHtml } from './assets'
 import { getWebpackConfig } from '../build/build'
 import { logError } from '../__util/log'
-import CONFIG from '../build/config/config'
+import CONFIG from '../config/config'
 
 const { PUBLIC_PATH, SERVER_PUBLIC_DIR } = CONFIG
 const noop: express.RequestHandler = (_res, _req, next) => next()

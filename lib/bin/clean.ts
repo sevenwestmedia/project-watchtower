@@ -1,5 +1,5 @@
 import doClean from '../clean'
-import CONFIG from '../build/config/config'
+import CONFIG from '../config/config'
 
 const { CLIENT_OUTPUT, SERVER_OUTPUT } = CONFIG
 

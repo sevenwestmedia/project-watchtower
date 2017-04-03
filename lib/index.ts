@@ -6,6 +6,7 @@ import binLint from './bin/lint'
 import binStart from './bin/start'
 
 import * as buildModule from './build'
+import * as configModule from './config'
 import * as lintModule from './lint'
 import * as serverModule from './server'
 
@@ -20,6 +21,7 @@ export const bin = {
 }
 
 export const build = buildModule
+export const config = configModule
 export const lint = lintModule
 export const server = serverModule
 

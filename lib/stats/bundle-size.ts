@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import CONFIG from '../build/config/config'
+import CONFIG from '../config/config'
 import { log, logError, prettyJson } from '../__util/log'
 import { BuildMetrics } from './'
 import { formatFileSize, getFileSize, readFile } from './util'

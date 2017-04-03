@@ -4,8 +4,8 @@ import * as autoprefixer from 'autoprefixer'
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as AssetsPlugin from 'assets-webpack-plugin'
 import CONFIG from './config'
-import { updateAssetLocations } from '../../server/assets'
-import { Assets } from '../../types'
+import { updateAssetLocations } from '../server/assets'
+import { Assets } from '../types'
 
 const { CLIENT_ENTRY, CLIENT_OUTPUT, CLIENT_POLYFILLS, PUBLIC_PATH } = CONFIG
 

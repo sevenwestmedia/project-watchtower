@@ -1,4 +1,4 @@
-import CONFIG from '../build/config/config'
+import CONFIG from '../config/config'
 import clean from './clean'
 import build from './build'
 import start from './start'

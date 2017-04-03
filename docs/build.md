@@ -14,9 +14,9 @@ Example:
 
 ```ts
 import { merge } from 'project-watchtower/lib/build'
-import baseConfig from 'project-watchtower/lib/build/config/webpack.base'
-import clientConfig from 'project-watchtower/lib/build/config/webpack.client'
-import clientDevConfig from 'project-watchtower/lib/build/config/webpack.client.dev'
+import baseConfig from 'project-watchtower/lib/config/webpack.base'
+import clientConfig from 'project-watchtower/lib/config/webpack.client'
+import clientDevConfig from 'project-watchtower/lib/config/webpack.client.dev'
 
 // either extend one of the complete configurations
 const extendedConfig = merge(
@@ -51,7 +51,7 @@ const customConfig: BuildConfigOverride = {
 export default customConfig
 ```
 
-The complete default configuration is located in `project-watchtower/lib/build/config/config`
+The complete default configuration is located in `project-watchtower/lib/config/config`
 
 See the [config documentation](./config.md) for an overview of the default project structure.
 

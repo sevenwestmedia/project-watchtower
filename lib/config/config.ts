@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { logError } from '../../__util/log'
-import { BuildConfig, BuildConfigOverride } from '../../types'
+import { logError } from '../__util/log'
+import { BuildConfig, BuildConfigOverride } from '../types'
 
 const root = process.cwd()
 

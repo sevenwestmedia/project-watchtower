@@ -48,7 +48,7 @@ export const getWebpackConfig = (
             log('Using custom config file ' + customConfigFile)
         } else {
             log('Building ' + configFileName + '...')
-            config = require('./config/' + configFileName).default
+            config = require('../config/' + configFileName).default
         }
 
         return config

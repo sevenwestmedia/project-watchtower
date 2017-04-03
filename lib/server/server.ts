@@ -1,7 +1,7 @@
 import * as express from 'express'
 import { getDefaultHtmlMiddleware, getHotReloadMiddleware, openBrowser } from './dev'
 import { log } from '../__util/log'
-import CONFIG from '../build/config/config'
+import CONFIG from '../config/config'
 
 const port = process.env.PORT || 3000
 const isProduction = process.env.NODE_ENV === 'production'

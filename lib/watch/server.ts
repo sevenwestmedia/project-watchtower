@@ -7,7 +7,7 @@ import * as dotenv from 'dotenv'
 import { getWebpackConfig } from '../build/build'
 import { openBrowser, getHotReloadMiddleware } from '../server/dev'
 import { waitForConnection } from '../__util/network'
-import CONFIG from '../build/config/config'
+import CONFIG from '../config/config'
 
 dotenv.config()
 

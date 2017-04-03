@@ -1,6 +1,6 @@
 import * as path from 'path'
 import * as dotenv from 'dotenv'
-import CONFIG from '../build/config/config'
+import CONFIG from '../config/config'
 import { forkPromise } from '../__util/process'
 import { StartParam } from '../types'
 
