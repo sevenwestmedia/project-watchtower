@@ -9,6 +9,7 @@ export const printWebpackStats = (stats: webpack.Stats) => {
         timings: true,
         colors: true,
         chunkModules: false,
+        children: false,
     })
 
     log(statsString)
