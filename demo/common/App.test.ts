@@ -1,3 +1,4 @@
+import { mount } from 'enzyme'
 import App from './App'
 
 describe('demo suite', () => {
@@ -8,6 +9,11 @@ describe('demo suite', () => {
 
     it('environment variables have to be loaded', () => {
         expect(process.env.PORT).toBeDefined()
+    })
+
+    it('snapshot', () => {
+        const mounted = mount(App)
+        expect(mounted).toMatchSnapshot()
     })
 
 })
