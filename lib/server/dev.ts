@@ -24,13 +24,16 @@ export const getHotReloadMiddleware: HotReloadMiddleware = () => {
         {
             publicPath: PUBLIC_PATH,
             noInfo: true,
+            stats: 'minimal',
             watchOptions: {
                 ignored: /node_modules/,
             },
         },
     )
 
-    const hot = webpackHotMiddleware(compiler)
+    const hot = webpackHotMiddleware(compiler, {
+        noInfo: true,
+    })
 
     return [
         dev,
