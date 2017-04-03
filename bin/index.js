@@ -5,4 +5,4 @@
  * with CRLF on Windows, which breks the shebang line on linux/unix!
  */
 
-require('../lib/bin')
+require('../lib/bin/_pwt')
