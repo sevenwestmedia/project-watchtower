@@ -1378,6 +1378,18 @@ entities@^1.1.1, entities@~1.1.1:
   version "1.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
+enzyme-to-json@^1.5.0:
+  version "1.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/enzyme-to-json/-/enzyme-to-json-1.5.0.tgz#bb94f21346866d68378adc9b26856dd6e2bfa60b"
+  dependencies:
+    lodash.filter "^4.6.0"
+    lodash.isnil "^4.0.0"
+    lodash.isplainobject "^4.0.6"
+    lodash.omitby "^4.5.0"
+    lodash.range "^3.2.0"
+    object-values "^1.0.0"
+    object.entries "^1.0.3"
+
 enzyme@^2.8.0:
   version "2.8.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/enzyme/-/enzyme-2.8.0.tgz#86cc1fc96e5cbd7695766dd6e89deb13a0aead51"
@@ -3112,7 +3124,7 @@ lodash.escape@^3.0.0:
   dependencies:
     lodash._root "^3.0.0"
 
-lodash.filter@^4.4.0:
+lodash.filter@^4.4.0, lodash.filter@^4.6.0:
   version "4.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.filter/-/lodash.filter-4.6.0.tgz#668b1d4981603ae1cc5a6fa760143e480b4c4ace"
 
@@ -3136,6 +3148,10 @@ lodash.isarray@^3.0.0:
   version "3.0.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
 
+lodash.isnil@^4.0.0:
+  version "4.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.isnil/-/lodash.isnil-4.0.0.tgz#49e28cd559013458c814c5479d3c663a21bfaa6c"
+
 lodash.isplainobject@^3.0.0:
   version "3.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.isplainobject/-/lodash.isplainobject-3.2.0.tgz#9a8238ae16b200432960cd7346512d0123fbf4c5"
@@ -3143,6 +3159,10 @@ lodash.isplainobject@^3.0.0:
     lodash._basefor "^3.0.0"
     lodash.isarguments "^3.0.0"
     lodash.keysin "^3.0.0"
+
+lodash.isplainobject@^4.0.6:
+  version "4.0.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
 
 lodash.istypedarray@^3.0.0:
   version "3.0.6"
@@ -3199,6 +3219,10 @@ lodash.mergewith@^4.6.0:
   version "4.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.mergewith/-/lodash.mergewith-4.6.0.tgz#150cf0a16791f5903b8891eab154609274bdea55"
 
+lodash.omitby@^4.5.0:
+  version "4.6.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.omitby/-/lodash.omitby-4.6.0.tgz#5c15ff4754ad555016b53c041311e8f079204791"
+
 lodash.partition@^4.6.0:
   version "4.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.partition/-/lodash.partition-4.6.0.tgz#a38e46b73469e0420b0da1212e66d414be364ba4"
@@ -3210,6 +3234,10 @@ lodash.pick@^4.2.1:
 lodash.pickby@^4.6.0:
   version "4.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.pickby/-/lodash.pickby-4.6.0.tgz#7dea21d8c18d7703a27c704c15d3b84a67e33aff"
+
+lodash.range@^3.2.0:
+  version "3.2.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.range/-/lodash.range-3.2.0.tgz#f461e588f66683f7eadeade513e38a69a565a15d"
 
 lodash.reduce@^4.4.0:
   version "4.6.0"
@@ -3657,6 +3685,10 @@ object-keys@^1.0.10, object-keys@^1.0.8:
 object-path@^0.9.2:
   version "0.9.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/object-path/-/object-path-0.9.2.tgz#0fd9a74fc5fad1ae3968b586bda5c632bd6c05a5"
+
+object-values@^1.0.0:
+  version "1.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/object-values/-/object-values-1.0.0.tgz#72af839630119e5b98c3b02bb8c27e3237158105"
 
 object.assign@^4.0.4:
   version "4.0.4"
@@ -4178,15 +4210,16 @@ progress@^1.1.8:
   version "1.1.8"
   resolved "https://nexus.swmdigital.io/repository/js-combined/progress/-/progress-1.1.8.tgz#e260c78f6161cdd9b0e56cc3e0a85de17c7a57be"
 
-project-watchtower@^0.0.3:
-  version "0.0.3"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/project-watchtower/-/project-watchtower-0.0.3.tgz#656e0f4485129820c70978e5e89b11dffa39d5ae"
+project-watchtower@^0.0.4:
+  version "0.0.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/project-watchtower/-/project-watchtower-0.0.4.tgz#51d4e6185dd66a9ad168b5dad2daf4a1da9d8555"
   dependencies:
     assets-webpack-plugin "^3.5.1"
     autoprefixer "^6.7.7"
     awesome-typescript-loader "^3.1.2"
     css-loader "^0.27.3"
     dotenv "^4.0.0"
+    enzyme-to-json "^1.5.0"
     extract-text-webpack-plugin "^2.1.0"
     http-proxy-middleware "^0.17.4"
     jest "^19.0.2"

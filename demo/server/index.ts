@@ -1,3 +1,4 @@
+import * as React from 'react'
 import * as express from 'express'
 import { renderToString } from 'react-dom/server'
 import { addAssetsToHtml } from 'project-watchtower/lib/server/assets'
@@ -19,7 +20,7 @@ const createServer = () => {
         index: false,
     }))
 
-    const ssr = renderToString(App)
+    const ssr = renderToString(React.createElement(App))
 
     app.get('*', (_req, res) => {
         const content = addAssetsToHtml(`<!DOCTYPE html>

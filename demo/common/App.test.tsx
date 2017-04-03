@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { mount } from 'enzyme'
 import App from './App'
 
@@ -12,7 +13,7 @@ describe('demo suite', () => {
     })
 
     it('snapshot', () => {
-        const mounted = mount(App)
+        const mounted = mount(<App />)
         expect(mounted).toMatchSnapshot()
     })
 
