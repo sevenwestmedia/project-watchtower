@@ -39,6 +39,9 @@ export interface BuildConfig {
     /** directory that is served as static resources */
     SERVER_PUBLIC_DIR: string | false
 
+    /** if true, no hash is added to the generated assets */
+    STATIC_RESOURCE_NAMES: boolean
+
 }
 
 /** Use to override the application configuration */

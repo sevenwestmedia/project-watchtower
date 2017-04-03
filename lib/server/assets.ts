@@ -63,13 +63,18 @@ export const getJsAssetHtml = () => {
 export const addAssetsToHtml = (html: string) => {
     ensureAssets()
     let modifiedHtml = html
-    modifiedHtml = modifiedHtml.replace(
-        '</head>',
-        getCssAssetHtml() + '</head>',
-    )
-    modifiedHtml = modifiedHtml.replace(
-        '</body>',
-        getJsAssetHtml() + '</body>',
-    )
+
+    if (html.indexOf(assets.main.css) === -1) {
+        modifiedHtml = modifiedHtml.replace(
+            '</head>',
+            getCssAssetHtml() + '</head>',
+        )
+    }
+    if (html.indexOf(assets.main.js) === -1) {
+        modifiedHtml = modifiedHtml.replace(
+            '</body>',
+            getJsAssetHtml() + '</body>',
+        )
+    }
     return modifiedHtml
 }
