@@ -1,5 +1,5 @@
 import * as webpack from 'webpack'
-import { log } from './log'
+import { log, logError } from './log'
 
 export const printWebpackStats = (stats: webpack.Stats) => {
 
@@ -14,3 +14,17 @@ export const printWebpackStats = (stats: webpack.Stats) => {
 
     log(statsString)
 }
+
+export const webpackPromise = (config: webpack.Configuration) => (
+    new Promise((resolve, reject) => {
+        webpack(config).run((err, stats) => {
+            if (err) {
+                logError(err)
+                reject(err)
+            } else {
+                printWebpackStats(stats)
+                resolve()
+            }
+        })
+    })
+)

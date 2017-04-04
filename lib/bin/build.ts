@@ -6,32 +6,20 @@ import { ENVIRONMENTS, getWebpackConfig, TARGETS } from '../build/build'
 import clean from '../clean'
 import CONFIG from '../config/config'
 import { logError } from '../__util/log'
-import { printWebpackStats } from '../__util/webpack'
+import { webpackPromise } from '../__util/webpack'
 import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
 
 const { CLIENT_OUTPUT, SERVER_OUTPUT, HAS_SERVER } = CONFIG
 
-const buildTarget = (target: BuildTarget, environment: BuildEnvironment = 'prod') => (
-    new Promise((resolve, reject) => {
-        const config = getWebpackConfig(target, environment)
+const buildTarget = (target: BuildTarget, environment: BuildEnvironment = 'prod') => {
+    const config = getWebpackConfig(target, environment)
 
-        if (!config) {
-            return reject(`Could not load webpack configuration for ${target}/${environment}!`)
-        }
+    if (!config) {
+        return reject(`Could not load webpack configuration for ${target}/${environment}!`)
+    }
 
-        const compiler = webpack(config)
-
-        compiler.run((err, stats) => {
-            if (err) {
-                logError(err)
-                reject(err)
-            } else {
-                printWebpackStats(stats)
-                resolve()
-            }
-        })
-    })
-)
+    return webpackPromise(config)
+}
 
 const cleanAndBuild = (target: BuildTarget, environment: BuildEnvironment = 'prod') => {
     const cleanTarget = target === 'server'

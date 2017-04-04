@@ -37,7 +37,7 @@ export const createServer: CreateServerType = (
 
     app.get('*', getDefaultHtmlMiddleware())
 
-    app.listen(port, () => {
+    const server = app.listen(port, () => {
         log(`Server listening on port ${port}`)
         if (!isProduction && watchMode) {
             openBrowser(port)
@@ -46,6 +46,8 @@ export const createServer: CreateServerType = (
             callback()
         }
     })
+
+    app.set('server', server)
 
     return app
 }
