@@ -1,5 +1,5 @@
 import * as rimraf from 'rimraf'
-import { logError } from '../__util/log'
+import { logError } from '../util/log'
 
 const clean: (paths: string | string[]) => Promise<any> = (paths) => {
 

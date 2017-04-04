@@ -1,7 +1,7 @@
 import * as webpack from 'webpack'
-import { printWebpackStats } from '../../lib/__util/webpack'
+import { printWebpackStats } from '../../lib/util/webpack'
 
-describe('__util/webpack', () => {
+describe('util/webpack', () => {
 
     it('printWebpackStats', () => {
         const stats = {

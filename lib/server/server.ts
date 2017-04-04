@@ -1,7 +1,7 @@
 import * as express from 'express'
 import { getDefaultHtmlMiddleware, getHotReloadMiddleware, openBrowser } from './dev'
-import { findFreePort } from '../__util/network'
-import { log } from '../__util/log'
+import { findFreePort } from '../util/network'
+import { log } from '../util/log'
 import CONFIG from '../config/config'
 
 const port = parseInt(process.env.PORT || 3000, 10)

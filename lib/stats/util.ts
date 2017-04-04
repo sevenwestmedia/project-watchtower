@@ -1,5 +1,5 @@
 import * as fs from 'fs'
-import { logError } from '../__util/log'
+import { logError } from '../util/log'
 
 export const formatFileSize = (size: number) => (size / 1024).toFixed(1)
 

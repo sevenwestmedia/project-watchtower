@@ -1,12 +1,10 @@
-import * as webpack from 'webpack'
 import cleanBin from './clean'
 import lint from './lint'
 import test from './test'
 import { ENVIRONMENTS, getWebpackConfig, TARGETS } from '../build/build'
 import clean from '../clean'
 import CONFIG from '../config/config'
-import { logError } from '../__util/log'
-import { webpackPromise } from '../__util/webpack'
+import { webpackPromise } from '../util/webpack'
 import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
 
 const { CLIENT_OUTPUT, SERVER_OUTPUT, HAS_SERVER } = CONFIG
@@ -15,7 +13,7 @@ const buildTarget = (target: BuildTarget, environment: BuildEnvironment = 'prod'
     const config = getWebpackConfig(target, environment)
 
     if (!config) {
-        return reject(`Could not load webpack configuration for ${target}/${environment}!`)
+        return Promise.reject(`Could not load webpack configuration for ${target}/${environment}!`)
     }
 
     return webpackPromise(config)

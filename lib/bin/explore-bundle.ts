@@ -1,8 +1,7 @@
-import * as webpack from 'webpack'
 import * as merge from 'webpack-merge'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import { getWebpackConfig } from '../build/build'
-import { webpackPromise } from '../__util/webpack'
+import { webpackPromise } from '../util/webpack'
 
 /**
  * Opens the webpack-bundle-analyzer for the client production bundle

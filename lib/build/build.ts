@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as webpack from 'webpack'
-import { log, logError } from '../__util/log'
+import { log, logError } from '../util/log'
 import { BuildEnvironment, BuildTarget } from '../types'
 
 export const TARGETS: BuildTarget[] = [

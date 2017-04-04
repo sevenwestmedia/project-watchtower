@@ -1,6 +1,6 @@
 import * as path from 'path'
 import clean from './clean'
-import { forkPromise } from '../__util/process'
+import { forkPromise } from '../util/process'
 
 const root = process.cwd()
 const jestBin = path.resolve(root, 'node_modules', 'jest', 'bin', 'jest.js')

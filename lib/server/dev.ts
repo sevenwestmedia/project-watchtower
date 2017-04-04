@@ -7,7 +7,7 @@ import * as webpackHotMiddleware from 'webpack-hot-middleware'
 import * as opn from 'opn'
 import { addAssetsToHtml } from './assets'
 import { getWebpackConfig } from '../build/build'
-import { logError } from '../__util/log'
+import { logError } from '../util/log'
 import CONFIG from '../config/config'
 
 const { PUBLIC_PATH, SERVER_PUBLIC_DIR } = CONFIG

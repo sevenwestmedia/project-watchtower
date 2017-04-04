@@ -1,6 +1,6 @@
-import { log, logError, prettyJson } from '../../lib/__util/log'
+import { log, logError, prettyJson } from '../../lib/util/log'
 
-describe('__util/log', () => {
+describe('util/log', () => {
 
     it('log', () => {
         log('a', undefined, { foo: 'bar' })

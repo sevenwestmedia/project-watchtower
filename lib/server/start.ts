@@ -1,5 +1,5 @@
 import { createServer } from './server'
-import { log } from '../__util/log'
+import { log } from '../util/log'
 
 log('Starting Project Watchtower internal server...')
 

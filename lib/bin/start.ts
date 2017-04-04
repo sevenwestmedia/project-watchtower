@@ -1,7 +1,7 @@
 import * as path from 'path'
 import * as dotenv from 'dotenv'
 import CONFIG from '../config/config'
-import { forkPromise } from '../__util/process'
+import { forkPromise } from '../util/process'
 import { StartParam } from '../types'
 
 const { HAS_SERVER, SERVER_OUTPUT } = CONFIG

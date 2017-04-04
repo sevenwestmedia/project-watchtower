@@ -3,8 +3,8 @@ import * as http from 'http'
 import { fork } from 'child_process'
 import * as dotenv from 'dotenv'
 import CONFIG from '../config/config'
-import { waitForConnection } from '../__util/network'
-import { log, logError, prettyJson } from '../__util/log'
+import { waitForConnection } from '../util/network'
+import { log, logError, prettyJson } from '../util/log'
 import { BuildMetrics } from './'
 import {
     formatFileSize,

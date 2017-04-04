@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as dotenv from 'dotenv'
-import { log } from '../__util/log'
+import { log } from '../util/log'
 
 dotenv.config()
 process.env.NODE_ENV = 'test'

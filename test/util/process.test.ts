@@ -1,10 +1,10 @@
 import * as path from 'path'
 import { expectPromiseToFail } from '../test-helpers'
-import { spawnPromise, forkPromise } from '../../lib/__util/process'
+import { spawnPromise, forkPromise } from '../../lib/util/process'
 
 const processExit = path.resolve(__dirname, '..', '__test-data__', 'process-exit.ts')
 
-describe('__util/process', () => {
+describe('util/process', () => {
 
     it('spawnPromise', () => (
         spawnPromise('node', [

@@ -1,6 +1,6 @@
 import * as path from 'path'
 import CONFIG from '../config/config'
-import { forkPromise } from '../__util/process'
+import { forkPromise } from '../util/process'
 
 const { LINT_EXCLUDE } = CONFIG
 

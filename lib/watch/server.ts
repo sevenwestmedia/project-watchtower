@@ -6,7 +6,7 @@ import * as proxyMiddleware from 'http-proxy-middleware'
 import * as dotenv from 'dotenv'
 import { getWebpackConfig } from '../build/build'
 import { openBrowser, getHotReloadMiddleware } from '../server/dev'
-import { waitForConnection } from '../__util/network'
+import { waitForConnection } from '../util/network'
 import CONFIG from '../config/config'
 
 dotenv.config()

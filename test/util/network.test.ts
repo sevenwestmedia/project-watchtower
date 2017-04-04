@@ -3,10 +3,10 @@ import {
     waitForConnection,
     checkPortAvailability,
     findFreePort,
-} from '../../lib/__util/network'
+} from '../../lib/util/network'
 import { expectPromiseToFail } from '../test-helpers'
 
-describe('__util/network', () => {
+describe('util/network', () => {
 
     it('waitForConnection', () => {
         const port = 3000
