@@ -9,7 +9,7 @@ export interface BuildMetrics {
     [key: string]: string
 }
 
-export default async function buildStats() {
+const buildStats = async () => {
 
     const keys: string[] = []
     const values: string[] = []
@@ -38,3 +38,5 @@ export default async function buildStats() {
 
     return writeFile(statsFilePath, fileContent)
 }
+
+export default buildStats

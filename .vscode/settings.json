@@ -12,7 +12,8 @@
         "{lib,demo}/**/*.js": { "when": "$(basename).tsx" }
     },
     "search.exclude": {
-        "**/node_modules": true
+        "**/node_modules": true,
+        "coverage/**": true,
     },
     "path-intellisense.mappings": {
         "testHelpers": "${workspaceRoot}/common/testHelpers",

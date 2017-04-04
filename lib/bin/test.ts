@@ -9,7 +9,7 @@ const jestBin = path.resolve(root, 'node_modules', 'jest', 'bin', 'jest.js')
  * Runs the jest test runner
  * @param params Jest options
  */
-async function test(...params: string[]) {
+const test = async (...params: string[]) => {
     await clean()
     return forkPromise(
         jestBin,

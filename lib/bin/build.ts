@@ -63,7 +63,7 @@ const getBuildTargets = (args: BuildParam[]) => {
  *  - environment defaults to prod
  *  - complete: runs clean, lint and test before building
  */
-async function build(...args: BuildParam[]) {
+const build = async (...args: BuildParam[]) => {
     const targets = getBuildTargets(args)
     const environment = getBuildEnvironment(args)
 

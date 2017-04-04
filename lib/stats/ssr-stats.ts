@@ -42,7 +42,7 @@ const loadSSRPage = () => (
     })
 )
 
-export default async function ssrStats() {
+const ssrStats = async () => {
 
     log('Measuring SSR load times...')
 
@@ -85,3 +85,5 @@ export default async function ssrStats() {
         return {}
     }
 }
+
+export default ssrStats

@@ -14,3 +14,34 @@ export const waitForConnection = (port: number) => (
         connect()
     })
 )
+
+const startPort = parseInt(process.env.PORT || 3000, 10)
+
+export const checkPortAvailability = (port: number) => (
+    new Promise((resolve, reject) => {
+        const server = net.createServer()
+
+        server.on('error', () => reject())
+
+        server.listen(port, () => {
+            server.once('close', () => resolve())
+            server.close()
+        })
+    })
+)
+
+export const findFreePort = async (useStartPort?: number) => {
+    const testPort = useStartPort || startPort
+
+    for (let i = 0; i < 100; i++) {
+        try {
+            const port = testPort + i
+            await checkPortAvailability(port)
+            return port
+        } catch (e) {
+            // do nothing
+        }
+    }
+
+    throw new Error('Could not find a free port within 100 tries!')
+}

@@ -8,7 +8,7 @@ import { formatFileSize, getFileSize, readFile } from './util'
 const { BASE, CLIENT_OUTPUT, SERVER_PUBLIC_DIR } = CONFIG
 const assetFilePath = path.resolve(BASE, 'assets.json')
 
-async function getChunkSize(chunkPath: string): Promise<string> {
+const getChunkSize = async (chunkPath: string) => {
     const normalizedChunkPath = chunkPath[0] === '/'
         ? chunkPath.slice(1)
         : chunkPath
@@ -43,7 +43,7 @@ const getCombinedSize = () =>
         })
     })
 
-export default async function bundleSize() {
+const bundleSize = async () => {
     try {
         const assetFile = await readFile(assetFilePath)
         const assets = JSON.parse(assetFile)
@@ -70,3 +70,5 @@ export default async function bundleSize() {
         return {}
     }
 }
+
+export default bundleSize

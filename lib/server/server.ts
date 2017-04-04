@@ -1,9 +1,10 @@
 import * as express from 'express'
 import { getDefaultHtmlMiddleware, getHotReloadMiddleware, openBrowser } from './dev'
+import { findFreePort } from '../__util/network'
 import { log } from '../__util/log'
 import CONFIG from '../config/config'
 
-const port = process.env.PORT || 3000
+const port = parseInt(process.env.PORT || 3000, 10)
 const isProduction = process.env.NODE_ENV === 'production'
 const watchMode = process.env.START_WATCH_MODE === 'true'
 
@@ -37,17 +38,25 @@ export const createServer: CreateServerType = (
 
     app.get('*', getDefaultHtmlMiddleware())
 
-    const server = app.listen(port, () => {
-        log(`Server listening on port ${port}`)
-        if (!isProduction && watchMode) {
-            openBrowser(port)
-        }
-        if (callback) {
-            callback()
-        }
-    })
+    const listen = (usePort: number) => {
+        const server = app.listen(usePort, () => {
+            log(`Server listening on port ${usePort}`)
+            if (!isProduction && watchMode) {
+                openBrowser(port)
+            }
+            if (callback) {
+                callback()
+            }
+        })
 
-    app.set('server', server)
+        app.set('server', server)
+    }
+
+    if (isProduction) {
+        listen(port)
+    } else {
+        findFreePort(port).then((usePort) => listen(usePort))
+    }
 
     return app
 }

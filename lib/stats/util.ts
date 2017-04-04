@@ -55,7 +55,7 @@ export const delay = (ms = 1000) =>
 export const average = (nums: number[]) =>
     nums.reduce((prev, cur) => prev + cur, 0) / nums.length
 
-export async function getSequenceAverage(fn: () => Promise<number>, times = 5) {
+export const getSequenceAverage = async (fn: () => Promise<number>, times = 5) => {
     const results: number[] = []
 
     for (let i = 0; i < times; i++) {

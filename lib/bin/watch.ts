@@ -12,7 +12,7 @@ const { HAS_SERVER } = CONFIG
  * - server: Also watches and rebuilds server
  * - fast: disables type checking
  */
-async function watch(...args: string[]) {
+const watch = async (...args: string[]) => {
 
     if (args.indexOf('fast') !== -1) {
         process.env.START_FAST_MODE = 'true'
