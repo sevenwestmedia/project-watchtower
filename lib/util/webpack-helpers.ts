@@ -1,6 +1,11 @@
 import * as webpack from 'webpack'
 import { log, logError } from './log'
 
+/*
+ * This file cannot be named 'webpack.ts' as the import of the 'webpack'
+ * module will not work in the ts-jest environment!
+ */
+
 export const printWebpackStats = (stats: webpack.Stats) => {
 
     const statsString = stats.toString({

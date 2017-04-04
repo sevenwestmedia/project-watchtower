@@ -9,9 +9,11 @@
     "clean": "rimraf lib/**/*.{js,map,d.ts}",
     "prepublish": "npm run clean && npm run test && npm run build",
     "lint": "tslint --type-check --project tsconfig.json lib/**/*.ts -e **/*.d.ts",
-    "sass-lint": "node lib/lint/sass-lint.js",
     "build": "tsc",
-    "test": "jest --silent --config jest.json",
+    "test:base": "jest --runInBand --config jest.json",
+    "test": "npm run test:base -- --silent",
+    "test:verbose": "npm run test:base -- --verbose",
+    "coverage": "npm run test -- --coverage",
     "watch": "npm run build -- --watch"
   },
   "main": "lib/index.js",

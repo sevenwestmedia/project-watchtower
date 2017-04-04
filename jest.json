@@ -1,5 +1,6 @@
 {
     "setupTestFrameworkScriptFile": "<rootDir>/lib/test/setup-tests.ts",
+    "testEnvironment": "node",
     "transform": {
         ".tsx?": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
@@ -31,6 +32,9 @@
         "!**/*.d.ts",
         "!**/node_modules/**",
         "!lib/config/**",
-        "!demo/**"
+        "!demo/**",
+        "!server/**",
+        "!client/**",
+        "!test/**"
     ]
 }

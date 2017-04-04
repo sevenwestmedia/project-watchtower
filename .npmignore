@@ -5,3 +5,7 @@ demo/
 *.ts
 *.tsx
 !*.d.ts
+client/
+public/
+server/
+build/

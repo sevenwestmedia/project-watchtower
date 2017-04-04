@@ -162,4 +162,12 @@ webpack-assets.json
 
 lib/**/*.js
 lib/**/*.d.ts
+server/**/*.js
+server/**/*.d.ts
+client/**/*.js
+client/**/*.d.ts
+build
+public/assets
+assets.json
+build-stats.csv
 *.tgz
