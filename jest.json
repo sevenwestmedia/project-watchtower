@@ -1,0 +1,36 @@
+{
+    "setupTestFrameworkScriptFile": "<rootDir>/lib/test/setup-tests.ts",
+    "transform": {
+        ".tsx?": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "\\.(spec|test)\\.tsx?$",
+    "moduleFileExtensions": [
+        "ts",
+        "tsx",
+        "js",
+        "json"
+    ],
+    "moduleDirectories": [
+        "node_modules",
+        "common",
+        "."
+    ],
+    "testPathIgnorePatterns": [
+        "/node_modules/",
+        "/demo/"
+    ],
+    "moduleNameMapper": {
+        "\\.(s?css|png|svg|jpg)$": "<rootDir>/lib/test/test-mapper.ta"
+    },
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "verbose": false,
+    "collectCoverageFrom": [
+        "**/*.{ts,tsx}",
+        "!**/*.d.ts",
+        "!**/node_modules/**",
+        "!lib/config/**",
+        "!demo/**"
+    ]
+}
