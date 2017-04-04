@@ -11,14 +11,21 @@ const jestBin = path.resolve(root, 'node_modules', 'jest', 'bin', 'jest.js')
  */
 const test = async (...params: string[]) => {
     await clean()
-    return forkPromise(
-        jestBin,
-        [
-            '--silent',
+
+    let args: string[] = []
+
+    if (params.indexOf('--config') === -1) {
+        args = args.concat([
             '--config',
             'node_modules/project-watchtower/config-templates/jest.json',
-            ...params,
-        ],
+        ])
+    }
+
+    args = args.concat(params)
+
+    return forkPromise(
+        jestBin,
+        args,
         {
             env: {
                 ...process.env,
