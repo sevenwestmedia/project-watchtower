@@ -1,6 +1,6 @@
 describe('bin', () => {
 
-    it('index', () => {
+    it('lib/bin/index', () => {
         require('../../lib/bin/index')
     })
 
