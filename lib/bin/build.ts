@@ -4,7 +4,7 @@ import test from './test'
 import { ENVIRONMENTS, getWebpackConfig, TARGETS } from '../build/build'
 import clean from '../clean'
 import CONFIG from '../config/config'
-import { webpackPromise } from '../util/webpack-helpers'
+import { webpackPromise } from '../util/webpack'
 import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
 
 const { CLIENT_OUTPUT, SERVER_OUTPUT, HAS_SERVER } = CONFIG

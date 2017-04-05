@@ -12,8 +12,7 @@
     ],
     "moduleDirectories": [
         "node_modules",
-        "common",
-        "."
+        "common"
     ],
     "moduleNameMapper": {
         "\\.(s?css|png|svg|jpg)$": "<rootDir>/node_modules/project-watchtower/lib/test/test-mapper.js"
