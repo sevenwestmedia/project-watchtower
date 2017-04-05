@@ -12,6 +12,7 @@
         "jsx-no-string-ref": true,
         "jsx-self-close": true,
         "jsx-wrap-multiline": true,
+        "jsx-boolean-value": false,
         // @TODO swap to using arrow parens with ban-single-arg-parens
         // https://palantir.github.io/tslint/rules/arrow-parens/
 

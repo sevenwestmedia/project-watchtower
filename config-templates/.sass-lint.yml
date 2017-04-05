@@ -28,7 +28,7 @@ rules:
         -
             allow-rgba: true
     no-combinators: 0
-    no-css-comments: 1
+    no-css-comments: 0
     no-debug: 1
     no-disallowed-properties: 0
     no-duplicate-properties: 1
@@ -38,7 +38,10 @@ rules:
     no-important: 0
     no-invalid-hex: 1
     no-mergeable-selectors: 1
-    no-misspelled-properties: 1
+    no-misspelled-properties:
+        - 1
+        - 'extra-properties':
+            - 'overflow-scrolling'
     no-qualifying-elements:
         - 1
         -
@@ -67,6 +70,12 @@ rules:
         -
             allow-leading-underscore: false
             convention: 'hyphenatedbem'
+            ignore:
+                - 'Guide-description'
+                - 'Guide-example'
+                - 'Guide-markup'
+                - 'Guide-expander'
+                - 'Guide-expanderSection'
     function-name-format:
         - 1
         -
