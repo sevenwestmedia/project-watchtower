@@ -8,7 +8,7 @@
   "scripts": {
     "clean": "rimraf lib/**/*.{js,map,d.ts}",
     "prepublish": "npm run clean && npm run test && npm run build",
-    "lint": "tslint --type-check --project tsconfig.json lib/**/*.ts -e **/*.d.ts",
+    "lint": "tslint lib/**/*.ts -e **/*.d.ts",
     "build": "tsc",
     "test:base": "jest --runInBand --config jest.json",
     "test": "npm run test:base -- --silent",
@@ -74,7 +74,7 @@
     "style-loader": "^0.16.1",
     "throng": "^4.0.0",
     "ts-jest": "^19.0.7",
-    "tslint": "^5.0.0",
+    "tslint": "4.5.1",
     "tslint-react": "^2.5.0",
     "webpack": "^2.3.3",
     "webpack-bundle-analyzer": "^2.3.1",
