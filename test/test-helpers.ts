@@ -1,3 +1,5 @@
+import { findFreePort } from '../lib/util/network'
+
 export const expectPromiseToFail = (promise: Promise<any>) => (
     new Promise((resolve, reject) => {
         promise
@@ -5,3 +7,5 @@ export const expectPromiseToFail = (promise: Promise<any>) => (
             .catch(() => resolve())
     })
 )
+
+export const getTestPort = () => findFreePort()

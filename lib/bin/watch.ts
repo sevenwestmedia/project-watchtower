@@ -1,8 +1,9 @@
+import { ChildProcess } from 'child_process'
 import CONFIG from '../config/config'
 import clean from './clean'
 import build from './build'
 import start from './start'
-import watchServer from '../watch/server'
+import { default as watchServer, WatchServer } from '../watch/server'
 
 const { HAS_SERVER } = CONFIG
 
@@ -12,7 +13,7 @@ const { HAS_SERVER } = CONFIG
  * - server: Also watches and rebuilds server
  * - fast: disables type checking
  */
-const watch = async (...args: string[]) => {
+const watch = async (...args: string[]): Promise<ChildProcess | WatchServer> => {
 
     if (args.indexOf('fast') !== -1) {
         process.env.START_FAST_MODE = 'true'

@@ -1,6 +1,7 @@
 import * as path from 'path'
 import { fork, ChildProcess } from 'child_process'
 import * as express from 'express'
+import { Server } from 'http'
 import * as webpack from 'webpack'
 import * as proxyMiddleware from 'http-proxy-middleware'
 import * as dotenv from 'dotenv'
@@ -22,8 +23,14 @@ const restartServer = (oldServer?: ChildProcess) => {
     })
 }
 
+export interface WatchServer {
+    app: express.Express,
+    server: Server,
+    close: () => void
+}
+
 const watchServer = (port?: number) => (
-    new Promise((resolve) => {
+    new Promise<WatchServer>((resolve) => {
         const serverPort = parseInt(port || process.env.PORT || 3000, 10)
         const devServerPort = serverPort + 1
 
@@ -32,7 +39,7 @@ const watchServer = (port?: number) => (
 
         const serverCompiler = webpack(getWebpackConfig('server', 'dev'))
 
-        serverCompiler.watch({
+        const watching = serverCompiler.watch({
             aggregateTimeout: 10000,
             ignored: /node_modules/,
         }, () => {
@@ -57,7 +64,18 @@ const watchServer = (port?: number) => (
 
         app.use(proxyMiddleware('http://localhost:' + serverPort))
 
-        app.listen(devServerPort, () => resolve())
+        const server = app.listen(devServerPort, () => {
+            resolve({
+                app,
+                server,
+                close: () => {
+                    watching.close(() => {})
+                    server.close()
+                },
+            })
+        })
+
+        app.set('server', server)
     })
 )
 

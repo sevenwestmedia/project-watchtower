@@ -7,10 +7,10 @@
   },
   "scripts": {
     "clean": "rimraf lib/**/*.{js,map,d.ts}",
-    "prepublish": "npm run clean && npm run test && npm run build",
+    "prepublish": "npm run clean && npm run lint && npm run test && npm run build",
     "lint": "tslint lib/**/*.ts -e **/*.d.ts",
     "build": "tsc",
-    "test:base": "jest --runInBand --config jest.json",
+    "test:base": "jest --runInBand --forceExit --config jest.json",
     "test": "npm run test:base -- --silent",
     "test:verbose": "npm run test:base -- --verbose",
     "coverage": "npm run test -- --coverage",

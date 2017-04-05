@@ -4,12 +4,12 @@ import {
     checkPortAvailability,
     findFreePort,
 } from '../../lib/util/network'
-import { expectPromiseToFail } from '../test-helpers'
+import { expectPromiseToFail, getTestPort } from '../test-helpers'
 
 describe('util/network', () => {
 
-    it('waitForConnection', () => {
-        const port = 3000
+    it('waitForConnection', async () => {
+        const port = await getTestPort()
         const app = express()
         const server = app.listen(port)
 
@@ -17,30 +17,35 @@ describe('util/network', () => {
             .then(() => server.close())
     })
 
-    it('checkPortAvailability', () => (
-        checkPortAvailability(3000)
-    ))
+    it('checkPortAvailability', async () => {
+        const port = await getTestPort()
+        return checkPortAvailability(port)
+    })
 
-    it('checkPortAvailability - port occupied', (done) => {
-        const port = 3001
+    it('checkPortAvailability - port occupied', async () => {
+        const port = await getTestPort()
         const app = express()
-        const server = app.listen(port, () => {
-            expectPromiseToFail(checkPortAvailability(port))
-                .then(() => {
-                    server.close()
-                    done()
-                })
+        return new Promise((resolve) => {
+            const server = app.listen(port, () => {
+                expectPromiseToFail(checkPortAvailability(port))
+                    .then(() => {
+                        server.close()
+                        resolve()
+                    })
+            })
         })
     })
 
-    it('findFreePort', (done) => {
-        const port = 3002
+    it('findFreePort', async () => {
+        const port = await getTestPort()
         const app = express()
-        const server = app.listen(port, async () => {
-            const freePort = await findFreePort(port)
-            expect(freePort).toBe(port + 1)
-            server.close()
-            done()
+        return new Promise((resolve) => {
+            const server = app.listen(port, async () => {
+                const freePort = await findFreePort(port)
+                expect(freePort).toBe(port + 1)
+                server.close()
+                resolve()
+            })
         })
     })
 

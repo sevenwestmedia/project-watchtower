@@ -1,10 +1,11 @@
 import * as path from 'path'
+import { ChildProcess } from 'child_process'
 import { forkPromise } from '../util/process'
 import CONFIG from '../config/config'
 
 const { LINT_EXCLUDE } = CONFIG
 
-const tslint = (...paths: string[]) => {
+const tslint = (...paths: string[]): Promise<ChildProcess> => {
     const usePaths = paths.length
             ? paths
             : [ '**/*.ts?(x)' ]

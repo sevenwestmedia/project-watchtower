@@ -3,6 +3,7 @@ import * as path from 'path'
 import clean from '../../lib/bin/clean'
 import build from '../../lib/bin/build'
 import stats from '../../lib/bin/stats'
+import { getTestPort } from '../test-helpers'
 
 // Increase test timeout because builds might take a while
 (jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000
@@ -10,6 +11,9 @@ import stats from '../../lib/bin/stats'
 describe('stats', () => {
 
     it('will build stats', async () => {
+        const port = await getTestPort()
+        process.env.PORT = port
+
         await clean()
         await build()
         await stats()

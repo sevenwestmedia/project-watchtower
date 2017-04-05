@@ -1,3 +1,4 @@
+import { ChildProcess } from 'child_process'
 
 import binBuild from './bin/build'
 import binClean from './bin/clean'
@@ -10,9 +11,21 @@ import * as configModule from './config'
 import * as lintModule from './lint'
 import * as serverModule from './server'
 
+import { StartParam } from './types'
+
 export * from './types'
 
-export const bin = {
+export type BinPromiseType = (...args: string[]) => Promise<any>
+
+export interface BinType {
+    build: BinPromiseType,
+    clean: BinPromiseType,
+    exploreBundle: BinPromiseType,
+    lint: BinPromiseType,
+    start: (...args: StartParam[]) => Promise<ChildProcess>,
+}
+
+export const bin: BinType = {
     build: binBuild,
     clean: binClean,
     exploreBundle: binExploreBundle,

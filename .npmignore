@@ -1,11 +1,13 @@
 .vscode
 @types
-demo/
 *.tgz
 *.ts
 *.tsx
 !*.d.ts
 client/
+build/
+demo/
+docs/
 public/
 server/
-build/
+test/

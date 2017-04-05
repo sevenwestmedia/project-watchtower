@@ -66,6 +66,9 @@ export const getDefaultHtmlMiddleware = () => {
 }
 
 export const openBrowser = (port?: number) => {
+    if (process.env.NODE_ENV === 'test') {
+        return
+    }
     const usePort = port || process.env.PORT || 3000
     opn(`http://localhost:${usePort}`)
 }

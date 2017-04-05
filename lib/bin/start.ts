@@ -1,4 +1,5 @@
 import * as path from 'path'
+import { ChildProcess } from 'child_process'
 import * as dotenv from 'dotenv'
 import CONFIG from '../config/config'
 import { forkPromise } from '../util/process'
@@ -14,7 +15,7 @@ const { HAS_SERVER, SERVER_OUTPUT } = CONFIG
  * - fast: Disables server-side rendering and type checking
  * - prod: Sets NODE_ENV to "production"
  */
-const start = (...args: StartParam[]) => {
+const start = (...args: StartParam[]): Promise<ChildProcess> => {
 
     if (args.indexOf('watch') !== -1) {
         process.env.START_WATCH_MODE = 'true'
@@ -34,9 +35,12 @@ const start = (...args: StartParam[]) => {
 
     dotenv.config()
 
-    return forkPromise(serverPath, [], {
-        env: process.env,
-    })
+    return forkPromise(
+        serverPath,
+        [],
+        { env: process.env },
+        true,
+    )
 }
 
 export default start

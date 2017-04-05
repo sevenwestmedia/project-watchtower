@@ -1,10 +1,11 @@
 import * as path from 'path'
+import { ChildProcess } from 'child_process'
 import CONFIG from '../config/config'
 import { forkPromise } from '../util/process'
 
 const { LINT_EXCLUDE } = CONFIG
 
-const sassLint = (...paths: string[]) => {
+const sassLint = (...paths: string[]): Promise<ChildProcess> => {
     const usePaths = paths.length
             ? paths
             : [ '**/*.scss' ]
