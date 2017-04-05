@@ -1,7 +1,7 @@
 import * as path from 'path'
 import bundleSize from './bundle-size'
 import ssrStats from './ssr-stats'
-import { writeFile } from './util'
+import { writeFile } from '../util/fs'
 
 const root = process.cwd()
 

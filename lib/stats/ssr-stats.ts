@@ -6,12 +6,9 @@ import CONFIG from '../config/config'
 import { waitForConnection } from '../util/network'
 import { log, logError, prettyJson } from '../util/log'
 import { BuildMetrics } from './'
-import {
-    formatFileSize,
-    formatTimeMs,
-    getSequenceAverage,
-    getTimeMs,
-} from './util'
+import { formatFileSize } from '../util/fs'
+import { getTimeMs, formatTimeMs } from '../util/time'
+import { getSequenceAverage } from '../util/math'
 
 dotenv.config()
 

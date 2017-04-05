@@ -3,7 +3,7 @@ import * as path from 'path'
 import CONFIG from '../config/config'
 import { log, logError, prettyJson } from '../util/log'
 import { BuildMetrics } from './'
-import { formatFileSize, getFileSize, readFile } from './util'
+import { getFileSize, readFile, formatFileSize } from '../util/fs'
 
 const { BASE, CLIENT_OUTPUT, SERVER_PUBLIC_DIR } = CONFIG
 const assetFilePath = path.resolve(BASE, 'assets.json')
