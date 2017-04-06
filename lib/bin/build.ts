@@ -68,7 +68,7 @@ const build = async (...args: BuildParam[]) => {
     if (args.indexOf('complete') !== -1) {
         await cleanBin()
         await lint()
-        await test()
+        await test('--silent')
         return Promise.all(
             targets.map((target) => buildTarget(target, environment)),
         )
