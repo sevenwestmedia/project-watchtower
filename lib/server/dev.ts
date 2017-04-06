@@ -8,6 +8,7 @@ import * as opn from 'opn'
 import { addAssetsToHtml } from './assets'
 import { getWebpackConfig } from '../build/build'
 import { logError } from '../util/log'
+import { webpackStatsConfig } from '../util/webpack'
 import CONFIG from '../config/config'
 
 const { PUBLIC_PATH, SERVER_PUBLIC_DIR } = CONFIG
@@ -24,7 +25,13 @@ export const getHotReloadMiddleware: HotReloadMiddleware = () => {
         {
             publicPath: PUBLIC_PATH,
             noInfo: true,
-            stats: 'minimal',
+            stats: {
+                ...webpackStatsConfig,
+                assets: false,
+                version: false,
+                hash: false,
+                timings: false,
+            },
             watchOptions: {
                 ignored: /node_modules/,
             },

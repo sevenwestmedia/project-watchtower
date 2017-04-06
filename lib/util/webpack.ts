@@ -1,21 +1,19 @@
 import * as webpack from 'webpack'
 import { log, logError } from './log'
 
-/*
- * This file cannot be named 'webpack.ts' as the import of the 'webpack'
- * module will not work in the ts-jest environment!
- */
+export const webpackStatsConfig: webpack.Stats.ToStringOptionsObject = {
+    errors: true,
+    warnings: true,
+    timings: true,
+    colors: true,
+    chunks: false,
+    chunkModules: false,
+    children: false,
+}
 
 export const printWebpackStats = (stats: webpack.Stats) => {
 
-    const statsString = stats.toString({
-        errors: true,
-        warnings: true,
-        timings: true,
-        colors: true,
-        chunkModules: false,
-        children: false,
-    })
+    const statsString = stats.toString(webpackStatsConfig)
 
     log(statsString)
 }
