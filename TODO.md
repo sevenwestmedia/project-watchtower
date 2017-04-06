@@ -22,3 +22,16 @@ Currently rolled back to 4.5.1 because 5.0.0 is unusable
 
 *   space-before-function-paren with generic async arrow function: https://github.com/palantir/tslint/issues/2308
 
+## ts-jest downgraded to 19.0.1
+
+Would fail tests in Jenkins:
+
+```
+ FAIL  common/tests/home-page.spec.ts
+  ● Test suite failed to run
+
+    ENAMETOOLONG: name too long, open '/tmp/jest/ts-jest/L3Zhci9saWIvamVua2lucy93b3Jrc3BhY2UvX2ZlYXR1cmVfcHJvamVjdC13YXRjaHRvd2VyLVBOQ1dMSDNJSFhTVTJGR1VMS1VQRlVHWlFCWUxVUlFBRVNYQVdPMlJJUVJaWVNKNjZXTlEvY29tbW9uL3BhZ2VzL01vbWVudHMvUHJvbWlzZVRyYWNrZXIvY29tcG9uZW50cy9Qcm9taXNlVHJhY2tlckRldGFpbFBhZ2UvUHJvbWlzZVRyYWNrZXJEZXRhaWxQYWdlLnRzeA=='
+```
+
+PR on GitHub:
+https://github.com/kulshekhar/ts-jest/pull/152

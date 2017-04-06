@@ -170,7 +170,11 @@ alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
   version "1.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
 
-amdefine@>=0.0.4, amdefine@^1.0.0:
+amdefine@1.0.0:
+  version "1.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/amdefine/-/amdefine-1.0.0.tgz#fd17474700cb5cc9c2b709f0be9d23ce3c198c33"
+
+amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
@@ -1955,13 +1959,6 @@ fs-extra@^1.0.0:
     graceful-fs "^4.1.2"
     jsonfile "^2.1.0"
     klaw "^1.0.0"
-
-fs-extra@^2.1.2:
-  version "2.1.2"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/fs-extra/-/fs-extra-2.1.2.tgz#046c70163cef9aad46b0e4a7fa467fb22d71de35"
-  dependencies:
-    graceful-fs "^4.1.2"
-    jsonfile "^2.1.0"
 
 fs.realpath@^1.0.0:
   version "1.0.0"
@@ -4639,14 +4636,13 @@ regjsparser@^0.1.4:
   dependencies:
     jsesc "~0.5.0"
 
-remap-istanbul@^0.9.5:
-  version "0.9.5"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/remap-istanbul/-/remap-istanbul-0.9.5.tgz#a18617b1f31eec5a7dbee77538298b775606aaa8"
+remap-istanbul@^0.7.0:
+  version "0.7.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/remap-istanbul/-/remap-istanbul-0.7.0.tgz#c360dadaea641dba734cb6a58cabe9ebd88a2858"
   dependencies:
-    amdefine "^1.0.0"
+    amdefine "1.0.0"
     gulp-util "3.0.7"
     istanbul "0.4.5"
-    minimatch "^3.0.3"
     source-map ">=0.5.6"
     through2 "2.0.1"
 
@@ -5118,7 +5114,7 @@ strip-ansi@^3.0.0, strip-ansi@^3.0.1:
   dependencies:
     ansi-regex "^2.0.0"
 
-strip-bom@3.0.0, strip-bom@^3.0.0:
+strip-bom@3.0.0:
   version "3.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/strip-bom/-/strip-bom-3.0.0.tgz#2334c18e9c759f7bdd56fdef7e9ae3d588e68ed3"
 
@@ -5138,13 +5134,13 @@ strip-indent@^1.0.1:
   dependencies:
     get-stdin "^4.0.1"
 
-strip-json-comments@^2.0.0, strip-json-comments@~2.0.1:
-  version "2.0.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
-
 strip-json-comments@~1.0.1:
   version "1.0.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/strip-json-comments/-/strip-json-comments-1.0.4.tgz#1e15fbcac97d3ee99bf2d73b4c656b082bbafb91"
+
+strip-json-comments@~2.0.1:
+  version "2.0.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
 style-loader@^0.16.1:
   version "0.16.1"
@@ -5303,11 +5299,10 @@ tryit@^1.0.1:
   version "1.0.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/tryit/-/tryit-1.0.3.tgz#393be730a9446fd1ead6da59a014308f36c289cb"
 
-ts-jest@^19.0.7:
-  version "19.0.7"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/ts-jest/-/ts-jest-19.0.7.tgz#316bcf3002df7cc2af26050a4996b00f62ca1529"
+ts-jest@19.0.1:
+  version "19.0.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/ts-jest/-/ts-jest-19.0.1.tgz#d906b8538d0563d9e10d4edeb93ec9e5e00100a5"
   dependencies:
-    fs-extra "^2.1.2"
     glob-all "^3.1.0"
     istanbul-lib-instrument "^1.2.0"
     jest-config "^19.0.0"
@@ -5316,17 +5311,9 @@ ts-jest@^19.0.7:
     lodash.includes "^4.3.0"
     lodash.partition "^4.6.0"
     lodash.pickby "^4.6.0"
-    remap-istanbul "^0.9.5"
+    remap-istanbul "^0.7.0"
     source-map-support "^0.4.4"
-    tsconfig "^6.0.0"
-    yargs "^7.0.2"
-
-tsconfig@^6.0.0:
-  version "6.0.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/tsconfig/-/tsconfig-6.0.0.tgz#6b0e8376003d7af1864f8df8f89dd0059ffcd032"
-  dependencies:
-    strip-bom "^3.0.0"
-    strip-json-comments "^2.0.0"
+    yargs "^6.1.1"
 
 tslint-react@^2.5.0:
   version "2.5.0"
@@ -5765,12 +5752,6 @@ yargs-parser@^4.2.0:
   dependencies:
     camelcase "^3.0.0"
 
-yargs-parser@^5.0.0:
-  version "5.0.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/yargs-parser/-/yargs-parser-5.0.0.tgz#275ecf0d7ffe05c77e64e7c86e4cd94bf0e1228a"
-  dependencies:
-    camelcase "^3.0.0"
-
 yargs@^4.7.1:
   version "4.8.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/yargs/-/yargs-4.8.1.tgz#c0c42924ca4aaa6b0e6da1739dfb216439f9ddc0"
@@ -5790,7 +5771,7 @@ yargs@^4.7.1:
     y18n "^3.2.1"
     yargs-parser "^2.4.1"
 
-yargs@^6.0.0, yargs@^6.3.0:
+yargs@^6.0.0, yargs@^6.1.1, yargs@^6.3.0:
   version "6.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/yargs/-/yargs-6.6.0.tgz#782ec21ef403345f830a808ca3d513af56065208"
   dependencies:
@@ -5807,24 +5788,6 @@ yargs@^6.0.0, yargs@^6.3.0:
     which-module "^1.0.0"
     y18n "^3.2.1"
     yargs-parser "^4.2.0"
-
-yargs@^7.0.2:
-  version "7.0.2"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/yargs/-/yargs-7.0.2.tgz#115b97df1321823e8b8648e8968c782521221f67"
-  dependencies:
-    camelcase "^3.0.0"
-    cliui "^3.2.0"
-    decamelize "^1.1.1"
-    get-caller-file "^1.0.1"
-    os-locale "^1.4.0"
-    read-pkg-up "^1.0.1"
-    require-directory "^2.1.1"
-    require-main-filename "^1.0.1"
-    set-blocking "^2.0.0"
-    string-width "^1.0.2"
-    which-module "^1.0.0"
-    y18n "^3.2.1"
-    yargs-parser "^5.0.0"
 
 yargs@~1.2.6:
   version "1.2.6"
