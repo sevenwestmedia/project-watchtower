@@ -12,10 +12,18 @@ process.env.UV_THREADPOOL_SIZE = 128
 
 const filePath = path.resolve(__dirname, 'index.js')
 
-fork(
+const proc = fork(
     filePath,
     process.argv.slice(2),
     {
         env: process.env,
     },
 )
+
+proc.on('error', () => {
+    process.exit(1)
+})
+
+proc.on('exit', (code) => {
+    process.exit(code)
+})
