@@ -17,3 +17,8 @@ Currently rolled back to 4.5.1 because 5.0.0 is unusable
 (trailing-comma) Missing trailing comma
 (jsx-no-lambda) Lambdas are forbidden in JSX attributes due to their rendering performance impact
 ```
+
+**Other tslint issues**
+
+*   space-before-function-paren with generic async arrow function: https://github.com/palantir/tslint/issues/2308
+
