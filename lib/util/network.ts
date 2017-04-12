@@ -15,7 +15,7 @@ export const waitForConnection = (port: number) => (
     })
 )
 
-const startPort = parseInt(process.env.PORT || 3000, 10)
+const startPort = 3000
 
 export const checkPortAvailability = (port: number) => (
     new Promise((resolve, reject) => {

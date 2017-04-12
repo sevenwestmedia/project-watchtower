@@ -7,6 +7,7 @@ import * as proxyMiddleware from 'http-proxy-middleware'
 import * as dotenv from 'dotenv'
 import { getWebpackConfig } from '../build/build'
 import { openBrowser, getHotReloadMiddleware } from '../server/dev'
+import { getPort } from '../server/server'
 import { waitForConnection } from '../util/network'
 import CONFIG from '../config/config'
 
@@ -31,7 +32,7 @@ export interface WatchServer {
 
 const watchServer = (port?: number) => (
     new Promise<WatchServer>((resolve) => {
-        const serverPort = parseInt(port || process.env.PORT || 3000, 10)
+        const serverPort = port || getPort()
         const devServerPort = serverPort + 1
 
         let devServer: ChildProcess

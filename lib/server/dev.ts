@@ -6,6 +6,7 @@ import * as webpackDevMiddleware from 'webpack-dev-middleware'
 import * as webpackHotMiddleware from 'webpack-hot-middleware'
 import * as opn from 'opn'
 import { addAssetsToHtml } from './assets'
+import { getPort } from './server'
 import { getWebpackConfig } from '../build/build'
 import { logError } from '../util/log'
 import { webpackStatsConfig } from '../util/webpack'
@@ -76,6 +77,6 @@ export const openBrowser = (port?: number) => {
     if (process.env.NODE_ENV === 'test') {
         return
     }
-    const usePort = port || process.env.PORT || 3000
+    const usePort = port || getPort()
     opn(`http://localhost:${usePort}`)
 }

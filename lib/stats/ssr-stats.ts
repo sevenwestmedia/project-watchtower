@@ -3,6 +3,7 @@ import * as http from 'http'
 import { fork } from 'child_process'
 import * as dotenv from 'dotenv'
 import CONFIG from '../config/config'
+import { getPort } from '../server/server'
 import { waitForConnection } from '../util/network'
 import { log, logError, prettyJson } from '../util/log'
 import { BuildMetrics } from './'
@@ -13,7 +14,7 @@ import { getSequenceAverage } from '../util/math'
 dotenv.config()
 
 const { SERVER_OUTPUT } = CONFIG
-const port = parseInt(process.env.PORT || 3000, 10)
+const port = getPort()
 
 interface SSRStats {
     size: number

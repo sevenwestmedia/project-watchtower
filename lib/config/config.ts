@@ -17,6 +17,7 @@ const defaultConfig: BuildConfig = {
     SERVER_PUBLIC_DIR: path.resolve(root, 'public'),
     STATIC_RESOURCE_NAMES: false,
     LINT_EXCLUDE: [],
+    PORT: 3000,
 }
 
 const customConfigFile = path.resolve(root, 'config', 'config.js')

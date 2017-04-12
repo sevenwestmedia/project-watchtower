@@ -51,7 +51,7 @@ Runs `tslint` and/or `sass-lint` against the project.
 *   `tslint`: Only run tslint
 *   `sass-lint`: Only run sass-lint
 
-By default all `.ts`/`.tsx` and all `.scss` files are checked. You can supply custom glob patterns instead. Note that they have to contain either `.ts` or `.scss` to be mapped to the correct linter.
+By default all `.ts`/`.tsx` and all `.scss` files are checked. You can supply custom glob patterns instead. Note that they have to contain either `.ts` or `.scss` to be mapped to the correct linter if both linters are run in the same command.
 
 ### start
 

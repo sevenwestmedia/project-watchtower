@@ -40,10 +40,13 @@ export interface BuildConfig {
     SERVER_PUBLIC_DIR: string | false
 
     /** if true, no hash is added to the generated assets */
-    STATIC_RESOURCE_NAMES: boolean,
+    STATIC_RESOURCE_NAMES: boolean
 
     /** List paths to exclude from linting */
     LINT_EXCLUDE: string[]
+
+    /** Default port for the server (when process.env.PORT is not set) */
+    PORT: number
 
 }
 

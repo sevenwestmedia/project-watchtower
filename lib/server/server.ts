@@ -4,11 +4,20 @@ import { findFreePort } from '../util/network'
 import { log } from '../util/log'
 import CONFIG from '../config/config'
 
-const port = parseInt(process.env.PORT || 3000, 10)
 const isProduction = process.env.NODE_ENV === 'production'
-const watchMode = process.env.START_WATCH_MODE === 'true'
+const { SERVER_PUBLIC_DIR, PORT } = CONFIG
 
-const { SERVER_PUBLIC_DIR } = CONFIG
+export const getPort = (fallbackPort?: number) => (
+    parseInt(process.env.PORT || fallbackPort || PORT, 10)
+)
+
+export const isWatchMode = () => (
+    process.env.START_WATCH_MODE === 'true'
+)
+
+export const isFastMode = () => (
+    process.env.START_FAST_MODE === 'true'
+)
 
 export type CreateServerType = (
     middlewareHook?: (app: express.Express) => void,
@@ -22,7 +31,7 @@ export const createServer: CreateServerType = (
 
     const app = express()
 
-    if (!isProduction && watchMode) {
+    if (!isProduction && isWatchMode()) {
         app.use(getHotReloadMiddleware())
     }
 
@@ -41,8 +50,8 @@ export const createServer: CreateServerType = (
     const listen = (usePort: number) => {
         const server = app.listen(usePort, () => {
             log(`Server listening on port ${usePort}`)
-            if (!isProduction && watchMode) {
-                openBrowser(port)
+            if (!isProduction && isWatchMode()) {
+                openBrowser(usePort)
             }
             if (callback) {
                 callback()
@@ -51,6 +60,8 @@ export const createServer: CreateServerType = (
 
         app.set('server', server)
     }
+
+    const port = getPort()
 
     if (isProduction) {
         listen(port)
