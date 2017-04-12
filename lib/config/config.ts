@@ -18,6 +18,11 @@ const defaultConfig: BuildConfig = {
     STATIC_RESOURCE_NAMES: false,
     LINT_EXCLUDE: [],
     PORT: 3000,
+    MODULE_PATHS: [
+        root,
+        path.resolve(root, 'node_modules'),
+        path.resolve(root, 'common'),
+    ],
 }
 
 const customConfigFile = path.resolve(root, 'config', 'config.js')

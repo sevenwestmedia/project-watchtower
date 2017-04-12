@@ -7,7 +7,7 @@ import CONFIG from './config'
 import { updateAssetLocations } from '../server/assets'
 import { Assets } from '../types'
 
-const { CLIENT_ENTRY, CLIENT_OUTPUT, CLIENT_POLYFILLS, PUBLIC_PATH } = CONFIG
+const { CLIENT_ENTRY, CLIENT_OUTPUT, CLIENT_POLYFILLS, PUBLIC_PATH, MODULE_PATHS } = CONFIG
 
 type EntryPoints = {
     [name: string]: string[],
@@ -63,6 +63,7 @@ const clientBaseConfig: webpack.Configuration = {
                             loader: 'sass-loader',
                             options: {
                                 sourceMap: true,
+                                includePaths: MODULE_PATHS,
                             },
                         },
                     ],

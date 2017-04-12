@@ -48,6 +48,9 @@ export interface BuildConfig {
     /** Default port for the server (when process.env.PORT is not set) */
     PORT: number
 
+    /** Paths where modules are resolved */
+    MODULE_PATHS: string[]
+
 }
 
 /** Use to override the application configuration */

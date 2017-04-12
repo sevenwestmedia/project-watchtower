@@ -3,7 +3,7 @@ import * as webpack from 'webpack'
 import { CheckerPlugin } from 'awesome-typescript-loader'
 import CONFIG from './config'
 
-const { BASE } = CONFIG
+const { BASE, MODULE_PATHS } = CONFIG
 const disableTypeCheck = process.env.START_FAST_MODE === 'true'
 
 /**
@@ -18,11 +18,7 @@ const baseConfig: webpack.Configuration = {
         extensions: [
             '.ts', '.tsx', '.js', '.scss', '*',
         ],
-        modules: [
-            BASE,
-            path.resolve(BASE, 'node_modules'),
-            path.resolve(BASE, 'common'),
-        ],
+        modules: MODULE_PATHS,
         // force linked dependencies to use the project's node_modules
         // https://github.com/webpack/webpack/issues/985#issuecomment-261497772
         symlinks: false,
