@@ -53,7 +53,7 @@ export default customConfig
 
 The complete default configuration is located in `project-watchtower/lib/config/config`
 
-See the [config documentation](./config.md) for an overview of the default project structure.
+See the [config documentation](./config.md) for an overview of the default project structure and configuration details.
 
 ## Running
 
