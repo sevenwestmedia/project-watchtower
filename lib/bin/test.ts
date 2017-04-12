@@ -18,7 +18,7 @@ const test = async (...params: string[]): Promise<ChildProcess> => {
     if (params.indexOf('--config') === -1) {
         args = args.concat([
             '--config',
-            'node_modules/project-watchtower/config-templates/jest.json',
+            'node_modules/project-watchtower/presets/jest/jest.json',
         ])
     }
 

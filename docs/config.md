@@ -32,18 +32,6 @@ See the [build documentation](./build.md) for details on how to customise the pr
 
 Project Watchtower offers several templates for configuration files around tooling and building:
 
-### TypeScript: tsconfig.json
-
-**Important:** You have to set `include` or `exclude` in the project's `tsconfig.json` to at least exclude the `node_modules` folder! Ideally only include the directories that contain TypeScript source files.
-
-```json
-{
-    "extends": "./node_modules/project-watchtower/config-templates/tsconfig.json",
-    "include": [
-        ...
-    ]
-}
-
 ```
 
 ### TSLint: tslint.json
@@ -51,7 +39,7 @@ Project Watchtower offers several templates for configuration files around tooli
 ```json
 {
     "extends": [
-        "./node_modules/project-watchtower/config-templates/tslint.json"
+        "project-watchtower/presets/tslint"
     ]
 }
 
@@ -64,6 +52,6 @@ The sass-lint configuration can be referenced from `package.json`
 ```json
 {
     ...
-    "sasslintConfig": "node_modules/project-watchtower/config-templates/.sass-lint.yml"
+    "sasslintConfig": "node_modules/project-watchtower/presets/sass-lint/.sass-lint.yml"
 }
 ```

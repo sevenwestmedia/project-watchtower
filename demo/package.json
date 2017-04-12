@@ -37,5 +37,5 @@
     "react-addons-test-utils": "^15.4.2",
     "typescript": "^2.2.2"
   },
-  "sasslintConfig": "node_modules/project-watchtower/config-templates/.sass-lint.yml"
+  "sasslintConfig": "node_modules/project-watchtower/presets/sass-lint/.sass-lint.yml"
 }

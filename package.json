@@ -85,5 +85,5 @@
   "engines": {
     "node": ">=6.0.0"
   },
-  "sasslintConfig": "config-templates/.sass-lint.yml"
+  "sasslintConfig": "presets/sass-lint/.sass-lint.yml"
 }

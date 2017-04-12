@@ -1,5 +1,5 @@
 {
     "extends": [
-        "./config-templates/tslint.json"
+        "./presets/tslint"
     ]
 }
