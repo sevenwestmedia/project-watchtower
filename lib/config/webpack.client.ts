@@ -3,6 +3,7 @@ import * as webpack from 'webpack'
 import * as autoprefixer from 'autoprefixer'
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as AssetsPlugin from 'assets-webpack-plugin'
+import * as dotenv from 'dotenv'
 import CONFIG from './config'
 import { updateAssetLocations } from '../server/assets'
 import { Assets } from '../types'
@@ -23,6 +24,20 @@ if (CLIENT_POLYFILLS && fs.existsSync(CLIENT_POLYFILLS)) {
     entry.vendor = [
         CLIENT_POLYFILLS,
     ]
+}
+
+// TODO the typings for dotenv are out of date
+const env: any = dotenv.config()
+
+const envReplace: { [key: string]: string } = {}
+
+if (env && env.parsed) {
+    Object.keys(env.parsed).forEach((key) => {
+        if (key === 'NODE_ENV') {
+            return
+        }
+        envReplace['process.env.' + key] = JSON.stringify(env.parsed[key])
+    })
 }
 
 /**
@@ -99,6 +114,7 @@ const clientBaseConfig: webpack.Configuration = {
                 return !isSwmModule
             },
         }),
+        new webpack.DefinePlugin(envReplace),
     ],
 }
 
