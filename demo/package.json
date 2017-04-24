@@ -12,12 +12,12 @@
     "test": "pwt test",
     "coverage": "pwt coverage",
     "pwt": "pwt",
-    "postinstall": "tsc -p tsconfig-config.json"
+    "postinstall": "tsc -p ./config"
   },
   "keywords": [],
   "dependencies": {
     "express": "^4.15.2",
-    "project-watchtower": "^0.0.8",
+    "project-watchtower": "^0.1.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "source-map-support": "^0.4.14"
