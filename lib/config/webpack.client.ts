@@ -1,14 +1,23 @@
 import * as fs from 'fs'
+import * as path from 'path'
 import * as webpack from 'webpack'
 import * as autoprefixer from 'autoprefixer'
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as AssetsPlugin from 'assets-webpack-plugin'
+import * as HtmlPlugin from 'html-webpack-plugin'
 import * as dotenv from 'dotenv'
 import CONFIG from './config'
 import { updateAssetLocations } from '../server/assets'
 import { Assets } from '../types'
 
-const { CLIENT_ENTRY, CLIENT_OUTPUT, CLIENT_POLYFILLS, PUBLIC_PATH, MODULE_PATHS } = CONFIG
+const {
+    CLIENT_ENTRY,
+    CLIENT_OUTPUT,
+    CLIENT_POLYFILLS,
+    PUBLIC_PATH,
+    MODULE_PATHS,
+    SERVER_PUBLIC_DIR,
+} = CONFIG
 
 type EntryPoints = {
     [name: string]: string[],
@@ -26,6 +35,36 @@ if (CLIENT_POLYFILLS && fs.existsSync(CLIENT_POLYFILLS)) {
     ]
 }
 
+const plugins: webpack.Plugin[] = [
+    new AssetsPlugin({
+        filename: 'assets.json',
+        processOutput: (assets: Assets) => {
+            updateAssetLocations(assets)
+            return JSON.stringify(assets)
+        },
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        minChunks: (module: { context: string }) => {
+            if (!module.context) {
+                return false
+            }
+
+            const modulePos = module.context.indexOf('node_modules')
+            if (modulePos === -1) {
+                return false
+            }
+
+            const isSwmModule =
+                module.context.indexOf('swm-component-library', modulePos) !== -1
+                || module.context.indexOf('redux-data-loader', modulePos) !== -1
+                || module.context.indexOf('project-watchtower', modulePos) !== -1
+
+            return !isSwmModule
+        },
+    }),
+]
+
 // TODO the typings for dotenv are out of date
 const env: any = dotenv.config()
 
@@ -38,6 +77,21 @@ if (env && env.parsed) {
         }
         envReplace['process.env.' + key] = JSON.stringify(env.parsed[key])
     })
+
+    plugins.push(new webpack.DefinePlugin(envReplace))
+}
+
+if (SERVER_PUBLIC_DIR) {
+    const indexHtml = path.resolve(SERVER_PUBLIC_DIR, 'index.html')
+
+    if (fs.existsSync(indexHtml)) {
+        plugins.push(
+            new HtmlPlugin({
+                inject: true,
+                template: indexHtml,
+            }),
+        )
+    }
 }
 
 /**
@@ -86,36 +140,7 @@ const clientBaseConfig: webpack.Configuration = {
             },
         ],
     },
-    plugins: [
-        new AssetsPlugin({
-            filename: 'assets.json',
-            processOutput: (assets: Assets) => {
-                updateAssetLocations(assets)
-                return JSON.stringify(assets)
-            },
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: (module: { context: string }) => {
-                if (!module.context) {
-                    return false
-                }
-
-                const modulePos = module.context.indexOf('node_modules')
-                if (modulePos === -1) {
-                    return false
-                }
-
-                const isSwmModule =
-                    module.context.indexOf('swm-component-library', modulePos) !== -1
-                    || module.context.indexOf('redux-data-loader', modulePos) !== -1
-                    || module.context.indexOf('project-watchtower', modulePos) !== -1
-
-                return !isSwmModule
-            },
-        }),
-        new webpack.DefinePlugin(envReplace),
-    ],
+    plugins,
 }
 
 export default clientBaseConfig
