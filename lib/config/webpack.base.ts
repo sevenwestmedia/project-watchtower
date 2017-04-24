@@ -58,6 +58,10 @@ const baseConfig: webpack.Configuration = {
                     name: 'static/fonts/[name].[ext]',
                 },
             },
+            {
+                test: /\.md$/,
+                loader: 'raw-loader',
+            },
         ],
     },
     plugins: [
