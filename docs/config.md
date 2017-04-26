@@ -29,6 +29,8 @@ See the [build documentation](./build.md) for details on how to customise the pr
         * ...
 * assets.json: Mapping to the location of the generated assets
 * build-stats.csv: Generated build metrics
+* .env: Environment variables
+* .env.default: Definition of environment variables
 
 ## Override default configuration
 

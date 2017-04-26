@@ -66,3 +66,14 @@ Starts the server, using the environment variables defined in `.env`
 *   `NODE_ENV`: set to `"production"` or `"development` depending on the `prod` flag 
 *   `START_WATCH_MODE`: set to `"true"` by the `watch` flag
 *   `START_FAST_MODE`: set to `"true"` by the `fast` flag
+
+If you want to use additional `process.env` variables in the **client** build, make sure you create a `.env` (for local) and `.env.default` file:
+
+`.env`
+> FOO=bar
+
+`.env.default`
+> FOO=
+
+The values defined here are replaced in the client build. The server build still accesses its actual `process.env` object, only `process.env.NODE_ENV` is being replaced there.
+Values that are present in the actual runtime environment at build time will _not_ be overridden by the ones defined in `.env` / `.env.default`. However, it is necessary to define all the environment variables in the `.env.default` file that are used in the client code.

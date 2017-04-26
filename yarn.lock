@@ -1438,6 +1438,16 @@ dot-prop@^4.1.0:
   dependencies:
     is-obj "^1.0.0"
 
+dotenv-safe@^2.3.1:
+  version "2.3.3"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/dotenv-safe/-/dotenv-safe-2.3.3.tgz#f35e09650527579bcc6e3565a7e2b6fcbbd44539"
+  dependencies:
+    dotenv "^2.0.0"
+
+dotenv@^2.0.0:
+  version "2.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/dotenv/-/dotenv-2.0.0.tgz#bd759c357aaa70365e01c96b7b0bec08a6e0d949"
+
 dotenv@^4.0.0:
   version "4.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
@@ -5749,6 +5759,12 @@ webpack-dev-middleware@^1.10.1:
     mime "^1.3.4"
     path-is-absolute "^1.0.0"
     range-parser "^1.0.3"
+
+webpack-dotenv-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/webpack-dotenv-plugin/-/webpack-dotenv-plugin-2.0.0.tgz#f68d0d1c58af252bc97230ba220a707930fd48a8"
+  dependencies:
+    dotenv-safe "^2.3.1"
 
 webpack-hot-middleware@^2.18.0:
   version "2.18.0"

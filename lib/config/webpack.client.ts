@@ -5,12 +5,13 @@ import * as autoprefixer from 'autoprefixer'
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as AssetsPlugin from 'assets-webpack-plugin'
 import * as HtmlPlugin from 'html-webpack-plugin'
-import * as dotenv from 'dotenv'
+import * as DotenvPlugin from 'webpack-dotenv-plugin'
 import CONFIG from './config'
 import { updateAssetLocations } from '../server/assets'
 import { Assets } from '../types'
 
 const {
+    BASE,
     CLIENT_ENTRY,
     CLIENT_OUTPUT,
     CLIENT_POLYFILLS,
@@ -65,20 +66,14 @@ const plugins: webpack.Plugin[] = [
     }),
 ]
 
-// TODO the typings for dotenv are out of date
-const env: any = dotenv.config()
+const env = path.resolve(BASE, '.env')
+const envDefault = path.resolve(BASE, '.env.default')
 
-const envReplace: { [key: string]: string } = {}
-
-if (env && env.parsed) {
-    Object.keys(env.parsed).forEach((key) => {
-        if (key === 'NODE_ENV') {
-            return
-        }
-        envReplace['process.env.' + key] = JSON.stringify(env.parsed[key])
-    })
-
-    plugins.push(new webpack.DefinePlugin(envReplace))
+if (fs.existsSync(env) && fs.existsSync(envDefault)) {
+    plugins.push(new DotenvPlugin({
+        path: '.env',
+        sample: '.env.default',
+    }))
 }
 
 if (SERVER_PUBLIC_DIR) {
