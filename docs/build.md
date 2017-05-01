@@ -57,7 +57,7 @@ See the [config documentation](./config.md) for an overview of the default proje
 
 ## Running
 
-    pwt start [watch] [fast]
+    pwt start [watch] [fast] [debug]
 
 Starts the server, using the environment variables defined in `.env`
 
@@ -66,6 +66,7 @@ Starts the server, using the environment variables defined in `.env`
 *   `NODE_ENV`: set to `"production"` or `"development` depending on the `prod` flag 
 *   `START_WATCH_MODE`: set to `"true"` by the `watch` flag
 *   `START_FAST_MODE`: set to `"true"` by the `fast` flag
+*   `START_DEBUG_MODE`: set to `"true"` by the `debug` flag
 
 If you want to use additional `process.env` variables in the **client** build, make sure you create a `.env` (for local) and `.env.default` file:
 
@@ -77,3 +78,35 @@ If you want to use additional `process.env` variables in the **client** build, m
 
 The values defined here are replaced in the client build. The server build still accesses its actual `process.env` object, only `process.env.NODE_ENV` is being replaced there.
 Values that are present in the actual runtime environment at build time will _not_ be overridden by the ones defined in `.env` / `.env.default`. However, it is necessary to define all the environment variables in the `.env.default` file that are used in the client code.
+
+## Debugging
+
+### Debug server build
+
+Add a debug configuration to `.vscode/launch.json`:
+
+```
+{
+    "type": "node",
+    "request": "launch",
+    "name": "Debug server (webpack)",
+    "runtimeExecutable": "npm",
+    "windows": {
+        "runtimeExecutable": "npm.cmd"
+    },
+    "runtimeArgs": [
+        "run-script",
+        "start:debug-webpack"
+    ],
+    "port": 5858,
+    "timeout": 90000,
+    "sourceMaps": true,
+    "outFiles": [
+        "${workspaceRoot}/build/server.js",
+        "${workspaceRoot}/build/*.js"
+    ],
+    "smartStep": true,
+    "trace": "sm"
+},
+```
+

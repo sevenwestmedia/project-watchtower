@@ -1,5 +1,10 @@
 # Changelog
 
+## vNext
+
+* Add `debug` environment for `pwt build server debug`
+* Add `pwt start debug` and `START_DEBUG_MODE` environment flag
+
 ## v0.1.3 (2017-05-01)
 
 * Add `pwt test debug` for debugging Jest tests

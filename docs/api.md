@@ -12,7 +12,7 @@ pwt build [complete] [<target>] [<environment>]
 
 * `complete`: Runs clean, lint and test before building
 * `target`: server, client
-* `environment`: dev, prod
+* `environment`: dev, debug, prod
 
 Leaving the target out builds both server and client.
 

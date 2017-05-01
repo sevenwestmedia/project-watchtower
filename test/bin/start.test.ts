@@ -14,7 +14,7 @@ describe('bin/start', () => {
         await build()
         const port = await getTestPort()
         process.env.PORT = port
-        const childProcess = await start('watch', 'fast', 'prod')
+        const childProcess = await start('watch', 'fast', 'prod', 'debug')
         await delay()
         childProcess.kill()
     })

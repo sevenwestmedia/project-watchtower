@@ -63,6 +63,7 @@ export type BuildTarget =
 export type BuildEnvironment =
     | 'dev'
     | 'prod'
+    | 'debug'
 
 export type BuildParam =
     | BuildTarget
@@ -73,3 +74,4 @@ export type StartParam =
     | 'fast'
     | 'watch'
     | 'prod'
+    | 'debug'

@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { ChildProcess } from 'child_process'
+import { ChildProcess, ForkOptions } from 'child_process'
 import * as dotenv from 'dotenv'
 import CONFIG from '../config/config'
 import { forkPromise } from '../util/process'
@@ -25,6 +25,12 @@ const start = (...args: StartParam[]): Promise<ChildProcess> => {
         process.env.START_FAST_MODE = 'true'
     }
 
+    const isDebug = args.indexOf('debug') !== -1
+
+    if (isDebug) {
+        process.env.START_DEBUG_MODE = 'true'
+    }
+
     process.env.NODE_ENV = (args.indexOf('prod') !== -1)
         ? 'production'
         : 'development'
@@ -35,10 +41,20 @@ const start = (...args: StartParam[]): Promise<ChildProcess> => {
 
     dotenv.config()
 
+    const options: ForkOptions = {
+        env: process.env,
+    }
+
+    if (isDebug) {
+        options.execArgv = [
+            '--debug',
+        ]
+    }
+
     return forkPromise(
         serverPath,
         [],
-        { env: process.env },
+        options,
         true,
     )
 }
