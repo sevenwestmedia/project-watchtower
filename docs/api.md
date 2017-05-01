@@ -81,8 +81,10 @@ bundle_size_total,bundle_size_main,bundle_size_vendor,bundle_size_css,ssr_docume
 ### test
 
 ```
-pwt test [<jest option> ...]
+pwt test [debug] [<jest option> ...]
 ```
+
+*   `debug`: Runs the tests in debugging mode to use breakpoints. **This is incompatible with ts-jest so all TypeScript test files will have to be compiled to JavaScript first!**
 
 ### watch
 

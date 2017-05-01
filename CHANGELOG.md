@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.3 (2017-05-01)
+
+* Add `pwt test debug` for debugging Jest tests
+
 ## v0.1.2 (2017-04-26)
 
 * Use `webpack-dotenv-plugin` to allow environment variables to be defined in the actual runtime environment during build

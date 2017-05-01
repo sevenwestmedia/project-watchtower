@@ -15,12 +15,29 @@ const test = async (...params: string[]): Promise<ChildProcess> => {
 
     let args: string[] = []
 
+    const debugIndex = params.indexOf('debug')
+    const isDebug = debugIndex !== -1
+
+    if (isDebug) {
+        params.splice(debugIndex, 1)
+
+        if (params.indexOf('--runInBand') === -1) {
+            args.push('--runInBand')
+        }
+    }
+
     if (params.indexOf('--config') === -1) {
         args = args.concat([
             '--config',
-            'node_modules/project-watchtower/presets/jest/jest.json',
+            isDebug
+                ? 'node_modules/project-watchtower/presets/jest/jest-js.json'
+                : 'node_modules/project-watchtower/presets/jest/jest.json',
         ])
     }
+
+    const options = isDebug
+        ? { execArgv: [ '--debug' ] }
+        : {}
 
     args = args.concat(params)
 
@@ -32,6 +49,7 @@ const test = async (...params: string[]): Promise<ChildProcess> => {
                 ...process.env,
                 NODE_ENV: 'test',
             },
+            ...options,
         },
     )
 }

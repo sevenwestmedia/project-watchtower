@@ -13,4 +13,13 @@ describe('bin/test', () => {
         )
     })
 
+    it('will test in debug mode', async () => {
+        await test(
+            'debug',
+            '--config',
+            'jest.json',
+            'math.test.js', // make sure to not recursively test this file
+        )
+    })
+
 })
