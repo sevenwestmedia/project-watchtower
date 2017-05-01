@@ -89,14 +89,14 @@ Add a debug configuration to `.vscode/launch.json`:
 {
     "type": "node",
     "request": "launch",
-    "name": "Debug server (webpack)",
+    "name": "Debug server",
     "runtimeExecutable": "npm",
     "windows": {
         "runtimeExecutable": "npm.cmd"
     },
     "runtimeArgs": [
         "run-script",
-        "start:debug-webpack"
+        "start:debug"
     ],
     "port": 5858,
     "timeout": 90000,
@@ -110,3 +110,47 @@ Add a debug configuration to `.vscode/launch.json`:
 },
 ```
 
+Add the following script to your `package.json`:
+
+```
+"start:debug": "pwt build server debug && pwt start debug"
+```
+
+### Debug tests
+
+Debugging test cases with Jest currently only works by transpiling the tests to JavaScript and then running them due to a limitation in the `ts-jest` preprocessor.
+
+Add a debug configuration to `.vscode/launch.json`:
+
+```
+{
+    "type": "node",
+    "request": "launch",
+    "name": "Debug tests",
+    "runtimeExecutable": "npm",
+    "windows": {
+        "runtimeExecutable": "npm.cmd"
+    },
+    "runtimeArgs": [
+        "run-script",
+        "test:debug"
+    ],
+    "port": 5858,
+    "timeout": 30000,
+    "sourceMaps": true
+}
+```
+
+Depending on your TypeScript configuration you might have to add the compilation target directory as `outFiles`:
+
+```
+"outFiles": [
+    "${workspaceRoot}/dist/**/*.js"
+]
+```
+
+Add the following script to your `package.json` (with the appropriate command to transpile your TypeScript sources):
+
+```
+"test:debug": "tsc && pwt test debug"
+```
