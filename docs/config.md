@@ -84,6 +84,31 @@ export interface BuildConfig {
 }
 ```
 
+Default configuration:
+
+```ts
+{
+    BASE: `${root}`,
+    HAS_SERVER: true,
+    CLIENT_ENTRY: `${root}/client/index.tsx`,
+    CLIENT_OUTPUT: `${root}/public/assets`,
+    CLIENT_POLYFILLS: `${root}/client/polyfills.ts`,
+    SERVER_ENTRY: `${root}/server/start.ts`,
+    SERVER_OUTPUT: `${root}/build`,
+    PUBLIC_PATH: '/assets/',
+    SERVER_PUBLIC_DIR: `${root}/public`,
+    STATIC_RESOURCE_NAMES: false,
+    LINT_EXCLUDE: [],
+    PORT: 3000,
+    MODULE_PATHS: [
+        `${root}`,
+        `${root}/node_modules`,
+        `${root}/common`,
+    ],
+    WATCH_IGNORE: /node_modules(?!.+swm-component-library)/,
+}
+```
+
 ## Configuration file templates
 
 Project Watchtower offers several templates for configuration files around tooling and building:
