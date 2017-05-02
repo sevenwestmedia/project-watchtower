@@ -13,7 +13,7 @@ import CONFIG from '../config/config'
 
 dotenv.config()
 
-const { SERVER_OUTPUT } = CONFIG
+const { SERVER_OUTPUT, WATCH_IGNORE } = CONFIG
 
 const restartServer = (oldServer?: ChildProcess) => {
     if (oldServer) {
@@ -42,7 +42,7 @@ const watchServer = (port?: number) => (
 
         const watching = serverCompiler.watch({
             aggregateTimeout: 10000,
-            ignored: /node_modules/,
+            ignored: WATCH_IGNORE,
         }, () => {
             if (!devServer) {
                 setTimeout(() => openBrowser(devServerPort), 2000)

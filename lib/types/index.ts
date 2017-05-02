@@ -49,7 +49,10 @@ export interface BuildConfig {
     PORT: number
 
     /** Paths where modules are resolved */
-    MODULE_PATHS: string[]
+    MODULE_PATHS: string[],
+
+    /** Regular expression of paths to be ignored in watch mode */
+    WATCH_IGNORE: RegExp
 
 }
 

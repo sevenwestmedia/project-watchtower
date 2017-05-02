@@ -23,6 +23,7 @@ const defaultConfig: BuildConfig = {
         path.resolve(root, 'node_modules'),
         path.resolve(root, 'common'),
     ],
+    WATCH_IGNORE: /node_modules(?!.+swm-component-library)/,
 }
 
 const customConfigFile = path.resolve(root, 'config', 'config.js')

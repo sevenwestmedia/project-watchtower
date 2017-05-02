@@ -12,7 +12,7 @@ import { logError } from '../util/log'
 import { webpackStatsConfig } from '../util/webpack'
 import CONFIG from '../config/config'
 
-const { PUBLIC_PATH, SERVER_PUBLIC_DIR } = CONFIG
+const { PUBLIC_PATH, SERVER_PUBLIC_DIR, WATCH_IGNORE } = CONFIG
 const noop: express.RequestHandler = (_res, _req, next) => next()
 
 export type HotReloadMiddleware = () => express.RequestHandler[]
@@ -34,7 +34,8 @@ export const getHotReloadMiddleware: HotReloadMiddleware = () => {
                 timings: false,
             },
             watchOptions: {
-                ignored: /node_modules/,
+                ignored: WATCH_IGNORE,
+                aggregateTimeout: 1000,
             },
         },
     )
