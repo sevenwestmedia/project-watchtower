@@ -5,6 +5,7 @@
 * Add `debug` environment for `pwt build server debug`
 * Add `pwt start debug` and `START_DEBUG_MODE` environment flag
 * Add `WATCH_IGNORE` configuration
+* Add lighthouse build stats for first meaningful paint and time to interactive
 
 ## v0.1.3 (2017-05-01)
 

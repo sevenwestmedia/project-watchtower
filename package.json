@@ -6,15 +6,16 @@
     "registry": "https://nexus.swmdigital.io/repository/js-private"
   },
   "scripts": {
-    "clean": "rimraf lib/**/*.{js,map,d.ts}",
+    "clean": "npm run clean:lighthouse && rimraf lib/**/*.{js,map,d.ts}",
     "prepublish": "npm run clean && npm run lint && npm run test && npm run build",
     "lint": "tslint lib/**/*.ts -e **/*.d.ts",
     "build": "tsc",
-    "test:base": "jest --runInBand --forceExit --config jest.json",
+    "test:base": "npm run clean:lighthouse && jest --runInBand --forceExit --config jest.json",
     "test": "npm run test:base -- --silent",
     "test:verbose": "npm run test:base -- --verbose",
     "coverage": "npm run test -- --coverage",
-    "watch": "npm run build -- --watch"
+    "watch": "npm run build -- --watch",
+    "clean:lighthouse": "rimraf node_modules/lighthouse/**/*.ts"
   },
   "main": "lib/index.js",
   "bin": {
@@ -64,6 +65,7 @@
     "html-webpack-plugin": "^2.28.0",
     "http-proxy-middleware": "^0.17.4",
     "jest": "^19.0.2",
+    "lighthouse": "^1.6.5",
     "node-sass": "^4.5.2",
     "null-loader": "^0.1.1",
     "opn": "^4.0.2",

@@ -6,7 +6,7 @@ import stats from '../../lib/bin/stats'
 import { getTestPort } from '../test-helpers'
 
 // Increase test timeout because builds might take a while
-(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000
+(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 60000
 
 describe('stats', () => {
 
