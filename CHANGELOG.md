@@ -6,6 +6,7 @@
 * Add `pwt start debug` and `START_DEBUG_MODE` environment flag
 * Add `WATCH_IGNORE` configuration
 * Add lighthouse build stats for first meaningful paint and time to interactive
+* Add `CSS_AUTOPREFIXER` configuration
 
 ## v0.1.3 (2017-05-01)
 
