@@ -1,6 +1,7 @@
 import * as path from 'path'
 import bundleSize from './bundle-size'
 import ssrStats from './ssr-stats'
+import lighthouseStats from './lighthouse'
 import { writeFile } from '../util/fs'
 
 const root = process.cwd()
@@ -26,6 +27,9 @@ const buildStats = async () => {
 
     const ssrMetrics = await ssrStats()
     addMetrics(ssrMetrics)
+
+    const lighthouseMetrics = await lighthouseStats()
+    addMetrics(lighthouseMetrics)
 
     const titleRow = keys.join(',')
     const valueRow = values.join(',')

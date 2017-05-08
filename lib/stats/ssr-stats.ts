@@ -13,7 +13,7 @@ import { getSequenceAverage } from '../util/math'
 
 dotenv.config()
 
-const { SERVER_OUTPUT } = CONFIG
+const { SERVER_OUTPUT, HAS_SERVER } = CONFIG
 const port = getPort()
 
 interface SSRStats {
@@ -41,6 +41,11 @@ const loadSSRPage = () => (
 )
 
 const ssrStats = async () => {
+
+    if (!HAS_SERVER) {
+        log('Skipping SSR stats because the application has no server')
+        return {}
+    }
 
     log('Measuring SSR load times...')
 
