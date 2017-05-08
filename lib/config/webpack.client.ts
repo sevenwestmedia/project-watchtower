@@ -18,6 +18,7 @@ const {
     PUBLIC_PATH,
     MODULE_PATHS,
     SERVER_PUBLIC_DIR,
+    CSS_AUTOPREFIXER,
 } = CONFIG
 
 type EntryPoints = {
@@ -118,7 +119,7 @@ const clientBaseConfig: webpack.Configuration = {
                             loader: 'postcss-loader',
                             options: {
                                 plugins: () => [
-                                    autoprefixer({ browsers: ['last 2 versions'] }),
+                                    autoprefixer({ browsers: CSS_AUTOPREFIXER }),
                                 ],
                             },
                         },

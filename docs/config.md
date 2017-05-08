@@ -81,6 +81,9 @@ export interface BuildConfig {
     /** Regular expression of paths to be ignored in watch mode */
     WATCH_IGNORE: RegExp
 
+    /** Autoprefixer browser compatibilty  */
+    CSS_AUTOPREFIXER: string[]
+
 }
 ```
 

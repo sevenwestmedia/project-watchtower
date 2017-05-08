@@ -24,6 +24,7 @@ const defaultConfig: BuildConfig = {
         path.resolve(root, 'common'),
     ],
     WATCH_IGNORE: /node_modules(?!.+swm-component-library)/,
+    CSS_AUTOPREFIXER: ['last 2 versions'],
 }
 
 const customConfigFile = path.resolve(root, 'config', 'config.js')
