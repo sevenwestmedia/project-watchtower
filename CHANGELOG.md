@@ -7,6 +7,9 @@
 * Add `WATCH_IGNORE` configuration
 * Add lighthouse build stats for first meaningful paint and time to interactive
 * Add `CSS_AUTOPREFIXER` configuration
+* Add TeamCity build stats output
+* **BREAKING** Add `STATS_PAGES` configuration to allow multiple pages to be assessed for build stats. The stats will be prefixed by the page's name
+* Add `STATS_ENV` configuration to set up a special environment for measuring build stats
 
 ## v0.1.3 (2017-05-01)
 

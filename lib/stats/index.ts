@@ -3,6 +3,7 @@ import bundleSize from './bundle-size'
 import ssrStats from './ssr-stats'
 import lighthouseStats from './lighthouse'
 import { writeFile } from '../util/fs'
+import { log } from '../util/log'
 
 const root = process.cwd()
 
@@ -10,26 +11,36 @@ export interface BuildMetrics {
     [key: string]: string
 }
 
-const buildStats = async () => {
+export const measureBuildStats = async (): Promise<BuildMetrics> => {
+
+    const bundleMetrics = await bundleSize()
+    const ssrMetrics = await ssrStats()
+    const lighthouseMetrics = await lighthouseStats()
+
+    return {
+        ...bundleMetrics,
+        ...ssrMetrics,
+        ...lighthouseMetrics,
+    }
+}
+
+export const writeBuildStats = async (metrics: BuildMetrics) => {
+
+    // TeamCity expects key-value pairs written to the console
+
+    Object.keys(metrics).forEach((key) => {
+        log(`##teamcity[buildStatisticValue key='${key}' value='${metrics[key]}']`)
+    })
+
+    // Jenkins wants a CSV file
 
     const keys: string[] = []
     const values: string[] = []
 
-    const addMetrics = (obj: BuildMetrics) => {
-        Object.keys(obj).forEach((key) => {
-            keys.push(key)
-            values.push(obj[key])
-        })
-    }
-
-    const bundleMetrics = await bundleSize()
-    addMetrics(bundleMetrics)
-
-    const ssrMetrics = await ssrStats()
-    addMetrics(ssrMetrics)
-
-    const lighthouseMetrics = await lighthouseStats()
-    addMetrics(lighthouseMetrics)
+    Object.keys(metrics).forEach((key) => {
+        keys.push(key)
+        values.push(metrics[key])
+    })
 
     const titleRow = keys.join(',')
     const valueRow = values.join(',')
@@ -40,7 +51,12 @@ const buildStats = async () => {
 
     const statsFilePath = path.resolve(root, 'build-stats.csv')
 
-    return writeFile(statsFilePath, fileContent)
+    await writeFile(statsFilePath, fileContent)
 }
 
-export default buildStats
+const measureAndWriteBuildStats = async () => {
+    const metrics = await measureBuildStats()
+    await writeBuildStats(metrics)
+}
+
+export default measureAndWriteBuildStats
