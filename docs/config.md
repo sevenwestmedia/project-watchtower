@@ -42,9 +42,6 @@ export interface BuildConfig {
     /** root path of your application */
     BASE: string
 
-    /** set to false if the application is serverless */
-    HAS_SERVER: boolean,
-
     /** entry file for the client */
     CLIENT_ENTRY: string
 
@@ -53,6 +50,21 @@ export interface BuildConfig {
 
     /** output directory for the client build */
     CLIENT_OUTPUT: string
+
+    /** Autoprefixer browser compatibilty  */
+    CSS_AUTOPREFIXER: string[]
+
+    /** set to false if the application is serverless */
+    HAS_SERVER: boolean,
+
+    /** List paths to exclude from linting */
+    LINT_EXCLUDE: string[]
+
+    /** Paths where modules are resolved */
+    MODULE_PATHS: string[]
+
+    /** Default port for the server (when process.env.PORT is not set) */
+    PORT: number
 
     /** entry file for the server if applicable */
     SERVER_ENTRY: string
@@ -69,20 +81,14 @@ export interface BuildConfig {
     /** if true, no hash is added to the generated assets */
     STATIC_RESOURCE_NAMES: boolean
 
-    /** List paths to exclude from linting */
-    LINT_EXCLUDE: string[]
+    /** Additional environment variables for build stats */
+    STATS_ENV: { [key: string]: string }
 
-    /** Default port for the server (when process.env.PORT is not set) */
-    PORT: number
-
-    /** Paths where modules are resolved */
-    MODULE_PATHS: string[]
+    /** Pages to run build stats on, format { name: URL } */
+    STATS_PAGES: { [name: string]: string }
 
     /** Regular expression of paths to be ignored in watch mode */
     WATCH_IGNORE: RegExp
-
-    /** Autoprefixer browser compatibilty  */
-    CSS_AUTOPREFIXER: string[]
 
 }
 ```
@@ -92,22 +98,49 @@ Default configuration:
 ```ts
 {
     BASE: `${root}`,
-    HAS_SERVER: true,
     CLIENT_ENTRY: `${root}/client/index.tsx`,
     CLIENT_OUTPUT: `${root}/public/assets`,
     CLIENT_POLYFILLS: `${root}/client/polyfills.ts`,
-    SERVER_ENTRY: `${root}/server/start.ts`,
-    SERVER_OUTPUT: `${root}/build`,
-    PUBLIC_PATH: '/assets/',
-    SERVER_PUBLIC_DIR: `${root}/public`,
-    STATIC_RESOURCE_NAMES: false,
+    CSS_AUTOPREFIXER: ['last 2 browsers'],
+    HAS_SERVER: true,
     LINT_EXCLUDE: [],
-    PORT: 3000,
     MODULE_PATHS: [
         `${root}`,
         `${root}/node_modules`,
         `${root}/common`,
     ],
+    PUBLIC_PATH: '/assets/',
+    PORT: 3000,
+    SERVER_ENTRY: `${root}/server/start.ts`,
+    SERVER_OUTPUT: `${root}/build`,
+    SERVER_PUBLIC_DIR: `${root}/public`,
+    STATIC_RESOURCE_NAMES: false,
+    STATS_ENV: {},
+    STATS_PAGES: { home: '/' },
+    WATCH_IGNORE: /node_modules(?!.+swm-component-library)/,
+}
+
+const defaultConfig: BuildConfig = {
+    BASE: root,
+    CLIENT_ENTRY: path.resolve(root, 'client', 'index.tsx'),
+    CLIENT_OUTPUT: path.resolve(root, 'public', 'assets'),
+    CLIENT_POLYFILLS: path.resolve(root, 'client', 'polyfills.ts'),
+    CSS_AUTOPREFIXER: ['last 2 versions'],
+    HAS_SERVER: true,
+    LINT_EXCLUDE: [],
+    MODULE_PATHS: [
+        root,
+        path.resolve(root, 'node_modules'),
+        path.resolve(root, 'common'),
+    ],
+    PUBLIC_PATH: '/assets/',
+    PORT: 3000,
+    SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
+    SERVER_OUTPUT: path.resolve(root, 'build'),
+    SERVER_PUBLIC_DIR: path.resolve(root, 'public'),
+    STATIC_RESOURCE_NAMES: false,
+    STATS_ENV: {},
+    STATS_PAGES: { home: '/' },
     WATCH_IGNORE: /node_modules(?!.+swm-component-library)/,
 }
 ```

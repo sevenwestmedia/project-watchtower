@@ -15,9 +15,6 @@ export interface BuildConfig {
     /** root path of your application */
     BASE: string
 
-    /** set to false if the application is serverless */
-    HAS_SERVER: boolean,
-
     /** entry file for the client */
     CLIENT_ENTRY: string
 
@@ -26,6 +23,21 @@ export interface BuildConfig {
 
     /** output directory for the client build */
     CLIENT_OUTPUT: string
+
+    /** Autoprefixer browser compatibilty  */
+    CSS_AUTOPREFIXER: string[]
+
+    /** set to false if the application is serverless */
+    HAS_SERVER: boolean,
+
+    /** List paths to exclude from linting */
+    LINT_EXCLUDE: string[]
+
+    /** Paths where modules are resolved */
+    MODULE_PATHS: string[]
+
+    /** Default port for the server (when process.env.PORT is not set) */
+    PORT: number
 
     /** entry file for the server if applicable */
     SERVER_ENTRY: string
@@ -42,20 +54,14 @@ export interface BuildConfig {
     /** if true, no hash is added to the generated assets */
     STATIC_RESOURCE_NAMES: boolean
 
-    /** List paths to exclude from linting */
-    LINT_EXCLUDE: string[]
+    /** Additional environment variables for build stats */
+    STATS_ENV: { [key: string]: string }
 
-    /** Default port for the server (when process.env.PORT is not set) */
-    PORT: number
-
-    /** Paths where modules are resolved */
-    MODULE_PATHS: string[]
+    /** Pages to run build stats on, format { name: URL } */
+    STATS_PAGES: { [name: string]: string }
 
     /** Regular expression of paths to be ignored in watch mode */
     WATCH_IGNORE: RegExp
-
-    /** Autoprefixer browser compatibilty  */
-    CSS_AUTOPREFIXER: string[]
 
 }
 

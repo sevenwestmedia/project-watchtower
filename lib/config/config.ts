@@ -7,24 +7,26 @@ const root = process.cwd()
 
 const defaultConfig: BuildConfig = {
     BASE: root,
-    HAS_SERVER: true,
     CLIENT_ENTRY: path.resolve(root, 'client', 'index.tsx'),
     CLIENT_OUTPUT: path.resolve(root, 'public', 'assets'),
     CLIENT_POLYFILLS: path.resolve(root, 'client', 'polyfills.ts'),
-    SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
-    SERVER_OUTPUT: path.resolve(root, 'build'),
-    PUBLIC_PATH: '/assets/',
-    SERVER_PUBLIC_DIR: path.resolve(root, 'public'),
-    STATIC_RESOURCE_NAMES: false,
+    CSS_AUTOPREFIXER: ['last 2 versions'],
+    HAS_SERVER: true,
     LINT_EXCLUDE: [],
-    PORT: 3000,
     MODULE_PATHS: [
         root,
         path.resolve(root, 'node_modules'),
         path.resolve(root, 'common'),
     ],
+    PUBLIC_PATH: '/assets/',
+    PORT: 3000,
+    SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
+    SERVER_OUTPUT: path.resolve(root, 'build'),
+    SERVER_PUBLIC_DIR: path.resolve(root, 'public'),
+    STATIC_RESOURCE_NAMES: false,
+    STATS_ENV: {},
+    STATS_PAGES: { home: '/' },
     WATCH_IGNORE: /node_modules(?!.+swm-component-library)/,
-    CSS_AUTOPREFIXER: ['last 2 versions'],
 }
 
 const customConfigFile = path.resolve(root, 'config', 'config.js')

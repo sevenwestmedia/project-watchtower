@@ -74,8 +74,14 @@ Measures build metrics and saves them to `build-stats.csv`
 Example:
 
 ```
-bundle_size_total,bundle_size_main,bundle_size_vendor,bundle_size_css,ssr_document_size,ssr_loadtime,first_meaningful_paint,speed_index,time_to_interactive
-28.6,0.2,28.4,0.1,0.0,2,242,250,245
+bundle_size_total,bundle_size_main,bundle_size_vendor,bundle_size_css,home_ssr_document_size,home_ssr_loadtime,home_first_meaningful_paint,home_speed_index,home_time_to_interactive
+28.6,0.2,28.4,0.1,0.0,2,270,284,275
+```
+
+In addition the stats are output on the console for TeamCity:
+
+```
+##teamcity[buildStatisticValue key='${key}' value='${value}']
 ```
 
 Stats:
@@ -84,15 +90,19 @@ Stats:
 *   `bundle_size_main`: Size of the main JS bundle (KB)
 *   `bundle_size_vendor`: Size of the vendor JS bundle (KB)
 *   `bundle_size_css`: Size of the CSS bundle (KB)
-*   `ssr_document_size`: Size of the server-side rendered homepage document (KB)
-*   `ssr_loadtime`: Average load time of the server-side rendered homepage document (ms)
-*   `first_meaningful_paint`: First meaningful paint through lighthouse (ms)
-*   `speed_index`: Lighthouse speed index (lower is better)
-*   `time_to_interactive`: Time to interactive through lighthouse (ms)
+*   `<PAGE>_ssr_document_size`: Size of the server-side rendered homepage document (KB)
+*   `<PAGE>_ssr_loadtime`: Average load time of the server-side rendered homepage document (ms)
+*   `<PAGE>_first_meaningful_paint`: First meaningful paint through lighthouse (ms)
+*   `<PAGE>_speed_index`: Lighthouse speed index (lower is better)
+*   `<PAGE>_time_to_interactive`: Time to interactive through lighthouse (ms)
 
 For the lighthouse values to be generated, Google Chrome has to be installed on the machine running the tests.
-If Google Chrome is not installed, the lighthouse stats will not be included in the CSV file.
+If Google Chrome is not installed, the lighthouse stats will not be included.
 
+Stats generation can be customised through configuration variables:
+
+* `STATS_PAGES` defines the pages that should be measured, default `{ home: '/' }` will generate stats like `home_ssr_document_size`
+* `STATS_ENV` defines additional environment variables for the server so it can set up a stable and predictable environment to measure the stats
 
 ### test
 
@@ -191,6 +201,16 @@ createServer(
     middlewareHook?: (app: express.Express) => void,
     callback?: () => void,
 ) => express.Express
+```
+
+`project-watchtower/lib/stats`
+
+```ts
+measureBuildStats() => Promise<BuildMetrics>
+
+writeBuildStats(metrics: BuildMetrics) => Promise<void>
+
+default measureAndWriteBuildStats() => Promise<void>
 ```
 
 ### Types
