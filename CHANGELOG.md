@@ -1,6 +1,6 @@
 # Changelog
 
-## vNext
+## v0.2.0 (2017-05-11)
 
 * Add `debug` environment for `pwt build server debug`
 * Add `pwt start debug` and `START_DEBUG_MODE` environment flag
