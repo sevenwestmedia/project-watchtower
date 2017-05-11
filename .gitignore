@@ -166,7 +166,7 @@ server/**/*.js
 server/**/*.d.ts
 client/**/*.js
 client/**/*.d.ts
-build
+build/**
 public/assets
 assets.json
 build-stats.csv

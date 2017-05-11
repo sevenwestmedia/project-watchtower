@@ -12,6 +12,7 @@ export const TARGETS: BuildTarget[] = [
 export const ENVIRONMENTS: BuildEnvironment[] = [
     'dev',
     'prod',
+    'debug',
 ]
 
 const root = process.cwd()
