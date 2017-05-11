@@ -4,6 +4,9 @@ import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import baseConfig from './webpack.base'
 import clientBaseConfig from './webpack.client'
 import devConfig from './webpack.client.dev'
+import CONFIG from './config'
+
+const { ASSETS_PATH_PREFIX } = CONFIG
 
 /** Webpack config for the client in development */
 const config: webpack.Configuration = merge(
@@ -17,11 +20,11 @@ const config: webpack.Configuration = merge(
             ],
         },
         output: {
-            filename: '[name].js',
-            chunkFilename: '[name].js',
+            filename: ASSETS_PATH_PREFIX + 'js/[name].js',
+            chunkFilename: ASSETS_PATH_PREFIX + 'js/[name].js',
         },
         plugins: [
-            new ExtractTextPlugin('css/[name].css'),
+            new ExtractTextPlugin(ASSETS_PATH_PREFIX + 'css/[name].css'),
             new webpack.HotModuleReplacementPlugin(),
         ],
     },

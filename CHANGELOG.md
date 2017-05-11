@@ -10,6 +10,7 @@
 * Add TeamCity build stats output
 * **BREAKING** Add `STATS_PAGES` configuration to allow multiple pages to be assessed for build stats. The stats will be prefixed by the page's name
 * Add `STATS_ENV` configuration to set up a special environment for measuring build stats
+* **BREAKING** Add `ASSETS_PATH_PREFIX` configuration and set it to `/static`, which changes the default location of the JS and CSS bundles (JS `/ => /static/js`, CSS `/css => /static/css`)
 
 ## v0.1.3 (2017-05-01)
 

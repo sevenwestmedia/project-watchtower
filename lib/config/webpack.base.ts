@@ -3,7 +3,7 @@ import * as webpack from 'webpack'
 import { CheckerPlugin } from 'awesome-typescript-loader'
 import CONFIG from './config'
 
-const { BASE, MODULE_PATHS } = CONFIG
+const { BASE, MODULE_PATHS, ASSETS_PATH_PREFIX } = CONFIG
 const disableTypeCheck = process.env.START_FAST_MODE === 'true'
 
 /**
@@ -48,14 +48,14 @@ const baseConfig: webpack.Configuration = {
                 exclude: /\/favicon.ico$/,
                 loader: 'file-loader',
                 options: {
-                    name: 'static/media/[name].[hash:8].[ext]',
+                    name: ASSETS_PATH_PREFIX + 'media/[name].[hash:8].[ext]',
                 },
             },
             {
                 test: /\.(eot|woff|woff2)(\?.*)?$/,
                 loader: 'file-loader',
                 options: {
-                    name: 'static/fonts/[name].[ext]',
+                    name: ASSETS_PATH_PREFIX + 'fonts/[name].[ext]',
                 },
             },
             {

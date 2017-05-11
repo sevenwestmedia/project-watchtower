@@ -12,6 +12,9 @@ export interface Assets {
 /** Application build configuration */
 export interface BuildConfig {
 
+    /** Prefix for all assets (JS, CSS, media, fonts) with trailing slash */
+    ASSETS_PATH_PREFIX: string
+
     /** root path of your application */
     BASE: string
 

@@ -6,15 +6,15 @@ import baseConfig from './webpack.base'
 import clientBaseConfig from './webpack.client'
 import prodConfig from './webpack.prod'
 
-const { STATIC_RESOURCE_NAMES } = CONFIG
+const { STATIC_RESOURCE_NAMES, ASSETS_PATH_PREFIX } = CONFIG
 
 const chunkFilename = STATIC_RESOURCE_NAMES
-    ? '[name].js'
-    : '[name]_[chunkhash].js'
+    ? ASSETS_PATH_PREFIX + 'js/[name].js'
+    : ASSETS_PATH_PREFIX + 'js/[name]_[chunkhash].js'
 
 const cssFilename = STATIC_RESOURCE_NAMES
-    ? 'css/[name].css'
-    : 'css/[name].[contenthash:8].css'
+    ? ASSETS_PATH_PREFIX + 'css/[name].css'
+    : ASSETS_PATH_PREFIX + 'css/[name].[contenthash:8].css'
 
 /** Webpack config for the client in production */
 const config: webpack.Configuration = merge(

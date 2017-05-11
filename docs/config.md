@@ -39,6 +39,9 @@ Options for the file  `/config/config.js` (usage explained in the [build documen
 ```ts
 export interface BuildConfig {
 
+    /** Prefix for all assets (JS, CSS, media, fonts) with trailing slash */
+    ASSETS_PATH_PREFIX: string
+
     /** root path of your application */
     BASE: string
 
@@ -97,6 +100,7 @@ Default configuration:
 
 ```ts
 {
+    ASSETS_PATH_PREFIX: 'static/',
     BASE: `${root}`,
     CLIENT_ENTRY: `${root}/client/index.tsx`,
     CLIENT_OUTPUT: `${root}/public/assets`,
