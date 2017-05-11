@@ -81,7 +81,15 @@ Values that are present in the actual runtime environment at build time will _no
 
 ## Debugging
 
+As VS code has problems with sourcemaps that are generated during the runtime of the debugger, the process of debugging has to be split into a "build" and a "debug" phase. The "build" tasks are defined in `.vscode/tasks.json`, the "debug" configurations in `.vscode/launch.json` - they reference the "build" tasks as their `preLaunchTask`.
+
 ### Debug server build
+
+In your `package.json`, add a shortcut script for project-watchtower:
+
+```
+"pwt": "pwt"
+```
 
 Add a debug configuration to `.vscode/launch.json`:
 
@@ -96,29 +104,47 @@ Add a debug configuration to `.vscode/launch.json`:
     },
     "runtimeArgs": [
         "run-script",
-        "start:debug"
+        "pwt",
+        "start",
+        "debug"
     ],
     "port": 5858,
-    "timeout": 90000,
+    "timeout": 60000,
     "sourceMaps": true,
     "outFiles": [
         "${workspaceRoot}/build/server.js",
         "${workspaceRoot}/build/*.js"
     ],
     "smartStep": true,
-    "trace": "sm"
-},
+    "trace": "sm",
+    "preLaunchTask": "build:debug"
+}
 ```
 
-Add the following script to your `package.json`:
+Add the following task to `.vscode/tasks.json`:
 
 ```
-"start:debug": "pwt build server debug && pwt start debug"
+{
+    "taskName": "build:debug",
+    "args": [
+        "run",
+        "pwt",
+        "build",
+        "debug"
+    ]
+}
 ```
 
 ### Debug tests
 
 Debugging test cases with Jest currently only works by transpiling the tests to JavaScript and then running them due to a limitation in the `ts-jest` preprocessor.
+
+In your `package.json`, add a shortcut script for project-watchtower and the TypeScript compiler:
+
+```
+"pwt": "pwt",
+"tsc": "tsc",
+```
 
 Add a debug configuration to `.vscode/launch.json`:
 
@@ -133,11 +159,16 @@ Add a debug configuration to `.vscode/launch.json`:
     },
     "runtimeArgs": [
         "run-script",
-        "test:debug"
+        "pwt",
+        "test",
+        "debug"
     ],
     "port": 5858,
     "timeout": 30000,
-    "sourceMaps": true
+    "sourceMaps": true,
+    "smartStep": true,
+    "trace": "sm",
+    "preLaunchTask": "build:test:debug"
 }
 ```
 
@@ -149,8 +180,17 @@ Depending on your TypeScript configuration you might have to add the compilation
 ]
 ```
 
-Add the following script to your `package.json` (with the appropriate command to transpile your TypeScript sources):
+Add a task to compile your tests to JavaScript to `.vscode/tasks.json`:
 
 ```
-"test:debug": "tsc && pwt test debug"
+{
+    "taskName": "build:test:debug",
+    "args": [
+        "run",
+        "tsc",
+        "--",
+        "-p",
+        "./tsconfig-debug.json"
+    ]
+}
 ```
