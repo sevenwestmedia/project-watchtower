@@ -1,6 +1,6 @@
 # Changelog
 
-## vNext
+## v0.2.1 (2017-05-11)
 
 * Fix `pwt build debug`
 * Add client debug configuration
