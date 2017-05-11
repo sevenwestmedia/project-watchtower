@@ -56,12 +56,13 @@ By default all `.ts`/`.tsx` and all `.scss` files are checked. You can supply cu
 ### start
 
 ```
-pwt start [watch] [fast] [prod]
+pwt start [watch] [fast] [prod] [debug]
 ```
 
 *   `watch`: Enable watch mode and rebuild client after changes
 *   `fast`: Disable TypeScript type checking for faster incremental builds
 *   `prod`: Set `NODE_ENV` to `"production"`
+*   `debug`: Start node process in debug mode
 
 ### stats
 
