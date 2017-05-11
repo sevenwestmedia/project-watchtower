@@ -1,5 +1,10 @@
 # Changelog
 
+## vNext
+
+* Fix `pwt build debug`
+* Add client debug configuration
+
 ## v0.2.0 (2017-05-11)
 
 * Add `debug` environment for `pwt build server debug`
