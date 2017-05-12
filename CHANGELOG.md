@@ -1,5 +1,9 @@
 # Changelog
 
+## vNext
+
+* Fix total bundle size stats after paths change
+
 ## v0.2.1 (2017-05-11)
 
 * Fix `pwt build debug`

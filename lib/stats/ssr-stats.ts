@@ -8,7 +8,7 @@ import { runStatsOnServer, loadSSRPage } from './server'
 
 const { HAS_SERVER } = CONFIG
 
-const ssrStats = async () => {
+const ssrStats = async (): Promise<BuildMetrics> => {
 
     if (!HAS_SERVER) {
         log('Skipping SSR stats because the application has no server')

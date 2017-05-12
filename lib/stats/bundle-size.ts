@@ -5,23 +5,25 @@ import { log, logError, prettyJson } from '../util/log'
 import { BuildMetrics } from './'
 import { getFileSize, readFile, formatFileSize } from '../util/fs'
 
-const { BASE, CLIENT_OUTPUT, SERVER_PUBLIC_DIR } = CONFIG
+const { BASE, SERVER_PUBLIC_DIR } = CONFIG
 const assetFilePath = path.resolve(BASE, 'assets.json')
 
-const getChunkSize = async (chunkPath: string) => {
+const getAbsoluteChunkPath = (chunkPath: string) => {
     const normalizedChunkPath = chunkPath[0] === '/'
         ? chunkPath.slice(1)
         : chunkPath
-    const absolutePath = path.resolve(SERVER_PUBLIC_DIR, normalizedChunkPath)
 
+    return path.resolve(SERVER_PUBLIC_DIR, normalizedChunkPath)
+}
+
+const getChunkSize = async (chunkPath: string) => {
+    const absolutePath = getAbsoluteChunkPath(chunkPath)
     const size = await getFileSize(absolutePath)
     return formatFileSize(size)
 }
 
-const getCombinedSize = () =>
+const getCombinedSize = (assetsDir: string) =>
     new Promise<string>((resolve, reject) => {
-        const assetsDir = CLIENT_OUTPUT
-
         fs.readdir(assetsDir, (err, files) => {
             if (err) {
                 logError('Error reading the assets directory', err)
@@ -47,9 +49,10 @@ const bundleSize = async () => {
     try {
         const assetFile = await readFile(assetFilePath)
         const assets = JSON.parse(assetFile)
+        const assetsDir = path.dirname(getAbsoluteChunkPath(assets.main.js))
 
         const values = await Promise.all([
-            getCombinedSize(),
+            getCombinedSize(assetsDir),
             getChunkSize(assets.main.js),
             getChunkSize(assets.vendor.js),
             getChunkSize(assets.main.css),
