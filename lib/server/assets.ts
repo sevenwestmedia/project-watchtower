@@ -6,15 +6,15 @@ import { Assets } from '../types'
 const root = process.cwd()
 const assetsFile = path.resolve(root, 'assets.json')
 const watchMode = process.env.START_WATCH_MODE === 'true'
-const { PUBLIC_PATH } = CONFIG
+const { PUBLIC_PATH, ASSETS_PATH_PREFIX } = CONFIG
 
 let assets: Assets = {
     main: {
-        js: PUBLIC_PATH + 'main.js',
-        css: PUBLIC_PATH + 'css/main.css',
+        js: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'js/main.js',
+        css: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'css/main.css',
     },
     vendor: {
-        js: PUBLIC_PATH + 'vendor.js',
+        js: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'js/vendor.js',
     },
 }
 
