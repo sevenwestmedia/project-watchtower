@@ -24,9 +24,14 @@ See the [build documentation](./build.md) for details on how to customise the pr
     * ...
 * public
     * assets: Client build output directory
-        * main.js (hashed in production build)
-        * vendor.js (hashed in production build)
-        * ...
+        * static
+            * js
+                * main.js (hashed in production build)
+                * vendor.js (hashed in production build)
+            * css
+                * main.css (hashed in production build)
+            * media
+            * fonts
 * assets.json: Mapping to the location of the generated assets
 * build-stats.csv: Generated build metrics
 * .env: Environment variables
