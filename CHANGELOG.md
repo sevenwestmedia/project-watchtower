@@ -1,6 +1,6 @@
 # Changelog
 
-## vNext
+## v0.2.2 (2017-05-15)
 
 * Fix total bundle size stats after paths change
 
