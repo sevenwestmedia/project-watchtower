@@ -97,8 +97,8 @@ const lighthouseStats = async (): Promise<BuildMetrics> => {
         log(`Lighthouse stats: ${prettyJson(stats)}`)
 
         return stats
-    } catch (e) {
-        logError('Error measuring lighthouse stats')
+    } catch (err) {
+        logError('Error measuring lighthouse stats', err)
         return {}
     }
 }
