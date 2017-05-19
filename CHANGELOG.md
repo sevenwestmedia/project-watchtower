@@ -1,6 +1,6 @@
 # Changelog
 
-## vNext
+## v0.2.3 (2017-05-19)
 
 * Fix initial asset locations
 * Fix: Only clean before testing when not in debug mode to prevent deleting transpiled artifacts
