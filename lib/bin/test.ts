@@ -11,8 +11,6 @@ const jestBin = path.resolve(root, 'node_modules', 'jest', 'bin', 'jest.js')
  * @param params Jest options
  */
 const test = async (...params: string[]): Promise<ChildProcess> => {
-    await clean()
-
     let args: string[] = []
 
     const debugIndex = params.indexOf('debug')
@@ -24,6 +22,8 @@ const test = async (...params: string[]): Promise<ChildProcess> => {
         if (params.indexOf('--runInBand') === -1) {
             args.push('--runInBand')
         }
+    } else {
+        await clean()
     }
 
     if (params.indexOf('--config') === -1) {
