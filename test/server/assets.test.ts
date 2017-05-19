@@ -1,3 +1,4 @@
+import clean from '../../lib/bin/clean'
 import {
     updateAssetLocations,
     getAssetLocations,
@@ -16,11 +17,26 @@ const assets = {
     },
 }
 
-beforeEach(() => {
-    updateAssetLocations(assets)
+describe('server/assets initial', () => {
+    it('initial asset location values', async () => {
+        await clean()
+        expect(getAssetLocations()).toEqual({
+            main: {
+                js: '/assets/static/js/main.js',
+                css: '/assets/static/css/main.css',
+            },
+            vendor: {
+                js: '/assets/static/js/vendor.js',
+            },
+        })
+    })
 })
 
 describe('server/assets', () => {
+
+    beforeEach(() => {
+        updateAssetLocations(assets)
+    })
 
     it('getAssetLocations', () => {
         expect(getAssetLocations()).toEqual(assets)
