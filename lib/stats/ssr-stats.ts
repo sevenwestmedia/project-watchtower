@@ -2,7 +2,7 @@ import CONFIG from '../config/config'
 import { log, logError, prettyJson } from '../util/log'
 import { BuildMetrics } from './'
 import { formatFileSize } from '../util/fs'
-import { formatTimeMs } from '../util/time'
+import { formatTimeMs, timeout } from '../util/time'
 import { getSequenceAverage } from '../util/math'
 import { runStatsOnServer, loadSSRPage } from './server'
 
@@ -20,11 +20,16 @@ const ssrStats = async (): Promise<BuildMetrics> => {
     const stats: BuildMetrics = {}
 
     try {
-        await runStatsOnServer(async (page: string, url: string) => {
-            const { size } = await loadSSRPage(url)
+        await runStatsOnServer(async ({ page, url }) => {
 
-            const getTime = () => loadSSRPage(url).then((result) => result.time)
-            const time = await getSequenceAverage(getTime, 5)
+            const loadPage = () => timeout(loadSSRPage(url), 20000)
+
+            const { size } = await loadPage()
+
+            const time = await getSequenceAverage(async () => {
+                const result = await loadPage()
+                return result.time
+            }, 5)
 
             stats[`${page}_ssr_document_size`] = formatFileSize(size)
             stats[`${page}_ssr_loadtime`] = formatTimeMs(time)
@@ -33,8 +38,8 @@ const ssrStats = async (): Promise<BuildMetrics> => {
         log(`SSR stats: ${prettyJson(stats)}`)
 
         return stats
-    } catch (e) {
-        logError('Error measuring SSR stats')
+    } catch (err) {
+        logError('Error measuring SSR stats', err)
         return {}
     }
 }

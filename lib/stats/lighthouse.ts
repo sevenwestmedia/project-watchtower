@@ -6,7 +6,7 @@ import { log, logError, prettyJson } from '../util/log'
 import { BuildMetrics } from './'
 import { runStatsOnServer } from './server'
 import { readFile } from '../util/fs'
-import { delay, formatTimeMs } from '../util/time'
+import { delay, formatTimeMs, timeout } from '../util/time'
 
 const { HAS_SERVER } = CONFIG
 
@@ -75,8 +75,8 @@ const lighthouseStats = async (): Promise<BuildMetrics> => {
     const stats: BuildMetrics = {}
 
     try {
-        await runStatsOnServer(async (page: string, _urlPath: string, url: string) => {
-            const lighthouseResult = await runLighthouse(url)
+        await runStatsOnServer(async ({ page, url }) => {
+            const lighthouseResult = await timeout(runLighthouse(url), 120000)
 
             const addLighthouseValue = (lighthouseKey: string, statsKey: string) => {
                 const result = lighthouseResult

@@ -1,5 +1,9 @@
 # Changelog
 
+## vNext
+
+* Fix: Find available port and add timeouts for server stats
+
 ## v0.2.3 (2017-05-19)
 
 * Fix initial asset locations
