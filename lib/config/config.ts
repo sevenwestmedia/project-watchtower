@@ -1,5 +1,5 @@
-import * as fs from 'fs'
 import * as path from 'path'
+import { existsSync } from '../util/fs'
 import { logError } from '../util/log'
 import { BuildConfig, BuildConfigOverride } from '../types'
 
@@ -30,21 +30,27 @@ const defaultConfig: BuildConfig = {
     WATCH_IGNORE: /node_modules(?!.+swm-component-library)/,
 }
 
-const customConfigFile = path.resolve(root, 'config', 'config.js')
-let customConfig: BuildConfigOverride = {}
+const getCustomConfig = (): BuildConfigOverride => {
+    const customConfigFile = path.resolve(root, 'config', 'config.js')
+    const customConfigFileTS = path.resolve(root, 'config', 'config.ts')
 
-try {
-    if (fs.existsSync(customConfigFile)) {
+    if (existsSync(customConfigFile)) {
         // tslint:disable-next-line no-var-requires
-        customConfig = require(customConfigFile).default
+        return require(customConfigFile).default
     }
-} catch (e) {
-    logError('Error reading config/config.js!', e)
+
+    if (existsSync(customConfigFileTS)) {
+        logError('/config/config.ts only found as TypeScript file.')
+        logError('Please make sure to compile all TS files in the /config folder to JS!')
+        process.exit(1)
+    }
+
+    return {}
 }
 
 const CONFIG = {
     ...defaultConfig,
-    ...customConfig,
+    ...getCustomConfig(),
 }
 
 export default CONFIG
