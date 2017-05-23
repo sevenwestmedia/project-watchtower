@@ -1,6 +1,6 @@
 # Changelog
 
-## vNext
+## v0.2.4 (2017-05-23)
 
 * Fix: Find available port and add timeouts for server stats
 * Fails execution if `/config/config.ts` is found, but has not been compiled to `/config/config.js`. This would otherwise lead to more random errors as previously project-watchtower would just fall back to its default configuration.
