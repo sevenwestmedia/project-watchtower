@@ -41,3 +41,12 @@ export const writeFile = (filePath: string, fileContent: string) => (
 )
 
 export const formatFileSize = (size: number) => (size / 1024).toFixed(1)
+
+export const existsSync = (file: string) => {
+    try {
+        fs.accessSync(file)
+        return true
+    } catch (ex) {
+        return false
+    }
+}
