@@ -4,21 +4,20 @@ import { fork } from 'child_process'
 import * as dotenv from 'dotenv'
 import CONFIG from '../config/config'
 import { getPort } from '../server/server'
-import { waitForConnection } from '../util/network'
+import { waitForConnection, findFreePort } from '../util/network'
 import { log } from '../util/log'
-import { getTimeMs } from '../util/time'
+import { getTimeMs, timeout } from '../util/time'
 
 dotenv.config()
 
 const { SERVER_OUTPUT, HAS_SERVER, STATS_ENV, STATS_PAGES } = CONFIG
-const port = getPort()
 
 export interface SSRStats {
     size: number
     time: number
 }
 
-export const getServerUrl = (urlPath: string) => {
+const getServerUrl = (port: number, urlPath: string) => {
     const useUrlPath = urlPath.indexOf('/') === 0
         ? urlPath
         : '/' + urlPath
@@ -26,11 +25,11 @@ export const getServerUrl = (urlPath: string) => {
     return `http://localhost:${port}${useUrlPath}`
 }
 
-export const loadSSRPage = (urlPath: string) => (
+export const loadSSRPage = (url: string) => (
     new Promise<SSRStats>((resolve, reject) => {
         const startTime = getTimeMs()
 
-        const request = http.get(getServerUrl(urlPath), (res) => {
+        const request = http.get(url, (res) => {
             res.setEncoding('utf8')
 
             let size = 0
@@ -45,11 +44,14 @@ export const loadSSRPage = (urlPath: string) => (
     })
 )
 
-export type StatsFn = (
-    page: string,
-    urlPath: string,
-    completeUrl: string,
-) => Promise<any>
+export interface StatsRunDetails {
+    page: string
+    urlPath: string
+    url: string
+    port: number
+}
+
+export type StatsFn = (details: StatsRunDetails) => Promise<any>
 
 export const runStatsOnServer = async (statsFn: StatsFn) => {
 
@@ -57,6 +59,8 @@ export const runStatsOnServer = async (statsFn: StatsFn) => {
         log('Skipping server-based stats because the application has no server')
         return
     }
+
+    const port = await findFreePort(getPort())
 
     const serverEntryFile = path.resolve(SERVER_OUTPUT, 'server.js')
 
@@ -67,25 +71,32 @@ export const runStatsOnServer = async (statsFn: StatsFn) => {
             env: {
                 ...process.env,
                 ...STATS_ENV,
+                PORT: port,
             },
             silent: true,
         },
     )
 
-    await waitForConnection(port)
+    try {
+        await timeout(waitForConnection(port), 20000)
 
-    for (const page in STATS_PAGES) {
-        if (STATS_PAGES.hasOwnProperty(page)) {
-            const urlPath = STATS_PAGES[page]
+        for (const page in STATS_PAGES) {
+            if (STATS_PAGES.hasOwnProperty(page)) {
+                const urlPath = STATS_PAGES[page]
+                const url = getServerUrl(port, urlPath)
 
-            // warm-up
-            for (let i = 0; i < 3; i++) {
-                await loadSSRPage(urlPath)
+                // warm-up
+                for (let i = 0; i < 3; i++) {
+                    await timeout(loadSSRPage(url), 20000)
+                }
+
+                await statsFn({ page, urlPath, url, port })
             }
-
-            await statsFn(page, urlPath, getServerUrl(urlPath))
         }
-    }
 
-    devServer.kill()
+    } catch (err) {
+        throw err
+    } finally {
+        devServer.kill()
+    }
 }
