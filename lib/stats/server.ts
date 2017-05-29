@@ -1,10 +1,10 @@
 import * as path from 'path'
 import * as http from 'http'
-import { fork } from 'child_process'
 import * as dotenv from 'dotenv'
 import CONFIG from '../config/config'
 import { getPort } from '../server/server'
 import { waitForConnection, findFreePort } from '../util/network'
+import { forkPromise } from '../util/process'
 import { log } from '../util/log'
 import { getTimeMs, timeout } from '../util/time'
 
@@ -64,7 +64,7 @@ export const runStatsOnServer = async (statsFn: StatsFn) => {
 
     const serverEntryFile = path.resolve(SERVER_OUTPUT, 'server.js')
 
-    const devServer = fork(
+    const devServer = await forkPromise(
         serverEntryFile,
         [],
         {
@@ -75,6 +75,7 @@ export const runStatsOnServer = async (statsFn: StatsFn) => {
             },
             silent: true,
         },
+        true,
     )
 
     try {

@@ -16,10 +16,15 @@ const command = args[0]
 const commandArgs = args.slice(1)
 
 const exitOnError = (result: Promise<any>) => {
-    result.catch((e) => {
-        logError(e)
-        process.exit(1)
-    })
+    result
+        .then(() => {
+            // force process to exit
+            process.exit(0)
+        })
+        .catch((e) => {
+            logError(e)
+            process.exit(1)
+        })
 }
 
 switch (command) {

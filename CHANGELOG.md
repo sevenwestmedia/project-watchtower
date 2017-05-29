@@ -1,5 +1,10 @@
 # Changelog
 
+## vNext
+
+* Fix: Make sure process exits after command was executed
+* Fix: Make sure all child processes are killed when exiting process
+
 ## v0.2.4 (2017-05-23)
 
 * Fix: Find available port and add timeouts for server stats
