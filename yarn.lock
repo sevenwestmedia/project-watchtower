@@ -99,6 +99,10 @@
   dependencies:
     "@types/source-map" "*"
 
+"@types/webpack-env@^1.13.0":
+  version "1.13.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack-env/-/webpack-env-1.13.0.tgz#3044381647e11ee973c5af2e925323930f691d80"
+
 "@types/webpack-merge@^0.0.4":
   version "0.0.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack-merge/-/webpack-merge-0.0.4.tgz#7150eaa758591905fbbb157f88ea15cae35d1b6c"
@@ -2293,19 +2297,9 @@ gzip-size@^3.0.0:
   dependencies:
     duplexer "^0.1.1"
 
-handlebars@4.0.5:
+handlebars@4.0.5, handlebars@^4.0.1, handlebars@^4.0.3:
   version "4.0.5"
   resolved "https://nexus.swmdigital.io/repository/js-combined/handlebars/-/handlebars-4.0.5.tgz#92c6ed6bb164110c50d4d8d0fbddc70806c6f8e7"
-  dependencies:
-    async "^1.4.0"
-    optimist "^0.6.1"
-    source-map "^0.4.4"
-  optionalDependencies:
-    uglify-js "^2.6"
-
-handlebars@^4.0.1, handlebars@^4.0.3:
-  version "4.0.6"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/handlebars/-/handlebars-4.0.6.tgz#2ce4484850537f9c97a8026d5399b935c4ed4ed7"
   dependencies:
     async "^1.4.0"
     optimist "^0.6.1"

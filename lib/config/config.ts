@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { existsSync } from '../util/fs'
+import { dynamicRequire, existsSync } from '../util/fs'
 import { logError } from '../util/log'
 import { BuildConfig, BuildConfigOverride } from '../types'
 
@@ -21,6 +21,10 @@ const defaultConfig: BuildConfig = {
     ],
     PUBLIC_PATH: '/assets/',
     PORT: 3000,
+    SERVER_BUNDLE_EXTERNALS: [
+        'swm-component-library',
+        'project-watchtower',
+    ],
     SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
     SERVER_OUTPUT: path.resolve(root, 'build'),
     SERVER_PUBLIC_DIR: path.resolve(root, 'public'),
@@ -35,8 +39,7 @@ const getCustomConfig = (): BuildConfigOverride => {
     const customConfigFileTS = path.resolve(root, 'config', 'config.ts')
 
     if (existsSync(customConfigFile)) {
-        // tslint:disable-next-line no-var-requires
-        return require(customConfigFile).default
+        return dynamicRequire(customConfigFile).default
     }
 
     if (existsSync(customConfigFileTS)) {

@@ -3,7 +3,13 @@ import * as path from 'path'
 import * as webpack from 'webpack'
 import CONFIG from './config'
 
-const { SERVER_ENTRY, SERVER_OUTPUT, PUBLIC_PATH, BASE } = CONFIG
+const {
+    BASE,
+    PUBLIC_PATH,
+    SERVER_BUNDLE_EXTERNALS,
+    SERVER_ENTRY,
+    SERVER_OUTPUT,
+} = CONFIG
 
 const nodeModules = fs.readdirSync(path.resolve(BASE, 'node_modules'))
 
@@ -41,8 +47,7 @@ const serverBaseConfig: webpack.Configuration = {
         // treat deep imports as externals as well
         const moduleName = request.split('/')[0]
 
-        // the component library has to be included to resolve .scss imports
-        if (moduleName === 'swm-component-library') {
+        if (SERVER_BUNDLE_EXTERNALS.indexOf(moduleName) !== -1) {
             (callback as any)()
         } else if (nodeModules.indexOf(moduleName) !== -1) {
             callback(null, 'commonjs ' + request)

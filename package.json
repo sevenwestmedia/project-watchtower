@@ -34,6 +34,7 @@
     "@types/opn": "^3.0.28",
     "@types/rimraf": "^0.0.28",
     "@types/webpack": "^2.2.14",
+    "@types/webpack-env": "^1.13.0",
     "@types/webpack-merge": "^0.0.4",
     "enzyme": "^2.8.0",
     "express": "^4.15.2",
