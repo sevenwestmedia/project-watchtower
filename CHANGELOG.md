@@ -1,6 +1,6 @@
 # Changelog
 
-## vNext
+## v0.3.0 (2017-05-30)
 
 * Fix: Make sure process exits after command was executed
 * Fix: Make sure all child processes are killed when exiting process
