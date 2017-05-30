@@ -6,6 +6,8 @@
 * Fix: Make sure all child processes are killed when exiting process
 * Fix: `NODE_ENV` is set to `"production"` when running `pwt stats`
 * Fix: Lighthouse no longer fails completely when some stats cannot be obtained
+* Add `SERVER_BUNDLE_EXTERNALS` configuration to specify which external modules should be included in the server bundle
+* Make parts of project-watchtower work within a webpack bundle so it can be installed as devDependency
 
 ## v0.2.4 (2017-05-23)
 

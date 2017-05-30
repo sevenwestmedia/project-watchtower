@@ -42,14 +42,17 @@ export interface BuildConfig {
     /** Default port for the server (when process.env.PORT is not set) */
     PORT: number
 
+    /** URL prefix for all resources */
+    PUBLIC_PATH: string
+
+    /** modules which the server build includes in the bundle */
+    SERVER_BUNDLE_EXTERNALS: string[]
+
     /** entry file for the server if applicable */
     SERVER_ENTRY: string
 
     /** output directory of the server */
     SERVER_OUTPUT: string
-
-    /** URL prefix for all resources */
-    PUBLIC_PATH: string
 
     /** directory that is served as static resources */
     SERVER_PUBLIC_DIR: string | false

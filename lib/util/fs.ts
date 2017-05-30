@@ -50,3 +50,20 @@ export const existsSync = (file: string) => {
         return false
     }
 }
+
+declare var __non_webpack_require__: any | undefined
+
+/**
+ * Dynamically require a file in a way that works both in node and from a webpack bundle
+ */
+export const dynamicRequire = (file: string) => {
+    if (typeof __non_webpack_require__ !== 'undefined') {
+        return __non_webpack_require__(file)
+    } else {
+        // apparently just wrapping require() in a function is enough
+        // to make webpack not try and bundle complete directories.
+        // without the presence of above __non_webpack_require__ it would however emit a warning
+        // "Critical dependency: the request of a dependency is an expression"
+        return require(file)
+    }
+}

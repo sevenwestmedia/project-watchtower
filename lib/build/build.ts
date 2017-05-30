@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as webpack from 'webpack'
+import { dynamicRequire } from '../util/fs'
 import { log, logError } from '../util/log'
 import { BuildEnvironment, BuildTarget } from '../types'
 
@@ -45,11 +46,13 @@ export const getWebpackConfig = (
 
     try {
         if (fs.existsSync(customConfigFile + '.js')) {
-            config = require(customConfigFile).default
+            config = dynamicRequire(customConfigFile).default
             log('Using custom config file ' + customConfigFile)
         } else {
             log('Building ' + configFileName + '...')
-            config = require('../config/' + configFileName).default
+            // we have to add the '.js' ending,
+            // otherwise webpack will bundle every file in the config directory
+            config = require('../config/' + configFileName + '.js').default
         }
 
         return config
