@@ -16,24 +16,33 @@ const command = args[0]
 const commandArgs = args.slice(1)
 
 const exitOnError = (result: Promise<any>) => {
-    result.catch((e) => {
-        logError(e)
-        process.exit(1)
-    })
+    result
+        .catch((e) => {
+            logError(e)
+            process.exit(1)
+        })
 }
+
+const exitAfter = (result: Promise<any>) => (
+    exitOnError(result
+        .then(() => {
+            // force process to exit
+            process.exit(0)
+        }))
+)
 
 switch (command) {
 
     case 'build':
-        exitOnError(build(...commandArgs as BuildParam[]))
+        exitAfter(build(...commandArgs as BuildParam[]))
         break
 
     case 'coverage':
-        exitOnError(test('--coverage', ...commandArgs))
+        exitAfter(test('--coverage', ...commandArgs))
         break
 
     case 'clean':
-        exitOnError(clean(...commandArgs))
+        exitAfter(clean(...commandArgs))
         break
 
     case 'explore-bundle':
@@ -41,7 +50,7 @@ switch (command) {
         break
 
     case 'lint':
-        exitOnError(lint(...commandArgs))
+        exitAfter(lint(...commandArgs))
         break
 
     case 'start':
@@ -49,11 +58,11 @@ switch (command) {
         break
 
     case 'stats':
-        exitOnError(stats())
+        exitAfter(stats())
         break
 
     case 'test':
-        exitOnError(test(...commandArgs))
+        exitAfter(test(...commandArgs))
         break
 
     case 'watch':
