@@ -84,8 +84,8 @@ const lighthouseStats = async (): Promise<BuildMetrics> => {
                     && lighthouseResult.audits[lighthouseKey]
                     && (lighthouseResult.audits[lighthouseKey].rawValue as number)
 
-                if (result !== undefined) {
-                    stats[`${page}_${statsKey}`] = formatTimeMs(result)
+                if (result !== undefined && result !== null) {
+                    stats[`${page}_${statsKey}`] = formatTimeMs(+result)
                 }
             }
 
