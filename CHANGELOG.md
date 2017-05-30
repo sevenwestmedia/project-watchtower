@@ -4,6 +4,8 @@
 
 * Fix: Make sure process exits after command was executed
 * Fix: Make sure all child processes are killed when exiting process
+* Fix: `NODE_ENV` is set to `"production"` when running `pwt stats`
+* Fix: Lighthouse no longer fails completely when some stats cannot be obtained
 
 ## v0.2.4 (2017-05-23)
 

@@ -69,6 +69,7 @@ export const runStatsOnServer = async (statsFn: StatsFn) => {
         [],
         {
             env: {
+                NODE_ENV: 'production',
                 ...process.env,
                 ...STATS_ENV,
                 PORT: port,
