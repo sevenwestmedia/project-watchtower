@@ -79,6 +79,13 @@ If you want to use additional `process.env` variables in the **client** build, m
 The values defined here are replaced in the client build. The server build still accesses its actual `process.env` object, only `process.env.NODE_ENV` is being replaced there.
 Values that are present in the actual runtime environment at build time will _not_ be overridden by the ones defined in `.env` / `.env.default`. However, it is necessary to define all the environment variables in the `.env.default` file that are used in the client code.
 
+#### Environment variables used for build stats
+
+*   `CHROME_REMOTE_DEBUGGING_PORT`: Port that the lighthouse stats try to connect to a Chrome instance
+*   `JENKINS_URL`: Used to detect a Jenkins build server
+*   `STATS_SERVER_ADDRESS`: Host name or IP address of container that hosts the Chrome installation
+*   `TEAMCITY_VERSION`: Used to detect a TeamCity build server
+
 ## Debugging
 
 As VS code has problems with sourcemaps that are generated during the runtime of the debugger, the process of debugging has to be split into a "build" and a "debug" phase. The "build" tasks are defined in `.vscode/tasks.json`, the "debug" configurations in `.vscode/launch.json` - they reference the "build" tasks as their `preLaunchTask`.

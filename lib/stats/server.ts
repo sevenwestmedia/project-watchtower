@@ -3,6 +3,7 @@ import * as http from 'http'
 import * as dotenv from 'dotenv'
 import CONFIG from '../config/config'
 import { getPort } from '../server/server'
+import { isBuildServer } from '../util/env'
 import { waitForConnection, findFreePort } from '../util/network'
 import { forkPromise } from '../util/process'
 import { log } from '../util/log'
@@ -22,7 +23,12 @@ const getServerUrl = (port: number, urlPath: string) => {
         ? urlPath
         : '/' + urlPath
 
-    return `http://localhost:${port}${useUrlPath}`
+    const host = isBuildServer()
+        // provided by build environment, ref OPS-383
+        ? process.env.STATS_SERVER_ADDRESS || 'localhost'
+        : 'localhost'
+
+    return `http://${host}:${port}${useUrlPath}`
 }
 
 export const loadSSRPage = (url: string) => (
