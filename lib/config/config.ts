@@ -39,6 +39,7 @@ const getCustomConfig = (): BuildConfigOverride => {
     const customConfigFileTS = path.resolve(root, 'config', 'config.ts')
 
     if (existsSync(customConfigFile)) {
+        // using dynamicRequire to support bundling project-watchtower with webpack
         return dynamicRequire(customConfigFile).default
     }
 

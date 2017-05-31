@@ -4,6 +4,12 @@ import * as webpack from 'webpack'
 import { dynamicRequire } from '../util/fs'
 import { log, logError } from '../util/log'
 import { BuildEnvironment, BuildTarget } from '../types'
+import webpackClientDevConfig from '../config/webpack.client.dev'
+import webpackClientDebugConfig from '../config/webpack.client.debug'
+import webpackClientProdConfig from '../config/webpack.client.prod'
+import webpackServerDevConfig from '../config/webpack.server.dev'
+import webpackServerDebugConfig from '../config/webpack.server.debug'
+import webpackServerProdConfig from '../config/webpack.server.prod'
 
 export const TARGETS: BuildTarget[] = [
     'server',
@@ -46,13 +52,49 @@ export const getWebpackConfig = (
 
     try {
         if (fs.existsSync(customConfigFile + '.js')) {
+            // using dynamicRequire to support bundling project-watchtower with webpack
             config = dynamicRequire(customConfigFile).default
             log('Using custom config file ' + customConfigFile)
         } else {
             log('Building ' + configFileName + '...')
-            // we have to add the '.js' ending,
-            // otherwise webpack will bundle every file in the config directory
-            config = require('../config/' + configFileName + '.js').default
+
+            switch (target) {
+
+                case 'server':
+
+                    switch (environment) {
+                        case 'dev':
+                            return webpackServerDevConfig
+
+                        case 'debug':
+                            return webpackServerDebugConfig
+
+                        case 'prod':
+                            return webpackServerProdConfig
+
+                        default:
+                            throw new Error(`Invalid build target: ${target} ${environment}`)
+                    }
+
+                case 'client':
+
+                    switch (environment) {
+                        case 'dev':
+                            return webpackClientDevConfig
+
+                        case 'debug':
+                            return webpackClientDebugConfig
+
+                        case 'prod':
+                            return webpackClientProdConfig
+
+                        default:
+                            throw new Error(`Invalid build target: ${target} ${environment}`)
+                    }
+
+                default:
+                    throw new Error(`Invalid build target: ${target} ${environment}`)
+            }
         }
 
         return config
