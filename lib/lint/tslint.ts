@@ -6,9 +6,13 @@ import CONFIG from '../config/config'
 const { LINT_EXCLUDE } = CONFIG
 
 const tslint = (...paths: string[]): Promise<ChildProcess> => {
+
+    // we have to wrap all glob patterns in single quotes
+    // see https://github.com/palantir/tslint/issues/2204
+
     const usePaths = paths.length
             ? paths
-            : [ '**/*.ts?(x)' ]
+            : [ `'**/*.ts?(x)'` ]
 
     const executable = path.resolve(process.cwd(), 'node_modules', 'tslint', 'bin', 'tslint')
 
@@ -30,7 +34,7 @@ const tslint = (...paths: string[]): Promise<ChildProcess> => {
 
     exclude.forEach((x) => {
         args.push('-e')
-        args.push(x)
+        args.push(`'${x}'`)
     })
 
     return forkPromise(executable, args)
