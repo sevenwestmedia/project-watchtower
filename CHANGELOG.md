@@ -1,10 +1,10 @@
 # Changelog
 
-## vNext
+## v0.3.1 (2017-05-31)
 
 * **BREAKING** Rename `SERVER_BUNDLE_EXTERNALS` configuration to `SERVER_INCLUDE_IN_BUNDLE`
 
-## v0.3.0 (2017-05-30)
+## v0.3.0 (2017-05-30) [unpublished]
 
 * Fix: Make sure process exits after command was executed
 * Fix: Make sure all child processes are killed when exiting process
