@@ -6,7 +6,7 @@ import CONFIG from './config'
 const {
     BASE,
     PUBLIC_PATH,
-    SERVER_BUNDLE_EXTERNALS,
+    SERVER_INCLUDE_IN_BUNDLE,
     SERVER_ENTRY,
     SERVER_OUTPUT,
 } = CONFIG
@@ -47,7 +47,7 @@ const serverBaseConfig: webpack.Configuration = {
         // treat deep imports as externals as well
         const moduleName = request.split('/')[0]
 
-        if (SERVER_BUNDLE_EXTERNALS.indexOf(moduleName) !== -1) {
+        if (SERVER_INCLUDE_IN_BUNDLE.indexOf(moduleName) !== -1) {
             (callback as any)()
         } else if (nodeModules.indexOf(moduleName) !== -1) {
             callback(null, 'commonjs ' + request)

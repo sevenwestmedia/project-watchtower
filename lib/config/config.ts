@@ -21,11 +21,11 @@ const defaultConfig: BuildConfig = {
     ],
     PUBLIC_PATH: '/assets/',
     PORT: 3000,
-    SERVER_BUNDLE_EXTERNALS: [
+    SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
+    SERVER_INCLUDE_IN_BUNDLE: [
         'swm-component-library',
         'project-watchtower',
     ],
-    SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
     SERVER_OUTPUT: path.resolve(root, 'build'),
     SERVER_PUBLIC_DIR: path.resolve(root, 'public'),
     STATIC_RESOURCE_NAMES: false,
