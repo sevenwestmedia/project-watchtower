@@ -8,7 +8,7 @@
   "scripts": {
     "clean": "npm run clean:lighthouse && rimraf lib/**/*.{js,map,d.ts}",
     "prepublish": "npm run clean && npm run lint && npm run test && npm run build",
-    "lint": "tslint lib/**/*.ts -e **/*.d.ts",
+    "lint": "tslint 'lib/**/*.ts' -e '**/*.d.ts'",
     "build": "tsc",
     "test:base": "npm run clean:lighthouse && jest --runInBand --forceExit --config jest.json",
     "test": "npm run test:base -- --silent",
