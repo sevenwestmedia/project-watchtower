@@ -78,7 +78,7 @@ export interface BuildConfig {
     PUBLIC_PATH: string
     
     /** modules which the server build includes in the bundle */
-    SERVER_BUNDLE_EXTERNALS: string[]
+    SERVER_INCLUDE_IN_BUNDLE: string[]
 
     /** entry file for the server if applicable */
     SERVER_ENTRY: string
@@ -123,7 +123,7 @@ Default configuration:
     ],
     PUBLIC_PATH: '/assets/',
     PORT: 3000,
-    SERVER_BUNDLE_EXTERNALS: [
+    SERVER_INCLUDE_IN_BUNDLE: [
         'swm-component-library',
         'project-watchtower',
     ],

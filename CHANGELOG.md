@@ -1,5 +1,9 @@
 # Changelog
 
+## vNext
+
+* **BREAKING** Rename `SERVER_BUNDLE_EXTERNALS` configuration to `SERVER_INCLUDE_IN_BUNDLE`
+
 ## v0.3.0 (2017-05-30)
 
 * Fix: Make sure process exits after command was executed

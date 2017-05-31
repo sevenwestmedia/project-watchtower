@@ -21,7 +21,7 @@ const defaultConfig: BuildConfig = {
     ],
     PUBLIC_PATH: '/assets/',
     PORT: 3000,
-    SERVER_BUNDLE_EXTERNALS: [
+    SERVER_INCLUDE_IN_BUNDLE: [
         'swm-component-library',
         'project-watchtower',
     ],
