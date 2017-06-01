@@ -5,16 +5,13 @@ import CONFIG from '../config/config'
 import { log, logError, prettyJson } from '../util/log'
 import { BuildMetrics } from './'
 import { runStatsOnServer } from './server'
+import { isBuildServer } from '../util/env'
 import { readFile } from '../util/fs'
 import { delay, formatTimeMs, timeout } from '../util/time'
 
 const { HAS_SERVER } = CONFIG
 
 export const runLighthouse = async (url: string) => {
-    const launcher = new ChromeLauncher({
-        port: 9222,
-        autoSelectChrome: true,
-    })
 
     let config: any
 
@@ -30,10 +27,21 @@ export const runLighthouse = async (url: string) => {
         return undefined
     }
 
-    try {
-        await launcher.isDebuggerReady()
-    } catch (_err) {
-        await launcher.run()
+    const onBuildServer = isBuildServer()
+
+    const launcher = onBuildServer
+        ? undefined
+        : new ChromeLauncher({
+            port: 9222,
+            autoSelectChrome: true,
+        })
+
+    if (launcher) {
+        try {
+            await launcher.isDebuggerReady()
+        } catch (_err) {
+            await launcher.run()
+        }
     }
 
     try {
@@ -41,7 +49,11 @@ export const runLighthouse = async (url: string) => {
             url,
             {
                 output: 'json',
-                port: 9222,
+                port: onBuildServer
+                    // provided by build environment, ref OPS-383
+                    ? Number(process.env.CHROME_REMOTE_DEBUGGING_PORT) || 9222
+                    : 9222,
+                skipAutolaunch: onBuildServer,
             },
             config,
         )
@@ -49,16 +61,22 @@ export const runLighthouse = async (url: string) => {
         // we have to wait a bit, otherwise we get a ECONNRESET error we can't catch
         await delay(2000)
 
-        // workaround for uncatcheable rimraf error on Windows when deleting the temporary folder
-        launcher.TMP_PROFILE_DIR = undefined
-
-        await launcher.kill()
+        if (launcher) {
+            // workaround for uncatcheable rimraf error on Windows
+            // when deleting the temporary folder
+            launcher.TMP_PROFILE_DIR = undefined
+            await launcher.kill()
+        }
 
         return results
     } catch (err) {
         logError('Could not run lighthouse!', err)
-        launcher.TMP_PROFILE_DIR = undefined
-        await launcher.kill()
+
+        if (launcher) {
+            launcher.TMP_PROFILE_DIR = undefined
+            await launcher.kill()
+        }
+
         return undefined
     }
 }

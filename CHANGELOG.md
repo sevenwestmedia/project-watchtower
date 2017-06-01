@@ -1,5 +1,9 @@
 # Changelog
 
+## vNext
+
+* The lighthouse stats now use a provided Chrome instance on build servers using the `CHROME_REMOTE_DEBUGGING_PORT` and `STATS_SERVER_ADDRESS` environment variables
+
 ## v0.3.1 (2017-05-31)
 
 * **BREAKING** Rename `SERVER_BUNDLE_EXTERNALS` configuration to `SERVER_INCLUDE_IN_BUNDLE`
