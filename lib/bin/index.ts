@@ -18,7 +18,7 @@ const commandArgs = args.slice(1)
 const exitOnError = (result: Promise<any>) => {
     result
         .catch((e) => {
-            logError(e)
+            logError(e || 'Error occurred, exiting...')
             process.exit(1)
         })
 }
