@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.3 (2017-06-02)
+
+* Fix failed webpack builds hanging on the build servers
+
 ## v0.3.2 (2017-06-02)
 
 * The lighthouse stats now use a provided Chrome instance on build servers using the `CHROME_REMOTE_DEBUGGING_PORT` and `STATS_SERVER_ADDRESS` environment variables
