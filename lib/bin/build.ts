@@ -4,6 +4,7 @@ import test from './test'
 import { ENVIRONMENTS, getWebpackConfig, TARGETS } from '../build/build'
 import clean from '../clean'
 import CONFIG from '../config/config'
+import { failPromisesLate } from '../util/async'
 import { webpackPromise } from '../util/webpack'
 import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
 
@@ -69,11 +70,13 @@ const build = async (...args: BuildParam[]) => {
         await cleanBin()
         await lint()
         await test('--silent')
-        return Promise.all(
+        // we have to fail promises late because otherwise the build servers would hang
+        // if we exit the process before all webpack builds are completed
+        return failPromisesLate(
             targets.map((target) => buildTarget(target, environment)),
         )
     } else {
-        return Promise.all(
+        return failPromisesLate(
             targets.map((target) => cleanAndBuild(target, environment)),
         )
     }
