@@ -3,6 +3,7 @@
 ## vNext
 
 * The lighthouse stats now use a provided Chrome instance on build servers using the `CHROME_REMOTE_DEBUGGING_PORT` and `STATS_SERVER_ADDRESS` environment variables
+* Fix: Fail webpack build if there are TypeScript errors
 
 ## v0.3.1 (2017-05-31)
 

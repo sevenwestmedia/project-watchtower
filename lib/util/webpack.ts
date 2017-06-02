@@ -26,7 +26,12 @@ export const webpackPromise = (config: webpack.Configuration) => (
                 reject(err)
             } else {
                 printWebpackStats(stats)
-                resolve()
+
+                if (stats.hasErrors()) {
+                    reject()
+                } else {
+                    resolve()
+                }
             }
         })
     })
