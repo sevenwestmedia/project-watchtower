@@ -1,130 +1,6 @@
-# API
+# JavaScript API
 
-## CLI
-
-Project Watchtower exposes the `project-watchtower` and `pwt` executables
-
-### build
-
-```
-pwt build [complete] [<target>] [<environment>]
-```
-
-* `complete`: Runs clean, lint and test before building
-* `target`: server, client
-* `environment`: dev, debug, prod
-
-Leaving the target out builds both server and client.
-
-Leaving the environment out builds for production by default.
-
-### clean
-
-```
-pwt clean [<glob> ...]
-```
-
-Cleans the default paths `SERVER_OUTPUT`, `CLIENT_OUTPUT` as well as all `.js` and `.maps` files in `/client`, `/server` and `/common`. You can pass in additional glob patterns to be cleaned.
-
-### coverage
-
-```
-pwt coverage [<jest option> ...]
-```
-
-### explore-bundle
-
-```
-pwt explore-bundle
-```
-
-Opens the `webpack-bundle-analyzer` for the client production bundle.
-
-### lint
-
-```
-pwt lint [tslint] [sass-lint] [<glob> ...]
-```
-
-Runs `tslint` and/or `sass-lint` against the project.
-
-*   `tslint`: Only run tslint
-*   `sass-lint`: Only run sass-lint
-
-By default all `.ts`/`.tsx` and all `.scss` files are checked. You can supply custom glob patterns instead. Note that they have to contain either `.ts` or `.scss` to be mapped to the correct linter if both linters are run in the same command.
-
-### start
-
-```
-pwt start [watch] [fast] [prod] [debug]
-```
-
-*   `watch`: Enable watch mode and rebuild client after changes
-*   `fast`: Disable TypeScript type checking for faster incremental builds
-*   `prod`: Set `NODE_ENV` to `"production"`
-*   `debug`: Start node process in debug mode
-
-### stats
-
-```
-pwt stats
-```
-
-Measures build metrics and saves them to `build-stats.csv`
-
-Example:
-
-```
-bundle_size_total,bundle_size_main,bundle_size_vendor,bundle_size_css,home_ssr_document_size,home_ssr_loadtime,home_first_meaningful_paint,home_speed_index,home_time_to_interactive
-28.6,0.2,28.4,0.1,0.0,2,270,284,275
-```
-
-In addition the stats are output on the console for TeamCity:
-
-```
-##teamcity[buildStatisticValue key='${key}' value='${value}']
-```
-
-Stats:
-
-*   `bundle_size_total`: Total size of all JS bundles (KB)
-*   `bundle_size_main`: Size of the main JS bundle (KB)
-*   `bundle_size_vendor`: Size of the vendor JS bundle (KB)
-*   `bundle_size_css`: Size of the CSS bundle (KB)
-*   `<PAGE>_ssr_document_size`: Size of the server-side rendered homepage document (KB)
-*   `<PAGE>_ssr_loadtime`: Average load time of the server-side rendered homepage document (ms)
-*   `<PAGE>_first_meaningful_paint`: First meaningful paint through lighthouse (ms)
-*   `<PAGE>_speed_index`: Lighthouse speed index (lower is better)
-*   `<PAGE>_time_to_interactive`: Time to interactive through lighthouse (ms)
-
-For the lighthouse values to be generated, Google Chrome has to be installed on the machine running the tests.
-If Google Chrome is not installed, the lighthouse stats will not be included.
-
-Stats generation can be customised through configuration variables:
-
-* `STATS_PAGES` defines the pages that should be measured, default `{ home: '/' }` will generate stats like `home_ssr_document_size`
-* `STATS_ENV` defines additional environment variables for the server so it can set up a stable and predictable environment to measure the stats
-
-### test
-
-```
-pwt test [debug] [<jest option> ...]
-```
-
-*   `debug`: Runs the tests in debugging mode to use breakpoints. **This is incompatible with ts-jest so all TypeScript test files will have to be compiled to JavaScript first!**
-
-### watch
-
-```
-pwt watch [server] [fast]
-```
-
-Builds the server in dev mode, then watches and rebuilds the client
-
-* `server`: Also watches and rebuilds the server
-* `fast`: Disable TypeScript type checking for faster incremental builds
-
-### Programmatic Usage
+## Programmatic Usage of CLI commands
 
 All CLI commands are available in `project-watchtower/lib/bin`. They take their parameters as strings:
 
@@ -134,23 +10,67 @@ import build from 'project-watchtower/lib/bin/build'
 build('server', 'prod')
 ```
 
-## JavaScript
+## Functions, Config and Middleware
 
 All functional areas are available as a top-level import from the `project-watchtower` module. However, deep imports are preferred, which is especially important on the client where we don't want unnecessary code bundled up.
 
-`project-watchtower/lib/build/build`
+The webpack build bundles project-watchtower itself into the server bundle, so it is not required to be present in `node_modules` to run the server. Many functions that are important for development, however, depend on external dependencies that are not included in the webpack bundle and would throw an error if imported statically during production. Components and functions in `/lib/runtime` are safe to statically import in production builds, even if project-watchtower is installed as a `devDependency`, because they have no external dependencies other than the ones listed as required for production in the README. All other functions have to be imported dynamically for development only:
+
+```ts
+// safe to statically import
+import { getAssetLocations } from 'project-watchtower/lib/runtime/server'
+
+// only safe to use during development
+if (process.env.START_WATCH_MODE) {
+    const { getHotReloadMiddleware } = require('project-watchtower/lib/server')
+    app.use(getHotReloadMiddleware())
+}
+```
+
+### Safe to import in production
+
+`project-watchtower/lib/runtime/client`
+
+```ts
+cssHotReload()
+```
+
+`project-watchtower/lib/runtime/config`
+
+```ts
+default CONFIG // application configuration
+```
+
+`project-watchtower/lib/runtime/server`
+
+```ts
+getAssetLocations(): Assets
+
+getCssAssetHtml(): string
+
+getJsAssetHtml(): string
+
+addAssetsToHtml(html: string): string
+
+createServer(
+    middlewareHook?: (app: express.Express) => void,
+    callback?: () => void,
+) => express.Express
+
+getDefaultHtmlMiddleware() => express.RequestHandler
+```
+
+### Import for dev only
+
+`project-watchtower/lib/build`
 
 ```ts
 getWebpackConfig(
     target: BuildTarget,
     environment: BuildEnvironment
 ): webpack.Configuration
-```
 
-`project-watchtower/lib/build/merge`
-
-```ts
-default merge(...configs: webpack.Configuration[]) => webpack.Configuration[]
+merge(...configs: webpack.Configuration[]) => webpack.Configuration[]
 ```
 
 `project-watchtower/lib/clean`
@@ -159,10 +79,19 @@ default merge(...configs: webpack.Configuration[]) => webpack.Configuration[]
 default clean(paths: string | string[]) => Promise<any>
 ```
 
-`project-watchtower/lib/client/dev`
+`project-watchtower/lib/config`
 
 ```ts
-cssHotReload()
+base: webpack.Configuration
+clientBase: webpack.Configuration
+clientDev: webpack.Configuration
+clientDebug: webpack.Configuration
+clientProd: webpack.Configuration
+serverDev: webpack.Configuration
+serverDebug: webpack.Configuration
+serverProd: webpack.Configuration
+devBase: webpack.Configuration
+prodBase: webpack.Configuration
 ```
 
 `project-watchtower/lib/lint`
@@ -173,35 +102,12 @@ tslint(...paths: string[]): Promise<any>
 sassLint(...paths: string[]): Promise<any>
 ```
 
-`project-watchtower/lib/server/assets`
-
-```ts
-getAssetLocations(): Assets
-
-getCssAssetHtml(): string
-
-getJsAssetHtml(): string
-
-addAssetsToHtml(html: string): string
-```
-
-`project-watchtower/lib/server/dev`
+`project-watchtower/lib/server`
 
 ```ts
 getHotReloadMiddleware() => express.RequestHandler[]
 
-getDefaultHtmlMiddleware() => express.RequestHandler
-
 openBrowser(port?: number)
-```
-
-`project-watchtower/lib/server/server`
-
-```ts
-createServer(
-    middlewareHook?: (app: express.Express) => void,
-    callback?: () => void,
-) => express.Express
 ```
 
 `project-watchtower/lib/stats`

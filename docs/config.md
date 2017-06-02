@@ -1,4 +1,4 @@
-# Configuration
+# Configuration and Structure
 
 ## Default project structure
 

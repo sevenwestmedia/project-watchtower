@@ -1,6 +1,6 @@
 import tslint from '../lint/tslint'
 import sassLint from '../lint/sass-lint'
-import { log } from '../util/log'
+import { log } from '../runtime/util/log'
 
 /**
  * Runs TSLint and/or SASS-Lint

@@ -1,7 +1,7 @@
 import * as path from 'path'
 import * as webpack from 'webpack'
 import { CheckerPlugin } from 'awesome-typescript-loader'
-import CONFIG from './config'
+import CONFIG from '../runtime/config/config'
 
 const { BASE, MODULE_PATHS, ASSETS_PATH_PREFIX } = CONFIG
 const disableTypeCheck = process.env.START_FAST_MODE === 'true'

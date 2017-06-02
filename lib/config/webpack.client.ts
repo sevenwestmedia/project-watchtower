@@ -6,8 +6,8 @@ import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as AssetsPlugin from 'assets-webpack-plugin'
 import * as HtmlPlugin from 'html-webpack-plugin'
 import * as DotenvPlugin from 'webpack-dotenv-plugin'
-import CONFIG from './config'
-import { updateAssetLocations } from '../server/assets'
+import CONFIG from '../runtime/config/config'
+import { updateAssetLocations } from '../runtime/server/assets'
 import { Assets } from '../types'
 
 const {

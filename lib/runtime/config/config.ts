@@ -1,7 +1,7 @@
 import * as path from 'path'
 import { dynamicRequire, existsSync } from '../util/fs'
 import { logError } from '../util/log'
-import { BuildConfig, BuildConfigOverride } from '../types'
+import { BuildConfig, BuildConfigOverride } from '../../types'
 
 const root = process.cwd()
 

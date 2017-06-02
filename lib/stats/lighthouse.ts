@@ -1,13 +1,13 @@
 import * as path from 'path'
 import * as Lighthouse from 'lighthouse'
 import { ChromeLauncher } from 'lighthouse/lighthouse-cli/chrome-launcher'
-import CONFIG from '../config/config'
-import { log, logError, prettyJson } from '../util/log'
+import CONFIG from '../runtime/config/config'
+import { log, logError, prettyJson } from '../runtime/util/log'
 import { BuildMetrics } from './'
 import { runStatsOnServer } from './server'
-import { isBuildServer } from '../util/env'
-import { readFile } from '../util/fs'
-import { delay, formatTimeMs, timeout } from '../util/time'
+import { isBuildServer } from '../runtime/util/env'
+import { readFile } from '../runtime/util/fs'
+import { delay, formatTimeMs, timeout } from '../runtime/util/time'
 
 const { HAS_SERVER } = CONFIG
 

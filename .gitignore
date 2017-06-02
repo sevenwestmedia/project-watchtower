@@ -166,6 +166,8 @@ server/**/*.js
 server/**/*.d.ts
 client/**/*.js
 client/**/*.d.ts
+test/**/*.js
+test/**/*.d.ts
 build/**
 public/assets
 assets.json

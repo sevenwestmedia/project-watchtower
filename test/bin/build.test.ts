@@ -2,8 +2,8 @@ import * as fs from 'fs'
 import * as path from 'path'
 import clean from '../../lib/bin/clean'
 import build from '../../lib/bin/build'
-import CONFIG from '../../lib/config/config'
-import { getAssetLocations } from '../../lib/server/assets'
+import CONFIG from '../../lib/runtime/config/config'
+import { getAssetLocations } from '../../lib/runtime/server/assets'
 
 // Increase test timeout because builds might take a while
 (jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000

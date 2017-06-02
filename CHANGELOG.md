@@ -3,6 +3,12 @@
 ## vNext
 
 * **BREAKING** Upgrade to jest 20
+* **BREAKING** Refactor components into `/lib/runtime` that can be safely imported when project-watchtower is installed as a `devDependency`
+    * `/lib/client/dev` -> `/lib/runtime/client`
+    * `/lib/config/config` -> `/lib/runtime/config`
+    * `/lib/server/assets` -> `/lib/runtime/server`
+    * `/lib/server/dev getDefaultHtmlMiddleware()` -> `/lib/runtime/server`
+    * `/lib/server/server` -> `/lib/runtime/server`
 
 ## v0.3.3 (2017-06-02)
 

@@ -1,6 +1,6 @@
 import * as path from 'path'
-import { formatFileSize, readFile, getFileSize, writeFile } from '../../lib/util/fs'
-import { expectPromiseToFail } from '../test-helpers'
+import { formatFileSize, readFile, getFileSize, writeFile } from '../../../lib/runtime/util/fs'
+import { expectPromiseToFail } from '../../test-helpers'
 
 const packageJson = path.resolve(process.cwd(), 'package.json')
 const buildStatsFile = path.resolve(process.cwd(), 'build-stats.csv')

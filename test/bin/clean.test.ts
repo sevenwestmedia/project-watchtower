@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import CONFIG from '../../lib/config/config'
+import CONFIG from '../../lib/runtime/config/config'
 import clean from '../../lib/bin/clean'
 
 const { CLIENT_OUTPUT } = CONFIG

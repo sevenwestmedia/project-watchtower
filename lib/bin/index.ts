@@ -7,7 +7,7 @@ import stats from './stats'
 import test from './test'
 import watch from './watch'
 
-import { log, logError } from '../util/log'
+import { log, logError } from '../runtime/util/log'
 import { BuildParam, StartParam } from '../types'
 
 const args = process.argv.slice(2)
