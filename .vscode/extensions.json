@@ -8,7 +8,6 @@
         "EditorConfig.EditorConfig",
         "msjsdiag.debugger-for-chrome",
         "robinbentley.sass-indented",
-        "christian-kohler.path-intellisense",
         "glen-84.sass-lint"
     ]
 }
