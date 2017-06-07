@@ -1,6 +1,6 @@
 # Changelog
 
-## vNext
+## v0.4.0 (2017-06-07)
 
 * **BREAKING** Upgrade to jest 20
 * **BREAKING** Refactor components into `/lib/runtime` that can be safely imported when project-watchtower is installed as a `devDependency`
