@@ -1,9 +1,9 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import CONFIG from '../config/config'
-import { log, logError, prettyJson } from '../util/log'
+import CONFIG from '../runtime/config/config'
+import { log, logError, prettyJson } from '../runtime/util/log'
 import { BuildMetrics } from './'
-import { getFileSize, readFile, formatFileSize } from '../util/fs'
+import { getFileSize, readFile, formatFileSize } from '../runtime/util/fs'
 
 const { BASE, SERVER_PUBLIC_DIR } = CONFIG
 const assetFilePath = path.resolve(BASE, 'assets.json')

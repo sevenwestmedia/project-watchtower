@@ -1,8 +1,8 @@
 import * as path from 'path'
 import { ChildProcess, ForkOptions } from 'child_process'
 import * as dotenv from 'dotenv'
-import CONFIG from '../config/config'
-import { forkPromise } from '../util/process'
+import CONFIG from '../runtime/config/config'
+import { forkPromise } from '../runtime/util/process'
 import { StartParam } from '../types'
 
 const { HAS_SERVER, SERVER_OUTPUT } = CONFIG

@@ -1,9 +1,9 @@
-import CONFIG from '../config/config'
-import { log, logError, prettyJson } from '../util/log'
+import CONFIG from '../runtime/config/config'
+import { log, logError, prettyJson } from '../runtime/util/log'
 import { BuildMetrics } from './'
-import { formatFileSize } from '../util/fs'
-import { formatTimeMs, timeout } from '../util/time'
-import { getSequenceAverage } from '../util/math'
+import { formatFileSize } from '../runtime/util/fs'
+import { formatTimeMs, timeout } from '../runtime/util/time'
+import { getSequenceAverage } from '../runtime/util/math'
 import { runStatsOnServer, loadSSRPage } from './server'
 
 const { HAS_SERVER } = CONFIG

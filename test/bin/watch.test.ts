@@ -1,5 +1,5 @@
 import watch from '../../lib/bin/watch'
-import { delay } from '../../lib/util/time'
+import { delay } from '../../lib/runtime/util/time'
 import { getTestPort } from '../test-helpers'
 
 // Increase test timeout because builds might take a while

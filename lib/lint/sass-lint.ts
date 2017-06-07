@@ -1,7 +1,7 @@
 import * as path from 'path'
 import { ChildProcess } from 'child_process'
-import CONFIG from '../config/config'
-import { forkPromise } from '../util/process'
+import CONFIG from '../runtime/config/config'
+import { forkPromise } from '../runtime/util/process'
 
 const { LINT_EXCLUDE } = CONFIG
 

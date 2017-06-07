@@ -1,8 +1,8 @@
 import * as path from 'path'
-import { expectPromiseToFail } from '../test-helpers'
-import { spawnPromise, forkPromise } from '../../lib/util/process'
+import { expectPromiseToFail } from '../../test-helpers'
+import { spawnPromise, forkPromise } from '../../../lib/runtime/util/process'
 
-const processExit = path.resolve(__dirname, '..', '__test-data__', 'process-exit.ts')
+const processExit = path.resolve(__dirname, '..', '..', '__test-data__', 'process-exit.ts')
 
 describe('util/process', () => {
 

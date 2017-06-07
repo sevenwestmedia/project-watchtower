@@ -1,11 +1,11 @@
-import clean from '../../lib/bin/clean'
+import clean from '../../../lib/bin/clean'
 import {
     updateAssetLocations,
     getAssetLocations,
     getCssAssetHtml,
     getJsAssetHtml,
     addAssetsToHtml,
-} from '../../lib/server/assets'
+} from '../../../lib/runtime/server/assets'
 
 const assets = {
     main: {

@@ -1,5 +1,5 @@
-import { createServer } from './server'
-import { log } from '../util/log'
+import { createServer } from '../runtime/server/server'
+import { log } from '../runtime/util/log'
 
 log('Starting Project Watchtower internal server...')
 

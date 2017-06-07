@@ -1,4 +1,4 @@
-import { average, getSequenceAverage } from '../../lib/util/math'
+import { average, getSequenceAverage } from '../../../lib/runtime/util/math'
 
 describe('util/math', () => {
 

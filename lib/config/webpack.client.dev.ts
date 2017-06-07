@@ -4,7 +4,7 @@ import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import baseConfig from './webpack.base'
 import clientBaseConfig from './webpack.client'
 import devConfig from './webpack.client.dev'
-import CONFIG from './config'
+import CONFIG from '../runtime/config/config'
 
 const { ASSETS_PATH_PREFIX } = CONFIG
 

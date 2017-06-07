@@ -2,8 +2,8 @@ import * as path from 'path'
 import bundleSize from './bundle-size'
 import ssrStats from './ssr-stats'
 import lighthouseStats from './lighthouse'
-import { writeFile } from '../util/fs'
-import { log } from '../util/log'
+import { writeFile } from '../runtime/util/fs'
+import { log } from '../runtime/util/log'
 
 const root = process.cwd()
 

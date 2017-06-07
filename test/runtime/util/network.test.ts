@@ -3,8 +3,8 @@ import {
     waitForConnection,
     checkPortAvailability,
     findFreePort,
-} from '../../lib/util/network'
-import { expectPromiseToFail, getTestPort } from '../test-helpers'
+} from '../../../lib/runtime/util/network'
+import { expectPromiseToFail, getTestPort } from '../../test-helpers'
 
 describe('util/network', () => {
 

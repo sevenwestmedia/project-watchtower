@@ -14,7 +14,24 @@ A unified basis for web applications.
 
 Detailed documentation available in the [docs](./docs) folder:
 
-* [API documentation](./docs/api.md)
-* [Configuration](./docs/config.md)
-* [Building and Running](./docs/build.md)
+* [CLI Commands](./docs/cli.md)
+* [JavaScript API](./docs/api.md)
+* [Configuration and Structure](./docs/config.md)
+* [Building, Running and Debugging](./docs/build.md)
 * [Developing Project Watchtower](./docs/development.md)
+
+## Peer dependencies
+
+### For production
+
+* express
+* react
+* react-dom
+* react-router-dom
+* source-map-support
+
+### For development
+
+* enzyme
+* react-addons-test-utils
+* typescript

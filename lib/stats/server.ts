@@ -1,13 +1,13 @@
 import * as path from 'path'
 import * as http from 'http'
 import * as dotenv from 'dotenv'
-import CONFIG from '../config/config'
-import { getPort } from '../server/server'
-import { isBuildServer } from '../util/env'
-import { waitForConnection, findFreePort } from '../util/network'
-import { forkPromise } from '../util/process'
-import { log } from '../util/log'
-import { getTimeMs, timeout } from '../util/time'
+import CONFIG from '../runtime/config/config'
+import { getPort } from '../runtime/server/server'
+import { isBuildServer } from '../runtime/util/env'
+import { waitForConnection, findFreePort } from '../runtime/util/network'
+import { forkPromise } from '../runtime/util/process'
+import { log } from '../runtime/util/log'
+import { getTimeMs, timeout } from '../runtime/util/time'
 
 dotenv.config()
 

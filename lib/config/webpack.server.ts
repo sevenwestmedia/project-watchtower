@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as webpack from 'webpack'
-import CONFIG from './config'
+import CONFIG from '../runtime/config/config'
 
 const {
     BASE,

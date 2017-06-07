@@ -1,4 +1,4 @@
-import { log, logError, prettyJson } from '../../lib/util/log'
+import { log, logError, prettyJson } from '../../../lib/runtime/util/log'
 
 describe('util/log', () => {
 

@@ -1,7 +1,7 @@
 import clean from '../../lib/bin/clean'
 import build from '../../lib/bin/build'
 import start from '../../lib/bin/start'
-import { delay } from '../../lib/util/time'
+import { delay } from '../../lib/runtime/util/time'
 import { getTestPort } from '../test-helpers'
 
 // Increase test timeout because builds might take a while

@@ -1,4 +1,4 @@
-# Webpack build process
+# Building, Running and Debugging
 
 ## Building
 
@@ -14,13 +14,11 @@ Example:
 
 ```ts
 import { merge } from 'project-watchtower/lib/build'
-import baseConfig from 'project-watchtower/lib/config/webpack.base'
-import clientConfig from 'project-watchtower/lib/config/webpack.client'
-import clientDevConfig from 'project-watchtower/lib/config/webpack.client.dev'
+import { base, clientBase, clientDev } from 'project-watchtower/lib/config'
 
 // either extend one of the complete configurations
 const extendedConfig = merge(
-    clientDevConfig,
+    clientDev,
     {
         // ...
     },
@@ -28,8 +26,8 @@ const extendedConfig = merge(
 
 // or build your own with multiple building blocks
 const config = merge(
-    baseConfig,
-    clientConfig,
+    base,
+    clientBase,
     {
         // ...
     },
@@ -51,19 +49,21 @@ const customConfig: BuildConfigOverride = {
 export default customConfig
 ```
 
-The complete default configuration is located in `project-watchtower/lib/config/config`
+If you provide a `/config/config.ts` in TypeScript, make sure it is transpiled to JavaScript before any `pwt` command is run or any of Project Watchtower's middlewares are used. This can be done in the `prepare` script in your project's `package.json`. Project Watchtower will throw an error if it detects a TypeScript configuration file, but not the transpiled JavaScript artifact.
+
+The complete default configuration is located in `project-watchtower/lib/runtime/config/config.ts`
 
 See the [config documentation](./config.md) for an overview of the default project structure and configuration details.
 
 ## Running
 
-    pwt start [watch] [fast] [debug]
+    pwt start [watch] [fast] [debug] [prod]
 
 Starts the server, using the environment variables defined in `.env`
 
 ### Environment Variables
 
-*   `NODE_ENV`: set to `"production"` or `"development` depending on the `prod` flag 
+*   `NODE_ENV`: set to `"production"` or `"development` depending on the `prod` flag - in the webpack bundles the values are hardcoded depending on which mode they were built in, so this is only relevant for third-party dependencies.
 *   `START_WATCH_MODE`: set to `"true"` by the `watch` flag
 *   `START_FAST_MODE`: set to `"true"` by the `fast` flag
 *   `START_DEBUG_MODE`: set to `"true"` by the `debug` flag
@@ -78,13 +78,6 @@ If you want to use additional `process.env` variables in the **client** build, m
 
 The values defined here are replaced in the client build. The server build still accesses its actual `process.env` object, only `process.env.NODE_ENV` is being replaced there.
 Values that are present in the actual runtime environment at build time will _not_ be overridden by the ones defined in `.env` / `.env.default`. However, it is necessary to define all the environment variables in the `.env.default` file that are used in the client code.
-
-#### Environment variables used for build stats
-
-*   `CHROME_REMOTE_DEBUGGING_PORT`: Port that the lighthouse stats try to connect to a Chrome instance
-*   `JENKINS_URL`: Used to detect a Jenkins build server
-*   `STATS_SERVER_ADDRESS`: Host name or IP address of container that hosts the Chrome installation
-*   `TEAMCITY_VERSION`: Used to detect a TeamCity build server
 
 ## Debugging
 

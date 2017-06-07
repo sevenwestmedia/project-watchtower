@@ -1,4 +1,4 @@
-import { findFreePort } from '../lib/util/network'
+import { findFreePort } from '../lib/runtime/util/network'
 
 export const expectPromiseToFail = (promise: Promise<any>) => (
     new Promise((resolve, reject) => {

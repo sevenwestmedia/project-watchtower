@@ -2,8 +2,8 @@
  * @testEnvironment jsdom
  */
 
-import { cssHotReload } from '../../lib/client/dev'
-import { delay } from '../../lib/util/time'
+import { cssHotReload } from '../../../lib/runtime/client/dev'
+import { delay } from '../../../lib/runtime/util/time'
 
 describe('lib/client/dev', () => {
 
