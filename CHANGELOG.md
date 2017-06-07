@@ -1,5 +1,9 @@
 # Changelog
 
+## vNext
+
+* **BREAKING** Upgrade to jest 20
+
 ## v0.3.3 (2017-06-02)
 
 * Fix failed webpack builds hanging on the build servers
