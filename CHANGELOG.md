@@ -1,5 +1,16 @@
 # Changelog
 
+## vNext
+
+* **BREAKING** Default configuration changes (SWM-2857)
+    * CLIENT_OUTPUT `/public/assets` -> `/build/client`
+    * SERVER_OUTPUT `/build` -> `build/server`
+    * PUBLIC_PATH `/assets` -> `/`
+* Applications with a server can now run client-only
+    * Added `pwt start client`
+    * Added `pwt watch client`
+* Added `getAbsoluteAssetPath()`
+
 ## v0.4.0 (2017-06-07)
 
 * **BREAKING** Upgrade to jest 20

@@ -10,7 +10,7 @@
     "clean": "npm run clean:lighthouse && rimraf lib/**/*.{js,map,d.ts}",
     "lint": "tslint 'lib/**/*.ts' -e '**/*.d.ts'",
     "build": "tsc",
-    "build:complete": "npm run clean && npm run lint && npm run test && npm run build",
+    "build:complete": "npm run clean && npm run lint && npm run test:verbose && npm run build",
     "test:base": "npm run clean:lighthouse && jest --runInBand --forceExit --config jest.json",
     "test": "npm run test:base -- --silent",
     "test:verbose": "npm run test:base -- --verbose",

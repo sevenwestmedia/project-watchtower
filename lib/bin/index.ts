@@ -8,7 +8,7 @@ import test from './test'
 import watch from './watch'
 
 import { log, logError } from '../runtime/util/log'
-import { BuildParam, StartParam } from '../types'
+import { BuildParam, StartParam, WatchParam } from '../types'
 
 const args = process.argv.slice(2)
 
@@ -66,7 +66,7 @@ switch (command) {
         break
 
     case 'watch':
-        exitOnError(watch(...commandArgs))
+        exitOnError(watch(...commandArgs as WatchParam[]))
         break
 
     default:

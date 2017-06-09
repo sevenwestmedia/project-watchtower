@@ -160,9 +160,7 @@ webpack-assets.json
 ### Generated files ###
 dist/
 .idea/
-public/assets/
 assets.json
 build-stats.csv
 /build/
 *.js
-

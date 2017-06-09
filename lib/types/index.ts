@@ -93,3 +93,9 @@ export type StartParam =
     | 'watch'
     | 'prod'
     | 'debug'
+    | 'client'
+
+export type WatchParam =
+    | 'server'
+    | 'fast'
+    | 'client'

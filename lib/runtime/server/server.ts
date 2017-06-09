@@ -7,7 +7,7 @@ import { log, logError } from '../util/log'
 import CONFIG from '../config/config'
 
 const isProduction = process.env.NODE_ENV === 'production'
-const { SERVER_PUBLIC_DIR, PORT } = CONFIG
+const { CLIENT_OUTPUT, PORT, SERVER_PUBLIC_DIR } = CONFIG
 
 export const getPort = (fallbackPort?: number) => (
     parseInt(process.env.PORT || fallbackPort || PORT, 10)
@@ -24,6 +24,17 @@ export const isFastMode = () => (
 export const expressNoop: express.RequestHandler = (_res, _req, next) => next()
 
 export const getDefaultHtmlMiddleware = (logNotFound = false) => {
+
+    // on production we just serve the generated index.html
+    if (isProduction) {
+        const indexPath = path.resolve(CLIENT_OUTPUT, 'index.html')
+        const middleware: express.RequestHandler = (_req, res) => {
+            res.status(200).sendFile(indexPath)
+        }
+        return middleware
+    }
+
+    // for development we grab the source index.html and add the assets
     let indexContent: string
 
     if (SERVER_PUBLIC_DIR) {
@@ -36,6 +47,8 @@ export const getDefaultHtmlMiddleware = (logNotFound = false) => {
             }
             return expressNoop
         }
+    } else {
+        return expressNoop
     }
 
     const middleware: express.RequestHandler = (_req, res) => {
@@ -67,6 +80,10 @@ export const createServer: CreateServerType = (
         app.use(getHotReloadMiddleware())
     }
 
+    app.use(express.static(CLIENT_OUTPUT, {
+        index: false,
+    }))
+
     if (SERVER_PUBLIC_DIR) {
         app.use(express.static(SERVER_PUBLIC_DIR, {
             index: false,
@@ -77,6 +94,8 @@ export const createServer: CreateServerType = (
         middlewareHook(app)
     }
 
+    // if the server does not use server-side rendering, just respond with index.html
+    // for each request not handled in other middlewares
     app.get('*', getDefaultHtmlMiddleware())
 
     const listen = (usePort: number) => {
