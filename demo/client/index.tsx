@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { cssHotReload } from 'project-watchtower/lib/client/dev'
+import { cssHotReload } from 'project-watchtower/lib/runtime/client'
 
 const render = () => {
     const App = require('../common/App').default
