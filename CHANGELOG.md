@@ -1,6 +1,6 @@
 # Changelog
 
-## vNext
+## v0.5.0 (2017-06-13)
 
 * **BREAKING** Default configuration changes (SWM-2857)
     * CLIENT_OUTPUT `/public/assets` -> `/build/client`
