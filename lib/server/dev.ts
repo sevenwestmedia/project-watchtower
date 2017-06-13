@@ -21,6 +21,9 @@ export const getHotReloadMiddleware: HotReloadMiddleware = () => {
         {
             publicPath: PUBLIC_PATH,
             noInfo: true,
+            // do not serve index.html on / route
+            // https://github.com/webpack/webpack-dev-middleware/issues/153
+            index: 'foobar',
             stats: {
                 ...webpackStatsConfig,
                 assets: false,
