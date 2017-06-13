@@ -1,3 +1,7 @@
+import CONFIG from '../../../lib/runtime/config/config'
+CONFIG.PUBLIC_PATH = '/baz/'
+
+import * as path from 'path'
 import clean from '../../../lib/bin/clean'
 import {
     updateAssetLocations,
@@ -5,6 +9,7 @@ import {
     getCssAssetHtml,
     getJsAssetHtml,
     addAssetsToHtml,
+    getAbsoluteAssetPath,
 } from '../../../lib/runtime/server/assets'
 
 const assets = {
@@ -22,11 +27,11 @@ describe('server/assets initial', () => {
         await clean()
         expect(getAssetLocations()).toEqual({
             main: {
-                js: '/assets/static/js/main.js',
-                css: '/assets/static/css/main.css',
+                js: '/baz/static/js/main.js',
+                css: '/baz/static/css/main.css',
             },
             vendor: {
-                js: '/assets/static/js/vendor.js',
+                js: '/baz/static/js/vendor.js',
             },
         })
     })
@@ -90,6 +95,11 @@ describe('server/assets', () => {
 
         expect(count(html, '<link')).toBe(1)
         expect(count(html, '<script')).toBe(2)
+    })
+
+    it('getAbsoluteAssetPath', () => {
+        const assetPath = path.resolve(CONFIG.CLIENT_OUTPUT, 'foo/bar')
+        expect(getAbsoluteAssetPath('/baz/foo/bar')).toBe(assetPath)
     })
 
 })

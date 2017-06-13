@@ -33,11 +33,13 @@ const start = (...args: StartParam[]): Promise<ChildProcess> => {
 
     process.env.NODE_ENV = (args.indexOf('prod') !== -1)
         ? 'production'
-        : 'development'
+        : process.env.NODE_ENV || 'development'
 
-    const serverPath = HAS_SERVER
-        ? path.resolve(SERVER_OUTPUT, 'server.js')
-        : path.resolve(__dirname, '..', 'server', 'start.js')
+    const clientMode = !HAS_SERVER || (args.indexOf('client') !== -1)
+
+    const serverPath = clientMode
+        ? path.resolve(__dirname, '..', 'server', 'start.js')
+        : path.resolve(SERVER_OUTPUT, 'server.js')
 
     dotenv.config()
 

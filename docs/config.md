@@ -14,28 +14,30 @@ See the [build documentation](./build.md) for details on how to customise the pr
 * client
     * index.tsx: Client entry file
     * polyfills.ts: Polyfills (optional)
+* public: Public directory for assets that aren't bundled with the application
+    * index.html: HTML template for client-only mode
 * server
     * start.ts: Server entry file
+* .env: Environment variables
+* .env.default: Definition of environment variables
 
 ### Output locations
 
-* build: Server build output directory
+* build/client: Client build output directory
+    * static
+        * js
+            * main.js (hashed in production build)
+            * vendor.js (hashed in production build)
+        * css
+            * main.css (hashed in production build)
+        * media
+        * fonts
+* build/server: Server build output directory
     * *server.js*: Main file generated for server
     * ...
-* public
-    * assets: Client build output directory
-        * static
-            * js
-                * main.js (hashed in production build)
-                * vendor.js (hashed in production build)
-            * css
-                * main.css (hashed in production build)
-            * media
-            * fonts
+    * index.html
 * assets.json: Mapping to the location of the generated assets
 * build-stats.csv: Generated build metrics
-* .env: Environment variables
-* .env.default: Definition of environment variables
 
 ## Override default configuration
 
@@ -111,7 +113,7 @@ Default configuration:
     ASSETS_PATH_PREFIX: 'static/',
     BASE: root,
     CLIENT_ENTRY: path.resolve(root, 'client', 'index.tsx'),
-    CLIENT_OUTPUT: path.resolve(root, 'public', 'assets'),
+    CLIENT_OUTPUT: path.resolve(root, 'build', 'client'),
     CLIENT_POLYFILLS: path.resolve(root, 'client', 'polyfills.ts'),
     CSS_AUTOPREFIXER: ['last 2 versions'],
     HAS_SERVER: true,
@@ -121,14 +123,14 @@ Default configuration:
         path.resolve(root, 'node_modules'),
         path.resolve(root, 'common'),
     ],
-    PUBLIC_PATH: '/assets/',
+    PUBLIC_PATH: '/',
     PORT: 3000,
     SERVER_INCLUDE_IN_BUNDLE: [
         'swm-component-library',
         'project-watchtower',
     ],
     SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
-    SERVER_OUTPUT: path.resolve(root, 'build'),
+    SERVER_OUTPUT: path.resolve(root, 'build', 'server'),
     SERVER_PUBLIC_DIR: path.resolve(root, 'public'),
     STATIC_RESOURCE_NAMES: false,
     STATS_ENV: {},

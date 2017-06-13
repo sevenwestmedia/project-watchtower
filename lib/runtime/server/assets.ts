@@ -3,10 +3,9 @@ import * as path from 'path'
 import CONFIG from '../config/config'
 import { Assets } from '../../types'
 
-const root = process.cwd()
-const assetsFile = path.resolve(root, 'assets.json')
+const { ASSETS_PATH_PREFIX, BASE, CLIENT_OUTPUT, PUBLIC_PATH } = CONFIG
+const assetsFile = path.resolve(BASE, 'assets.json')
 const watchMode = process.env.START_WATCH_MODE === 'true'
-const { PUBLIC_PATH, ASSETS_PATH_PREFIX } = CONFIG
 
 let assets: Assets = {
     main: {
@@ -77,4 +76,13 @@ export const addAssetsToHtml = (html: string) => {
         )
     }
     return modifiedHtml
+}
+
+export const getAbsoluteAssetPath = (asset: string) => {
+    let relativeAsset = asset.slice(PUBLIC_PATH.length)
+    if (relativeAsset[0] === '/') {
+        relativeAsset = relativeAsset.slice(1)
+    }
+
+    return path.resolve(CLIENT_OUTPUT, relativeAsset)
 }

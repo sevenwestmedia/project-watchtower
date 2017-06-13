@@ -52,6 +52,8 @@ getJsAssetHtml(): string
 
 addAssetsToHtml(html: string): string
 
+getAbsoluteAssetPath(asset: string): string
+
 createServer(
     middlewareHook?: (app: express.Express) => void,
     callback?: () => void,
