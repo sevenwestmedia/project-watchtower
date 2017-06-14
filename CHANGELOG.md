@@ -1,5 +1,9 @@
 # Changelog
 
+## vNext
+
+* Fix: `getHotReloadMiddleware()` no longer serves `public/index.html` on / route if it exists
+
 ## v0.5.0 (2017-06-13)
 
 * **BREAKING** Default configuration changes (SWM-2857)
