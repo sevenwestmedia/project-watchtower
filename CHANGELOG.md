@@ -1,6 +1,6 @@
 # Changelog
 
-## vNext
+## v0.5.1 (2017-06-14)
 
 * Fix: `getHotReloadMiddleware()` no longer serves `public/index.html` on / route if it exists
 
