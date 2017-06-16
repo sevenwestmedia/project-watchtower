@@ -42,7 +42,10 @@ export const getAssetLocations = () => {
     return assets
 }
 
-/** Returns a HTML snippet for all CSS assets */
+/**
+ * Returns a HTML snippet for all CSS assets
+ * We add the timestamp in watch mode to support hot reloading with the ExtractTextWebpackPlugin
+ */
 export const getCssAssetHtml = () => {
     ensureAssets()
     return `<link rel="stylesheet" type="text/css" id="css-main" href="${assets.main.css}${watchMode

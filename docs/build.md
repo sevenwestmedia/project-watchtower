@@ -79,6 +79,37 @@ If you want to use additional `process.env` variables in the **client** build, m
 The values defined here are replaced in the client build. The server build still accesses its actual `process.env` object, only `process.env.NODE_ENV` is being replaced there.
 Values that are present in the actual runtime environment at build time will _not_ be overridden by the ones defined in `.env` / `.env.default`. However, it is necessary to define all the environment variables in the `.env.default` file that are used in the client code.
 
+### Hot Reloading
+
+In development we use [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) and [webpack-hot-middleware](https://github.com/glenjamin/webpack-hot-middleware) to enable hot reloading. See the webpack docs under [https://webpack.js.org/guides/hot-module-replacement/](https://webpack.js.org/guides/hot-module-replacement/).
+
+For CSS bundling we use the [extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin), as the usual development fallback to [style-loader](https://github.com/webpack-contrib/style-loader) seems to have problems referncing fonts through file-loader, and we want to stay as close to production as we can. As it does not support hot reloading out of the box yet, the project has to include a manual helper method:
+
+```jsx
+import { cssHotReload } from 'project-watchtower/lib/runtime/client'
+
+const render = () => {
+    const App = require<{ default: React.ReactType }>('./components/App').default
+    ReactDOM.render((
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    ), document.getElementById('root'))
+}
+
+render()
+
+if (module.hot) {
+    module.hot.accept('./components/App', () => {
+        setTimeout(render)
+    })
+
+    cssHotReload()
+}
+```
+
+For more information see [https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/30#issuecomment-284301283](https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/30#issuecomment-284301283)
+
 ## Debugging
 
 As VS code has problems with sourcemaps that are generated during the runtime of the debugger, the process of debugging has to be split into a "build" and a "debug" phase. The "build" tasks are defined in `.vscode/tasks.json`, the "debug" configurations in `.vscode/launch.json` - they reference the "build" tasks as their `preLaunchTask`.
