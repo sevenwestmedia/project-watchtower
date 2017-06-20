@@ -28,5 +28,7 @@
         "!**/node_modules/**",
         "!config/**"
     ],
+    "coverageReporter": ["json", "lcov", "text", "teamcity"],
+    "testResultsProcessor": "jest-teamcity-reporter",
     "rootDir": "../../../.."
 }
