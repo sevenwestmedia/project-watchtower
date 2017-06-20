@@ -36,6 +36,6 @@
         "!client/**",
         "!test/**"
     ],
-    "coverageReporter": ["json", "lcov", "text", "teamcity"],
+    "coverageReporters": ["json", "lcov", "text", "teamcity"],
     "testResultsProcessor": "jest-teamcity-reporter"
 }
