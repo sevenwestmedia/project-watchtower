@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.2 (2017-06-20)
+
+* Output test results and coverage to TeamCity when run
+
 ## v0.5.1 (2017-06-14)
 
 * Fix: `getHotReloadMiddleware()` no longer serves `public/index.html` on / route if it exists
