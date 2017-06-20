@@ -69,7 +69,7 @@ const build = async (...args: BuildParam[]) => {
     if (args.indexOf('complete') !== -1) {
         await cleanBin()
         await lint()
-        await test('--silent')
+        await test('--silent', '--coverage')
         // we have to fail promises late because otherwise the build servers would hang
         // if we exit the process before all webpack builds are completed
         return failPromisesLate(
