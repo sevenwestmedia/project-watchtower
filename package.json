@@ -33,7 +33,7 @@
     "@types/jest": "^19.2.4",
     "@types/node": "^7.0.12",
     "@types/opn": "^3.0.28",
-    "@types/react": "^15.0.33",
+    "@types/react": "15.0.20",
     "@types/rimraf": "^0.0.28",
     "@types/webpack": "^2.2.14",
     "@types/webpack-env": "^1.13.0",
@@ -44,7 +44,7 @@
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router-dom": "^4.0.0",
-    "typescript": "^2.4.1"
+    "typescript": "2.2.2"
   },
   "peerDependencies": {
     "enzyme": ">=2.0.0",
