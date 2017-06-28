@@ -20,7 +20,7 @@
         "/demo/"
     ],
     "moduleNameMapper": {
-        "\\.(s?css|png|svg|jpg)$": "<rootDir>/lib/test/test-mapper.ta"
+        "\\.(s?css|png|svg|jpg)$": "<rootDir>/lib/test/test-mapper.ts"
     },
     "snapshotSerializers": [
       "enzyme-to-json/serializer"

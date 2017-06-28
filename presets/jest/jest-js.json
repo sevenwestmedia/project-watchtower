@@ -16,7 +16,8 @@
         "app"
     ],
     "moduleNameMapper": {
-        "\\.(s?css|png|svg|jpg)$": "<rootDir>/node_modules/project-watchtower/lib/test/test-mapper.js"
+        "\\.(s?css|png|svg|jpg)$": "<rootDir>/node_modules/project-watchtower/lib/test/test-mapper.js",
+        "^bundle-loader": "<rootDir>/node_modules/project-watchtower/lib/test/bundle-loader-mapper.js"
     },
     "snapshotSerializers": [
       "enzyme-to-json/serializer"

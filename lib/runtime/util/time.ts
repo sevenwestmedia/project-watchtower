@@ -13,7 +13,7 @@ export const timeout = <P>(promise: Promise<P>, time: number): Promise<P> => {
 
     return Promise.race([
         promise,
-        new Promise((_resolve, reject) => {
+        new Promise<P>((_resolve, reject) => {
             timer = setTimeout(() => reject(new Error(`Timeout after ${time} ms`)), time)
         }),
     ]).then((result) => {

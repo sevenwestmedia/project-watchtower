@@ -70,6 +70,10 @@
   dependencies:
     "@types/node" "*"
 
+"@types/react@^15.0.33":
+  version "15.0.33"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react/-/react-15.0.33.tgz#442b025b3ee7d65f25c5cf495b7bd773855c079b"
+
 "@types/relateurl@*":
   version "0.2.28"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/relateurl/-/relateurl-0.2.28.tgz#6bda7db8653fa62643f5ee69e9f69c11a392e3a6"
@@ -5578,9 +5582,9 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://nexus.swmdigital.io/repository/js-combined/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript@^2.2.2:
-  version "2.2.2"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/typescript/-/typescript-2.2.2.tgz#606022508479b55ffa368b58fee963a03dfd7b0c"
+typescript@^2.4.1:
+  version "2.4.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/typescript/-/typescript-2.4.1.tgz#c3ccb16ddaa0b2314de031e7e6fee89e5ba346bc"
 
 ua-parser-js@^0.7.9:
   version "0.7.12"
