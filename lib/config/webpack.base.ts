@@ -37,7 +37,7 @@ const baseConfig: webpack.Configuration = {
             {
                 test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader',
-                exclude: /node_modules/,
+                exclude: /node_modules\/(?!swm-component-library)/,
                 options: {
                     transpileOnly: disableTypeCheck,
                     useTranspileModule: disableTypeCheck,

@@ -3,6 +3,9 @@
     "transform": {
         ".tsx?": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
+    "transformIgnorePatterns": [
+        "node_modules/(?!swm-component-library)"
+    ],
     "testRegex": "\\.(spec|test)\\.tsx?$",
     "moduleFileExtensions": [
         "ts",
