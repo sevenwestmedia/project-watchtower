@@ -1,5 +1,10 @@
 # Changelog
 
+## vNext
+
+* Support testing lazy-loaded components by mocking `bundle-loader`
+* Support consuming the component library as TypeScript
+
 ## v0.5.2 (2017-06-20)
 
 * Output test results and coverage to TeamCity when run
