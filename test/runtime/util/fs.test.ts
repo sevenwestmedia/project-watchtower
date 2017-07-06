@@ -1,6 +1,13 @@
 import * as path from 'path'
-import { formatFileSize, readFile, getFileSize, writeFile } from '../../../lib/runtime/util/fs'
+import {
+    formatFileSize,
+    readFile,
+    getFileSize,
+    writeFile,
+    getCustomConfigFile,
+} from '../../../lib/runtime/util/fs'
 import { expectPromiseToFail } from '../../test-helpers'
+import { BuildConfigOverride } from '../../../lib/types'
 
 const packageJson = path.resolve(process.cwd(), 'package.json')
 const buildStatsFile = path.resolve(process.cwd(), 'build-stats.csv')
@@ -29,6 +36,18 @@ describe('util/fs', () => {
 
     it('formatFileSize', () => {
         expect(formatFileSize(2048)).toBe('2.0')
+    })
+
+    it('getCustomConfigFile', () => {
+        const buildConfig = getCustomConfigFile<BuildConfigOverride>('config/config', {})
+        expect(buildConfig).toEqual({
+            LINT_EXCLUDE: [
+                'demo/**',
+            ],
+        })
+
+        const nonExistentConfig = getCustomConfigFile<BuildConfigOverride>('config/foobar', {})
+        expect(nonExistentConfig).toEqual({})
     })
 
 })

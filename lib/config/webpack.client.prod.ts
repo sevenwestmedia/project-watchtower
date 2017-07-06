@@ -5,6 +5,7 @@ import CONFIG from '../runtime/config/config'
 import baseConfig from './webpack.base'
 import clientBaseConfig from './webpack.client'
 import prodConfig from './webpack.prod'
+import webpackHooks from './webpack-hooks'
 
 const { STATIC_RESOURCE_NAMES, ASSETS_PATH_PREFIX } = CONFIG
 
@@ -19,8 +20,11 @@ const cssFilename = STATIC_RESOURCE_NAMES
 /** Webpack config for the client in production */
 const config: webpack.Configuration = merge(
     baseConfig,
+    webpackHooks.base || {},
     clientBaseConfig,
+    webpackHooks.client || {},
     prodConfig,
+    webpackHooks.prod || {},
     {
         output: {
             filename: chunkFilename,
@@ -30,6 +34,7 @@ const config: webpack.Configuration = merge(
             new ExtractTextPlugin(cssFilename),
         ],
     },
+    webpackHooks.clientProd || {},
 )
 
 export default config
