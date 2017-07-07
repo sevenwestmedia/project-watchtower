@@ -3,7 +3,7 @@
 ## vNext
 
 
-## v0.5.3 (2017-07-07)
+## v0.5.4 (2017-07-07)
 
 * Support testing lazy-loaded components by mocking `bundle-loader`
 * Support consuming the component library as TypeScript
