@@ -2,6 +2,9 @@
 
 ## vNext
 
+
+## v0.5.3 (2017-07-07)
+
 * Support testing lazy-loaded components by mocking `bundle-loader`
 * Support consuming the component library as TypeScript
 * Add hooks to easily extend the webpack build configuration
