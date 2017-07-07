@@ -4,6 +4,7 @@
 
 * Support testing lazy-loaded components by mocking `bundle-loader`
 * Support consuming the component library as TypeScript
+* Add hooks to easily extend the webpack build configuration
 
 ## v0.5.2 (2017-06-20)
 

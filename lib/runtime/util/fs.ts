@@ -1,4 +1,5 @@
 import * as fs from 'fs'
+import * as path from 'path'
 import { logError } from './log'
 
 export const readFile = (filePath: string) => (
@@ -66,4 +67,28 @@ export const dynamicRequire = (file: string) => {
         // "Critical dependency: the request of a dependency is an expression"
         return require(file)
     }
+}
+
+/**
+ * Get custon config file if it exists as JavaScript
+ * Abort with an error if it only exists as TypeScript
+ * @param filePath File path from project root (without extension)
+ */
+export const getCustomConfigFile = <T extends {}>(filePath: string, fallback: T): T => {
+    const root = process.cwd()
+    const customConfigFile = path.resolve(root, filePath + '.js')
+    const customConfigFileTS = path.resolve(root, filePath + '.ts')
+
+    if (existsSync(customConfigFile)) {
+        // using dynamicRequire to support bundling project-watchtower with webpack
+        return dynamicRequire(customConfigFile).default
+    }
+
+    if (existsSync(customConfigFileTS)) {
+        logError(filePath + ' only found as TypeScript file.')
+        logError('Please make sure to compile all TS files in the /config folder to JS!')
+        process.exit(1)
+    }
+
+    return fallback
 }

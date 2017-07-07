@@ -1,6 +1,5 @@
 import * as path from 'path'
-import { dynamicRequire, existsSync } from '../util/fs'
-import { logError } from '../util/log'
+import { getCustomConfigFile } from '../util/fs'
 import { BuildConfig, BuildConfigOverride } from '../../types'
 
 const root = process.cwd()
@@ -34,27 +33,11 @@ const defaultConfig: BuildConfig = {
     WATCH_IGNORE: /node_modules(?!.+swm-component-library)/,
 }
 
-const getCustomConfig = (): BuildConfigOverride => {
-    const customConfigFile = path.resolve(root, 'config', 'config.js')
-    const customConfigFileTS = path.resolve(root, 'config', 'config.ts')
-
-    if (existsSync(customConfigFile)) {
-        // using dynamicRequire to support bundling project-watchtower with webpack
-        return dynamicRequire(customConfigFile).default
-    }
-
-    if (existsSync(customConfigFileTS)) {
-        logError('/config/config.ts only found as TypeScript file.')
-        logError('Please make sure to compile all TS files in the /config folder to JS!')
-        process.exit(1)
-    }
-
-    return {}
-}
+const customConfig = getCustomConfigFile<BuildConfigOverride>('config/config', {})
 
 const CONFIG = {
     ...defaultConfig,
-    ...getCustomConfig(),
+    ...customConfig,
 }
 
 export default CONFIG

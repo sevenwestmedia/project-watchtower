@@ -8,6 +8,7 @@ See the [build documentation](./build.md) for details on how to customise the pr
 
 * config (optional. TypeScript has to be transpiled to JavaScript before building!)
     * webpack.[target].[environment].js: Override configuration
+    * webpack-hooks.js: Add webpack options
     * config.js: Override default configuration
     * setup-tests.ts/js: Jest test setup
 * common: Application code

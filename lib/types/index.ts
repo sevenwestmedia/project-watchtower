@@ -1,3 +1,5 @@
+import * as webpack from 'webpack'
+
 /** Created assets in the webpack build */
 export interface Assets {
     vendor: {
@@ -73,6 +75,21 @@ export interface BuildConfig {
 
 /** Use to override the application configuration */
 export type BuildConfigOverride = Partial<BuildConfig>
+
+/** Override the webpack config per target and environment */
+export interface WebpackHooks {
+    base?: webpack.Configuration,
+    server?: webpack.Configuration,
+    client?: webpack.Configuration,
+    dev?: webpack.Configuration,
+    prod?: webpack.Configuration,
+    serverDev?: webpack.Configuration,
+    serverProd?: webpack.Configuration,
+    serverDebug?: webpack.Configuration,
+    clientDev?: webpack.Configuration,
+    clientProd?: webpack.Configuration,
+    clientDebug?: webpack.Configuration,
+}
 
 export type BuildTarget =
     | 'server'

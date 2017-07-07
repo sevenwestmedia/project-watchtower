@@ -5,14 +5,18 @@ import baseConfig from './webpack.base'
 import clientBaseConfig from './webpack.client'
 import devConfig from './webpack.client.dev'
 import CONFIG from '../runtime/config/config'
+import webpackHooks from './webpack-hooks'
 
 const { ASSETS_PATH_PREFIX } = CONFIG
 
 /** Webpack config for the client in development */
 const config: webpack.Configuration = merge(
     baseConfig,
+    webpackHooks.base || {},
     clientBaseConfig,
+    webpackHooks.client || {},
     devConfig,
+    webpackHooks.dev || {},
     {
         entry: {
             main: [
@@ -28,6 +32,7 @@ const config: webpack.Configuration = merge(
             new webpack.HotModuleReplacementPlugin(),
         ],
     },
+    webpackHooks.clientDev || {},
 )
 
 export default config

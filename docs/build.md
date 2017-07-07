@@ -8,33 +8,9 @@ pwt build [<target> <environment>]
 
 ## Customising
 
-By default, Project Watchtower uses its own webpack configuration files. If you want to modify or extend them with custom options for you project, add configuration files to your project: `/config/webpack.<target>.<environment>.js`.
+By default, Project Watchtower uses its own webpack configuration files. If you want to modify or extend them with custom options for you project, there are multiple ways of providing custom configuration:
 
-Example:
-
-```ts
-import { merge } from 'project-watchtower/lib/build'
-import { base, clientBase, clientDev } from 'project-watchtower/lib/config'
-
-// either extend one of the complete configurations
-const extendedConfig = merge(
-    clientDev,
-    {
-        // ...
-    },
-)
-
-// or build your own with multiple building blocks
-const config = merge(
-    base,
-    clientBase,
-    {
-        // ...
-    },
-)
-
-export default config
-```
+### Basic config file
 
 If you want to change the default configuration of the build process, you can add a `/config/config.js` that overrides the settings used by the default webpack configuration:
 
@@ -54,6 +30,66 @@ If you provide a `/config/config.ts` in TypeScript, make sure it is transpiled t
 The complete default configuration is located in `project-watchtower/lib/runtime/config/config.ts`
 
 See the [config documentation](./config.md) for an overview of the default project structure and configuration details.
+
+### Webpack hooks
+
+Add `/config/webpack-hooks.js` to your project:
+
+```ts
+import { WebpackHooks } from 'project-watchtower/lib/types'
+import * as FooWebpackPlugin from 'foo-webpack-plugin'
+
+const hooks: WebpackHooks = {
+    base: {
+        plugins: [
+            new FooWebpackPugin()
+        ]
+    }
+}
+
+export default hooks
+```
+
+The following hooks can be defined:
+
+* `base`
+* `client`
+* `server`
+* `dev`
+* `prod`
+* `clientDev`
+* `clientProd`
+* `clientDebug`
+* `serverDev`
+* `serverProd`
+* `serverDebug`
+
+These hooks are applied internally to all webpack cofigurations that have a target and environment.
+
+If you provide a completely custom webpack configuration as described below, they will
+* not be applied if you only use basic building blocks (like `base`, `clientBase` or `devBase`)
+* be applied if you extend complete configurations (like `clientDev`, `serverProd`)
+
+### Custom webpack configuration
+
+Add configuration files to your project: `/config/webpack.<target>.<environment>.js`.
+
+Example:
+
+```ts
+import { merge } from 'project-watchtower/lib/build'
+import { clientBase } from 'project-watchtower/lib/config'
+
+const config = merge(
+    base,
+    clientBase,
+    {
+        // ...
+    },
+)
+
+export default config
+```
 
 ## Running
 
