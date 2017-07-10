@@ -6,7 +6,8 @@
     * Webpack 3
     * TSLint 5
     * Lighthouse 2
-* Added `ModuleConcatenationPlugin` to webpack production builds for scope hoisting
+* Added `ModuleConcatenationPlugin` to webpack production builds for scope hoisting.
+* Set TypeScript's `module` option to `esnext` in aweseome-typescript-loader to enable scope hoisting for the project source files
 * Added the following build stats
     * `<PAGE>_consistently_interactive`: Time until the page is consistently interactive through lighthouse (ms)
     * `<PAGE>_dom_size`: Number of DOM elements on the page through lighthouse

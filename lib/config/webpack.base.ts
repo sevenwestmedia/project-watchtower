@@ -41,6 +41,9 @@ const baseConfig: webpack.Configuration = {
                 options: {
                     transpileOnly: disableTypeCheck,
                     useTranspileModule: disableTypeCheck,
+                    // Force >ES2015 module syntax (including dynamic imports)
+                    // to enable scope hoisting
+                    module: 'esnext',
                 },
             },
             {
