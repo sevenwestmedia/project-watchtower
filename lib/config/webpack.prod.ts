@@ -7,6 +7,7 @@ const prodConfig: webpack.Configuration = {
             'process.env.NODE_ENV': JSON.stringify('production'),
         }),
         new webpack.optimize.AggressiveMergingPlugin(),
+        new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 screw_ie8: true,

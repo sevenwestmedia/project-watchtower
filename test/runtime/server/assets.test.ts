@@ -49,7 +49,8 @@ describe('server/assets', () => {
 
     it('getCssAssetHtml', () => {
         const html = getCssAssetHtml()
-
+        expect(html).toContain('<link')
+        expect(html).toContain(assets.main.css)
     })
 
     it('getJsAssetHtml', () => {

@@ -10,7 +10,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 const { CLIENT_OUTPUT, PORT, SERVER_PUBLIC_DIR } = CONFIG
 
 export const getPort = (fallbackPort?: number) => (
-    parseInt(process.env.PORT || fallbackPort || PORT, 10)
+    parseInt(process.env.PORT || '', 10) || fallbackPort || PORT
 )
 
 export const isWatchMode = () => (
@@ -28,10 +28,10 @@ export const getDefaultHtmlMiddleware = (logNotFound = false) => {
     // on production we just serve the generated index.html
     if (isProduction) {
         const indexPath = path.resolve(CLIENT_OUTPUT, 'index.html')
-        const middleware: express.RequestHandler = (_req, res) => {
+        const productionMiddleware: express.RequestHandler = (_req, res) => {
             res.status(200).sendFile(indexPath)
         }
-        return middleware
+        return productionMiddleware
     }
 
     // for development we grab the source index.html and add the assets

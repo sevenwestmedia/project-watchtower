@@ -1,5 +1,3 @@
-import * as fs from 'fs'
-import * as path from 'path'
 import clean from '../../lib/bin/clean'
 import build from '../../lib/bin/build'
 import { getTestPort } from '../test-helpers'
@@ -8,13 +6,13 @@ import ssrStats from '../../lib/stats/ssr-stats'
 import lighthouseStats from '../../lib/stats/lighthouse'
 
 // Increase test timeout because builds might take a while
-(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 60000
+(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 90000
 
 describe('stats', () => {
 
     beforeAll(async () => {
         const port = await getTestPort()
-        process.env.PORT = port
+        process.env.PORT = port.toString()
 
         await clean()
         await build()
@@ -43,12 +41,15 @@ describe('stats', () => {
         const metrics = await ssrStats()
 
         const documentSize = metrics.home_ssr_document_size
+        const domSize = metrics.home_ssr_dom_size
         const loadTime = metrics.home_ssr_loadtime
 
         expect(documentSize).toBeDefined()
+        expect(domSize).toBeDefined()
         expect(loadTime).toBeDefined()
 
         expect((+documentSize)).not.toBeCloseTo(0)
+        expect((+domSize)).not.toBeCloseTo(0)
         expect((+loadTime)).not.toBeCloseTo(0)
     })
 
@@ -58,6 +59,9 @@ describe('stats', () => {
         expect(metrics.home_first_meaningful_paint).toBeDefined()
         expect(metrics.home_speed_index).toBeDefined()
         expect(metrics.home_time_to_interactive).toBeDefined()
+        expect(metrics.home_consistently_interactive).toBeDefined()
+        expect(metrics.home_dom_size).toBeDefined()
+        expect(metrics.home_perf_score).toBeDefined()
     })
 
 })

@@ -1,7 +1,6 @@
 import clean from '../../lib/bin/clean'
 import build from '../../lib/bin/build'
 import start from '../../lib/bin/start'
-import { delay } from '../../lib/runtime/util/time'
 import { waitForConnection } from '../../lib/runtime/util/network'
 import { getTestPort } from '../test-helpers'
 
@@ -17,7 +16,7 @@ describe('bin/start', () => {
 
     it('will start the server', async () => {
         const port = await getTestPort()
-        process.env.PORT = port
+        process.env.PORT = port.toString()
         const childProcess = await start('watch', 'fast', 'prod', 'debug')
         await waitForConnection(port)
         childProcess.kill()
@@ -26,7 +25,7 @@ describe('bin/start', () => {
     // can't test in TypeScript land because it requires the internal server in JavaScript
     it.skip('will start the client', async () => {
         const port = await getTestPort()
-        process.env.PORT = port
+        process.env.PORT = port.toString()
         const childProcess = await start('prod', 'client')
         await waitForConnection(port)
         childProcess.kill()

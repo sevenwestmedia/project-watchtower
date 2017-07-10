@@ -118,12 +118,18 @@ const clientBaseConfig: webpack.Configuration = {
                         {
                             loader: 'postcss-loader',
                             options: {
+                                sourceMap: true,
                                 plugins: () => [
                                     autoprefixer({ browsers: CSS_AUTOPREFIXER }),
                                 ],
                             },
                         },
-                        'resolve-url-loader',
+                        {
+                            loader: 'resolve-url-loader',
+                            options: {
+                                sourceMap: true,
+                            },
+                        },
                         {
                             loader: 'sass-loader',
                             options: {

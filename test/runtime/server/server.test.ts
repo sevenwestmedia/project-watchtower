@@ -12,7 +12,7 @@ describe('runtime/server/server', () => {
     })
 
     it('createServer', () => (
-        new Promise((resolve, reject) => {
+        new Promise((resolve) => {
             const app = createServer(
                 () => {},
                 () => {

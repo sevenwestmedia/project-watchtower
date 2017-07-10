@@ -1,5 +1,5 @@
 import { fork, ForkOptions, spawn, SpawnOptions, ChildProcess } from 'child_process'
-import { logError } from './log'
+import { log } from './log'
 
 // make sure all child processes are killed when the process exits
 // https://stackoverflow.com/questions/15833047/how-to-kill-all-child-processes-on-exit
@@ -19,10 +19,6 @@ process.on('exit', killAllChildProcesses)
 
 process.on('SIGINT', () => process.exit())
 process.on('SIGTERM', () => process.exit())
-process.on('uncaughtException', (err: any) => {
-    logError('uncaughtException', err)
-    process.exit(1)
-})
 
 export const spawnPromise = (
     command: string,
@@ -31,6 +27,8 @@ export const spawnPromise = (
     longRunning = false,
 ) => (
     new Promise<ChildProcess>((resolve, reject) => {
+        log(`[pwt] ${command} ${args.join(' ')}`)
+
         const proc = spawn(command, args, options)
 
         proc.on('exit', (code) => {
@@ -58,6 +56,8 @@ export const forkPromise = (
     longRunning = false,
 ) => (
     new Promise<ChildProcess>((resolve, reject) => {
+        log(`[pwt] node ${command} ${args.join(' ')}`)
+
         const proc = fork(command, args, options)
 
         proc.on('exit', (code) => {

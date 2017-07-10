@@ -43,6 +43,9 @@ describe('util/fs', () => {
         expect(buildConfig).toEqual({
             LINT_EXCLUDE: [
                 'demo/**',
+                'client/**',
+                'server/**',
+                'test/**',
             ],
         })
 
