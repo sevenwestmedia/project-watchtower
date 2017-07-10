@@ -14,9 +14,12 @@
         "tsx"
     ],
     "moduleDirectories": [
-        "node_modules",
-        "common",
-        "app"
+        "node_modules"
+    ],
+    "modulePaths": [
+        "<rootDir>/common",
+        "<rootDir>/app",
+        "<rootDir>"
     ],
     "moduleNameMapper": {
         "\\.(s?css|png|svg|jpg)$": "<rootDir>/node_modules/project-watchtower/lib/test/test-mapper.js",
