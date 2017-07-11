@@ -95,13 +95,17 @@
   version "0.0.29"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/mime/-/mime-0.0.29.tgz#fbcfd330573b912ef59eeee14602bface630754b"
 
-"@types/node@*", "@types/node@^8.0.9":
+"@types/node@*":
   version "8.0.9"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/node/-/node-8.0.9.tgz#19f44c3b6cb8a70d261d366f73650e3e3891ab2d"
 
 "@types/node@^6.0.46":
   version "6.0.79"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/node/-/node-6.0.79.tgz#5efe7d4a6d8c453c7e9eaf55d931f4a22fac5169"
+
+"@types/node@^8.0.10":
+  version "8.0.10"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/node/-/node-8.0.10.tgz#12efec9183b072d5f951cf86395a4c780f868a17"
 
 "@types/opn@^3.0.28":
   version "3.0.28"
@@ -115,9 +119,13 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^15.0.35":
+"@types/react@*":
   version "15.0.35"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react/-/react-15.0.35.tgz#4672923cd502d03e1480d03816ebc5a719fb86da"
+
+"@types/react@^15.0.36":
+  version "15.0.36"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react/-/react-15.0.36.tgz#35cb9153eaaae0750ea50e0a8eaee1d93f42c189"
 
 "@types/relateurl@*":
   version "0.2.28"
@@ -158,9 +166,17 @@
   dependencies:
     "@types/webpack" "*"
 
-"@types/webpack@*", "@types/webpack@^3.0.2":
+"@types/webpack@*":
   version "3.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack/-/webpack-3.0.2.tgz#6a65557da8a544cddc81e442b3db94339833543d"
+  dependencies:
+    "@types/node" "*"
+    "@types/tapable" "*"
+    "@types/uglify-js" "*"
+
+"@types/webpack@^3.0.4":
+  version "3.0.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack/-/webpack-3.0.4.tgz#a115419db8bd4077fc50f5c2b5ba1b44b4e5ff48"
   dependencies:
     "@types/node" "*"
     "@types/tapable" "*"
@@ -2137,9 +2153,9 @@ extglob@^1.1.0:
     snapdragon "^0.8.1"
     to-regex "^2.1.0"
 
-extract-text-webpack-plugin@3.0.0-rc.2:
-  version "3.0.0-rc.2"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/extract-text-webpack-plugin/-/extract-text-webpack-plugin-3.0.0-rc.2.tgz#d891bfa401a9312e42e0cc4c41abcfb7297b91a3"
+extract-text-webpack-plugin@^3.0.0:
+  version "3.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/extract-text-webpack-plugin/-/extract-text-webpack-plugin-3.0.0.tgz#90caa7907bc449f335005e3ac7532b41b00de612"
   dependencies:
     async "^2.4.1"
     loader-utils "^1.1.0"
