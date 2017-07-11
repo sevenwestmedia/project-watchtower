@@ -1,5 +1,6 @@
 import * as path from 'path'
 import * as webpack from 'webpack'
+import { version as tsVersion } from 'typescript'
 import { CheckerPlugin } from 'awesome-typescript-loader'
 import CONFIG from '../runtime/config/config'
 
@@ -43,7 +44,9 @@ const baseConfig: webpack.Configuration = {
                     useTranspileModule: disableTypeCheck,
                     // Force >ES2015 module syntax (including dynamic imports)
                     // to enable scope hoisting
-                    module: 'esnext',
+                    module: tsVersion > '2.4'
+                        ? 'esnext'
+                        : 'es2015',
                 },
             },
             {
