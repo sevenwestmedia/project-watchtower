@@ -1,5 +1,9 @@
 # Changelog
 
+## vNext
+
+* Fix TypeScript module setting override for TypeScript < 2.4
+
 ## v0.6.0-rc.1 (2017-07-11) **[pre-release @next]**
 
 * **BREAKING** Upgrade dependencies for compatibility with Node 8 and TypeScript 2.4
