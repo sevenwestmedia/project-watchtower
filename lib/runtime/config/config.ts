@@ -17,6 +17,7 @@ const defaultConfig: BuildConfig = {
         root,
         path.resolve(root, 'node_modules'),
         path.resolve(root, 'common'),
+        path.resolve(root, 'app'),
     ],
     PUBLIC_PATH: '/',
     PORT: 3000,

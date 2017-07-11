@@ -15,6 +15,7 @@
     * `<PAGE>_perf_score`: Lighthouse performance score (0-100)
 * Project Watchtower prints the full commands it executes to console
 * Added `disableHoisting` parameter to `explore-bundle` command to disable webpack 3 scope hoisting and see all modules in the bundle
+* Consolidate module directories across webpack and jest to default to `['./node_modules', './common', './app', '.']`
 
 **KNOWN ISSUES**
 * Lighthouse 2.2.1 has to run the whole suite to output the DOM size instead of just the performance suite, thus the stats will take longer to generate. This will be fixed in the next release
