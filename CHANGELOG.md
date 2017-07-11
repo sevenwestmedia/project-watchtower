@@ -1,6 +1,6 @@
 # Changelog
 
-## vNext
+## v0.6.0-rc.2 (2017-07-11) **[pre-release @next]**
 
 * Fix TypeScript module setting override for TypeScript < 2.4
 
