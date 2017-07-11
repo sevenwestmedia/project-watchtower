@@ -8,15 +8,23 @@
             "type": "node",
             "request": "launch",
             "name": "Debug tests",
-            "program": "${workspaceRoot}\\tools\\debug-tests.js",
-            "cwd": "${workspaceRoot}",
-            "sourceMaps": true,
-            "env": {
-                "NODE_ENV": "test"
+            "runtimeExecutable": "npm",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
             },
             "runtimeArgs": [
-                 "--max-old-space-size=2048"
-            ]
+                "run-script",
+                "test:debug"
+            ],
+            "port": 5858,
+            "timeout": 60000,
+            "smartStep": true,
+            "trace": "sm",
+            "outFiles": [
+                "${workspaceRoot}/test/**/*.js",
+                "${workspaceRoot}/lib/**/*.js"
+            ],
+            "preLaunchTask": "build:debug"
         },
         {
             "type": "node",

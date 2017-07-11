@@ -16,6 +16,7 @@ const { SERVER_OUTPUT, HAS_SERVER, STATS_ENV, STATS_PAGES } = CONFIG
 export interface SSRStats {
     size: number
     time: number
+    content: string
 }
 
 const getServerUrl = (port: number, urlPath: string) => {
@@ -39,11 +40,15 @@ export const loadSSRPage = (url: string) => (
             res.setEncoding('utf8')
 
             let size = 0
-            res.on('data', (chunk) => size += chunk.length)
+            let content = ''
+            res.on('data', (chunk) => {
+                size += chunk.length
+                content += chunk.toString()
+            })
 
             res.on('end', () => {
                 const time = getTimeMs() - startTime
-                resolve({ size, time })
+                resolve({ size, time, content })
             })
         })
         request.on('error', (err) => reject(err))

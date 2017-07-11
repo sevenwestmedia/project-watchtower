@@ -1,3 +1,4 @@
+import { load } from 'cheerio'
 import CONFIG from '../../../lib/runtime/config/config'
 CONFIG.PUBLIC_PATH = '/baz/'
 
@@ -49,14 +50,17 @@ describe('server/assets', () => {
 
     it('getCssAssetHtml', () => {
         const html = getCssAssetHtml()
-
+        const doc = load(html)
+        expect(doc('link').length).toBe(1)
+        expect(doc('link').first().attr('href')).toContain(assets.main.css)
     })
 
     it('getJsAssetHtml', () => {
         const html = getJsAssetHtml()
-        expect(html).toContain('<script')
-        expect(html).toContain(assets.main.js)
-        expect(html).toContain(assets.vendor.js)
+        const doc = load(html)
+        expect(doc('script').length).toBe(2)
+        expect(doc('script').first().attr('src')).toBe(assets.vendor.js)
+        expect(doc('script').last().attr('src')).toBe(assets.main.js)
     })
 
     it('addAssetsToHtml', () => {
@@ -68,11 +72,13 @@ describe('server/assets', () => {
 </body>
 </html>`
         const html = addAssetsToHtml(htmlTemplate)
-        expect(html).toContain('<script')
-        expect(html).toContain('<link')
-        expect(html).toContain(assets.main.css)
-        expect(html).toContain(assets.main.js)
-        expect(html).toContain(assets.vendor.js)
+
+        const doc = load(html)
+        expect(doc('link').length).toBe(1)
+        expect(doc('link').first().attr('href')).toContain(assets.main.css)
+        expect(doc('script').length).toBe(2)
+        expect(doc('script').first().attr('src')).toBe(assets.vendor.js)
+        expect(doc('script').last().attr('src')).toBe(assets.main.js)
     })
 
     it('addAssetsToHtml - already present', () => {
@@ -89,12 +95,9 @@ describe('server/assets', () => {
 </html>`
         const html = addAssetsToHtml(htmlTemplate)
 
-        const count = (str: string, substr: string) => (
-            (str.match(new RegExp(substr, 'g')) || []).length
-        )
-
-        expect(count(html, '<link')).toBe(1)
-        expect(count(html, '<script')).toBe(2)
+        const doc = load(html)
+        expect(doc('link').length).toBe(1)
+        expect(doc('script').length).toBe(2)
     })
 
     it('getAbsoluteAssetPath', () => {

@@ -6,7 +6,7 @@
     "rules": {
         // react specific rules
         "jsx-alignment": true,
-        "jsx-no-lambda": "never",
+        "jsx-no-lambda": false,
         // @TODO decide if we want to use this rule
         "jsx-no-multiline-js": false,
         "jsx-no-string-ref": true,

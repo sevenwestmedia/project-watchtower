@@ -46,7 +46,7 @@ switch (command) {
         break
 
     case 'explore-bundle':
-        exitOnError(exploreBundle())
+        exitOnError(exploreBundle(...commandArgs))
         break
 
     case 'lint':
@@ -78,14 +78,14 @@ Scripts:
     build [complete] [<target>] [<environment>]
     clean [<glob> ...]
     coverage [<jest options> ...]
-    explore-bundle
-    lint [<glob> ...]
-    start [watch] [fast] [prod]
+    explore-bundle [disableHoisting]
+    lint [tslint] [sass-lint] [<glob> ...]
+    start [watch] [fast] [prod] [debug] [client]
     stats
-    test [<jest options> ...]
+    test [debug] [<jest options> ...]
     watch [server]
 
-Refer to docs/api.md for the full API documentation
+Refer to docs/cli.md for the full API documentation
 `)
 
 }

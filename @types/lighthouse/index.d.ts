@@ -24,6 +24,8 @@ declare namespace Lighthouse {
         artifacts: any
         runtimeConfig: any
         aggregations: any[]
+        score: number
+        reportCategories: ReportCategory[]
     }
 
     interface Audit {
@@ -41,25 +43,23 @@ declare namespace Lighthouse {
         helpText: string
     }
 
+    interface ReportCategory {
+        name: string
+        description: string
+        audits: any
+        id: string
+        score: number
+    }
+
     type Lighthouse = (
         url: string,
         flags: LighthouseFlags,
-        config: object,
+        config?: object | null,
     ) => LighthouseResults
 
-    interface ChromeLauncherOptions {
-
-    }
-
-    interface ChromeLauncherConstructor {
-        new(options: ChromeLauncherOptions): ChromeLauncher
-    }
-
     interface ChromeLauncher {
-        isDebuggerReady(): Promise<void>
-        run(): Promise<void>
+        port: number
         kill(): Promise<void>
-        TMP_PROFILE_DIR: string | undefined
     }
 
 }
@@ -69,6 +69,6 @@ declare module "lighthouse" {
     export = main
 }
 
-declare module "lighthouse/lighthouse-cli/chrome-launcher" {
-    export const ChromeLauncher: Lighthouse.ChromeLauncherConstructor
+declare module "lighthouse/chrome-launcher" {
+    export const launch: () => Promise<Lighthouse.ChromeLauncher>
 }

@@ -1,81 +1,64 @@
-import * as path from 'path'
 import * as Lighthouse from 'lighthouse'
-import { ChromeLauncher } from 'lighthouse/lighthouse-cli/chrome-launcher'
+import { launch } from 'lighthouse/chrome-launcher'
 import CONFIG from '../runtime/config/config'
 import { log, logError, prettyJson } from '../runtime/util/log'
 import { BuildMetrics } from './'
 import { runStatsOnServer } from './server'
 import { isBuildServer } from '../runtime/util/env'
-import { readFile } from '../runtime/util/fs'
 import { delay, formatTimeMs, timeout } from '../runtime/util/time'
 
 const { HAS_SERVER } = CONFIG
 
-export const runLighthouse = async (url: string) => {
-
-    let config: any
-
-    try {
-        const configPath = path.resolve(
-            process.cwd(),
-            'node_modules/lighthouse/lighthouse-core/config/perf.json',
-        )
-        const configContent = await readFile(configPath)
-        config = JSON.parse(configContent)
-    } catch (_err) {
-        logError('Could not read lighthouse config!')
-        return undefined
+// https://github.com/GoogleChrome/lighthouse/issues/2618
+const killChromeLauncher = (launcher?: Lighthouse.ChromeLauncher) => {
+    if (!launcher) {
+        return
     }
+    process.once('uncaughtException', () => {})
+    setTimeout(() => launcher.kill(), 0)
+}
 
+export const runLighthouse = async (url: string) => {
     const onBuildServer = isBuildServer()
 
     const launcher = onBuildServer
         ? undefined
-        : new ChromeLauncher({
-            port: 9222,
-            autoSelectChrome: true,
-        })
-
-    if (launcher) {
-        try {
-            await launcher.isDebuggerReady()
-        } catch (_err) {
-            await launcher.run()
-        }
-    }
+        : await launch()
 
     try {
         const results = await Lighthouse(
             url,
             {
                 output: 'json',
-                port: onBuildServer
+                port: launcher
+                    ? launcher.port || 9222
                     // provided by build environment, ref OPS-383
-                    ? Number(process.env.CHROME_REMOTE_DEBUGGING_PORT) || 9222
-                    : 9222,
+                    : Number(process.env.CHROME_REMOTE_DEBUGGING_PORT) || 9222,
                 skipAutolaunch: onBuildServer,
             },
-            config,
+            // TODO re-enable limit to performance audits once dom-size audit works there
+            /*
+            {
+                extends: 'lighthouse:default',
+                settings: {
+                    onlyCategories: ['performance'],
+                },
+            },
+            */
         )
+
+        // log(results)
 
         // we have to wait a bit, otherwise we get a ECONNRESET error we can't catch
         await delay(2000)
 
-        if (launcher) {
-            // workaround for uncatcheable rimraf error on Windows
-            // when deleting the temporary folder
-            launcher.TMP_PROFILE_DIR = undefined
-            await launcher.kill()
-        }
+        killChromeLauncher(launcher)
 
         return results
     } catch (err) {
         logError('Could not run lighthouse!', err)
 
-        if (launcher) {
-            launcher.TMP_PROFILE_DIR = undefined
-            await launcher.kill()
-        }
+        killChromeLauncher(launcher)
 
         return undefined
     }
@@ -109,7 +92,19 @@ const lighthouseStats = async (): Promise<BuildMetrics> => {
 
             addLighthouseValue('first-meaningful-paint', 'first_meaningful_paint')
             addLighthouseValue('speed-index-metric', 'speed_index')
-            addLighthouseValue('time-to-interactive', 'time_to_interactive')
+            addLighthouseValue('first-interactive', 'time_to_interactive')
+            addLighthouseValue('consistently-interactive', 'consistently_interactive')
+            addLighthouseValue('dom-size', 'dom_size')
+
+            if (lighthouseResult) {
+                const perfResult = lighthouseResult.reportCategories.filter(
+                    (category) => category.id === 'performance',
+                )[0]
+
+                if (perfResult && typeof perfResult.score === 'number') {
+                    stats[`${page}_perf_score`] = perfResult.score.toFixed(1)
+                }
+            }
         })
 
         log(`Lighthouse stats: ${prettyJson(stats)}`)

@@ -33,10 +33,12 @@ pwt coverage [<jest option> ...]
 ### explore-bundle
 
 ```
-pwt explore-bundle
+pwt explore-bundle [disableHoisting]
 ```
 
 Opens the `webpack-bundle-analyzer` for the client production bundle.
+
+*   `disableHoisting`: Disable scope hosting to identify where all the modules are coming from
 
 ### lint
 
@@ -91,10 +93,14 @@ Stats:
 *   `bundle_size_vendor`: Size of the vendor JS bundle (KB)
 *   `bundle_size_css`: Size of the CSS bundle (KB)
 *   `<PAGE>_ssr_document_size`: Size of the server-side rendered homepage document (KB)
+*   `<PAGE>_ssr_dom_size`: Number of DOM elements after server-side rendering
 *   `<PAGE>_ssr_loadtime`: Average load time of the server-side rendered homepage document (ms)
 *   `<PAGE>_first_meaningful_paint`: First meaningful paint through lighthouse (ms)
 *   `<PAGE>_speed_index`: Lighthouse speed index (lower is better)
 *   `<PAGE>_time_to_interactive`: Time to interactive through lighthouse (ms)
+*   `<PAGE>_consistently_interactive`: Time until the page is consistently interactive through lighthouse (ms)
+*   `<PAGE>_dom_size`: Number of DOM elements on the page
+*   `<PAGE>_perf_score`: Overall performance score (0-100)
 
 For the lighthouse values to be generated, Google Chrome has to be installed on the machine running the tests.
 If Google Chrome is not installed, the lighthouse stats will not be included.

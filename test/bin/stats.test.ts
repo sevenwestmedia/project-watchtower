@@ -12,7 +12,7 @@ describe('stats', () => {
 
     it('will build stats', async () => {
         const port = await getTestPort()
-        process.env.PORT = port
+        process.env.PORT = port.toString()
 
         await clean()
         await build()

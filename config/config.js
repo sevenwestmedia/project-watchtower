@@ -3,6 +3,9 @@
  */
 exports.default = {
     LINT_EXCLUDE: [
-        'demo/**'
+        'demo/**',
+        'client/**',
+        'server/**',
+        'test/**',
     ]
 }

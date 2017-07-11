@@ -2,6 +2,22 @@
 
 ## vNext
 
+* **BREAKING** Upgrade dependencies for compatibility with Node 8 and TypeScript 2.4
+    * Webpack 3
+    * TSLint 5
+    * Lighthouse 2
+* Added `ModuleConcatenationPlugin` to webpack production builds for scope hoisting.
+* Set TypeScript's `module` option to `esnext` in aweseome-typescript-loader to enable scope hoisting for the project source files
+* Added the following build stats
+    * `<PAGE>_consistently_interactive`: Time until the page is consistently interactive through lighthouse (ms)
+    * `<PAGE>_dom_size`: Number of DOM elements on the page through lighthouse
+    * `<PAGE>_ssr_dom_size`: Number of DOM elements on the page after server-side rendering
+    * `<PAGE>_perf_score`: Lighthouse performance score (0-100)
+* Project Watchtower prints the full commands it executes to console
+* Added `disableHoisting` parameter to `explore-bundle` command to disable webpack 3 scope hoisting and see all modules in the bundle
+
+**KNOWN ISSUES**
+* Lighthouse 2.2.1 has to run the whole suite to output the DOM size instead of just the performance suite, thus the stats will take longer to generate. This will be fixed in the next release
 
 ## v0.5.4 (2017-07-07)
 

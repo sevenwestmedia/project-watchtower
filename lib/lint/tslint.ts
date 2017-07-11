@@ -24,12 +24,9 @@ const tslint = (...paths: string[]): Promise<ChildProcess> => {
 
     const args = [
         ...usePaths,
-        // TODO add after upgrading to tslint 5.1.0
-        /*
         '--type-check',
         '--project',
         './tsconfig.json',
-        */
     ]
 
     exclude.forEach((x) => {

@@ -1,3 +1,4 @@
+import { load } from 'cheerio'
 import CONFIG from '../runtime/config/config'
 import { log, logError, prettyJson } from '../runtime/util/log'
 import { BuildMetrics } from './'
@@ -24,7 +25,9 @@ const ssrStats = async (): Promise<BuildMetrics> => {
 
             const loadPage = () => timeout(loadSSRPage(url), 20000)
 
-            const { size } = await loadPage()
+            const { size, content } = await loadPage()
+
+            const domSize = load(content)('*').length
 
             const time = await getSequenceAverage(async () => {
                 const result = await loadPage()
@@ -32,6 +35,7 @@ const ssrStats = async (): Promise<BuildMetrics> => {
             }, 5)
 
             stats[`${page}_ssr_document_size`] = formatFileSize(size)
+            stats[`${page}_ssr_dom_size`] = domSize.toString()
             stats[`${page}_ssr_loadtime`] = formatTimeMs(time)
         })
 

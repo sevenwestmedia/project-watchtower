@@ -8,7 +8,7 @@ import { getAbsoluteAssetPath, getAssetLocations } from '../../lib/runtime/serve
 // Increase test timeout because builds might take a while
 (jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000
 
-const { BASE, CLIENT_OUTPUT, SERVER_OUTPUT } = CONFIG
+const { BASE, SERVER_OUTPUT } = CONFIG
 
 describe('bin/build', () => {
 

@@ -17,26 +17,18 @@
             ]
         },
         {
+            "taskName": "build:debug",
+            "args": [
+                "run",
+                "build:debug"
+            ]
+        },
+        {
             "taskName": "test",
             "isBuildCommand": true,
             "args": [
                 "run",
                 "test"
-            ]
-        },
-        {
-            "taskName": "update jest snapshots",
-            "isBuildCommand": true,
-            "args": [
-                "run",
-                "test:update-snapshots"
-            ]
-        },
-        {
-            "taskName": "sass-lint",
-            "args": [
-                "run",
-                "sass-lint"
             ]
         },
         {

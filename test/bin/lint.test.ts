@@ -7,7 +7,7 @@ describe('bin/lint', () => {
 
     it('will lint', async () => {
         await lint()
-        await lint('tslint')
+        await lint('tslint', `'lib/**/*.ts'`)
         await lint('sass-lint')
     })
 

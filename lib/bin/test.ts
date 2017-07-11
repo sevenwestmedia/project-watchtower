@@ -26,7 +26,9 @@ const test = async (...params: string[]): Promise<ChildProcess> => {
         await clean()
     }
 
-    if (params.indexOf('--config') === -1) {
+    const configDefined = params.some((param) => param.indexOf('--config') === 0)
+
+    if (!configDefined) {
         args = args.concat([
             '--config',
             isDebug

@@ -8,7 +8,7 @@ dotenv.config()
  * Increaase UV_THREADPOOL_SIZE to prevent deadlock in SCSS compilation
  * https://github.com/webpack-contrib/sass-loader/issues/100
  */
-process.env.UV_THREADPOOL_SIZE = 128
+process.env.UV_THREADPOOL_SIZE = '128'
 
 const filePath = path.resolve(__dirname, 'index.js')
 

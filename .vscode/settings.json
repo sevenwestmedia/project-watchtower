@@ -13,19 +13,7 @@
     },
     "search.exclude": {
         "**/node_modules": true,
-        "coverage/**": true,
+        "coverage/**": true
     },
-    "path-intellisense.mappings": {
-        "testHelpers": "${workspaceRoot}/common/testHelpers",
-        "actions": "${workspaceRoot}/common/actions",
-        "components": "${workspaceRoot}/common/components",
-        "containers": "${workspaceRoot}/common/containers",
-        "lib": "${workspaceRoot}/common/lib",
-        "reducers": "${workspaceRoot}/common/reducers",
-        "store": "${workspaceRoot}/common/store",
-        "styles": "${workspaceRoot}/common/styles"
-    }
-,
-"vsicons.presets.angular": false,
-"typescript.tsdk": "./node_modules/typescript/lib"
+    "typescript.tsdk": "./node_modules/typescript/lib"
 }
