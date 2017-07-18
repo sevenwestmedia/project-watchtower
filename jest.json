@@ -19,6 +19,9 @@
         "/node_modules/",
         "/demo/"
     ],
+    "transformIgnorePatterns": [
+        "<rootDir>/node_modules/(?!redux-data-loader)"
+    ],
     "moduleNameMapper": {
         "\\.(s?css|png|svg|jpg)$": "<rootDir>/lib/test/test-mapper.ts",
         "^bundle-loader": "<rootDir>/lib/test/bundle-loader-mapper.ts"

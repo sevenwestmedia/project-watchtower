@@ -8,7 +8,7 @@
   dependencies:
     postcss "^5.2.15"
 
-"@types/cheerio@^0.22.2":
+"@types/cheerio@*", "@types/cheerio@^0.22.2":
   version "0.22.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/cheerio/-/cheerio-0.22.2.tgz#539625874bc856086ad491c2fdc9b10c05ae308e"
 
@@ -21,6 +21,13 @@
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/dotenv/-/dotenv-4.0.0.tgz#bd458844cb82ada047fa87a475270ad55492d2d4"
   dependencies:
     "@types/node" "*"
+
+"@types/enzyme@^2.8.2":
+  version "2.8.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/enzyme/-/enzyme-2.8.2.tgz#5cd2582b7c7876d0a34dd9eaeadf6b52263fe88e"
+  dependencies:
+    "@types/cheerio" "*"
+    "@types/react" "*"
 
 "@types/express-serve-static-core@*":
   version "4.0.49"
@@ -40,6 +47,10 @@
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/extract-text-webpack-plugin/-/extract-text-webpack-plugin-2.1.0.tgz#db0eb859d1b61ea5d2a0b75ad34b4ff317a18379"
   dependencies:
     "@types/webpack" "*"
+
+"@types/history@*":
+  version "4.6.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/history/-/history-4.6.0.tgz#093d67ed780d889c9543f6dca24ebee0b6b9fc45"
 
 "@types/html-minifier@*":
   version "1.1.30"
@@ -78,15 +89,49 @@
   dependencies:
     "@types/node" "*"
 
+"@types/pino@^3.0.1":
+  version "3.0.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/pino/-/pino-3.0.1.tgz#90db868d8bb723c16b3a42fc753fe25709553479"
+  dependencies:
+    "@types/node" "*"
+
+"@types/react-addons-shallow-compare@^0.14.20":
+  version "0.14.20"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-addons-shallow-compare/-/react-addons-shallow-compare-0.14.20.tgz#753d55714e01ecb0a0ce22932e7288c0f2305448"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-dom@^15.5.1":
   version "15.5.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-dom/-/react-dom-15.5.1.tgz#f3c3e14c682785923c7d64583537df319442dec1"
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^15.0.36":
-  version "15.0.36"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react/-/react-15.0.36.tgz#35cb9153eaaae0750ea50e0a8eaee1d93f42c189"
+"@types/react-redux@^4.4.46":
+  version "4.4.46"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-redux/-/react-redux-4.4.46.tgz#83b78c8783f31fc890d9a4d1e2acf9c4665fa913"
+  dependencies:
+    "@types/react" "*"
+    redux "^3.6.0"
+
+"@types/react-router-dom@^4.0.7":
+  version "4.0.7"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-router-dom/-/react-router-dom-4.0.7.tgz#65b192f7a5dbd1c05a8d04cc5863c9775705a435"
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+    "@types/react-router" "*"
+
+"@types/react-router@*":
+  version "4.0.14"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-router/-/react-router-4.0.14.tgz#dd650f40bbb20ad1fec26471707665908efa9e9f"
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+
+"@types/react@*", "@types/react@^15.0.38":
+  version "15.0.38"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react/-/react-15.0.38.tgz#6afea31a9fe66304af474106ba372ddaba449995"
 
 "@types/relateurl@*":
   version "0.2.28"
@@ -1295,7 +1340,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-class@^15.6.0:
+create-react-class@^15.5.3, create-react-class@^15.6.0:
   version "15.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/create-react-class/-/create-react-class-15.6.0.tgz#ab448497c26566e1e29413e883207d57cfe7bed4"
   dependencies:
@@ -1720,6 +1765,12 @@ encoding@^0.1.11:
   dependencies:
     iconv-lite "~0.4.13"
 
+end-of-stream@^1.1.0:
+  version "1.4.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/end-of-stream/-/end-of-stream-1.4.0.tgz#7a90d833efda6cfa6eac0f4949dbb0fad3a63206"
+  dependencies:
+    once "^1.4.0"
+
 enhanced-resolve@^3.1.0, enhanced-resolve@^3.3.0:
   version "3.3.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/enhanced-resolve/-/enhanced-resolve-3.3.0.tgz#950964ecc7f0332a42321b673b38dc8ff15535b3"
@@ -2102,9 +2153,17 @@ fast-deep-equal@^1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/fast-deep-equal/-/fast-deep-equal-1.0.0.tgz#96256a3bc975595eb36d82e9929d060d893439ff"
 
+fast-json-parse@^1.0.0:
+  version "1.0.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/fast-json-parse/-/fast-json-parse-1.0.2.tgz#3fb1ca12db68a85933612cc3fab4d7060cfff1d7"
+
 fast-levenshtein@~2.0.4:
   version "2.0.6"
   resolved "https://nexus.swmdigital.io/repository/js-combined/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
+
+fast-safe-stringify@^1.0.8, fast-safe-stringify@^1.1.11:
+  version "1.2.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/fast-safe-stringify/-/fast-safe-stringify-1.2.0.tgz#ebd42666fd18fe4f2ba4f0d295065f3f85cade96"
 
 fastparse@^1.1.1:
   version "1.1.1"
@@ -2122,7 +2181,7 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-fbjs@^0.8.9:
+fbjs@^0.8.4, fbjs@^0.8.9:
   version "0.8.12"
   resolved "https://nexus.swmdigital.io/repository/js-combined/fbjs/-/fbjs-0.8.12.tgz#10b5d92f76d45575fd63a217d4ea02bea2f8ed04"
   dependencies:
@@ -2221,6 +2280,10 @@ flat-cache@^1.2.1:
     del "^2.0.2"
     graceful-fs "^4.1.2"
     write "^0.2.1"
+
+flatstr@^1.0.4:
+  version "1.0.5"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/flatstr/-/flatstr-1.0.5.tgz#5b451b08cbd48e2eac54a2bbe0bf46165aa14be3"
 
 flatten@^1.0.2:
   version "1.0.2"
@@ -2595,7 +2658,7 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
-hoist-non-react-statics@^1.2.0:
+hoist-non-react-statics@^1.0.3, hoist-non-react-statics@^1.2.0:
   version "1.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
 
@@ -2798,7 +2861,7 @@ interpret@^1.0.0:
   version "1.0.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/interpret/-/interpret-1.0.3.tgz#cbc35c62eeee73f19ab7b10a801511401afc0f90"
 
-invariant@^2.2.0, invariant@^2.2.1, invariant@^2.2.2:
+invariant@^2.0.0, invariant@^2.2.0, invariant@^2.2.1, invariant@^2.2.2:
   version "2.2.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
   dependencies:
@@ -3619,6 +3682,10 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
+lodash-es@^4.2.0, lodash-es@^4.2.1:
+  version "4.17.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/lodash-es/-/lodash-es-4.17.4.tgz#dcc1d7552e150a0640073ba9cb31d70f032950e7"
+
 lodash._arraycopy@^3.0.0:
   version "3.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash._arraycopy/-/lodash._arraycopy-3.0.0.tgz#76e7b7c1f1fb92547374878a562ed06a3e50f6e1"
@@ -3839,7 +3906,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0, lodash@~4.17.4:
+lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@~4.17.4:
   version "4.17.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -4392,7 +4459,7 @@ on-finished@~2.3.0:
   dependencies:
     ee-first "1.1.1"
 
-once@^1.3.0, once@^1.3.3, once@^1.4.0:
+once@^1.3.0, once@^1.3.1, once@^1.3.3, once@^1.4.0:
   version "1.4.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/once/-/once-1.4.0.tgz#583b1aa775961d4b113ac17d9c50baef9dd76bd1"
   dependencies:
@@ -4643,6 +4710,18 @@ pinkie-promise@^2.0.0:
 pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
+
+pino@^4.7.1:
+  version "4.7.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/pino/-/pino-4.7.1.tgz#d8208de925065f49c9d4a72f54509a167fe18018"
+  dependencies:
+    chalk "^2.0.1"
+    fast-json-parse "^1.0.0"
+    fast-safe-stringify "^1.1.11"
+    flatstr "^1.0.4"
+    pump "^1.0.2"
+    quick-format-unescaped "^1.1.1"
+    split2 "^2.0.1"
 
 pkg-dir@^2.0.0:
   version "2.0.0"
@@ -5016,6 +5095,13 @@ public-encrypt@^4.0.0:
     parse-asn1 "^5.0.0"
     randombytes "^2.0.1"
 
+pump@^1.0.2:
+  version "1.0.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/pump/-/pump-1.0.2.tgz#3b3ee6512f94f0e575538c17995f9f16990a5d51"
+  dependencies:
+    end-of-stream "^1.1.0"
+    once "^1.3.1"
+
 punycode@1.3.2:
   version "1.3.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
@@ -5047,6 +5133,12 @@ querystring@0.2.0, querystring@^0.2.0:
   version "0.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
 
+quick-format-unescaped@^1.1.1:
+  version "1.1.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/quick-format-unescaped/-/quick-format-unescaped-1.1.1.tgz#e77555ef3e66e105d4039e13ef79201284fee916"
+  dependencies:
+    fast-safe-stringify "^1.0.8"
+
 randomatic@^1.1.3:
   version "1.1.7"
   resolved "https://nexus.swmdigital.io/repository/js-combined/randomatic/-/randomatic-1.1.7.tgz#c7abe9cc8b87c0baa876b19fde83fd464797e38c"
@@ -5077,6 +5169,13 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-addons-shallow-compare@^15.6.0:
+  version "15.6.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/react-addons-shallow-compare/-/react-addons-shallow-compare-15.6.0.tgz#b7a4e5ff9f2704c20cf686dd8a05dd08b26de252"
+  dependencies:
+    fbjs "^0.8.4"
+    object-assign "^4.1.0"
+
 react-addons-test-utils@^15.6.0:
   version "15.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/react-addons-test-utils/-/react-addons-test-utils-15.6.0.tgz#062d36117fe8d18f3ba5e06eb33383b0b85ea5b9"
@@ -5088,6 +5187,18 @@ react-dom@^15.6.1:
     fbjs "^0.8.9"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
+    prop-types "^15.5.10"
+
+react-redux@^5.0.5:
+  version "5.0.5"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/react-redux/-/react-redux-5.0.5.tgz#f8e8c7b239422576e52d6b7db06439469be9846a"
+  dependencies:
+    create-react-class "^15.5.3"
+    hoist-non-react-statics "^1.0.3"
+    invariant "^2.0.0"
+    lodash "^4.2.0"
+    lodash-es "^4.2.0"
+    loose-envify "^1.1.0"
     prop-types "^15.5.10"
 
 react-router-dom@^4.1.2:
@@ -5160,7 +5271,7 @@ readable-stream@1.0:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.2.2, readable-stream@^2.2.6:
+readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.2.6:
   version "2.3.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/readable-stream/-/readable-stream-2.3.3.tgz#368f2512d79f9d46fdfc71349ae7878bbc1eb95c"
   dependencies:
@@ -5209,6 +5320,19 @@ reduce-function-call@^1.0.1:
   resolved "https://nexus.swmdigital.io/repository/js-combined/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
   dependencies:
     balanced-match "^0.4.2"
+
+redux-data-loader@^0.3.6:
+  version "0.3.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/redux-data-loader/-/redux-data-loader-0.3.6.tgz#98c85433ba24f4087a6f5018fe3e01584aed4562"
+
+redux@^3.6.0:
+  version "3.7.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"
+  dependencies:
+    lodash "^4.2.1"
+    lodash-es "^4.2.1"
+    loose-envify "^1.1.0"
+    symbol-observable "^1.0.3"
 
 regenerate@^1.2.1:
   version "1.3.2"
@@ -5755,6 +5879,12 @@ split-string@^2.1.0:
   dependencies:
     extend-shallow "^2.0.1"
 
+split2@^2.0.1:
+  version "2.1.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/split2/-/split2-2.1.1.tgz#7a1f551e176a90ecd3345f7246a0cfe175ef4fd0"
+  dependencies:
+    through2 "^2.0.2"
+
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
@@ -5921,6 +6051,10 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
+symbol-observable@^1.0.3:
+  version "1.0.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/symbol-observable/-/symbol-observable-1.0.4.tgz#29bf615d4aa7121bdd898b22d4b3f9bc4e2aa03d"
+
 symbol-tree@^3.2.1:
   version "3.2.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
@@ -5990,6 +6124,13 @@ throng@^4.0.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/throng/-/throng-4.0.0.tgz#983c6ba1993b58eae859998aa687ffe88df84c17"
   dependencies:
     lodash.defaults "^4.0.1"
+
+through2@^2.0.2:
+  version "2.0.3"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/through2/-/through2-2.0.3.tgz#0004569b37c7c74ba39c43f3ced78d1ad94140be"
+  dependencies:
+    readable-stream "^2.1.5"
+    xtend "~4.0.1"
 
 through@^2.3.6:
   version "2.3.8"
@@ -6595,7 +6736,7 @@ xml-name-validator@^2.0.1:
   version "2.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/xml-name-validator/-/xml-name-validator-2.0.1.tgz#4d8b8f1eccd3419aa362061becef515e1e559635"
 
-xtend@^4.0.0, xtend@^4.0.1:
+xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
 
