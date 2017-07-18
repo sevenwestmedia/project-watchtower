@@ -19,14 +19,18 @@ Array [
 
 exports[`PageLifecycleProvider raises completed event after data loaded and content re-rendered 2`] = `
 "<TestPage path=\\"/\\">
-  <DataLoader dataKey=\\"test/\\" renderData={[Function]}>
-    <div>
-      Loading:
-      false
-      Value:
-      test
+  <Page errorComponent=\\"oops\\">
+    <div className=\\"js-page-contents\\">
+      <DataLoader resourceId=\\"test/\\" renderData={[Function]}>
+        <div>
+          Status: 
+          Idle
+          Last action: 
+          {\\"type\\":\\"initial-fetch\\",\\"success\\":true}
+        </div>
+      </DataLoader>
     </div>
-  </DataLoader>
+  </Page>
 </TestPage>"
 `;
 
@@ -93,14 +97,18 @@ Array [
 
 exports[`PageLifecycleProvider raises events when page navigated 2`] = `
 "<TestPage path=\\"/foo\\">
-  <DataLoader dataKey=\\"test/foo\\" renderData={[Function]}>
-    <div>
-      Loading:
-      false
-      Value:
-      page2
+  <Page errorComponent=\\"oops\\">
+    <div className=\\"js-page-contents\\">
+      <DataLoader resourceId=\\"test/foo\\" renderData={[Function]}>
+        <div>
+          Status: 
+          Idle
+          Last action: 
+          {\\"type\\":\\"initial-fetch\\",\\"success\\":true}
+        </div>
+      </DataLoader>
     </div>
-  </DataLoader>
+  </Page>
 </TestPage>"
 `;
 
@@ -117,13 +125,17 @@ Array [
 
 exports[`PageLifecycleProvider raises loading event after render 2`] = `
 "<TestPage path=\\"/\\">
-  <DataLoader dataKey=\\"test/\\" renderData={[Function]}>
-    <div>
-      Loading:
-      true
-      Value:
-      undefined
+  <Page errorComponent=\\"oops\\">
+    <div className=\\"js-page-contents\\">
+      <DataLoader resourceId=\\"test/\\" renderData={[Function]}>
+        <div>
+          Status: 
+          Fetching
+          Last action: 
+          {\\"type\\":\\"none\\",\\"success\\":true}
+        </div>
+      </DataLoader>
     </div>
-  </DataLoader>
+  </Page>
 </TestPage>"
 `;
