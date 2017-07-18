@@ -52,6 +52,7 @@
     "typescript": "^2.4.1"
   },
   "peerDependencies": {
+    "@types/webpack": "^3.0.4",
     "enzyme": ">=2.0.0",
     "express": ">=4.0.0",
     "react": ">=15.0.0",
