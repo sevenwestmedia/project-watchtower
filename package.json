@@ -92,7 +92,7 @@
     "raw-loader": "^0.5.1",
     "react-addons-shallow-compare": "^15.6.0",
     "react-redux": "^5.0.5",
-    "redux-data-loader": "^0.3.6",
+    "redux-data-loader": "^0.3.7",
     "resolve-url-loader": "^2.1.0",
     "rimraf": "^2.6.1",
     "sass-lint": "^1.10.2",

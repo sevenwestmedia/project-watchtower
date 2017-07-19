@@ -5321,9 +5321,9 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
-redux-data-loader@^0.3.6:
-  version "0.3.6"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/redux-data-loader/-/redux-data-loader-0.3.6.tgz#98c85433ba24f4087a6f5018fe3e01584aed4562"
+redux-data-loader@^0.3.7:
+  version "0.3.7"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/redux-data-loader/-/redux-data-loader-0.3.7.tgz#c6535254292609eb6f7dfba1c501e89793319ff4"
 
 redux@^3.6.0:
   version "3.7.2"

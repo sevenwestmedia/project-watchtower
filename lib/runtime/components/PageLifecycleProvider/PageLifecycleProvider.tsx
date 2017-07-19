@@ -3,8 +3,6 @@ import { withRouter, RouteComponentProps } from 'react-router'
 import * as H from 'history'
 
 import { DataProvider, DataLoaderResources } from 'redux-data-loader'
-// TODO Should re-export this in redux-data-loader
-import { DataLoaderState } from 'redux-data-loader/src/data-loader-actions'
 
 // TODO These types are duplicated in the component library
 export interface ComponentEvent<T> {
