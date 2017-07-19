@@ -7,9 +7,9 @@
   },
   "scripts": {
     "prepare": "npm run clean",
-    "clean": "npm run clean:lighthouse && rimraf {lib,test}/**/*.{js,map,d.ts}",
+    "clean": "npm run clean:lighthouse && rimraf dist-es {lib,test}/**/*.{js,map,d.ts}",
     "lint": "tslint 'lib/**/*.ts' --type-check --project ./tsconfig.json -e '**/*.d.ts'",
-    "build": "tsc",
+    "build": "tsc && tsc -p ./tsconfig-es2015.json",
     "build:debug": "tsc -p tsconfig-debug.json",
     "build:complete": "npm run clean && npm run lint && npm run test -- --coverage --verbose && npm run build",
     "test:base": "npm run clean:lighthouse && jest --runInBand --forceExit --config jest.json",
@@ -49,6 +49,7 @@
     "react-addons-test-utils": "^15.6.0",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.2",
+    "tslib": "^1.7.1",
     "typescript": "^2.4.2"
   },
   "peerDependencies": {
@@ -60,6 +61,7 @@
     "react-dom": ">=15.0.0",
     "react-router-dom": ">=4.0.0",
     "source-map-support": ">=0.4.0",
+    "tslib": "^1.7.1",
     "typescript": ">=2.2.0"
   },
   "dependencies": {

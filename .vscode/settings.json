@@ -13,7 +13,8 @@
     },
     "search.exclude": {
         "**/node_modules": true,
-        "coverage/**": true
+        "coverage/**": true,
+        "dist-es/**": true
     },
     "typescript.tsdk": "./node_modules/typescript/lib"
 }

@@ -1,8 +1,11 @@
 # Changelog
 
 ## vNext
-* Add webpack alias to consume the component library as ES2015 modules in production
+
+* **BREAKING** Add `tslib` as peerDependency
+* **BREAKING** Add webpack alias to consume the component library as ES2015 modules in production (requires component library >= 43.0.0)
 * Upgrade Lighthouse to 2.3.0 to fix issues described below
+* Add ES2015 build and webpack alias for project-watchtower itself in production
 
 ## v0.6.0-rc.2 (2017-07-11) **[pre-release @next]**
 
