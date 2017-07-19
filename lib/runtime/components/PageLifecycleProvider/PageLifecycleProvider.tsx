@@ -177,7 +177,7 @@ export const withPageLifecycleEvents = (Component: React.ComponentClass<any>) =>
 }
 
 // tslint:disable-next-line:max-classes-per-file
-class PageLifecycleProvider extends React.Component<Props, {}> {
+class RawPageLifecycleProvider extends React.Component<Props, {}> {
     static childContextTypes = {
         pageLifecycle: React.PropTypes.object,
     }
@@ -293,4 +293,5 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
     }
 }
 
-export default withRouter(PageLifecycleProvider) as React.ComponentClass<OwnProps>
+export const PageLifecycleProvider =
+    withRouter(RawPageLifecycleProvider) as React.ComponentClass<OwnProps>

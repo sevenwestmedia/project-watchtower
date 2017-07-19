@@ -7,5 +7,7 @@
 
 export * from './server/assets'
 export * from './server/server'
+export { PageLifecycleProvider } from './components/PageLifecycleProvider/PageLifecycleProvider'
+export { Page } from './components/Page/Page'
 
 export { default as config } from './config/config'
