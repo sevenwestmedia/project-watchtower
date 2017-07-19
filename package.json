@@ -28,6 +28,11 @@
   },
   "keywords": [],
   "devDependencies": {
+    "@types/enzyme": "^2.8.2",
+    "@types/pino": "^3.0.1",
+    "@types/react-addons-shallow-compare": "^0.14.20",
+    "@types/react-redux": "^4.4.46",
+    "@types/react-router-dom": "^4.0.7",
     "@types/autoprefixer": "^6.7.2",
     "@types/cheerio": "^0.22.2",
     "@types/dotenv": "^4.0.0",
@@ -65,11 +70,6 @@
     "typescript": ">=2.2.0"
   },
   "dependencies": {
-    "@types/enzyme": "^2.8.2",
-    "@types/pino": "^3.0.1",
-    "@types/react-addons-shallow-compare": "^0.14.20",
-    "@types/react-redux": "^4.4.46",
-    "@types/react-router-dom": "^4.0.7",
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^7.1.2",
     "awesome-typescript-loader": "^3.2.1",

@@ -20,6 +20,14 @@ interface TestData {
     bar: string
 }
 
+const loaderStatusLookup: { [state: number]: string } = {
+    0: 'Idle',
+    1: 'Fetching',
+    2: 'Refreshing',
+    3: 'Paging',
+    4: 'Updating',
+}
+
 const createTestComponents = () => {
     const resources = new DataLoaderResources()
     const promiseCompletionSource = new PromiseCompletionSource<TestData>()
@@ -77,14 +85,6 @@ const createTestComponents = () => {
         FakeLazyLoad,
         TestPage,
     }
-}
-
-const loaderStatusLookup: { [state: number]: string } = {
-    0: 'Idle',
-    1: 'Fetching',
-    2: 'Refreshing',
-    3: 'Paging',
-    4: 'Updating',
 }
 
 describe('PageLifecycleProvider', () => {
