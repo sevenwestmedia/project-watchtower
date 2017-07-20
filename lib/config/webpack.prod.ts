@@ -2,6 +2,11 @@ import * as webpack from 'webpack'
 
 /** Webpack settings for all production builds */
 const prodConfig: webpack.Configuration = {
+    resolve: {
+        alias: {
+            'swm-component-library/dist': 'swm-component-library/dist-es',
+        },
+    },
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production'),
