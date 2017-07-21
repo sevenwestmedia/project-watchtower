@@ -40,17 +40,20 @@ const createTestComponents = () => {
     class TestPage extends React.Component<{ path: string }, {}> {
         render() {
             return (
-                <Page errorComponent="oops">
-                    <TestDataLoader
-                        resourceId={'test' + this.props.path}
-                        renderData={(data) => (
-                            <div>
-                                Status: {loaderStatusLookup[data.status]}
-                                Last action: {JSON.stringify(data.lastAction || {})}
-                            </div>
-                        )}
-                    />
-                </Page>
+                <Page
+                    errorComponent="oops"
+                    page={
+                        <TestDataLoader
+                            resourceId={'test' + this.props.path}
+                            renderData={(data) => (
+                                <div>
+                                    Status: {loaderStatusLookup[data.status]}
+                                    Last action: {JSON.stringify(data.lastAction || {})}
+                                </div>
+                            )}
+                        />
+                    }
+                />
             )
         }
     }
@@ -159,9 +162,12 @@ describe('PageLifecycleProvider', () => {
                         resources={testComponents.resources}
                         onEvent={(event) => pageEvents.push(event)}
                     >
-                        <Page errorComponent="oops">
-                            <testComponents.FakeLazyLoad path="/" />
-                        </Page>
+                        <Page
+                            errorComponent="oops"
+                            page={
+                                <testComponents.FakeLazyLoad path="/" />
+                            }
+                        />
                     </PageLifecycleProvider>
                 </MemoryRouter>
             </Provider>
