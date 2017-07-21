@@ -9,12 +9,10 @@ import { delay, formatTimeMs, timeout } from '../runtime/util/time'
 
 const { HAS_SERVER } = CONFIG
 
-// https://github.com/GoogleChrome/lighthouse/issues/2618
 const killChromeLauncher = (launcher?: Lighthouse.ChromeLauncher) => {
     if (!launcher) {
         return
     }
-    process.once('uncaughtException', () => {})
     setTimeout(() => launcher.kill(), 0)
 }
 
@@ -36,18 +34,13 @@ export const runLighthouse = async (url: string) => {
                     : Number(process.env.CHROME_REMOTE_DEBUGGING_PORT) || 9222,
                 skipAutolaunch: onBuildServer,
             },
-            // TODO re-enable limit to performance audits once dom-size audit works there
-            /*
             {
                 extends: 'lighthouse:default',
                 settings: {
                     onlyCategories: ['performance'],
                 },
             },
-            */
         )
-
-        // log(results)
 
         // we have to wait a bit, otherwise we get a ECONNRESET error we can't catch
         await delay(2000)
