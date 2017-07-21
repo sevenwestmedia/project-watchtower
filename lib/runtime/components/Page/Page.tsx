@@ -10,8 +10,8 @@ export interface Props {
     page: React.ReactElement<any> | ((pageProps: PageLifecycleProps) => React.ReactElement<any>)
 }
 
-export const Page = withPageLifecycleProps(
-    class PageRaw extends React.PureComponent<Props & PageLifecycleProps, State> {
+export default withPageLifecycleProps(
+    class Page extends React.PureComponent<Props & PageLifecycleProps, State> {
         static contextTypes = {
             // Seems like context cannot be exported, this is a runtime react thing anyways
             pageLifecycle: React.PropTypes.object as any,
@@ -68,6 +68,8 @@ export const Page = withPageLifecycleProps(
                     currentPageState: this.props.currentPageState,
                     currentPageLocation: this.props.currentPageLocation,
                 })
+            } else {
+                content = this.props.page
             }
 
             return (

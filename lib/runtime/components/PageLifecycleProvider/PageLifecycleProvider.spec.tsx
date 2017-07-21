@@ -9,12 +9,12 @@ import { MemoryRouter, Route } from 'react-router-dom'
 import { mount } from 'enzyme'
 import * as H from 'history'
 
-import {
-    PageLifecycleProvider, withPageLifecycleEvents, ComponentWithLifecycle, PageEvent,
+import PageLifecycleProvider, {
+    withPageLifecycleEvents, ComponentWithLifecycle, PageEvent,
 } from './PageLifecycleProvider'
 import PromiseCompletionSource from '../../util/promise-completion-source'
 import { DataLoaderResources } from 'redux-data-loader'
-import { Page } from '../Page/Page'
+import Page from '../Page/Page'
 
 interface TestData {
     bar: string
