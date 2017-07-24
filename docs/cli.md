@@ -68,10 +68,12 @@ pwt start [watch] [fast] [prod] [debug] [client]
 ### stats
 
 ```
-pwt stats
+pwt stats [verbose]
 ```
 
 Measures build metrics and saves them to `build-stats.csv`
+
+*   `verbose`: Output the server console logging when running the stats
 
 Example:
 

@@ -57,7 +57,7 @@ export const runLighthouse = async (url: string) => {
     }
 }
 
-const lighthouseStats = async (): Promise<BuildMetrics> => {
+const lighthouseStats = async (verbose = false): Promise<BuildMetrics> => {
 
     if (!HAS_SERVER) {
         log('Skipping lighthouse performance metrics because the application has no server')
@@ -98,7 +98,7 @@ const lighthouseStats = async (): Promise<BuildMetrics> => {
                     stats[`${page}_perf_score`] = perfResult.score.toFixed(1)
                 }
             }
-        })
+        }, verbose)
 
         log(`Lighthouse stats: ${prettyJson(stats)}`)
 

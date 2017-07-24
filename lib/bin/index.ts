@@ -58,7 +58,7 @@ switch (command) {
         break
 
     case 'stats':
-        exitAfter(stats())
+        exitAfter(stats(...commandArgs))
         break
 
     case 'test':
@@ -81,7 +81,7 @@ Scripts:
     explore-bundle [disableHoisting]
     lint [tslint] [sass-lint] [<glob> ...]
     start [watch] [fast] [prod] [debug] [client]
-    stats
+    stats [verbose]
     test [debug] [<jest options> ...]
     watch [server]
 

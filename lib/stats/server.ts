@@ -64,7 +64,7 @@ export interface StatsRunDetails {
 
 export type StatsFn = (details: StatsRunDetails) => Promise<any>
 
-export const runStatsOnServer = async (statsFn: StatsFn) => {
+export const runStatsOnServer = async (statsFn: StatsFn, verbose = false) => {
 
     if (!HAS_SERVER) {
         log('Skipping server-based stats because the application has no server')
@@ -74,6 +74,8 @@ export const runStatsOnServer = async (statsFn: StatsFn) => {
     const port = await findFreePort(getPort())
 
     const serverEntryFile = path.resolve(SERVER_OUTPUT, 'server.js')
+
+    log('VERBOSE', verbose)
 
     const devServer = await forkPromise(
         serverEntryFile,
@@ -85,7 +87,7 @@ export const runStatsOnServer = async (statsFn: StatsFn) => {
                 ...STATS_ENV,
                 PORT: port,
             },
-            silent: true,
+            silent: !verbose,
         },
         true,
     )

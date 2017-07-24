@@ -11,11 +11,11 @@ export interface BuildMetrics {
     [key: string]: string
 }
 
-export const measureBuildStats = async (): Promise<BuildMetrics> => {
+export const measureBuildStats = async (verbose?: boolean): Promise<BuildMetrics> => {
 
     const bundleMetrics = await bundleSize()
-    const ssrMetrics = await ssrStats()
-    const lighthouseMetrics = await lighthouseStats()
+    const ssrMetrics = await ssrStats(verbose)
+    const lighthouseMetrics = await lighthouseStats(verbose)
 
     return {
         ...bundleMetrics,
@@ -54,8 +54,8 @@ export const writeBuildStats = async (metrics: BuildMetrics) => {
     await writeFile(statsFilePath, fileContent)
 }
 
-const measureAndWriteBuildStats = async () => {
-    const metrics = await measureBuildStats()
+const measureAndWriteBuildStats = async (verbose = false) => {
+    const metrics = await measureBuildStats(verbose)
     await writeBuildStats(metrics)
 }
 

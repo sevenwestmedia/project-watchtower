@@ -9,7 +9,7 @@ import { runStatsOnServer, loadSSRPage } from './server'
 
 const { HAS_SERVER } = CONFIG
 
-const ssrStats = async (): Promise<BuildMetrics> => {
+const ssrStats = async (verbose = false): Promise<BuildMetrics> => {
 
     if (!HAS_SERVER) {
         log('Skipping SSR stats because the application has no server')
@@ -37,7 +37,7 @@ const ssrStats = async (): Promise<BuildMetrics> => {
             stats[`${page}_ssr_document_size`] = formatFileSize(size)
             stats[`${page}_ssr_dom_size`] = domSize.toString()
             stats[`${page}_ssr_loadtime`] = formatTimeMs(time)
-        })
+        }, verbose)
 
         log(`SSR stats: ${prettyJson(stats)}`)
 
