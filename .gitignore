@@ -169,6 +169,7 @@ client/**/*.d.ts
 test/**/*.js
 test/**/*.d.ts
 build/**
+dist-es/**
 public/assets
 assets.json
 build-stats.csv

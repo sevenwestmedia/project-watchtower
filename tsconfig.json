@@ -11,6 +11,7 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "jsx": "react",
+        "importHelpers": true,
         "lib": [
             "dom",
             "es5",
@@ -21,7 +22,7 @@
         ],
         "inlineSources": true,
         "declaration": true,
-        "baseUrl": ".",
+        "baseUrl": "./",
         "typeRoots": [
             "node_modules/@types",
             "@types"

@@ -5,6 +5,7 @@ const prodConfig: webpack.Configuration = {
     resolve: {
         alias: {
             'swm-component-library/dist': 'swm-component-library/dist-es',
+            'project-watchtower/lib': 'project-watchtower/dist-es',
         },
     },
     plugins: [
