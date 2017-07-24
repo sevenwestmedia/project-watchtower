@@ -48,8 +48,8 @@
     "react": "^15.6.1",
     "react-addons-test-utils": "^15.6.0",
     "react-dom": "^15.6.1",
-    "react-router-dom": "^4.1.1",
-    "typescript": "^2.4.1"
+    "react-router-dom": "^4.1.2",
+    "typescript": "^2.4.2"
   },
   "peerDependencies": {
     "@types/webpack": "^3.0.4",
@@ -76,7 +76,7 @@
     "http-proxy-middleware": "^0.17.4",
     "jest": "^20.0.4",
     "jest-teamcity-reporter": "^0.6.2",
-    "lighthouse": "2.2.1",
+    "lighthouse": "2.3.0",
     "node-sass": "^4.5.3",
     "null-loader": "^0.1.1",
     "opn": "^5.1.0",
@@ -92,8 +92,8 @@
     "ts-jest": "^20.0.7",
     "tslint": "5.5.0",
     "tslint-react": "3.0.0",
-    "webpack": "^3.1.0",
-    "webpack-bundle-analyzer": "^2.8.2",
+    "webpack": "^3.3.0",
+    "webpack-bundle-analyzer": "^2.8.3",
     "webpack-dev-middleware": "^1.11.0",
     "webpack-dotenv-plugin": "^2.0.2",
     "webpack-hot-middleware": "^2.18.2",

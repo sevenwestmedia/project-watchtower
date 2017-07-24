@@ -2,6 +2,7 @@
 
 ## vNext
 * Add webpack alias to consume the component library as ES2015 modules in production
+* Upgrade Lighthouse to 2.3.0 to fix issues described below
 
 ## v0.6.0-rc.2 (2017-07-11) **[pre-release @next]**
 
