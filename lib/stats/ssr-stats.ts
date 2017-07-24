@@ -27,6 +27,13 @@ const ssrStats = async (verbose = false): Promise<BuildMetrics> => {
 
             const { size, content } = await loadPage()
 
+            if (verbose) {
+                log('### SSR content for ', url)
+                log('---------------------')
+                log(content)
+                log('---------------------')
+            }
+
             const domSize = load(content)('*').length
 
             const time = await getSequenceAverage(async () => {
