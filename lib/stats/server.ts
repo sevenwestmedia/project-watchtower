@@ -75,8 +75,6 @@ export const runStatsOnServer = async (statsFn: StatsFn, verbose = false) => {
 
     const serverEntryFile = path.resolve(SERVER_OUTPUT, 'server.js')
 
-    log('VERBOSE', verbose)
-
     const devServer = await forkPromise(
         serverEntryFile,
         [],
