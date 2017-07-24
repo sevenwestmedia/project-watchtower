@@ -2,6 +2,9 @@
 
 ## vNext
 
+
+## v0.6.0 (2017-07-27)
+
 * **BREAKING** Add `tslib` as peerDependency
 * **BREAKING** Add webpack alias to consume the component library as ES2015 modules in production (requires component library >= 43.0.0)
 * Upgrade Lighthouse to 2.3.0 to fix issues described below
