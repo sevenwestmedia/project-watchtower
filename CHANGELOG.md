@@ -2,6 +2,7 @@
 
 ## vNext
 
+* Add `pwt stats verbose` to log the server output when running the stats
 
 ## v0.6.0 (2017-07-27)
 

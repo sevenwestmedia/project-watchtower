@@ -25,4 +25,7 @@ hello world hello world hello world hello world hello world hello world hello wo
 </html>`)
 })
 
-app.listen(port)
+app.listen(port, () => {
+    // tslint:disable-next-line no-console
+    console.log(`Server listening on port ${port}`)
+})

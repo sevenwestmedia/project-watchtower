@@ -64,7 +64,7 @@ export interface StatsRunDetails {
 
 export type StatsFn = (details: StatsRunDetails) => Promise<any>
 
-export const runStatsOnServer = async (statsFn: StatsFn) => {
+export const runStatsOnServer = async (statsFn: StatsFn, verbose = false) => {
 
     if (!HAS_SERVER) {
         log('Skipping server-based stats because the application has no server')
@@ -85,7 +85,7 @@ export const runStatsOnServer = async (statsFn: StatsFn) => {
                 ...STATS_ENV,
                 PORT: port,
             },
-            silent: true,
+            silent: !verbose,
         },
         true,
     )

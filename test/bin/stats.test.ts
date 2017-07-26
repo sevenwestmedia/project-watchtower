@@ -16,7 +16,7 @@ describe('stats', () => {
 
         await clean()
         await build()
-        await stats()
+        await stats('verbose')
 
         const filePath = path.resolve(process.cwd(), 'build-stats.csv')
         expect(fs.existsSync(filePath)).toBe(true)
