@@ -2,7 +2,7 @@ import * as React from 'react'
 import {
     PageLifecycle, withPageLifecycleProps, PageLifecycleProps,
 } from '../PageLifecycleProvider/PageLifecycleProvider'
-import { Logger } from 'pino'
+import { Logger } from '../../util/log'
 
 export interface State { error: boolean }
 export interface Props {
@@ -72,11 +72,7 @@ export default withPageLifecycleProps(
                 content = this.props.page
             }
 
-            return (
-                <div className="js-page-contents">
-                    {content}
-                </div>
-            )
+            return content
         }
     },
 )

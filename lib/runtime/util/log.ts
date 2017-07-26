@@ -1,3 +1,10 @@
+export interface Logger {
+    debug(msg: string): void
+    info(msg: string): void
+    error(msg: string): void
+    error<T extends { err: Error }>(obj: T): void
+}
+
 const logStack = (error: any) => {
     if (error && error.stack) {
         // tslint:disable-next-line no-console
