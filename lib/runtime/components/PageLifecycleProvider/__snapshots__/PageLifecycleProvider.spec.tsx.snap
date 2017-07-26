@@ -21,16 +21,14 @@ exports[`PageLifecycleProvider raises completed event after data loaded and cont
 "<TestPage path=\\"/\\">
   <WithPageLifecycleProps errorComponent=\\"oops\\" page={{...}}>
     <Page errorComponent=\\"oops\\" page={{...}} currentPageState=\\"loaded\\" currentPageLocation=\\"/\\">
-      <div className=\\"js-page-contents\\">
-        <DataLoader resourceId=\\"test/\\" renderData={[Function]}>
-          <div>
-            Status: 
-            Idle
-            Last action: 
-            {\\"type\\":\\"initial-fetch\\",\\"success\\":true}
-          </div>
-        </DataLoader>
-      </div>
+      <DataLoader resourceId=\\"test/\\" renderData={[Function]}>
+        <div>
+          Status: 
+          Idle
+          Last action: 
+          {\\"type\\":\\"initial-fetch\\",\\"success\\":true}
+        </div>
+      </DataLoader>
     </Page>
   </WithPageLifecycleProps>
 </TestPage>"
@@ -101,16 +99,14 @@ exports[`PageLifecycleProvider raises events when page navigated 2`] = `
 "<TestPage path=\\"/foo\\">
   <WithPageLifecycleProps errorComponent=\\"oops\\" page={{...}}>
     <Page errorComponent=\\"oops\\" page={{...}} currentPageState=\\"loaded\\" currentPageLocation=\\"/foo\\">
-      <div className=\\"js-page-contents\\">
-        <DataLoader resourceId=\\"test/foo\\" renderData={[Function]}>
-          <div>
-            Status: 
-            Idle
-            Last action: 
-            {\\"type\\":\\"initial-fetch\\",\\"success\\":true}
-          </div>
-        </DataLoader>
-      </div>
+      <DataLoader resourceId=\\"test/foo\\" renderData={[Function]}>
+        <div>
+          Status: 
+          Idle
+          Last action: 
+          {\\"type\\":\\"initial-fetch\\",\\"success\\":true}
+        </div>
+      </DataLoader>
     </Page>
   </WithPageLifecycleProps>
 </TestPage>"
@@ -131,16 +127,14 @@ exports[`PageLifecycleProvider raises loading event after render 2`] = `
 "<TestPage path=\\"/\\">
   <WithPageLifecycleProps errorComponent=\\"oops\\" page={{...}}>
     <Page errorComponent=\\"oops\\" page={{...}} currentPageState=\\"loading\\" currentPageLocation=\\"/\\">
-      <div className=\\"js-page-contents\\">
-        <DataLoader resourceId=\\"test/\\" renderData={[Function]}>
-          <div>
-            Status: 
-            Fetching
-            Last action: 
-            {\\"type\\":\\"none\\",\\"success\\":true}
-          </div>
-        </DataLoader>
-      </div>
+      <DataLoader resourceId=\\"test/\\" renderData={[Function]}>
+        <div>
+          Status: 
+          Fetching
+          Last action: 
+          {\\"type\\":\\"none\\",\\"success\\":true}
+        </div>
+      </DataLoader>
     </Page>
   </WithPageLifecycleProps>
 </TestPage>"
