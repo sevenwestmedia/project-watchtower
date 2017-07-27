@@ -42,7 +42,7 @@ describe('util/network', () => {
         return new Promise((resolve) => {
             const server = app.listen(port, async () => {
                 const freePort = await findFreePort(port)
-                expect(freePort).toBe(port + 1)
+                expect(freePort).toBeGreaterThan(port)
                 server.close()
                 resolve()
             })
