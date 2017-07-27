@@ -16,26 +16,26 @@
   },
   "keywords": [],
   "dependencies": {
-    "express": "^4.15.2",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "source-map-support": "^0.4.14"
+    "express": "^4.15.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "source-map-support": "^0.4.15"
   },
   "engines": {
     "node": ">=6.10.0"
   },
   "devDependencies": {
-    "@types/enzyme": "^2.7.7",
-    "@types/express": "^4.0.35",
-    "@types/jest": "^19.2.2",
-    "@types/react": "^15.0.20",
-    "@types/react-dom": "^0.14.23",
-    "@types/webpack": "^2.2.14",
+    "@types/enzyme": "^2.8.2",
+    "@types/express": "^4.0.36",
+    "@types/jest": "^20.0.4",
+    "@types/react": "^15.0.38",
+    "@types/react-dom": "^15.5.1",
+    "@types/webpack": "^3.0.4",
     "@types/webpack-env": "^1.13.0",
-    "enzyme": "^2.8.0",
-    "project-watchtower": "^0.4.0",
-    "react-addons-test-utils": "^15.4.2",
-    "typescript": "^2.3.4"
+    "enzyme": "^2.9.1",
+    "project-watchtower": "^0.6.1",
+    "react-addons-test-utils": "^15.6.0",
+    "typescript": "^2.4.1"
   },
   "sasslintConfig": "node_modules/project-watchtower/presets/sass-lint/.sass-lint.yml"
 }
