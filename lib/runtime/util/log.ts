@@ -1,8 +1,8 @@
 export interface Logger {
-    debug(msg: string): void
-    info(msg: string): void
+    debug(msg: string | { msg: string, [key: string]: any }): void
+    info(msg: string | { msg: string, [key: string]: any }): void
     error(msg: string): void
-    error<T extends { err: Error }>(obj: T): void
+    error<T extends { err: Error, msg: string }>(obj: T): void
 }
 
 const logStack = (error: any) => {

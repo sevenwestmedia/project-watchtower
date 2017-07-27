@@ -12,7 +12,7 @@ build('server', 'prod')
 
 ## Functions, Config and Middleware
 
-All functional areas are available as a top-level import from the `project-watchtower` module. However, deep imports are preferred, which is especially important on the client where we don't want unnecessary code bundled up.
+All functional areas are available as a top-level import from the `project-watchtower` module. However, deep imports are preferred, which is especially important on the client where we don't want unnecessary code bundled up (like WebPack/TypeScript, you probably don't want them in your client bundle in production).
 
 The webpack build bundles project-watchtower itself into the server bundle, so it is not required to be present in `node_modules` to run the server. Many functions that are important for development, however, depend on external dependencies that are not included in the webpack bundle and would throw an error if imported statically during production. Components and functions in `/lib/runtime` are safe to statically import in production builds, even if project-watchtower is installed as a `devDependency`, because they have no external dependencies other than the ones listed as required for production in the README. All other functions have to be imported dynamically for development only:
 

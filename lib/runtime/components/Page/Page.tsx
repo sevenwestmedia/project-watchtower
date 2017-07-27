@@ -31,9 +31,8 @@ export default withPageLifecycleProps(
         // https://github.com/facebook/react/blob/15-stable/src/renderers/shared/stack/reconciler/tests/ReactErrorBoundaries-test.js
         // https://github.com/facebook/react/issues/2461
         // TODO Move to stable error boundaries API
-        unstable_handleError(e: Error) {
-            e.message = 'Render error: ' + e.message
-            this.context.logger.error({ err: e })
+        unstable_handleError(err: Error) {
+            this.context.logger.error({ err, msg: 'Render error' })
             this.setState({ error: true })
         }
 

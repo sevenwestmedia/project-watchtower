@@ -262,7 +262,8 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
     }
 
     componentWillReceiveProps(nextProps: Props) {
-        if (this.props.location !== nextProps.location) {
+        // We only care about pathname, not any of the other location info
+        if (this.props.location.pathname !== nextProps.location.pathname) {
             this.isRouting = true
             this.raisePageLoadStartEvent()
             this.pageLifecycle.routeChanged(nextProps.location)
