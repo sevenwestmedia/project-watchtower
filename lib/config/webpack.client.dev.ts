@@ -3,7 +3,7 @@ import * as merge from 'webpack-merge'
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import baseConfig from './webpack.base'
 import clientBaseConfig from './webpack.client'
-import devConfig from './webpack.client.dev'
+import devConfig from './webpack.dev'
 import CONFIG from '../runtime/config/config'
 import webpackHooks from './webpack-hooks'
 
