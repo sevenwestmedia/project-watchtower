@@ -2,6 +2,7 @@ import * as webpack from 'webpack'
 
 /** Webpack settings for all production builds */
 const prodConfig: webpack.Configuration = {
+    devtool: 'source-map',
     resolve: {
         alias: {
             'swm-component-library/dist': 'swm-component-library/dist-es',

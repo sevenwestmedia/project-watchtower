@@ -5,7 +5,6 @@ import * as webpackHotMiddleware from 'webpack-hot-middleware'
 import * as opn from 'opn'
 import { getPort } from '../runtime/server/server'
 import { getWebpackConfig } from '../build/build'
-import { webpackStatsConfig } from '../util/webpack'
 import CONFIG from '../runtime/config/config'
 
 const { PUBLIC_PATH, WATCH_IGNORE } = CONFIG
@@ -24,13 +23,7 @@ export const getHotReloadMiddleware: HotReloadMiddleware = () => {
             // do not serve index.html on / route
             // https://github.com/webpack/webpack-dev-middleware/issues/153
             index: 'foobar',
-            stats: {
-                ...webpackStatsConfig,
-                assets: false,
-                version: false,
-                hash: false,
-                timings: false,
-            },
+            stats: 'errors-only',
             watchOptions: {
                 ignored: WATCH_IGNORE,
                 aggregateTimeout: 1000,

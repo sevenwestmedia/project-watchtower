@@ -14,10 +14,9 @@ const disableTypeCheck = process.env.START_FAST_MODE === 'true'
  * - handle static files (images and fonts)
  */
 const baseConfig: webpack.Configuration = {
-    devtool: 'source-map',
     resolve: {
         extensions: [
-            '.ts', '.tsx', '.js', '.scss', '*',
+            '.ts', '.tsx', '.js', '*',
         ],
         modules: MODULE_PATHS,
         // force linked dependencies to use the project's node_modules
