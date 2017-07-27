@@ -4,7 +4,7 @@ import clean from './clean'
 import build from './build'
 import start from './start'
 import { default as watchServer, WatchServer } from '../watch/server'
-import { WatchParam } from '../types'
+import { StartParam, WatchParam } from '../types'
 
 const { HAS_SERVER } = CONFIG
 
@@ -17,26 +17,33 @@ const { HAS_SERVER } = CONFIG
  */
 const watch = async (...args: WatchParam[]): Promise<ChildProcess | WatchServer> => {
 
+    const additionalStartParams: StartParam[] = []
+
     if (args.indexOf('fast') !== -1) {
+        additionalStartParams.push('fast')
         process.env.START_FAST_MODE = 'true'
     }
 
-    const isServerWatch = HAS_SERVER
-        && args.indexOf('server') !== -1
-
-    const clientMode = !HAS_SERVER || (args.indexOf('client') !== -1)
+    if (args.indexOf('inspect') !== -1) {
+        additionalStartParams.push('inspect')
+    }
 
     await clean()
+
+    const isServerWatch = HAS_SERVER
+        && args.indexOf('server') !== -1
 
     if (isServerWatch) {
         return watchServer()
     }
 
+    const clientMode = !HAS_SERVER || (args.indexOf('client') !== -1)
+
     if (clientMode) {
-        return start('watch', 'client')
+        return start('watch', 'client', ...additionalStartParams)
     } else {
         await build('server', 'dev')
-        return start('watch')
+        return start('watch', ...additionalStartParams)
     }
 }
 

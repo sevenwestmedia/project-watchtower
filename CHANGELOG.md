@@ -1,6 +1,11 @@
 # Changelog
 
 ## vNext
+
+* Add `pwt start inspect` and `pwt watch inspect` to do profiling with `node --inspect`
+
+## v0.6.2 (2017-07-28)
+
 * Add `LogProvider` and `addLog` to access a logger scoped to the react application
 * Add `PageLifecycleProvider`
 * Add a few new utils like promise-completion-source

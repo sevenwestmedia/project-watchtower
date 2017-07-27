@@ -80,10 +80,10 @@ Scripts:
     coverage [<jest options> ...]
     explore-bundle [disableHoisting]
     lint [tslint] [sass-lint] [<glob> ...]
-    start [watch] [fast] [prod] [debug] [client]
+    start [watch] [fast] [prod] [debug] [inspect] [client]
     stats [verbose]
     test [debug] [<jest options> ...]
-    watch [server]
+    watch [server] [client] [fast] [inspect]
 
 Refer to docs/cli.md for the full API documentation
 `)

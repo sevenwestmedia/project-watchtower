@@ -26,8 +26,9 @@ const start = (...args: StartParam[]): Promise<ChildProcess> => {
     }
 
     const isDebug = args.indexOf('debug') !== -1
+    const isInspect = args.indexOf('inspect') !== -1
 
-    if (isDebug) {
+    if (isDebug || isInspect) {
         process.env.START_DEBUG_MODE = 'true'
     }
 
@@ -43,14 +44,18 @@ const start = (...args: StartParam[]): Promise<ChildProcess> => {
 
     dotenv.config()
 
-    const options: ForkOptions = {
-        env: process.env,
-    }
+    const execArgv: string[] = []
 
     if (isDebug) {
-        options.execArgv = [
-            '--debug',
-        ]
+        execArgv.push('--debug')
+    }
+    if (isInspect) {
+        execArgv.push('--inspect')
+    }
+
+    const options: ForkOptions = {
+        env: process.env,
+        execArgv,
     }
 
     return forkPromise(
