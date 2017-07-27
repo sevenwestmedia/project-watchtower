@@ -2,12 +2,15 @@
 
 ## vNext
 
+
+## v0.6.1 (2017-07-27)
+
 * Add `pwt stats verbose` to log the server output when running the stats
 * Downgrade ts-jest to 20.0.4 due to performance regression
   (https://github.com/kulshekhar/ts-jest/issues/259)
 * Fix webpack performance regression by reducing source map resolution and stats output in dev
 
-## v0.6.0 (2017-07-27)
+## v0.6.0 (2017-07-24)
 
 * **BREAKING** Add `tslib` as peerDependency
 * **BREAKING** Add webpack alias to consume the component library as ES2015 modules in production (requires component library >= 43.0.0)
