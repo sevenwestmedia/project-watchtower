@@ -9,7 +9,7 @@ import { getTestPort } from '../test-helpers'
 
 describe('watch/server', () => {
 
-    it('will run', async () => {
+    it.skip('will run', async () => {
         await clean()
         await build()
         const port = await getTestPort()
