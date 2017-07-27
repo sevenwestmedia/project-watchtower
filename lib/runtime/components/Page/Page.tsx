@@ -1,8 +1,10 @@
 import * as React from 'react'
+import * as PropTypes from 'prop-types'
 import {
-    PageLifecycle, withPageLifecycleProps, PageLifecycleProps,
+    withPageLifecycleProps, PageLifecycleProps,
 } from '../PageLifecycleProvider/PageLifecycleProvider'
 import { Logger } from '../../util/log'
+import { PageLifecycle } from '../PageLifecycleProvider/PageLifecycle'
 
 export interface State { error: boolean }
 export interface Props {
@@ -14,7 +16,7 @@ export default withPageLifecycleProps(
     class Page extends React.PureComponent<Props & PageLifecycleProps, State> {
         static contextTypes = {
             // Seems like context cannot be exported, this is a runtime react thing anyways
-            pageLifecycle: React.PropTypes.object as any,
+            pageLifecycle: PropTypes.object as any,
         }
 
         state: State = { error: false }
@@ -66,6 +68,8 @@ export default withPageLifecycleProps(
                 content = this.props.page({
                     currentPageState: this.props.currentPageState,
                     currentPageLocation: this.props.currentPageLocation,
+                    beginLoadingData: this.props.beginLoadingData,
+                    endLoadingData: this.props.endLoadingData,
                 })
             } else {
                 content = this.props.page

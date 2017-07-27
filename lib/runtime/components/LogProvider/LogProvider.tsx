@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as PropTypes from 'prop-types'
 import { Logger } from '../../util/log'
 
 /**
@@ -6,7 +7,7 @@ import { Logger } from '../../util/log'
  */
 export function addLog<T extends React.ComponentClass<any>>(component: T): T {
     (component as any).contextTypes = {
-        logger: React.PropTypes.any,
+        logger: PropTypes.any,
         ...component.contextTypes,
     }
     return component
@@ -18,7 +19,7 @@ export interface LoggerProps {
 
 export class LogProvider extends React.Component<LoggerProps, {}> {
     static childContextTypes = {
-        logger: React.PropTypes.any,
+        logger: PropTypes.any,
     }
 
     getChildContext() {

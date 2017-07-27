@@ -5,7 +5,7 @@ export default class PromiseCompletionSource<T> {
 
     private _promise: Promise<T>
 
-    constructor(private autoReset = true) {
+    constructor(private autoReset = false) {
     }
 
     get promise(): Promise<T> {
@@ -20,6 +20,12 @@ export default class PromiseCompletionSource<T> {
             }
         }
 
+        this.reset()
+
+        return this._promise
+    }
+
+    reset = () => {
         this.completed = false
         this._promise = new Promise((resolve, reject) => {
             this.resolve = (result) => {
@@ -36,8 +42,6 @@ export default class PromiseCompletionSource<T> {
                 return new Promise<void>((r) => setTimeout(r))
             }
         })
-
-        return this._promise
     }
 
     private ensureNotComplete = () => {

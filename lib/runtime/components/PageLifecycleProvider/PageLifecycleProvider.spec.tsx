@@ -13,46 +13,36 @@ import PageLifecycleProvider, {
     withPageLifecycleEvents, ComponentWithLifecycle, PageEvent,
 } from './PageLifecycleProvider'
 import PromiseCompletionSource from '../../util/promise-completion-source'
-import { DataLoaderResources } from 'redux-data-loader'
 import Page from '../Page/Page'
 
 interface TestData {
     bar: string
 }
 
-const loaderStatusLookup: { [state: number]: string } = {
-    0: 'Idle',
-    1: 'Fetching',
-    2: 'Refreshing',
-    3: 'Paging',
-    4: 'Updating',
-}
-
 const createTestComponents = () => {
-    const resources = new DataLoaderResources()
     const promiseCompletionSource = new PromiseCompletionSource<TestData>()
-    const TestDataLoader = resources.registerResource(
-        'test',
-        (_id: string) => {
-            return promiseCompletionSource.promise
-        },
-    )
     class TestPage extends React.Component<{ path: string }, {}> {
+        loadTriggered = false
+
         render() {
             return (
                 <Page
                     errorComponent="oops"
-                    page={
-                        <TestDataLoader
-                            resourceId={'test' + this.props.path}
-                            renderData={(data) => (
-                                <div>
-                                    Status: {loaderStatusLookup[data.status]}
-                                    Last action: {JSON.stringify(data.lastAction || {})}
-                                </div>
-                            )}
-                        />
-                    }
+                    page={(pageProps) => {
+                        // This emulates a component under the page starting to load data
+                        // then completing once the promise completion source completes
+                        if (!this.loadTriggered) {
+                            pageProps.beginLoadingData()
+                            this.loadTriggered = true
+                            promiseCompletionSource.promise.then(() => pageProps.endLoadingData())
+                        }
+                        return (
+                            <div>
+                                Page location: {pageProps.currentPageLocation}
+                                Page state: {pageProps.currentPageState}
+                            </div>
+                        )
+                    }}
                 />
             )
         }
@@ -64,11 +54,14 @@ const createTestComponents = () => {
             state = { loaded: false }
 
             componentDidMount() {
-                this.context.pageLifecycle.lazyLoadingPage()
+                this.context.pageLifecycle.beginLoadingData()
                 // When we mount, pretend we are starting to load the test page
                 setTimeout(() => {
-                    this.context.pageLifecycle.lazyLoadingPageComplete()
-                    this.setState({ loaded: true })
+                    this.setState(
+                        { loaded: true },
+                        // Only end load data after state change has been applied
+                        // Because this could trigger more loading of data
+                        this.context.pageLifecycle.endLoadingData)
                 })
             }
 
@@ -82,9 +75,7 @@ const createTestComponents = () => {
         },
     )
     return {
-        resources,
         promiseCompletionSource,
-        TestDataLoader,
         FakeLazyLoad,
         TestPage,
     }
@@ -100,11 +91,9 @@ describe('PageLifecycleProvider', () => {
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/']} initialIndex={0}>
                     <PageLifecycleProvider
-                        resources={testComponents.resources}
                         onEvent={(event) => pageEvents.push(event)}
-                    >
-                        <testComponents.TestPage path="/" />
-                    </PageLifecycleProvider>
+                        render={<testComponents.TestPage path="/" />}
+                    />
                 </MemoryRouter>
             </Provider>
         ))
@@ -127,16 +116,15 @@ describe('PageLifecycleProvider', () => {
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/']} initialIndex={0}>
                     <PageLifecycleProvider
-                        resources={testComponents.resources}
                         onEvent={(event) => pageEvents.push(event)}
-                    >
-                        <testComponents.TestPage path="/" />
-                    </PageLifecycleProvider>
+                        render={<testComponents.TestPage path="/" />}
+                    />
                 </MemoryRouter>
             </Provider>
         ))
 
         const testPage = wrapper.find(testComponents.TestPage)
+
         testComponents.promiseCompletionSource.resolve({
             bar: 'test',
         })
@@ -159,16 +147,16 @@ describe('PageLifecycleProvider', () => {
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/']} initialIndex={0}>
                     <PageLifecycleProvider
-                        resources={testComponents.resources}
                         onEvent={(event) => pageEvents.push(event)}
-                    >
-                        <Page
-                            errorComponent="oops"
-                            page={
-                                <testComponents.FakeLazyLoad path="/" />
-                            }
-                        />
-                    </PageLifecycleProvider>
+                        render={(
+                            <Page
+                                errorComponent="oops"
+                                page={
+                                    <testComponents.FakeLazyLoad path="/" />
+                                }
+                            />
+                        )}
+                    />
                 </MemoryRouter>
             </Provider>
         ))
@@ -197,8 +185,6 @@ describe('PageLifecycleProvider', () => {
         expect(testPage.debug()).toMatchSnapshot()
     })
 
-    // TODO Test which validates page load events on navigation..
-
     it('raises events when page navigated', async () => {
         const testComponents = createTestComponents()
         let history: H.History | undefined
@@ -209,26 +195,29 @@ describe('PageLifecycleProvider', () => {
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/', '/foo']} initialIndex={0}>
                     <PageLifecycleProvider
-                        resources={testComponents.resources}
                         onEvent={(event) => pageEvents.push(event)}
-                    >
-                        <Route
-                            render={(props) => {
-                                history = props.history
-                                return (
-                                    <testComponents.TestPage path={props.location.pathname} />
-                                )}
-                            }
-                        />
-                    </PageLifecycleProvider>
+                        render={(
+                            <Route
+                                render={(props) => {
+                                    history = props.history
+                                    return (
+                                        <testComponents.TestPage path={props.location.pathname} />
+                                    )}
+                                }
+                            />
+                        )}
+                    />
                 </MemoryRouter>
             </Provider>
         ))
 
+        if (!history) { throw new Error('History not defined') }
+
         testComponents.promiseCompletionSource.resolve({ bar: 'test' })
         await new Promise((resolve) => setTimeout(() => resolve()))
+        testComponents.promiseCompletionSource.reset()
 
-        if (history) { history.push('/foo') }
+        history.push('/foo')
 
         const testPage = wrapper.find(testComponents.TestPage)
 

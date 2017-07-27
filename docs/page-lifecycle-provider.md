@@ -15,3 +15,9 @@ We cannot use statics/globals, this has to work on the server and requests must 
 Because we need to know when a component is fully rendered (so we know when to decide if the page is going to load data or not) all pages need to be wrapped in a `<Page>` component which allows us to raise the events with confidence.
 
 ## Usage
+
+
+## API
+
+### withPageLifecycleEvents
+Gives access to the page lifecycle events, this way you can register work with the page lifecycle provider which is not directly under the `PageLifecycleProvider` or the `Page`
