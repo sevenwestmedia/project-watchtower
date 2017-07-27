@@ -8,37 +8,6 @@
   dependencies:
     postcss "^5.2.15"
 
-"@types/babel-core@^6.7.14":
-  version "6.7.14"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/babel-core/-/babel-core-6.7.14.tgz#a08c900a98e8987c1a98d2ea4fa0a1805a7d131f"
-  dependencies:
-    "@types/babel-template" "*"
-    "@types/babel-traverse" "*"
-    "@types/babel-types" "*"
-
-"@types/babel-template@*":
-  version "6.7.14"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/babel-template/-/babel-template-6.7.14.tgz#8088a56f9d697d620d3d079c3ef66025b7a08d02"
-  dependencies:
-    "@types/babel-types" "*"
-    "@types/babylon" "*"
-
-"@types/babel-traverse@*":
-  version "6.7.17"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/babel-traverse/-/babel-traverse-6.7.17.tgz#5212a4edced81f53a6c4fb1fd7a34aa4ff6cf36b"
-  dependencies:
-    "@types/babel-types" "*"
-
-"@types/babel-types@*":
-  version "6.7.16"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/babel-types/-/babel-types-6.7.16.tgz#e2602896636858a0067971f7ca4bb8678038293f"
-
-"@types/babylon@*":
-  version "6.16.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/babylon/-/babylon-6.16.1.tgz#e4d10ab9e43a73703a17c6f41438bede28769340"
-  dependencies:
-    "@types/babel-types" "*"
-
 "@types/cheerio@^0.22.2":
   version "0.22.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/cheerio/-/cheerio-0.22.2.tgz#539625874bc856086ad491c2fdc9b10c05ae308e"
@@ -556,7 +525,7 @@ babel-helpers@^6.24.1:
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
 
-babel-jest@^20.0.3:
+babel-jest@^20.0.0, babel-jest@^20.0.3:
   version "20.0.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/babel-jest/-/babel-jest-20.0.3.tgz#e4a03b13dc10389e140fc645d09ffc4ced301671"
   dependencies:
@@ -570,7 +539,7 @@ babel-messages@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-istanbul@^4.0.0, babel-plugin-istanbul@^4.1.4:
+babel-plugin-istanbul@^4.0.0:
   version "4.1.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/babel-plugin-istanbul/-/babel-plugin-istanbul-4.1.4.tgz#18dde84bf3ce329fddf3f4103fae921456d8e587"
   dependencies:
@@ -2427,6 +2396,13 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
+glob-all@^3.1.0:
+  version "3.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/glob-all/-/glob-all-3.1.0.tgz#8913ddfb5ee1ac7812656241b03d5217c64b02ab"
+  dependencies:
+    glob "^7.0.5"
+    yargs "~1.2.6"
+
 glob-base@^0.3.0:
   version "0.3.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/glob-base/-/glob-base-0.3.0.tgz#dbb164f6221b1c0b1ccf82aea328b497df0ea3c4"
@@ -4068,6 +4044,10 @@ minimist@0.0.8, minimist@~0.0.1:
 minimist@1.1.x:
   version "1.1.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/minimist/-/minimist-1.1.3.tgz#3bedfd91a92d39016fcfaa1c681e8faa1a1efda8"
+
+minimist@^0.1.0:
+  version "0.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/minimist/-/minimist-0.1.0.tgz#99df657a52574c21c9057497df742790b2b4c0de"
 
 minimist@^1.1.1, minimist@^1.1.3, minimist@^1.2.0:
   version "1.2.0"
@@ -5898,13 +5878,13 @@ strip-indent@^1.0.1:
   dependencies:
     get-stdin "^4.0.1"
 
+strip-json-comments@^2.0.0, strip-json-comments@~2.0.1:
+  version "2.0.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
+
 strip-json-comments@~1.0.1:
   version "1.0.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/strip-json-comments/-/strip-json-comments-1.0.4.tgz#1e15fbcac97d3ee99bf2d73b4c656b082bbafb91"
-
-strip-json-comments@~2.0.1:
-  version "2.0.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
 style-loader@^0.18.2:
   version "0.18.2"
@@ -6092,21 +6072,27 @@ tryit@^1.0.1:
   version "1.0.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/tryit/-/tryit-1.0.3.tgz#393be730a9446fd1ead6da59a014308f36c289cb"
 
-ts-jest@^20.0.7:
-  version "20.0.7"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/ts-jest/-/ts-jest-20.0.7.tgz#82c99b9163f8c0a864a2b221238202fa1e623c26"
+ts-jest@20.0.4:
+  version "20.0.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/ts-jest/-/ts-jest-20.0.4.tgz#ffe3987d48c8762cd7b6ae83518d203eca167618"
   dependencies:
-    "@types/babel-core" "^6.7.14"
-    babel-core "^6.24.1"
-    babel-plugin-istanbul "^4.1.4"
+    babel-jest "^20.0.0"
     babel-plugin-transform-es2015-modules-commonjs "^6.24.1"
-    babel-preset-jest "^20.0.3"
     fs-extra "^3.0.0"
+    glob-all "^3.1.0"
     jest-config "^20.0.0"
     jest-util "^20.0.0"
     pkg-dir "^2.0.0"
     source-map-support "^0.4.4"
+    tsconfig "^6.0.0"
     yargs "^8.0.1"
+
+tsconfig@^6.0.0:
+  version "6.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/tsconfig/-/tsconfig-6.0.0.tgz#6b0e8376003d7af1864f8df8f89dd0059ffcd032"
+  dependencies:
+    strip-bom "^3.0.0"
+    strip-json-comments "^2.0.0"
 
 tslib@^1.7.1:
   version "1.7.1"
@@ -6704,6 +6690,12 @@ yargs@^8.0.1:
     which-module "^2.0.0"
     y18n "^3.2.1"
     yargs-parser "^7.0.0"
+
+yargs@~1.2.6:
+  version "1.2.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/yargs/-/yargs-1.2.6.tgz#9c7b4a82fd5d595b2bf17ab6dcc43135432fe34b"
+  dependencies:
+    minimist "^0.1.0"
 
 yargs@~3.10.0:
   version "3.10.0"
