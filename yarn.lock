@@ -783,10 +783,6 @@ braces@^2.2.2:
     split-string "^2.1.0"
     to-regex "^3.0.1"
 
-brcast@^2.0.0:
-  version "2.0.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/brcast/-/brcast-2.0.1.tgz#4311508f0634a6f5a2465b6cf2db27f06902aaca"
-
 brorand@^1.0.1:
   version "1.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
@@ -2171,10 +2167,6 @@ fast-levenshtein@~2.0.4:
   version "2.0.6"
   resolved "https://nexus.swmdigital.io/repository/js-combined/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
 
-fast-memoize@^2.2.7:
-  version "2.2.7"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/fast-memoize/-/fast-memoize-2.2.7.tgz#f145c5c22039cedf0a1d4ff6ca592ad0268470ca"
-
 fastparse@^1.1.1:
   version "1.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/fastparse/-/fastparse-1.1.1.tgz#d1e2643b38a94d7583b479060e6c4affc94071f8"
@@ -2474,16 +2466,6 @@ glamor@^2.20.37:
     object-assign "^4.1.1"
     prop-types "^15.5.10"
 
-glamorous@^3.24.0:
-  version "3.24.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/glamorous/-/glamorous-3.24.0.tgz#d64ff810a80c55143d19c28b6d31bc9339b30cc1"
-  dependencies:
-    brcast "^2.0.0"
-    fast-memoize "^2.2.7"
-    html-tag-names "^1.1.1"
-    react-html-attributes "^1.3.0"
-    svg-tag-names "^1.1.0"
-
 glob-all@^3.1.0:
   version "3.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/glob-all/-/glob-all-3.1.0.tgz#8913ddfb5ee1ac7812656241b03d5217c64b02ab"
@@ -2702,10 +2684,6 @@ html-comment-regex@^1.1.0:
   version "1.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/html-comment-regex/-/html-comment-regex-1.1.1.tgz#668b93776eaae55ebde8f3ad464b307a4963625e"
 
-html-element-attributes@^1.0.0:
-  version "1.3.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/html-element-attributes/-/html-element-attributes-1.3.0.tgz#f06ebdfce22de979db82020265cac541fb17d4fc"
-
 html-encoding-sniffer@^1.0.1:
   version "1.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/html-encoding-sniffer/-/html-encoding-sniffer-1.0.1.tgz#79bf7a785ea495fe66165e734153f363ff5437da"
@@ -2728,10 +2706,6 @@ html-minifier@^3.2.3:
     param-case "2.1.x"
     relateurl "0.2.x"
     uglify-js "3.0.x"
-
-html-tag-names@^1.1.1:
-  version "1.1.2"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/html-tag-names/-/html-tag-names-1.1.2.tgz#f65168964c5a9c82675efda882875dcb2a875c22"
 
 html-webpack-plugin@^2.29.0:
   version "2.29.0"
@@ -5206,12 +5180,6 @@ react-helmet@^5.1.3:
     prop-types "^15.5.4"
     react-side-effect "^1.1.0"
 
-react-html-attributes@^1.3.0:
-  version "1.4.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/react-html-attributes/-/react-html-attributes-1.4.1.tgz#97b5ec710da68833598c8be6f89ac436216840a5"
-  dependencies:
-    html-element-attributes "^1.0.0"
-
 react-redux@^5.0.5:
   version "5.0.5"
   resolved "https://nexus.swmdigital.io/repository/js-combined/react-redux/-/react-redux-5.0.5.tgz#f8e8c7b239422576e52d6b7db06439469be9846a"
@@ -6073,10 +6041,6 @@ supports-color@^4.0.0, supports-color@^4.1.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/supports-color/-/supports-color-4.2.0.tgz#ad986dc7eb2315d009b4d77c8169c2231a684037"
   dependencies:
     has-flag "^2.0.0"
-
-svg-tag-names@^1.1.0:
-  version "1.1.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/svg-tag-names/-/svg-tag-names-1.1.1.tgz#9641b29ef71025ee094c7043f7cdde7d99fbd50a"
 
 svgo@^0.7.0:
   version "0.7.2"
