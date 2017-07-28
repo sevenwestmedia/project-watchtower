@@ -93,7 +93,7 @@ export default config
 
 ## Running
 
-    pwt start [watch] [fast] [debug] [prod]
+    pwt start [watch] [fast] [debug] [inspect] [prod]
 
 Starts the server, using the environment variables defined in `.env`
 
@@ -261,3 +261,19 @@ Add a task to compile your tests to JavaScript to `.vscode/tasks.json`:
     ]
 }
 ```
+
+### Server profiling
+
+Start the server with
+
+```
+pwt start inspect
+```
+
+or
+
+```
+pwt watch inspect
+```
+
+Open Google Chrome and go to *chrome://inspect*, where the Node.js process will show up and allow you do to profiling.

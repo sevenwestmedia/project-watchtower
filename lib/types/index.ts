@@ -111,8 +111,10 @@ export type StartParam =
     | 'prod'
     | 'debug'
     | 'client'
+    | 'inspect'
 
 export type WatchParam =
     | 'server'
     | 'fast'
     | 'client'
+    | 'inspect'

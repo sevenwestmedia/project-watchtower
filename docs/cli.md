@@ -56,13 +56,14 @@ By default all `.ts`/`.tsx` and all `.scss` files are checked. You can supply cu
 ### start
 
 ```
-pwt start [watch] [fast] [prod] [debug] [client]
+pwt start [watch] [fast] [prod] [debug] [inspect] [client]
 ```
 
 *   `watch`: Enable watch mode and rebuild client after changes
 *   `fast`: Disable TypeScript type checking for faster incremental builds
 *   `prod`: Set `NODE_ENV` to `"production"`
 *   `debug`: Start node process in debug mode
+*   `inspect`: Start node process with `--inspect` for debugging and performance measurement in *chrome://inspect*
 *   `client`: Start internal server that serves only the client
 
 ### stats
@@ -130,11 +131,12 @@ pwt test [debug] [<jest option> ...]
 ### watch
 
 ```
-pwt watch [server] [client] [fast]
+pwt watch [server] [client] [fast] [inspect]
 ```
 
 Builds the server in dev mode, then watches and rebuilds the client
 
-* `server`: Also watches and rebuilds the server
-* `fast`: Disable TypeScript type checking for faster incremental builds
-* `client`: Only run client without a server
+*   `server`: Also watches and rebuilds the server
+*   `fast`: Disable TypeScript type checking for faster incremental builds
+*   `client`: Only run client without a server
+*   `inspect`: Start node process with `--inspect` for debugging and performance measurement in *chrome://inspect*

@@ -17,7 +17,7 @@ describe('bin/start', () => {
     it('will start the server', async () => {
         const port = await getTestPort()
         process.env.PORT = port.toString()
-        const childProcess = await start('watch', 'fast', 'prod', 'debug')
+        const childProcess = await start('watch', 'fast', 'prod', 'debug', 'inspect')
         await waitForConnection(port)
         childProcess.kill()
     })
