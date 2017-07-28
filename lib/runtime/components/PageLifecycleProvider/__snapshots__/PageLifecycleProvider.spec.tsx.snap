@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageLifecycleProvider raises completed event after data loaded and content re-rendered 1`] = `
+Array [
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {},
+    "timeStamp": 0,
+    "type": "page-load-started",
+  },
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {},
+    "timeStamp": 0,
+    "type": "page-load-complete",
+  },
+]
+`;
+
+exports[`PageLifecycleProvider raises completed event after data loaded and content re-rendered 2`] = `
+"<TestPage path=\\"/\\">
+  <WithPageLifecycleProps errorComponent=\\"oops\\" page={[Function]}>
+    <Page errorComponent=\\"oops\\" page={[Function]} currentPageState=\\"loaded\\" currentPageLocation=\\"/\\" beginLoadingData={[Function]} endLoadingData={[Function]}>
+      <div>
+        Page location: 
+        /
+        Page state: 
+        loaded
+      </div>
+    </Page>
+  </WithPageLifecycleProps>
+</TestPage>"
+`;
+
+exports[`PageLifecycleProvider raises completed event after lazy loaded page has completed load data 1`] = `
+Array [
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {},
+    "timeStamp": 0,
+    "type": "page-load-started",
+  },
+]
+`;
+
+exports[`PageLifecycleProvider raises completed event after lazy loaded page has completed load data 2`] = `""`;
+
+exports[`PageLifecycleProvider raises completed event after lazy loaded page has completed load data 3`] = `
+Array [
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {},
+    "timeStamp": 0,
+    "type": "page-load-started",
+  },
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {},
+    "timeStamp": 0,
+    "type": "page-load-complete",
+  },
+]
+`;
+
+exports[`PageLifecycleProvider raises completed event after lazy loaded page has completed load data 4`] = `""`;
+
+exports[`PageLifecycleProvider raises events when page navigated 1`] = `
+Array [
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {},
+    "timeStamp": 0,
+    "type": "page-load-started",
+  },
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {},
+    "timeStamp": 0,
+    "type": "page-load-complete",
+  },
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {},
+    "timeStamp": 0,
+    "type": "page-load-started",
+  },
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {},
+    "timeStamp": 0,
+    "type": "page-load-complete",
+  },
+]
+`;
+
+exports[`PageLifecycleProvider raises events when page navigated 2`] = `
+"<TestPage path=\\"/foo\\">
+  <WithPageLifecycleProps errorComponent=\\"oops\\" page={[Function]}>
+    <Page errorComponent=\\"oops\\" page={[Function]} currentPageState=\\"loaded\\" currentPageLocation=\\"/foo\\" beginLoadingData={[Function]} endLoadingData={[Function]}>
+      <div>
+        Page location: 
+        /foo
+        Page state: 
+        loaded
+      </div>
+    </Page>
+  </WithPageLifecycleProps>
+</TestPage>"
+`;
+
+exports[`PageLifecycleProvider raises loading event after render 1`] = `
+Array [
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {},
+    "timeStamp": 0,
+    "type": "page-load-started",
+  },
+]
+`;
+
+exports[`PageLifecycleProvider raises loading event after render 2`] = `
+"<TestPage path=\\"/\\">
+  <WithPageLifecycleProps errorComponent=\\"oops\\" page={[Function]}>
+    <Page errorComponent=\\"oops\\" page={[Function]} currentPageState=\\"loading\\" currentPageLocation=\\"/\\" beginLoadingData={[Function]} endLoadingData={[Function]}>
+      <div>
+        Page location: 
+        /
+        Page state: 
+        loading
+      </div>
+    </Page>
+  </WithPageLifecycleProps>
+</TestPage>"
+`;
