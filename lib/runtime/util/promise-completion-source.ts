@@ -1,3 +1,13 @@
+/**
+ * PromiseCompletionSource allows the resolution/rejection of a promise to be
+ * controled outside of the promise ctor callback
+ *
+ * Example:
+ * const pcs = new PromiseCompletionSource<any>()
+ *
+ * const promise = pcs.promise
+ * pcs.resolve('data')
+ */
 export default class PromiseCompletionSource<T> {
     resolve: (result: T) => Promise<void>
     reject: (error: Error) => Promise<void>

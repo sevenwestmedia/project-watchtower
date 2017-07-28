@@ -10,6 +10,29 @@ import build from 'project-watchtower/lib/bin/build'
 build('server', 'prod')
 ```
 
+## React Components
+
+### LogProvider / addLog
+``` ts
+@addLog
+class YourComponent extends React.Component<{}, {}> {
+    context: { logger: Logger }
+
+    onClick = () => {
+        this.context.logger.info('Clicked!')
+    }
+}
+
+<LogProvider logger={yourLogger}>
+    ...
+        <YourComponent />
+    ...
+</LogProvider>
+```
+
+### PageLifecycleProvider
+See [Page Lifecycle Provider](./page-lifecycle-provider.md)
+
 ## Functions, Config and Middleware
 
 All functional areas are available as a top-level import from the `project-watchtower` module. However, deep imports are preferred, which is especially important on the client where we don't want unnecessary code bundled up (like WebPack/TypeScript, you probably don't want them in your client bundle in production).

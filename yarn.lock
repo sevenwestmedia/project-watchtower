@@ -120,18 +120,14 @@
     "@types/react" "*"
     "@types/react-router" "*"
 
-"@types/react-router@*":
+"@types/react-router@*", "@types/react-router@^4.0.14":
   version "4.0.14"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-router/-/react-router-4.0.14.tgz#dd650f40bbb20ad1fec26471707665908efa9e9f"
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react@*":
-  version "15.0.38"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react/-/react-15.0.38.tgz#6afea31a9fe66304af474106ba372ddaba449995"
-
-"@types/react@^15.0.39":
+"@types/react@*", "@types/react@^15.0.39":
   version "15.0.39"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react/-/react-15.0.39.tgz#5a820c75cabf4cbfa177a3ab5a9a0634c46b14d1"
 

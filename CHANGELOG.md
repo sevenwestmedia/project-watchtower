@@ -1,7 +1,10 @@
 # Changelog
 
 ## vNext
-
+* Add `LogProvider` and `addLog` to access a logger scoped to the react application
+* Add `PageLifecycleProvider`
+* Add a few new utils like promise-completion-source
+* Add server side rendering express helpers
 
 ## v0.6.1 (2017-07-27)
 
