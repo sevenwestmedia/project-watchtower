@@ -26,7 +26,6 @@ export const getHotReloadMiddleware: HotReloadMiddleware = () => {
             stats: 'errors-only',
             watchOptions: {
                 ignored: WATCH_IGNORE,
-                aggregateTimeout: 1000,
             },
         },
     )

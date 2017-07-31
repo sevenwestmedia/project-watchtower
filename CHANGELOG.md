@@ -3,6 +3,7 @@
 ## vNext
 
 * Add `pwt start inspect` and `pwt watch inspect` to do profiling with `node --inspect`
+* Remove `aggregateTimeout` for faster hot reloading as it does not seem to be needed any more to link the component library
 
 ## v0.6.2 (2017-07-28)
 
