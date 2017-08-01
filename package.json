@@ -1,6 +1,6 @@
 {
   "name": "project-watchtower",
-  "version": "0.6.0",
+  "version": "0.6.3",
   "description": "",
   "publishConfig": {
     "registry": "https://nexus.swmdigital.io/repository/js-private"
@@ -99,6 +99,7 @@
     "opn": "^5.1.0",
     "postcss-loader": "^2.0.6",
     "raw-loader": "^0.5.1",
+    "release-preparer": "^0.1.2",
     "resolve-url-loader": "^2.1.0",
     "rimraf": "^2.6.1",
     "sass-lint": "^1.10.2",

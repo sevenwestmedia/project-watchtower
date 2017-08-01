@@ -1,153 +1,130 @@
 # Changelog
 
-## vNext
-
-* Add `pwt start inspect` and `pwt watch inspect` to do profiling with `node --inspect`
-* Remove `aggregateTimeout` for faster hot reloading as it does not seem to be needed any more to link the component library
+## [v0.6.3] - 1/8/2017
+ - Add `pwt start inspect` and `pwt watch inspect` to do profiling with `node --inspect`
+ - Remove `aggregateTimeout` for faster hot reloading as it does not seem to be needed any more to link the component library
 
 ## v0.6.2 (2017-07-28)
-
-* Add `LogProvider` and `addLog` to access a logger scoped to the react application
-* Add `PageLifecycleProvider`
-* Add a few new utils like promise-completion-source
-* Add server side rendering express helpers
+ - Add `LogProvider` and `addLog` to access a logger scoped to the react application
+ - Add `PageLifecycleProvider`
+ - Add a few new utils like promise-completion-source
+ - Add server side rendering express helpers
 
 ## v0.6.1 (2017-07-27)
-
-* Add `pwt stats verbose` to log the server output when running the stats
-* Downgrade ts-jest to 20.0.4 due to performance regression
-  (https://github.com/kulshekhar/ts-jest/issues/259)
-* Fix webpack performance regression by reducing source map resolution and stats output in dev
+ - Add `pwt stats verbose` to log the server output when running the stats
+ - Downgrade ts-jest to 20.0.4 due to performance regression
+(https://github.com/kulshekhar/ts-jest/issues/259)
+ - Fix webpack performance regression by reducing source map resolution and stats output in dev
 
 ## v0.6.0 (2017-07-24)
-
-* **BREAKING** Add `tslib` as peerDependency
-* **BREAKING** Add webpack alias to consume the component library as ES2015 modules in production (requires component library >= 43.0.0)
-* Upgrade Lighthouse to 2.3.0 to fix issues described below
-* Add ES2015 build and webpack alias for project-watchtower itself in production
+ - **BREAKING** Add `tslib` as peerDependency
+ - **BREAKING** Add webpack alias to consume the component library as ES2015 modules in production (requires component library >= 43.0.0)
+ - Upgrade Lighthouse to 2.3.0 to fix issues described below
+ - Add ES2015 build and webpack alias for project-watchtower itself in production
 
 ## v0.6.0-rc.2 (2017-07-11) **[pre-release @next]**
-
-* Fix TypeScript module setting override for TypeScript < 2.4
+ - Fix TypeScript module setting override for TypeScript < 2.4
 
 ## v0.6.0-rc.1 (2017-07-11) **[pre-release @next]**
-
-* **BREAKING** Upgrade dependencies for compatibility with Node 8 and TypeScript 2.4
-    * Webpack 3
-    * TSLint 5
-    * Lighthouse 2
-* Added `ModuleConcatenationPlugin` to webpack production builds for scope hoisting.
-* Set TypeScript's `module` option to `esnext` in aweseome-typescript-loader to enable scope hoisting for the project source files
-* Added the following build stats
-    * `<PAGE>_consistently_interactive`: Time until the page is consistently interactive through lighthouse (ms)
-    * `<PAGE>_dom_size`: Number of DOM elements on the page through lighthouse
-    * `<PAGE>_ssr_dom_size`: Number of DOM elements on the page after server-side rendering
-    * `<PAGE>_perf_score`: Lighthouse performance score (0-100)
-* Project Watchtower prints the full commands it executes to console
-* Added `disableHoisting` parameter to `explore-bundle` command to disable webpack 3 scope hoisting and see all modules in the bundle
-* Consolidate module directories across webpack and jest to default to `['./node_modules', './common', './app', '.']`
+ - **BREAKING** Upgrade dependencies for compatibility with Node 8 and TypeScript 2.4
+   - Webpack 3
+   - TSLint 5
+   - Lighthouse 2
+ - Added `ModuleConcatenationPlugin` to webpack production builds for scope hoisting.
+ - Set TypeScript's `module` option to `esnext` in aweseome-typescript-loader to enable scope hoisting for the project source files
+ - Added the following build stats
+   - `<PAGE>_consistently_interactive`: Time until the page is consistently interactive through lighthouse (ms)
+   - `<PAGE>_dom_size`: Number of DOM elements on the page through lighthouse
+   - `<PAGE>_ssr_dom_size`: Number of DOM elements on the page after server-side rendering
+   - `<PAGE>_perf_score`: Lighthouse performance score (0-100)
+ - Project Watchtower prints the full commands it executes to console
+ - Added `disableHoisting` parameter to `explore-bundle` command to disable webpack 3 scope hoisting and see all modules in the bundle
+ - Consolidate module directories across webpack and jest to default to `['./node_modules', './common', './app', '.']`
 
 **KNOWN ISSUES**
-* Lighthouse 2.2.1 has to run the whole suite to output the DOM size instead of just the performance suite, thus the stats will take longer to generate. This will be fixed in the next release
+ - Lighthouse 2.2.1 has to run the whole suite to output the DOM size instead of just the performance suite, thus the stats will take longer to generate. This will be fixed in the next release
 
 ## v0.5.4 (2017-07-07)
-
-* Support testing lazy-loaded components by mocking `bundle-loader`
-* Support consuming the component library as TypeScript
-* Add hooks to easily extend the webpack build configuration
+ - Support testing lazy-loaded components by mocking `bundle-loader`
+ - Support consuming the component library as TypeScript
+ - Add hooks to easily extend the webpack build configuration
 
 ## v0.5.2 (2017-06-20)
-
-* Output test results and coverage to TeamCity when run
+ - Output test results and coverage to TeamCity when run
 
 ## v0.5.1 (2017-06-14)
-
-* Fix: `getHotReloadMiddleware()` no longer serves `public/index.html` on / route if it exists
+ - Fix: `getHotReloadMiddleware()` no longer serves `public/index.html` on / route if it exists
 
 ## v0.5.0 (2017-06-13)
-
-* **BREAKING** Default configuration changes (SWM-2857)
-    * CLIENT_OUTPUT `/public/assets` -> `/build/client`
-    * SERVER_OUTPUT `/build` -> `build/server`
-    * PUBLIC_PATH `/assets` -> `/`
-* Applications with a server can now run client-only
-    * Added `pwt start client`
-    * Added `pwt watch client`
-* Added `getAbsoluteAssetPath()`
+ - **BREAKING** Default configuration changes (SWM-2857)
+   - CLIENT_OUTPUT `/public/assets` -> `/build/client`
+   - SERVER_OUTPUT `/build` -> `build/server`
+   - PUBLIC_PATH `/assets` -> `/`
+ - Applications with a server can now run client-only
+   - Added `pwt start client`
+   - Added `pwt watch client`
+ - Added `getAbsoluteAssetPath()`
 
 ## v0.4.0 (2017-06-07)
-
-* **BREAKING** Upgrade to jest 20
-* **BREAKING** Refactor components into `/lib/runtime` that can be safely imported when project-watchtower is installed as a `devDependency`
-    * `/lib/client/dev` -> `/lib/runtime/client`
-    * `/lib/config/config` -> `/lib/runtime/config`
-    * `/lib/server/assets` -> `/lib/runtime/server`
-    * `/lib/server/dev getDefaultHtmlMiddleware()` -> `/lib/runtime/server`
-    * `/lib/server/server` -> `/lib/runtime/server`
+ - **BREAKING** Upgrade to jest 20
+ - **BREAKING** Refactor components into `/lib/runtime` that can be safely imported when project-watchtower is installed as a `devDependency`
+   - `/lib/client/dev` -> `/lib/runtime/client`
+   - `/lib/config/config` -> `/lib/runtime/config`
+   - `/lib/server/assets` -> `/lib/runtime/server`
+   - `/lib/server/dev getDefaultHtmlMiddleware()` -> `/lib/runtime/server`
+   - `/lib/server/server` -> `/lib/runtime/server`
 
 ## v0.3.3 (2017-06-02)
-
-* Fix failed webpack builds hanging on the build servers
+ - Fix failed webpack builds hanging on the build servers
 
 ## v0.3.2 (2017-06-02)
-
-* The lighthouse stats now use a provided Chrome instance on build servers using the `CHROME_REMOTE_DEBUGGING_PORT` and `STATS_SERVER_ADDRESS` environment variables
-* Fix: Fail webpack build if there are TypeScript errors
+ - The lighthouse stats now use a provided Chrome instance on build servers using the `CHROME_REMOTE_DEBUGGING_PORT` and `STATS_SERVER_ADDRESS` environment variables
+ - Fix: Fail webpack build if there are TypeScript errors
 
 ## v0.3.1 (2017-05-31)
-
-* **BREAKING** Rename `SERVER_BUNDLE_EXTERNALS` configuration to `SERVER_INCLUDE_IN_BUNDLE`
+ - **BREAKING** Rename `SERVER_BUNDLE_EXTERNALS` configuration to `SERVER_INCLUDE_IN_BUNDLE`
 
 ## v0.3.0 (2017-05-30) [unpublished]
-
-* Fix: Make sure process exits after command was executed
-* Fix: Make sure all child processes are killed when exiting process
-* Fix: `NODE_ENV` is set to `"production"` when running `pwt stats`
-* Fix: Lighthouse no longer fails completely when some stats cannot be obtained
-* Add `SERVER_BUNDLE_EXTERNALS` configuration to specify which external modules should be included in the server bundle
-* Make parts of project-watchtower work within a webpack bundle so it can be installed as devDependency
+ - Fix: Make sure process exits after command was executed
+ - Fix: Make sure all child processes are killed when exiting process
+ - Fix: `NODE_ENV` is set to `"production"` when running `pwt stats`
+ - Fix: Lighthouse no longer fails completely when some stats cannot be obtained
+ - Add `SERVER_BUNDLE_EXTERNALS` configuration to specify which external modules should be included in the server bundle
+ - Make parts of project-watchtower work within a webpack bundle so it can be installed as devDependency
 
 ## v0.2.4 (2017-05-23)
-
-* Fix: Find available port and add timeouts for server stats
-* Fails execution if `/config/config.ts` is found, but has not been compiled to `/config/config.js`. This would otherwise lead to more random errors as previously project-watchtower would just fall back to its default configuration.
+ - Fix: Find available port and add timeouts for server stats
+ - Fails execution if `/config/config.ts` is found, but has not been compiled to `/config/config.js`. This would otherwise lead to more random errors as previously project-watchtower would just fall back to its default configuration.
 
 ## v0.2.3 (2017-05-19)
-
-* Fix initial asset locations
-* Fix: Only clean before testing when not in debug mode to prevent deleting transpiled artifacts
+ - Fix initial asset locations
+ - Fix: Only clean before testing when not in debug mode to prevent deleting transpiled artifacts
 
 ## v0.2.2 (2017-05-15)
-
-* Fix total bundle size stats after paths change
+ - Fix total bundle size stats after paths change
 
 ## v0.2.1 (2017-05-11)
-
-* Fix `pwt build debug`
-* Add client debug configuration
+ - Fix `pwt build debug`
+ - Add client debug configuration
 
 ## v0.2.0 (2017-05-11)
-
-* Add `debug` environment for `pwt build server debug`
-* Add `pwt start debug` and `START_DEBUG_MODE` environment flag
-* Add `WATCH_IGNORE` configuration
-* Add lighthouse build stats for first meaningful paint and time to interactive
-* Add `CSS_AUTOPREFIXER` configuration
-* Add TeamCity build stats output
-* **BREAKING** Add `STATS_PAGES` configuration to allow multiple pages to be assessed for build stats. The stats will be prefixed by the page's name
-* Add `STATS_ENV` configuration to set up a special environment for measuring build stats
-* **BREAKING** Add `ASSETS_PATH_PREFIX` configuration and set it to `/static`, which changes the default location of the JS and CSS bundles (JS `/ => /static/js`, CSS `/css => /static/css`)
+ - Add `debug` environment for `pwt build server debug`
+ - Add `pwt start debug` and `START_DEBUG_MODE` environment flag
+ - Add `WATCH_IGNORE` configuration
+ - Add lighthouse build stats for first meaningful paint and time to interactive
+ - Add `CSS_AUTOPREFIXER` configuration
+ - Add TeamCity build stats output
+ - **BREAKING** Add `STATS_PAGES` configuration to allow multiple pages to be assessed for build stats. The stats will be prefixed by the page's name
+ - Add `STATS_ENV` configuration to set up a special environment for measuring build stats
+ - **BREAKING** Add `ASSETS_PATH_PREFIX` configuration and set it to `/static`, which changes the default location of the JS and CSS bundles (JS `/ => /static/js`, CSS `/css => /static/css`)
 
 ## v0.1.3 (2017-05-01)
-
-* Add `pwt test debug` for debugging Jest tests
+ - Add `pwt test debug` for debugging Jest tests
 
 ## v0.1.2 (2017-04-26)
-
-* Use `webpack-dotenv-plugin` to allow environment variables to be defined in the actual runtime environment during build
+ - Use `webpack-dotenv-plugin` to allow environment variables to be defined in the actual runtime environment during build
 
 ## v0.1.1 (2017-04-24)
-
-* Replace `process.env` variables in client build with the values defined in the `.env` file
-* Add `raw-loader` for `.md` files
-* Add `html-webpack-plugin` to client build if `<SERVER_PUBLIC_DIR>/index.html` exists
+ - Replace `process.env` variables in client build with the values defined in the `.env` file
+ - Add `raw-loader` for `.md` files
+ - Add `html-webpack-plugin` to client build if `<SERVER_PUBLIC_DIR>/index.html` exists
