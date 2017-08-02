@@ -5489,9 +5489,9 @@ relateurl@0.2.x:
   version "0.2.7"
   resolved "https://nexus.swmdigital.io/repository/js-combined/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
 
-release-preparer@^0.1.2:
-  version "0.1.2"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/release-preparer/-/release-preparer-0.1.2.tgz#03dc7dfae9998c4b407d3e0cfd8aba93ee127916"
+release-preparer@^0.2.0:
+  version "0.2.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/release-preparer/-/release-preparer-0.2.0.tgz#c79c50536a58db0a5e6b244998be4beb7c2ae3ef"
   dependencies:
     commander "^2.9.0"
     fs-extra "^3.0.1"
