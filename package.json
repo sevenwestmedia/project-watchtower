@@ -100,7 +100,6 @@
     "opn": "^5.1.0",
     "postcss-loader": "^2.0.6",
     "raw-loader": "^0.5.1",
-    "release-preparer": "^0.2.0",
     "resolve-url-loader": "^2.1.0",
     "rimraf": "^2.6.1",
     "sass-lint": "^1.10.2",
