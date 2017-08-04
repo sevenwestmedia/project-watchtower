@@ -89,6 +89,12 @@
   dependencies:
     "@types/node" "*"
 
+"@types/pino@^3.0.1":
+  version "3.0.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/pino/-/pino-3.0.1.tgz#90db868d8bb723c16b3a42fc753fe25709553479"
+  dependencies:
+    "@types/node" "*"
+
 "@types/prop-types@^15.5.1":
   version "15.5.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/prop-types/-/prop-types-15.5.1.tgz#1ecf52621299e65b855374337fb11fd2d1066fc1"
@@ -1777,6 +1783,12 @@ encoding@^0.1.11:
   dependencies:
     iconv-lite "~0.4.13"
 
+end-of-stream@^1.1.0:
+  version "1.4.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/end-of-stream/-/end-of-stream-1.4.0.tgz#7a90d833efda6cfa6eac0f4949dbb0fad3a63206"
+  dependencies:
+    once "^1.4.0"
+
 enhanced-resolve@^3.1.0, enhanced-resolve@^3.3.0:
   version "3.3.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/enhanced-resolve/-/enhanced-resolve-3.3.0.tgz#950964ecc7f0332a42321b673b38dc8ff15535b3"
@@ -2163,9 +2175,17 @@ fast-deep-equal@^1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/fast-deep-equal/-/fast-deep-equal-1.0.0.tgz#96256a3bc975595eb36d82e9929d060d893439ff"
 
+fast-json-parse@^1.0.0:
+  version "1.0.3"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/fast-json-parse/-/fast-json-parse-1.0.3.tgz#43e5c61ee4efa9265633046b770fb682a7577c4d"
+
 fast-levenshtein@~2.0.4:
   version "2.0.6"
   resolved "https://nexus.swmdigital.io/repository/js-combined/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
+
+fast-safe-stringify@^1.0.8, fast-safe-stringify@^1.1.11:
+  version "1.2.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/fast-safe-stringify/-/fast-safe-stringify-1.2.0.tgz#ebd42666fd18fe4f2ba4f0d295065f3f85cade96"
 
 fastparse@^1.1.1:
   version "1.1.1"
@@ -2283,6 +2303,10 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
+flatstr@^1.0.4:
+  version "1.0.5"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/flatstr/-/flatstr-1.0.5.tgz#5b451b08cbd48e2eac54a2bbe0bf46165aa14be3"
+
 flatten@^1.0.2:
   version "1.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
@@ -2351,7 +2375,7 @@ fs-extra@^1.0.0:
     jsonfile "^2.1.0"
     klaw "^1.0.0"
 
-fs-extra@^3.0.0:
+fs-extra@^3.0.0, fs-extra@^3.0.1:
   version "3.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/fs-extra/-/fs-extra-3.0.1.tgz#3794f378c58b342ea7dbbb23095109c4b3b62291"
   dependencies:
@@ -2486,7 +2510,7 @@ glob-parent@^2.0.0:
   dependencies:
     is-glob "^2.0.0"
 
-glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@~7.1.1:
+glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2, glob@~7.1.1:
   version "7.1.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/glob/-/glob-7.1.2.tgz#c19c9df9a028702d678612384a6552404c636d15"
   dependencies:
@@ -4067,6 +4091,10 @@ map-visit@^0.1.5:
     lazy-cache "^2.0.1"
     object-visit "^0.3.4"
 
+marked@^0.3.6:
+  version "0.3.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/marked/-/marked-0.3.6.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"
+
 math-expression-evaluator@^1.2.14:
   version "1.2.17"
   resolved "https://nexus.swmdigital.io/repository/js-combined/math-expression-evaluator/-/math-expression-evaluator-1.2.17.tgz#de819fdbcd84dccd8fae59c6aeb79615b9d266ac"
@@ -4553,7 +4581,7 @@ on-finished@~2.3.0:
   dependencies:
     ee-first "1.1.1"
 
-once@^1.3.0, once@^1.3.3, once@^1.4.0:
+once@^1.3.0, once@^1.3.1, once@^1.3.3, once@^1.4.0:
   version "1.4.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/once/-/once-1.4.0.tgz#583b1aa775961d4b113ac17d9c50baef9dd76bd1"
   dependencies:
@@ -4804,6 +4832,18 @@ pinkie-promise@^2.0.0:
 pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
+
+pino@^4.7.1:
+  version "4.7.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/pino/-/pino-4.7.1.tgz#d8208de925065f49c9d4a72f54509a167fe18018"
+  dependencies:
+    chalk "^2.0.1"
+    fast-json-parse "^1.0.0"
+    fast-safe-stringify "^1.1.11"
+    flatstr "^1.0.4"
+    pump "^1.0.2"
+    quick-format-unescaped "^1.1.1"
+    split2 "^2.0.1"
 
 pkg-dir@^2.0.0:
   version "2.0.0"
@@ -5183,6 +5223,13 @@ public-encrypt@^4.0.0:
     parse-asn1 "^5.0.0"
     randombytes "^2.0.1"
 
+pump@^1.0.2:
+  version "1.0.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/pump/-/pump-1.0.2.tgz#3b3ee6512f94f0e575538c17995f9f16990a5d51"
+  dependencies:
+    end-of-stream "^1.1.0"
+    once "^1.3.1"
+
 punycode@1.3.2:
   version "1.3.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
@@ -5213,6 +5260,12 @@ querystring-es3@^0.2.0:
 querystring@0.2.0, querystring@^0.2.0:
   version "0.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
+
+quick-format-unescaped@^1.1.1:
+  version "1.1.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/quick-format-unescaped/-/quick-format-unescaped-1.1.1.tgz#e77555ef3e66e105d4039e13ef79201284fee916"
+  dependencies:
+    fast-safe-stringify "^1.0.8"
 
 randomatic@^1.1.3:
   version "1.1.7"
@@ -5358,7 +5411,7 @@ readable-stream@1.0:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.2.2, readable-stream@^2.2.6:
+readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.2.6:
   version "2.3.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/readable-stream/-/readable-stream-2.3.3.tgz#368f2512d79f9d46fdfc71349ae7878bbc1eb95c"
   dependencies:
@@ -5484,6 +5537,17 @@ regjsparser@^0.1.4:
 relateurl@0.2.x:
   version "0.2.7"
   resolved "https://nexus.swmdigital.io/repository/js-combined/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
+
+release-preparer@^0.2.4:
+  version "0.2.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/release-preparer/-/release-preparer-0.2.4.tgz#90a1cf29cf522418d345be3238091a3c3d74c184"
+  dependencies:
+    "@types/pino" "^3.0.1"
+    commander "^2.9.0"
+    fs-extra "^3.0.1"
+    glob "^7.1.2"
+    marked "^0.3.6"
+    pino "^4.7.1"
 
 remove-trailing-separator@^1.0.1:
   version "1.0.2"
@@ -5970,6 +6034,12 @@ split-string@^2.1.0:
   dependencies:
     extend-shallow "^2.0.1"
 
+split2@^2.0.1:
+  version "2.1.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/split2/-/split2-2.1.1.tgz#7a1f551e176a90ecd3345f7246a0cfe175ef4fd0"
+  dependencies:
+    through2 "^2.0.2"
+
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
@@ -6209,6 +6279,13 @@ throng@^4.0.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/throng/-/throng-4.0.0.tgz#983c6ba1993b58eae859998aa687ffe88df84c17"
   dependencies:
     lodash.defaults "^4.0.1"
+
+through2@^2.0.2:
+  version "2.0.3"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/through2/-/through2-2.0.3.tgz#0004569b37c7c74ba39c43f3ced78d1ad94140be"
+  dependencies:
+    readable-stream "^2.1.5"
+    xtend "~4.0.1"
 
 through@^2.3.6:
   version "2.3.8"
@@ -6814,7 +6891,7 @@ xml-name-validator@^2.0.1:
   version "2.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/xml-name-validator/-/xml-name-validator-2.0.1.tgz#4d8b8f1eccd3419aa362061becef515e1e559635"
 
-xtend@^4.0.0, xtend@^4.0.1:
+xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
 
