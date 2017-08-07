@@ -1,4 +1,4 @@
-import { PromiseTracker } from '../server'
+import { PromiseTracker } from '../universal'
 
 export interface WatchtowerEvents {
     beginWaitingForTasks?: (elapsed: string) => void
