@@ -1,9 +1,8 @@
 import * as redux from 'redux'
 import thunk from 'redux-thunk'
 
-import { PromiseTracker, elapsed, Logger } from '../server'
+import { PromiseTracker, elapsed, Logger, createReduxLoggerMiddleware } from '../universal'
 import resolveAllData from './helpers/recursive-task-resolver'
-import { createReduxLoggerMiddleware } from '../server'
 import handleRouterContextResult, { success } from './router-context-handler'
 import * as ServerRenderResults from './server-render-results'
 import renderToString, { CreateAppElement } from './render-app-to-string'

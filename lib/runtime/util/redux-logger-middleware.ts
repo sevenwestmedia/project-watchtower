@@ -1,5 +1,5 @@
 import * as redux from 'redux'
-import { Logger } from 'lib/runtime/util/log'
+import { Logger } from './log'
 
 export const createReduxLoggerMiddleware = (logger: Logger) =>
     <S>() =>

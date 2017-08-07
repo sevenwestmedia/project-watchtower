@@ -7,6 +7,5 @@
 
 export * from './server/assets'
 export * from './server/server'
-export * from './universal'
 
 export { default as config } from './config/config'
