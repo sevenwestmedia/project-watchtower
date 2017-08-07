@@ -1,6 +1,6 @@
-export * from './Components/LogProvider/LogProvider'
-export * from './Components/Page/Page'
-export * from './Components/PageLifecycleProvider/PageLifecycleProvider'
+export * from './components/LogProvider/LogProvider'
+export * from './components/Page/Page'
+export * from './components/PageLifecycleProvider/PageLifecycleProvider'
 
 export * from './util/redux-logger-middleware'
 export * from './util/promise-tracker'
