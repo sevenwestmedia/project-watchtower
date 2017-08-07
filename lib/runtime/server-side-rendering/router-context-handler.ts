@@ -1,4 +1,4 @@
-import { elapsed } from './helpers/function-timer'
+import { elapsed } from '../util/function-timer'
 import { ServerRenderResult, ServerRenderResultType } from './server-render-results'
 import { RenderPassResult } from './render-app-to-string'
 

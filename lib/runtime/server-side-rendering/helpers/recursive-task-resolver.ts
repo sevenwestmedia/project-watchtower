@@ -1,5 +1,4 @@
-import PromiseTracker from './promise-tracker'
-import { Logger } from '../../util/log'
+import { PromiseTracker, Logger } from '../../server'
 
 const delay = (forMs: number) => new Promise((resolve) => setTimeout(resolve, forMs))
 const component = 'RecursiveTaskResolver'

@@ -1,15 +1,13 @@
 import * as redux from 'redux'
 import thunk from 'redux-thunk'
 
-import PromiseTracker from './lib/promise-tracker'
-import resolveAllData from './lib/recursive-task-resolver'
-import createLogger from './redux/redux-logger-middleware'
+import { PromiseTracker, elapsed, Logger } from '../server'
+import resolveAllData from './helpers/recursive-task-resolver'
+import { createReduxLoggerMiddleware } from '../server'
 import handleRouterContextResult, { success } from './router-context-handler'
 import * as ServerRenderResults from './server-render-results'
 import renderToString, { CreateAppElement } from './render-app-to-string'
 import { WatchtowerEvents } from './render-events'
-import { elapsed } from './helpers/function-timer'
-import { Logger } from '../util/log'
 
 export { PromiseTracker }
 export interface RenderOptions {
@@ -47,7 +45,7 @@ async function renderPageContents<T extends object>(
         store = await options.createReduxStore([
             promiseTracker.middleware(),
             thunk.withExtraArgument({ log: options.log }),
-            createLogger(options.log)
+            createReduxLoggerMiddleware(options.log)
         ])
     } catch (err) {
         const failure: ServerRenderResults.FailedRenderResult = {

@@ -1,7 +1,7 @@
 import * as redux from 'redux'
+import { Logger } from 'lib/runtime/util/log'
 
-// @TODO revisit and make logger and action types correct
-const reduxLoggerMiddleware = (logger: any) =>
+export const createReduxLoggerMiddleware = (logger: Logger) =>
     <S>() =>
         (next: redux.Dispatch<S>) =>
             (action: any) => {
@@ -17,14 +17,14 @@ const reduxLoggerMiddleware = (logger: any) =>
 
                 // new error payload strategy
                 if (action.isError) {
-                    const logObj = { err: action, event: 'ActionFailure' }
                     const logMsg = `Failed to perform client action ${actionDescription}`
-                    logger.warn(logObj, logMsg)
+                    const logObj = { err: action, event: 'ActionFailure', msg: logMsg }
+                    logger.warn(logObj)
                 } else if (action.error) { // old error payload strategy
-                    const logObj = { err: action, event: 'ActionFailure' }
                     const logMsg = `Failed to perform client action ${actionDescription}`
+                    const logObj = { err: action, event: 'ActionFailure', msg: logMsg }
 
-                    logger.warn(logObj, logMsg)
+                    logger.warn(logObj)
                 }
 
                 logger.debug(`dispatching: ${actionDescription}`)
@@ -35,5 +35,3 @@ const reduxLoggerMiddleware = (logger: any) =>
 
                 return result
             }
-
-export default reduxLoggerMiddleware

@@ -8,7 +8,7 @@
  * const promise = pcs.promise
  * pcs.resolve('data')
  */
-export default class PromiseCompletionSource<T> {
+export class PromiseCompletionSource<T> {
     resolve: (result: T) => Promise<void>
     reject: (error: Error) => Promise<void>
     completed: boolean = false
