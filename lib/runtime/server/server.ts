@@ -67,11 +67,13 @@ export const getDefaultHtmlMiddleware = (logNotFound = false) => {
 export type CreateServerType = (
     middlewareHook?: (app: express.Express) => void,
     callback?: () => void,
+    startListening?: boolean,
 ) => express.Express
 
 export const createServer: CreateServerType = (
     middlewareHook,
     callback,
+    startListening = true,
 ) => {
 
     const app = express()
@@ -104,6 +106,10 @@ export const createServer: CreateServerType = (
     // if the server does not use server-side rendering, just respond with index.html
     // for each request not handled in other middlewares
     app.get('*', getDefaultHtmlMiddleware())
+
+    if (!startListening) {
+        return app
+    }
 
     const listen = (usePort: number) => {
         const server = app.listen(usePort, () => {
