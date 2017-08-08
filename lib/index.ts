@@ -12,7 +12,8 @@ import binWatch from './bin/watch'
 import * as buildModule from './build'
 import * as configModule from './config'
 import * as lintModule from './lint'
-import * as runtimeServerOnlyModule from './runtime/server'
+import * as runtimeServerModule from './runtime/server'
+import * as universalModule from './runtime/universal'
 import * as serverModule from './server'
 import * as statsModule from './stats'
 
@@ -47,7 +48,8 @@ export const bin: BinType = {
 export const build = buildModule
 export const config = configModule
 export const lint = lintModule
-export const runtimeServerOnly = runtimeServerOnlyModule
+export const runtimeServer = runtimeServerModule
+export const universal = universalModule
 export const server = serverModule
 export const stats = statsModule
 
