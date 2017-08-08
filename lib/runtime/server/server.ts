@@ -1,6 +1,8 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as express from 'express'
+import * as compression from 'compression'
+import * as hpp from 'hpp'
 import { addAssetsToHtml } from './assets'
 import { findFreePort } from '../util/network'
 import { log, logError } from '../util/log'
@@ -73,6 +75,7 @@ export const createServer: CreateServerType = (
 ) => {
 
     const app = express()
+    app.disable('x-powered-by')
 
     if (!isProduction && isWatchMode()) {
         // tslint:disable-next-line no-var-requires
@@ -80,6 +83,10 @@ export const createServer: CreateServerType = (
         app.use(getHotReloadMiddleware())
     }
 
+    if (isProduction) {
+        app.use(hpp())
+        app.use(compression())
+    }
     app.use(express.static(CLIENT_OUTPUT, {
         index: false,
     }))
