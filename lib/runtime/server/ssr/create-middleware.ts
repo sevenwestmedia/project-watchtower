@@ -2,7 +2,7 @@ import * as helmet from 'helmet'
 import { Request, Response, Express } from 'express'
 import * as redux from 'redux'
 import {
-  WatchtowerOptions,
+  ServerSideRenderOptions,
   SuccessServerRenderResult,
   PageNotFoundRenderResult,
   renderPageContents,
@@ -39,7 +39,7 @@ export const createSsrMiddleware = <ReduxState extends object>(
     renderApp: RenderApp,
     renderHtml: RenderHtml<ReduxState>,
     errorLocation: string,
-    createReduxStore: WatchtowerOptions<ReduxState>['createReduxStore'],
+    createReduxStore: ServerSideRenderOptions<ReduxState>['createReduxStore'],
 ) => {
     // We require helmet middleware registered
     app.use(helmet())
@@ -48,7 +48,7 @@ export const createSsrMiddleware = <ReduxState extends object>(
     return async (req: RenderRequest, response: Response) => {
         let renderContext: RenderContext
 
-        const options: WatchtowerOptions<ReduxState> = {
+        const options: ServerSideRenderOptions<ReduxState> = {
             log: req.log,
             errorLocation,
             ssrTimeoutMs,

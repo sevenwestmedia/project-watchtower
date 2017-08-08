@@ -13,8 +13,9 @@
 - Added `lib` export `runtimeUniversal`
   - Safe for import into universal/isomorphic modules
   - Also can be accessed through `lib/runtime/universal` if not using tree-shaking
-- **BREAKING**: Renamed `lib/runtime/server-sider-rendering` -> `lib/runtime/server-side-rendering`
+- **BREAKING**: Renamed `lib/runtime/server-sider-rendering` -> `lib/runtime/server/ssr`
   - Also a number of utilities under `server-side-rendering/lib` to `runtime/util`
+- Added helmet, compression and hpp as peer dependencies
 
 ## [v0.6.5] - 4/8/2017
 

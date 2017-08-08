@@ -16,7 +16,7 @@ export interface RenderOptions {
     events?: WatchtowerEvents
 }
 
-export interface WatchtowerOptions<ReduxState extends object> extends RenderOptions {
+export interface ServerSideRenderOptions<ReduxState extends object> extends RenderOptions {
     ssrTimeoutMs: number
     createReduxStore: (middlewares: redux.Middleware[]) => Promise<redux.Store<ReduxState>>
 }
@@ -34,7 +34,7 @@ export interface Assets {
 
 async function renderPageContents<T extends object>(
     currentLocation: string,
-    options: WatchtowerOptions<T>,
+    options: ServerSideRenderOptions<T>,
 ): Promise<ServerRenderResults.ServerRenderResult<T>> {
     const START_FAST_MODE = process.env.START_FAST_MODE === 'true'
     const startTime = process.hrtime()
