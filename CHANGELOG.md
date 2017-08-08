@@ -1,5 +1,8 @@
 # Changelog
 
+## vNext
+- Upgrade ts-jest to 20.0.10 for better testing performance
+
 ## [v0.6.5] - 4/8/2017
 No changes
 

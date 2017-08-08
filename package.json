@@ -108,7 +108,7 @@
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.18.2",
     "throng": "^4.0.0",
-    "ts-jest": "20.0.4",
+    "ts-jest": "^20.0.10",
     "tslint": "5.5.0",
     "tslint-react": "3.0.0",
     "webpack": "^3.3.0",
