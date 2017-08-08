@@ -8,4 +8,7 @@
 export * from './server/assets'
 export * from './server/server'
 
+import * as ssr from './server/ssr'
+export { ssr }
+
 export { default as config } from './config/config'

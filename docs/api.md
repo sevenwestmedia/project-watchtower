@@ -67,6 +67,10 @@ default CONFIG // application configuration
 `project-watchtower/lib/runtime/server`
 These dependencies are safe to import into a node server, also includes everything from `/universal`
 
+`project-watchtower/lib/runtime/server/ssr`
+See [Server Side Rendering](./server-side-rendering.md)
+
+
 ```ts
 getAssetLocations(): Assets
 
