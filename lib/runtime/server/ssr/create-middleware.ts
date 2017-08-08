@@ -20,9 +20,9 @@ export interface RenderContext {
 }
 
 export type RenderRequest = Request & { log: Logger }
-export type RenderApp<ReduxState extends object> = (
+export type RenderApp<ReduxState extends object, SsrRequest extends RenderRequest> = (
     logger: Logger, store: redux.Store<ReduxState>,
-    context: RenderContext, req: RenderRequest,
+    context: RenderContext, req: SsrRequest,
 ) => JSX.Element
 export type RenderHtml<ReduxState extends object> = (
     head: HelmetData | undefined,
@@ -34,23 +34,29 @@ export type ResultType<ReduxState extends object> =
     | SuccessServerRenderResult<ReduxState>
     | PageNotFoundRenderResult<ReduxState>
 
-export type ServerSideRenderMiddlewareOptions<ReduxState extends object> = {
+export type ServerSideRenderMiddlewareOptions<
+    ReduxState extends object,
+    SsrRequest extends RenderRequest,
+> = {
     app: Express,
     ssrTimeoutMs: number,
-    renderApp: RenderApp<ReduxState>,
+    renderApp: RenderApp<ReduxState, SsrRequest>,
     renderHtml: RenderHtml<ReduxState>,
     errorLocation: string,
     createReduxStore: ServerSideRenderOptions<ReduxState>['createReduxStore'],
 }
 
-export const createSsrMiddleware = <ReduxState extends object>(
-    options: ServerSideRenderMiddlewareOptions<ReduxState>,
+export const createSsrMiddleware = <
+    ReduxState extends object,
+    SsrRequest extends RenderRequest = RenderRequest
+>(
+    options: ServerSideRenderMiddlewareOptions<ReduxState, SsrRequest>,
 ) => {
     // We require helmet middleware registered
     options.app.use(helmet())
     const assets = getAssetLocations()
 
-    return async (req: RenderRequest, response: Response) => {
+    return async (req: SsrRequest, response: Response) => {
         let renderContext: RenderContext
 
         const ssrOptions: ServerSideRenderOptions<ReduxState> = {
