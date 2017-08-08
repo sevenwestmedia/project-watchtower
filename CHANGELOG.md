@@ -13,7 +13,7 @@
 - Added `lib` export `runtimeUniversal`
   - Safe for import into universal/isomorphic modules
   - Also can be accessed through `lib/runtime/universal` if not using tree-shaking
-- **BREAKING**: Renamed `lib/runtime/server-sider-rendering` -> `lib/runtime/server-sider-rendering`
+- **BREAKING**: Renamed `lib/runtime/server-sider-rendering` -> `lib/runtime/server-side-rendering`
   - Also a number of utilities under `server-side-rendering/lib` to `runtime/util`
 
 ## [v0.6.5] - 4/8/2017
