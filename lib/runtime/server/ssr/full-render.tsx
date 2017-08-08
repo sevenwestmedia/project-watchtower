@@ -17,12 +17,17 @@ export interface RenderOptions {
     events?: WatchtowerEvents
 }
 
-export interface ServerSideRenderOptions<ReduxState extends object> extends RenderOptions {
+export type CreateReduxStore<ReduxState extends object, SsrRequest extends RenderRequest> = (
+    middlewares: redux.Middleware[],
+    req: SsrRequest,
+) => Promise<redux.Store<ReduxState>>
+
+export interface ServerSideRenderOptions<
+    ReduxState extends object,
+    SsrRequest extends RenderRequest
+> extends RenderOptions {
     ssrTimeoutMs: number
-    createReduxStore: (
-        middlewares: redux.Middleware[],
-        req: RenderRequest,
-    ) => Promise<redux.Store<ReduxState>>
+    createReduxStore: CreateReduxStore<ReduxState, SsrRequest>
 }
 
 // tslint:disable:trailing-comma
@@ -36,9 +41,9 @@ export interface Assets {
     }
 }
 
-async function renderPageContents<T extends object>(
-    options: ServerSideRenderOptions<T>,
-    req: RenderRequest,
+async function renderPageContents<T extends object, SsrRequest extends RenderRequest>(
+    options: ServerSideRenderOptions<T, SsrRequest>,
+    req: SsrRequest,
 ): Promise<ServerRenderResults.ServerRenderResult<T>> {
     const { url: currentLocation } = req
     const START_FAST_MODE = process.env.START_FAST_MODE === 'true'

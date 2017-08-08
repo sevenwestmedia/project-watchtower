@@ -13,6 +13,7 @@ import {
 import { PromiseCompletionSource, Logger } from '../../universal'
 import { getAssetLocations } from '../../server'
 import { HelmetData } from 'react-helmet'
+import { CreateReduxStore } from '../ssr'
 
 export interface RenderContext {
     completionNotifier: PromiseCompletionSource<{}>
@@ -43,7 +44,7 @@ export type ServerSideRenderMiddlewareOptions<
     renderApp: RenderApp<ReduxState, SsrRequest>,
     renderHtml: RenderHtml<ReduxState>,
     errorLocation: string,
-    createReduxStore: ServerSideRenderOptions<ReduxState>['createReduxStore'],
+    createReduxStore: CreateReduxStore<ReduxState, SsrRequest>,
 }
 
 export const createSsrMiddleware = <
@@ -59,7 +60,7 @@ export const createSsrMiddleware = <
     return async (req: SsrRequest, response: Response) => {
         let renderContext: RenderContext
 
-        const ssrOptions: ServerSideRenderOptions<ReduxState> = {
+        const ssrOptions: ServerSideRenderOptions<ReduxState, SsrRequest> = {
             log: req.log,
             errorLocation: options.errorLocation,
             ssrTimeoutMs: options.ssrTimeoutMs,
@@ -82,7 +83,7 @@ export const createSsrMiddleware = <
                 },
             },
         }
-        const pageRenderResult = await renderPageContents<ReduxState>(ssrOptions, req)
+        const pageRenderResult = await renderPageContents<ReduxState, SsrRequest>(ssrOptions, req)
 
         const createPageMarkup = (result: ResultType<ReduxState>) => (
             options.renderHtml(
