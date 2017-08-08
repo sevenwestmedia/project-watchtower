@@ -1,4 +1,4 @@
-import { Logger } from '../../util/log'
+import { Logger } from '../../../util/log'
 
 export const testLogger: Logger = {
     // tslint:disable:no-console
