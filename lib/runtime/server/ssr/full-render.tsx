@@ -7,6 +7,7 @@ import handleRouterContextResult, { success } from './router-context-handler'
 import * as ServerRenderResults from './server-render-results'
 import renderToString, { CreateAppElement } from './render-app-to-string'
 import { WatchtowerEvents } from './render-events'
+import { RenderRequest } from '../ssr'
 
 export { PromiseTracker }
 export interface RenderOptions {
@@ -18,7 +19,10 @@ export interface RenderOptions {
 
 export interface ServerSideRenderOptions<ReduxState extends object> extends RenderOptions {
     ssrTimeoutMs: number
-    createReduxStore: (middlewares: redux.Middleware[]) => Promise<redux.Store<ReduxState>>
+    createReduxStore: (
+        middlewares: redux.Middleware[],
+        req: RenderRequest,
+    ) => Promise<redux.Store<ReduxState>>
 }
 
 // tslint:disable:trailing-comma
@@ -33,9 +37,10 @@ export interface Assets {
 }
 
 async function renderPageContents<T extends object>(
-    currentLocation: string,
     options: ServerSideRenderOptions<T>,
+    req: RenderRequest,
 ): Promise<ServerRenderResults.ServerRenderResult<T>> {
+    const { url: currentLocation } = req
     const START_FAST_MODE = process.env.START_FAST_MODE === 'true'
     const startTime = process.hrtime()
     const promiseTracker = new PromiseTracker()
@@ -45,7 +50,7 @@ async function renderPageContents<T extends object>(
             promiseTracker.middleware(),
             thunk.withExtraArgument({ log: options.log }),
             createReduxLoggerMiddleware(options.log)
-        ])
+        ], req)
     } catch (err) {
         const failure: ServerRenderResults.FailedRenderResult = {
             type: ServerRenderResults.ServerRenderResultType.Failure,

@@ -20,7 +20,7 @@ export interface RenderContext {
 }
 
 export type RenderRequest = Request & { log: Logger }
-export type RenderApp = <ReduxState extends object>(
+export type RenderApp<ReduxState extends object> = (
     logger: Logger, store: redux.Store<ReduxState>,
     context: RenderContext, req: RenderRequest,
 ) => JSX.Element
@@ -31,35 +31,40 @@ export type RenderHtml<ReduxState extends object> = (
     assets: Assets,
 ) => string
 export type ResultType<ReduxState extends object> =
-    | SuccessServerRenderResult<ReduxState> | PageNotFoundRenderResult<ReduxState>
+    | SuccessServerRenderResult<ReduxState>
+    | PageNotFoundRenderResult<ReduxState>
 
-export const createSsrMiddleware = <ReduxState extends object>(
+export type ServerSideRenderMiddlewareOptions<ReduxState extends object> = {
     app: Express,
     ssrTimeoutMs: number,
-    renderApp: RenderApp,
+    renderApp: RenderApp<ReduxState>,
     renderHtml: RenderHtml<ReduxState>,
     errorLocation: string,
     createReduxStore: ServerSideRenderOptions<ReduxState>['createReduxStore'],
+}
+
+export const createSsrMiddleware = <ReduxState extends object>(
+    options: ServerSideRenderMiddlewareOptions<ReduxState>,
 ) => {
     // We require helmet middleware registered
-    app.use(helmet())
+    options.app.use(helmet())
     const assets = getAssetLocations()
 
     return async (req: RenderRequest, response: Response) => {
         let renderContext: RenderContext
 
-        const options: ServerSideRenderOptions<ReduxState> = {
+        const ssrOptions: ServerSideRenderOptions<ReduxState> = {
             log: req.log,
-            errorLocation,
-            ssrTimeoutMs,
+            errorLocation: options.errorLocation,
+            ssrTimeoutMs: options.ssrTimeoutMs,
             appRender: (store) => {
                 renderContext = {
                     completionNotifier: new PromiseCompletionSource<{}>(),
                     triggeredLoad: false,
                 }
-                return renderApp(req.log, store, renderContext, req)
+                return options.renderApp(req.log, store, renderContext, req)
             },
-            createReduxStore,
+            createReduxStore: options.createReduxStore,
             events: {
                 renderPerformed: (promiseTracker) => {
                     // loadAllCompleted will not fire if nothing started loading
@@ -71,10 +76,10 @@ export const createSsrMiddleware = <ReduxState extends object>(
                 },
             },
         }
-        const pageRenderResult = await renderPageContents<ReduxState>(req.url, options)
+        const pageRenderResult = await renderPageContents<ReduxState>(ssrOptions, req)
 
         const createPageMarkup = (result: ResultType<ReduxState>) => (
-            renderHtml(
+            options.renderHtml(
                 result.head,
                 result.renderedContent,
                 result.reduxState,
