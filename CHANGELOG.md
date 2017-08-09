@@ -1,11 +1,16 @@
 # Changelog
 
-## vNext
+## [v0.6.6] - 9/8/2017
+- Upgrade ts-jest to 20.0.10 for better testing performance
+- Increase the memory for the Node process to 4GB to work around TS2.4 OOM error
+- Upgrade webpack to 3.5.1, upgrade other webpack-related dependencies
+
 - Upgrade ts-jest to 20.0.10 for better testing performance
 - Increase the memory for the Node process to 4GB to work around TS2.4 OOM error
 - Upgrade webpack to 3.5.1, upgrade other webpack-related dependencies
 
 ## [v0.6.5] - 4/8/2017
+
 No changes
 
 ## [v0.6.4] - 2/8/2017
@@ -24,7 +29,6 @@ No changes
 ## [v0.6.1 (2017-07-27)]
 - Add `pwt stats verbose` to log the server output when running the stats
 - Downgrade ts-jest to 20.0.4 due to performance regression
-      (https://github.com/kulshekhar/ts-jest/issues/259)
 - Fix webpack performance regression by reducing source map resolution and stats output in dev
 
 ## [v0.6.0 (2017-07-24)]
