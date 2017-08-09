@@ -62,10 +62,8 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
             elapsed: elapsed(startTime),
             head: undefined,
         }
-        options.log.error({
-            msg: failure.errorMessage,
-            err,
-        })
+
+        options.log.error({ err }, failure.errorMessage)
 
         return failure
     }
@@ -95,7 +93,7 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
                     options.events.renderPerformed(promiseTracker)
                 } catch (err) {
                     // External event failed. Just log and continue
-                    options.log.error({ err, msg: 'renderPerformed event failed' })
+                    options.log.error({ err }, 'renderPerformed event failed')
                 }
             }
 
@@ -137,7 +135,7 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
                 options.events.beginWaitingForTasks(elapsed(startTime))
             } catch (err) {
                 // external event failed, log and continue
-                options.log.error({ err, msg: 'beginWaitingForTasks threw, continuing' })
+                options.log.error({ err }, 'beginWaitingForTasks threw, continuing')
             }
         }
 
@@ -162,7 +160,7 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
             elapsed: elapsed(startTime),
             head: undefined,
         }
-        options.log.error({ err, msg: 'Failed to render' })
+        options.log.error({ err }, 'Failed to render')
 
         return failure
     }
