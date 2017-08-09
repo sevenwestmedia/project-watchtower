@@ -1,12 +1,14 @@
 import { Logger } from '../../../util/log'
 
+const formatArgs = (a: any) => typeof a === 'string' ? a : JSON.stringify(a)
+
 export const testLogger: Logger = {
     // tslint:disable:no-console
-    debug: (msg) => console.log(msg),
-    info: (msg) => console.log(msg),
-    warn: (msg) => console.log(msg),
+    debug: (...args: any[]) => console.log(args.map(formatArgs)),
+    info: (...args: any[]) => console.log(args.map(formatArgs)),
+    warn: (...args: any[]) => console.log(args.map(formatArgs)),
     error: (...args: any[]) => {
-        console.log(args)
+        console.log(args.map(formatArgs))
     },
     // tslint:enable:no-console
 }
