@@ -3,6 +3,7 @@
 ## vNext
 - Upgrade ts-jest to 20.0.10 for better testing performance
 - Increase the memory for the Node process to 4GB to work around TS2.4 OOM error
+- Upgrade webpack to 3.5.1, upgrade other webpack-related dependencies
 
 ## [v0.6.5] - 4/8/2017
 No changes
