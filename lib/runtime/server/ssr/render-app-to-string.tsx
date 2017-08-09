@@ -5,10 +5,8 @@ import { renderToString } from 'react-dom/server'
 import { renderStaticOptimized, GlamorServerResult } from 'glamor/server'
 import { StaticRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { functionTimer } from './helpers/function-timer'
+import { functionTimer, Logger, LogProvider } from '../../universal'
 import { StaticRouterContext } from './router-context-handler'
-import { Logger } from '../util/log'
-import { LogProvider } from '../components/LogProvider/LogProvider'
 
 export type CreateAppElement = (
     store: redux.Store<any>,

@@ -1,15 +1,13 @@
 import * as redux from 'redux'
 import thunk from 'redux-thunk'
 
-import PromiseTracker from './lib/promise-tracker'
-import resolveAllData from './lib/recursive-task-resolver'
-import createLogger from './redux/redux-logger-middleware'
+import { PromiseTracker, elapsed, Logger } from '../../universal'
+import resolveAllData from './helpers/recursive-task-resolver'
 import handleRouterContextResult, { success } from './router-context-handler'
 import * as ServerRenderResults from './server-render-results'
 import renderToString, { CreateAppElement } from './render-app-to-string'
 import { WatchtowerEvents } from './render-events'
-import { elapsed } from './helpers/function-timer'
-import { Logger } from '../util/log'
+import { RenderRequest } from '../ssr'
 
 export { PromiseTracker }
 export interface RenderOptions {
@@ -19,9 +17,17 @@ export interface RenderOptions {
     events?: WatchtowerEvents
 }
 
-export interface WatchtowerOptions<ReduxState extends object> extends RenderOptions {
+export type CreateReduxStore<ReduxState extends object, SsrRequest extends RenderRequest> = (
+    middlewares: redux.Middleware[],
+    req: SsrRequest,
+) => Promise<redux.Store<ReduxState>>
+
+export interface ServerSideRenderOptions<
+    ReduxState extends object,
+    SsrRequest extends RenderRequest
+> extends RenderOptions {
     ssrTimeoutMs: number
-    createReduxStore: (middlewares: redux.Middleware[]) => Promise<redux.Store<ReduxState>>
+    createReduxStore: CreateReduxStore<ReduxState, SsrRequest>
 }
 
 // tslint:disable:trailing-comma
@@ -35,10 +41,11 @@ export interface Assets {
     }
 }
 
-async function renderPageContents<T extends object>(
-    currentLocation: string,
-    options: WatchtowerOptions<T>,
+async function renderPageContents<T extends object, SsrRequest extends RenderRequest>(
+    options: ServerSideRenderOptions<T, SsrRequest>,
+    req: SsrRequest,
 ): Promise<ServerRenderResults.ServerRenderResult<T>> {
+    const { url: currentLocation } = req
     const START_FAST_MODE = process.env.START_FAST_MODE === 'true'
     const startTime = process.hrtime()
     const promiseTracker = new PromiseTracker()
@@ -47,8 +54,7 @@ async function renderPageContents<T extends object>(
         store = await options.createReduxStore([
             promiseTracker.middleware(),
             thunk.withExtraArgument({ log: options.log }),
-            createLogger(options.log)
-        ])
+        ], req)
     } catch (err) {
         const failure: ServerRenderResults.FailedRenderResult = {
             type: ServerRenderResults.ServerRenderResultType.Failure,
@@ -56,10 +62,8 @@ async function renderPageContents<T extends object>(
             elapsed: elapsed(startTime),
             head: undefined,
         }
-        options.log.error({
-            msg: failure.errorMessage,
-            err,
-        })
+
+        options.log.error({ err }, failure.errorMessage)
 
         return failure
     }
@@ -89,7 +93,7 @@ async function renderPageContents<T extends object>(
                     options.events.renderPerformed(promiseTracker)
                 } catch (err) {
                     // External event failed. Just log and continue
-                    options.log.error({ err, msg: 'renderPerformed event failed' })
+                    options.log.error({ err }, 'renderPerformed event failed')
                 }
             }
 
@@ -131,7 +135,7 @@ async function renderPageContents<T extends object>(
                 options.events.beginWaitingForTasks(elapsed(startTime))
             } catch (err) {
                 // external event failed, log and continue
-                options.log.error({ err, msg: 'beginWaitingForTasks threw, continuing' })
+                options.log.error({ err }, 'beginWaitingForTasks threw, continuing')
             }
         }
 
@@ -156,7 +160,7 @@ async function renderPageContents<T extends object>(
             elapsed: elapsed(startTime),
             head: undefined,
         }
-        options.log.error({ err, msg: 'Failed to render' })
+        options.log.error({ err }, 'Failed to render')
 
         return failure
     }

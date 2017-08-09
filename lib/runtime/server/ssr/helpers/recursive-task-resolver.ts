@@ -1,5 +1,4 @@
-import PromiseTracker from './promise-tracker'
-import { Logger } from '../../util/log'
+import { PromiseTracker, Logger } from '../../../universal'
 
 const delay = (forMs: number) => new Promise((resolve) => setTimeout(resolve, forMs))
 const component = 'RecursiveTaskResolver'
@@ -49,6 +48,11 @@ function innerResolve<T>(
     }))
 }
 
+/**
+ * Utility which will recursively render the React application, triggering any
+ * additional data loader recursively until no more data loads are triggered
+ * or it times out, or it hits the max depth
+ */
 export default async function<T>(
     log: Logger,
     promiseTracker: PromiseTracker,

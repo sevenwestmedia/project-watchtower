@@ -1,5 +1,5 @@
 import resolveAllData from './recursive-task-resolver'
-import PromiseTracker from './promise-tracker'
+import { PromiseTracker } from '../../../universal'
 import { testLogger } from '../helpers/test-logger'
 
 describe('Recursive Task Resolver', () => {

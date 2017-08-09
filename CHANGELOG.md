@@ -8,6 +8,14 @@
 - Upgrade ts-jest to 20.0.10 for better testing performance
 - Increase the memory for the Node process to 4GB to work around TS2.4 OOM error
 - Upgrade webpack to 3.5.1, upgrade other webpack-related dependencies
+- **BREAKING**: Renamed `lib` export `runtime` -> `runtimeServerOnly`
+  - Contains runtime dependencies safe for server code
+- Added `lib` export `runtimeUniversal`
+  - Safe for import into universal/isomorphic modules
+  - Also can be accessed through `lib/runtime/universal` if not using tree-shaking
+- **BREAKING**: Renamed `lib/runtime/server-sider-rendering` -> `lib/runtime/server/ssr`
+  - Also a number of utilities under `server-side-rendering/lib` to `runtime/util`
+- Added helmet, compression and hpp as peer dependencies
 
 ## [v0.6.5] - 4/8/2017
 

@@ -65,6 +65,13 @@ default CONFIG // application configuration
 ```
 
 `project-watchtower/lib/runtime/server`
+These dependencies are safe to import into a node server
+
+The watchtower server includes some common express modules, like hpp and compression.
+
+`project-watchtower/lib/runtime/server/ssr`
+See [Server Side Rendering](./server-side-rendering.md)
+
 
 ```ts
 getAssetLocations(): Assets
@@ -84,6 +91,10 @@ createServer(
 
 getDefaultHtmlMiddleware() => express.RequestHandler
 ```
+
+`project-watchtower/lib/runtime/universal`
+
+Exposes a number of utilities and helpers which are safe to use on the server or client
 
 ### Import for dev only
 

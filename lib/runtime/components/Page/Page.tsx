@@ -34,7 +34,7 @@ export default withPageLifecycleProps(
         // https://github.com/facebook/react/issues/2461
         // TODO Move to stable error boundaries API
         unstable_handleError(err: Error) {
-            this.context.logger.error({ err, msg: 'Render error' })
+            this.context.logger.error({ err }, 'Render error')
             this.setState({ error: true })
         }
 

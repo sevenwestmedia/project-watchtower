@@ -12,7 +12,7 @@ import * as H from 'history'
 import PageLifecycleProvider, {
     withPageLifecycleEvents, ComponentWithLifecycle, PageEvent,
 } from './PageLifecycleProvider'
-import PromiseCompletionSource from '../../util/promise-completion-source'
+import { PromiseCompletionSource } from '../../universal'
 import Page from '../Page/Page'
 
 interface TestData {

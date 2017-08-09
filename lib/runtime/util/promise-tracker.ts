@@ -2,7 +2,7 @@ import * as redux from 'redux'
 
 export type TrackedPromise = PromiseLike<any>
 
-export default class PromiseTracker {
+export class PromiseTracker {
     promises: TrackedPromise[] = []
 
     track(promise: PromiseLike<any>) {

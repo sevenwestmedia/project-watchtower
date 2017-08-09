@@ -1,6 +1,8 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as express from 'express'
+import * as compression from 'compression'
+import * as hpp from 'hpp'
 import { addAssetsToHtml } from './assets'
 import { findFreePort } from '../util/network'
 import { log, logError } from '../util/log'
@@ -65,14 +67,17 @@ export const getDefaultHtmlMiddleware = (logNotFound = false) => {
 export type CreateServerType = (
     middlewareHook?: (app: express.Express) => void,
     callback?: () => void,
+    startListening?: boolean,
 ) => express.Express
 
 export const createServer: CreateServerType = (
     middlewareHook,
     callback,
+    startListening = true,
 ) => {
 
     const app = express()
+    app.disable('x-powered-by')
 
     if (!isProduction && isWatchMode()) {
         // tslint:disable-next-line no-var-requires
@@ -80,6 +85,10 @@ export const createServer: CreateServerType = (
         app.use(getHotReloadMiddleware())
     }
 
+    if (isProduction) {
+        app.use(hpp())
+        app.use(compression())
+    }
     app.use(express.static(CLIENT_OUTPUT, {
         index: false,
     }))
@@ -97,6 +106,10 @@ export const createServer: CreateServerType = (
     // if the server does not use server-side rendering, just respond with index.html
     // for each request not handled in other middlewares
     app.get('*', getDefaultHtmlMiddleware())
+
+    if (!startListening) {
+        return app
+    }
 
     const listen = (usePort: number) => {
         const server = app.listen(usePort, () => {
