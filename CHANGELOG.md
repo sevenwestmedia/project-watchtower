@@ -6,6 +6,7 @@
 - Upgrade webpack to 3.5.1, upgrade other webpack-related dependencies
 
 - Upgrade ts-jest to 20.0.10 for better testing performance
+
 - Increase the memory for the Node process to 4GB to work around TS2.4 OOM error
 - Upgrade webpack to 3.5.1, upgrade other webpack-related dependencies
 - **BREAKING**: Renamed `lib` export `runtime` -> `runtimeServerOnly`

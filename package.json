@@ -1,6 +1,6 @@
 {
   "name": "project-watchtower",
-  "version": "0.6.6",
+  "version": "0.7.0",
   "description": "",
   "publishConfig": {
     "registry": "https://nexus.swmdigital.io/repository/js-private"
@@ -72,9 +72,12 @@
   },
   "peerDependencies": {
     "@types/webpack": ">=3.0.0",
+    "compression": "^1.7.0",
     "enzyme": ">=2.0.0",
     "express": ">=4.0.0",
     "glamor": "^2.20.0",
+    "helmet": "^3.8.1",
+    "hpp": "^0.2.2",
     "react": ">=15.6.0",
     "react-dom": ">=15.6.0",
     "react-helmet": ">=5.1.0",
@@ -84,10 +87,7 @@
     "redux-thunk": ">=2.2.0",
     "source-map-support": ">=0.4.0",
     "tslib": ">=1.7.0",
-    "typescript": ">=2.4.0",
-    "helmet": "^3.8.1",
-    "compression": "^1.7.0",
-    "hpp": "^0.2.2"
+    "typescript": ">=2.4.0"
   },
   "dependencies": {
     "assets-webpack-plugin": "^3.5.1",
