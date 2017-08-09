@@ -17,6 +17,10 @@ const proc = fork(
     process.argv.slice(2),
     {
         env: process.env,
+        // Node runs out of memory when re-exporting the glamorous 4 typings
+        // with TypeScript 2.4
+        // https://github.com/Microsoft/TypeScript/issues/17070
+        execArgv: ['--max-old-space-size=4096'],
     },
 )
 
