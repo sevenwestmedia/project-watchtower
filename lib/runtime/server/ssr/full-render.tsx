@@ -1,7 +1,7 @@
 import * as redux from 'redux'
 import thunk from 'redux-thunk'
 
-import { PromiseTracker, elapsed, Logger, createReduxLoggerMiddleware } from '../../universal'
+import { PromiseTracker, elapsed, Logger } from '../../universal'
 import resolveAllData from './helpers/recursive-task-resolver'
 import handleRouterContextResult, { success } from './router-context-handler'
 import * as ServerRenderResults from './server-render-results'
@@ -54,7 +54,6 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
         store = await options.createReduxStore([
             promiseTracker.middleware(),
             thunk.withExtraArgument({ log: options.log }),
-            createReduxLoggerMiddleware(options.log)
         ], req)
     } catch (err) {
         const failure: ServerRenderResults.FailedRenderResult = {
