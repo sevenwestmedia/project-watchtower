@@ -20,7 +20,7 @@ const config: webpack.Configuration = merge(
     {
         entry: {
             main: [
-                'webpack-hot-middleware/client',
+                'webpack-hot-middleware/client?noInfo=true',
             ],
         },
         output: {

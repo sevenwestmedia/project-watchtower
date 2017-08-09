@@ -30,9 +30,7 @@ export const getHotReloadMiddleware: HotReloadMiddleware = () => {
         },
     )
 
-    const hot = webpackHotMiddleware(compiler, {
-        noInfo: true,
-    })
+    const hot = webpackHotMiddleware(compiler)
 
     return [
         dev,
