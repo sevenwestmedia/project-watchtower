@@ -34,7 +34,7 @@ function innerResolve<T>(
                     return p
                 }
 
-                log.info({ component, msg: 'Re-rendering to trigger any child promises' })
+                log.debug({ component, msg: 'Re-rendering to trigger any child promises' })
                 const renderResult = render()
 
                 // eslint-disable-next-line consistent-return
