@@ -1,5 +1,10 @@
 # Changelog
 
+## vNext
+- Preserve passed Node options
+- Pass Node options to child process when starting server
+- Skip type checking for server build when running `pwt watch fast`
+
 ## [v0.6.6] - 9/8/2017
 - Upgrade ts-jest to 20.0.10 for better testing performance
 - Increase the memory for the Node process to 4GB to work around TS2.4 OOM error

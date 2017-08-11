@@ -12,15 +12,23 @@ process.env.UV_THREADPOOL_SIZE = '128'
 
 const filePath = path.resolve(__dirname, 'index.js')
 
+// already set fast mode env variable here so that the server build also skips type checking
+if (process.argv.indexOf('watch') !== -1 && process.argv.indexOf('fast') !== -1) {
+    process.env.START_FAST_MODE = 'true'
+}
+
 const proc = fork(
     filePath,
     process.argv.slice(2),
     {
         env: process.env,
-        // Node runs out of memory when re-exporting the glamorous 4 typings
-        // with TypeScript 2.4
-        // https://github.com/Microsoft/TypeScript/issues/17070
-        execArgv: ['--max-old-space-size=4096'],
+        execArgv: [
+            ...process.execArgv,
+            // Node runs out of memory when re-exporting the glamorous 4 typings
+            // with TypeScript 2.4
+            // https://github.com/Microsoft/TypeScript/issues/17070
+            '--max-old-space-size=4096',
+        ],
     },
 )
 

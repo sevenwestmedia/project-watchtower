@@ -44,7 +44,9 @@ const start = (...args: StartParam[]): Promise<ChildProcess> => {
 
     dotenv.config()
 
-    const execArgv: string[] = []
+    const execArgv: string[] = process.execArgv.filter((arg: string) => (
+        arg.indexOf('--debug') !== 0 && arg.indexOf('--inspect') !== 0
+    ))
 
     if (isDebug) {
         execArgv.push('--debug')
