@@ -1,6 +1,12 @@
 # Changelog
 
-## vNext
+## [v0.8.0] - 11/8/2017
+- Preserve passed Node options
+- Pass Node options to child process when starting server
+- Skip type checking for server build when running `pwt watch fast`
+- **Breaking**: PageLifecycleProvider is now a named export, can now be imported from /universal
+- **Breaking**: Arguments for server side render middleware callbacks have been grouped into a params object
+
 - Preserve passed Node options
 - Pass Node options to child process when starting server
 - Skip type checking for server build when running `pwt watch fast`
@@ -15,6 +21,7 @@
 - Upgrade ts-jest to 20.0.10 for better testing performance
 
 - Increase the memory for the Node process to 4GB to work around TS2.4 OOM error
+
 - Upgrade webpack to 3.5.1, upgrade other webpack-related dependencies
 - **BREAKING**: Renamed `lib` export `runtime` -> `runtimeServerOnly`
   - Contains runtime dependencies safe for server code
