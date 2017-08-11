@@ -9,8 +9,8 @@ import { MemoryRouter, Route } from 'react-router-dom'
 import { mount } from 'enzyme'
 import * as H from 'history'
 
-import PageLifecycleProvider, {
-    withPageLifecycleEvents, ComponentWithLifecycle, PageEvent,
+import {
+    PageLifecycleProvider, withPageLifecycleEvents, ComponentWithLifecycle, PageEvent,
 } from './PageLifecycleProvider'
 import { PromiseCompletionSource } from '../../universal'
 import Page from '../Page/Page'
