@@ -69,6 +69,24 @@ These dependencies are safe to import into a node server
 
 The watchtower server includes some common express modules, like hpp and compression.
 
+``` ts
+import { createServer } from 'project-watchtower/lib/runtime/server'
+import { createSsrMiddleware } from 'project-watchtower/lib/runtime/server/ssr'
+import { configureStore, rootReducer, AppState } from 'store'
+import { renderApp } from './render-server'
+import { renderHtml } from 'server/render-html'
+
+export const startServer = () => {
+    // Do any server configuration here
+    return createServer((app) => {
+        // Register additional routes here
+
+        // If you want server side rendering support, register the ssr middleware here
+    })
+}
+
+```
+
 `project-watchtower/lib/runtime/server/ssr`
 See [Server Side Rendering](./server-side-rendering.md)
 

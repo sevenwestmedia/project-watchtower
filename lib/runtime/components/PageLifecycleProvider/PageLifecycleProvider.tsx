@@ -237,4 +237,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
     }
 }
 
-export default withRouter(PageLifecycleProvider) as React.ComponentClass<OwnProps>
+const PageLifecycleProviderWithRouter: React.ComponentClass<OwnProps>
+    = withRouter(PageLifecycleProvider)
+
+export { PageLifecycleProviderWithRouter as PageLifecycleProvider }
