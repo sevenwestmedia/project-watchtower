@@ -2,6 +2,12 @@
 # yarn lockfile v1
 
 
+"@types/assets-webpack-plugin@^3.5.0":
+  version "3.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/assets-webpack-plugin/-/assets-webpack-plugin-3.5.0.tgz#a3ce3e24de5295f9939dcedb3b1737ca5ec4549a"
+  dependencies:
+    "@types/webpack" "*"
+
 "@types/autoprefixer@^6.7.2":
   version "6.7.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/autoprefixer/-/autoprefixer-6.7.2.tgz#093156a5572575a35f213e454d6f17fa82115621"
@@ -21,6 +27,12 @@
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/compression/-/compression-0.0.33.tgz#95dc733a2339aa846381d7f1377792d2553dc27d"
   dependencies:
     "@types/express" "*"
+
+"@types/connect@*":
+  version "3.4.30"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/connect/-/connect-3.4.30.tgz#0a8ede309ce0ebdba2f0534e574692511dd71eb6"
+  dependencies:
+    "@types/node" "*"
 
 "@types/dotenv@^4.0.0":
   version "4.0.0"
@@ -184,9 +196,35 @@
   dependencies:
     "@types/source-map" "*"
 
+"@types/webpack-bundle-analyzer@^2.9.0":
+  version "2.9.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack-bundle-analyzer/-/webpack-bundle-analyzer-2.9.0.tgz#824f100941dde6014290eff6e1517f6addd5bfd8"
+  dependencies:
+    "@types/webpack" "*"
+
+"@types/webpack-dev-middleware@^1.9.2":
+  version "1.9.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack-dev-middleware/-/webpack-dev-middleware-1.9.2.tgz#c1d7c4a24f634da51ad76b6a211669449b80daf9"
+  dependencies:
+    "@types/connect" "*"
+    "@types/webpack" "*"
+
+"@types/webpack-dotenv-plugin@^2.0.0":
+  version "2.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack-dotenv-plugin/-/webpack-dotenv-plugin-2.0.0.tgz#32857d64c5558363331263b51a43c0df00d30249"
+  dependencies:
+    "@types/webpack" "*"
+
 "@types/webpack-env@^1.13.0":
   version "1.13.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack-env/-/webpack-env-1.13.0.tgz#3044381647e11ee973c5af2e925323930f691d80"
+
+"@types/webpack-hot-middleware@^2.15.0":
+  version "2.15.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack-hot-middleware/-/webpack-hot-middleware-2.15.0.tgz#15c93c44ff2b6369d898df7ef42a374e8ba6780e"
+  dependencies:
+    "@types/connect" "*"
+    "@types/webpack" "*"
 
 "@types/webpack-merge@^0.0.4":
   version "0.0.4"

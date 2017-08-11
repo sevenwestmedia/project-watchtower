@@ -40,8 +40,8 @@ if (CLIENT_POLYFILLS && fs.existsSync(CLIENT_POLYFILLS)) {
 const plugins: webpack.Plugin[] = [
     new AssetsPlugin({
         filename: 'assets.json',
-        processOutput: (assets: Assets) => {
-            updateAssetLocations(assets)
+        processOutput: (assets) => {
+            updateAssetLocations(assets as any as Assets)
             return JSON.stringify(assets)
         },
     }),
