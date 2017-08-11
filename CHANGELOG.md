@@ -4,6 +4,8 @@
 - Preserve passed Node options
 - Pass Node options to child process when starting server
 - Skip type checking for server build when running `pwt watch fast`
+- **Breaking**: PageLifecycleProvider is now a named export, can now be imported from /universal
+- **Breaking**: Arguments for server side render middleware callbacks have been grouped into a params object
 
 ## [v0.6.6] - 9/8/2017
 - Upgrade ts-jest to 20.0.10 for better testing performance
