@@ -15,22 +15,24 @@ import { getAssetLocations } from '../../server'
 import { HelmetData } from 'react-helmet'
 import { CreateReduxStore } from '../ssr'
 
-export interface RenderContext {
+export interface RenderContext<AdditionalState = object> {
     completionNotifier: PromiseCompletionSource<{}>
     triggeredLoad: boolean
+    additionalState: AdditionalState
 }
 
 export type RenderRequest = Request & { log: Logger }
-export type RenderApp<ReduxState extends object, SsrRequest extends RenderRequest> = (
-    logger: Logger, store: redux.Store<ReduxState>,
+export type RenderApp<ReduxState extends object, SsrRequest extends RenderRequest> = (params: {
+    log: Logger, store: redux.Store<ReduxState>,
     context: RenderContext, req: SsrRequest,
-) => JSX.Element
-export type RenderHtml<ReduxState extends object> = (
+}) => JSX.Element
+export type RenderHtml<ReduxState extends object> = (params: {
     head: HelmetData | undefined,
     renderMarkup: RenderMarkup,
     reduxState: ReduxState,
     assets: Assets,
-) => string
+    context: RenderContext,
+}) => string
 export type ResultType<ReduxState extends object> =
     | SuccessServerRenderResult<ReduxState>
     | PageNotFoundRenderResult<ReduxState>
@@ -59,6 +61,7 @@ export const createSsrMiddleware = <
 
     return async (req: SsrRequest, response: Response) => {
         let renderContext: RenderContext
+        const additionalState: object = {}
 
         const ssrOptions: ServerSideRenderOptions<ReduxState, SsrRequest> = {
             log: req.log,
@@ -68,8 +71,10 @@ export const createSsrMiddleware = <
                 renderContext = {
                     completionNotifier: new PromiseCompletionSource<{}>(),
                     triggeredLoad: false,
+                    additionalState,
                 }
-                return options.renderApp(req.log, store, renderContext, req)
+
+                return options.renderApp({ log: req.log, store, context: renderContext, req })
             },
             createReduxStore: options.createReduxStore,
             events: {
@@ -86,12 +91,14 @@ export const createSsrMiddleware = <
         const pageRenderResult = await renderPageContents<ReduxState, SsrRequest>(ssrOptions, req)
 
         const createPageMarkup = (result: ResultType<ReduxState>) => (
-            options.renderHtml(
-                result.head,
-                result.renderedContent,
-                result.reduxState,
+            options.renderHtml({
+                head: result.head,
+                renderMarkup: result.renderedContent,
+                reduxState: result.reduxState,
                 assets,
-        ))
+                context: renderContext,
+            })
+        )
 
         switch (pageRenderResult.type) {
             case ServerRenderResultType.Success:

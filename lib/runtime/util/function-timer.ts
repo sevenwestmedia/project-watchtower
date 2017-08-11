@@ -31,7 +31,7 @@ const functionTimerAsync = async <T> (
             logger.debug(`Async ${description} took ${elapsed(startTime)}`)
             return result
         } catch (err) {
-            logger.debug(`Async ${description} threw after ${elapsed(startTime)}`)
+            logger.debug({ err }, `Async ${description} threw after ${elapsed(startTime)}`)
             throw err
         }
     }

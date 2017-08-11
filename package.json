@@ -76,6 +76,7 @@
     "typescript": "^2.4.2"
   },
   "peerDependencies": {
+    "@types/prop-types": "^15.5.1",
     "@types/webpack": ">=3.0.0",
     "compression": "^1.7.0",
     "enzyme": ">=2.0.0",

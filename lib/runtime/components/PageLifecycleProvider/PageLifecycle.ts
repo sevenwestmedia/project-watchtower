@@ -16,13 +16,13 @@ export class PageLifecycle implements PageLifecycleProps, PageProps {
 
     constructor(
         onPageRender: () => void,
-        beginLoadingDate: () => void,
+        beginLoadingData: () => void,
         endLoadingData: () => void,
         public currentPageState: LoadingStates,
         public currentPageLocation: string,
     ) {
         this.pageRenderComplete = onPageRender
-        this.beginLoadingData = beginLoadingDate
+        this.beginLoadingData = beginLoadingData
         this.endLoadingData = endLoadingData
     }
 

@@ -43,7 +43,48 @@ if (singleNode) {
 ```
 
 ### createSsrMiddleware
-To enable server side rendering, you just need to register the SSR middleware.
+To enable server side rendering, you just need to register the SSR middleware when creating your server
+
+### Usage
+``` ts
+import { createServer } from 'project-watchtower/lib/runtime/server'
+import { createSsrMiddleware } from 'project-watchtower/lib/runtime/server/ssr'
+import { configureStore, rootReducer, AppState } from 'store'
+import { renderApp } from './render-server'
+import { renderHtml } from 'server/render-html'
+
+export const startServer = () => {
+    // Do any server configuration here
+    return createServer((app) => {
+        // Register additional routes here
+
+        // If you want server side rendering support, register the ssr middleware
+        app.get('*', createSsrMiddleware<AppState>(
+        {
+            app,
+            ssrTimeoutMs: 1000,
+            renderApp: ({ logger, store, renderContext, req }) => (
+                renderApp(renderContext)
+            ),
+            renderHtml: ({ head, renderMarkup, reduxState, assets, renderContext }) => (
+                renderHtml(head, renderMarkup, reduxState, assets)
+            ),
+            errorLocation: '/error',
+            createReduxStore: async (middlewares, _req) => {
+                const store = configureStore(
+                    rootReducer,
+                    {},
+                    ...middlewares)
+
+                // Initialise the store here
+
+                return store
+            },
+        }))
+    })
+}
+
+```
 
 #### Arguments
 ##### app: express.Express
@@ -55,7 +96,45 @@ Number of milliseconds before server side render times out
 ##### renderApp: (....) => JSX.Element
 A function which gives you access to important state of the request and allows you to return a React element.
 
-The `renderContext` allows you to let watchtower know that data has been loaded in this request. Simply 
+The `renderContext` allows you to let watchtower know that data has been loaded in this request.
+
+**NOTE** You do *not* have to include redux's `Provider`, watchtowers `LogProvider` or react routers `StaticRouter`. These are all configured and provided by watchtower SSR
+
+If your application loads any data simply set `context.triggeredLoad = true`, this will ensure watchtower waits for you to call `context.completionNotifier.resolve({})` which will trigger another render.
 
 ##### createReduxStore: (....) => redux.Store
 A function which creates the redux store for the request
+
+
+
+
+
+
+### Express and async handlers
+If a middleware happens to reject in an async handler it may be useful to catch. Here is a simple wrapper which does this if needed.
+
+``` ts
+import { ErrorRequestHandler, RequestHandler } from 'express'
+
+const isErrorHandler = (
+    handler: RequestHandler | ErrorRequestHandler,
+): handler is ErrorRequestHandler =>
+    handler.length === 4
+
+/** Ensures express handlers which return promises are handled properly */
+export const wrapAsyncHandler = (handler: RequestHandler | ErrorRequestHandler) => {
+    if (isErrorHandler(handler)) {
+        const errorTryHandler: ErrorRequestHandler = (err, req, res, next) => Promise
+            .resolve(handler(err, req, res, next))
+            .catch(next)
+
+        return errorTryHandler
+    }
+
+    const tryHandler: RequestHandler = async (req, res, next) => Promise
+        .resolve(handler(req, res, next))
+        .catch(next)
+
+    return tryHandler
+}
+```
