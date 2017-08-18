@@ -56,7 +56,12 @@ export const createSsrMiddleware = <
     options: ServerSideRenderMiddlewareOptions<ReduxState, SsrRequest>,
 ) => {
     // We require helmet middleware registered
-    options.app.use(helmet())
+    // hsts.includeSubdomains has to be turned off because it breaks http-served sub-domains!
+    options.app.use(helmet({
+        hsts: {
+            includeSubdomains: false,
+        },
+    }))
     const assets = getAssetLocations()
 
     return async (req: SsrRequest, response: Response) => {
