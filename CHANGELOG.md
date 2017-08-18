@@ -1,5 +1,8 @@
 # Changelog
 
+## vNext
+- Turn off `hsts.includeSubdomains` in the `helmet` middleware (ref OPS-547)
+
 ## [v0.8.0] - 11/8/2017
 - Preserve passed Node options
 - Pass Node options to child process when starting server
