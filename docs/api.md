@@ -100,7 +100,7 @@ addAssetsToHtml(html: string): string
 
 getAbsoluteAssetPath(asset: string): string
 
-createServer(options: {
+createServer(options?: {
     /** Early middleware hook is before static middleswares etc */
     earlyMiddlewareHook?: (app: express.Express) => void,
     middlewareHook?: (app: express.Express) => void,

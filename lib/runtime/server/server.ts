@@ -62,21 +62,23 @@ export const getDefaultHtmlMiddleware = (logNotFound = false) => {
     return middleware
 }
 
-export type CreateServerType = (options: {
+export type CreateServerOptions = {
     /** Early middleware hook is before static middleswares etc */
     earlyMiddlewareHook?: (app: express.Express) => void,
     middlewareHook?: (app: express.Express) => void,
     callback?: () => void,
     startListening?: boolean,
-}) => express.Express
+}
+export type CreateServerType = (options?: CreateServerOptions) => express.Express
 
-export const createServer: CreateServerType = ({
-    earlyMiddlewareHook,
-    middlewareHook,
-    callback,
-    startListening = true,
-}) => {
-
+const defaultOptions: CreateServerOptions = {}
+export const createServer: CreateServerType = (options = defaultOptions) => {
+    const {
+        earlyMiddlewareHook,
+        middlewareHook,
+        callback,
+        startListening = true,
+    } = options
     const app = express()
     app.disable('x-powered-by')
 
