@@ -1,6 +1,9 @@
 # Changelog
 
-## vNext
+## [v0.9.0] - 24/8/2017
+- Removed helmet, compression and hpp from watchtower
+  - These can be configured by the product as they are not always wanted
+
 - Removed helmet, compression and hpp from watchtower
   - These can be configured by the product as they are not always wanted
 
@@ -29,6 +32,7 @@
 - Added helmet, compression and hpp as peer dependencies
 
 ## [v0.6.5] - 4/8/2017
+
 No changes
 
 ## [v0.6.4] - 2/8/2017
