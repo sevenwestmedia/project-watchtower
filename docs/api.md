@@ -67,8 +67,6 @@ default CONFIG // application configuration
 `project-watchtower/lib/runtime/server`
 These dependencies are safe to import into a node server
 
-The watchtower server includes some common express modules, like hpp and compression.
-
 ``` ts
 import { createServer } from 'project-watchtower/lib/runtime/server'
 import { createSsrMiddleware } from 'project-watchtower/lib/runtime/server/ssr'
@@ -102,10 +100,13 @@ addAssetsToHtml(html: string): string
 
 getAbsoluteAssetPath(asset: string): string
 
-createServer(
+createServer(options: {
+    /** Early middleware hook is before static middleswares etc */
+    earlyMiddlewareHook?: (app: express.Express) => void,
     middlewareHook?: (app: express.Express) => void,
     callback?: () => void,
-) => express.Express
+    startListening?: boolean,
+}) => express.Express
 
 getDefaultHtmlMiddleware() => express.RequestHandler
 ```
