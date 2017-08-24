@@ -1,8 +1,10 @@
 # Changelog
 
-## [v0.8.2] - 24/8/2017
-- Turn off `hsts.includeSubdomains` in the `helmet` middleware (ref OPS-547)
+## vNext
+- Removed helmet, compression and hpp from watchtower
+  - These can be configured by the product as they are not always wanted
 
+## [v0.8.2] - 24/8/2017
 - Turn off `hsts.includeSubdomains` in the `helmet` middleware (ref OPS-547)
 
 ## [v0.8.0] - 11/8/2017
@@ -12,23 +14,9 @@
 - **Breaking**: PageLifecycleProvider is now a named export, can now be imported from /universal
 - **Breaking**: Arguments for server side render middleware callbacks have been grouped into a params object
 
-- Preserve passed Node options
-
-- Pass Node options to child process when starting server
-
-- Skip type checking for server build when running `pwt watch fast`
-- **Breaking**: PageLifecycleProvider is now a named export, can now be imported from /universal
-- **Breaking**: Arguments for server side render middleware callbacks have been grouped into a params object
-
 ## [v0.6.6] - 9/8/2017
 - Upgrade ts-jest to 20.0.10 for better testing performance
 - Increase the memory for the Node process to 4GB to work around TS2.4 OOM error
-- Upgrade webpack to 3.5.1, upgrade other webpack-related dependencies
-
-- Upgrade ts-jest to 20.0.10 for better testing performance
-
-- Increase the memory for the Node process to 4GB to work around TS2.4 OOM error
-
 - Upgrade webpack to 3.5.1, upgrade other webpack-related dependencies
 
 - **BREAKING**: Renamed `lib` export `runtime` -> `runtimeServerOnly`
@@ -41,7 +29,6 @@
 - Added helmet, compression and hpp as peer dependencies
 
 ## [v0.6.5] - 4/8/2017
-
 No changes
 
 ## [v0.6.4] - 2/8/2017

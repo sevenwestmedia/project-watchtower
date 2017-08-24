@@ -1,8 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as express from 'express'
-import * as compression from 'compression'
-import * as hpp from 'hpp'
 import { addAssetsToHtml } from './assets'
 import { findFreePort } from '../util/network'
 import { log, logError } from '../util/log'
@@ -64,18 +62,23 @@ export const getDefaultHtmlMiddleware = (logNotFound = false) => {
     return middleware
 }
 
-export type CreateServerType = (
+export type CreateServerOptions = {
+    /** Early middleware hook is before static middleswares etc */
+    earlyMiddlewareHook?: (app: express.Express) => void,
     middlewareHook?: (app: express.Express) => void,
     callback?: () => void,
     startListening?: boolean,
-) => express.Express
+}
+export type CreateServerType = (options?: CreateServerOptions) => express.Express
 
-export const createServer: CreateServerType = (
-    middlewareHook,
-    callback,
-    startListening = true,
-) => {
-
+const defaultOptions: CreateServerOptions = {}
+export const createServer: CreateServerType = (options = defaultOptions) => {
+    const {
+        earlyMiddlewareHook,
+        middlewareHook,
+        callback,
+        startListening = true,
+    } = options
     const app = express()
     app.disable('x-powered-by')
 
@@ -85,10 +88,10 @@ export const createServer: CreateServerType = (
         app.use(getHotReloadMiddleware())
     }
 
-    if (isProduction) {
-        app.use(hpp())
-        app.use(compression())
+    if (earlyMiddlewareHook) {
+        earlyMiddlewareHook(app)
     }
+
     app.use(express.static(CLIENT_OUTPUT, {
         index: false,
     }))

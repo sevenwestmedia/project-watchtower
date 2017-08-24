@@ -1,4 +1,3 @@
-import * as helmet from 'helmet'
 import { Request, Response, Express } from 'express'
 import * as redux from 'redux'
 import {
@@ -55,13 +54,6 @@ export const createSsrMiddleware = <
 >(
     options: ServerSideRenderMiddlewareOptions<ReduxState, SsrRequest>,
 ) => {
-    // We require helmet middleware registered
-    // hsts.includeSubdomains has to be turned off because it breaks http-served sub-domains!
-    options.app.use(helmet({
-        hsts: {
-            includeSubdomains: false,
-        },
-    }))
     const assets = getAssetLocations()
 
     return async (req: SsrRequest, response: Response) => {
