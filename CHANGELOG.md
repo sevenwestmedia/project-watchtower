@@ -1,6 +1,8 @@
 # Changelog
 
-## vNext
+## [v0.8.2] - 24/8/2017
+- Turn off `hsts.includeSubdomains` in the `helmet` middleware (ref OPS-547)
+
 - Turn off `hsts.includeSubdomains` in the `helmet` middleware (ref OPS-547)
 
 ## [v0.8.0] - 11/8/2017
@@ -13,6 +15,7 @@
 - Preserve passed Node options
 
 - Pass Node options to child process when starting server
+
 - Skip type checking for server build when running `pwt watch fast`
 - **Breaking**: PageLifecycleProvider is now a named export, can now be imported from /universal
 - **Breaking**: Arguments for server side render middleware callbacks have been grouped into a params object
