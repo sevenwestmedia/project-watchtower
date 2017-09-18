@@ -45,7 +45,7 @@ export default <T extends object>(
             type: ServerRenderResultType.Redirect,
             head: renderResult.head,
             redirectTo: renderResult.context.url,
-            isPermanent: false,
+            isPermanent: renderResult.context.statusCode === 301,
             elapsed: elapsed(startTime),
         }
     }
