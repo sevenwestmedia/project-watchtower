@@ -1,9 +1,9 @@
 # Changelog
 
-## [v0.9.0] - 24/8/2017
-- Removed helmet, compression and hpp from watchtower
-  - These can be configured by the product as they are not always wanted
+## vNext
+- Fixed when redirect statuscode is set in redux router that it does not get used for express response
 
+## [v0.9.0] - 24/8/2017
 - Removed helmet, compression and hpp from watchtower
   - These can be configured by the product as they are not always wanted
 
