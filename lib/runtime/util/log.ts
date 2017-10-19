@@ -1,4 +1,6 @@
 export interface Logger {
+    trace(msg: string | { [key: string]: any }): void
+    trace(obj: { [key: string]: any }, msg: string): void
     debug(msg: string | { [key: string]: any }): void
     debug(obj: { [key: string]: any }, msg: string): void
     info(msg: string | { [key: string]: any }): void
@@ -7,6 +9,8 @@ export interface Logger {
     warn(obj: { [key: string]: any }, msg: string): void
     error(msg: string): void
     error<T extends { err: Error }>(obj: T, msg: string): void
+    fatal(msg: string): void
+    fatal<T extends { err: Error }>(obj: T, msg: string): void
 }
 
 const logStack = (error: any) => {
