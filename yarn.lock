@@ -87,23 +87,21 @@
   version "1.3.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/mime/-/mime-1.3.1.tgz#2cf42972d0931c1060c7d5fa6627fce6bd876f2f"
 
-"@types/node@*", "@types/node@^8.0.10":
-  version "8.0.10"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/node/-/node-8.0.10.tgz#12efec9183b072d5f951cf86395a4c780f868a17"
+"@types/node@*":
+  version "8.0.45"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/node/-/node-8.0.45.tgz#89fad82439d5624e1b5c6b42f0f5d85136dcdecc"
 
 "@types/node@^6.0.46":
   version "6.0.80"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/node/-/node-6.0.80.tgz#914a75799605b4609bd9a2918c865ba3c4141367"
 
+"@types/node@^8.0.10":
+  version "8.0.10"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/node/-/node-8.0.10.tgz#12efec9183b072d5f951cf86395a4c780f868a17"
+
 "@types/opn@^3.0.28":
   version "3.0.28"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/opn/-/opn-3.0.28.tgz#097d0d1c9b5749573a5d96df132387bb6d02118a"
-  dependencies:
-    "@types/node" "*"
-
-"@types/pino@^3.0.1":
-  version "3.0.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/pino/-/pino-3.0.1.tgz#90db868d8bb723c16b3a42fc753fe25709553479"
   dependencies:
     "@types/node" "*"
 
@@ -345,13 +343,13 @@ ansi-styles@^2.2.1:
   version "2.2.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
 
-ansi-styles@^3.0.0, ansi-styles@^3.1.0:
+ansi-styles@^3.0.0:
   version "3.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/ansi-styles/-/ansi-styles-3.1.0.tgz#09c202d5c917ec23188caa5c9cb9179cd9547750"
   dependencies:
     color-convert "^1.0.0"
 
-ansi-styles@^3.2.0:
+ansi-styles@^3.1.0, ansi-styles@^3.2.0:
   version "3.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/ansi-styles/-/ansi-styles-3.2.0.tgz#c159b8d5be0f9e5a6f346dab94f16ce022161b88"
   dependencies:
@@ -1042,8 +1040,8 @@ chalk@^1.0.0, chalk@^1.1.0, chalk@^1.1.1, chalk@^1.1.3:
     supports-color "^2.0.0"
 
 chalk@^2.0.1:
-  version "2.0.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/chalk/-/chalk-2.0.1.tgz#dbec49436d2ae15f536114e76d14656cdbc0f44d"
+  version "2.2.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/chalk/-/chalk-2.2.0.tgz#477b3bf2f9b8fd5ca9e429747e37f724ee7af240"
   dependencies:
     ansi-styles "^3.1.0"
     escape-string-regexp "^1.0.5"
@@ -1212,9 +1210,13 @@ color-convert@^1.0.0, color-convert@^1.3.0, color-convert@^1.9.0:
   dependencies:
     color-name "^1.1.1"
 
-color-name@^1.0.0, color-name@^1.1.1:
+color-name@^1.0.0:
   version "1.1.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/color-name/-/color-name-1.1.2.tgz#5c8ab72b64bd2215d617ae9559ebb148475cf98d"
+
+color-name@^1.1.1:
+  version "1.1.3"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
 
 color-string@^0.3.0:
   version "0.3.0"
@@ -4851,8 +4853,8 @@ pinkie@^2.0.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
 
 pino@^4.7.1:
-  version "4.7.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/pino/-/pino-4.7.1.tgz#d8208de925065f49c9d4a72f54509a167fe18018"
+  version "4.7.3"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/pino/-/pino-4.7.3.tgz#babb7fff1f9cf67c81b2a177fdd8035a59206485"
   dependencies:
     chalk "^2.0.1"
     fast-json-parse "^1.0.0"
@@ -5556,11 +5558,10 @@ relateurl@0.2.x:
   version "0.2.7"
   resolved "https://nexus.swmdigital.io/repository/js-combined/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
 
-release-preparer@^0.2.4:
-  version "0.2.4"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/release-preparer/-/release-preparer-0.2.4.tgz#90a1cf29cf522418d345be3238091a3c3d74c184"
+release-preparer@^0.5.0:
+  version "0.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/release-preparer/-/release-preparer-0.5.0.tgz#9d04c09bad9641c746da8214979bf1d37ab26db6"
   dependencies:
-    "@types/pino" "^3.0.1"
     commander "^2.9.0"
     fs-extra "^3.0.1"
     glob "^7.1.2"
@@ -6053,8 +6054,8 @@ split-string@^2.1.0:
     extend-shallow "^2.0.1"
 
 split2@^2.0.1:
-  version "2.1.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/split2/-/split2-2.1.1.tgz#7a1f551e176a90ecd3345f7246a0cfe175ef4fd0"
+  version "2.2.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/split2/-/split2-2.2.0.tgz#186b2575bcf83e85b7d18465756238ee4ee42493"
   dependencies:
     through2 "^2.0.2"
 
@@ -6206,7 +6207,13 @@ supports-color@^3.1.2, supports-color@^3.2.3:
   dependencies:
     has-flag "^1.0.0"
 
-supports-color@^4.0.0, supports-color@^4.1.0:
+supports-color@^4.0.0:
+  version "4.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/supports-color/-/supports-color-4.5.0.tgz#be7a0de484dec5c5cddf8b3d59125044912f635b"
+  dependencies:
+    has-flag "^2.0.0"
+
+supports-color@^4.1.0:
   version "4.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/supports-color/-/supports-color-4.2.0.tgz#ad986dc7eb2315d009b4d77c8169c2231a684037"
   dependencies:
@@ -6553,8 +6560,8 @@ unique-string@^1.0.0:
     crypto-random-string "^1.0.0"
 
 universalify@^0.1.0:
-  version "0.1.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/universalify/-/universalify-0.1.0.tgz#9eb1c4651debcc670cc94f1a75762332bb967778"
+  version "0.1.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/universalify/-/universalify-0.1.1.tgz#fa71badd4437af4c148841e3b3b165f9e9e590b7"
 
 unpipe@~1.0.0:
   version "1.0.0"
