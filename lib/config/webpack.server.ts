@@ -16,24 +16,24 @@ const nodeModules = fs.readdirSync(path.resolve(BASE, 'node_modules'))
 const serverBaseConfig: webpack.Configuration = {
     target: 'node',
     entry: {
-        main: [SERVER_ENTRY]
+        main: [SERVER_ENTRY],
     },
     output: {
         path: SERVER_OUTPUT,
         publicPath: PUBLIC_PATH,
-        filename: 'server.js'
+        filename: 'server.js',
     },
     module: {
         rules: [
             {
                 test: /\.s?css$/,
-                use: 'null-loader'
-            }
-        ]
+                use: 'null-loader',
+            },
+        ],
     },
     node: {
         __filename: true,
-        __dirname: true
+        __dirname: true,
     },
     externals: (_context, request, callback) => {
         // treat deep imports as externals as well
@@ -51,9 +51,9 @@ const serverBaseConfig: webpack.Configuration = {
         new webpack.BannerPlugin({
             banner: 'require("source-map-support").install();',
             raw: true,
-            entryOnly: false
-        })
-    ]
+            entryOnly: false,
+        }),
+    ],
 }
 
 export default serverBaseConfig

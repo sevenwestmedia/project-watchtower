@@ -19,8 +19,8 @@ describe('Recursive Task Resolver', () => {
                 () => done(new Error('Expected too many recurses error')),
                 err =>
                     expect(err.message).toEqual(
-                        'Abort waiting for loading all data after 5 recursive waits'
-                    )
+                        'Abort waiting for loading all data after 5 recursive waits',
+                    ),
             )
             .then(() => done())
             .catch(done)
@@ -49,7 +49,7 @@ describe('Recursive Task Resolver', () => {
             render,
             '',
             5, // attempts
-            100 // ms
+            100, // ms
         )
             .then(() => {
                 expect(resolvedSecondPromise).toBe(true)

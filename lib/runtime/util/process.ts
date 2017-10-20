@@ -24,7 +24,7 @@ export const spawnPromise = (
     command: string,
     args: string[],
     options?: SpawnOptions,
-    longRunning = false
+    longRunning = false,
 ) =>
     new Promise<ChildProcess>((resolve, reject) => {
         log(`[pwt] ${command} ${args.join(' ')}`)
@@ -52,7 +52,7 @@ export const forkPromise = (
     command: string,
     args: string[],
     options?: ForkOptions,
-    longRunning = false
+    longRunning = false,
 ) =>
     new Promise<ChildProcess>((resolve, reject) => {
         log(`[pwt] node ${command} ${args.join(' ')}`)

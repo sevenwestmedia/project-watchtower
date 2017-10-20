@@ -79,11 +79,11 @@ export const runStatsOnServer = async (statsFn: StatsFn, verbose = false) => {
                 NODE_ENV: 'production',
                 ...process.env,
                 ...STATS_ENV,
-                PORT: port
+                PORT: port,
             },
-            silent: !verbose
+            silent: !verbose,
         },
-        true
+        true,
     )
 
     try {

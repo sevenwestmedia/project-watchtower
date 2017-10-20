@@ -27,7 +27,7 @@ const exitAfter = (result: Promise<any>) =>
         result.then(() => {
             // force process to exit
             process.exit(0)
-        })
+        }),
     )
 
 switch (command) {

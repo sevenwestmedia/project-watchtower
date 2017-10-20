@@ -5,7 +5,7 @@ export enum ServerRenderResultType {
     Success,
     Failure,
     Redirect,
-    PageNotFound
+    PageNotFound,
 }
 export interface ServerRenderResultBase {
     type: ServerRenderResultType

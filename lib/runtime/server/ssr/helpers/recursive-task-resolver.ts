@@ -12,7 +12,7 @@ function innerResolve<T>(
     initialRender: T,
     numberAttempts: number,
     remainingAttempts: number,
-    timeoutPromise: Promise<any>
+    timeoutPromise: Promise<any>,
 ): Promise<T | typeof timedOut> {
     if (!promiseTracker.hasWork()) {
         log.debug({ component, msg: 'No work, resolving' })
@@ -20,7 +20,7 @@ function innerResolve<T>(
     }
     if (!remainingAttempts || remainingAttempts <= 0) {
         return Promise.reject(
-            new Error(`Abort waiting for loading all data after ${numberAttempts} recursive waits`)
+            new Error(`Abort waiting for loading all data after ${numberAttempts} recursive waits`),
         )
     }
 
@@ -46,12 +46,12 @@ function innerResolve<T>(
                         renderResult,
                         numberAttempts,
                         remainingAttempts - 1,
-                        timeoutPromise
+                        timeoutPromise,
                     )
                 })
                 .then(resolve)
                 .catch(reject)
-        })
+        }),
     )
 }
 
@@ -66,7 +66,7 @@ export default async function<T>(
     render: () => T,
     initialRender: T,
     numberAttempts: number,
-    timeoutMs: number
+    timeoutMs: number,
 ): Promise<T> {
     const timeoutPromise = delay(timeoutMs).then(() => timedOut)
 
@@ -77,7 +77,7 @@ export default async function<T>(
         initialRender,
         numberAttempts,
         numberAttempts,
-        timeoutPromise
+        timeoutPromise,
     )
 
     if (resolved === timedOut) {

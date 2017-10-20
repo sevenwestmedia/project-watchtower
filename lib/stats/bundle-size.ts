@@ -32,7 +32,7 @@ const getCombinedSize = (assetsDir: string) =>
                 .then(fileStats => {
                     const combinedSize: number = fileStats.reduce(
                         (prev: number, cur: number) => prev + cur,
-                        0
+                        0,
                     )
                     resolve(formatFileSize(combinedSize))
                 })
@@ -50,14 +50,14 @@ const bundleSize = async () => {
             getCombinedSize(assetsDir),
             getChunkSize(assets.main.js),
             getChunkSize(assets.vendor.js),
-            getChunkSize(assets.main.css)
+            getChunkSize(assets.main.css),
         ])
 
         const stats: BuildMetrics = {
             bundle_size_total: values[0],
             bundle_size_main: values[1],
             bundle_size_vendor: values[2],
-            bundle_size_css: values[3]
+            bundle_size_css: values[3],
         }
 
         log(`Bundle size: ${prettyJson(stats)}`)

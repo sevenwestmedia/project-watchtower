@@ -41,7 +41,7 @@
             true,
             // @TODO investigate turning off for types
             // https://palantir.github.io/tslint/rules/trailing-comma/
-            { "multiline": "never", "singleline": "never" }
+            { "multiline": "all", "singleline": "never" }
         ],
         "no-trailing-whitespace": true,
         "no-unused-expression": true,

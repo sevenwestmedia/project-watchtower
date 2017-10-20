@@ -30,14 +30,14 @@ export const runLighthouse = async (url: string) => {
                     ? launcher.port || 9222
                     : // provided by build environment, ref OPS-383
                       Number(process.env.CHROME_REMOTE_DEBUGGING_PORT) || 9222,
-                skipAutolaunch: onBuildServer
+                skipAutolaunch: onBuildServer,
             },
             {
                 extends: 'lighthouse:default',
                 settings: {
-                    onlyCategories: ['performance']
-                }
-            }
+                    onlyCategories: ['performance'],
+                },
+            },
         )
 
         // we have to wait a bit, otherwise we get a ECONNRESET error we can't catch
@@ -89,7 +89,7 @@ const lighthouseStats = async (verbose = false): Promise<BuildMetrics> => {
 
             if (lighthouseResult) {
                 const perfResult = lighthouseResult.reportCategories.filter(
-                    category => category.id === 'performance'
+                    category => category.id === 'performance',
                 )[0]
 
                 if (perfResult && typeof perfResult.score === 'number') {

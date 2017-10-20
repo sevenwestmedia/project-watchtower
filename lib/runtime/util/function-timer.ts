@@ -22,7 +22,7 @@ const functionTimer = <T>(description: string, func: () => T, logger: Logger): T
 const functionTimerAsync = async <T>(
     description: string,
     func: () => Promise<T>,
-    logger: Logger
+    logger: Logger,
 ): Promise<T> => {
     const startTime = process.hrtime()
 

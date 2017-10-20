@@ -10,11 +10,11 @@ const watchMode = process.env.START_WATCH_MODE === 'true'
 let assets: Assets = {
     main: {
         js: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'js/main.js',
-        css: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'css/main.css'
+        css: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'css/main.css',
     },
     vendor: {
-        js: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'js/vendor.js'
-    }
+        js: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'js/vendor.js',
+    },
 }
 
 let assetsLoaded = false

@@ -19,7 +19,7 @@ export const measureBuildStats = async (verbose?: boolean): Promise<BuildMetrics
     return {
         ...bundleMetrics,
         ...ssrMetrics,
-        ...lighthouseMetrics
+        ...lighthouseMetrics,
     }
 }
 

@@ -19,7 +19,7 @@ export interface RenderOptions {
 
 export type CreateReduxStore<ReduxState extends object, SsrRequest extends RenderRequest> = (
     middlewares: redux.Middleware[],
-    req: SsrRequest
+    req: SsrRequest,
 ) => Promise<redux.Store<ReduxState>>
 
 export interface ServerSideRenderOptions<
@@ -43,7 +43,7 @@ export interface Assets {
 
 async function renderPageContents<T extends object, SsrRequest extends RenderRequest>(
     options: ServerSideRenderOptions<T, SsrRequest>,
-    req: SsrRequest
+    req: SsrRequest,
 ): Promise<ServerRenderResults.ServerRenderResult<T>> {
     const { url: currentLocation } = req
     const START_FAST_MODE = process.env.START_FAST_MODE === 'true'
@@ -53,14 +53,14 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
     try {
         store = await options.createReduxStore(
             [promiseTracker.middleware(), thunk.withExtraArgument({ log: options.log })],
-            req
+            req,
         )
     } catch (err) {
         const failure: ServerRenderResults.FailedRenderResult = {
             type: ServerRenderResults.ServerRenderResultType.Failure,
             errorMessage: 'Failed to create redux store',
             elapsed: elapsed(startTime),
-            head: undefined
+            head: undefined,
         }
 
         options.log.error({ err }, failure.errorMessage)
@@ -82,7 +82,7 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
             const result = handleRouterContextResult(
                 renderResult,
                 startTime,
-                storeStateAtRenderTime
+                storeStateAtRenderTime,
             )
 
             if (options.events && options.events.renderPerformed) {
@@ -109,11 +109,11 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
             renderedContent: {
                 html: '',
                 css: '',
-                ids: []
+                ids: [],
             },
             reduxState: store.getState(),
             elapsed: elapsed(startTime),
-            head: undefined
+            head: undefined,
         }
 
         return successResult
@@ -142,7 +142,7 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
             () => render(currentLocation),
             initialRenderResult,
             10,
-            options.ssrTimeoutMs
+            options.ssrTimeoutMs,
         )
 
         if (dataResolved.type === ServerRenderResults.ServerRenderResultType.Success) {
@@ -158,7 +158,7 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
             type: ServerRenderResults.ServerRenderResultType.Failure,
             errorMessage: 'Failed to do render',
             elapsed: elapsed(startTime),
-            head: undefined
+            head: undefined,
         }
         options.log.error({ err }, 'Failed to render')
 

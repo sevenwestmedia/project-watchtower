@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import {
     withPageLifecycleProps,
-    PageLifecycleProps
+    PageLifecycleProps,
 } from '../PageLifecycleProvider/PageLifecycleProvider'
 import { Logger } from '../../util/log'
 import { PageLifecycle } from '../PageLifecycleProvider/PageLifecycle'
@@ -19,7 +19,7 @@ export default withPageLifecycleProps(
     class Page extends React.PureComponent<Props & PageLifecycleProps, State> {
         static contextTypes = {
             // Seems like context cannot be exported, this is a runtime react thing anyways
-            pageLifecycle: PropTypes.object as any
+            pageLifecycle: PropTypes.object as any,
         }
 
         state: State = { error: false }
@@ -72,7 +72,7 @@ export default withPageLifecycleProps(
                     currentPageState: this.props.currentPageState,
                     currentPageLocation: this.props.currentPageLocation,
                     beginLoadingData: this.props.beginLoadingData,
-                    endLoadingData: this.props.endLoadingData
+                    endLoadingData: this.props.endLoadingData,
                 })
             } else {
                 content = this.props.page
@@ -80,5 +80,5 @@ export default withPageLifecycleProps(
 
             return content
         }
-    }
+    },
 )

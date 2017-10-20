@@ -24,8 +24,8 @@ const proc = fork(filePath, process.argv.slice(2), {
         // Node runs out of memory when re-exporting the glamorous 4 typings
         // with TypeScript 2.4
         // https://github.com/Microsoft/TypeScript/issues/17070
-        '--max-old-space-size=4096'
-    ]
+        '--max-old-space-size=4096',
+    ],
 })
 
 proc.on('error', () => {

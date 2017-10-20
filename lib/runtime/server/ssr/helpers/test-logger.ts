@@ -13,6 +13,6 @@ export const testLogger: Logger = {
     },
     fatal: (...args: any[]) => {
         console.log(args.map(formatArgs))
-    }
+    },
     // tslint:enable:no-console
 }

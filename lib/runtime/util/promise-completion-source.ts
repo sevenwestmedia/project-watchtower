@@ -27,8 +27,8 @@ export class PromiseCompletionSource<T> {
                 // tslint:disable-next-line:max-line-length
                 this.reject(
                     new Error(
-                        'Cannot get new promise when autoReset is true and existing promise was not resolved'
-                    )
+                        'Cannot get new promise when autoReset is true and existing promise was not resolved',
+                    ),
                 )
             }
         }

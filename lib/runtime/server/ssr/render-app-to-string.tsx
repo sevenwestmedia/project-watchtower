@@ -26,7 +26,7 @@ export default (
     currentLocation: string,
     store: redux.Store<any>,
     log: Logger,
-    appRender: CreateAppElement
+    appRender: CreateAppElement,
 ): RenderPassResult => {
     // first create a context for <StaticRouter>, it's where we keep the
     // results of rendering for the second pass if necessary
@@ -46,10 +46,10 @@ export default (
                                     {appRender(store)}
                                 </StaticRouter>
                             </LogProvider>
-                        </Provider>
-                    )
+                        </Provider>,
+                    ),
                 ),
-            log
+            log,
         )
     } finally {
         head = Helmet.rewind()
@@ -58,6 +58,6 @@ export default (
     return {
         context,
         renderMarkup,
-        head
+        head,
     }
 }

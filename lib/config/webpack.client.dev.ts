@@ -19,18 +19,18 @@ const config: webpack.Configuration = merge(
     webpackHooks.dev || {},
     {
         entry: {
-            main: ['webpack-hot-middleware/client?noInfo=true']
+            main: ['webpack-hot-middleware/client?noInfo=true'],
         },
         output: {
             filename: ASSETS_PATH_PREFIX + 'js/[name].js',
-            chunkFilename: ASSETS_PATH_PREFIX + 'js/[name].js'
+            chunkFilename: ASSETS_PATH_PREFIX + 'js/[name].js',
         },
         plugins: [
             new ExtractTextPlugin(ASSETS_PATH_PREFIX + 'css/[name].css'),
-            new webpack.HotModuleReplacementPlugin()
-        ]
+            new webpack.HotModuleReplacementPlugin(),
+        ],
     },
-    webpackHooks.clientDev || {}
+    webpackHooks.clientDev || {},
 )
 
 export default config

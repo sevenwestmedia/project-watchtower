@@ -20,7 +20,7 @@ const restartServer = (oldServer?: ChildProcess) => {
         oldServer.kill()
     }
     return fork(path.resolve(SERVER_OUTPUT, 'server.js'), [], {
-        env: process.env
+        env: process.env,
     })
 }
 
@@ -43,7 +43,7 @@ const watchServer = (port?: number) =>
         const watching = serverCompiler.watch(
             {
                 aggregateTimeout: 10000,
-                ignored: WATCH_IGNORE
+                ignored: WATCH_IGNORE,
             },
             () => {
                 if (!devServer) {
@@ -54,7 +54,7 @@ const watchServer = (port?: number) =>
                 setTimeout(() => {
                     devServerAvailable = waitForConnection(serverPort)
                 }, 100)
-            }
+            },
         )
 
         const app = express()
@@ -75,7 +75,7 @@ const watchServer = (port?: number) =>
                 close: () => {
                     watching.close(() => {})
                     server.close()
-                }
+                },
             })
         })
 

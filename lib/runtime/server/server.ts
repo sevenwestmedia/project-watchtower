@@ -83,15 +83,15 @@ export const createServer: CreateServerType = (options = defaultOptions) => {
 
     app.use(
         express.static(CLIENT_OUTPUT, {
-            index: false
-        })
+            index: false,
+        }),
     )
 
     if (SERVER_PUBLIC_DIR) {
         app.use(
             express.static(SERVER_PUBLIC_DIR, {
-                index: false
-            })
+                index: false,
+            }),
         )
     }
 

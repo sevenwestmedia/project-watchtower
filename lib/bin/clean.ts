@@ -11,7 +11,7 @@ const clean = (...paths: string[]) =>
         'assets.json',
         'build-stats.csv',
         'coverage',
-        ...paths
+        ...paths,
     ])
 
 export default clean

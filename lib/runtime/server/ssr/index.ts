@@ -4,13 +4,13 @@ export {
     default as renderPageContents,
     Assets,
     ServerSideRenderOptions,
-    CreateReduxStore
+    CreateReduxStore,
 } from './full-render'
 export {
     ServerRenderResult,
     ServerRenderResultType,
     SuccessServerRenderResult,
-    PageNotFoundRenderResult
+    PageNotFoundRenderResult,
 } from './server-render-results'
 export { default as recursiveTaskResolver } from './helpers/recursive-task-resolver'
 export * from './create-middleware'

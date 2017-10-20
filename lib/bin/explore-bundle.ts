@@ -15,7 +15,7 @@ const exploreBundle = (...args: string[]) => {
     }
 
     const config = merge(baseConfig, {
-        plugins: [new BundleAnalyzerPlugin()]
+        plugins: [new BundleAnalyzerPlugin()],
     })
 
     const disableHoisting = args.indexOf('disableHoisting') !== -1
@@ -24,7 +24,7 @@ const exploreBundle = (...args: string[]) => {
         config.plugins =
             config.plugins &&
             config.plugins.filter(
-                plugin => !(plugin instanceof webpack.optimize.ModuleConcatenationPlugin)
+                plugin => !(plugin instanceof webpack.optimize.ModuleConcatenationPlugin),
             )
     }
 

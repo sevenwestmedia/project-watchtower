@@ -31,7 +31,7 @@ export const getWebpackConfig = (target: BuildTarget, environment: BuildEnvironm
     if (ENVIRONMENTS.indexOf(environment) === -1) {
         logError(
             `Unknown environment: "${environment}"! ` +
-                `Known values are: ${ENVIRONMENTS.join(', ')}`
+                `Known values are: ${ENVIRONMENTS.join(', ')}`,
         )
         return undefined
     }

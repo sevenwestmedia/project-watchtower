@@ -1,5 +1,5 @@
-// Place your settings in this file to overwrite default and user settings.
 {
+    // Place your settings in this file to overwrite default and user settings.
     "files.exclude": {
         "**/.git": true,
         "**/node_modules": false,
@@ -21,7 +21,7 @@
     "prettier.tabWidth": 4,
     "prettier.useTabs": false,
     "prettier.singleQuote": true,
-    "prettier.trailingComma": "none",
+    "prettier.trailingComma": "all",
     "editor.formatOnSave": true,
     "prettier.printWidth": 100
 }

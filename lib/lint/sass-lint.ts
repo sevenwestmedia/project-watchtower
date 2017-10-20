@@ -13,7 +13,7 @@ const sassLint = (...paths: string[]): Promise<ChildProcess> => {
         'node_modules',
         'sass-lint',
         'bin',
-        'sass-lint.js'
+        'sass-lint.js',
     )
 
     const ignore = ['**/node_modules/**', ...LINT_EXCLUDE]

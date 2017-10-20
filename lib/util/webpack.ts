@@ -8,7 +8,7 @@ export const webpackStatsConfig: webpack.Stats.ToStringOptionsObject = {
     colors: true,
     chunks: false,
     chunkModules: false,
-    children: false
+    children: false,
 }
 
 export const printWebpackStats = (stats: webpack.Stats) => {

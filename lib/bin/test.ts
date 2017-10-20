@@ -33,7 +33,7 @@ const test = async (...params: string[]): Promise<ChildProcess> => {
             '--config',
             isDebug
                 ? 'node_modules/project-watchtower/presets/jest/jest-js.json'
-                : 'node_modules/project-watchtower/presets/jest/jest.json'
+                : 'node_modules/project-watchtower/presets/jest/jest.json',
         ])
     }
 
@@ -44,9 +44,9 @@ const test = async (...params: string[]): Promise<ChildProcess> => {
     return forkPromise(jestBin, args, {
         env: {
             ...process.env,
-            NODE_ENV: 'test'
+            NODE_ENV: 'test',
         },
-        ...options
+        ...options,
     })
 }
 

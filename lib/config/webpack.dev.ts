@@ -5,9 +5,9 @@ const devConfig: webpack.Configuration = {
     devtool: 'cheap-module-source-map',
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('development')
-        })
-    ]
+            'process.env.NODE_ENV': JSON.stringify('development'),
+        }),
+    ],
 }
 
 export default devConfig

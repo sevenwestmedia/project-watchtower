@@ -13,7 +13,7 @@ const config: webpack.Configuration = merge(
     webpackHooks.server || {},
     devConfig,
     webpackHooks.dev || {},
-    webpackHooks.serverDev || {}
+    webpackHooks.serverDev || {},
 )
 
 export default config

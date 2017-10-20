@@ -7,7 +7,7 @@ import {
     renderPageContents,
     Assets,
     RenderMarkup,
-    ServerRenderResultType
+    ServerRenderResultType,
 } from './'
 import { PromiseCompletionSource, Logger } from '../../universal'
 import { getAssetLocations } from '../../server'
@@ -27,7 +27,7 @@ export type RenderApp<ReduxState extends object, SsrRequest extends RenderReques
         store: redux.Store<ReduxState>
         context: RenderContext
         req: SsrRequest
-    }
+    },
 ) => JSX.Element
 export type RenderHtml<ReduxState extends object> = (
     params: {
@@ -36,7 +36,7 @@ export type RenderHtml<ReduxState extends object> = (
         reduxState: ReduxState
         assets: Assets
         context: RenderContext
-    }
+    },
 ) => string
 export type ResultType<ReduxState extends object> =
     | SuccessServerRenderResult<ReduxState>
@@ -58,7 +58,7 @@ export const createSsrMiddleware = <
     ReduxState extends object,
     SsrRequest extends RenderRequest = RenderRequest
 >(
-    options: ServerSideRenderMiddlewareOptions<ReduxState, SsrRequest>
+    options: ServerSideRenderMiddlewareOptions<ReduxState, SsrRequest>,
 ) => {
     const assets = getAssetLocations()
 
@@ -74,7 +74,7 @@ export const createSsrMiddleware = <
                 renderContext = {
                     completionNotifier: new PromiseCompletionSource<{}>(),
                     triggeredLoad: false,
-                    additionalState
+                    additionalState,
                 }
 
                 return options.renderApp({ log: req.log, store, context: renderContext, req })
@@ -91,8 +91,8 @@ export const createSsrMiddleware = <
                     ) {
                         promiseTracker.track(renderContext.completionNotifier.promise)
                     }
-                }
-            }
+                },
+            },
         }
         const pageRenderResult = await renderPageContents<ReduxState, SsrRequest>(ssrOptions, req)
 
@@ -102,7 +102,7 @@ export const createSsrMiddleware = <
                 renderMarkup: result.renderedContent,
                 reduxState: result.reduxState,
                 assets,
-                context: renderContext
+                context: renderContext,
             })
 
         switch (pageRenderResult.type) {
@@ -121,7 +121,7 @@ export const createSsrMiddleware = <
             case ServerRenderResultType.Redirect:
                 response.redirect(
                     pageRenderResult.isPermanent ? 301 : 302,
-                    pageRenderResult.redirectTo
+                    pageRenderResult.redirectTo,
                 )
                 return
             case ServerRenderResultType.Failure:

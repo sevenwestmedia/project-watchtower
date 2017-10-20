@@ -17,7 +17,7 @@ const defaultConfig: BuildConfig = {
         root,
         path.resolve(root, 'node_modules'),
         path.resolve(root, 'common'),
-        path.resolve(root, 'app')
+        path.resolve(root, 'app'),
     ],
     PUBLIC_PATH: '/',
     PORT: 3000,
@@ -28,14 +28,14 @@ const defaultConfig: BuildConfig = {
     STATIC_RESOURCE_NAMES: false,
     STATS_ENV: {},
     STATS_PAGES: { home: '/' },
-    WATCH_IGNORE: /node_modules(?!.+swm-component-library)/
+    WATCH_IGNORE: /node_modules(?!.+swm-component-library)/,
 }
 
 const customConfig = getCustomConfigFile<BuildConfigOverride>('config/config', {})
 
 const CONFIG = {
     ...defaultConfig,
-    ...customConfig
+    ...customConfig,
 }
 
 export default CONFIG

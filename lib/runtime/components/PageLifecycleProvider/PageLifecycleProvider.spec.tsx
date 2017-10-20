@@ -13,7 +13,7 @@ import {
     PageLifecycleProvider,
     withPageLifecycleEvents,
     ComponentWithLifecycle,
-    PageEvent
+    PageEvent,
 } from './PageLifecycleProvider'
 import { PromiseCompletionSource } from '../../universal'
 import Page from '../Page/Page'
@@ -64,7 +64,7 @@ const createTestComponents = () => {
                         { loaded: true },
                         // Only end load data after state change has been applied
                         // Because this could trigger more loading of data
-                        this.context.pageLifecycle.endLoadingData
+                        this.context.pageLifecycle.endLoadingData,
                     )
                 })
             }
@@ -72,12 +72,12 @@ const createTestComponents = () => {
             render() {
                 return this.state.loaded ? <TestPage {...this.props} /> : <noscript />
             }
-        }
+        },
     )
     return {
         promiseCompletionSource,
         FakeLazyLoad,
-        TestPage
+        TestPage,
     }
 }
 
@@ -95,7 +95,7 @@ describe('PageLifecycleProvider', () => {
                         render={<testComponents.TestPage path="/" />}
                     />
                 </MemoryRouter>
-            </Provider>
+            </Provider>,
         )
 
         const testPage = wrapper.find(testComponents.TestPage)
@@ -104,7 +104,7 @@ describe('PageLifecycleProvider', () => {
             pageEvents.map(e => {
                 e.timeStamp = 0
                 return e
-            })
+            }),
         ).toMatchSnapshot()
         expect(testPage.debug()).toMatchSnapshot()
     })
@@ -122,13 +122,13 @@ describe('PageLifecycleProvider', () => {
                         render={<testComponents.TestPage path="/" />}
                     />
                 </MemoryRouter>
-            </Provider>
+            </Provider>,
         )
 
         const testPage = wrapper.find(testComponents.TestPage)
 
         testComponents.promiseCompletionSource.resolve({
-            bar: 'test'
+            bar: 'test',
         })
         expect(pageEvents.length).toBe(1)
         await new Promise(resolve => setTimeout(() => resolve()))
@@ -137,7 +137,7 @@ describe('PageLifecycleProvider', () => {
             pageEvents.map(e => {
                 e.timeStamp = 0
                 return e
-            })
+            }),
         ).toMatchSnapshot()
         expect(testPage.debug()).toMatchSnapshot()
     })
@@ -160,7 +160,7 @@ describe('PageLifecycleProvider', () => {
                         }
                     />
                 </MemoryRouter>
-            </Provider>
+            </Provider>,
         )
 
         const testPage = wrapper.find(testComponents.TestPage)
@@ -169,13 +169,13 @@ describe('PageLifecycleProvider', () => {
             pageEvents.map(e => {
                 e.timeStamp = 0
                 return e
-            })
+            }),
         ).toMatchSnapshot()
         expect(testPage.debug()).toMatchSnapshot()
         await new Promise(resolve => setTimeout(() => resolve()))
 
         testComponents.promiseCompletionSource.resolve({
-            bar: 'test'
+            bar: 'test',
         })
         // We should not have received the completed event yet
         expect(pageEvents.length).toBe(1)
@@ -186,7 +186,7 @@ describe('PageLifecycleProvider', () => {
             pageEvents.map(e => {
                 e.timeStamp = 0
                 return e
-            })
+            }),
         ).toMatchSnapshot()
         expect(testPage.debug()).toMatchSnapshot()
     })
@@ -214,7 +214,7 @@ describe('PageLifecycleProvider', () => {
                         }
                     />
                 </MemoryRouter>
-            </Provider>
+            </Provider>,
         )
 
         if (!history) {
@@ -235,7 +235,7 @@ describe('PageLifecycleProvider', () => {
             pageEvents.map(e => {
                 e.timeStamp = 0
                 return e
-            })
+            }),
         ).toMatchSnapshot()
         expect(testPage.debug()).toMatchSnapshot()
     })

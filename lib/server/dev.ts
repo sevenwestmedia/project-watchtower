@@ -23,8 +23,8 @@ export const getHotReloadMiddleware: HotReloadMiddleware = () => {
         index: 'foobar',
         stats: 'errors-only',
         watchOptions: {
-            ignored: WATCH_IGNORE
-        }
+            ignored: WATCH_IGNORE,
+        },
     })
 
     const hot = webpackHotMiddleware(compiler)

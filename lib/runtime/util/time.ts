@@ -14,7 +14,7 @@ export const timeout = <P>(promise: Promise<P>, time: number): Promise<P> => {
         promise,
         new Promise<P>((_resolve, reject) => {
             timer = setTimeout(() => reject(new Error(`Timeout after ${time} ms`)), time)
-        })
+        }),
     ]).then(result => {
         clearTimeout(timer)
         return result
