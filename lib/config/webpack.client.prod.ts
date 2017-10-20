@@ -30,9 +30,7 @@ const config: webpack.Configuration = merge(
             filename: chunkFilename,
             chunkFilename,
         },
-        plugins: [
-            new ExtractTextPlugin(cssFilename),
-        ],
+        plugins: [new ExtractTextPlugin(cssFilename)],
     },
     webpackHooks.clientProd || {},
 )

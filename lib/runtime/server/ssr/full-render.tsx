@@ -51,10 +51,10 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
     const promiseTracker = new PromiseTracker()
     let store: redux.Store<T>
     try {
-        store = await options.createReduxStore([
-            promiseTracker.middleware(),
-            thunk.withExtraArgument({ log: options.log }),
-        ], req)
+        store = await options.createReduxStore(
+            [promiseTracker.middleware(), thunk.withExtraArgument({ log: options.log })],
+            req,
+        )
     } catch (err) {
         const failure: ServerRenderResults.FailedRenderResult = {
             type: ServerRenderResults.ServerRenderResultType.Failure,
@@ -68,11 +68,8 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
         return failure
     }
 
-    const performSinglePassLocationRender = (location: string) => (
-        renderToString(
-            location, store, options.log, options.appRender,
-        )
-    )
+    const performSinglePassLocationRender = (location: string) =>
+        renderToString(location, store, options.log, options.appRender)
 
     const render = (location: string): ServerRenderResults.ServerRenderResult<T> => {
         // We need to capture the store before we render
@@ -140,9 +137,12 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
         }
 
         const dataResolved = await resolveAllData(
-            options.log, promiseTracker,
-            () => render(currentLocation), initialRenderResult,
-            10, options.ssrTimeoutMs
+            options.log,
+            promiseTracker,
+            () => render(currentLocation),
+            initialRenderResult,
+            10,
+            options.ssrTimeoutMs,
         )
 
         if (dataResolved.type === ServerRenderResults.ServerRenderResultType.Success) {

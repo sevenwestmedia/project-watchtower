@@ -1,8 +1,11 @@
 import * as H from 'history'
 import {
-    PageLifecycleProps, StateChangeCallback,
-    RouteChangeCallback, LoadingStates,
-    PageProps, LifecycleState,
+    PageLifecycleProps,
+    StateChangeCallback,
+    RouteChangeCallback,
+    LoadingStates,
+    PageProps,
+    LifecycleState,
 } from './PageLifecycleProvider'
 
 export class PageLifecycle implements PageLifecycleProps, PageProps {

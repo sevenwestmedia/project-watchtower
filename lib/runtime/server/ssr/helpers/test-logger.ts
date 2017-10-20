@@ -1,6 +1,6 @@
 import { Logger } from '../../../util/log'
 
-const formatArgs = (a: any) => typeof a === 'string' ? a : JSON.stringify(a)
+const formatArgs = (a: any) => (typeof a === 'string' ? a : JSON.stringify(a))
 
 export const testLogger: Logger = {
     // tslint:disable:no-console

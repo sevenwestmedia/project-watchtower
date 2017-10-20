@@ -1,12 +1,15 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import {
-    withPageLifecycleProps, PageLifecycleProps,
+    withPageLifecycleProps,
+    PageLifecycleProps,
 } from '../PageLifecycleProvider/PageLifecycleProvider'
 import { Logger } from '../../util/log'
 import { PageLifecycle } from '../PageLifecycleProvider/PageLifecycle'
 
-export interface State { error: boolean }
+export interface State {
+    error: boolean
+}
 export interface Props {
     errorComponent: React.ReactType
     page: React.ReactElement<any> | ((pageProps: PageLifecycleProps) => React.ReactElement<any>)
@@ -22,8 +25,8 @@ export default withPageLifecycleProps(
         state: State = { error: false }
 
         context: {
-            pageLifecycle: PageLifecycle,
-            logger: Logger,
+            pageLifecycle: PageLifecycle
+            logger: Logger
         }
 
         // This is using React error boundaries which were added in v15

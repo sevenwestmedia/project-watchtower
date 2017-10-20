@@ -9,22 +9,16 @@ import CONFIG from '../config/config'
 const isProduction = process.env.NODE_ENV === 'production'
 const { CLIENT_OUTPUT, PORT, SERVER_PUBLIC_DIR } = CONFIG
 
-export const getPort = (fallbackPort?: number) => (
+export const getPort = (fallbackPort?: number) =>
     parseInt(process.env.PORT || '', 10) || fallbackPort || PORT
-)
 
-export const isWatchMode = () => (
-    process.env.START_WATCH_MODE === 'true'
-)
+export const isWatchMode = () => process.env.START_WATCH_MODE === 'true'
 
-export const isFastMode = () => (
-    process.env.START_FAST_MODE === 'true'
-)
+export const isFastMode = () => process.env.START_FAST_MODE === 'true'
 
 export const expressNoop: express.RequestHandler = (_res, _req, next) => next()
 
 export const getDefaultHtmlMiddleware = (logNotFound = false) => {
-
     // on production we just serve the generated index.html
     if (isProduction) {
         const indexPath = path.resolve(CLIENT_OUTPUT, 'index.html')
@@ -64,21 +58,16 @@ export const getDefaultHtmlMiddleware = (logNotFound = false) => {
 
 export type CreateServerOptions = {
     /** Early middleware hook is before static middleswares etc */
-    earlyMiddlewareHook?: (app: express.Express) => void,
-    middlewareHook?: (app: express.Express) => void,
-    callback?: () => void,
-    startListening?: boolean,
+    earlyMiddlewareHook?: (app: express.Express) => void
+    middlewareHook?: (app: express.Express) => void
+    callback?: () => void
+    startListening?: boolean
 }
 export type CreateServerType = (options?: CreateServerOptions) => express.Express
 
 const defaultOptions: CreateServerOptions = {}
 export const createServer: CreateServerType = (options = defaultOptions) => {
-    const {
-        earlyMiddlewareHook,
-        middlewareHook,
-        callback,
-        startListening = true,
-    } = options
+    const { earlyMiddlewareHook, middlewareHook, callback, startListening = true } = options
     const app = express()
     app.disable('x-powered-by')
 
@@ -92,14 +81,18 @@ export const createServer: CreateServerType = (options = defaultOptions) => {
         earlyMiddlewareHook(app)
     }
 
-    app.use(express.static(CLIENT_OUTPUT, {
-        index: false,
-    }))
+    app.use(
+        express.static(CLIENT_OUTPUT, {
+            index: false,
+        }),
+    )
 
     if (SERVER_PUBLIC_DIR) {
-        app.use(express.static(SERVER_PUBLIC_DIR, {
-            index: false,
-        }))
+        app.use(
+            express.static(SERVER_PUBLIC_DIR, {
+                index: false,
+            }),
+        )
     }
 
     if (middlewareHook) {
@@ -135,7 +128,7 @@ export const createServer: CreateServerType = (options = defaultOptions) => {
     if (isProduction) {
         listen(port)
     } else {
-        findFreePort(port).then((usePort) => listen(usePort))
+        findFreePort(port).then(usePort => listen(usePort))
     }
 
     return app

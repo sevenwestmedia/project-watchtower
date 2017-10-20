@@ -1,7 +1,10 @@
 export { WatchtowerEvents } from './render-events'
 export { RenderMarkup } from './render-app-to-string'
 export {
-    default as renderPageContents, Assets, ServerSideRenderOptions, CreateReduxStore,
+    default as renderPageContents,
+    Assets,
+    ServerSideRenderOptions,
+    CreateReduxStore,
 } from './full-render'
 export {
     ServerRenderResult,

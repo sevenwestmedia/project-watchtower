@@ -3,17 +3,16 @@ import * as webpack from 'webpack'
 /** Created assets in the webpack build */
 export interface Assets {
     vendor: {
-        js: string,
+        js: string
     }
     main: {
-        js: string,
-        css: string,
+        js: string
+        css: string
     }
 }
 
 /** Application build configuration */
 export interface BuildConfig {
-
     /** Prefix for all assets (JS, CSS, media, fonts) with trailing slash */
     ASSETS_PATH_PREFIX: string
 
@@ -33,7 +32,7 @@ export interface BuildConfig {
     CSS_AUTOPREFIXER: string[]
 
     /** set to false if the application is serverless */
-    HAS_SERVER: boolean,
+    HAS_SERVER: boolean
 
     /** List paths to exclude from linting */
     LINT_EXCLUDE: string[]
@@ -70,7 +69,6 @@ export interface BuildConfig {
 
     /** Regular expression of paths to be ignored in watch mode */
     WATCH_IGNORE: RegExp
-
 }
 
 /** Use to override the application configuration */
@@ -78,43 +76,25 @@ export type BuildConfigOverride = Partial<BuildConfig>
 
 /** Override the webpack config per target and environment */
 export interface WebpackHooks {
-    base?: webpack.Configuration,
-    server?: webpack.Configuration,
-    client?: webpack.Configuration,
-    dev?: webpack.Configuration,
-    prod?: webpack.Configuration,
-    serverDev?: webpack.Configuration,
-    serverProd?: webpack.Configuration,
-    serverDebug?: webpack.Configuration,
-    clientDev?: webpack.Configuration,
-    clientProd?: webpack.Configuration,
-    clientDebug?: webpack.Configuration,
+    base?: webpack.Configuration
+    server?: webpack.Configuration
+    client?: webpack.Configuration
+    dev?: webpack.Configuration
+    prod?: webpack.Configuration
+    serverDev?: webpack.Configuration
+    serverProd?: webpack.Configuration
+    serverDebug?: webpack.Configuration
+    clientDev?: webpack.Configuration
+    clientProd?: webpack.Configuration
+    clientDebug?: webpack.Configuration
 }
 
-export type BuildTarget =
-    | 'server'
-    | 'client'
+export type BuildTarget = 'server' | 'client'
 
-export type BuildEnvironment =
-    | 'dev'
-    | 'prod'
-    | 'debug'
+export type BuildEnvironment = 'dev' | 'prod' | 'debug'
 
-export type BuildParam =
-    | BuildTarget
-    | BuildEnvironment
-    | 'complete'
+export type BuildParam = BuildTarget | BuildEnvironment | 'complete'
 
-export type StartParam =
-    | 'fast'
-    | 'watch'
-    | 'prod'
-    | 'debug'
-    | 'client'
-    | 'inspect'
+export type StartParam = 'fast' | 'watch' | 'prod' | 'debug' | 'client' | 'inspect'
 
-export type WatchParam =
-    | 'server'
-    | 'fast'
-    | 'client'
-    | 'inspect'
+export type WatchParam = 'server' | 'fast' | 'client' | 'inspect'

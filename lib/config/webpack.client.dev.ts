@@ -19,9 +19,7 @@ const config: webpack.Configuration = merge(
     webpackHooks.dev || {},
     {
         entry: {
-            main: [
-                'webpack-hot-middleware/client?noInfo=true',
-            ],
+            main: ['webpack-hot-middleware/client?noInfo=true'],
         },
         output: {
             filename: ASSETS_PATH_PREFIX + 'js/[name].js',

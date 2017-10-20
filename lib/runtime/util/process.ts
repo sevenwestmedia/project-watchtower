@@ -7,10 +7,10 @@ import { log } from './log'
 let childProcesses: ChildProcess[] = []
 
 const killAllChildProcesses = () => {
-    childProcesses.forEach((proc) => {
+    childProcesses.forEach(proc => {
         try {
             proc.kill()
-        } catch (err)  {}
+        } catch (err) {}
     })
     childProcesses = []
 }
@@ -25,13 +25,13 @@ export const spawnPromise = (
     args: string[],
     options?: SpawnOptions,
     longRunning = false,
-) => (
+) =>
     new Promise<ChildProcess>((resolve, reject) => {
         log(`[pwt] ${command} ${args.join(' ')}`)
 
         const proc = spawn(command, args, options)
 
-        proc.on('exit', (code) => {
+        proc.on('exit', code => {
             if (code === 0) {
                 resolve(proc)
             } else {
@@ -39,7 +39,7 @@ export const spawnPromise = (
             }
         })
 
-        proc.on('error', (err) => reject(err))
+        proc.on('error', err => reject(err))
 
         if (longRunning) {
             setTimeout(() => resolve(proc), 1000)
@@ -47,20 +47,19 @@ export const spawnPromise = (
 
         childProcesses.push(proc)
     })
-)
 
 export const forkPromise = (
     command: string,
     args: string[],
     options?: ForkOptions,
     longRunning = false,
-) => (
+) =>
     new Promise<ChildProcess>((resolve, reject) => {
         log(`[pwt] node ${command} ${args.join(' ')}`)
 
         const proc = fork(command, args, options)
 
-        proc.on('exit', (code) => {
+        proc.on('exit', code => {
             if (code === 0) {
                 resolve(proc)
             } else {
@@ -68,7 +67,7 @@ export const forkPromise = (
             }
         })
 
-        proc.on('error', (err) => reject(err))
+        proc.on('error', err => reject(err))
 
         if (longRunning) {
             setTimeout(() => resolve(proc), 1000)
@@ -76,4 +75,3 @@ export const forkPromise = (
 
         childProcesses.push(proc)
     })
-)

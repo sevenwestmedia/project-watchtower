@@ -1,13 +1,13 @@
 import { Request, Response, Express } from 'express'
 import * as redux from 'redux'
 import {
-  ServerSideRenderOptions,
-  SuccessServerRenderResult,
-  PageNotFoundRenderResult,
-  renderPageContents,
-  Assets,
-  RenderMarkup,
-  ServerRenderResultType,
+    ServerSideRenderOptions,
+    SuccessServerRenderResult,
+    PageNotFoundRenderResult,
+    renderPageContents,
+    Assets,
+    RenderMarkup,
+    ServerRenderResultType,
 } from './'
 import { PromiseCompletionSource, Logger } from '../../universal'
 import { getAssetLocations } from '../../server'
@@ -21,31 +21,37 @@ export interface RenderContext<AdditionalState = object> {
 }
 
 export type RenderRequest = Request & { log: Logger }
-export type RenderApp<ReduxState extends object, SsrRequest extends RenderRequest> = (params: {
-    log: Logger, store: redux.Store<ReduxState>,
-    context: RenderContext, req: SsrRequest,
-}) => JSX.Element
-export type RenderHtml<ReduxState extends object> = (params: {
-    head: HelmetData | undefined,
-    renderMarkup: RenderMarkup,
-    reduxState: ReduxState,
-    assets: Assets,
-    context: RenderContext,
-}) => string
+export type RenderApp<ReduxState extends object, SsrRequest extends RenderRequest> = (
+    params: {
+        log: Logger
+        store: redux.Store<ReduxState>
+        context: RenderContext
+        req: SsrRequest
+    },
+) => JSX.Element
+export type RenderHtml<ReduxState extends object> = (
+    params: {
+        head: HelmetData | undefined
+        renderMarkup: RenderMarkup
+        reduxState: ReduxState
+        assets: Assets
+        context: RenderContext
+    },
+) => string
 export type ResultType<ReduxState extends object> =
     | SuccessServerRenderResult<ReduxState>
     | PageNotFoundRenderResult<ReduxState>
 
 export type ServerSideRenderMiddlewareOptions<
     ReduxState extends object,
-    SsrRequest extends RenderRequest,
+    SsrRequest extends RenderRequest
 > = {
-    app: Express,
-    ssrTimeoutMs: number,
-    renderApp: RenderApp<ReduxState, SsrRequest>,
-    renderHtml: RenderHtml<ReduxState>,
-    errorLocation: string,
-    createReduxStore: CreateReduxStore<ReduxState, SsrRequest>,
+    app: Express
+    ssrTimeoutMs: number
+    renderApp: RenderApp<ReduxState, SsrRequest>
+    renderHtml: RenderHtml<ReduxState>
+    errorLocation: string
+    createReduxStore: CreateReduxStore<ReduxState, SsrRequest>
 }
 
 export const createSsrMiddleware = <
@@ -64,7 +70,7 @@ export const createSsrMiddleware = <
             log: req.log,
             errorLocation: options.errorLocation,
             ssrTimeoutMs: options.ssrTimeoutMs,
-            appRender: (store) => {
+            appRender: store => {
                 renderContext = {
                     completionNotifier: new PromiseCompletionSource<{}>(),
                     triggeredLoad: false,
@@ -75,11 +81,14 @@ export const createSsrMiddleware = <
             },
             createReduxStore: options.createReduxStore,
             events: {
-                renderPerformed: (promiseTracker) => {
+                renderPerformed: promiseTracker => {
                     // loadAllCompleted will not fire if nothing started loading
                     // this is needed to not hang the return
                     // tslint:disable-next-line:max-line-length
-                    if (renderContext.triggeredLoad && !renderContext.completionNotifier.completed) {
+                    if (
+                        renderContext.triggeredLoad &&
+                        !renderContext.completionNotifier.completed
+                    ) {
                         promiseTracker.track(renderContext.completionNotifier.promise)
                     }
                 },
@@ -87,7 +96,7 @@ export const createSsrMiddleware = <
         }
         const pageRenderResult = await renderPageContents<ReduxState, SsrRequest>(ssrOptions, req)
 
-        const createPageMarkup = (result: ResultType<ReduxState>) => (
+        const createPageMarkup = (result: ResultType<ReduxState>) =>
             options.renderHtml({
                 head: result.head,
                 renderMarkup: result.renderedContent,
@@ -95,7 +104,6 @@ export const createSsrMiddleware = <
                 assets,
                 context: renderContext,
             })
-        )
 
         switch (pageRenderResult.type) {
             case ServerRenderResultType.Success:
@@ -113,10 +121,12 @@ export const createSsrMiddleware = <
             case ServerRenderResultType.Redirect:
                 response.redirect(
                     pageRenderResult.isPermanent ? 301 : 302,
-                    pageRenderResult.redirectTo)
+                    pageRenderResult.redirectTo,
+                )
                 return
             case ServerRenderResultType.Failure:
-            default: // tslint:disable-line:no-switch-case-fall-through
+            default:
+                // tslint:disable-line:no-switch-case-fall-through
                 response.status(500).send()
         }
     }

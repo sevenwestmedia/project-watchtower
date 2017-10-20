@@ -15,27 +15,21 @@ export const getHotReloadMiddleware: HotReloadMiddleware = () => {
     const config = getWebpackConfig('client', 'dev')
     const compiler = webpack(config)
 
-    const dev = webpackDevMiddleware(
-        compiler,
-        {
-            publicPath: PUBLIC_PATH,
-            noInfo: true,
-            // do not serve index.html on / route
-            // https://github.com/webpack/webpack-dev-middleware/issues/153
-            index: 'foobar',
-            stats: 'errors-only',
-            watchOptions: {
-                ignored: WATCH_IGNORE,
-            },
+    const dev = webpackDevMiddleware(compiler, {
+        publicPath: PUBLIC_PATH,
+        noInfo: true,
+        // do not serve index.html on / route
+        // https://github.com/webpack/webpack-dev-middleware/issues/153
+        index: 'foobar',
+        stats: 'errors-only',
+        watchOptions: {
+            ignored: WATCH_IGNORE,
         },
-    )
+    })
 
     const hot = webpackHotMiddleware(compiler)
 
-    return [
-        dev,
-        hot,
-    ]
+    return [dev, hot]
 }
 
 export const openBrowser = (port?: number) => {

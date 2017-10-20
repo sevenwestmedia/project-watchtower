@@ -8,9 +8,7 @@ import { Provider } from 'react-redux'
 import { functionTimer, Logger, LogProvider } from '../../universal'
 import { StaticRouterContext } from './router-context-handler'
 
-export type CreateAppElement = (
-    store: redux.Store<any>,
-) => React.ReactElement<any>
+export type CreateAppElement = (store: redux.Store<any>) => React.ReactElement<any>
 
 export interface RenderMarkup {
     html: string
@@ -37,19 +35,22 @@ export default (
     let head: HelmetData
 
     try {
-        renderMarkup = functionTimer('Server side render', () => (
-            renderStaticOptimized(
-                () => renderToString((
-                    <Provider store={store}>
-                        <LogProvider logger={log}>
-                            <StaticRouter location={currentLocation} context={context}>
-                                {appRender(store)}
-                            </StaticRouter>
-                        </LogProvider>
-                    </Provider>
-                )),
-            )
-        ), log)
+        renderMarkup = functionTimer(
+            'Server side render',
+            () =>
+                renderStaticOptimized(() =>
+                    renderToString(
+                        <Provider store={store}>
+                            <LogProvider logger={log}>
+                                <StaticRouter location={currentLocation} context={context}>
+                                    {appRender(store)}
+                                </StaticRouter>
+                            </LogProvider>
+                        </Provider>,
+                    ),
+                ),
+            log,
+        )
     } finally {
         head = Helmet.rewind()
     }

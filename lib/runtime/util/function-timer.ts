@@ -19,21 +19,21 @@ const functionTimer = <T>(description: string, func: () => T, logger: Logger): T
     }
 }
 
-const functionTimerAsync = async <T> (
+const functionTimerAsync = async <T>(
     description: string,
     func: () => Promise<T>,
     logger: Logger,
 ): Promise<T> => {
-        const startTime = process.hrtime()
+    const startTime = process.hrtime()
 
-        try {
-            const result = await func()
-            logger.debug(`Async ${description} took ${elapsed(startTime)}`)
-            return result
-        } catch (err) {
-            logger.debug({ err }, `Async ${description} threw after ${elapsed(startTime)}`)
-            throw err
-        }
+    try {
+        const result = await func()
+        logger.debug(`Async ${description} took ${elapsed(startTime)}`)
+        return result
+    } catch (err) {
+        logger.debug({ err }, `Async ${description} threw after ${elapsed(startTime)}`)
+        throw err
     }
+}
 
 export { elapsed, functionTimer, functionTimerAsync }

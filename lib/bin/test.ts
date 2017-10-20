@@ -26,7 +26,7 @@ const test = async (...params: string[]): Promise<ChildProcess> => {
         await clean()
     }
 
-    const configDefined = params.some((param) => param.indexOf('--config') === 0)
+    const configDefined = params.some(param => param.indexOf('--config') === 0)
 
     if (!configDefined) {
         args = args.concat([
@@ -37,23 +37,17 @@ const test = async (...params: string[]): Promise<ChildProcess> => {
         ])
     }
 
-    const options = isDebug
-        ? { execArgv: [ '--debug' ] }
-        : {}
+    const options = isDebug ? { execArgv: ['--debug'] } : {}
 
     args = args.concat(params)
 
-    return forkPromise(
-        jestBin,
-        args,
-        {
-            env: {
-                ...process.env,
-                NODE_ENV: 'test',
-            },
-            ...options,
+    return forkPromise(jestBin, args, {
+        env: {
+            ...process.env,
+            NODE_ENV: 'test',
         },
-    )
+        ...options,
+    })
 }
 
 export default test

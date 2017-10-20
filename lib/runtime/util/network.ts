@@ -1,7 +1,7 @@
 import * as net from 'net'
 
-export const waitForConnection = (port: number) => (
-    new Promise((resolve) => {
+export const waitForConnection = (port: number) =>
+    new Promise(resolve => {
         const connect = () => {
             const socket = net.connect({ port }, () => {
                 socket.end()
@@ -13,11 +13,10 @@ export const waitForConnection = (port: number) => (
         }
         connect()
     })
-)
 
 const startPort = 3000
 
-export const checkPortAvailability = (port: number) => (
+export const checkPortAvailability = (port: number) =>
     new Promise((resolve, reject) => {
         const server = net.createServer()
 
@@ -28,7 +27,6 @@ export const checkPortAvailability = (port: number) => (
             server.close()
         })
     })
-)
 
 export const findFreePort = async (useStartPort?: number) => {
     const testPort = useStartPort || startPort

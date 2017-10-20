@@ -11,16 +11,9 @@ import webpackServerDevConfig from '../config/webpack.server.dev'
 import webpackServerDebugConfig from '../config/webpack.server.debug'
 import webpackServerProdConfig from '../config/webpack.server.prod'
 
-export const TARGETS: BuildTarget[] = [
-    'server',
-    'client',
-]
+export const TARGETS: BuildTarget[] = ['server', 'client']
 
-export const ENVIRONMENTS: BuildEnvironment[] = [
-    'dev',
-    'prod',
-    'debug',
-]
+export const ENVIRONMENTS: BuildEnvironment[] = ['dev', 'prod', 'debug']
 
 const root = process.cwd()
 
@@ -29,19 +22,17 @@ const root = process.cwd()
  * This will be the custom configuration if a file is present in
  * config/webpack.<target>.<environment>.js, or the default one otherwise
  */
-export const getWebpackConfig = (
-    target: BuildTarget,
-    environment: BuildEnvironment,
-) => {
+export const getWebpackConfig = (target: BuildTarget, environment: BuildEnvironment) => {
     if (TARGETS.indexOf(target) === -1) {
-        logError(`Unknown target: "${target}"! `
-            + `Known values are: ${TARGETS.join(', ')}`)
+        logError(`Unknown target: "${target}"! ` + `Known values are: ${TARGETS.join(', ')}`)
         return undefined
     }
 
     if (ENVIRONMENTS.indexOf(environment) === -1) {
-        logError(`Unknown environment: "${environment}"! `
-            + `Known values are: ${ENVIRONMENTS.join(', ')}`)
+        logError(
+            `Unknown environment: "${environment}"! ` +
+                `Known values are: ${ENVIRONMENTS.join(', ')}`,
+        )
         return undefined
     }
 
@@ -59,9 +50,7 @@ export const getWebpackConfig = (
             log('Building ' + configFileName + '...')
 
             switch (target) {
-
                 case 'server':
-
                     switch (environment) {
                         case 'dev':
                             return webpackServerDevConfig
@@ -77,7 +66,6 @@ export const getWebpackConfig = (
                     }
 
                 case 'client':
-
                     switch (environment) {
                         case 'dev':
                             return webpackClientDevConfig

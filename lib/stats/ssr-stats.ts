@@ -10,7 +10,6 @@ import { runStatsOnServer, loadSSRPage } from './server'
 const { HAS_SERVER } = CONFIG
 
 const ssrStats = async (verbose = false): Promise<BuildMetrics> => {
-
     if (!HAS_SERVER) {
         log('Skipping SSR stats because the application has no server')
         return {}
@@ -22,7 +21,6 @@ const ssrStats = async (verbose = false): Promise<BuildMetrics> => {
 
     try {
         await runStatsOnServer(async ({ page, url }) => {
-
             const loadPage = () => timeout(loadSSRPage(url), 20000)
 
             const { size, content } = await loadPage()

@@ -15,9 +15,7 @@ const disableTypeCheck = process.env.START_FAST_MODE === 'true'
  */
 const baseConfig: webpack.Configuration = {
     resolve: {
-        extensions: [
-            '.ts', '.tsx', '.js', '*',
-        ],
+        extensions: ['.ts', '.tsx', '.js', '*'],
         modules: MODULE_PATHS,
         // force linked dependencies to use the project's node_modules
         // https://github.com/webpack/webpack/issues/985#issuecomment-261497772
@@ -43,9 +41,7 @@ const baseConfig: webpack.Configuration = {
                     useTranspileModule: disableTypeCheck,
                     // Force >ES2015 module syntax (including dynamic imports)
                     // to enable scope hoisting
-                    module: tsVersion > '2.4'
-                        ? 'esnext'
-                        : 'es2015',
+                    module: tsVersion > '2.4' ? 'esnext' : 'es2015',
                 },
             },
             {
@@ -69,10 +65,7 @@ const baseConfig: webpack.Configuration = {
             },
         ],
     },
-    plugins: [
-        new CheckerPlugin(),
-        new webpack.NoEmitOnErrorsPlugin(),
-    ],
+    plugins: [new CheckerPlugin(), new webpack.NoEmitOnErrorsPlugin()],
 }
 
 export default baseConfig

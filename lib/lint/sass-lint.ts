@@ -6,25 +6,19 @@ import { forkPromise } from '../runtime/util/process'
 const { LINT_EXCLUDE } = CONFIG
 
 const sassLint = (...paths: string[]): Promise<ChildProcess> => {
-    const usePaths = paths.length
-            ? paths
-            : [ '**/*.scss' ]
+    const usePaths = paths.length ? paths : ['**/*.scss']
 
-    const executable = path.resolve(process.cwd(),
-        'node_modules', 'sass-lint', 'bin', 'sass-lint.js')
+    const executable = path.resolve(
+        process.cwd(),
+        'node_modules',
+        'sass-lint',
+        'bin',
+        'sass-lint.js',
+    )
 
-    const ignore = [
-        '**/node_modules/**',
-        ...LINT_EXCLUDE,
-    ]
+    const ignore = ['**/node_modules/**', ...LINT_EXCLUDE]
 
-    const args = [
-        ...usePaths,
-        '--verbose',
-        '--no-exit',
-        '--ignore',
-        ignore.join(', '),
-    ]
+    const args = [...usePaths, '--verbose', '--no-exit', '--ignore', ignore.join(', ')]
 
     return forkPromise(executable, args)
 }

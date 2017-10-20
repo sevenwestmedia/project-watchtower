@@ -19,9 +19,7 @@ const killChromeLauncher = (launcher?: Lighthouse.ChromeLauncher) => {
 export const runLighthouse = async (url: string) => {
     const onBuildServer = isBuildServer()
 
-    const launcher = onBuildServer
-        ? undefined
-        : await launch()
+    const launcher = onBuildServer ? undefined : await launch()
 
     try {
         const results = await Lighthouse(
@@ -30,8 +28,8 @@ export const runLighthouse = async (url: string) => {
                 output: 'json',
                 port: launcher
                     ? launcher.port || 9222
-                    // provided by build environment, ref OPS-383
-                    : Number(process.env.CHROME_REMOTE_DEBUGGING_PORT) || 9222,
+                    : // provided by build environment, ref OPS-383
+                      Number(process.env.CHROME_REMOTE_DEBUGGING_PORT) || 9222,
                 skipAutolaunch: onBuildServer,
             },
             {
@@ -58,7 +56,6 @@ export const runLighthouse = async (url: string) => {
 }
 
 const lighthouseStats = async (verbose = false): Promise<BuildMetrics> => {
-
     if (!HAS_SERVER) {
         log('Skipping lighthouse performance metrics because the application has no server')
         return {}
@@ -73,10 +70,11 @@ const lighthouseStats = async (verbose = false): Promise<BuildMetrics> => {
             const lighthouseResult = await timeout(runLighthouse(url), 120000)
 
             const addLighthouseValue = (lighthouseKey: string, statsKey: string) => {
-                const result = lighthouseResult
-                    && lighthouseResult.audits
-                    && lighthouseResult.audits[lighthouseKey]
-                    && (lighthouseResult.audits[lighthouseKey].rawValue as number)
+                const result =
+                    lighthouseResult &&
+                    lighthouseResult.audits &&
+                    lighthouseResult.audits[lighthouseKey] &&
+                    (lighthouseResult.audits[lighthouseKey].rawValue as number)
 
                 if (result !== undefined && result !== null) {
                     stats[`${page}_${statsKey}`] = formatTimeMs(+result)
@@ -91,7 +89,7 @@ const lighthouseStats = async (verbose = false): Promise<BuildMetrics> => {
 
             if (lighthouseResult) {
                 const perfResult = lighthouseResult.reportCategories.filter(
-                    (category) => category.id === 'performance',
+                    category => category.id === 'performance',
                 )[0]
 
                 if (perfResult && typeof perfResult.score === 'number') {

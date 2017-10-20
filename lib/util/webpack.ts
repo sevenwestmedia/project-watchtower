@@ -12,13 +12,12 @@ export const webpackStatsConfig: webpack.Stats.ToStringOptionsObject = {
 }
 
 export const printWebpackStats = (stats: webpack.Stats) => {
-
     const statsString = stats.toString(webpackStatsConfig)
 
     log(statsString)
 }
 
-export const webpackPromise = (config: webpack.Configuration) => (
+export const webpackPromise = (config: webpack.Configuration) =>
     new Promise((resolve, reject) => {
         webpack(config).run((err, stats) => {
             if (err) {
@@ -35,4 +34,3 @@ export const webpackPromise = (config: webpack.Configuration) => (
             }
         })
     })
-)

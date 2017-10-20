@@ -25,16 +25,18 @@ const getCombinedSize = (assetsDir: string) =>
             }
 
             const filePromises = files
-                .filter((file) => /\.js$/.test(file))
-                .map((file) => getFileSize(path.resolve(assetsDir, file)))
+                .filter(file => /\.js$/.test(file))
+                .map(file => getFileSize(path.resolve(assetsDir, file)))
 
             Promise.all(filePromises)
-                .then((fileStats) => {
+                .then(fileStats => {
                     const combinedSize: number = fileStats.reduce(
-                        (prev: number, cur: number) => prev + cur, 0)
+                        (prev: number, cur: number) => prev + cur,
+                        0,
+                    )
                     resolve(formatFileSize(combinedSize))
                 })
-                .catch((reason) => reject(reason))
+                .catch(reason => reject(reason))
         })
     })
 

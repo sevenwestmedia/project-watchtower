@@ -21,9 +21,7 @@ const buildTarget = (target: BuildTarget, environment: BuildEnvironment = 'prod'
 }
 
 const cleanAndBuild = (target: BuildTarget, environment: BuildEnvironment = 'prod') => {
-    const cleanTarget = target === 'server'
-        ? SERVER_OUTPUT
-        : CLIENT_OUTPUT
+    const cleanTarget = target === 'server' ? SERVER_OUTPUT : CLIENT_OUTPUT
 
     return clean(cleanTarget).then(() => buildTarget(target, environment))
 }
@@ -47,9 +45,7 @@ const getBuildTargets = (args: BuildParam[]) => {
         }
     }
 
-    const defaultTargets = HAS_SERVER
-        ? ['server', 'client']
-        : ['client']
+    const defaultTargets = HAS_SERVER ? ['server', 'client'] : ['client']
 
     return defaultTargets as BuildTarget[]
 }
@@ -72,13 +68,9 @@ const build = async (...args: BuildParam[]) => {
         await test('--silent', '--coverage')
         // we have to fail promises late because otherwise the build servers would hang
         // if we exit the process before all webpack builds are completed
-        return failPromisesLate(
-            targets.map((target) => buildTarget(target, environment)),
-        )
+        return failPromisesLate(targets.map(target => buildTarget(target, environment)))
     } else {
-        return failPromisesLate(
-            targets.map((target) => cleanAndBuild(target, environment)),
-        )
+        return failPromisesLate(targets.map(target => cleanAndBuild(target, environment)))
     }
 }
 

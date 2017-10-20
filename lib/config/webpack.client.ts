@@ -22,26 +22,22 @@ const {
 } = CONFIG
 
 type EntryPoints = {
-    [name: string]: string[],
+    [name: string]: string[]
 }
 
 const entry: EntryPoints = {
-    main: [
-        CLIENT_ENTRY,
-    ],
+    main: [CLIENT_ENTRY],
 }
 
 if (CLIENT_POLYFILLS && fs.existsSync(CLIENT_POLYFILLS)) {
-    entry.vendor = [
-        CLIENT_POLYFILLS,
-    ]
+    entry.vendor = [CLIENT_POLYFILLS]
 }
 
 const plugins: webpack.Plugin[] = [
     new AssetsPlugin({
         filename: 'assets.json',
-        processOutput: (assets) => {
-            updateAssetLocations(assets as any as Assets)
+        processOutput: assets => {
+            updateAssetLocations((assets as any) as Assets)
             return JSON.stringify(assets)
         },
     }),
@@ -58,9 +54,9 @@ const plugins: webpack.Plugin[] = [
             }
 
             const isSwmModule =
-                module.context.indexOf('swm-component-library', modulePos) !== -1
-                || module.context.indexOf('redux-data-loader', modulePos) !== -1
-                || module.context.indexOf('project-watchtower', modulePos) !== -1
+                module.context.indexOf('swm-component-library', modulePos) !== -1 ||
+                module.context.indexOf('redux-data-loader', modulePos) !== -1 ||
+                module.context.indexOf('project-watchtower', modulePos) !== -1
 
             return !isSwmModule
         },
@@ -71,10 +67,12 @@ const env = path.resolve(BASE, '.env')
 const envDefault = path.resolve(BASE, '.env.default')
 
 if (fs.existsSync(env) && fs.existsSync(envDefault)) {
-    plugins.push(new DotenvPlugin({
-        path: '.env',
-        sample: '.env.default',
-    }))
+    plugins.push(
+        new DotenvPlugin({
+            path: '.env',
+            sample: '.env.default',
+        }),
+    )
 }
 
 if (SERVER_PUBLIC_DIR) {
@@ -119,9 +117,7 @@ const clientBaseConfig: webpack.Configuration = {
                             loader: 'postcss-loader',
                             options: {
                                 sourceMap: true,
-                                plugins: () => [
-                                    autoprefixer({ browsers: CSS_AUTOPREFIXER }),
-                                ],
+                                plugins: () => [autoprefixer({ browsers: CSS_AUTOPREFIXER })],
                             },
                         },
                         {

@@ -1,6 +1,6 @@
 import { PromiseTracker, Logger } from '../../../universal'
 
-const delay = (forMs: number) => new Promise((resolve) => setTimeout(resolve, forMs))
+const delay = (forMs: number) => new Promise(resolve => setTimeout(resolve, forMs))
 const component = 'RecursiveTaskResolver'
 
 const timedOut = Symbol('Timed out')
@@ -24,28 +24,35 @@ function innerResolve<T>(
         )
     }
 
-    return new Promise((resolve, reject) => setTimeout(() => {
-        const promiseOrTimedOut = [promiseTracker.waitForCompletion(), timeoutPromise]
-        Promise.race<string | typeof timedOut>(promiseOrTimedOut)
-            .then((p) => {
-                // If we have timed out return the timed out symbol to
-                // prevent another nested render
-                if (p === timedOut) {
-                    return p
-                }
+    return new Promise((resolve, reject) =>
+        setTimeout(() => {
+            const promiseOrTimedOut = [promiseTracker.waitForCompletion(), timeoutPromise]
+            Promise.race<string | typeof timedOut>(promiseOrTimedOut)
+                .then(p => {
+                    // If we have timed out return the timed out symbol to
+                    // prevent another nested render
+                    if (p === timedOut) {
+                        return p
+                    }
 
-                log.debug({ component, msg: 'Re-rendering to trigger any child promises' })
-                const renderResult = render()
+                    log.debug({ component, msg: 'Re-rendering to trigger any child promises' })
+                    const renderResult = render()
 
-                // eslint-disable-next-line consistent-return
-                return innerResolve(
-                    log,
-                    promiseTracker, render, renderResult,
-                    numberAttempts, remainingAttempts - 1, timeoutPromise)
-            })
-            .then(resolve)
-            .catch(reject)
-    }))
+                    // eslint-disable-next-line consistent-return
+                    return innerResolve(
+                        log,
+                        promiseTracker,
+                        render,
+                        renderResult,
+                        numberAttempts,
+                        remainingAttempts - 1,
+                        timeoutPromise,
+                    )
+                })
+                .then(resolve)
+                .catch(reject)
+        }),
+    )
 }
 
 /**
@@ -65,8 +72,12 @@ export default async function<T>(
 
     const resolved = await innerResolve<T>(
         log,
-        promiseTracker, render, initialRender,
-        numberAttempts, numberAttempts, timeoutPromise,
+        promiseTracker,
+        render,
+        initialRender,
+        numberAttempts,
+        numberAttempts,
+        timeoutPromise,
     )
 
     if (resolved === timedOut) {

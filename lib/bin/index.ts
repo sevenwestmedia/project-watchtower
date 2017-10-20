@@ -16,25 +16,23 @@ const command = args[0]
 const commandArgs = args.slice(1)
 
 const exitOnError = (result: Promise<any>) => {
-    result
-        .catch((e) => {
-            logError(e || 'Error occurred, exiting...')
-            process.exit(1)
-        })
+    result.catch(e => {
+        logError(e || 'Error occurred, exiting...')
+        process.exit(1)
+    })
 }
 
-const exitAfter = (result: Promise<any>) => (
-    exitOnError(result
-        .then(() => {
+const exitAfter = (result: Promise<any>) =>
+    exitOnError(
+        result.then(() => {
             // force process to exit
             process.exit(0)
-        }))
-)
+        }),
+    )
 
 switch (command) {
-
     case 'build':
-        exitAfter(build(...commandArgs as BuildParam[]))
+        exitAfter(build(...(commandArgs as BuildParam[])))
         break
 
     case 'coverage':
@@ -54,7 +52,7 @@ switch (command) {
         break
 
     case 'start':
-        exitOnError(start(...commandArgs as StartParam[]))
+        exitOnError(start(...(commandArgs as StartParam[])))
         break
 
     case 'stats':
@@ -66,7 +64,7 @@ switch (command) {
         break
 
     case 'watch':
-        exitOnError(watch(...commandArgs as WatchParam[]))
+        exitOnError(watch(...(commandArgs as WatchParam[])))
         break
 
     default:
@@ -87,5 +85,4 @@ Scripts:
 
 Refer to docs/cli.md for the full API documentation
 `)
-
 }

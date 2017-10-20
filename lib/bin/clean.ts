@@ -3,7 +3,7 @@ import CONFIG from '../runtime/config/config'
 
 const { CLIENT_OUTPUT, SERVER_OUTPUT } = CONFIG
 
-const clean = (...paths: string[]) => (
+const clean = (...paths: string[]) =>
     doClean([
         CLIENT_OUTPUT,
         SERVER_OUTPUT,
@@ -13,6 +13,5 @@ const clean = (...paths: string[]) => (
         'coverage',
         ...paths,
     ])
-)
 
 export default clean
