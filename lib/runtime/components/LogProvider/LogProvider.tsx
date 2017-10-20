@@ -6,7 +6,7 @@ import { Logger } from '../../util/log'
  * Makes the provider logger available through context.logger
  */
 export function addLog<T extends React.ComponentClass<any>>(component: T): T {
-    ;(component as any).contextTypes = {
+    component.contextTypes = {
         logger: PropTypes.any,
         ...component.contextTypes,
     }
