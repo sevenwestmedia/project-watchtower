@@ -16,7 +16,6 @@ const { HAS_SERVER, SERVER_OUTPUT } = CONFIG
  * - prod: Sets NODE_ENV to "production"
  */
 const start = (...args: StartParam[]): Promise<ChildProcess> => {
-
     if (args.indexOf('watch') !== -1) {
         process.env.START_WATCH_MODE = 'true'
     }
@@ -32,11 +31,10 @@ const start = (...args: StartParam[]): Promise<ChildProcess> => {
         process.env.START_DEBUG_MODE = 'true'
     }
 
-    process.env.NODE_ENV = (args.indexOf('prod') !== -1)
-        ? 'production'
-        : process.env.NODE_ENV || 'development'
+    process.env.NODE_ENV =
+        args.indexOf('prod') !== -1 ? 'production' : process.env.NODE_ENV || 'development'
 
-    const clientMode = !HAS_SERVER || (args.indexOf('client') !== -1)
+    const clientMode = !HAS_SERVER || args.indexOf('client') !== -1
 
     const serverPath = clientMode
         ? path.resolve(__dirname, '..', 'server', 'start.js')
@@ -44,9 +42,9 @@ const start = (...args: StartParam[]): Promise<ChildProcess> => {
 
     dotenv.config()
 
-    const execArgv: string[] = process.execArgv.filter((arg: string) => (
-        arg.indexOf('--debug') !== 0 && arg.indexOf('--inspect') !== 0
-    ))
+    const execArgv: string[] = process.execArgv.filter(
+        (arg: string) => arg.indexOf('--debug') !== 0 && arg.indexOf('--inspect') !== 0
+    )
 
     if (isDebug) {
         execArgv.push('--debug')
@@ -57,15 +55,10 @@ const start = (...args: StartParam[]): Promise<ChildProcess> => {
 
     const options: ForkOptions = {
         env: process.env,
-        execArgv,
+        execArgv
     }
 
-    return forkPromise(
-        serverPath,
-        [],
-        options,
-        true,
-    )
+    return forkPromise(serverPath, [], options, true)
 }
 
 export default start

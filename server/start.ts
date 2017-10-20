@@ -10,7 +10,7 @@ const app = express()
 
 app.get('*', (_req, res) => {
     res.status(200).send(
-`<!DOCTYPE html>
+        `<!DOCTYPE html>
 <html>
 <head>
     <title>Test</title>
@@ -22,7 +22,8 @@ hello world hello world hello world hello world hello world hello world hello wo
 hello world hello world hello world hello world hello world hello world hello world
 </p>
 </body>
-</html>`)
+</html>`
+    )
 })
 
 app.listen(port, () => {

@@ -10,11 +10,11 @@ const watchMode = process.env.START_WATCH_MODE === 'true'
 let assets: Assets = {
     main: {
         js: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'js/main.js',
-        css: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'css/main.css',
+        css: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'css/main.css'
     },
     vendor: {
-        js: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'js/vendor.js',
-    },
+        js: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'js/vendor.js'
+    }
 }
 
 let assetsLoaded = false
@@ -50,8 +50,7 @@ export const getCssAssetHtml = () => {
     ensureAssets()
     return `<link rel="stylesheet" type="text/css" id="css-main" href="${assets.main.css}${watchMode
         ? '?' + Date.now()
-        : ''
-    }" />`
+        : ''}" />`
 }
 
 /** Returns a HTML snippet for all JavaScript assets */
@@ -67,16 +66,10 @@ export const addAssetsToHtml = (html: string) => {
     let modifiedHtml = html
 
     if (html.indexOf(assets.main.css) === -1) {
-        modifiedHtml = modifiedHtml.replace(
-            '</head>',
-            getCssAssetHtml() + '</head>',
-        )
+        modifiedHtml = modifiedHtml.replace('</head>', getCssAssetHtml() + '</head>')
     }
     if (html.indexOf(assets.main.js) === -1) {
-        modifiedHtml = modifiedHtml.replace(
-            '</body>',
-            getJsAssetHtml() + '</body>',
-        )
+        modifiedHtml = modifiedHtml.replace('</body>', getJsAssetHtml() + '</body>')
     }
     return modifiedHtml
 }

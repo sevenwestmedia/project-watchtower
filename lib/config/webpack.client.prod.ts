@@ -28,13 +28,11 @@ const config: webpack.Configuration = merge(
     {
         output: {
             filename: chunkFilename,
-            chunkFilename,
+            chunkFilename
         },
-        plugins: [
-            new ExtractTextPlugin(cssFilename),
-        ],
+        plugins: [new ExtractTextPlugin(cssFilename)]
     },
-    webpackHooks.clientProd || {},
+    webpackHooks.clientProd || {}
 )
 
 export default config

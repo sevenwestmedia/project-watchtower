@@ -5,7 +5,7 @@ export enum ServerRenderResultType {
     Success,
     Failure,
     Redirect,
-    PageNotFound,
+    PageNotFound
 }
 export interface ServerRenderResultBase {
     type: ServerRenderResultType
@@ -32,7 +32,8 @@ export interface RedirectServerRenderResult extends ServerRenderResultBase {
     redirectTo: string
     isPermanent: boolean
 }
-export type ServerRenderResult<T extends object> = SuccessServerRenderResult<T>
+export type ServerRenderResult<T extends object> =
+    | SuccessServerRenderResult<T>
     | FailedRenderResult
     | RedirectServerRenderResult
     | PageNotFoundRenderResult<T>

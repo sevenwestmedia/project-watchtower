@@ -12,7 +12,6 @@ export interface BuildMetrics {
 }
 
 export const measureBuildStats = async (verbose?: boolean): Promise<BuildMetrics> => {
-
     const bundleMetrics = await bundleSize()
     const ssrMetrics = await ssrStats(verbose)
     const lighthouseMetrics = await lighthouseStats(verbose)
@@ -20,15 +19,14 @@ export const measureBuildStats = async (verbose?: boolean): Promise<BuildMetrics
     return {
         ...bundleMetrics,
         ...ssrMetrics,
-        ...lighthouseMetrics,
+        ...lighthouseMetrics
     }
 }
 
 export const writeBuildStats = async (metrics: BuildMetrics) => {
-
     // TeamCity expects key-value pairs written to the console
 
-    Object.keys(metrics).forEach((key) => {
+    Object.keys(metrics).forEach(key => {
         log(`##teamcity[buildStatisticValue key='${key}' value='${metrics[key]}']`)
     })
 
@@ -37,7 +35,7 @@ export const writeBuildStats = async (metrics: BuildMetrics) => {
     const keys: string[] = []
     const values: string[] = []
 
-    Object.keys(metrics).forEach((key) => {
+    Object.keys(metrics).forEach(key => {
         keys.push(key)
         values.push(metrics[key])
     })
@@ -45,9 +43,7 @@ export const writeBuildStats = async (metrics: BuildMetrics) => {
     const titleRow = keys.join(',')
     const valueRow = values.join(',')
 
-    const fileContent = titleRow
-        + '\n'
-        + valueRow
+    const fileContent = titleRow + '\n' + valueRow
 
     const statsFilePath = path.resolve(root, 'build-stats.csv')
 

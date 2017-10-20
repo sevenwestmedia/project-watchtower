@@ -20,28 +20,26 @@ export interface SSRStats {
 }
 
 const getServerUrl = (port: number, urlPath: string) => {
-    const useUrlPath = urlPath.indexOf('/') === 0
-        ? urlPath
-        : '/' + urlPath
+    const useUrlPath = urlPath.indexOf('/') === 0 ? urlPath : '/' + urlPath
 
     const host = isBuildServer()
-        // provided by build environment, ref OPS-383
-        ? process.env.STATS_SERVER_ADDRESS || 'localhost'
+        ? // provided by build environment, ref OPS-383
+          process.env.STATS_SERVER_ADDRESS || 'localhost'
         : 'localhost'
 
     return `http://${host}:${port}${useUrlPath}`
 }
 
-export const loadSSRPage = (url: string) => (
+export const loadSSRPage = (url: string) =>
     new Promise<SSRStats>((resolve, reject) => {
         const startTime = getTimeMs()
 
-        const request = http.get(url, (res) => {
+        const request = http.get(url, res => {
             res.setEncoding('utf8')
 
             let size = 0
             let content = ''
-            res.on('data', (chunk) => {
+            res.on('data', chunk => {
                 size += chunk.length
                 content += chunk.toString()
             })
@@ -51,9 +49,8 @@ export const loadSSRPage = (url: string) => (
                 resolve({ size, time, content })
             })
         })
-        request.on('error', (err) => reject(err))
+        request.on('error', err => reject(err))
     })
-)
 
 export interface StatsRunDetails {
     page: string
@@ -65,7 +62,6 @@ export interface StatsRunDetails {
 export type StatsFn = (details: StatsRunDetails) => Promise<any>
 
 export const runStatsOnServer = async (statsFn: StatsFn, verbose = false) => {
-
     if (!HAS_SERVER) {
         log('Skipping server-based stats because the application has no server')
         return
@@ -83,11 +79,11 @@ export const runStatsOnServer = async (statsFn: StatsFn, verbose = false) => {
                 NODE_ENV: 'production',
                 ...process.env,
                 ...STATS_ENV,
-                PORT: port,
+                PORT: port
             },
-            silent: !verbose,
+            silent: !verbose
         },
-        true,
+        true
     )
 
     try {
@@ -106,7 +102,6 @@ export const runStatsOnServer = async (statsFn: StatsFn, verbose = false) => {
                 await statsFn({ page, urlPath, url, port })
             }
         }
-
     } catch (err) {
         throw err
     } finally {

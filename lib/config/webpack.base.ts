@@ -15,13 +15,11 @@ const disableTypeCheck = process.env.START_FAST_MODE === 'true'
  */
 const baseConfig: webpack.Configuration = {
     resolve: {
-        extensions: [
-            '.ts', '.tsx', '.js', '*',
-        ],
+        extensions: ['.ts', '.tsx', '.js', '*'],
         modules: MODULE_PATHS,
         // force linked dependencies to use the project's node_modules
         // https://github.com/webpack/webpack/issues/985#issuecomment-261497772
-        symlinks: false,
+        symlinks: false
     } as any, // @typings/webpack is missing resolve.symlinks
     module: {
         rules: [
@@ -31,8 +29,8 @@ const baseConfig: webpack.Configuration = {
                 loader: 'source-map-loader',
                 include: [
                     path.resolve(BASE, 'node_modules', 'swm-component-library'),
-                    path.resolve(BASE, 'node_modules', 'redux-data-loader'),
-                ],
+                    path.resolve(BASE, 'node_modules', 'redux-data-loader')
+                ]
             },
             {
                 test: /\.tsx?$/,
@@ -43,36 +41,31 @@ const baseConfig: webpack.Configuration = {
                     useTranspileModule: disableTypeCheck,
                     // Force >ES2015 module syntax (including dynamic imports)
                     // to enable scope hoisting
-                    module: tsVersion > '2.4'
-                        ? 'esnext'
-                        : 'es2015',
-                },
+                    module: tsVersion > '2.4' ? 'esnext' : 'es2015'
+                }
             },
             {
                 test: /\.(ico|jpg|png|gif|otf|webp|svg|ttf)(\?.*)?$/,
                 exclude: /\/favicon.ico$/,
                 loader: 'file-loader',
                 options: {
-                    name: ASSETS_PATH_PREFIX + 'media/[name].[hash:8].[ext]',
-                },
+                    name: ASSETS_PATH_PREFIX + 'media/[name].[hash:8].[ext]'
+                }
             },
             {
                 test: /\.(eot|woff|woff2)(\?.*)?$/,
                 loader: 'file-loader',
                 options: {
-                    name: ASSETS_PATH_PREFIX + 'fonts/[name].[ext]',
-                },
+                    name: ASSETS_PATH_PREFIX + 'fonts/[name].[ext]'
+                }
             },
             {
                 test: /\.md$/,
-                loader: 'raw-loader',
-            },
-        ],
+                loader: 'raw-loader'
+            }
+        ]
     },
-    plugins: [
-        new CheckerPlugin(),
-        new webpack.NoEmitOnErrorsPlugin(),
-    ],
+    plugins: [new CheckerPlugin(), new webpack.NoEmitOnErrorsPlugin()]
 }
 
 export default baseConfig

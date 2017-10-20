@@ -1,8 +1,5 @@
 {
-    "extends": [
-        "tslint:latest",
-        "tslint-react"
-    ],
+    "extends": ["tslint:latest", "tslint-react"],
     "rules": {
         // react specific rules
         "jsx-alignment": true,
@@ -13,45 +10,25 @@
         "jsx-self-close": true,
         "jsx-wrap-multiline": true,
         "jsx-boolean-value": false,
-        // @TODO swap to using arrow parens with ban-single-arg-parens
-        // https://palantir.github.io/tslint/rules/arrow-parens/
-
+        "arrow-parens": [true, "ban-single-arg-parens"],
         // js rules
         "class-name": true,
-        "comment-format": [
-            true,
-            "check-space"
-        ],
+        "comment-format": [true, "check-space"],
         "curly": true,
         "eofline": true,
         "forin": true,
-        "indent": [
-            true,
-            "spaces"
-        ],
+        "indent": [true, "spaces"],
         // @TODO decide if we want to use this rule
-        "interface-name": [
-            false
-        ],
+        "interface-name": [false],
         "interface-over-type-literal": false,
         "label-position": true,
-        "max-line-length": [
-            true,
-            100
-        ],
+        // Handled by prettier
+        "max-line-length": false,
         // @TODO decide if we want to use this rule
         "member-access": false,
         "no-arg": true,
         "no-bitwise": true,
-        "no-console": [
-            true,
-            "log",
-            "debug",
-            "info",
-            "time",
-            "timeEnd",
-            "trace"
-        ],
+        "no-console": [true, "log", "debug", "info", "time", "timeEnd", "trace"],
         "no-construct": true,
         "no-debugger": true,
         "no-duplicate-variable": true,
@@ -64,7 +41,7 @@
             true,
             // @TODO investigate turning off for types
             // https://palantir.github.io/tslint/rules/trailing-comma/
-            { "multiline": "always", "singleline": "never" }
+            { "multiline": "never", "singleline": "never" }
         ],
         "no-trailing-whitespace": true,
         "no-unused-expression": true,
@@ -74,26 +51,13 @@
         "object-literal-key-quotes": [true, "as-needed"],
         // @TODO decide if we want to use this rule
         "object-literal-sort-keys": false,
-        "one-line": [
-            true,
-            "check-open-brace",
-            "check-catch",
-            "check-else",
-            "check-whitespace"
-        ],
+        "one-line": [true, "check-open-brace", "check-catch", "check-else", "check-whitespace"],
         // @TODO decide if we want to use this rule
-        "ordered-imports": [
-            false
-        ],
+        "ordered-imports": [false],
         "radix": true,
-        "semicolon": [
-            true,
-            "never"
-        ],
-        "triple-equals": [
-            true,
-            "allow-null-check"
-        ],
+        "semicolon": [true, "never"],
+        "triple-equals": [true, "allow-null-check"],
+        "space-before-function-paren": false,
         "variable-name": [
             true,
             "check-format",
@@ -109,10 +73,6 @@
             "check-separator",
             "check-type"
         ],
-        "quotemark": [
-            true,
-            "single",
-            "jsx-double"
-        ]
+        "quotemark": [true, "single", "jsx-double"]
     }
 }

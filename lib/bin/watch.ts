@@ -16,7 +16,6 @@ const { HAS_SERVER } = CONFIG
  * - client: Only run client without a server
  */
 const watch = async (...args: WatchParam[]): Promise<ChildProcess | WatchServer> => {
-
     const additionalStartParams: StartParam[] = []
 
     if (args.indexOf('fast') !== -1) {
@@ -30,14 +29,13 @@ const watch = async (...args: WatchParam[]): Promise<ChildProcess | WatchServer>
 
     await clean()
 
-    const isServerWatch = HAS_SERVER
-        && args.indexOf('server') !== -1
+    const isServerWatch = HAS_SERVER && args.indexOf('server') !== -1
 
     if (isServerWatch) {
         return watchServer()
     }
 
-    const clientMode = !HAS_SERVER || (args.indexOf('client') !== -1)
+    const clientMode = !HAS_SERVER || args.indexOf('client') !== -1
 
     if (clientMode) {
         return start('watch', 'client', ...additionalStartParams)

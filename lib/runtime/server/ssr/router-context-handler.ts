@@ -10,35 +10,35 @@ export interface StaticRouterContext {
 export const success = <T extends object>(
     result: RenderPassResult,
     reduxState: T,
-    startTime: [number, number],
+    startTime: [number, number]
 ): ServerRenderResult<T> => {
     return {
         type: ServerRenderResultType.Success,
         elapsed: elapsed(startTime),
         head: result.head,
         renderedContent: result.renderMarkup,
-        reduxState,
+        reduxState
     }
 }
 
 export const notFound = <T extends object>(
     result: RenderPassResult,
     reduxState: T,
-    startTime: [number, number],
+    startTime: [number, number]
 ): ServerRenderResult<T> => {
     return {
         type: ServerRenderResultType.PageNotFound,
         elapsed: elapsed(startTime),
         head: result.head,
         renderedContent: result.renderMarkup,
-        reduxState,
+        reduxState
     }
 }
 
 export default <T extends object>(
     renderResult: RenderPassResult,
     startTime: [number, number],
-    reduxState: T,
+    reduxState: T
 ): ServerRenderResult<T> => {
     if (renderResult.context.url) {
         return {
@@ -46,7 +46,7 @@ export default <T extends object>(
             head: renderResult.head,
             redirectTo: renderResult.context.url,
             isPermanent: renderResult.context.statusCode === 301,
-            elapsed: elapsed(startTime),
+            elapsed: elapsed(startTime)
         }
     }
 

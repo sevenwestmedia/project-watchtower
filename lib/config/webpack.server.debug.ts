@@ -10,10 +10,10 @@ const config: webpack.Configuration = merge(
         devtool: 'source-map',
         output: {
             devtoolModuleFilenameTemplate: '[absolute-resource-path]',
-            devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]',
-        },
+            devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]'
+        }
     },
-    webpackHooks.serverDebug || {},
+    webpackHooks.serverDebug || {}
 )
 
 export default config

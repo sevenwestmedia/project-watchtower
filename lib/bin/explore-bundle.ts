@@ -14,21 +14,18 @@ const exploreBundle = (...args: string[]) => {
         return Promise.reject('Error loading the webpack configuration!')
     }
 
-    const config = merge(
-        baseConfig,
-        {
-            plugins: [
-                new BundleAnalyzerPlugin(),
-            ],
-        },
-    )
+    const config = merge(baseConfig, {
+        plugins: [new BundleAnalyzerPlugin()]
+    })
 
     const disableHoisting = args.indexOf('disableHoisting') !== -1
 
     if (disableHoisting) {
-        config.plugins = config.plugins && config.plugins.filter((plugin) => (
-            !(plugin instanceof webpack.optimize.ModuleConcatenationPlugin)
-        ))
+        config.plugins =
+            config.plugins &&
+            config.plugins.filter(
+                plugin => !(plugin instanceof webpack.optimize.ModuleConcatenationPlugin)
+            )
     }
 
     return webpackPromise(config)

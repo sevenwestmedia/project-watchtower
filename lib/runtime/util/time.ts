@@ -3,8 +3,7 @@ export const getTimeMs = () => {
     return hrtime[0] * 1000 + hrtime[1] / 1000000
 }
 
-export const delay = (ms = 1000) =>
-    new Promise((resolve) => setTimeout(() => resolve(), ms))
+export const delay = (ms = 1000) => new Promise(resolve => setTimeout(() => resolve(), ms))
 
 export const formatTimeMs = (ms: number) => ms.toFixed(0)
 
@@ -15,8 +14,8 @@ export const timeout = <P>(promise: Promise<P>, time: number): Promise<P> => {
         promise,
         new Promise<P>((_resolve, reject) => {
             timer = setTimeout(() => reject(new Error(`Timeout after ${time} ms`)), time)
-        }),
-    ]).then((result) => {
+        })
+    ]).then(result => {
         clearTimeout(timer)
         return result
     })

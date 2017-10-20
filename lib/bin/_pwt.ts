@@ -17,25 +17,21 @@ if (process.argv.indexOf('watch') !== -1 && process.argv.indexOf('fast') !== -1)
     process.env.START_FAST_MODE = 'true'
 }
 
-const proc = fork(
-    filePath,
-    process.argv.slice(2),
-    {
-        env: process.env,
-        execArgv: [
-            ...process.execArgv,
-            // Node runs out of memory when re-exporting the glamorous 4 typings
-            // with TypeScript 2.4
-            // https://github.com/Microsoft/TypeScript/issues/17070
-            '--max-old-space-size=4096',
-        ],
-    },
-)
+const proc = fork(filePath, process.argv.slice(2), {
+    env: process.env,
+    execArgv: [
+        ...process.execArgv,
+        // Node runs out of memory when re-exporting the glamorous 4 typings
+        // with TypeScript 2.4
+        // https://github.com/Microsoft/TypeScript/issues/17070
+        '--max-old-space-size=4096'
+    ]
+})
 
 proc.on('error', () => {
     process.exit(1)
 })
 
-proc.on('exit', (code) => {
+proc.on('exit', code => {
     process.exit(code)
 })

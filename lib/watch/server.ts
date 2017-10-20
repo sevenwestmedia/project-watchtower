@@ -20,18 +20,18 @@ const restartServer = (oldServer?: ChildProcess) => {
         oldServer.kill()
     }
     return fork(path.resolve(SERVER_OUTPUT, 'server.js'), [], {
-        env: process.env,
+        env: process.env
     })
 }
 
 export interface WatchServer {
-    app: express.Express,
-    server: Server,
+    app: express.Express
+    server: Server
     close: () => void
 }
 
-const watchServer = (port?: number) => (
-    new Promise<WatchServer>((resolve) => {
+const watchServer = (port?: number) =>
+    new Promise<WatchServer>(resolve => {
         const serverPort = port || getPort()
         const devServerPort = serverPort + 1
 
@@ -40,19 +40,22 @@ const watchServer = (port?: number) => (
 
         const serverCompiler = webpack(getWebpackConfig('server', 'dev'))
 
-        const watching = serverCompiler.watch({
-            aggregateTimeout: 10000,
-            ignored: WATCH_IGNORE,
-        }, () => {
-            if (!devServer) {
-                setTimeout(() => openBrowser(devServerPort), 2000)
-            }
-            devServer = restartServer(devServer)
+        const watching = serverCompiler.watch(
+            {
+                aggregateTimeout: 10000,
+                ignored: WATCH_IGNORE
+            },
+            () => {
+                if (!devServer) {
+                    setTimeout(() => openBrowser(devServerPort), 2000)
+                }
+                devServer = restartServer(devServer)
 
-            setTimeout(() => {
-                devServerAvailable = waitForConnection(serverPort)
-            }, 100)
-        })
+                setTimeout(() => {
+                    devServerAvailable = waitForConnection(serverPort)
+                }, 100)
+            }
+        )
 
         const app = express()
 
@@ -72,12 +75,11 @@ const watchServer = (port?: number) => (
                 close: () => {
                     watching.close(() => {})
                     server.close()
-                },
+                }
             })
         })
 
         app.set('server', server)
     })
-)
 
 export default watchServer

@@ -10,7 +10,10 @@ import { mount } from 'enzyme'
 import * as H from 'history'
 
 import {
-    PageLifecycleProvider, withPageLifecycleEvents, ComponentWithLifecycle, PageEvent,
+    PageLifecycleProvider,
+    withPageLifecycleEvents,
+    ComponentWithLifecycle,
+    PageEvent
 } from './PageLifecycleProvider'
 import { PromiseCompletionSource } from '../../universal'
 import Page from '../Page/Page'
@@ -28,7 +31,7 @@ const createTestComponents = () => {
             return (
                 <Page
                     errorComponent="oops"
-                    page={(pageProps) => {
+                    page={pageProps => {
                         // This emulates a component under the page starting to load data
                         // then completing once the promise completion source completes
                         if (!this.loadTriggered) {
@@ -50,7 +53,7 @@ const createTestComponents = () => {
 
     const FakeLazyLoad = withPageLifecycleEvents(
         // tslint:disable-next-line:max-classes-per-file
-        class extends ComponentWithLifecycle<{ path: string}, { loaded: boolean }> {
+        class extends ComponentWithLifecycle<{ path: string }, { loaded: boolean }> {
             state = { loaded: false }
 
             componentDidMount() {
@@ -61,23 +64,20 @@ const createTestComponents = () => {
                         { loaded: true },
                         // Only end load data after state change has been applied
                         // Because this could trigger more loading of data
-                        this.context.pageLifecycle.endLoadingData)
+                        this.context.pageLifecycle.endLoadingData
+                    )
                 })
             }
 
             render() {
-                return (
-                    this.state.loaded
-                        ? <TestPage {...this.props} />
-                        : <noscript />
-                )
+                return this.state.loaded ? <TestPage {...this.props} /> : <noscript />
             }
-        },
+        }
     )
     return {
         promiseCompletionSource,
         FakeLazyLoad,
-        TestPage,
+        TestPage
     }
 }
 
@@ -87,23 +87,25 @@ describe('PageLifecycleProvider', () => {
         const pageEvents: PageEvent[] = []
 
         const store = createStore((s = {}, _) => s)
-        const wrapper = mount((
+        const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/']} initialIndex={0}>
                     <PageLifecycleProvider
-                        onEvent={(event) => pageEvents.push(event)}
+                        onEvent={event => pageEvents.push(event)}
                         render={<testComponents.TestPage path="/" />}
                     />
                 </MemoryRouter>
             </Provider>
-        ))
+        )
 
         const testPage = wrapper.find(testComponents.TestPage)
 
-        expect(pageEvents.map((e) => {
-            e.timeStamp = 0
-            return e
-        })).toMatchSnapshot()
+        expect(
+            pageEvents.map(e => {
+                e.timeStamp = 0
+                return e
+            })
+        ).toMatchSnapshot()
         expect(testPage.debug()).toMatchSnapshot()
     })
 
@@ -112,29 +114,31 @@ describe('PageLifecycleProvider', () => {
         const pageEvents: PageEvent[] = []
 
         const store = createStore((s = {}, _) => s)
-        const wrapper = mount((
+        const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/']} initialIndex={0}>
                     <PageLifecycleProvider
-                        onEvent={(event) => pageEvents.push(event)}
+                        onEvent={event => pageEvents.push(event)}
                         render={<testComponents.TestPage path="/" />}
                     />
                 </MemoryRouter>
             </Provider>
-        ))
+        )
 
         const testPage = wrapper.find(testComponents.TestPage)
 
         testComponents.promiseCompletionSource.resolve({
-            bar: 'test',
+            bar: 'test'
         })
         expect(pageEvents.length).toBe(1)
-        await new Promise((resolve) => setTimeout(() => resolve()))
+        await new Promise(resolve => setTimeout(() => resolve()))
 
-        expect(pageEvents.map((e) => {
-            e.timeStamp = 0
-            return e
-        })).toMatchSnapshot()
+        expect(
+            pageEvents.map(e => {
+                e.timeStamp = 0
+                return e
+            })
+        ).toMatchSnapshot()
         expect(testPage.debug()).toMatchSnapshot()
     })
 
@@ -143,45 +147,47 @@ describe('PageLifecycleProvider', () => {
         const pageEvents: PageEvent[] = []
 
         const store = createStore((s = {}, _) => s)
-        const wrapper = mount((
+        const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/']} initialIndex={0}>
                     <PageLifecycleProvider
-                        onEvent={(event) => pageEvents.push(event)}
-                        render={(
+                        onEvent={event => pageEvents.push(event)}
+                        render={
                             <Page
                                 errorComponent="oops"
-                                page={
-                                    <testComponents.FakeLazyLoad path="/" />
-                                }
+                                page={<testComponents.FakeLazyLoad path="/" />}
                             />
-                        )}
+                        }
                     />
                 </MemoryRouter>
             </Provider>
-        ))
+        )
 
         const testPage = wrapper.find(testComponents.TestPage)
 
-        expect(pageEvents.map((e) => {
-            e.timeStamp = 0
-            return e
-        })).toMatchSnapshot()
+        expect(
+            pageEvents.map(e => {
+                e.timeStamp = 0
+                return e
+            })
+        ).toMatchSnapshot()
         expect(testPage.debug()).toMatchSnapshot()
-        await new Promise((resolve) => setTimeout(() => resolve()))
+        await new Promise(resolve => setTimeout(() => resolve()))
 
         testComponents.promiseCompletionSource.resolve({
-            bar: 'test',
+            bar: 'test'
         })
         // We should not have received the completed event yet
         expect(pageEvents.length).toBe(1)
 
         // Let the completion propagate
-        await new Promise((resolve) => setTimeout(() => resolve()))
-        expect(pageEvents.map((e) => {
-            e.timeStamp = 0
-            return e
-        })).toMatchSnapshot()
+        await new Promise(resolve => setTimeout(() => resolve()))
+        expect(
+            pageEvents.map(e => {
+                e.timeStamp = 0
+                return e
+            })
+        ).toMatchSnapshot()
         expect(testPage.debug()).toMatchSnapshot()
     })
 
@@ -191,30 +197,32 @@ describe('PageLifecycleProvider', () => {
         const pageEvents: PageEvent[] = []
 
         const store = createStore((s = {}, _) => s)
-        const wrapper = mount((
+        const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/', '/foo']} initialIndex={0}>
                     <PageLifecycleProvider
-                        onEvent={(event) => pageEvents.push(event)}
-                        render={(
+                        onEvent={event => pageEvents.push(event)}
+                        render={
                             <Route
-                                render={(props) => {
+                                render={props => {
                                     history = props.history
                                     return (
                                         <testComponents.TestPage path={props.location.pathname} />
-                                    )}
-                                }
+                                    )
+                                }}
                             />
-                        )}
+                        }
                     />
                 </MemoryRouter>
             </Provider>
-        ))
+        )
 
-        if (!history) { throw new Error('History not defined') }
+        if (!history) {
+            throw new Error('History not defined')
+        }
 
         testComponents.promiseCompletionSource.resolve({ bar: 'test' })
-        await new Promise((resolve) => setTimeout(() => resolve()))
+        await new Promise(resolve => setTimeout(() => resolve()))
         testComponents.promiseCompletionSource.reset()
 
         history.push('/foo')
@@ -222,11 +230,13 @@ describe('PageLifecycleProvider', () => {
         const testPage = wrapper.find(testComponents.TestPage)
 
         testComponents.promiseCompletionSource.resolve({ bar: 'page2' })
-        await new Promise((resolve) => setTimeout(() => resolve()))
-        expect(pageEvents.map((e) => {
-            e.timeStamp = 0
-            return e
-        })).toMatchSnapshot()
+        await new Promise(resolve => setTimeout(() => resolve()))
+        expect(
+            pageEvents.map(e => {
+                e.timeStamp = 0
+                return e
+            })
+        ).toMatchSnapshot()
         expect(testPage.debug()).toMatchSnapshot()
     })
 })

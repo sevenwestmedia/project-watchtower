@@ -1,5 +1,4 @@
 export const isBuildServer = () => {
-
     // TeamCity build server
     // https://confluence.jetbrains.com/display/TCD10/Predefined+Build+Parameters
     if (process.env.TEAMCITY_VERSION) {

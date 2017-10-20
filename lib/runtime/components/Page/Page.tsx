@@ -1,12 +1,15 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import {
-    withPageLifecycleProps, PageLifecycleProps,
+    withPageLifecycleProps,
+    PageLifecycleProps
 } from '../PageLifecycleProvider/PageLifecycleProvider'
 import { Logger } from '../../util/log'
 import { PageLifecycle } from '../PageLifecycleProvider/PageLifecycle'
 
-export interface State { error: boolean }
+export interface State {
+    error: boolean
+}
 export interface Props {
     errorComponent: React.ReactType
     page: React.ReactElement<any> | ((pageProps: PageLifecycleProps) => React.ReactElement<any>)
@@ -16,14 +19,14 @@ export default withPageLifecycleProps(
     class Page extends React.PureComponent<Props & PageLifecycleProps, State> {
         static contextTypes = {
             // Seems like context cannot be exported, this is a runtime react thing anyways
-            pageLifecycle: PropTypes.object as any,
+            pageLifecycle: PropTypes.object as any
         }
 
         state: State = { error: false }
 
         context: {
-            pageLifecycle: PageLifecycle,
-            logger: Logger,
+            pageLifecycle: PageLifecycle
+            logger: Logger
         }
 
         // This is using React error boundaries which were added in v15
@@ -69,7 +72,7 @@ export default withPageLifecycleProps(
                     currentPageState: this.props.currentPageState,
                     currentPageLocation: this.props.currentPageLocation,
                     beginLoadingData: this.props.beginLoadingData,
-                    endLoadingData: this.props.endLoadingData,
+                    endLoadingData: this.props.endLoadingData
                 })
             } else {
                 content = this.props.page
@@ -77,5 +80,5 @@ export default withPageLifecycleProps(
 
             return content
         }
-    },
+    }
 )

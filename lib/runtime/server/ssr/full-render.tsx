@@ -19,7 +19,7 @@ export interface RenderOptions {
 
 export type CreateReduxStore<ReduxState extends object, SsrRequest extends RenderRequest> = (
     middlewares: redux.Middleware[],
-    req: SsrRequest,
+    req: SsrRequest
 ) => Promise<redux.Store<ReduxState>>
 
 export interface ServerSideRenderOptions<
@@ -43,7 +43,7 @@ export interface Assets {
 
 async function renderPageContents<T extends object, SsrRequest extends RenderRequest>(
     options: ServerSideRenderOptions<T, SsrRequest>,
-    req: SsrRequest,
+    req: SsrRequest
 ): Promise<ServerRenderResults.ServerRenderResult<T>> {
     const { url: currentLocation } = req
     const START_FAST_MODE = process.env.START_FAST_MODE === 'true'
@@ -51,16 +51,16 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
     const promiseTracker = new PromiseTracker()
     let store: redux.Store<T>
     try {
-        store = await options.createReduxStore([
-            promiseTracker.middleware(),
-            thunk.withExtraArgument({ log: options.log }),
-        ], req)
+        store = await options.createReduxStore(
+            [promiseTracker.middleware(), thunk.withExtraArgument({ log: options.log })],
+            req
+        )
     } catch (err) {
         const failure: ServerRenderResults.FailedRenderResult = {
             type: ServerRenderResults.ServerRenderResultType.Failure,
             errorMessage: 'Failed to create redux store',
             elapsed: elapsed(startTime),
-            head: undefined,
+            head: undefined
         }
 
         options.log.error({ err }, failure.errorMessage)
@@ -68,11 +68,8 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
         return failure
     }
 
-    const performSinglePassLocationRender = (location: string) => (
-        renderToString(
-            location, store, options.log, options.appRender,
-        )
-    )
+    const performSinglePassLocationRender = (location: string) =>
+        renderToString(location, store, options.log, options.appRender)
 
     const render = (location: string): ServerRenderResults.ServerRenderResult<T> => {
         // We need to capture the store before we render
@@ -85,7 +82,7 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
             const result = handleRouterContextResult(
                 renderResult,
                 startTime,
-                storeStateAtRenderTime,
+                storeStateAtRenderTime
             )
 
             if (options.events && options.events.renderPerformed) {
@@ -112,11 +109,11 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
             renderedContent: {
                 html: '',
                 css: '',
-                ids: [],
+                ids: []
             },
             reduxState: store.getState(),
             elapsed: elapsed(startTime),
-            head: undefined,
+            head: undefined
         }
 
         return successResult
@@ -140,9 +137,12 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
         }
 
         const dataResolved = await resolveAllData(
-            options.log, promiseTracker,
-            () => render(currentLocation), initialRenderResult,
-            10, options.ssrTimeoutMs
+            options.log,
+            promiseTracker,
+            () => render(currentLocation),
+            initialRenderResult,
+            10,
+            options.ssrTimeoutMs
         )
 
         if (dataResolved.type === ServerRenderResults.ServerRenderResultType.Success) {
@@ -158,7 +158,7 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
             type: ServerRenderResults.ServerRenderResultType.Failure,
             errorMessage: 'Failed to do render',
             elapsed: elapsed(startTime),
-            head: undefined,
+            head: undefined
         }
         options.log.error({ err }, 'Failed to render')
 

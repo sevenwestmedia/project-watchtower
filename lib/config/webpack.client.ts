@@ -18,32 +18,28 @@ const {
     CSS_AUTOPREFIXER,
     MODULE_PATHS,
     PUBLIC_PATH,
-    SERVER_PUBLIC_DIR,
+    SERVER_PUBLIC_DIR
 } = CONFIG
 
 type EntryPoints = {
-    [name: string]: string[],
+    [name: string]: string[]
 }
 
 const entry: EntryPoints = {
-    main: [
-        CLIENT_ENTRY,
-    ],
+    main: [CLIENT_ENTRY]
 }
 
 if (CLIENT_POLYFILLS && fs.existsSync(CLIENT_POLYFILLS)) {
-    entry.vendor = [
-        CLIENT_POLYFILLS,
-    ]
+    entry.vendor = [CLIENT_POLYFILLS]
 }
 
 const plugins: webpack.Plugin[] = [
     new AssetsPlugin({
         filename: 'assets.json',
-        processOutput: (assets) => {
-            updateAssetLocations(assets as any as Assets)
+        processOutput: assets => {
+            updateAssetLocations((assets as any) as Assets)
             return JSON.stringify(assets)
-        },
+        }
     }),
     new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
@@ -58,23 +54,25 @@ const plugins: webpack.Plugin[] = [
             }
 
             const isSwmModule =
-                module.context.indexOf('swm-component-library', modulePos) !== -1
-                || module.context.indexOf('redux-data-loader', modulePos) !== -1
-                || module.context.indexOf('project-watchtower', modulePos) !== -1
+                module.context.indexOf('swm-component-library', modulePos) !== -1 ||
+                module.context.indexOf('redux-data-loader', modulePos) !== -1 ||
+                module.context.indexOf('project-watchtower', modulePos) !== -1
 
             return !isSwmModule
-        },
-    }),
+        }
+    })
 ]
 
 const env = path.resolve(BASE, '.env')
 const envDefault = path.resolve(BASE, '.env.default')
 
 if (fs.existsSync(env) && fs.existsSync(envDefault)) {
-    plugins.push(new DotenvPlugin({
-        path: '.env',
-        sample: '.env.default',
-    }))
+    plugins.push(
+        new DotenvPlugin({
+            path: '.env',
+            sample: '.env.default'
+        })
+    )
 }
 
 if (SERVER_PUBLIC_DIR) {
@@ -84,8 +82,8 @@ if (SERVER_PUBLIC_DIR) {
         plugins.push(
             new HtmlPlugin({
                 inject: true,
-                template: indexHtml,
-            }),
+                template: indexHtml
+            })
         )
     }
 }
@@ -100,7 +98,7 @@ const clientBaseConfig: webpack.Configuration = {
     entry,
     output: {
         path: CLIENT_OUTPUT,
-        publicPath: PUBLIC_PATH,
+        publicPath: PUBLIC_PATH
     },
     module: {
         rules: [
@@ -112,37 +110,35 @@ const clientBaseConfig: webpack.Configuration = {
                         {
                             loader: 'css-loader',
                             options: {
-                                sourceMap: true,
-                            },
+                                sourceMap: true
+                            }
                         },
                         {
                             loader: 'postcss-loader',
                             options: {
                                 sourceMap: true,
-                                plugins: () => [
-                                    autoprefixer({ browsers: CSS_AUTOPREFIXER }),
-                                ],
-                            },
+                                plugins: () => [autoprefixer({ browsers: CSS_AUTOPREFIXER })]
+                            }
                         },
                         {
                             loader: 'resolve-url-loader',
                             options: {
-                                sourceMap: true,
-                            },
+                                sourceMap: true
+                            }
                         },
                         {
                             loader: 'sass-loader',
                             options: {
                                 sourceMap: true,
-                                includePaths: MODULE_PATHS,
-                            },
-                        },
-                    ],
-                }),
-            },
-        ],
+                                includePaths: MODULE_PATHS
+                            }
+                        }
+                    ]
+                })
+            }
+        ]
     },
-    plugins,
+    plugins
 }
 
 export default clientBaseConfig

@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { logError } from './log'
 
-export const readFile = (filePath: string) => (
+export const readFile = (filePath: string) =>
     new Promise<string>((resolve, reject) => {
         fs.readFile(filePath, 'utf8', (err, data) => {
             if (err) {
@@ -13,9 +13,8 @@ export const readFile = (filePath: string) => (
             }
         })
     })
-)
 
-export const getFileSize = (filePath: string) => (
+export const getFileSize = (filePath: string) =>
     new Promise<number>((resolve, reject) => {
         fs.stat(filePath, (err, stats) => {
             if (err) {
@@ -26,11 +25,10 @@ export const getFileSize = (filePath: string) => (
             }
         })
     })
-)
 
-export const writeFile = (filePath: string, fileContent: string) => (
+export const writeFile = (filePath: string, fileContent: string) =>
     new Promise((resolve, reject) => {
-        fs.writeFile(filePath, fileContent, (err) => {
+        fs.writeFile(filePath, fileContent, err => {
             if (err) {
                 logError('Error writing file', err)
                 reject(err)
@@ -39,7 +37,6 @@ export const writeFile = (filePath: string, fileContent: string) => (
             }
         })
     })
-)
 
 export const formatFileSize = (size: number) => (size / 1024).toFixed(1)
 

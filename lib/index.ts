@@ -42,7 +42,7 @@ export const bin: BinType = {
     start: binStart,
     stats: binStats,
     test: binTest,
-    watch: binWatch,
+    watch: binWatch
 }
 
 export const build = buildModule

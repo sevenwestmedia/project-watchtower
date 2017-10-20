@@ -7,9 +7,9 @@ import webpackHooks from './webpack-hooks'
 const config: webpack.Configuration = merge(
     clientDevConfig,
     {
-        devtool: 'source-map',
+        devtool: 'source-map'
     },
-    webpackHooks.clientDebug || {},
+    webpackHooks.clientDebug || {}
 )
 
 export default config

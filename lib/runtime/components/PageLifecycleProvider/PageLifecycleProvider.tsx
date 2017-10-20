@@ -11,7 +11,7 @@ export interface PageLifecycleEvent<T> {
     payload: T
 }
 export declare type Properties = {
-    [key: string]: any;
+    [key: string]: any
 }
 export interface PageLoadStarted extends PageLifecycleEvent<Properties> {
     type: 'page-load-started'
@@ -44,8 +44,8 @@ type Props = OwnProps & RouteComponentProps<{}>
 export type LoadingStates = 'loading' | 'loaded'
 
 export type LifecycleState = {
-    currentPageState: LoadingStates,
-    currentPageLocation: string,
+    currentPageState: LoadingStates
+    currentPageLocation: string
 }
 export type PageLifecycleProps = LifecycleState & PageProps
 
@@ -55,25 +55,27 @@ export type RouteChangeCallback = (location: H.Location) => void
 // tslint:disable-next-line:max-classes-per-file
 export class ComponentWithLifecycle<P, S> extends React.Component<P & PageLifecycleProps, S> {
     context: {
-        pageLifecycle: PageLifecycle,
+        pageLifecycle: PageLifecycle
     }
 }
 
 type LifecycleComponent<T> =
- | React.ComponentClass<PageLifecycleProps & T>
- | React.SFC<PageLifecycleProps & T>
+    | React.ComponentClass<PageLifecycleProps & T>
+    | React.SFC<PageLifecycleProps & T>
 
 // tslint:disable-next-line:max-line-length
 // tslint:disable-next-line:only-arrow-functions
-export const withPageLifecycleProps = function<T>(Component: LifecycleComponent<T>): React.ComponentClass<T> {
+export const withPageLifecycleProps = function<T>(
+    Component: LifecycleComponent<T>
+): React.ComponentClass<T> {
     // tslint:disable-next-line:max-classes-per-file
     return class WithPageLifecycleProps extends React.Component<T, LifecycleState> {
         static contextTypes = {
-            pageLifecycle: PropTypes.object,
+            pageLifecycle: PropTypes.object
         }
 
         context: {
-            pageLifecycle: PageLifecycle,
+            pageLifecycle: PageLifecycle
         }
 
         state: LifecycleState
@@ -87,7 +89,7 @@ export const withPageLifecycleProps = function<T>(Component: LifecycleComponent<
                     : 'loading',
                 currentPageLocation: context.pageLifecycle
                     ? context.pageLifecycle.currentPageLocation
-                    : '',
+                    : ''
             }
         }
 
@@ -123,7 +125,7 @@ export const withPageLifecycleProps = function<T>(Component: LifecycleComponent<
 export const withPageLifecycleEvents = (Component: React.ComponentClass<any>) => {
     Component.contextTypes = {
         ...Component.contextTypes,
-        pageLifecycle: PropTypes.object,
+        pageLifecycle: PropTypes.object
     }
 
     return Component
@@ -132,7 +134,7 @@ export const withPageLifecycleEvents = (Component: React.ComponentClass<any>) =>
 // tslint:disable-next-line:max-classes-per-file
 class PageLifecycleProvider extends React.Component<Props, {}> {
     static childContextTypes = {
-        pageLifecycle: PropTypes.object,
+        pageLifecycle: PropTypes.object
     }
 
     isRouting: boolean
@@ -149,7 +151,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
             this.beginLoadingData,
             this.endLoadingData,
             'loading',
-            this.props.location.pathname,
+            this.props.location.pathname
         )
     }
 
@@ -159,12 +161,10 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
 
     stateChanged = () => {
         const isLoading = this.isRouting || this.loadingDataCount > 0
-        const currentPageState = isLoading
-                ? 'loading'
-                : 'loaded'
+        const currentPageState = isLoading ? 'loading' : 'loaded'
         this.pageLifecycle.pageStateChanged({
             currentPageState,
-            currentPageLocation: this.props.location.pathname,
+            currentPageLocation: this.props.location.pathname
         })
     }
 
@@ -175,7 +175,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
             originator: 'PageEvents',
             // TODO Add payload
             payload: {},
-            timeStamp: new Date().getTime(),
+            timeStamp: new Date().getTime()
         })
     }
 
@@ -187,7 +187,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
             originator: 'PageEvents',
             // TODO Add payload
             payload: {},
-            timeStamp: new Date().getTime(),
+            timeStamp: new Date().getTime()
         })
     }
 
@@ -201,7 +201,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
 
     getChildContext() {
         return {
-            pageLifecycle: this.pageLifecycle,
+            pageLifecycle: this.pageLifecycle
         }
     }
 
@@ -230,14 +230,15 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
         if (typeof this.props.render === 'function') {
             return this.props.render({
                 beginLoadingData: this.beginLoadingData,
-                endLoadingData: this.endLoadingData,
+                endLoadingData: this.endLoadingData
             })
         }
         return this.props.render
     }
 }
 
-const PageLifecycleProviderWithRouter: React.ComponentClass<OwnProps>
-    = withRouter(PageLifecycleProvider)
+const PageLifecycleProviderWithRouter: React.ComponentClass<OwnProps> = withRouter(
+    PageLifecycleProvider
+)
 
 export { PageLifecycleProviderWithRouter as PageLifecycleProvider }

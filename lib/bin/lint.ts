@@ -10,19 +10,16 @@ const lint = (...paths: string[]) => {
     let promise: Promise<any>
 
     if (paths.indexOf('tslint') !== -1) {
-        const tslintPaths = paths.filter((p) => p !== 'tslint')
+        const tslintPaths = paths.filter(p => p !== 'tslint')
         promise = tslint(...tslintPaths)
     } else if (paths.indexOf('sass-lint') !== -1) {
-        const sassLintPaths = paths.filter((p) => p !== 'sass-lint')
+        const sassLintPaths = paths.filter(p => p !== 'sass-lint')
         promise = sassLint(...sassLintPaths)
     } else {
-        const tslintPaths = paths.filter((p) => p.indexOf('.ts') !== -1)
-        const sassLintPaths = paths.filter((p) => p.indexOf('.scss') !== -1)
+        const tslintPaths = paths.filter(p => p.indexOf('.ts') !== -1)
+        const sassLintPaths = paths.filter(p => p.indexOf('.scss') !== -1)
 
-        promise = Promise.all([
-            tslint(...tslintPaths),
-            sassLint(...sassLintPaths),
-        ])
+        promise = Promise.all([tslint(...tslintPaths), sassLint(...sassLintPaths)])
     }
 
     return promise.then(() => {

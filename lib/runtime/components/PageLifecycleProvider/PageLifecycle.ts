@@ -1,8 +1,11 @@
 import * as H from 'history'
 import {
-    PageLifecycleProps, StateChangeCallback,
-    RouteChangeCallback, LoadingStates,
-    PageProps, LifecycleState,
+    PageLifecycleProps,
+    StateChangeCallback,
+    RouteChangeCallback,
+    LoadingStates,
+    PageProps,
+    LifecycleState
 } from './PageLifecycleProvider'
 
 export class PageLifecycle implements PageLifecycleProps, PageProps {
@@ -19,7 +22,7 @@ export class PageLifecycle implements PageLifecycleProps, PageProps {
         beginLoadingData: () => void,
         endLoadingData: () => void,
         public currentPageState: LoadingStates,
-        public currentPageLocation: string,
+        public currentPageLocation: string
     ) {
         this.pageRenderComplete = onPageRender
         this.beginLoadingData = beginLoadingData

@@ -1,8 +1,7 @@
 import { logError } from './log'
 import { delay } from './time'
 
-export const average = (nums: number[]) =>
-    nums.reduce((prev, cur) => prev + cur, 0) / nums.length
+export const average = (nums: number[]) => nums.reduce((prev, cur) => prev + cur, 0) / nums.length
 
 export const getSequenceAverage = async (fn: () => Promise<number>, times = 5) => {
     const results: number[] = []
