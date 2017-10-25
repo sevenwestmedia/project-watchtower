@@ -12,28 +12,25 @@ export interface ServerRenderResultBase {
     elapsed: string
     head: Helm.HelmetData | undefined
 }
-export interface SuccessServerRenderResult<T extends object> extends ServerRenderResultBase {
+export interface StatusServerRenderResult<T extends object> extends ServerRenderResultBase {
     type: ServerRenderResultType.Success
     renderedContent: RenderMarkup
     reduxState: T
+    statusCode: number
 }
 
 export interface FailedRenderResult extends ServerRenderResultBase {
     type: ServerRenderResultType.Failure
     errorMessage: string
 }
-export interface PageNotFoundRenderResult<T extends object> extends ServerRenderResultBase {
-    type: ServerRenderResultType.PageNotFound
-    renderedContent: RenderMarkup
-    reduxState: T
-}
+
 export interface RedirectServerRenderResult extends ServerRenderResultBase {
     type: ServerRenderResultType.Redirect
     redirectTo: string
     isPermanent: boolean
 }
+
 export type ServerRenderResult<T extends object> =
-    | SuccessServerRenderResult<T>
+    | StatusServerRenderResult<T>
     | FailedRenderResult
     | RedirectServerRenderResult
-    | PageNotFoundRenderResult<T>

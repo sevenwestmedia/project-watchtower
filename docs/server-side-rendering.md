@@ -102,6 +102,10 @@ The `renderContext` allows you to let watchtower know that data has been loaded 
 
 If your application loads any data simply set `context.triggeredLoad = true`, this will ensure watchtower waits for you to call `context.completionNotifier.resolve({})` which will trigger another render.
 
+###### Route Status
+
+Within a `renderApp` render you can optionally set a statusCode using react-router.
+
 ##### createReduxStore: (....) => redux.Store
 A function which creates the redux store for the request
 

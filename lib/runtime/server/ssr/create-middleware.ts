@@ -2,8 +2,7 @@ import { Request, Response, Express } from 'express'
 import * as redux from 'redux'
 import {
     ServerSideRenderOptions,
-    SuccessServerRenderResult,
-    PageNotFoundRenderResult,
+    StatusServerRenderResult,
     renderPageContents,
     Assets,
     RenderMarkup,
@@ -38,9 +37,6 @@ export type RenderHtml<ReduxState extends object> = (
         context: RenderContext
     },
 ) => string
-export type ResultType<ReduxState extends object> =
-    | SuccessServerRenderResult<ReduxState>
-    | PageNotFoundRenderResult<ReduxState>
 
 export type ServerSideRenderMiddlewareOptions<
     ReduxState extends object,
@@ -96,7 +92,7 @@ export const createSsrMiddleware = <
         }
         const pageRenderResult = await renderPageContents<ReduxState, SsrRequest>(ssrOptions, req)
 
-        const createPageMarkup = (result: ResultType<ReduxState>) =>
+        const createPageMarkup = (result: StatusServerRenderResult<ReduxState>) =>
             options.renderHtml({
                 head: result.head,
                 renderMarkup: result.renderedContent,
@@ -108,13 +104,7 @@ export const createSsrMiddleware = <
         switch (pageRenderResult.type) {
             case ServerRenderResultType.Success:
                 response
-                    .status(200)
-                    .header('Content-Type', 'text/html')
-                    .send(createPageMarkup(pageRenderResult))
-                return
-            case ServerRenderResultType.PageNotFound:
-                response
-                    .status(404)
+                    .status(pageRenderResult.statusCode)
                     .header('Content-Type', 'text/html')
                     .send(createPageMarkup(pageRenderResult))
                 return

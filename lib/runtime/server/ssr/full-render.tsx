@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 
 import { PromiseTracker, elapsed, Logger } from '../../universal'
 import resolveAllData from './helpers/recursive-task-resolver'
-import handleRouterContextResult, { success } from './router-context-handler'
+import { createResponse, routerContextHandler } from './router-context-handler'
 import * as ServerRenderResults from './server-render-results'
 import renderToString, { CreateAppElement } from './render-app-to-string'
 import { WatchtowerEvents } from './render-events'
@@ -79,7 +79,7 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
         try {
             const renderResult = performSinglePassLocationRender(location)
 
-            const result = handleRouterContextResult(
+            const result = routerContextHandler(
                 renderResult,
                 startTime,
                 storeStateAtRenderTime,
@@ -99,12 +99,17 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
             options.log.error(err)
             const errorRender = performSinglePassLocationRender(options.errorLocation)
 
-            return success(errorRender, storeStateAtRenderTime, startTime)
+            return createResponse({
+                renderResult: errorRender,
+                reduxState: storeStateAtRenderTime,
+                startTime,
+                statusCode: 500,
+            })
         }
     }
 
     if (START_FAST_MODE) {
-        const successResult: ServerRenderResults.SuccessServerRenderResult<T> = {
+        const successResult: ServerRenderResults.StatusServerRenderResult<T> = {
             type: ServerRenderResults.ServerRenderResultType.Success,
             renderedContent: {
                 html: '',
@@ -114,6 +119,7 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
             reduxState: store.getState(),
             elapsed: elapsed(startTime),
             head: undefined,
+            statusCode: 200,
         }
 
         return successResult
