@@ -1,8 +1,23 @@
 # Changelog
 
-## vNext
+## [v0.10.0] - 25/10/2017
 - Upgraded release-preparer
 - Added trace and fatal to logging abstraction
+
+### docs
+- `server-side-rendering.md`
+  - added documentation around using status codes with renderApp
+
+### ssr
+- `./create-middleware.ts`
+  - Deprecate SuccessServerRenderResult, PageNotFoundRenderResult and their union type ResultType in favor of single `StatusServerRenderResult`
+- `./full-render.ts`
+      - 
+- `./router-context-handler.ts`
+  - refactor `success` to take an object with a new status parameter
+  - rename `success` -> `createResponse`
+  - deprecate `notFound` and add status to success arg.
+  - rework default export to named export `routerContextHandler`
 
 ## [v0.9.1] - 18/9/2017
 - Fixed when redirect statuscode is set in redux router that it does not get used for express response
