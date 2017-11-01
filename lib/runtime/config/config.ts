@@ -4,7 +4,7 @@ import { BuildConfig, BuildConfigOverride } from '../../types'
 
 const root = process.cwd()
 
-const defaultConfig: BuildConfig = {
+export const defaultConfig: BuildConfig = {
     ASSETS_PATH_PREFIX: 'static/',
     BASE: root,
     CLIENT_ENTRY: path.resolve(root, 'client', 'index.tsx'),
@@ -33,9 +33,11 @@ const defaultConfig: BuildConfig = {
 
 const customConfig = getCustomConfigFile<BuildConfigOverride>('config/config', {})
 
-const CONFIG = {
+let CONFIG = {
     ...defaultConfig,
     ...customConfig,
 }
+
+export const updateCONFIG = (newConfig: BuildConfig) => (CONFIG = newConfig)
 
 export default CONFIG
