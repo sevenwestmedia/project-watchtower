@@ -5,12 +5,13 @@ Project Watchtower exposes the `project-watchtower` and `pwt` executables
 ### build
 
 ```
-pwt build [complete] [<target>] [<environment>]
+pwt build [complete] [<target>] [<environment>] <config=CONFIF_FILE_NAME>
 ```
 
 * `complete`: Runs clean, lint and test before building
 * `target`: server, client
 * `environment`: dev, debug, prod
+* `config`: takes a filename of a custom config under `./config`
 
 Leaving the target out builds both server and client.
 
