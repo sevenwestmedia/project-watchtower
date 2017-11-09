@@ -3,7 +3,7 @@
 ## Building
 
 ```
-pwt build [<target> <environment> <config=[config-file-name]>]
+pwt build [<target> <environment>]
 ```
 
 ## Customising
@@ -12,9 +12,7 @@ By default, Project Watchtower uses its own webpack configuration files. If you 
 
 ### Basic config file
 
-If you want to change the default configuration of the build process, you can add a `./config/config.js` that overrides the settings used by the default webpack configuration:
-
-if you want to have multiple build configurations you can use `pwt build config=CONFIG_FILE_NAME` where `CONFIG_FILE_NAME` is a file under `./config` in your project.
+If you want to change the default configuration of the build process, you can add a `/config/config.js` that overrides the settings used by the default webpack configuration:
 
 ```ts
 import * as path from 'path'
@@ -27,7 +25,7 @@ const customConfig: BuildConfigOverride = {
 export default customConfig
 ```
 
-If you provide a custom config (ie. `/config/config.ts`) in TypeScript, make sure it is transpiled to JavaScript before any `pwt` command is run or any of Project Watchtower's middlewares are used. This can be done in the `prepare` script in your project's `package.json`. Project Watchtower will throw an error if it detects a TypeScript configuration file, but not the transpiled JavaScript artifact.
+If you provide a `/config/config.ts` in TypeScript, make sure it is transpiled to JavaScript before any `pwt` command is run or any of Project Watchtower's middlewares are used. This can be done in the `prepare` script in your project's `package.json`. Project Watchtower will throw an error if it detects a TypeScript configuration file, but not the transpiled JavaScript artifact.
 
 The complete default configuration is located in `project-watchtower/lib/runtime/config/config.ts`
 

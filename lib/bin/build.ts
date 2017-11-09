@@ -3,34 +3,25 @@ import lint from './lint'
 import test from './test'
 import { ENVIRONMENTS, getWebpackConfig, TARGETS } from '../build/build'
 import clean from '../clean'
-import { defaultConfig, updateCONFIG } from '../runtime/config/config'
+import CONFIG from '../runtime/config/config'
 import { failPromisesLate } from '../runtime/util/async'
-import { getCustomConfigFile } from '../runtime/util/fs'
 import { webpackPromise } from '../util/webpack'
-import {
-    BuildConfig,
-    BuildConfigOverride,
-    BuildEnvironment,
-    BuildParam,
-    BuildTarget,
-} from '../types'
+import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
+
+const { CLIENT_OUTPUT, SERVER_OUTPUT, HAS_SERVER } = CONFIG
 
 const buildTarget = (target: BuildTarget, environment: BuildEnvironment = 'prod') => {
-    const webpackConfig = getWebpackConfig(target, environment)
+    const config = getWebpackConfig(target, environment)
 
-    if (!webpackConfig) {
+    if (!config) {
         return Promise.reject(`Could not load webpack configuration for ${target}/${environment}!`)
     }
 
-    return webpackPromise(webpackConfig)
+    return webpackPromise(config)
 }
 
-const cleanAndBuild = (
-    target: BuildTarget,
-    environment: BuildEnvironment = 'prod',
-    config: BuildConfig,
-) => {
-    const cleanTarget = target === 'server' ? config.SERVER_OUTPUT : config.CLIENT_OUTPUT
+const cleanAndBuild = (target: BuildTarget, environment: BuildEnvironment = 'prod') => {
+    const cleanTarget = target === 'server' ? SERVER_OUTPUT : CLIENT_OUTPUT
 
     return clean(cleanTarget).then(() => buildTarget(target, environment))
 }
@@ -44,9 +35,9 @@ const getBuildEnvironment = (args: BuildParam[]) => {
     return 'prod'
 }
 
-const getBuildTargets = (args: BuildParam[], config: BuildConfig) => {
+const getBuildTargets = (args: BuildParam[]) => {
     for (const arg of args) {
-        if (!config.HAS_SERVER && arg === 'server') {
+        if (!HAS_SERVER && arg === 'server') {
             continue
         }
         if ((TARGETS as string[]).indexOf(arg) !== -1) {
@@ -54,32 +45,9 @@ const getBuildTargets = (args: BuildParam[], config: BuildConfig) => {
         }
     }
 
-    const defaultTargets = config.HAS_SERVER ? ['server', 'client'] : ['client']
+    const defaultTargets = HAS_SERVER ? ['server', 'client'] : ['client']
 
     return defaultTargets as BuildTarget[]
-}
-
-const getBuildConfig = (args: BuildParam[]): BuildConfig => {
-    let fileName
-
-    for (const arg of args) {
-        if (arg.indexOf('config=') === 0) {
-            fileName = arg.slice(7, arg.length)
-            continue
-        }
-    }
-
-    const customConfig = fileName
-        ? getCustomConfigFile<BuildConfigOverride>(`config/${fileName}`, {})
-        : {}
-    const config = {
-        ...defaultConfig,
-        ...customConfig,
-    }
-
-    updateCONFIG(config)
-
-    return config
 }
 
 /**
@@ -91,8 +59,7 @@ const getBuildConfig = (args: BuildParam[]): BuildConfig => {
  *  - complete: runs clean, lint and test before building
  */
 const build = async (...args: BuildParam[]) => {
-    const config = getBuildConfig(args)
-    const targets = getBuildTargets(args, config)
+    const targets = getBuildTargets(args)
     const environment = getBuildEnvironment(args)
 
     if (args.indexOf('complete') !== -1) {
@@ -103,7 +70,7 @@ const build = async (...args: BuildParam[]) => {
         // if we exit the process before all webpack builds are completed
         return failPromisesLate(targets.map(target => buildTarget(target, environment)))
     } else {
-        return failPromisesLate(targets.map(target => cleanAndBuild(target, environment, config)))
+        return failPromisesLate(targets.map(target => cleanAndBuild(target, environment)))
     }
 }
 
