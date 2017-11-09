@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## vNext
+- `./build.md`
+  - [revert] updated to contain information about using the new config arg
+- `./cli.md`
+  - [revert] updated to contain information about using the new config arg
+
 ## [v0.10.1] - 1/11/2017
 - `./build.md`
   - updated to contain information about using the new config arg
