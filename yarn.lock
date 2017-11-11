@@ -115,9 +115,9 @@
   version "15.5.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/prop-types/-/prop-types-15.5.1.tgz#1ecf52621299e65b855374337fb11fd2d1066fc1"
 
-"@types/react-dom@^15.5.1":
-  version "15.5.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-dom/-/react-dom-15.5.1.tgz#f3c3e14c682785923c7d64583537df319442dec1"
+"@types/react-dom@^15.5.6":
+  version "15.5.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-dom/-/react-dom-15.5.6.tgz#7794ff7822882b59b899c30294e1b1e62e97757e"
   dependencies:
     "@types/react" "*"
 
@@ -134,24 +134,31 @@
     "@types/react" "*"
     redux "^3.6.0"
 
-"@types/react-router-dom@^4.0.7":
-  version "4.0.7"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-router-dom/-/react-router-dom-4.0.7.tgz#65b192f7a5dbd1c05a8d04cc5863c9775705a435"
+"@types/react-router-dom@^4.2.1":
+  version "4.2.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-router-dom/-/react-router-dom-4.2.1.tgz#c5583550d7246dea60612cc55a523cf980d56df1"
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
     "@types/react-router" "*"
 
-"@types/react-router@*", "@types/react-router@^4.0.14":
+"@types/react-router@*":
   version "4.0.14"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-router/-/react-router-4.0.14.tgz#dd650f40bbb20ad1fec26471707665908efa9e9f"
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^15.0.39":
-  version "15.0.39"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react/-/react-15.0.39.tgz#5a820c75cabf4cbfa177a3ab5a9a0634c46b14d1"
+"@types/react-router@^4.0.17":
+  version "4.0.17"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-router/-/react-router-4.0.17.tgz#1032c800ed0da188d8a3bb38fe6afa8c917865d5"
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+
+"@types/react@*", "@types/react@^15.6.6":
+  version "15.6.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react/-/react-15.6.6.tgz#21c93d921d63e5c8478ad54b917f52c9abd547e2"
 
 "@types/relateurl@*":
   version "0.2.28"
@@ -6479,9 +6486,9 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://nexus.swmdigital.io/repository/js-combined/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript@^2.4.2:
-  version "2.4.2"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/typescript/-/typescript-2.4.2.tgz#f8395f85d459276067c988aa41837a8f82870844"
+typescript@^2.6.1:
+  version "2.6.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/typescript/-/typescript-2.6.1.tgz#ef39cdea27abac0b500242d6726ab90e0c846631"
 
 ua-parser-js@^0.7.9:
   version "0.7.13"

@@ -46,12 +46,12 @@
         "@types/node": "^8.0.10",
         "@types/opn": "^3.0.28",
         "@types/prop-types": "^15.5.1",
-        "@types/react": "^15.0.39",
-        "@types/react-dom": "^15.5.1",
+        "@types/react": "^15.6.6",
+        "@types/react-dom": "^15.5.6",
         "@types/react-helmet": "^5.0.3",
         "@types/react-redux": "^4.4.46",
-        "@types/react-router": "^4.0.14",
-        "@types/react-router-dom": "^4.0.7",
+        "@types/react-router": "^4.0.17",
+        "@types/react-router-dom": "^4.2.1",
         "@types/rimraf": "^0.0.28",
         "@types/webpack": "^3.0.4",
         "@types/webpack-bundle-analyzer": "^2.9.0",
@@ -74,7 +74,7 @@
         "redux-thunk": "^2.2.0",
         "release-preparer": "^0.5.0",
         "tslib": "^1.7.1",
-        "typescript": "^2.4.2"
+        "typescript": "^2.6.1"
     },
     "peerDependencies": {
         "@types/prop-types": "^15.5.1",
@@ -91,7 +91,7 @@
         "redux-thunk": ">=2.2.0",
         "source-map-support": ">=0.4.0",
         "tslib": ">=1.7.0",
-        "typescript": ">=2.4.0"
+        "typescript": ">=2.6.0"
     },
     "dependencies": {
         "assets-webpack-plugin": "^3.5.1",

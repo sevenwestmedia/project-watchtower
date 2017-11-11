@@ -85,9 +85,12 @@ export const withPageLifecycleProps = function<T>(
 
         state: LifecycleState
 
-        constructor(props: T, context: { pageLifecycle: PageLifecycle }) {
+        constructor(props?: T, context?: { pageLifecycle: PageLifecycle }) {
             super(props, context)
 
+            if (!context) {
+                return
+            }
             this.state = {
                 currentPageState: context.pageLifecycle.currentPageState,
                 currentPageLocation: context.pageLifecycle.currentPageLocation,
@@ -105,7 +108,7 @@ export const withPageLifecycleProps = function<T>(
             this.context.pageLifecycle.offPageStateChanged(this.pageStateChanged)
         }
 
-        pageStateChanged = (pageState: PageLifecycleProps) => {
+        pageStateChanged = (pageState: LifecycleState) => {
             if (this.context.logger) {
                 this.context.logger.trace(
                     {
@@ -155,7 +158,8 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
 
     currentPageProps: object = {}
 
-    constructor(props: Props) {
+    constructor(props?: Props) {
+
         super(props)
 
         this.isRouting = true
@@ -309,8 +313,6 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
     }
 }
 
-const PageLifecycleProviderWithRouter: React.ComponentClass<OwnProps> = withRouter(
-    PageLifecycleProvider,
-)
+const PageLifecycleProviderWithRouter = withRouter<OwnProps>(PageLifecycleProvider)
 
 export { PageLifecycleProviderWithRouter as PageLifecycleProvider }
