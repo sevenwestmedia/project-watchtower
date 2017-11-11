@@ -1,5 +1,8 @@
 # Changelog
 
+## vNext
+- Updated jest config to mock font extensions
+
 ## [v0.10.1] - 1/11/2017
 ### docs
 - `./build.md`

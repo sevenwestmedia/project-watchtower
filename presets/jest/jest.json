@@ -1,41 +1,23 @@
 {
-    "setupTestFrameworkScriptFile": "<rootDir>/node_modules/project-watchtower/lib/test/setup-tests.js",
+    "setupTestFrameworkScriptFile":
+        "<rootDir>/node_modules/project-watchtower/lib/test/setup-tests.js",
     "transform": {
         ".tsx?": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "transformIgnorePatterns": [
-        "node_modules/(?!(swm-component-library|publication-types))"
-    ],
+    "transformIgnorePatterns": ["node_modules/(?!(swm-component-library|publication-types))"],
     "testRegex": "\\.(spec|test)\\.tsx?$",
-    "moduleFileExtensions": [
-        "ts",
-        "tsx",
-        "js",
-        "json"
-    ],
-    "moduleDirectories": [
-        "node_modules"
-    ],
-    "modulePaths": [
-        "<rootDir>/common",
-        "<rootDir>/app",
-        "<rootDir>"
-    ],
+    "moduleFileExtensions": ["ts", "tsx", "js", "json"],
+    "moduleDirectories": ["node_modules"],
+    "modulePaths": ["<rootDir>/common", "<rootDir>/app", "<rootDir>"],
     "moduleNameMapper": {
-        "\\.(s?css|png|svg|jpg)$": "<rootDir>/node_modules/project-watchtower/lib/test/test-mapper.js",
-        "^bundle-loader": "<rootDir>/node_modules/project-watchtower/lib/test/bundle-loader-mapper.js"
+        "\\.(s?css|png|svg|jpg|eot|woff|woff2)$":
+            "<rootDir>/node_modules/project-watchtower/lib/test/test-mapper.js",
+        "^bundle-loader":
+            "<rootDir>/node_modules/project-watchtower/lib/test/bundle-loader-mapper.js"
     },
-    "snapshotSerializers": [
-      "jest-glamor-react",
-      "enzyme-to-json/serializer"
-    ],
+    "snapshotSerializers": ["jest-glamor-react", "enzyme-to-json/serializer"],
     "verbose": false,
-    "collectCoverageFrom": [
-        "**/*.{ts,tsx}",
-        "!**/*.d.ts",
-        "!**/node_modules/**",
-        "!config/**"
-    ],
+    "collectCoverageFrom": ["**/*.{ts,tsx}", "!**/*.d.ts", "!**/node_modules/**", "!config/**"],
     "coverageReporters": ["json", "lcov", "text", "teamcity"],
     "testResultsProcessor": "jest-teamcity-reporter",
     "rootDir": "../../../.."
