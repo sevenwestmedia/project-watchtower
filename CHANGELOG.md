@@ -1,23 +1,50 @@
 # Changelog
 
-## vNext
+## [v0.10.2] - 11/11/2017
 - Updated jest config to mock font extensions
 
-## [v0.10.1] - 1/11/2017
 ### docs
 - `./build.md`
-  - updated to contain information about using the new config arg
+  - [revert] updated to contain information about using the new config arg
 - `./cli.md`
-  - updated to contain information about using the new config arg
+  - [revert] updated to contain information about using the new config arg
 
 
 ### bin
 - `./build.ts`
-  - updated to accept a config argument used to pass a custom config path
+  - [revert] updated to accept a config argument used to pass a custom config path
+
 
 ### config
 - `./config.ts`
+  - [revert] exported defaultConfig and expose function to update `CONFIG` (used by build)
+
+
+## [v0.10.1] - 1/11/2017
+### docs
+- `./build.md`
+### docs
+  - updated to contain information about using the new config arg
+
+- `./cli.md`
+### docs
+  - updated to contain information about using the new config arg
+
+
+
+### bin
+- `./build.ts`
+### bin
+  - updated to accept a config argument used to pass a custom config path
+
+
+
+### config
+- `./config.ts`
+### config
   - exported defaultConfig and expose function to update `CONFIG` (used by build)
+
+
 
 ## [v0.10.0] - 25/10/2017
 - Upgraded release-preparer
@@ -36,6 +63,7 @@
   - Deprecate SuccessServerRenderResult, PageNotFoundRenderResult and their union type ResultType in favor of single `StatusServerRenderResult`
 
 - `./full-render.ts`
+
 - `./router-context-handler.ts`
 ### ssr
   - refactor `success` to take an object with a new status parameter

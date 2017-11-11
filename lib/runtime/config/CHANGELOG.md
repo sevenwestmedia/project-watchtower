@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## vNext
+## [v0.10.2] - 11/11/2017
 - `./config.ts`
   - [revert] exported defaultConfig and expose function to update `CONFIG` (used by build)
 
