@@ -1,23 +1,36 @@
 # Changelog
 
+## [v0.10.3] - 16/11/2017
+### ssr
+- Express Request available in renderHtml callback
+
+
 ## [v0.10.2] - 11/11/2017
 - Updated jest config to mock font extensions
 
 ### docs
 - `./build.md`
+### docs
   - [revert] updated to contain information about using the new config arg
+
 - `./cli.md`
+### docs
   - [revert] updated to contain information about using the new config arg
+
 
 
 ### bin
 - `./build.ts`
+### bin
   - [revert] updated to accept a config argument used to pass a custom config path
+
 
 
 ### config
 - `./config.ts`
+### config
   - [revert] exported defaultConfig and expose function to update `CONFIG` (used by build)
+
 
 
 ## [v0.10.1] - 1/11/2017

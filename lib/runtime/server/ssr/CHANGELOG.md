@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## vNext
+## [v0.10.3] - 16/11/2017
 - Express Request available in renderHtml callback
 
 ## [v0.10.0] - 25/10/2017
