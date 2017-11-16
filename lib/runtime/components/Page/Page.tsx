@@ -7,53 +7,39 @@ import {
 import { Logger } from '../../util/log'
 import { PageLifecycle } from '../PageLifecycleProvider/PageLifecycle'
 
-export interface State {
-    error: boolean
-}
 export interface Props {
-    errorComponent: React.ReactType
     page: React.ReactElement<any> | ((pageProps: PageLifecycleProps) => React.ReactElement<any>)
+    pageProperties?: object
 }
 
 export default withPageLifecycleProps(
-    class Page extends React.PureComponent<Props & PageLifecycleProps, State> {
+    class Page extends React.PureComponent<Props & PageLifecycleProps, {}> {
         static contextTypes = {
             // Seems like context cannot be exported, this is a runtime react thing anyways
             pageLifecycle: PropTypes.object as any,
         }
-
-        state: State = { error: false }
 
         context: {
             pageLifecycle: PageLifecycle
             logger: Logger
         }
 
-        // This is using React error boundaries which were added in v15
-        // v16 may add official support
-        // Info at:
-        // tslint:disable-next-line:max-line-length
-        // https://github.com/facebook/react/blob/15-stable/src/renderers/shared/stack/reconciler/tests/ReactErrorBoundaries-test.js
-        // https://github.com/facebook/react/issues/2461
-        // TODO Move to stable error boundaries API
-        unstable_handleError(err: Error) {
-            this.context.logger.error({ err }, 'Render error')
-            this.setState({ error: true })
+        constructor(
+            props: Props & PageLifecycleProps,
+            context: {
+                pageLifecycle: PageLifecycle
+                logger: Logger
+            },
+        ) {
+            super(props, context)
+
+            if (this.props.pageProperties) {
+                context.pageLifecycle.updatePageProps(this.props.pageProperties)
+            }
         }
 
         componentDidMount() {
             this.context.pageLifecycle.pageRenderComplete()
-            this.context.pageLifecycle.onRouteChanged(this.routeChanged)
-        }
-
-        componentWillUnmount() {
-            this.context.pageLifecycle.offRouteChanged(this.routeChanged)
-        }
-
-        routeChanged = () => {
-            if (this.state.error) {
-                this.setState({ error: false })
-            }
         }
 
         componentDidUpdate() {
@@ -62,10 +48,6 @@ export default withPageLifecycleProps(
 
         render() {
             let content: React.ReactElement<any> | undefined
-
-            if (this.state.error) {
-                content = <this.props.errorComponent />
-            }
 
             if (typeof this.props.page === 'function') {
                 content = this.props.page({

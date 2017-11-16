@@ -32,6 +32,7 @@ export interface PageProps {
     beginLoadingData: () => void
     /** Decrements loading count */
     endLoadingData: () => void
+    currentPageLocation: H.Location
 }
 
 export interface OwnProps {
@@ -45,7 +46,7 @@ export type LoadingStates = 'loading' | 'loaded'
 
 export type LifecycleState = {
     currentPageState: LoadingStates
-    currentPageLocation: string
+    currentPageLocation: H.Location
 }
 export type PageLifecycleProps = LifecycleState & PageProps
 
@@ -63,7 +64,6 @@ type LifecycleComponent<T> =
     | React.ComponentClass<PageLifecycleProps & T>
     | React.SFC<PageLifecycleProps & T>
 
-// tslint:disable-next-line:max-line-length
 // tslint:disable-next-line:only-arrow-functions
 export const withPageLifecycleProps = function<T>(
     Component: LifecycleComponent<T>,
@@ -84,12 +84,8 @@ export const withPageLifecycleProps = function<T>(
             super(props, context)
 
             this.state = {
-                currentPageState: context.pageLifecycle
-                    ? context.pageLifecycle.currentPageState
-                    : 'loading',
-                currentPageLocation: context.pageLifecycle
-                    ? context.pageLifecycle.currentPageLocation
-                    : '',
+                currentPageState: context.pageLifecycle.currentPageState,
+                currentPageLocation: context.pageLifecycle.currentPageLocation,
             }
         }
 
@@ -141,17 +137,20 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
     loadingDataCount: number
     pageLifecycle: PageLifecycle
 
+    currentPageProps: object = {}
+
     constructor(props: Props) {
         super(props)
 
         this.isRouting = true
         this.loadingDataCount = 0
         this.pageLifecycle = new PageLifecycle(
+            this.updatePageProps,
             this.onPageRender,
             this.beginLoadingData,
             this.endLoadingData,
             'loading',
-            this.props.location.pathname,
+            this.props.location,
         )
     }
 
@@ -164,7 +163,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
         const currentPageState = isLoading ? 'loading' : 'loaded'
         this.pageLifecycle.pageStateChanged({
             currentPageState,
-            currentPageLocation: this.props.location.pathname,
+            currentPageLocation: this.props.location,
         })
     }
 
@@ -173,8 +172,10 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
         this.props.onEvent({
             type: 'page-load-started',
             originator: 'PageEvents',
-            // TODO Add payload
-            payload: {},
+            payload: {
+                location: this.props.location.pathname,
+                ...this.currentPageProps,
+            },
             timeStamp: new Date().getTime(),
         })
     }
@@ -185,10 +186,16 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
         this.props.onEvent({
             type: 'page-load-complete',
             originator: 'PageEvents',
-            // TODO Add payload
-            payload: {},
+            payload: {
+                location: this.props.location.pathname,
+                ...this.currentPageProps,
+            },
             timeStamp: new Date().getTime(),
         })
+    }
+
+    updatePageProps = (props: object) => {
+        this.currentPageProps = props
     }
 
     onPageRender = () => {
@@ -231,6 +238,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
             return this.props.render({
                 beginLoadingData: this.beginLoadingData,
                 endLoadingData: this.endLoadingData,
+                currentPageLocation: this.props.location,
             })
         }
         return this.props.render

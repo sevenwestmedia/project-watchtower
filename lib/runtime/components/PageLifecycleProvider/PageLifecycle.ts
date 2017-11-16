@@ -9,6 +9,8 @@ import {
 } from './PageLifecycleProvider'
 
 export class PageLifecycle implements PageLifecycleProps, PageProps {
+    /** Adds data to the page */
+    updatePageProps: (props: object) => void
     pageRenderComplete: () => void
     /** Increment loading count */
     beginLoadingData: () => void
@@ -18,12 +20,14 @@ export class PageLifecycle implements PageLifecycleProps, PageProps {
     routeChangedListeners: RouteChangeCallback[] = []
 
     constructor(
+        updatePageProps: (props: object) => void,
         onPageRender: () => void,
         beginLoadingData: () => void,
         endLoadingData: () => void,
         public currentPageState: LoadingStates,
-        public currentPageLocation: string,
+        public currentPageLocation: H.Location,
     ) {
+        this.updatePageProps = updatePageProps
         this.pageRenderComplete = onPageRender
         this.beginLoadingData = beginLoadingData
         this.endLoadingData = endLoadingData
