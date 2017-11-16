@@ -28,13 +28,14 @@ export type RenderApp<ReduxState extends object, SsrRequest extends RenderReques
         req: SsrRequest
     },
 ) => JSX.Element
-export type RenderHtml<ReduxState extends object> = (
+export type RenderHtml<ReduxState extends object, SsrRequest extends RenderRequest> = (
     params: {
         head: HelmetData | undefined
         renderMarkup: RenderMarkup
         reduxState: ReduxState
         assets: Assets
         context: RenderContext
+        req: SsrRequest
     },
 ) => string
 
@@ -45,7 +46,7 @@ export type ServerSideRenderMiddlewareOptions<
     app: Express
     ssrTimeoutMs: number
     renderApp: RenderApp<ReduxState, SsrRequest>
-    renderHtml: RenderHtml<ReduxState>
+    renderHtml: RenderHtml<ReduxState, SsrRequest>
     errorLocation: string
     createReduxStore: CreateReduxStore<ReduxState, SsrRequest>
 }
@@ -80,7 +81,6 @@ export const createSsrMiddleware = <
                 renderPerformed: promiseTracker => {
                     // loadAllCompleted will not fire if nothing started loading
                     // this is needed to not hang the return
-                    // tslint:disable-next-line:max-line-length
                     if (
                         renderContext.triggeredLoad &&
                         !renderContext.completionNotifier.completed
@@ -99,6 +99,7 @@ export const createSsrMiddleware = <
                 reduxState: result.reduxState,
                 assets,
                 context: renderContext,
+                req,
             })
 
         switch (pageRenderResult.type) {
