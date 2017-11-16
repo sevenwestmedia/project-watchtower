@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## vNext
+- Express Request available in renderHtml callback
+
 ## [v0.10.0] - 25/10/2017
 - `./create-middleware.ts`
   - Deprecate SuccessServerRenderResult, PageNotFoundRenderResult and their union type ResultType in favor of single `StatusServerRenderResult`
