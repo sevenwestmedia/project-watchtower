@@ -103,6 +103,9 @@ describe('PageLifecycleProvider', () => {
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0
+                if (e.payload && e.payload.location) {
+                    e.payload.location.key = '...'
+                }
                 return e
             }),
         ).toMatchSnapshot()
@@ -159,6 +162,9 @@ describe('PageLifecycleProvider', () => {
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0
+                if (e.payload && e.payload.location) {
+                    e.payload.location.key = '...'
+                }
                 return e
             }),
         ).toMatchSnapshot()
@@ -192,6 +198,9 @@ describe('PageLifecycleProvider', () => {
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0
+                if (e.payload && e.payload.location) {
+                    e.payload.location.key = '...'
+                }
                 return e
             }),
         ).toMatchSnapshot()
@@ -219,6 +228,9 @@ describe('PageLifecycleProvider', () => {
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0
+                if (e.payload && e.payload.location) {
+                    e.payload.location.key = '...'
+                }
                 return e
             }),
         ).toMatchSnapshot()
@@ -236,6 +248,9 @@ describe('PageLifecycleProvider', () => {
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0
+                if (e.payload && e.payload.location) {
+                    e.payload.location.key = '...'
+                }
                 return e
             }),
         ).toMatchSnapshot()
@@ -285,6 +300,9 @@ describe('PageLifecycleProvider', () => {
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0
+                if (e.payload && e.payload.location) {
+                    e.payload.location.key = '...'
+                }
                 return e
             }),
         ).toMatchSnapshot()
