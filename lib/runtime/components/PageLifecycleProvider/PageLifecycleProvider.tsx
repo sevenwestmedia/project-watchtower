@@ -133,6 +133,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
         pageLifecycle: PropTypes.object,
     }
 
+    raiseStartOnRender: boolean
     isRouting: boolean
     loadingDataCount: number
     pageLifecycle: PageLifecycle
@@ -199,6 +200,12 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
     }
 
     onPageRender = () => {
+        if (this.raiseStartOnRender) {
+            // We need to raise start after the page has been rendered
+            // so we get the correct page props
+            this.raisePageLoadStartEvent()
+            this.raiseStartOnRender = false
+        }
         // We started routing, but no loading data events have fired
         if (this.isRouting && this.loadingDataCount === 0) {
             this.isRouting = false
@@ -216,7 +223,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
         // We only care about pathname, not any of the other location info
         if (this.props.location.pathname !== nextProps.location.pathname) {
             this.isRouting = true
-            this.raisePageLoadStartEvent()
+            this.raiseStartOnRender = true
             this.pageLifecycle.routeChanged(nextProps.location)
         }
     }

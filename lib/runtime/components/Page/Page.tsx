@@ -33,13 +33,15 @@ export default withPageLifecycleProps(
         ) {
             super(props, context)
 
-            if (this.props.pageProperties) {
-                context.pageLifecycle.updatePageProps(this.props.pageProperties)
-            }
+            context.pageLifecycle.updatePageProps(this.props.pageProperties || {})
         }
 
         componentDidMount() {
             this.context.pageLifecycle.pageRenderComplete()
+        }
+
+        componentWillReceiveProps(nextProps: Props & PageLifecycleProps) {
+            this.context.pageLifecycle.updatePageProps(nextProps.pageProperties || {})
         }
 
         componentDidUpdate() {

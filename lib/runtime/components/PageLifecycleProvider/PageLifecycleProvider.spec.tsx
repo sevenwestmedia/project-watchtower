@@ -24,13 +24,13 @@ interface TestData {
 
 const createTestComponents = () => {
     const promiseCompletionSource = new PromiseCompletionSource<TestData>()
-    class TestPage extends React.Component<{ path: string }, {}> {
+    class TestPage extends React.Component<{ path: string; extraProps?: object }, {}> {
         loadTriggered = false
 
         render() {
             return (
                 <Page
-                    pageProperties={{ test: 'extra' }}
+                    pageProperties={this.props.extraProps}
                     page={pageProps => {
                         // This emulates a component under the page starting to load data
                         // then completing once the promise completion source completes
@@ -111,27 +111,51 @@ describe('PageLifecycleProvider', () => {
 
     it('can pass extra data to pages', async () => {
         const testComponents = createTestComponents()
+        let history: H.History | undefined
         const pageEvents: PageEvent[] = []
+        const extraPropsLookup: { [path: string]: object } = {
+            '/': { home: 'isHome' },
+            '/foo': { foo: 'isFoo' },
+        }
 
         const store = createStore((s = {}, _) => s)
         const wrapper = mount(
             <Provider store={store}>
-                <MemoryRouter initialEntries={['/']} initialIndex={0}>
+                <MemoryRouter initialEntries={['/', '/foo']} initialIndex={0}>
                     <PageLifecycleProvider
                         onEvent={event => pageEvents.push(event)}
-                        render={<testComponents.TestPage path="/" />}
+                        render={
+                            <Route
+                                render={props => {
+                                    history = props.history
+                                    return (
+                                        <testComponents.TestPage
+                                            path={props.location.pathname}
+                                            extraProps={extraPropsLookup[props.location.pathname]}
+                                        />
+                                    )
+                                }}
+                            />
+                        }
                     />
                 </MemoryRouter>
             </Provider>,
         )
 
+        if (!history) {
+            throw new Error('History not defined')
+        }
+
+        testComponents.promiseCompletionSource.resolve({ bar: 'test' })
+        await new Promise(resolve => setTimeout(() => resolve()))
+        testComponents.promiseCompletionSource.reset()
+
+        history.push('/foo')
+
         const testPage = wrapper.find(testComponents.TestPage)
 
-        testComponents.promiseCompletionSource.resolve({
-            bar: 'test',
-        })
+        testComponents.promiseCompletionSource.resolve({ bar: 'page2' })
         await new Promise(resolve => setTimeout(() => resolve()))
-
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0

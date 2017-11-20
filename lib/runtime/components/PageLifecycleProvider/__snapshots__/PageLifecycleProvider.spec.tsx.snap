@@ -13,8 +13,26 @@ Array [
   Object {
     "originator": "PageEvents",
     "payload": Object {
+      "home": "isHome",
       "location": "/",
-      "test": "extra",
+    },
+    "timeStamp": 0,
+    "type": "page-load-complete",
+  },
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "foo": "isFoo",
+      "location": "/foo",
+    },
+    "timeStamp": 0,
+    "type": "page-load-started",
+  },
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "foo": "isFoo",
+      "location": "/foo",
     },
     "timeStamp": 0,
     "type": "page-load-complete",
@@ -23,12 +41,12 @@ Array [
 `;
 
 exports[`PageLifecycleProvider can pass extra data to pages 2`] = `
-"<TestPage path=\\"/\\">
+"<TestPage path=\\"/foo\\" extraProps={{...}}>
   <WithPageLifecycleProps pageProperties={{...}} page={[Function]}>
     <Page pageProperties={{...}} page={[Function]} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
       <div>
         Page location: 
-        /
+        /foo
         Page state: 
         loaded
       </div>
@@ -51,7 +69,6 @@ Array [
     "originator": "PageEvents",
     "payload": Object {
       "location": "/",
-      "test": "extra",
     },
     "timeStamp": 0,
     "type": "page-load-complete",
@@ -61,8 +78,8 @@ Array [
 
 exports[`PageLifecycleProvider raises completed event after data loaded and content re-rendered 2`] = `
 "<TestPage path=\\"/\\">
-  <WithPageLifecycleProps pageProperties={{...}} page={[Function]}>
-    <Page pageProperties={{...}} page={[Function]} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
+  <WithPageLifecycleProps pageProperties={[undefined]} page={[Function]}>
+    <Page pageProperties={[undefined]} page={[Function]} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
       <div>
         Page location: 
         /
@@ -103,7 +120,6 @@ Array [
     "originator": "PageEvents",
     "payload": Object {
       "location": "/",
-      "test": "extra",
     },
     "timeStamp": 0,
     "type": "page-load-complete",
@@ -127,7 +143,6 @@ Array [
     "originator": "PageEvents",
     "payload": Object {
       "location": "/",
-      "test": "extra",
     },
     "timeStamp": 0,
     "type": "page-load-complete",
@@ -135,8 +150,7 @@ Array [
   Object {
     "originator": "PageEvents",
     "payload": Object {
-      "location": "/",
-      "test": "extra",
+      "location": "/foo",
     },
     "timeStamp": 0,
     "type": "page-load-started",
@@ -145,7 +159,6 @@ Array [
     "originator": "PageEvents",
     "payload": Object {
       "location": "/foo",
-      "test": "extra",
     },
     "timeStamp": 0,
     "type": "page-load-complete",
@@ -155,8 +168,8 @@ Array [
 
 exports[`PageLifecycleProvider raises events when page navigated 2`] = `
 "<TestPage path=\\"/foo\\">
-  <WithPageLifecycleProps pageProperties={{...}} page={[Function]}>
-    <Page pageProperties={{...}} page={[Function]} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
+  <WithPageLifecycleProps pageProperties={[undefined]} page={[Function]}>
+    <Page pageProperties={[undefined]} page={[Function]} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
       <div>
         Page location: 
         /foo
@@ -183,8 +196,8 @@ Array [
 
 exports[`PageLifecycleProvider raises loading event after render 2`] = `
 "<TestPage path=\\"/\\">
-  <WithPageLifecycleProps pageProperties={{...}} page={[Function]}>
-    <Page pageProperties={{...}} page={[Function]} currentPageState=\\"loading\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
+  <WithPageLifecycleProps pageProperties={[undefined]} page={[Function]}>
+    <Page pageProperties={[undefined]} page={[Function]} currentPageState=\\"loading\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
       <div>
         Page location: 
         /
