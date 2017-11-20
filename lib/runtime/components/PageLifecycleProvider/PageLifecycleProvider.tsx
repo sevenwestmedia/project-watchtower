@@ -11,6 +11,7 @@ export interface PageLifecycleEvent<T> {
     payload: T
 }
 export declare type Properties = {
+    location: H.Location
     [key: string]: any
 }
 export interface PageLoadStarted extends PageLifecycleEvent<Properties> {
@@ -174,8 +175,8 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
             type: 'page-load-started',
             originator: 'PageEvents',
             payload: {
-                location: this.props.location,
                 ...this.currentPageProps,
+                location: this.props.location,
             },
             timeStamp: new Date().getTime(),
         })
@@ -188,8 +189,8 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
             type: 'page-load-complete',
             originator: 'PageEvents',
             payload: {
-                location: this.props.location,
                 ...this.currentPageProps,
+                location: this.props.location,
             },
             timeStamp: new Date().getTime(),
         })
