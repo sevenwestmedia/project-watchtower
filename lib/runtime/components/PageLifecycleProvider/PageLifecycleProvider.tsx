@@ -197,7 +197,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
     }
 
     updatePageProps = (props: object) => {
-        this.currentPageProps = props
+        this.currentPageProps = { ...this.currentPageProps, ...props }
     }
 
     onPageRender = () => {
@@ -225,6 +225,9 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
         if (this.props.location.pathname !== nextProps.location.pathname) {
             this.isRouting = true
             this.raiseStartOnRender = true
+            // We should clear the current page props at this point because the re-render
+            // has not happened and we should start collecting again
+            this.currentPageProps = {}
             this.pageLifecycle.routeChanged(nextProps.location)
         }
     }

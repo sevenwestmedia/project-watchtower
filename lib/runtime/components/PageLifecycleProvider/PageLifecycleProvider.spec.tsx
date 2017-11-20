@@ -17,6 +17,7 @@ import {
 } from './PageLifecycleProvider'
 import { PromiseCompletionSource } from '../../universal'
 import Page from '../Page/Page'
+import { PageAdditionalProps } from '../Page/PageAdditionalProps'
 
 interface TestData {
     bar: string
@@ -132,10 +133,21 @@ describe('PageLifecycleProvider', () => {
                                 render={props => {
                                     history = props.history
                                     return (
-                                        <testComponents.TestPage
-                                            path={props.location.pathname}
-                                            extraProps={extraPropsLookup[props.location.pathname]}
-                                        />
+                                        <div>
+                                            {props.location.pathname === '/' && (
+                                                <PageAdditionalProps
+                                                    pageProperties={{
+                                                        pageExtra: 'Some extra page data',
+                                                    }}
+                                                />
+                                            )}
+                                            <testComponents.TestPage
+                                                path={props.location.pathname}
+                                                extraProps={
+                                                    extraPropsLookup[props.location.pathname]
+                                                }
+                                            />
+                                        </div>
                                     )
                                 }}
                             />

@@ -27,6 +27,7 @@ Array [
         "search": "",
         "state": undefined,
       },
+      "pageExtra": "Some extra page data",
     },
     "timeStamp": 0,
     "type": "page-load-complete",
