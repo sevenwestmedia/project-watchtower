@@ -119,15 +119,6 @@ export const withPageLifecycleProps = function<T>(
         }
 
         render() {
-            if (this.context.logger) {
-                this.context.logger.trace(
-                    {
-                        currentPageState: this.state.currentPageState,
-                        currentPageLocation: this.state.currentPageLocation,
-                    },
-                    'Rendering WithPageLifecycle',
-                )
-            }
             return (
                 <Component
                     {...this.props}
@@ -191,7 +182,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
             currentPageLocation: this.props.location,
         }
         if (this.props.logger) {
-            this.props.logger.trace(newState, 'Rasing start load event')
+            this.props.logger.trace(newState, 'State changed')
         }
         this.pageLifecycle.pageStateChanged(newState)
     }
@@ -238,7 +229,10 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
         this.currentPageProps = { ...this.currentPageProps, ...props }
 
         if (this.props.logger) {
-            this.props.logger.trace({ currentPageProps: this.currentPageProps }, 'Updating prop')
+            this.props.logger.trace(
+                { currentPageProps: this.currentPageProps },
+                'Updating page props',
+            )
         }
     }
 

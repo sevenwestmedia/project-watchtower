@@ -6,7 +6,8 @@ import * as React from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { MemoryRouter, Route } from 'react-router-dom'
-import { mount } from 'enzyme'
+import { mount, configure } from 'enzyme'
+import * as Adapter from 'enzyme-adapter-react-15'
 import * as H from 'history'
 
 import {
@@ -19,6 +20,8 @@ import { PromiseCompletionSource } from '../../universal'
 import Page from '../Page/Page'
 import { PageAdditionalProps } from '../Page/PageAdditionalProps'
 import { testLogger } from '../../server/ssr/helpers/test-logger'
+
+configure({ adapter: new Adapter() })
 
 interface TestData {
     bar: string
@@ -171,10 +174,10 @@ describe('PageLifecycleProvider', () => {
 
         history.push('/foo')
 
-        const testPage = wrapper.find(testComponents.TestPage)
-
         testComponents.promiseCompletionSource.resolve({ bar: 'page2' })
         await new Promise(resolve => setTimeout(() => resolve()))
+
+        const testPage = wrapper.update().find(testComponents.TestPage)
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0
@@ -187,7 +190,7 @@ describe('PageLifecycleProvider', () => {
         expect(testPage.debug()).toMatchSnapshot()
     })
 
-    it.only('raises completed event after data loaded and content re-rendered', async () => {
+    it('raises completed event after data loaded and content re-rendered', async () => {
         const testComponents = createTestComponents()
         const pageEvents: PageEvent[] = []
 
@@ -204,13 +207,13 @@ describe('PageLifecycleProvider', () => {
             </Provider>,
         )
 
-        const testPage = wrapper.find(testComponents.TestPage)
-
         testComponents.promiseCompletionSource.resolve({
             bar: 'test',
         })
+
         expect(pageEvents.length).toBe(1)
         await new Promise(resolve => setTimeout(() => resolve()))
+        const testPage = wrapper.update().find(testComponents.TestPage)
 
         expect(
             pageEvents.map(e => {
@@ -221,6 +224,7 @@ describe('PageLifecycleProvider', () => {
                 return e
             }),
         ).toMatchSnapshot()
+
         expect(testPage.debug()).toMatchSnapshot()
     })
 
@@ -312,10 +316,9 @@ describe('PageLifecycleProvider', () => {
 
         history.push('/foo')
 
-        const testPage = wrapper.find(testComponents.TestPage)
-
         testComponents.promiseCompletionSource.resolve({ bar: 'page2' })
         await new Promise(resolve => setTimeout(() => resolve()))
+        const testPage = wrapper.update().find(testComponents.TestPage)
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0
