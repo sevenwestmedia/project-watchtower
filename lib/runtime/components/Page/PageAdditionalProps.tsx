@@ -8,7 +8,7 @@ export interface Props {
     pageProperties?: object
 }
 
-export class PageAdditionalProps extends React.PureComponent<Props & PageLifecycleProps, {}> {
+export class PageAdditionalProps extends React.PureComponent<Props, {}> {
     static contextTypes = {
         // Seems like context cannot be exported, this is a runtime react thing anyways
         pageLifecycle: PropTypes.object as any,
