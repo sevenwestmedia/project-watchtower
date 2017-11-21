@@ -7,7 +7,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { MemoryRouter, Route } from 'react-router-dom'
 import { mount, configure } from 'enzyme'
-import * as Adapter from 'enzyme-adapter-react-15'
+import * as Adapter from 'enzyme-adapter-react-16'
 import * as H from 'history'
 
 import {
@@ -20,6 +20,8 @@ import { PromiseCompletionSource } from '../../universal'
 import Page from '../Page/Page'
 import { PageAdditionalProps } from '../Page/PageAdditionalProps'
 import { testLogger } from '../../server/ssr/helpers/test-logger'
+
+configure({ adapter: new Adapter() })
 
 configure({ adapter: new Adapter() })
 

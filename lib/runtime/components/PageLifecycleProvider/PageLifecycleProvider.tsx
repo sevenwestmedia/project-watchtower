@@ -85,7 +85,7 @@ export const withPageLifecycleProps = function<T>(
 
         state: LifecycleState
 
-        constructor(props?: T, context?: { pageLifecycle: PageLifecycle }) {
+        constructor(props: T, context: { pageLifecycle: PageLifecycle }) {
             super(props, context)
 
             if (!context) {
@@ -158,8 +158,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
 
     currentPageProps: object = {}
 
-    constructor(props?: Props) {
-
+    constructor(props: Props) {
         super(props)
 
         this.isRouting = true
