@@ -75,10 +75,12 @@ export const withPageLifecycleProps = function<T>(
     return class WithPageLifecycleProps extends React.Component<T, LifecycleState> {
         static contextTypes = {
             pageLifecycle: PropTypes.object,
+            logger: PropTypes.object,
         }
 
         context: {
             pageLifecycle: PageLifecycle
+            logger: Logger | undefined
         }
 
         state: LifecycleState
@@ -104,10 +106,28 @@ export const withPageLifecycleProps = function<T>(
         }
 
         pageStateChanged = (pageState: PageLifecycleProps) => {
+            if (this.context.logger) {
+                this.context.logger.trace(
+                    {
+                        currentPageState: this.state.currentPageState,
+                        currentPageLocation: this.state.currentPageLocation,
+                    },
+                    'Setting pageState on WithPageLifecycle',
+                )
+            }
             this.setState(pageState)
         }
 
         render() {
+            if (this.context.logger) {
+                this.context.logger.trace(
+                    {
+                        currentPageState: this.state.currentPageState,
+                        currentPageLocation: this.state.currentPageLocation,
+                    },
+                    'Rendering WithPageLifecycle',
+                )
+            }
             return (
                 <Component
                     {...this.props}
