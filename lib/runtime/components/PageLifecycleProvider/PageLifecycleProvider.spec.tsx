@@ -17,6 +17,7 @@ import {
 } from './PageLifecycleProvider'
 import { PromiseCompletionSource } from '../../universal'
 import Page from '../Page/Page'
+import { PageAdditionalProps } from '../Page/PageAdditionalProps'
 
 interface TestData {
     bar: string
@@ -24,13 +25,13 @@ interface TestData {
 
 const createTestComponents = () => {
     const promiseCompletionSource = new PromiseCompletionSource<TestData>()
-    class TestPage extends React.Component<{ path: string }, {}> {
+    class TestPage extends React.Component<{ path: string; extraProps?: object }, {}> {
         loadTriggered = false
 
         render() {
             return (
                 <Page
-                    errorComponent="oops"
+                    pageProperties={this.props.extraProps}
                     page={pageProps => {
                         // This emulates a component under the page starting to load data
                         // then completing once the promise completion source completes
@@ -41,7 +42,7 @@ const createTestComponents = () => {
                         }
                         return (
                             <div>
-                                Page location: {pageProps.currentPageLocation}
+                                Page location: {pageProps.currentPageLocation.pathname}
                                 Page state: {pageProps.currentPageState}
                             </div>
                         )
@@ -103,6 +104,79 @@ describe('PageLifecycleProvider', () => {
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0
+                if (e.payload && e.payload.location) {
+                    e.payload.location.key = '...'
+                }
+                return e
+            }),
+        ).toMatchSnapshot()
+        expect(testPage.debug()).toMatchSnapshot()
+    })
+
+    it('can pass extra data to pages', async () => {
+        const testComponents = createTestComponents()
+        let history: H.History | undefined
+        const pageEvents: PageEvent[] = []
+        const extraPropsLookup: { [path: string]: object } = {
+            '/': { home: 'isHome' },
+            '/foo': { foo: 'isFoo' },
+        }
+
+        const store = createStore((s = {}, _) => s)
+        const wrapper = mount(
+            <Provider store={store}>
+                <MemoryRouter initialEntries={['/', '/foo']} initialIndex={0}>
+                    <PageLifecycleProvider
+                        onEvent={event => pageEvents.push(event)}
+                        render={
+                            <Route
+                                render={props => {
+                                    history = props.history
+                                    return (
+                                        <div>
+                                            {props.location.pathname === '/' && (
+                                                <PageAdditionalProps
+                                                    pageProperties={{
+                                                        pageExtra: 'Some extra page data',
+                                                    }}
+                                                />
+                                            )}
+                                            <testComponents.TestPage
+                                                path={props.location.pathname}
+                                                extraProps={
+                                                    extraPropsLookup[props.location.pathname]
+                                                }
+                                            />
+                                        </div>
+                                    )
+                                }}
+                            />
+                        }
+                    />
+                </MemoryRouter>
+            </Provider>,
+        )
+
+        if (!history) {
+            throw new Error('History not defined')
+        }
+
+        testComponents.promiseCompletionSource.resolve({ bar: 'test' })
+        await new Promise(resolve => setTimeout(() => resolve()))
+        testComponents.promiseCompletionSource.reset()
+
+        history.push('/foo')
+
+        const testPage = wrapper.find(testComponents.TestPage)
+
+        testComponents.promiseCompletionSource.resolve({ bar: 'page2' })
+        await new Promise(resolve => setTimeout(() => resolve()))
+        expect(
+            pageEvents.map(e => {
+                e.timeStamp = 0
+                if (e.payload && e.payload.location) {
+                    e.payload.location.key = '...'
+                }
                 return e
             }),
         ).toMatchSnapshot()
@@ -136,6 +210,9 @@ describe('PageLifecycleProvider', () => {
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0
+                if (e.payload && e.payload.location) {
+                    e.payload.location.key = '...'
+                }
                 return e
             }),
         ).toMatchSnapshot()
@@ -152,12 +229,7 @@ describe('PageLifecycleProvider', () => {
                 <MemoryRouter initialEntries={['/']} initialIndex={0}>
                     <PageLifecycleProvider
                         onEvent={event => pageEvents.push(event)}
-                        render={
-                            <Page
-                                errorComponent="oops"
-                                page={<testComponents.FakeLazyLoad path="/" />}
-                            />
-                        }
+                        render={<Page page={<testComponents.FakeLazyLoad path="/" />} />}
                     />
                 </MemoryRouter>
             </Provider>,
@@ -168,6 +240,9 @@ describe('PageLifecycleProvider', () => {
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0
+                if (e.payload && e.payload.location) {
+                    e.payload.location.key = '...'
+                }
                 return e
             }),
         ).toMatchSnapshot()
@@ -185,6 +260,9 @@ describe('PageLifecycleProvider', () => {
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0
+                if (e.payload && e.payload.location) {
+                    e.payload.location.key = '...'
+                }
                 return e
             }),
         ).toMatchSnapshot()
@@ -234,6 +312,9 @@ describe('PageLifecycleProvider', () => {
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0
+                if (e.payload && e.payload.location) {
+                    e.payload.location.key = '...'
+                }
                 return e
             }),
         ).toMatchSnapshot()

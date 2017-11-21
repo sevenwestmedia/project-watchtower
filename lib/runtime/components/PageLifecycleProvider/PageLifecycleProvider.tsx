@@ -11,6 +11,7 @@ export interface PageLifecycleEvent<T> {
     payload: T
 }
 export declare type Properties = {
+    location: H.Location
     [key: string]: any
 }
 export interface PageLoadStarted extends PageLifecycleEvent<Properties> {
@@ -32,6 +33,7 @@ export interface PageProps {
     beginLoadingData: () => void
     /** Decrements loading count */
     endLoadingData: () => void
+    currentPageLocation: H.Location
 }
 
 export interface OwnProps {
@@ -45,7 +47,7 @@ export type LoadingStates = 'loading' | 'loaded'
 
 export type LifecycleState = {
     currentPageState: LoadingStates
-    currentPageLocation: string
+    currentPageLocation: H.Location
 }
 export type PageLifecycleProps = LifecycleState & PageProps
 
@@ -63,7 +65,6 @@ type LifecycleComponent<T> =
     | React.ComponentClass<PageLifecycleProps & T>
     | React.SFC<PageLifecycleProps & T>
 
-// tslint:disable-next-line:max-line-length
 // tslint:disable-next-line:only-arrow-functions
 export const withPageLifecycleProps = function<T>(
     Component: LifecycleComponent<T>,
@@ -84,12 +85,8 @@ export const withPageLifecycleProps = function<T>(
             super(props, context)
 
             this.state = {
-                currentPageState: context.pageLifecycle
-                    ? context.pageLifecycle.currentPageState
-                    : 'loading',
-                currentPageLocation: context.pageLifecycle
-                    ? context.pageLifecycle.currentPageLocation
-                    : '',
+                currentPageState: context.pageLifecycle.currentPageState,
+                currentPageLocation: context.pageLifecycle.currentPageLocation,
             }
         }
 
@@ -137,9 +134,12 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
         pageLifecycle: PropTypes.object,
     }
 
+    raiseStartOnRender: boolean
     isRouting: boolean
     loadingDataCount: number
     pageLifecycle: PageLifecycle
+
+    currentPageProps: object = {}
 
     constructor(props: Props) {
         super(props)
@@ -147,11 +147,12 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
         this.isRouting = true
         this.loadingDataCount = 0
         this.pageLifecycle = new PageLifecycle(
+            this.updatePageProps,
             this.onPageRender,
             this.beginLoadingData,
             this.endLoadingData,
             'loading',
-            this.props.location.pathname,
+            this.props.location,
         )
     }
 
@@ -164,7 +165,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
         const currentPageState = isLoading ? 'loading' : 'loaded'
         this.pageLifecycle.pageStateChanged({
             currentPageState,
-            currentPageLocation: this.props.location.pathname,
+            currentPageLocation: this.props.location,
         })
     }
 
@@ -173,8 +174,10 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
         this.props.onEvent({
             type: 'page-load-started',
             originator: 'PageEvents',
-            // TODO Add payload
-            payload: {},
+            payload: {
+                ...this.currentPageProps,
+                location: this.props.location,
+            },
             timeStamp: new Date().getTime(),
         })
     }
@@ -185,13 +188,25 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
         this.props.onEvent({
             type: 'page-load-complete',
             originator: 'PageEvents',
-            // TODO Add payload
-            payload: {},
+            payload: {
+                ...this.currentPageProps,
+                location: this.props.location,
+            },
             timeStamp: new Date().getTime(),
         })
     }
 
+    updatePageProps = (props: object) => {
+        this.currentPageProps = { ...this.currentPageProps, ...props }
+    }
+
     onPageRender = () => {
+        if (this.raiseStartOnRender) {
+            // We need to raise start after the page has been rendered
+            // so we get the correct page props
+            this.raisePageLoadStartEvent()
+            this.raiseStartOnRender = false
+        }
         // We started routing, but no loading data events have fired
         if (this.isRouting && this.loadingDataCount === 0) {
             this.isRouting = false
@@ -209,7 +224,10 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
         // We only care about pathname, not any of the other location info
         if (this.props.location.pathname !== nextProps.location.pathname) {
             this.isRouting = true
-            this.raisePageLoadStartEvent()
+            this.raiseStartOnRender = true
+            // We should clear the current page props at this point because the re-render
+            // has not happened and we should start collecting again
+            this.currentPageProps = {}
             this.pageLifecycle.routeChanged(nextProps.location)
         }
     }
@@ -231,6 +249,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
             return this.props.render({
                 beginLoadingData: this.beginLoadingData,
                 endLoadingData: this.endLoadingData,
+                currentPageLocation: this.props.location,
             })
         }
         return this.props.render
