@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.10.4] - 21/11/2017
+No changes
+
 ## [v0.10.3] - 16/11/2017
 ### ssr
 - Express Request available in renderHtml callback
