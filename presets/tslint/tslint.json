@@ -55,7 +55,7 @@
         // @TODO decide if we want to use this rule
         "ordered-imports": [false],
         "radix": true,
-        "semicolon": [true, "never"],
+        "semicolon": false,
         "triple-equals": [true, "allow-null-check"],
         "space-before-function-paren": false,
         "variable-name": [
@@ -65,14 +65,8 @@
             "allow-pascal-case",
             "ban-keywords"
         ],
-        "whitespace": [
-            true,
-            "check-branch",
-            "check-decl",
-            "check-operator",
-            "check-separator",
-            "check-type"
-        ],
-        "quotemark": [true, "single", "jsx-double"]
+        "whitespace": false,
+        "quotemark": [true, "single", "jsx-double"],
+        "align": false
     }
 }
