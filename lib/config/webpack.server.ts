@@ -36,30 +36,30 @@ const serverBaseConfig: webpack.Configuration = {
                 test: /\.s?css$/,
                 use: 'null-loader',
             },
-            {
-                test: /\.png$/,
-                use: 'null-loader',
-            },
-            {
-                test: /\.jpg$/,
-                use: 'null-loader',
-            },
-            {
-                test: /\.svg$/,
-                use: 'null-loader',
-            },
-            {
-                test: /\.woff$/,
-                use: 'null-loader',
-            },
-            {
-                test: /\.woff2$/,
-                use: 'null-loader',
-            },
-            {
-                test: /\.eot$/,
-                use: 'null-loader',
-            },
+            // {
+            //     test: /\.png$/,
+            //     use: 'null-loader',
+            // },
+            // {
+            //     test: /\.jpg$/,
+            //     use: 'null-loader',
+            // },
+            // {
+            //     test: /\.svg$/,
+            //     use: 'null-loader',
+            // },
+            // {
+            //     test: /\.woff$/,
+            //     use: 'null-loader',
+            // },
+            // {
+            //     test: /\.woff2$/,
+            //     use: 'null-loader',
+            // },
+            // {
+            //     test: /\.eot$/,
+            //     use: 'null-loader',
+            // },
         ],
     },
     node: {

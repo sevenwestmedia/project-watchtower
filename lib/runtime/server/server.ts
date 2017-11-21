@@ -71,7 +71,7 @@ export const createServer: CreateServerType = (options = defaultOptions) => {
     const app = express()
     app.disable('x-powered-by')
 
-    if (!isProduction && isWatchMode()) {
+    if (process.env.NODE_ENV !== 'production' && isWatchMode()) {
         // tslint:disable-next-line no-var-requires
         const { getHotReloadMiddleware } = require('../../server/dev')
         app.use(getHotReloadMiddleware())
@@ -110,7 +110,7 @@ export const createServer: CreateServerType = (options = defaultOptions) => {
     const listen = (usePort: number) => {
         const server = app.listen(usePort, () => {
             log(`Server listening on port ${usePort}`)
-            if (!isProduction && isWatchMode()) {
+            if (process.env.NODE_ENV !== 'production' && isWatchMode()) {
                 // tslint:disable-next-line no-var-requires
                 const { openBrowser } = require('../../server/dev')
                 openBrowser(usePort)
