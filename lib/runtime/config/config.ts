@@ -22,6 +22,7 @@ const defaultConfig: BuildConfig = {
     PUBLIC_PATH: '/',
     PORT: 3000,
     SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
+    SERVER_BUNDLE_ALL: false,
     SERVER_INCLUDE_IN_BUNDLE: ['swm-component-library', 'project-watchtower'],
     SERVER_OUTPUT: path.resolve(root, 'build', 'server'),
     SERVER_PUBLIC_DIR: path.resolve(root, 'public'),
