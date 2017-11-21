@@ -45,6 +45,10 @@ const serverBaseConfig: webpack.Configuration = {
                 use: 'null-loader',
             },
             {
+                test: /\.svg$/,
+                use: 'null-loader',
+            },
+            {
                 test: /\.woff$/,
                 use: 'null-loader',
             },
