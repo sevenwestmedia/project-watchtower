@@ -49,6 +49,9 @@ export interface BuildConfig {
     /** entry file for the server if applicable */
     SERVER_ENTRY: string
 
+    /** if true, all externals will be bundled */
+    SERVER_BUNDLE_ALL: boolean
+
     /** modules which the server build includes in the bundle */
     SERVER_INCLUDE_IN_BUNDLE: string[]
 

@@ -3,7 +3,14 @@ import * as path from 'path'
 import * as webpack from 'webpack'
 import CONFIG from '../runtime/config/config'
 
-const { BASE, PUBLIC_PATH, SERVER_INCLUDE_IN_BUNDLE, SERVER_ENTRY, SERVER_OUTPUT } = CONFIG
+const {
+    BASE,
+    PUBLIC_PATH,
+    SERVER_BUNDLE_ALL,
+    SERVER_INCLUDE_IN_BUNDLE,
+    SERVER_ENTRY,
+    SERVER_OUTPUT,
+} = CONFIG
 
 const nodeModules = fs.readdirSync(path.resolve(BASE, 'node_modules'))
 
@@ -39,7 +46,9 @@ const serverBaseConfig: webpack.Configuration = {
         // treat deep imports as externals as well
         const moduleName = request.split('/')[0]
 
-        if (SERVER_INCLUDE_IN_BUNDLE.indexOf(moduleName) !== -1) {
+        if (SERVER_BUNDLE_ALL) {
+            callback(undefined, undefined)
+        } else if (SERVER_INCLUDE_IN_BUNDLE.indexOf(moduleName) !== -1) {
             callback(undefined, undefined)
         } else if (nodeModules.indexOf(moduleName) !== -1) {
             callback(null, 'commonjs ' + request)
