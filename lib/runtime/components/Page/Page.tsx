@@ -41,6 +41,9 @@ export default withPageLifecycleProps(
         }
 
         componentWillReceiveProps(nextProps: Props & PageLifecycleProps) {
+            if (this.context.logger) {
+                this.context.logger.trace('Page recieved lifecycle props')
+            }
             this.context.pageLifecycle.updatePageProps(nextProps.pageProperties || {})
         }
 

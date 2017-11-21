@@ -109,8 +109,8 @@ export const withPageLifecycleProps = function<T>(
             if (this.context.logger) {
                 this.context.logger.trace(
                     {
-                        currentPageState: this.state.currentPageState,
-                        currentPageLocation: this.state.currentPageLocation,
+                        currentPageState: pageState.currentPageState,
+                        currentPageLocation: pageState.currentPageLocation,
                     },
                     'Setting pageState on WithPageLifecycle',
                 )

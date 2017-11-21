@@ -34,6 +34,7 @@ const createTestComponents = () => {
                 <Page
                     pageProperties={this.props.extraProps}
                     page={pageProps => {
+                        testLogger.trace({ pageProps }, 'Rendering TestPage')
                         // This emulates a component under the page starting to load data
                         // then completing once the promise completion source completes
                         if (!this.loadTriggered) {
