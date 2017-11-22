@@ -1,5 +1,8 @@
 # Changelog
 
+## vNext
+- Simplify context usage in PageAdditionalProps
+
 ## [v0.11.1] - 21/11/2017
 No changes
 
