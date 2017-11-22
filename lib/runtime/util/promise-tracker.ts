@@ -9,8 +9,8 @@ export class PromiseTracker {
         this.promises.push(promise)
     }
 
-    middleware() {
-        return <S>() => (next: redux.Dispatch<S>) => (action: redux.Dispatch<S>) => {
+    middleware(): redux.Middleware {
+        return () => next => (action: any) => {
             const result = next(action)
             // Promise.resolve must return the same promise if the arg is a promise
             // http://www.ecma-international.org/ecma-262/6.0/#sec-promise.resolve

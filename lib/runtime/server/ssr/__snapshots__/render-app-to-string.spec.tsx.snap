@@ -3,7 +3,7 @@
 exports[`renders app callback with router 1`] = `
 Object {
   "css": "",
-  "html": "<div data-reactroot=\\"\\" data-reactid=\\"1\\" data-react-checksum=\\"-1178726173\\">Home</div>",
+  "html": "<div data-reactroot=\\"\\">Home</div>",
   "ids": Array [],
   "rules": Array [],
 }

@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types'
 import { withRouter, RouteComponentProps } from 'react-router'
 import * as H from 'history'
 import { PageLifecycle } from './PageLifecycle'
+import { Logger } from 'lib/runtime/universal'
 
 export interface PageLifecycleEvent<T> {
     type: string
@@ -39,6 +40,7 @@ export interface PageProps {
 export interface OwnProps {
     render: React.ReactElement<any> | ((pageProps: PageProps) => React.ReactElement<any>)
     onEvent: (event: PageEvent) => void
+    logger?: Logger
 }
 
 type Props = OwnProps & RouteComponentProps<{}>
@@ -73,10 +75,12 @@ export const withPageLifecycleProps = function<T>(
     return class WithPageLifecycleProps extends React.Component<T, LifecycleState> {
         static contextTypes = {
             pageLifecycle: PropTypes.object,
+            logger: PropTypes.object,
         }
 
         context: {
             pageLifecycle: PageLifecycle
+            logger: Logger | undefined
         }
 
         state: LifecycleState
@@ -84,6 +88,9 @@ export const withPageLifecycleProps = function<T>(
         constructor(props: T, context: { pageLifecycle: PageLifecycle }) {
             super(props, context)
 
+            if (!context) {
+                return
+            }
             this.state = {
                 currentPageState: context.pageLifecycle.currentPageState,
                 currentPageLocation: context.pageLifecycle.currentPageLocation,
@@ -101,7 +108,16 @@ export const withPageLifecycleProps = function<T>(
             this.context.pageLifecycle.offPageStateChanged(this.pageStateChanged)
         }
 
-        pageStateChanged = (pageState: PageLifecycleProps) => {
+        pageStateChanged = (pageState: LifecycleState) => {
+            if (this.context.logger) {
+                this.context.logger.trace(
+                    {
+                        currentPageState: pageState.currentPageState,
+                        currentPageLocation: pageState.currentPageLocation,
+                    },
+                    'Setting pageState on WithPageLifecycle',
+                )
+            }
             this.setState(pageState)
         }
 
@@ -132,6 +148,7 @@ export const withPageLifecycleEvents = (Component: React.ComponentClass<any>) =>
 class PageLifecycleProvider extends React.Component<Props, {}> {
     static childContextTypes = {
         pageLifecycle: PropTypes.object,
+        logger: PropTypes.object,
     }
 
     raiseStartOnRender: boolean
@@ -162,14 +179,22 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
 
     stateChanged = () => {
         const isLoading = this.isRouting || this.loadingDataCount > 0
-        const currentPageState = isLoading ? 'loading' : 'loaded'
-        this.pageLifecycle.pageStateChanged({
+        const currentPageState: LoadingStates = isLoading ? 'loading' : 'loaded'
+        const newState = {
             currentPageState,
             currentPageLocation: this.props.location,
-        })
+        }
+        if (this.props.logger) {
+            this.props.logger.trace(newState, 'State changed')
+        }
+        this.pageLifecycle.pageStateChanged(newState)
     }
 
     raisePageLoadStartEvent = () => {
+        if (this.props.logger) {
+            this.props.logger.trace({}, 'Rasing start load event')
+        }
+
         this.stateChanged()
         this.props.onEvent({
             type: 'page-load-started',
@@ -183,6 +208,13 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
     }
 
     raisePageLoadCompleteEvent = () => {
+        if (this.props.logger) {
+            this.props.logger.trace(
+                { currentPageProps: this.currentPageProps },
+                'Raising page load complete event',
+            )
+        }
+
         this.isRouting = false
         this.stateChanged()
         this.props.onEvent({
@@ -198,6 +230,13 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
 
     updatePageProps = (props: object) => {
         this.currentPageProps = { ...this.currentPageProps, ...props }
+
+        if (this.props.logger) {
+            this.props.logger.trace(
+                { currentPageProps: this.currentPageProps },
+                'Updating page props',
+            )
+        }
     }
 
     onPageRender = () => {
@@ -217,12 +256,20 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
     getChildContext() {
         return {
             pageLifecycle: this.pageLifecycle,
+            logger: this.props.logger,
         }
     }
 
     componentWillReceiveProps(nextProps: Props) {
         // We only care about pathname, not any of the other location info
         if (this.props.location.pathname !== nextProps.location.pathname) {
+            if (this.props.logger) {
+                this.props.logger.trace(
+                    { oldPath: this.props.location.pathname, newPath: nextProps.location.pathname },
+                    'Path changed',
+                )
+            }
+
             this.isRouting = true
             this.raiseStartOnRender = true
             // We should clear the current page props at this point because the re-render
@@ -234,10 +281,19 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
 
     beginLoadingData = () => {
         this.loadingDataCount++
+        if (this.props.logger) {
+            this.props.logger.trace(
+                { loadingDataCount: this.loadingDataCount },
+                'Begin loading data',
+            )
+        }
     }
 
     endLoadingData = () => {
         this.loadingDataCount--
+        if (this.props.logger) {
+            this.props.logger.trace({ loadingDataCount: this.loadingDataCount }, 'End loading data')
+        }
 
         if (this.loadingDataCount === 0) {
             this.raisePageLoadCompleteEvent()
@@ -256,8 +312,6 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
     }
 }
 
-const PageLifecycleProviderWithRouter: React.ComponentClass<OwnProps> = withRouter(
-    PageLifecycleProvider,
-)
+const PageLifecycleProviderWithRouter = withRouter<OwnProps>(PageLifecycleProvider)
 
 export { PageLifecycleProviderWithRouter as PageLifecycleProvider }

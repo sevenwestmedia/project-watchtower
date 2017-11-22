@@ -16,7 +16,8 @@ export default withPageLifecycleProps(
     class Page extends React.PureComponent<Props & PageLifecycleProps, {}> {
         static contextTypes = {
             // Seems like context cannot be exported, this is a runtime react thing anyways
-            pageLifecycle: PropTypes.object as any,
+            pageLifecycle: PropTypes.object,
+            logger: PropTypes.object,
         }
 
         context: {

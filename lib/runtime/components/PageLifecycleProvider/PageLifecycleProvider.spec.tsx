@@ -2,11 +2,16 @@
  * @jest-environment jsdom
  */
 
+;(global as any).requestAnimationFrame = (callback: any) => {
+    setTimeout(callback, 0)
+}
+
 import * as React from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { MemoryRouter, Route } from 'react-router-dom'
-import { mount } from 'enzyme'
+import { mount, configure } from 'enzyme'
+import * as Adapter from 'enzyme-adapter-react-16'
 import * as H from 'history'
 
 import {
@@ -18,6 +23,11 @@ import {
 import { PromiseCompletionSource } from '../../universal'
 import Page from '../Page/Page'
 import { PageAdditionalProps } from '../Page/PageAdditionalProps'
+import { testLogger } from '../../server/ssr/helpers/test-logger'
+
+configure({ adapter: new Adapter() })
+
+configure({ adapter: new Adapter() })
 
 interface TestData {
     bar: string
@@ -33,6 +43,7 @@ const createTestComponents = () => {
                 <Page
                     pageProperties={this.props.extraProps}
                     page={pageProps => {
+                        testLogger.trace({ pageProps }, 'Rendering TestPage')
                         // This emulates a component under the page starting to load data
                         // then completing once the promise completion source completes
                         if (!this.loadTriggered) {
@@ -92,6 +103,7 @@ describe('PageLifecycleProvider', () => {
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/']} initialIndex={0}>
                     <PageLifecycleProvider
+                        logger={testLogger}
                         onEvent={event => pageEvents.push(event)}
                         render={<testComponents.TestPage path="/" />}
                     />
@@ -127,6 +139,7 @@ describe('PageLifecycleProvider', () => {
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/', '/foo']} initialIndex={0}>
                     <PageLifecycleProvider
+                        logger={testLogger}
                         onEvent={event => pageEvents.push(event)}
                         render={
                             <Route
@@ -167,10 +180,10 @@ describe('PageLifecycleProvider', () => {
 
         history.push('/foo')
 
-        const testPage = wrapper.find(testComponents.TestPage)
-
         testComponents.promiseCompletionSource.resolve({ bar: 'page2' })
         await new Promise(resolve => setTimeout(() => resolve()))
+
+        const testPage = wrapper.update().find(testComponents.TestPage)
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0
@@ -192,6 +205,7 @@ describe('PageLifecycleProvider', () => {
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/']} initialIndex={0}>
                     <PageLifecycleProvider
+                        logger={testLogger}
                         onEvent={event => pageEvents.push(event)}
                         render={<testComponents.TestPage path="/" />}
                     />
@@ -199,13 +213,13 @@ describe('PageLifecycleProvider', () => {
             </Provider>,
         )
 
-        const testPage = wrapper.find(testComponents.TestPage)
-
         testComponents.promiseCompletionSource.resolve({
             bar: 'test',
         })
+
         expect(pageEvents.length).toBe(1)
         await new Promise(resolve => setTimeout(() => resolve()))
+        const testPage = wrapper.update().find(testComponents.TestPage)
 
         expect(
             pageEvents.map(e => {
@@ -216,6 +230,7 @@ describe('PageLifecycleProvider', () => {
                 return e
             }),
         ).toMatchSnapshot()
+
         expect(testPage.debug()).toMatchSnapshot()
     })
 
@@ -228,6 +243,7 @@ describe('PageLifecycleProvider', () => {
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/']} initialIndex={0}>
                     <PageLifecycleProvider
+                        logger={testLogger}
                         onEvent={event => pageEvents.push(event)}
                         render={<Page page={<testComponents.FakeLazyLoad path="/" />} />}
                     />
@@ -279,6 +295,7 @@ describe('PageLifecycleProvider', () => {
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/', '/foo']} initialIndex={0}>
                     <PageLifecycleProvider
+                        logger={testLogger}
                         onEvent={event => pageEvents.push(event)}
                         render={
                             <Route
@@ -305,10 +322,9 @@ describe('PageLifecycleProvider', () => {
 
         history.push('/foo')
 
-        const testPage = wrapper.find(testComponents.TestPage)
-
         testComponents.promiseCompletionSource.resolve({ bar: 'page2' })
         await new Promise(resolve => setTimeout(() => resolve()))
+        const testPage = wrapper.update().find(testComponents.TestPage)
         expect(
             pageEvents.map(e => {
                 e.timeStamp = 0

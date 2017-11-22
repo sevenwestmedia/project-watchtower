@@ -51,10 +51,9 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
     const promiseTracker = new PromiseTracker()
     let store: redux.Store<T>
     try {
-        store = await options.createReduxStore(
-            [promiseTracker.middleware(), thunk.withExtraArgument({ log: options.log })],
-            req,
-        )
+        const promiseTrackerMiddleware: redux.Middleware = promiseTracker.middleware()
+        const thunkMiddleware: redux.Middleware = thunk.withExtraArgument({ log: options.log })
+        store = await options.createReduxStore([promiseTrackerMiddleware, thunkMiddleware], req)
     } catch (err) {
         const failure: ServerRenderResults.FailedRenderResult = {
             type: ServerRenderResults.ServerRenderResultType.Failure,
@@ -79,11 +78,7 @@ async function renderPageContents<T extends object, SsrRequest extends RenderReq
         try {
             const renderResult = performSinglePassLocationRender(location)
 
-            const result = routerContextHandler(
-                renderResult,
-                startTime,
-                storeStateAtRenderTime,
-            )
+            const result = routerContextHandler(renderResult, startTime, storeStateAtRenderTime)
 
             if (options.events && options.events.renderPerformed) {
                 try {
