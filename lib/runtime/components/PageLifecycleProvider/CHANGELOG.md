@@ -1,5 +1,8 @@
 # Changelog
 
+## vNext
+- Fixed broken path when compiling downstream
+
 ## [v0.11.0] - 21/11/2017
 - Include location in pageProps
 - Include location in page events
