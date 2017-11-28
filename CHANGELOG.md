@@ -1,9 +1,10 @@
 # Changelog
 
-## vNext
+## [v0.11.2] - 28/11/2017
 - Simplify context usage in PageAdditionalProps
 
 ## [v0.11.1] - 21/11/2017
+
 No changes
 
 ## [v0.11.0] - 21/11/2017
