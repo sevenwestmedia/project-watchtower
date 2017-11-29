@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types'
 import { withRouter, RouteComponentProps } from 'react-router'
 import * as H from 'history'
 import { PageLifecycle } from './PageLifecycle'
-import { Logger } from 'lib/runtime/universal'
+import { Logger } from '../../universal'
 
 export interface PageLifecycleEvent<T> {
     type: string
