@@ -1,6 +1,6 @@
 # Changelog
 
-## vNext
+## [v0.11.3] - 29/11/2017
 - Fixed broken path when compiling downstream
 
 ## [v0.11.0] - 21/11/2017

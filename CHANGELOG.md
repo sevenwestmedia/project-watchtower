@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.11.3] - 29/11/2017
+### PageLifecycleProvider
+- Fixed broken path when compiling downstream
+
+
 ## [v0.11.2] - 28/11/2017
 - Simplify context usage in PageAdditionalProps
 
