@@ -27,8 +27,6 @@ import { testLogger } from '../../server/ssr/helpers/test-logger'
 
 configure({ adapter: new Adapter() })
 
-configure({ adapter: new Adapter() })
-
 interface TestData {
     bar: string
 }

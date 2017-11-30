@@ -229,11 +229,21 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
     }
 
     updatePageProps = (props: object) => {
+        const existingProps = this.currentPageProps
+        // Ensure we don't clear props which are already specified
+        // This behavior is still not deterministic, possible solution is to
+        // maintain the order we got the props. Or Page always is least important,
+        // then additional is next.
+        // This issue only exists if the same prop name is specified in multiple areas
+        Object.keys(props).forEach(
+            key => (props as any)[key] === undefined && delete (props as any)[key],
+        )
+
         this.currentPageProps = { ...this.currentPageProps, ...props }
 
         if (this.props.logger) {
             this.props.logger.trace(
-                { currentPageProps: this.currentPageProps },
+                { currentPageProps: this.currentPageProps, existingProps, props },
                 'Updating page props',
             )
         }

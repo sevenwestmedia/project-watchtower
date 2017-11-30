@@ -1,5 +1,8 @@
 # Changelog
 
+## vNext
+- Fixed issue where undefined page properties can overwrite additional properties
+
 ## [v0.11.3] - 29/11/2017
 - Fixed broken path when compiling downstream
 
