@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.11.4] - 30/11/2017
+### PageLifecycleProvider
+- Fixed issue where undefined page properties can overwrite additional properties
+
+
 ## [v0.11.3] - 29/11/2017
 ### PageLifecycleProvider
 - Fixed broken path when compiling downstream
