@@ -1,5 +1,9 @@
 # Changelog
 
+## vNext
+
+- chore(code hygiene): update editorconfig package.json indent
+
 ## [v0.11.4] - 30/11/2017
 ### PageLifecycleProvider
 - Fixed issue where undefined page properties can overwrite additional properties
