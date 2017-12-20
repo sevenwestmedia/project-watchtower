@@ -7,6 +7,15 @@ import CONFIG from '../runtime/config/config'
 const { BASE, MODULE_PATHS, ASSETS_PATH_PREFIX } = CONFIG
 const disableTypeCheck = process.env.START_FAST_MODE === 'true'
 
+export const fileLoaderConfig = {
+    test: /\.(ico|jpg|png|gif|otf|webp|svg|ttf)(\?.*)?$/,
+    exclude: /\/favicon.ico$/,
+    loader: 'file-loader',
+    options: {
+        name: ASSETS_PATH_PREFIX + 'media/[name].[hash:8].[ext]',
+    },
+}
+
 /**
  * Base webpack configuration that is shared by the server and the client
  * - load original source maps from custom SWM dependencies
@@ -44,14 +53,7 @@ const baseConfig: webpack.Configuration = {
                     module: tsVersion > '2.4' ? 'esnext' : 'es2015',
                 },
             },
-            {
-                test: /\.(ico|jpg|png|gif|otf|webp|svg|ttf)(\?.*)?$/,
-                exclude: /\/favicon.ico$/,
-                loader: 'file-loader',
-                options: {
-                    name: ASSETS_PATH_PREFIX + 'media/[name].[hash:8].[ext]',
-                },
-            },
+            fileLoaderConfig,
             {
                 test: /\.(eot|woff|woff2)(\?.*)?$/,
                 loader: 'file-loader',
