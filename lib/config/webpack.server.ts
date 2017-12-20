@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as webpack from 'webpack'
 import CONFIG from '../runtime/config/config'
-import { fileLoaderConfig } from 'lib/config/webpack.base'
+import { fileLoaderConfig } from './webpack.base'
 
 const {
     BASE,
