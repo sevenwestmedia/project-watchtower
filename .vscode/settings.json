@@ -7,9 +7,13 @@
         "**/.hg": true,
         "**/.DS_Store": true,
         "**/*.map": true,
-        "**/*.js": { "when": "$(basename).ts" },
+        "**/*.js": {
+            "when": "$(basename).ts"
+        },
         "lib/**/*.d.ts": true,
-        "{lib,demo}/**/*.js": { "when": "$(basename).tsx" }
+        "{lib,demo}/**/*.js": {
+            "when": "$(basename).tsx"
+        }
     },
     "search.exclude": {
         "**/node_modules": true,
@@ -23,5 +27,9 @@
     "prettier.singleQuote": true,
     "prettier.trailingComma": "all",
     "editor.formatOnSave": true,
-    "prettier.printWidth": 100
+    "prettier.printWidth": 100,
+    "prettier.disableLanguages": [
+        "json",
+        "markdown"
+    ]
 }
