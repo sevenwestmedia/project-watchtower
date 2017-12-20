@@ -5,6 +5,8 @@
 - chore(code hygiene): update editorconfig package.json indent
 - Don't output static assets during server build, they are only needed for client build
 - Default built to /dist, removed /client, /server folders resulting in simplier /dist folder
+- Introduced ASSETS_ROOT for when CLIENT_OUTPUT and SERVER_OUTPUT build to the same folder and the app will be run from that folder. eg. dist/ and assets are under dist/static/(css|js etc)
+- Use ASSETS_ROOT as the path express uses to find static assets
 
 ## [v0.11.4] - 30/11/2017
 ### PageLifecycleProvider

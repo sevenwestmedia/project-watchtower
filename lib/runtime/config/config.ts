@@ -7,6 +7,7 @@ const root = process.cwd()
 const defaultConfig: BuildConfig = {
     ASSETS_PATH_PREFIX: 'static/',
     BASE: root,
+    ASSETS_ROOT: path.resolve(root),
     CLIENT_ENTRY: path.resolve(root, 'client', 'index.tsx'),
     CLIENT_OUTPUT: path.resolve(root, 'dist'),
     CLIENT_POLYFILLS: path.resolve(root, 'client', 'polyfills.ts'),

@@ -115,9 +115,10 @@ Default configuration:
 ```ts
 {
     ASSETS_PATH_PREFIX: 'static/',
+    ASSETS_ROOT: path.resolve(root),
     BASE: root,
     CLIENT_ENTRY: path.resolve(root, 'client', 'index.tsx'),
-    CLIENT_OUTPUT: path.resolve(root, 'build', 'client'),
+    CLIENT_OUTPUT: path.resolve(root, 'dist'),
     CLIENT_POLYFILLS: path.resolve(root, 'client', 'polyfills.ts'),
     CSS_AUTOPREFIXER: ['last 2 versions'],
     HAS_SERVER: true,
@@ -137,7 +138,7 @@ Default configuration:
         'project-watchtower',
     ],
     SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
-    SERVER_OUTPUT: path.resolve(root, 'build', 'server'),
+    SERVER_OUTPUT: path.resolve(root, 'dist'),
     SERVER_PUBLIC_DIR: path.resolve(root, 'public'),
     STATIC_RESOURCE_NAMES: false,
     STATS_ENV: {},

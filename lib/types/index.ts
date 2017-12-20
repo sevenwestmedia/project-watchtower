@@ -16,6 +16,13 @@ export interface BuildConfig {
     /** Prefix for all assets (JS, CSS, media, fonts) with trailing slash */
     ASSETS_PATH_PREFIX: string
 
+    /** The location where assets are resolved from
+     * default is the working directory is the server output directory.
+     *
+     * If this is not the case, set to the same value as CLIENT_OUTPUT
+     */
+    ASSETS_ROOT: string
+
     /** root path of your application */
     BASE: string
 

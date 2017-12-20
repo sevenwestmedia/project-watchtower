@@ -7,7 +7,7 @@ import { log, logError } from '../util/log'
 import CONFIG from '../config/config'
 
 const isProduction = process.env.NODE_ENV === 'production'
-const { CLIENT_OUTPUT, PORT, SERVER_PUBLIC_DIR } = CONFIG
+const { CLIENT_OUTPUT, PORT, SERVER_PUBLIC_DIR, ASSETS_PATH_PREFIX, ASSETS_ROOT } = CONFIG
 
 export const getPort = (fallbackPort?: number) =>
     parseInt(process.env.PORT || '', 10) || fallbackPort || PORT
@@ -82,7 +82,8 @@ export const createServer: CreateServerType = (options = defaultOptions) => {
     }
 
     app.use(
-        express.static(CLIENT_OUTPUT, {
+        ASSETS_PATH_PREFIX,
+        express.static(ASSETS_ROOT, {
             index: false,
         }),
     )
