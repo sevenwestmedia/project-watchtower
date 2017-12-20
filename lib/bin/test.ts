@@ -46,7 +46,6 @@ const test = async (...params: string[]): Promise<ChildProcess> => {
             ...process.env,
             NODE_ENV: 'test',
         },
-        silent: true,
         ...options,
     })
 }
