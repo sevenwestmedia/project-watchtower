@@ -12,12 +12,13 @@ describe('bin/test', () => {
         )
     })
 
-    // TODO Restore this test, first need to figure out how to get access to the real error
-    it.skip('will test in debug mode', async () => {
+    it('will test in debug mode', async () => {
         await test(
             'debug',
             '--config',
             'jest.json',
+            '--testRegex',
+            '\\.(spec|test)\\.js$',
             'math.test.js', // make sure to not recursively test this file
         )
     })

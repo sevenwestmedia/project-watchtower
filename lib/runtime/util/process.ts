@@ -55,7 +55,11 @@ export const forkPromise = (
     longRunning = false,
 ) =>
     new Promise<ChildProcess>((resolve, reject) => {
-        log(`[pwt] node ${command} ${args.join(' ')}`)
+        log(
+            `[pwt] node ${options && options.execArgv
+                ? `${options.execArgv.join(' ')} `
+                : ''}${command} ${args.join(' ')}`,
+        )
 
         const proc = fork(command, args, options)
 
