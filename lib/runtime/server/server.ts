@@ -81,9 +81,12 @@ export const createServer: CreateServerType = (options = defaultOptions) => {
         earlyMiddlewareHook(app)
     }
 
+    // Express route prefixes have to start with /
+    const assetsPathPrefixWithLeadingSlash =
+        ASSETS_PATH_PREFIX[0] === '/' ? ASSETS_PATH_PREFIX : `/${ASSETS_PATH_PREFIX}`
     app.use(
-        ASSETS_PATH_PREFIX,
-        express.static(ASSETS_ROOT, {
+        assetsPathPrefixWithLeadingSlash,
+        express.static(path.join(process.cwd(), ASSETS_ROOT, ASSETS_PATH_PREFIX), {
             index: false,
         }),
     )
