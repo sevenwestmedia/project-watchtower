@@ -86,7 +86,7 @@ export const createServer: CreateServerType = (options = defaultOptions) => {
         ASSETS_PATH_PREFIX[0] === '/' ? ASSETS_PATH_PREFIX : `/${ASSETS_PATH_PREFIX}`
     app.use(
         assetsPathPrefixWithLeadingSlash,
-        express.static(path.join(process.cwd(), ASSETS_ROOT, ASSETS_PATH_PREFIX), {
+        express.static(path.join(ASSETS_ROOT, ASSETS_PATH_PREFIX), {
             index: false,
         }),
     )
