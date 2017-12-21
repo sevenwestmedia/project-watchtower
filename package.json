@@ -80,7 +80,7 @@
     "peerDependencies": {
         "@types/prop-types": "^15.5.1",
         "@types/webpack": ">=3.0.0",
-        "enzyme": ">=2.0.0",
+        "enzyme": ">=3.0.0",
         "enzyme-to-json": "^3.0.0",
         "express": ">=4.0.0",
         "glamor": "^2.20.40",
