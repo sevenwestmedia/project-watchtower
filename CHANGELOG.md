@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.12.1] - 3/1/2018
+No changes
+
 ## [v0.12.0] - 20/12/2017
 - chore(code hygiene): update editorconfig package.json indent
 - Don't output static assets during server build, they are only needed for client build
