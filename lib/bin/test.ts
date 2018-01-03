@@ -37,7 +37,7 @@ const test = async (...params: string[]): Promise<ChildProcess> => {
         ])
     }
 
-    const options = isDebug ? { execArgv: ['--debug'] } : {}
+    const options = isDebug ? { execArgv: ['--inspect'] } : {}
 
     args = args.concat(params)
 

@@ -67,6 +67,7 @@
         ],
         "whitespace": false,
         "quotemark": [true, "single", "jsx-double"],
-        "align": false
+        "align": false,
+        "import-spacing": false
     }
 }

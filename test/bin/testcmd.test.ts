@@ -1,10 +1,9 @@
 import test from '../../lib/bin/test'
 
 // Increase test timeout because tests might take a while
-(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000
+;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000
 
 describe('bin/test', () => {
-
     it('will test', async () => {
         await test(
             '--config',
@@ -18,8 +17,9 @@ describe('bin/test', () => {
             'debug',
             '--config',
             'jest.json',
+            '--testRegex',
+            '\\.(spec|test)\\.js$',
             'math.test.js', // make sure to not recursively test this file
         )
     })
-
 })
