@@ -7,7 +7,6 @@
         "registry": "https://nexus.swmdigital.io/repository/js-private"
     },
     "scripts": {
-        "prepare": "npm run clean",
         "clean": "npm run clean:lighthouse && rimraf dist-es {lib,test}/**/*.{js,map,d.ts}",
         "lint": "tslint 'lib/**/*.ts' --type-check --project ./tsconfig.json -e '**/*.d.ts'",
         "lint:prettier": "prettier --single-quote=true --tab-width=4 --trailing-comma=all --use-tabs=false --print-width=100 --no-semi --write \"./lib/**/*.ts\" \"./lib/**/*.tsx\" \"./server/**/*.ts\" \"./server/**/*.tsx\"",
