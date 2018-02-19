@@ -2,7 +2,6 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as webpack from 'webpack'
 import CONFIG from '../runtime/config/config'
-import { fileLoaderConfig } from './webpack.base'
 
 const {
     BASE,
@@ -36,7 +35,7 @@ const serverBaseConfig: webpack.Configuration = {
             {
                 test: /\.s?css$/,
                 use: 'null-loader',
-            }
+            },
         ],
     },
     node: {
