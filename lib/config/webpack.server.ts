@@ -36,16 +36,7 @@ const serverBaseConfig: webpack.Configuration = {
             {
                 test: /\.s?css$/,
                 use: 'null-loader',
-            },
-            {
-                ...fileLoaderConfig,
-                options: {
-                    ...fileLoaderConfig.options,
-                    // We want the same config as client, except we don't
-                    // need to emit the assets
-                    emitFile: false,
-                },
-            },
+            }
         ],
     },
     node: {

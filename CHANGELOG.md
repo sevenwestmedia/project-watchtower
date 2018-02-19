@@ -1,5 +1,8 @@
 # Changelog
 
+## vNext
+- Copy assets from server build as server may reference assets which client doesn't, causing 404s
+
 ## [v0.12.1] - 3/1/2018
 No changes
 
