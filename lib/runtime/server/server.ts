@@ -7,7 +7,14 @@ import { log, logError } from '../util/log'
 import CONFIG from '../config/config'
 
 const isProduction = process.env.NODE_ENV === 'production'
-const { CLIENT_OUTPUT, PORT, SERVER_PUBLIC_DIR, ASSETS_PATH_PREFIX, ASSETS_ROOT } = CONFIG
+const {
+    CLIENT_OUTPUT,
+    PORT,
+    SERVER_PUBLIC_DIR,
+    ASSETS_PATH_PREFIX,
+    ASSETS_ROOT,
+    SERVER_OUTPUT,
+} = CONFIG
 
 export const getPort = (fallbackPort?: number) =>
     parseInt(process.env.PORT || '', 10) || fallbackPort || PORT
@@ -81,12 +88,17 @@ export const createServer: CreateServerType = (options = defaultOptions) => {
         earlyMiddlewareHook(app)
     }
 
+    // We can run from <root> or server output
+    const staticRoot = fs.existsSync(path.resolve(SERVER_OUTPUT, 'server.js'))
+        ? SERVER_OUTPUT
+        : ASSETS_ROOT
+
     // Express route prefixes have to start with /
     const assetsPathPrefixWithLeadingSlash =
         ASSETS_PATH_PREFIX[0] === '/' ? ASSETS_PATH_PREFIX : `/${ASSETS_PATH_PREFIX}`
     app.use(
         assetsPathPrefixWithLeadingSlash,
-        express.static(path.join(ASSETS_ROOT, ASSETS_PATH_PREFIX), {
+        express.static(path.join(staticRoot, ASSETS_PATH_PREFIX), {
             index: false,
         }),
     )
