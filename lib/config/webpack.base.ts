@@ -1,7 +1,7 @@
 import * as path from 'path'
 import * as webpack from 'webpack'
 import { version as tsVersion } from 'typescript'
-import { CheckerPlugin } from 'awesome-typescript-loader'
+import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader'
 import CONFIG from '../runtime/config/config'
 
 const { BASE, MODULE_PATHS, ASSETS_PATH_PREFIX } = CONFIG
@@ -67,7 +67,7 @@ const baseConfig: webpack.Configuration = {
             },
         ],
     },
-    plugins: [new CheckerPlugin(), new webpack.NoEmitOnErrorsPlugin()],
+    plugins: [new CheckerPlugin(), new webpack.NoEmitOnErrorsPlugin(), new TsConfigPathsPlugin()],
 }
 
 export default baseConfig
