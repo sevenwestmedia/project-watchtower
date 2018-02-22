@@ -1,5 +1,8 @@
 # Changelog
 
+## vNext
+- Support using TypeScript path mappings and configuring base directory for webpack config
+
 ## [v0.12.2] - 20/2/2018
 - Copy assets from server build as server may reference assets which client doesn't, causing 404s
 
