@@ -29,6 +29,7 @@ const baseConfig: webpack.Configuration = {
         // force linked dependencies to use the project's node_modules
         // https://github.com/webpack/webpack/issues/985#issuecomment-261497772
         symlinks: false,
+        plugins: [new TsConfigPathsPlugin()],
     } as any, // @typings/webpack is missing resolve.symlinks
     module: {
         rules: [
@@ -67,7 +68,7 @@ const baseConfig: webpack.Configuration = {
             },
         ],
     },
-    plugins: [new CheckerPlugin(), new webpack.NoEmitOnErrorsPlugin(), new TsConfigPathsPlugin()],
+    plugins: [new CheckerPlugin(), new webpack.NoEmitOnErrorsPlugin()],
 }
 
 export default baseConfig
