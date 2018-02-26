@@ -22,8 +22,6 @@ const test = async (...params: string[]): Promise<ChildProcess> => {
         if (params.indexOf('--runInBand') === -1) {
             args.push('--runInBand')
         }
-    } else {
-        await clean()
     }
 
     const configDefined = params.some(param => param.indexOf('--config') === 0)
