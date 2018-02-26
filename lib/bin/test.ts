@@ -1,6 +1,6 @@
+import * as fs from 'fs'
 import * as path from 'path'
 import { ChildProcess } from 'child_process'
-import clean from './clean'
 import { forkPromise } from '../runtime/util/process'
 
 const root = process.cwd()
@@ -23,17 +23,7 @@ const test = async (...params: string[]): Promise<ChildProcess> => {
             args.push('--runInBand')
         }
     }
-
-    const configDefined = params.some(param => param.indexOf('--config') === 0)
-
-    if (!configDefined) {
-        args = args.concat([
-            '--config',
-            isDebug
-                ? 'node_modules/project-watchtower/presets/jest/jest-js.json'
-                : 'node_modules/project-watchtower/presets/jest/jest.json',
-        ])
-    }
+    args = appendConfigArgs(args, params, isDebug)
 
     const options = isDebug ? { execArgv: ['--inspect'] } : {}
 
@@ -46,6 +36,27 @@ const test = async (...params: string[]): Promise<ChildProcess> => {
         },
         ...options,
     })
+}
+
+function appendConfigArgs(args: string[], params: string[], isDebug: boolean) {
+    const configDefined = params.some(param => param.indexOf('--config') === 0)
+    if (configDefined) {
+        return args
+    }
+
+    if (isDebug && fs.existsSync(path.resolve(root, 'jest.debug.config.js'))) {
+        return args.concat(['--config', 'jest.debug.config.js'])
+    }
+    if (fs.existsSync(path.resolve(root, 'jest.config.js'))) {
+        return args.concat(['--config', 'jest.config.js'])
+    }
+
+    return args.concat([
+        '--config',
+        isDebug
+            ? 'node_modules/project-watchtower/presets/jest/jest-js.json'
+            : 'node_modules/project-watchtower/presets/jest/jest.json',
+    ])
 }
 
 export default test
