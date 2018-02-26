@@ -1,6 +1,6 @@
 # Changelog
 
-## vNext
+## [v0.12.3] - 26/2/2018
 - Support using TypeScript path mappings and configuring base directory for webpack config
 
 ## [v0.12.2] - 20/2/2018
