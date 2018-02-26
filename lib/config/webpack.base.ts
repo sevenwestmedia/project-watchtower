@@ -1,7 +1,7 @@
 import * as path from 'path'
 import * as webpack from 'webpack'
 import { version as tsVersion } from 'typescript'
-import { CheckerPlugin } from 'awesome-typescript-loader'
+import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader'
 import CONFIG from '../runtime/config/config'
 
 const { BASE, MODULE_PATHS, ASSETS_PATH_PREFIX } = CONFIG
@@ -29,6 +29,7 @@ const baseConfig: webpack.Configuration = {
         // force linked dependencies to use the project's node_modules
         // https://github.com/webpack/webpack/issues/985#issuecomment-261497772
         symlinks: false,
+        plugins: [new TsConfigPathsPlugin()],
     } as any, // @typings/webpack is missing resolve.symlinks
     module: {
         rules: [

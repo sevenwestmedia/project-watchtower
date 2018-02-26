@@ -11,6 +11,7 @@ pwt build [<target> <environment>]
 By default, Project Watchtower uses its own webpack configuration files. If you want to modify or extend them with custom options for you project, there are multiple ways of providing custom configuration:
 
 ### Basic config file
+To override the root directory (defaults to current working directory), set the `ROOT_DIR` environmental variable
 
 If you want to change the default configuration of the build process, you can add a `/config/config.js` that overrides the settings used by the default webpack configuration:
 

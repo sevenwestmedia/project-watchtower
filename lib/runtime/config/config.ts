@@ -2,7 +2,7 @@ import * as path from 'path'
 import { getCustomConfigFile } from '../util/fs'
 import { BuildConfig, BuildConfigOverride } from '../../types'
 
-const root = process.cwd()
+const root = (process.env.ROOT_DIR && path.resolve(process.env.ROOT_DIR)) || process.cwd()
 
 const defaultConfig: BuildConfig = {
     ASSETS_PATH_PREFIX: 'static/',
