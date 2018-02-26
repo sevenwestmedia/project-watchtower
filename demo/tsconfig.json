@@ -18,12 +18,10 @@
             "es2015.iterable",
             "es2015.symbol",
             "es2015.symbol.wellknown"
-        ]
+        ],
+        "baseUrl": ".",
+        "typeRoots": ["node_modules/@types"]
     },
-    "include": [
-        "client",
-        "server",
-        "common",
-        "config"
-    ]
+    "include": ["client", "server", "common", "config"],
+    "exclude": ["../node_modules"]
 }

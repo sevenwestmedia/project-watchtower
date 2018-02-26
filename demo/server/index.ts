@@ -9,8 +9,8 @@ import {
 
 import App from '../common/App'
 
-const html = (ssr: string) => (
-`<!DOCTYPE html>
+const html = (ssr: string) =>
+    `<!DOCTYPE html>
 <html>
 <head>
     <title>Demo Server</title>
@@ -21,15 +21,16 @@ const html = (ssr: string) => (
     ${getJsAssetHtml()}
 </body>
 </html>`
-)
 
 const createAppServer = () => {
-    createServer((app) => {
-        app.get('*', (_req, res) => {
-            const ssr = renderToString(React.createElement(App))
-            const content = html(ssr)
-            res.send(content)
-        })
+    createServer({
+        middlewareHook: app => {
+            app.get('*', (_req, res) => {
+                const ssr = renderToString(React.createElement(App))
+                const content = html(ssr)
+                res.send(content)
+            })
+        },
     })
 }
 
