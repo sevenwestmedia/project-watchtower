@@ -44,9 +44,6 @@ export interface BuildConfig {
     /** List paths to exclude from linting */
     LINT_EXCLUDE: string[]
 
-    /** Paths where modules are resolved */
-    MODULE_PATHS: string[]
-
     /** Default port for the server (when process.env.PORT is not set) */
     PORT: number
 

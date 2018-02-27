@@ -12,12 +12,6 @@ const defaultConfig = (root: string): BuildConfig => ({
     CSS_AUTOPREFIXER: ['last 2 versions'],
     HAS_SERVER: true,
     LINT_EXCLUDE: [],
-    MODULE_PATHS: [
-        root,
-        path.resolve(root, 'node_modules'),
-        path.resolve(root, 'common'),
-        path.resolve(root, 'app'),
-    ],
     PUBLIC_PATH: '/',
     PORT: 3000,
     SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),

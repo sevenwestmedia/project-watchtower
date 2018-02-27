@@ -23,7 +23,6 @@ export const fileLoaderConfig = (buildConfig: BuildConfig) => ({
 const baseConfig = (buildConfig: BuildConfig): webpack.Configuration => ({
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '*'],
-        modules: buildConfig.MODULE_PATHS,
         // force linked dependencies to use the project's node_modules
         // https://github.com/webpack/webpack/issues/985#issuecomment-261497772
         symlinks: false,

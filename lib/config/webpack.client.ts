@@ -54,7 +54,6 @@ const clientBaseConfig = (buildConfig: BuildConfig) => {
         CLIENT_OUTPUT,
         CLIENT_POLYFILLS,
         CSS_AUTOPREFIXER,
-        MODULE_PATHS,
         PUBLIC_PATH,
         SERVER_PUBLIC_DIR,
     } = buildConfig
@@ -127,7 +126,6 @@ const clientBaseConfig = (buildConfig: BuildConfig) => {
                                 loader: 'sass-loader',
                                 options: {
                                     sourceMap: true,
-                                    includePaths: MODULE_PATHS,
                                 },
                             },
                         ],

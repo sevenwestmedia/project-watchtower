@@ -71,9 +71,6 @@ export interface BuildConfig {
     /** List paths to exclude from linting */
     LINT_EXCLUDE: string[]
 
-    /** Paths where modules are resolved */
-    MODULE_PATHS: string[]
-
     /** Default port for the server (when process.env.PORT is not set) */
     PORT: number
 
@@ -123,12 +120,6 @@ Default configuration:
     CSS_AUTOPREFIXER: ['last 2 versions'],
     HAS_SERVER: true,
     LINT_EXCLUDE: [],
-    MODULE_PATHS: [
-        root,
-        path.resolve(root, 'node_modules'),
-        path.resolve(root, 'common'),
-        path.resolve(root, 'app'),
-    ],
     PUBLIC_PATH: '/',
     PORT: 3000,
     /** if true, all externals will be bundled */
