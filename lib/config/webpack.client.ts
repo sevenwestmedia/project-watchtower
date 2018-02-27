@@ -34,12 +34,9 @@ const plugins: webpack.Plugin[] = [
                 return false
             }
 
-            const isSwmModule =
-                module.context.indexOf('swm-component-library', modulePos) !== -1 ||
-                module.context.indexOf('redux-data-loader', modulePos) !== -1 ||
-                module.context.indexOf('project-watchtower', modulePos) !== -1
+            const isWatchtower = module.context.indexOf('project-watchtower', modulePos) !== -1
 
-            return !isSwmModule
+            return !isWatchtower
         },
     }),
 ]

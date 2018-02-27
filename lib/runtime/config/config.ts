@@ -22,7 +22,7 @@ const defaultConfig = (root: string): BuildConfig => ({
     PORT: 3000,
     SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
     SERVER_BUNDLE_ALL: false,
-    SERVER_INCLUDE_IN_BUNDLE: ['swm-component-library', 'project-watchtower'],
+    SERVER_INCLUDE_IN_BUNDLE: ['project-watchtower'],
     SERVER_OUTPUT: path.resolve(root, 'dist'),
     SERVER_PUBLIC_DIR: path.resolve(root, 'public'),
     STATIC_RESOURCE_NAMES: false,
