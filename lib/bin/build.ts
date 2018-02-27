@@ -13,7 +13,7 @@ const buildTarget = (
     target: BuildTarget,
     environment: BuildEnvironment = 'prod',
 ) => {
-    const config = getWebpackConfig(buildConfig.BASE, target, environment)
+    const config = getWebpackConfig(buildConfig, target, environment)
 
     if (!config) {
         return Promise.reject(`Could not load webpack configuration for ${target}/${environment}!`)

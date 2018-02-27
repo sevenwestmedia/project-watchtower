@@ -10,7 +10,7 @@ import { BuildConfig } from '../../lib'
 export type HotReloadMiddleware = (buildConfig: BuildConfig) => express.RequestHandler[]
 
 export const getHotReloadMiddleware: HotReloadMiddleware = buildConfig => {
-    const config = getWebpackConfig(buildConfig.BASE, 'client', 'dev')
+    const config = getWebpackConfig(buildConfig, 'client', 'dev')
     const compiler = webpack(config)
 
     const dev = webpackDevMiddleware(compiler, {

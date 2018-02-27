@@ -9,7 +9,7 @@ import { BuildConfig } from '../../lib'
  * Opens the webpack-bundle-analyzer for the client production bundle
  */
 const exploreBundle = (buildConfig: BuildConfig, ...args: string[]) => {
-    const baseConfig = getWebpackConfig(buildConfig.BASE, 'client', 'prod')
+    const baseConfig = getWebpackConfig(buildConfig, 'client', 'prod')
 
     if (!baseConfig) {
         return Promise.reject('Error loading the webpack configuration!')

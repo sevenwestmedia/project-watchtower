@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv'
 import { forkPromise } from '../runtime/util/process'
 import { StartParam } from '../types'
 import { BuildConfig } from '../../lib'
+import { setBaseDir } from '../runtime/server/base-dir'
 
 /**
  * Starts the pre-built server with the environment variables
@@ -14,10 +15,14 @@ import { BuildConfig } from '../../lib'
  * - prod: Sets NODE_ENV to "production"
  */
 const start = (buildConfig: BuildConfig, ...args: StartParam[]): Promise<ChildProcess> => {
+    // When running in local dev, we have a different process.cwd() than
+    // when running in production. This allows static files and such to resolve
     const { HAS_SERVER, SERVER_OUTPUT } = buildConfig
+    setBaseDir(SERVER_OUTPUT)
 
     if (args.indexOf('watch') !== -1) {
         process.env.START_WATCH_MODE = 'true'
+        process.env.PROJECT_DIR = buildConfig.BASE
     }
 
     if (args.indexOf('fast') !== -1) {

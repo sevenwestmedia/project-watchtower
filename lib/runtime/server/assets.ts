@@ -2,6 +2,8 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { Assets } from '../../types'
 import { BuildConfig } from '../../../lib'
+import { getConfig } from '../../../lib/runtime/config/config'
+import { getBaseDir } from '../../../lib/runtime/server/base-dir'
 
 let assets: Assets
 
@@ -9,7 +11,8 @@ let assetsLoaded = false
 
 const getAssetsFile = (buildConfig: BuildConfig) => path.resolve(buildConfig.BASE, 'assets.json')
 
-const ensureAssets = (buildConfig: BuildConfig) => {
+const ensureAssets = () => {
+    const buildConfig = getConfig(getBaseDir())
     if (assetsLoaded) {
         return
     }
@@ -39,8 +42,8 @@ export const updateAssetLocations = (newAssets: Assets) => {
     assetsLoaded = true
 }
 
-export const getAssetLocations = (buildConfig: BuildConfig) => {
-    ensureAssets(buildConfig)
+export const getAssetLocations = () => {
+    ensureAssets()
     return assets
 }
 
@@ -48,30 +51,30 @@ export const getAssetLocations = (buildConfig: BuildConfig) => {
  * Returns a HTML snippet for all CSS assets
  * We add the timestamp in watch mode to support hot reloading with the ExtractTextWebpackPlugin
  */
-export const getCssAssetHtml = (buildConfig: BuildConfig) => {
-    ensureAssets(buildConfig)
+export const getCssAssetHtml = () => {
+    ensureAssets()
     return `<link rel="stylesheet" type="text/css" id="css-main" href="${assets.main.css}${watchMode
         ? '?' + Date.now()
         : ''}" />`
 }
 
 /** Returns a HTML snippet for all JavaScript assets */
-export const getJsAssetHtml = (buildConfig: BuildConfig) => {
-    ensureAssets(buildConfig)
+export const getJsAssetHtml = () => {
+    ensureAssets()
     return `<script src="${assets.vendor.js}"></script>
     <script src="${assets.main.js}" async></script>`
 }
 
 /** Inserts all assets into a given HTML document string */
-export const addAssetsToHtml = (buildConfig: BuildConfig, html: string) => {
-    ensureAssets(buildConfig)
+export const addAssetsToHtml = (html: string) => {
+    ensureAssets()
     let modifiedHtml = html
 
     if (html.indexOf(assets.main.css) === -1) {
-        modifiedHtml = modifiedHtml.replace('</head>', getCssAssetHtml(buildConfig) + '</head>')
+        modifiedHtml = modifiedHtml.replace('</head>', getCssAssetHtml() + '</head>')
     }
     if (html.indexOf(assets.main.js) === -1) {
-        modifiedHtml = modifiedHtml.replace('</body>', getJsAssetHtml(buildConfig) + '</body>')
+        modifiedHtml = modifiedHtml.replace('</body>', getJsAssetHtml() + '</body>')
     }
     return modifiedHtml
 }

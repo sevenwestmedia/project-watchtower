@@ -6,6 +6,7 @@ import { findFreePort } from '../util/network'
 import { log, logError } from '../util/log'
 import { getConfig } from '../config/config'
 import { BuildConfig } from '../../types'
+import { getBaseDir } from '../../../lib/runtime/server/base-dir'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -46,7 +47,7 @@ export const getDefaultHtmlMiddleware = (buildConfig: BuildConfig, logNotFound =
     }
 
     const middleware: express.RequestHandler = (_req, res) => {
-        const indexWithAssets = addAssetsToHtml(buildConfig, indexContent)
+        const indexWithAssets = addAssetsToHtml(indexContent)
         res
             .status(200)
             .contentType('text/html')
@@ -63,15 +64,11 @@ export type CreateServerOptions = {
     callback?: () => void
     startListening?: boolean
 }
-export type CreateServerType = (
-    /** startDir should be build output directory */
-    startDir: string,
-    options?: CreateServerOptions,
-) => express.Express
+export type CreateServerType = (options?: CreateServerOptions) => express.Express
 
 const defaultOptions: CreateServerOptions = {}
-export const createServer: CreateServerType = (startDir, options = defaultOptions) => {
-    const config = getConfig(startDir)
+export const createServer: CreateServerType = (options = defaultOptions) => {
+    const config = getConfig(getBaseDir())
     const { earlyMiddlewareHook, middlewareHook, callback, startListening = true } = options
     const app = express()
     app.disable('x-powered-by')
@@ -79,7 +76,8 @@ export const createServer: CreateServerType = (startDir, options = defaultOption
     if (process.env.NODE_ENV !== 'production' && isWatchMode()) {
         // tslint:disable-next-line no-var-requires
         const { getHotReloadMiddleware } = require('../../server/dev')
-        app.use(getHotReloadMiddleware())
+        const buildConfig = getConfig(process.env.PROJECT_DIR || process.cwd())
+        app.use(getHotReloadMiddleware(buildConfig))
     }
 
     if (earlyMiddlewareHook) {
@@ -93,7 +91,7 @@ export const createServer: CreateServerType = (startDir, options = defaultOption
             : `/${config.ASSETS_PATH_PREFIX}`
     app.use(
         assetsPathPrefixWithLeadingSlash,
-        express.static(path.join(startDir, config.ASSETS_PATH_PREFIX), {
+        express.static(path.join(config.BASE, config.ASSETS_PATH_PREFIX), {
             index: false,
         }),
     )
@@ -124,7 +122,7 @@ export const createServer: CreateServerType = (startDir, options = defaultOption
             if (process.env.NODE_ENV !== 'production' && isWatchMode()) {
                 // tslint:disable-next-line no-var-requires
                 const { openBrowser } = require('../../server/dev')
-                openBrowser(usePort)
+                openBrowser(config, usePort)
             }
             if (callback) {
                 callback()

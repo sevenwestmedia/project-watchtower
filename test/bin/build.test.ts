@@ -21,7 +21,7 @@ describe('bin/build', () => {
         const assetsPath = path.resolve(BASE, 'assets.json')
         expect(fs.existsSync(assetsPath)).toBe(true)
 
-        const assets = getAssetLocations(buildConfig)
+        const assets = getAssetLocations()
 
         const files = [assets.main.js, assets.main.css, assets.vendor.js].map(f =>
             getAbsoluteAssetPath(buildConfig, f),

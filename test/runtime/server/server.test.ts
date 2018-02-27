@@ -13,7 +13,7 @@ describe('runtime/server/server', () => {
 
     it('createServer', () =>
         new Promise(resolve => {
-            const app = createServer(__dirname, {
+            const app = createServer({
                 callback: () => {
                     app.get('server').close()
                     resolve()

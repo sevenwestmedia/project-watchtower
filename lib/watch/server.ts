@@ -36,7 +36,7 @@ const watchServer = (buildConfig: BuildConfig, port?: number) =>
         let devServer: ChildProcess
         let devServerAvailable: Promise<any>
 
-        const serverCompiler = webpack(getWebpackConfig(buildConfig.BASE, 'server', 'dev'))
+        const serverCompiler = webpack(getWebpackConfig(buildConfig, 'server', 'dev'))
 
         const watching = serverCompiler.watch(
             {

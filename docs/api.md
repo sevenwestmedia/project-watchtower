@@ -137,14 +137,14 @@ default clean(paths: string | string[]) => Promise<any>
 `project-watchtower/lib/config`
 
 ```ts
-base: webpack.Configuration
-clientBase: webpack.Configuration
-clientDev: webpack.Configuration
-clientDebug: webpack.Configuration
-clientProd: webpack.Configuration
-serverDev: webpack.Configuration
-serverDebug: webpack.Configuration
-serverProd: webpack.Configuration
+base: (buildConfig: BuildConfig) => webpack.Configuration
+clientBase: (buildConfig: BuildConfig) => webpack.Configuration
+clientDev: (buildConfig: BuildConfig) => webpack.Configuration
+clientDebug: (buildConfig: BuildConfig) => webpack.Configuration
+clientProd: (buildConfig: BuildConfig) => webpack.Configuration
+serverDev: (buildConfig: BuildConfig) => webpack.Configuration
+serverDebug:(buildConfig: BuildConfig) =>  webpack.Configuration
+serverProd: (buildConfig: BuildConfig) => webpack.Configuration
 devBase: webpack.Configuration
 prodBase: webpack.Configuration
 ```
@@ -160,9 +160,9 @@ sassLint(...paths: string[]): Promise<any>
 `project-watchtower/lib/server`
 
 ```ts
-getHotReloadMiddleware() => express.RequestHandler[]
+getHotReloadMiddleware(buildConfig: BuildConfig) => express.RequestHandler[]
 
-openBrowser(port?: number)
+openBrowser(buildConfig: BuildConfig, port?: number)
 ```
 
 `project-watchtower/lib/stats`

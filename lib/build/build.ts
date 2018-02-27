@@ -10,7 +10,7 @@ import webpackClientProdConfig from '../config/webpack.client.prod'
 import webpackServerDevConfig from '../config/webpack.server.dev'
 import webpackServerDebugConfig from '../config/webpack.server.debug'
 import webpackServerProdConfig from '../config/webpack.server.prod'
-import { getConfig } from '../../lib/runtime/config/config'
+import { BuildConfig } from '../index'
 
 export const TARGETS: BuildTarget[] = ['server', 'client']
 
@@ -22,11 +22,10 @@ export const ENVIRONMENTS: BuildEnvironment[] = ['dev', 'prod', 'debug']
  * config/webpack.<target>.<environment>.js, or the default one otherwise
  */
 export const getWebpackConfig = (
-    root: string,
+    buildConfig: BuildConfig,
     target: BuildTarget,
     environment: BuildEnvironment,
 ): webpack.Configuration | undefined => {
-    const buildConfig = getConfig(root)
     if (TARGETS.indexOf(target) === -1) {
         logError(`Unknown target: "${target}"! ` + `Known values are: ${TARGETS.join(', ')}`)
         return undefined
@@ -41,7 +40,7 @@ export const getWebpackConfig = (
     }
 
     const configFileName = `webpack.${target}.${environment}`
-    const customConfigFile = path.resolve(root, 'config', configFileName)
+    const customConfigFile = path.resolve(buildConfig.BASE, 'config', configFileName)
 
     let config: webpack.Configuration
 

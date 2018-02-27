@@ -29,7 +29,7 @@ buildConfig.PUBLIC_PATH = '/baz/'
 describe('server/assets initial', () => {
     it('initial asset location values', async () => {
         await clean(buildConfig)
-        expect(getAssetLocations(buildConfig)).toEqual({
+        expect(getAssetLocations()).toEqual({
             main: {
                 js: '/baz/static/js/main.js',
                 css: '/baz/static/css/main.css',
@@ -47,11 +47,11 @@ describe('server/assets', () => {
     })
 
     it('getAssetLocations', () => {
-        expect(getAssetLocations(buildConfig)).toEqual(assets)
+        expect(getAssetLocations()).toEqual(assets)
     })
 
     it('getCssAssetHtml', () => {
-        const html = getCssAssetHtml(buildConfig)
+        const html = getCssAssetHtml()
         const doc = load(html)
         expect(doc('link').length).toBe(1)
         expect(
@@ -62,7 +62,7 @@ describe('server/assets', () => {
     })
 
     it('getJsAssetHtml', () => {
-        const html = getJsAssetHtml(buildConfig)
+        const html = getJsAssetHtml()
         const doc = load(html)
         expect(doc('script').length).toBe(2)
         expect(
@@ -85,7 +85,7 @@ describe('server/assets', () => {
 <body>
 </body>
 </html>`
-        const html = addAssetsToHtml(buildConfig, htmlTemplate)
+        const html = addAssetsToHtml(htmlTemplate)
 
         const doc = load(html)
         expect(doc('link').length).toBe(1)
@@ -119,7 +119,7 @@ describe('server/assets', () => {
 <script src="${assets.main.js}"></script>
 </body>
 </html>`
-        const html = addAssetsToHtml(buildConfig, htmlTemplate)
+        const html = addAssetsToHtml(htmlTemplate)
 
         const doc = load(html)
         expect(doc('link').length).toBe(1)
