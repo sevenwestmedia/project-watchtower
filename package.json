@@ -18,7 +18,7 @@
         "prestart:demo": "npm run clean:lighthouse && yarn build",
         "start:demo": "yarn pwt watch -p demo",
         "pretest:base": "npm run clean:lighthouse",
-        "test:base": "jest --runInBand --config jest.json",
+        "test:base": "jest --runInBand --forceExit --config jest.json",
         "test": "npm run build:debug && npm run test:base -- --silent",
         "test:debug": "node --inspect ./node_modules/jest/bin/jest.js --runInBand --config jest-debug.json",
         "test:verbose": "npm run test:base -- --verbose",

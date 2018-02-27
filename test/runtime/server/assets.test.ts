@@ -24,18 +24,16 @@ const assets = {
     },
 }
 
-buildConfig.PUBLIC_PATH = '/baz/'
-
 describe('server/assets initial', () => {
     it('initial asset location values', async () => {
         await clean(buildConfig)
         expect(getAssetLocations()).toEqual({
             main: {
-                js: '/baz/static/js/main.js',
-                css: '/baz/static/css/main.css',
+                js: '/static/js/main.js',
+                css: '/static/css/main.css',
             },
             vendor: {
-                js: '/baz/static/js/vendor.js',
+                js: '/static/js/vendor.js',
             },
         })
     })
@@ -128,6 +126,6 @@ describe('server/assets', () => {
 
     it('getAbsoluteAssetPath', () => {
         const assetPath = path.resolve(buildConfig.CLIENT_OUTPUT, 'foo/bar')
-        expect(getAbsoluteAssetPath(buildConfig, '/baz/foo/bar')).toBe(assetPath)
+        expect(getAbsoluteAssetPath(buildConfig, '/foo/bar')).toBe(assetPath)
     })
 })
