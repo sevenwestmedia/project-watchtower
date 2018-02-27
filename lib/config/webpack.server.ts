@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as webpack from 'webpack'
-import { BuildConfig } from 'lib'
+import { BuildConfig } from '../../lib'
 
 /**
  * Base Webpack config for the server that is used in both development and production

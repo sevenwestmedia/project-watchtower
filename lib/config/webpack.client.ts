@@ -8,7 +8,7 @@ import * as HtmlPlugin from 'html-webpack-plugin'
 import * as DotenvPlugin from 'webpack-dotenv-plugin'
 import { updateAssetLocations } from '../runtime/server/assets'
 import { Assets } from '../types'
-import { BuildConfig } from 'lib'
+import { BuildConfig } from '../../lib'
 
 type EntryPoints = {
     [name: string]: string[]

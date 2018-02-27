@@ -5,7 +5,7 @@ import baseConfig from './webpack.base'
 import clientBaseConfig from './webpack.client'
 import prodConfig from './webpack.prod'
 import getWebpackHooks from './webpack-hooks'
-import { BuildConfig } from 'lib'
+import { BuildConfig } from '../../lib'
 
 /** Webpack config for the client in production */
 const config = (buildConfig: BuildConfig): webpack.Configuration => {
