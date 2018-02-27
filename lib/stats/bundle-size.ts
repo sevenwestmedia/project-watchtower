@@ -40,7 +40,7 @@ const getCombinedSize = (assetsDir: string) =>
 const bundleSize = async (buildConfig: BuildConfig) => {
     try {
         const assetFilePath = path.resolve(buildConfig.BASE, 'assets.json')
-
+        console.warn(assetFilePath, buildConfig)
         const assetFile = await readFile(assetFilePath)
         const assets = JSON.parse(assetFile)
         const assetsDir = path.dirname(getAbsoluteAssetPath(buildConfig, assets.main.js))

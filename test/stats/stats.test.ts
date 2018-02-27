@@ -33,7 +33,7 @@ describe('stats', () => {
         expect(vendor).toBeDefined()
         expect(css).toBeDefined()
 
-        expect(+main + +vendor).toBeCloseTo(+total)
+        expect(+main + +vendor).toBeCloseTo(+total, 0.1)
 
         expect(+total).not.toBeCloseTo(0)
         expect(+css).not.toBeCloseTo(0)

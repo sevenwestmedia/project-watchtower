@@ -1,8 +1,8 @@
+import * as os from 'os'
 import * as path from 'path'
 import * as http from 'http'
 import * as dotenv from 'dotenv'
 import { getPort } from '../runtime/server/server'
-import { isBuildServer } from '../runtime/util/env'
 import { waitForConnection, findFreePort } from '../runtime/util/network'
 import { forkPromise } from '../runtime/util/process'
 import { log } from '../runtime/util/log'
@@ -17,13 +17,24 @@ export interface SSRStats {
     content: string
 }
 
+const getIp = () => {
+    const interfaces = os.networkInterfaces()
+    for (const i of Object.keys(interfaces)) {
+        for (const address of interfaces[i]) {
+            if (address.family === 'IPv4' && !address.internal) {
+                return address.address
+            }
+        }
+    }
+
+    return os.hostname()
+}
+
 const getServerUrl = (port: number, urlPath: string) => {
     const useUrlPath = urlPath.indexOf('/') === 0 ? urlPath : '/' + urlPath
 
-    const host = isBuildServer()
-        ? // provided by build environment, ref OPS-383
-          process.env.STATS_SERVER_ADDRESS || 'localhost'
-        : 'localhost'
+    const host = // provided by build environment, ref OPS-383
+        process.env.STATS_SERVER_ADDRESS || getIp() || 'localhost'
 
     return `http://${host}:${port}${useUrlPath}`
 }

@@ -1,34 +1,19 @@
 import * as Lighthouse from 'lighthouse'
-import { launch } from 'lighthouse/chrome-launcher'
 import { log, logError, prettyJson } from '../runtime/util/log'
 import { BuildMetrics } from './'
 import { runStatsOnServer } from './server'
-import { isBuildServer } from '../runtime/util/env'
-import { delay, formatTimeMs, timeout } from '../runtime/util/time'
+import { formatTimeMs, timeout } from '../runtime/util/time'
 import { BuildConfig } from '../../lib'
 
-const killChromeLauncher = (launcher?: Lighthouse.ChromeLauncher) => {
-    if (!launcher) {
-        return
-    }
-    setTimeout(() => launcher.kill(), 0)
-}
-
 export const runLighthouse = async (url: string) => {
-    const onBuildServer = isBuildServer()
-
-    const launcher = onBuildServer ? undefined : await launch()
-
     try {
         const results = await Lighthouse(
             url,
             {
                 output: 'json',
-                port: launcher
-                    ? launcher.port || 9222
-                    : // provided by build environment, ref OPS-383
-                      Number(process.env.CHROME_REMOTE_DEBUGGING_PORT) || 9222,
-                skipAutolaunch: onBuildServer,
+                // provided by build environment, ref OPS-383
+                port: Number(process.env.CHROME_REMOTE_DEBUGGING_PORT) || 9222,
+                skipAutolaunch: true,
             },
             {
                 extends: 'lighthouse:default',
@@ -38,16 +23,9 @@ export const runLighthouse = async (url: string) => {
             },
         )
 
-        // we have to wait a bit, otherwise we get a ECONNRESET error we can't catch
-        await delay(2000)
-
-        killChromeLauncher(launcher)
-
         return results
     } catch (err) {
         logError('Could not run lighthouse!', err)
-
-        killChromeLauncher(launcher)
 
         return undefined
     }

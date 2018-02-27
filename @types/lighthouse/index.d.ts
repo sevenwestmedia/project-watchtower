@@ -1,5 +1,4 @@
 declare namespace Lighthouse {
-
     interface LighthouseFlags {
         output?: 'html' | 'json'
         port?: number
@@ -61,14 +60,9 @@ declare namespace Lighthouse {
         port: number
         kill(): Promise<void>
     }
-
 }
 
-declare module "lighthouse" {
+declare module 'lighthouse' {
     const main: Lighthouse.Lighthouse
     export = main
-}
-
-declare module "lighthouse/chrome-launcher" {
-    export const launch: () => Promise<Lighthouse.ChromeLauncher>
 }
