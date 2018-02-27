@@ -1,4 +1,4 @@
-import { BuildConfigOverride } from '../../../project-watchtower/lib/types'
+import { BuildConfigOverride } from '../../lib/types'
 
 const config: BuildConfigOverride = {}
 
