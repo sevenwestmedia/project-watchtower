@@ -4,33 +4,34 @@ import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import baseConfig from './webpack.base'
 import clientBaseConfig from './webpack.client'
 import devConfig from './webpack.dev'
-import CONFIG from '../runtime/config/config'
-import webpackHooks from './webpack-hooks'
-
-const { ASSETS_PATH_PREFIX } = CONFIG
+import getWebpackHooks from './webpack-hooks'
+import { BuildConfig } from '../../lib'
 
 /** Webpack config for the client in development */
-const config: webpack.Configuration = merge(
-    baseConfig,
-    webpackHooks.base || {},
-    clientBaseConfig,
-    webpackHooks.client || {},
-    devConfig,
-    webpackHooks.dev || {},
-    {
-        entry: {
-            main: ['webpack-hot-middleware/client?noInfo=true'],
+const config = (buildConfig: BuildConfig): webpack.Configuration => {
+    const webpackHooks = getWebpackHooks(buildConfig.BASE)
+    return merge(
+        baseConfig(buildConfig),
+        webpackHooks.base || {},
+        clientBaseConfig(buildConfig),
+        webpackHooks.client || {},
+        devConfig,
+        webpackHooks.dev || {},
+        {
+            entry: {
+                main: ['webpack-hot-middleware/client?noInfo=true'],
+            },
+            output: {
+                filename: buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js',
+                chunkFilename: buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js',
+            },
+            plugins: [
+                new ExtractTextPlugin(buildConfig.ASSETS_PATH_PREFIX + 'css/[name].css'),
+                new webpack.HotModuleReplacementPlugin(),
+            ],
         },
-        output: {
-            filename: ASSETS_PATH_PREFIX + 'js/[name].js',
-            chunkFilename: ASSETS_PATH_PREFIX + 'js/[name].js',
-        },
-        plugins: [
-            new ExtractTextPlugin(ASSETS_PATH_PREFIX + 'css/[name].css'),
-            new webpack.HotModuleReplacementPlugin(),
-        ],
-    },
-    webpackHooks.clientDev || {},
-)
+        webpackHooks.clientDev || {},
+    )
+}
 
 export default config

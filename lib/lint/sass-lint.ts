@@ -1,11 +1,9 @@
 import * as path from 'path'
 import { ChildProcess } from 'child_process'
-import CONFIG from '../runtime/config/config'
 import { forkPromise } from '../runtime/util/process'
+import { BuildConfig } from '../../lib'
 
-const { LINT_EXCLUDE } = CONFIG
-
-const sassLint = (...paths: string[]): Promise<ChildProcess> => {
+const sassLint = (buildConfig: BuildConfig, ...paths: string[]): Promise<ChildProcess> => {
     const usePaths = paths.length ? paths : ['**/*.scss']
 
     const executable = path.resolve(
@@ -16,7 +14,7 @@ const sassLint = (...paths: string[]): Promise<ChildProcess> => {
         'sass-lint.js',
     )
 
-    const ignore = ['**/node_modules/**', ...LINT_EXCLUDE]
+    const ignore = ['**/node_modules/**', ...buildConfig.LINT_EXCLUDE]
 
     const args = [...usePaths, '--verbose', '--no-exit', '--ignore', ignore.join(', ')]
 

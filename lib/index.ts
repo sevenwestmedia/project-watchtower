@@ -17,21 +17,21 @@ import * as universalModule from './runtime/universal'
 import * as serverModule from './server'
 import * as statsModule from './stats'
 
-import { StartParam, BuildParam, WatchParam } from './types'
+import { StartParam, BuildParam, WatchParam, BuildConfig } from './types'
 
 export * from './types'
 
-export type BinPromiseType = (...args: string[]) => Promise<any>
+export type BinPromiseType = (buildConfig: BuildConfig, ...args: string[]) => Promise<any>
 
 export interface BinType {
-    build: (...args: BuildParam[]) => Promise<any>
+    build: (buildConfig: BuildConfig, ...args: BuildParam[]) => Promise<any>
     clean: BinPromiseType
     exploreBundle: BinPromiseType
     lint: BinPromiseType
-    start: (...args: StartParam[]) => Promise<ChildProcess>
+    start: (buildConfig: BuildConfig, ...args: StartParam[]) => Promise<ChildProcess>
     stats: BinPromiseType
     test: BinPromiseType
-    watch: (...args: WatchParam[]) => Promise<any>
+    watch: (buildConfig: BuildConfig, ...args: WatchParam[]) => Promise<any>
 }
 
 export const bin: BinType = {

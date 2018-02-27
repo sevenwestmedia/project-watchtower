@@ -1,17 +1,15 @@
 import * as path from 'path'
 import * as http from 'http'
 import * as dotenv from 'dotenv'
-import CONFIG from '../runtime/config/config'
 import { getPort } from '../runtime/server/server'
 import { isBuildServer } from '../runtime/util/env'
 import { waitForConnection, findFreePort } from '../runtime/util/network'
 import { forkPromise } from '../runtime/util/process'
 import { log } from '../runtime/util/log'
 import { getTimeMs, timeout } from '../runtime/util/time'
+import { BuildConfig } from '../../lib'
 
 dotenv.config()
-
-const { SERVER_OUTPUT, HAS_SERVER, STATS_ENV, STATS_PAGES } = CONFIG
 
 export interface SSRStats {
     size: number
@@ -61,13 +59,19 @@ export interface StatsRunDetails {
 
 export type StatsFn = (details: StatsRunDetails) => Promise<any>
 
-export const runStatsOnServer = async (statsFn: StatsFn, verbose = false) => {
+export const runStatsOnServer = async (
+    buildConfig: BuildConfig,
+    statsFn: StatsFn,
+    verbose = false,
+) => {
+    const { SERVER_OUTPUT, HAS_SERVER, STATS_ENV, STATS_PAGES } = buildConfig
+
     if (!HAS_SERVER) {
         log('Skipping server-based stats because the application has no server')
         return
     }
 
-    const port = await findFreePort(getPort())
+    const port = await findFreePort(getPort(buildConfig))
 
     const serverEntryFile = path.resolve(SERVER_OUTPUT, 'server.js')
 

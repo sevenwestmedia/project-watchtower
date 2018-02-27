@@ -134,7 +134,6 @@ Default configuration:
     /** if true, all externals will be bundled */
     SERVER_BUNDLE_ALL: false,
     SERVER_INCLUDE_IN_BUNDLE: [
-        'swm-component-library',
         'project-watchtower',
     ],
     SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
@@ -143,7 +142,6 @@ Default configuration:
     STATIC_RESOURCE_NAMES: false,
     STATS_ENV: {},
     STATS_PAGES: { home: '/' },
-    WATCH_IGNORE: /node_modules(?!.+swm-component-library)/,
 }
 ```
 

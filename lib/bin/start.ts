@@ -1,11 +1,9 @@
 import * as path from 'path'
 import { ChildProcess, ForkOptions } from 'child_process'
 import * as dotenv from 'dotenv'
-import CONFIG from '../runtime/config/config'
 import { forkPromise } from '../runtime/util/process'
 import { StartParam } from '../types'
-
-const { HAS_SERVER, SERVER_OUTPUT } = CONFIG
+import { BuildConfig } from '../../lib'
 
 /**
  * Starts the pre-built server with the environment variables
@@ -15,7 +13,9 @@ const { HAS_SERVER, SERVER_OUTPUT } = CONFIG
  * - fast: Disables server-side rendering and type checking
  * - prod: Sets NODE_ENV to "production"
  */
-const start = (...args: StartParam[]): Promise<ChildProcess> => {
+const start = (buildConfig: BuildConfig, ...args: StartParam[]): Promise<ChildProcess> => {
+    const { HAS_SERVER, SERVER_OUTPUT } = buildConfig
+
     if (args.indexOf('watch') !== -1) {
         process.env.START_WATCH_MODE = 'true'
     }

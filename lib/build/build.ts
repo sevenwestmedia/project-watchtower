@@ -10,19 +10,23 @@ import webpackClientProdConfig from '../config/webpack.client.prod'
 import webpackServerDevConfig from '../config/webpack.server.dev'
 import webpackServerDebugConfig from '../config/webpack.server.debug'
 import webpackServerProdConfig from '../config/webpack.server.prod'
+import { getConfig } from '../../lib/runtime/config/config'
 
 export const TARGETS: BuildTarget[] = ['server', 'client']
 
 export const ENVIRONMENTS: BuildEnvironment[] = ['dev', 'prod', 'debug']
-
-const root = process.cwd()
 
 /**
  * Get the webpack configuration for a given target and environment.
  * This will be the custom configuration if a file is present in
  * config/webpack.<target>.<environment>.js, or the default one otherwise
  */
-export const getWebpackConfig = (target: BuildTarget, environment: BuildEnvironment) => {
+export const getWebpackConfig = (
+    root: string,
+    target: BuildTarget,
+    environment: BuildEnvironment,
+): webpack.Configuration | undefined => {
+    const buildConfig = getConfig(root)
     if (TARGETS.indexOf(target) === -1) {
         logError(`Unknown target: "${target}"! ` + `Known values are: ${TARGETS.join(', ')}`)
         return undefined
@@ -53,13 +57,13 @@ export const getWebpackConfig = (target: BuildTarget, environment: BuildEnvironm
                 case 'server':
                     switch (environment) {
                         case 'dev':
-                            return webpackServerDevConfig
+                            return webpackServerDevConfig(buildConfig)
 
                         case 'debug':
-                            return webpackServerDebugConfig
+                            return webpackServerDebugConfig(buildConfig)
 
                         case 'prod':
-                            return webpackServerProdConfig
+                            return webpackServerProdConfig(buildConfig)
 
                         default:
                             throw new Error(`Invalid build target: ${target} ${environment}`)
@@ -68,13 +72,13 @@ export const getWebpackConfig = (target: BuildTarget, environment: BuildEnvironm
                 case 'client':
                     switch (environment) {
                         case 'dev':
-                            return webpackClientDevConfig
+                            return webpackClientDevConfig(buildConfig)
 
                         case 'debug':
-                            return webpackClientDebugConfig
+                            return webpackClientDebugConfig(buildConfig)
 
                         case 'prod':
-                            return webpackClientProdConfig
+                            return webpackClientProdConfig(buildConfig)
 
                         default:
                             throw new Error(`Invalid build target: ${target} ${environment}`)

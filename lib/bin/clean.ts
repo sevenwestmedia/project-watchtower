@@ -1,10 +1,9 @@
 import doClean from '../clean'
-import CONFIG from '../runtime/config/config'
+import { BuildConfig } from '../../lib'
 
-const { CLIENT_OUTPUT, SERVER_OUTPUT } = CONFIG
-
-const clean = (...paths: string[]) =>
-    doClean([
+const clean = (buildConfig: BuildConfig, ...paths: string[]) => {
+    const { CLIENT_OUTPUT, SERVER_OUTPUT } = buildConfig
+    return doClean([
         CLIENT_OUTPUT,
         SERVER_OUTPUT,
         '{client,common,server}/**/*.{js,map}',
@@ -13,5 +12,6 @@ const clean = (...paths: string[]) =>
         'coverage',
         ...paths,
     ])
+}
 
 export default clean

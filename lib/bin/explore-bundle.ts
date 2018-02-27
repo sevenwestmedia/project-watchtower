@@ -3,12 +3,13 @@ import * as merge from 'webpack-merge'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import { getWebpackConfig } from '../build/build'
 import { webpackPromise } from '../util/webpack'
+import { BuildConfig } from '../../lib'
 
 /**
  * Opens the webpack-bundle-analyzer for the client production bundle
  */
-const exploreBundle = (...args: string[]) => {
-    const baseConfig = getWebpackConfig('client', 'prod')
+const exploreBundle = (buildConfig: BuildConfig, ...args: string[]) => {
+    const baseConfig = getWebpackConfig(buildConfig.BASE, 'client', 'prod')
 
     if (!baseConfig) {
         return Promise.reject('Error loading the webpack configuration!')

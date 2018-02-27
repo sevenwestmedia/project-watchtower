@@ -1,25 +1,23 @@
 import * as path from 'path'
-import CONFIG from '../../../lib/runtime/config/config'
-
-CONFIG.SERVER_PUBLIC_DIR = path.resolve(__dirname, '..', '..', 'demo', 'public')
 
 import { getDefaultHtmlMiddleware, createServer } from '../../../lib/runtime/server/server'
+import { getConfig } from '../../../lib/runtime/config/config'
+
+const config = getConfig(__dirname)
+config.SERVER_PUBLIC_DIR = path.resolve(__dirname, '..', '..', 'demo', 'public')
 
 describe('runtime/server/server', () => {
-
     it('getDefaultHtmlMiddleware', () => {
-        getDefaultHtmlMiddleware()
+        getDefaultHtmlMiddleware(config)
     })
 
-    it('createServer', () => (
-        new Promise((resolve) => {
-            const app = createServer({
+    it('createServer', () =>
+        new Promise(resolve => {
+            const app = createServer(__dirname, {
                 callback: () => {
                     app.get('server').close()
                     resolve()
                 },
             })
-        })
-    ))
-
+        }))
 })

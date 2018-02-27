@@ -1,15 +1,15 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import CONFIG from '../../lib/runtime/config/config'
 import clean from '../../lib/clean'
+import { getConfig } from '../../lib/runtime/config/config'
 
-const { CLIENT_OUTPUT } = CONFIG
+const buildConfig = getConfig(process.cwd())
 
 const doClean = async (paths: string | string[]) => {
-    const filePath = path.resolve(CLIENT_OUTPUT, 'foo.js')
+    const filePath = path.resolve(buildConfig.CLIENT_OUTPUT, 'foo.js')
 
     try {
-        fs.mkdirSync(CLIENT_OUTPUT)
+        fs.mkdirSync(buildConfig.CLIENT_OUTPUT)
     } catch (e) {
         // do nothing
     }
@@ -21,10 +21,8 @@ const doClean = async (paths: string | string[]) => {
 }
 
 describe('lib/clean', () => {
-
     it('will clean', async () => {
-        await doClean(CLIENT_OUTPUT)
-        await doClean([CLIENT_OUTPUT])
+        await doClean(buildConfig.CLIENT_OUTPUT)
+        await doClean([buildConfig.CLIENT_OUTPUT])
     })
-
 })

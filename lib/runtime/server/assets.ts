@@ -1,44 +1,46 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import CONFIG from '../config/config'
 import { Assets } from '../../types'
+import { BuildConfig } from '../../../lib'
 
-const { ASSETS_PATH_PREFIX, BASE, CLIENT_OUTPUT, PUBLIC_PATH } = CONFIG
-const assetsFile = path.resolve(BASE, 'assets.json')
-const watchMode = process.env.START_WATCH_MODE === 'true'
-
-let assets: Assets = {
-    main: {
-        js: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'js/main.js',
-        css: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'css/main.css',
-    },
-    vendor: {
-        js: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'js/vendor.js',
-    },
-}
+let assets: Assets
 
 let assetsLoaded = false
 
-const ensureAssets = () => {
+const getAssetsFile = (buildConfig: BuildConfig) => path.resolve(buildConfig.BASE, 'assets.json')
+
+const ensureAssets = (buildConfig: BuildConfig) => {
     if (assetsLoaded) {
         return
     }
     try {
-        const assetsFileContents = fs.readFileSync(assetsFile)
+        const assetsFileContents = fs.readFileSync(getAssetsFile(buildConfig))
         assets = JSON.parse(assetsFileContents.toString())
         assetsLoaded = true
     } catch (e) {
         // do nothing
+        // Create defaults
+        assets = {
+            main: {
+                js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/main.js',
+                css: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'css/main.css',
+            },
+            vendor: {
+                js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/vendor.js',
+            },
+        }
     }
 }
+
+const watchMode = process.env.START_WATCH_MODE === 'true'
 
 export const updateAssetLocations = (newAssets: Assets) => {
     assets = newAssets
     assetsLoaded = true
 }
 
-export const getAssetLocations = () => {
-    ensureAssets()
+export const getAssetLocations = (buildConfig: BuildConfig) => {
+    ensureAssets(buildConfig)
     return assets
 }
 
@@ -46,39 +48,39 @@ export const getAssetLocations = () => {
  * Returns a HTML snippet for all CSS assets
  * We add the timestamp in watch mode to support hot reloading with the ExtractTextWebpackPlugin
  */
-export const getCssAssetHtml = () => {
-    ensureAssets()
+export const getCssAssetHtml = (buildConfig: BuildConfig) => {
+    ensureAssets(buildConfig)
     return `<link rel="stylesheet" type="text/css" id="css-main" href="${assets.main.css}${watchMode
         ? '?' + Date.now()
         : ''}" />`
 }
 
 /** Returns a HTML snippet for all JavaScript assets */
-export const getJsAssetHtml = () => {
-    ensureAssets()
+export const getJsAssetHtml = (buildConfig: BuildConfig) => {
+    ensureAssets(buildConfig)
     return `<script src="${assets.vendor.js}"></script>
     <script src="${assets.main.js}" async></script>`
 }
 
 /** Inserts all assets into a given HTML document string */
-export const addAssetsToHtml = (html: string) => {
-    ensureAssets()
+export const addAssetsToHtml = (buildConfig: BuildConfig, html: string) => {
+    ensureAssets(buildConfig)
     let modifiedHtml = html
 
     if (html.indexOf(assets.main.css) === -1) {
-        modifiedHtml = modifiedHtml.replace('</head>', getCssAssetHtml() + '</head>')
+        modifiedHtml = modifiedHtml.replace('</head>', getCssAssetHtml(buildConfig) + '</head>')
     }
     if (html.indexOf(assets.main.js) === -1) {
-        modifiedHtml = modifiedHtml.replace('</body>', getJsAssetHtml() + '</body>')
+        modifiedHtml = modifiedHtml.replace('</body>', getJsAssetHtml(buildConfig) + '</body>')
     }
     return modifiedHtml
 }
 
-export const getAbsoluteAssetPath = (asset: string) => {
-    let relativeAsset = asset.slice(PUBLIC_PATH.length)
+export const getAbsoluteAssetPath = (buildConfig: BuildConfig, asset: string) => {
+    let relativeAsset = asset.slice(buildConfig.PUBLIC_PATH.length)
     if (relativeAsset[0] === '/') {
         relativeAsset = relativeAsset.slice(1)
     }
 
-    return path.resolve(CLIENT_OUTPUT, relativeAsset)
+    return path.resolve(buildConfig.CLIENT_OUTPUT, relativeAsset)
 }

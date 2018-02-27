@@ -1,18 +1,20 @@
 import watch from '../../lib/bin/watch'
 import { waitForConnection } from '../../lib/runtime/util/network'
 import { getTestPort } from '../test-helpers'
+import { getConfig } from '../../lib/runtime/config/config'
 
 // Increase test timeout because builds might take a while
-(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000
+;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000
 
 process.env.NODE_ENV = 'production'
 
-describe('bin/watch', () => {
+const buildConfig = getConfig(process.cwd())
 
+describe('bin/watch', () => {
     it('will watch', async () => {
         const port = await getTestPort()
         process.env.PORT = port.toString()
-        const childProcess: any = await watch()
+        const childProcess: any = await watch(buildConfig)
         await waitForConnection(port)
         childProcess.kill()
     })
@@ -21,9 +23,8 @@ describe('bin/watch', () => {
     it.skip('will watch the client', async () => {
         const port = await getTestPort()
         process.env.PORT = port.toString()
-        const childProcess: any = await watch('client')
+        const childProcess: any = await watch(buildConfig, 'client')
         await waitForConnection(port)
         childProcess.kill()
     })
-
 })

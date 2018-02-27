@@ -1,6 +1,4 @@
 import { load } from 'cheerio'
-import CONFIG from '../../../lib/runtime/config/config'
-CONFIG.PUBLIC_PATH = '/baz/'
 
 import * as path from 'path'
 import clean from '../../../lib/bin/clean'
@@ -12,6 +10,9 @@ import {
     addAssetsToHtml,
     getAbsoluteAssetPath,
 } from '../../../lib/runtime/server/assets'
+import { getConfig } from '../../../lib/runtime/config/config'
+
+const buildConfig = getConfig(process.cwd())
 
 const assets = {
     main: {
@@ -23,10 +24,12 @@ const assets = {
     },
 }
 
+buildConfig.PUBLIC_PATH = '/baz/'
+
 describe('server/assets initial', () => {
     it('initial asset location values', async () => {
-        await clean()
-        expect(getAssetLocations()).toEqual({
+        await clean(buildConfig)
+        expect(getAssetLocations(buildConfig)).toEqual({
             main: {
                 js: '/baz/static/js/main.js',
                 css: '/baz/static/css/main.css',
@@ -39,28 +42,39 @@ describe('server/assets initial', () => {
 })
 
 describe('server/assets', () => {
-
     beforeEach(() => {
         updateAssetLocations(assets)
     })
 
     it('getAssetLocations', () => {
-        expect(getAssetLocations()).toEqual(assets)
+        expect(getAssetLocations(buildConfig)).toEqual(assets)
     })
 
     it('getCssAssetHtml', () => {
-        const html = getCssAssetHtml()
+        const html = getCssAssetHtml(buildConfig)
         const doc = load(html)
         expect(doc('link').length).toBe(1)
-        expect(doc('link').first().attr('href')).toContain(assets.main.css)
+        expect(
+            doc('link')
+                .first()
+                .attr('href'),
+        ).toContain(assets.main.css)
     })
 
     it('getJsAssetHtml', () => {
-        const html = getJsAssetHtml()
+        const html = getJsAssetHtml(buildConfig)
         const doc = load(html)
         expect(doc('script').length).toBe(2)
-        expect(doc('script').first().attr('src')).toBe(assets.vendor.js)
-        expect(doc('script').last().attr('src')).toBe(assets.main.js)
+        expect(
+            doc('script')
+                .first()
+                .attr('src'),
+        ).toBe(assets.vendor.js)
+        expect(
+            doc('script')
+                .last()
+                .attr('src'),
+        ).toBe(assets.main.js)
     })
 
     it('addAssetsToHtml', () => {
@@ -71,14 +85,26 @@ describe('server/assets', () => {
 <body>
 </body>
 </html>`
-        const html = addAssetsToHtml(htmlTemplate)
+        const html = addAssetsToHtml(buildConfig, htmlTemplate)
 
         const doc = load(html)
         expect(doc('link').length).toBe(1)
-        expect(doc('link').first().attr('href')).toContain(assets.main.css)
+        expect(
+            doc('link')
+                .first()
+                .attr('href'),
+        ).toContain(assets.main.css)
         expect(doc('script').length).toBe(2)
-        expect(doc('script').first().attr('src')).toBe(assets.vendor.js)
-        expect(doc('script').last().attr('src')).toBe(assets.main.js)
+        expect(
+            doc('script')
+                .first()
+                .attr('src'),
+        ).toBe(assets.vendor.js)
+        expect(
+            doc('script')
+                .last()
+                .attr('src'),
+        ).toBe(assets.main.js)
     })
 
     it('addAssetsToHtml - already present', () => {
@@ -93,7 +119,7 @@ describe('server/assets', () => {
 <script src="${assets.main.js}"></script>
 </body>
 </html>`
-        const html = addAssetsToHtml(htmlTemplate)
+        const html = addAssetsToHtml(buildConfig, htmlTemplate)
 
         const doc = load(html)
         expect(doc('link').length).toBe(1)
@@ -101,8 +127,7 @@ describe('server/assets', () => {
     })
 
     it('getAbsoluteAssetPath', () => {
-        const assetPath = path.resolve(CONFIG.CLIENT_OUTPUT, 'foo/bar')
-        expect(getAbsoluteAssetPath('/baz/foo/bar')).toBe(assetPath)
+        const assetPath = path.resolve(buildConfig.CLIENT_OUTPUT, 'foo/bar')
+        expect(getAbsoluteAssetPath(buildConfig, '/baz/foo/bar')).toBe(assetPath)
     })
-
 })

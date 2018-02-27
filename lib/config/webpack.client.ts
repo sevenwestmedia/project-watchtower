@@ -6,31 +6,12 @@ import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as AssetsPlugin from 'assets-webpack-plugin'
 import * as HtmlPlugin from 'html-webpack-plugin'
 import * as DotenvPlugin from 'webpack-dotenv-plugin'
-import CONFIG from '../runtime/config/config'
 import { updateAssetLocations } from '../runtime/server/assets'
 import { Assets } from '../types'
-
-const {
-    BASE,
-    CLIENT_ENTRY,
-    CLIENT_OUTPUT,
-    CLIENT_POLYFILLS,
-    CSS_AUTOPREFIXER,
-    MODULE_PATHS,
-    PUBLIC_PATH,
-    SERVER_PUBLIC_DIR,
-} = CONFIG
+import { BuildConfig } from 'lib'
 
 type EntryPoints = {
     [name: string]: string[]
-}
-
-const entry: EntryPoints = {
-    main: [CLIENT_ENTRY],
-}
-
-if (CLIENT_POLYFILLS && fs.existsSync(CLIENT_POLYFILLS)) {
-    entry.vendor = [CLIENT_POLYFILLS]
 }
 
 const plugins: webpack.Plugin[] = [
@@ -63,82 +44,102 @@ const plugins: webpack.Plugin[] = [
     }),
 ]
 
-const env = path.resolve(BASE, '.env')
-const envDefault = path.resolve(BASE, '.env.default')
-
-if (fs.existsSync(env) && fs.existsSync(envDefault)) {
-    plugins.push(
-        new DotenvPlugin({
-            path: '.env',
-            sample: '.env.default',
-        }),
-    )
-}
-
-if (SERVER_PUBLIC_DIR) {
-    const indexHtml = path.resolve(SERVER_PUBLIC_DIR, 'index.html')
-
-    if (fs.existsSync(indexHtml)) {
-        plugins.push(
-            new HtmlPlugin({
-                inject: true,
-                template: indexHtml,
-            }),
-        )
-    }
-}
-
 /**
  * Base webpack config for the client that is used both in development and production
  * - Compile SCSS to CSS and extract into external assets
  * - Create assets.json that maps the created assets to their locations
  * - Create vendor chunk with everything from node_modules except for SWM modules
  */
-const clientBaseConfig: webpack.Configuration = {
-    entry,
-    output: {
-        path: CLIENT_OUTPUT,
-        publicPath: PUBLIC_PATH,
-    },
-    module: {
-        rules: [
-            {
-                test: /\.s?css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                sourceMap: true,
-                            },
-                        },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                sourceMap: true,
-                                plugins: () => [autoprefixer({ browsers: CSS_AUTOPREFIXER })],
-                            },
-                        },
-                        {
-                            loader: 'resolve-url-loader',
-                            options: {
-                                sourceMap: true,
-                            },
-                        },
-                        {
-                            loader: 'sass-loader',
-                            options: {
-                                sourceMap: true,
-                                includePaths: MODULE_PATHS,
-                            },
-                        },
-                    ],
+const clientBaseConfig = (buildConfig: BuildConfig) => {
+    const {
+        BASE,
+        CLIENT_ENTRY,
+        CLIENT_OUTPUT,
+        CLIENT_POLYFILLS,
+        CSS_AUTOPREFIXER,
+        MODULE_PATHS,
+        PUBLIC_PATH,
+        SERVER_PUBLIC_DIR,
+    } = buildConfig
+
+    const entry: EntryPoints = {
+        main: [CLIENT_ENTRY],
+    }
+
+    if (CLIENT_POLYFILLS && fs.existsSync(CLIENT_POLYFILLS)) {
+        entry.vendor = [CLIENT_POLYFILLS]
+    }
+    const env = path.resolve(BASE, '.env')
+    const envDefault = path.resolve(BASE, '.env.default')
+
+    if (fs.existsSync(env) && fs.existsSync(envDefault)) {
+        plugins.push(
+            new DotenvPlugin({
+                path: '.env',
+                sample: '.env.default',
+            }),
+        )
+    }
+
+    if (SERVER_PUBLIC_DIR) {
+        const indexHtml = path.resolve(SERVER_PUBLIC_DIR, 'index.html')
+
+        if (fs.existsSync(indexHtml)) {
+            plugins.push(
+                new HtmlPlugin({
+                    inject: true,
+                    template: indexHtml,
                 }),
-            },
-        ],
-    },
-    plugins,
+            )
+        }
+    }
+
+    return {
+        entry,
+        output: {
+            path: CLIENT_OUTPUT,
+            publicPath: PUBLIC_PATH,
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.s?css$/,
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: [
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    sourceMap: true,
+                                },
+                            },
+                            {
+                                loader: 'postcss-loader',
+                                options: {
+                                    sourceMap: true,
+                                    plugins: () => [autoprefixer({ browsers: CSS_AUTOPREFIXER })],
+                                },
+                            },
+                            {
+                                loader: 'resolve-url-loader',
+                                options: {
+                                    sourceMap: true,
+                                },
+                            },
+                            {
+                                loader: 'sass-loader',
+                                options: {
+                                    sourceMap: true,
+                                    includePaths: MODULE_PATHS,
+                                },
+                            },
+                        ],
+                    }),
+                },
+            ],
+        },
+        plugins,
+    }
 }
 
 export default clientBaseConfig

@@ -1,13 +1,11 @@
 import * as Lighthouse from 'lighthouse'
 import { launch } from 'lighthouse/chrome-launcher'
-import CONFIG from '../runtime/config/config'
 import { log, logError, prettyJson } from '../runtime/util/log'
 import { BuildMetrics } from './'
 import { runStatsOnServer } from './server'
 import { isBuildServer } from '../runtime/util/env'
 import { delay, formatTimeMs, timeout } from '../runtime/util/time'
-
-const { HAS_SERVER } = CONFIG
+import { BuildConfig } from '../../lib'
 
 const killChromeLauncher = (launcher?: Lighthouse.ChromeLauncher) => {
     if (!launcher) {
@@ -55,8 +53,11 @@ export const runLighthouse = async (url: string) => {
     }
 }
 
-const lighthouseStats = async (verbose = false): Promise<BuildMetrics> => {
-    if (!HAS_SERVER) {
+const lighthouseStats = async (
+    buildConfig: BuildConfig,
+    verbose = false,
+): Promise<BuildMetrics> => {
+    if (!buildConfig.HAS_SERVER) {
         log('Skipping lighthouse performance metrics because the application has no server')
         return {}
     }
@@ -66,37 +67,41 @@ const lighthouseStats = async (verbose = false): Promise<BuildMetrics> => {
     const stats: BuildMetrics = {}
 
     try {
-        await runStatsOnServer(async ({ page, url }) => {
-            const lighthouseResult = await timeout(runLighthouse(url), 120000)
+        await runStatsOnServer(
+            buildConfig,
+            async ({ page, url }) => {
+                const lighthouseResult = await timeout(runLighthouse(url), 120000)
 
-            const addLighthouseValue = (lighthouseKey: string, statsKey: string) => {
-                const result =
-                    lighthouseResult &&
-                    lighthouseResult.audits &&
-                    lighthouseResult.audits[lighthouseKey] &&
-                    (lighthouseResult.audits[lighthouseKey].rawValue as number)
+                const addLighthouseValue = (lighthouseKey: string, statsKey: string) => {
+                    const result =
+                        lighthouseResult &&
+                        lighthouseResult.audits &&
+                        lighthouseResult.audits[lighthouseKey] &&
+                        (lighthouseResult.audits[lighthouseKey].rawValue as number)
 
-                if (result !== undefined && result !== null) {
-                    stats[`${page}_${statsKey}`] = formatTimeMs(+result)
+                    if (result !== undefined && result !== null) {
+                        stats[`${page}_${statsKey}`] = formatTimeMs(+result)
+                    }
                 }
-            }
 
-            addLighthouseValue('first-meaningful-paint', 'first_meaningful_paint')
-            addLighthouseValue('speed-index-metric', 'speed_index')
-            addLighthouseValue('first-interactive', 'time_to_interactive')
-            addLighthouseValue('consistently-interactive', 'consistently_interactive')
-            addLighthouseValue('dom-size', 'dom_size')
+                addLighthouseValue('first-meaningful-paint', 'first_meaningful_paint')
+                addLighthouseValue('speed-index-metric', 'speed_index')
+                addLighthouseValue('first-interactive', 'time_to_interactive')
+                addLighthouseValue('consistently-interactive', 'consistently_interactive')
+                addLighthouseValue('dom-size', 'dom_size')
 
-            if (lighthouseResult) {
-                const perfResult = lighthouseResult.reportCategories.filter(
-                    category => category.id === 'performance',
-                )[0]
+                if (lighthouseResult) {
+                    const perfResult = lighthouseResult.reportCategories.filter(
+                        category => category.id === 'performance',
+                    )[0]
 
-                if (perfResult && typeof perfResult.score === 'number') {
-                    stats[`${page}_perf_score`] = perfResult.score.toFixed(1)
+                    if (perfResult && typeof perfResult.score === 'number') {
+                        stats[`${page}_perf_score`] = perfResult.score.toFixed(1)
+                    }
                 }
-            }
-        }, verbose)
+            },
+            verbose,
+        )
 
         log(`Lighthouse stats: ${prettyJson(stats)}`)
 

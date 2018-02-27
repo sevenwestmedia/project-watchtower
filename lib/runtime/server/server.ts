@@ -4,20 +4,13 @@ import * as express from 'express'
 import { addAssetsToHtml } from './assets'
 import { findFreePort } from '../util/network'
 import { log, logError } from '../util/log'
-import CONFIG from '../config/config'
+import { getConfig } from '../config/config'
+import { BuildConfig } from '../../types'
 
 const isProduction = process.env.NODE_ENV === 'production'
-const {
-    CLIENT_OUTPUT,
-    PORT,
-    SERVER_PUBLIC_DIR,
-    ASSETS_PATH_PREFIX,
-    ASSETS_ROOT,
-    SERVER_OUTPUT,
-} = CONFIG
 
-export const getPort = (fallbackPort?: number) =>
-    parseInt(process.env.PORT || '', 10) || fallbackPort || PORT
+export const getPort = (buildConfig: BuildConfig, fallbackPort?: number) =>
+    parseInt(process.env.PORT || '', 10) || fallbackPort || buildConfig.PORT
 
 export const isWatchMode = () => process.env.START_WATCH_MODE === 'true'
 
@@ -25,10 +18,10 @@ export const isFastMode = () => process.env.START_FAST_MODE === 'true'
 
 export const expressNoop: express.RequestHandler = (_res, _req, next) => next()
 
-export const getDefaultHtmlMiddleware = (logNotFound = false) => {
+export const getDefaultHtmlMiddleware = (buildConfig: BuildConfig, logNotFound = false) => {
     // on production we just serve the generated index.html
     if (isProduction) {
-        const indexPath = path.resolve(CLIENT_OUTPUT, 'index.html')
+        const indexPath = path.resolve(buildConfig.CLIENT_OUTPUT, 'index.html')
         const productionMiddleware: express.RequestHandler = (_req, res) => {
             res.status(200).sendFile(indexPath)
         }
@@ -38,9 +31,9 @@ export const getDefaultHtmlMiddleware = (logNotFound = false) => {
     // for development we grab the source index.html and add the assets
     let indexContent: string
 
-    if (SERVER_PUBLIC_DIR) {
+    if (buildConfig.SERVER_PUBLIC_DIR) {
         try {
-            const indexPath = path.resolve(SERVER_PUBLIC_DIR, 'index.html')
+            const indexPath = path.resolve(buildConfig.SERVER_PUBLIC_DIR, 'index.html')
             indexContent = fs.readFileSync(indexPath, 'utf8')
         } catch (e) {
             if (logNotFound) {
@@ -53,7 +46,7 @@ export const getDefaultHtmlMiddleware = (logNotFound = false) => {
     }
 
     const middleware: express.RequestHandler = (_req, res) => {
-        const indexWithAssets = addAssetsToHtml(indexContent)
+        const indexWithAssets = addAssetsToHtml(buildConfig, indexContent)
         res
             .status(200)
             .contentType('text/html')
@@ -70,10 +63,15 @@ export type CreateServerOptions = {
     callback?: () => void
     startListening?: boolean
 }
-export type CreateServerType = (options?: CreateServerOptions) => express.Express
+export type CreateServerType = (
+    /** startDir should be build output directory */
+    startDir: string,
+    options?: CreateServerOptions,
+) => express.Express
 
 const defaultOptions: CreateServerOptions = {}
-export const createServer: CreateServerType = (options = defaultOptions) => {
+export const createServer: CreateServerType = (startDir, options = defaultOptions) => {
+    const config = getConfig(startDir)
     const { earlyMiddlewareHook, middlewareHook, callback, startListening = true } = options
     const app = express()
     app.disable('x-powered-by')
@@ -88,24 +86,21 @@ export const createServer: CreateServerType = (options = defaultOptions) => {
         earlyMiddlewareHook(app)
     }
 
-    // We can run from <root> or server output
-    const staticRoot = fs.existsSync(path.resolve(SERVER_OUTPUT, 'server.js'))
-        ? SERVER_OUTPUT
-        : ASSETS_ROOT
-
     // Express route prefixes have to start with /
     const assetsPathPrefixWithLeadingSlash =
-        ASSETS_PATH_PREFIX[0] === '/' ? ASSETS_PATH_PREFIX : `/${ASSETS_PATH_PREFIX}`
+        config.ASSETS_PATH_PREFIX[0] === '/'
+            ? config.ASSETS_PATH_PREFIX
+            : `/${config.ASSETS_PATH_PREFIX}`
     app.use(
         assetsPathPrefixWithLeadingSlash,
-        express.static(path.join(staticRoot, ASSETS_PATH_PREFIX), {
+        express.static(path.join(startDir, config.ASSETS_PATH_PREFIX), {
             index: false,
         }),
     )
 
-    if (SERVER_PUBLIC_DIR) {
+    if (config.SERVER_PUBLIC_DIR) {
         app.use(
-            express.static(SERVER_PUBLIC_DIR, {
+            express.static(config.SERVER_PUBLIC_DIR, {
                 index: false,
             }),
         )
@@ -117,7 +112,7 @@ export const createServer: CreateServerType = (options = defaultOptions) => {
 
     // if the server does not use server-side rendering, just respond with index.html
     // for each request not handled in other middlewares
-    app.get('*', getDefaultHtmlMiddleware())
+    app.get('*', getDefaultHtmlMiddleware(config))
 
     if (!startListening) {
         return app
@@ -139,7 +134,7 @@ export const createServer: CreateServerType = (options = defaultOptions) => {
         app.set('server', server)
     }
 
-    const port = getPort()
+    const port = getPort(config)
 
     if (isProduction) {
         listen(port)

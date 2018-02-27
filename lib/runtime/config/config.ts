@@ -2,9 +2,7 @@ import * as path from 'path'
 import { getCustomConfigFile } from '../util/fs'
 import { BuildConfig, BuildConfigOverride } from '../../types'
 
-const root = (process.env.ROOT_DIR && path.resolve(process.env.ROOT_DIR)) || process.cwd()
-
-const defaultConfig: BuildConfig = {
+const defaultConfig = (root: string): BuildConfig => ({
     ASSETS_PATH_PREFIX: 'static/',
     BASE: root,
     ASSETS_ROOT: path.resolve(root),
@@ -30,14 +28,12 @@ const defaultConfig: BuildConfig = {
     STATIC_RESOURCE_NAMES: false,
     STATS_ENV: {},
     STATS_PAGES: { home: '/' },
-    WATCH_IGNORE: /node_modules(?!.+swm-component-library)/,
-}
+})
 
-const customConfig = getCustomConfigFile<BuildConfigOverride>('config/config', {})
+const customConfig = (root: string) =>
+    getCustomConfigFile<BuildConfigOverride>(root, 'config/config', {})
 
-const CONFIG = {
-    ...defaultConfig,
+export const getConfig = (root: string) => ({
+    ...defaultConfig(root),
     ...customConfig,
-}
-
-export default CONFIG
+})

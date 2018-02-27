@@ -76,9 +76,6 @@ export interface BuildConfig {
 
     /** Pages to run build stats on, format { name: URL } */
     STATS_PAGES: { [name: string]: string }
-
-    /** Regular expression of paths to be ignored in watch mode */
-    WATCH_IGNORE: RegExp
 }
 
 /** Use to override the application configuration */

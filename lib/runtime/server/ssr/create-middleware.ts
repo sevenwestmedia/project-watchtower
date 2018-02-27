@@ -12,6 +12,7 @@ import { PromiseCompletionSource, Logger } from '../../universal'
 import { getAssetLocations } from '../../server'
 import { HelmetData } from 'react-helmet'
 import { CreateReduxStore } from '../ssr'
+import { BuildConfig } from '../../../../lib'
 
 export interface RenderContext<AdditionalState = object> {
     completionNotifier: PromiseCompletionSource<{}>
@@ -55,9 +56,10 @@ export const createSsrMiddleware = <
     ReduxState extends object,
     SsrRequest extends RenderRequest = RenderRequest
 >(
+    buildConfig: BuildConfig,
     options: ServerSideRenderMiddlewareOptions<ReduxState, SsrRequest>,
 ) => {
-    const assets = getAssetLocations()
+    const assets = getAssetLocations(buildConfig)
 
     return async (req: SsrRequest, response: Response) => {
         let renderContext: RenderContext

@@ -13,7 +13,6 @@ const packageJson = path.resolve(process.cwd(), 'package.json')
 const buildStatsFile = path.resolve(process.cwd(), 'build-stats.csv')
 
 describe('util/fs', () => {
-
     it('readFile', async () => {
         const content = await readFile(packageJson)
         expect(content).toContain('project-watchtower')
@@ -39,18 +38,20 @@ describe('util/fs', () => {
     })
 
     it('getCustomConfigFile', () => {
-        const buildConfig = getCustomConfigFile<BuildConfigOverride>('config/config', {})
+        const buildConfig = getCustomConfigFile<BuildConfigOverride>(
+            process.cwd(),
+            'config/config',
+            {},
+        )
         expect(buildConfig).toEqual({
-            LINT_EXCLUDE: [
-                'demo/**',
-                'client/**',
-                'server/**',
-                'test/**',
-            ],
+            LINT_EXCLUDE: ['demo/**', 'client/**', 'server/**', 'test/**'],
         })
 
-        const nonExistentConfig = getCustomConfigFile<BuildConfigOverride>('config/foobar', {})
+        const nonExistentConfig = getCustomConfigFile<BuildConfigOverride>(
+            process.cwd(),
+            'config/foobar',
+            {},
+        )
         expect(nonExistentConfig).toEqual({})
     })
-
 })

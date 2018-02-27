@@ -9,6 +9,7 @@ import watch from './watch'
 
 import { log, logError } from '../runtime/util/log'
 import { BuildParam, StartParam, WatchParam } from '../types'
+import { getConfig } from '../runtime/config/config'
 
 const args = process.argv.slice(2)
 
@@ -30,41 +31,52 @@ const exitAfter = (result: Promise<any>) =>
         }),
     )
 
+const projectSwitchIndex = commandArgs.indexOf('-p')
+let workingDirectory = process.cwd()
+if (projectSwitchIndex !== -1) {
+    const projectSwitchArgs = commandArgs.splice(projectSwitchIndex, 2)
+    if (projectSwitchArgs.length === 2) {
+        workingDirectory = projectSwitchArgs[1]
+    }
+}
+
+const buildConfig = getConfig(workingDirectory)
+
 switch (command) {
     case 'build':
-        exitAfter(build(...(commandArgs as BuildParam[])))
+        exitAfter(build(buildConfig, ...(commandArgs as BuildParam[])))
         break
 
     case 'coverage':
-        exitAfter(test('--coverage', ...commandArgs))
+        exitAfter(test(buildConfig, '--coverage', ...commandArgs))
         break
 
     case 'clean':
-        exitAfter(clean(...commandArgs))
+        exitAfter(clean(buildConfig, ...commandArgs))
         break
 
     case 'explore-bundle':
-        exitOnError(exploreBundle(...commandArgs))
+        exitOnError(exploreBundle(buildConfig, ...commandArgs))
         break
 
     case 'lint':
-        exitAfter(lint(...commandArgs))
+        exitAfter(lint(buildConfig, ...commandArgs))
         break
 
     case 'start':
-        exitOnError(start(...(commandArgs as StartParam[])))
+        exitOnError(start(buildConfig, ...(commandArgs as StartParam[])))
         break
 
     case 'stats':
-        exitAfter(stats(...commandArgs))
+        exitAfter(stats(buildConfig, ...commandArgs))
         break
 
     case 'test':
-        exitAfter(test(...commandArgs))
+        exitAfter(test(buildConfig, ...commandArgs))
         break
 
     case 'watch':
-        exitOnError(watch(...(commandArgs as WatchParam[])))
+        exitOnError(watch(buildConfig, ...(commandArgs as WatchParam[])))
         break
 
     default:
@@ -73,15 +85,15 @@ switch (command) {
 
 Scripts:
 
-    build [complete] [<target>] [<environment>]
-    clean [<glob> ...]
-    coverage [<jest options> ...]
-    explore-bundle [disableHoisting]
-    lint [tslint] [sass-lint] [<glob> ...]
-    start [watch] [fast] [prod] [debug] [inspect] [client]
-    stats [verbose]
-    test [debug] [<jest options> ...]
-    watch [server] [client] [fast] [inspect]
+    build [complete] [<target>] [<environment>] [-p <project dir>]
+    clean [-p <project dir>] [<glob> ...]
+    coverage [<jest options> ...] [-p <project dir>]
+    explore-bundle [disableHoisting] [-p <project dir>]
+    lint [tslint] [sass-lint] [-p <project dir>] [<glob> ...]
+    start [watch] [fast] [prod] [debug] [inspect] [client] [-p <project dir>]
+    stats [verbose] [-p <project dir>]
+    test [debug] [-p <project dir>] [<jest options> ...]
+    watch [server] [client] [fast] [inspect] [-p <project dir>]
 
 Refer to docs/cli.md for the full API documentation
 `)

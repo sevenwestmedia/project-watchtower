@@ -3,17 +3,22 @@ import * as merge from 'webpack-merge'
 import baseConfig from './webpack.base'
 import serverBaseConfig from './webpack.server'
 import prodConfig from './webpack.prod'
-import webpackHooks from './webpack-hooks'
+import getWebpackHooks from './webpack-hooks'
+import { BuildConfig } from 'lib'
 
 /** Webpack config for the server in production */
-const config: webpack.Configuration = merge(
-    baseConfig,
-    webpackHooks.base || {},
-    serverBaseConfig,
-    webpackHooks.server || {},
-    prodConfig,
-    webpackHooks.prod || {},
-    webpackHooks.serverProd || {},
-)
+const config = (buildConfig: BuildConfig): webpack.Configuration => {
+    const webpackHooks = getWebpackHooks(buildConfig.BASE)
+
+    return merge(
+        baseConfig(buildConfig),
+        webpackHooks.base || {},
+        serverBaseConfig(buildConfig),
+        webpackHooks.server || {},
+        prodConfig,
+        webpackHooks.prod || {},
+        webpackHooks.serverProd || {},
+    )
+}
 
 export default config

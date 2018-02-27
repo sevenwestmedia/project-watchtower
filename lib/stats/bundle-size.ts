@@ -1,16 +1,13 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import CONFIG from '../runtime/config/config'
 import { log, logError, prettyJson } from '../runtime/util/log'
 import { BuildMetrics } from './'
 import { getFileSize, readFile, formatFileSize } from '../runtime/util/fs'
 import { getAbsoluteAssetPath } from '../runtime/server/assets'
+import { BuildConfig } from '../../lib'
 
-const { BASE } = CONFIG
-const assetFilePath = path.resolve(BASE, 'assets.json')
-
-const getChunkSize = async (chunkPath: string) => {
-    const absolutePath = getAbsoluteAssetPath(chunkPath)
+const getChunkSize = async (buildConfig: BuildConfig, chunkPath: string) => {
+    const absolutePath = getAbsoluteAssetPath(buildConfig, chunkPath)
     const size = await getFileSize(absolutePath)
     return formatFileSize(size)
 }
@@ -40,17 +37,19 @@ const getCombinedSize = (assetsDir: string) =>
         })
     })
 
-const bundleSize = async () => {
+const bundleSize = async (buildConfig: BuildConfig) => {
     try {
+        const assetFilePath = path.resolve(buildConfig.BASE, 'assets.json')
+
         const assetFile = await readFile(assetFilePath)
         const assets = JSON.parse(assetFile)
-        const assetsDir = path.dirname(getAbsoluteAssetPath(assets.main.js))
+        const assetsDir = path.dirname(getAbsoluteAssetPath(buildConfig, assets.main.js))
 
         const values = await Promise.all([
             getCombinedSize(assetsDir),
-            getChunkSize(assets.main.js),
-            getChunkSize(assets.vendor.js),
-            getChunkSize(assets.main.css),
+            getChunkSize(buildConfig, assets.main.js),
+            getChunkSize(buildConfig, assets.vendor.js),
+            getChunkSize(buildConfig, assets.main.css),
         ])
 
         const stats: BuildMetrics = {

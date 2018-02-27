@@ -4,17 +4,19 @@ import ssrStats from './ssr-stats'
 import lighthouseStats from './lighthouse'
 import { writeFile } from '../runtime/util/fs'
 import { log } from '../runtime/util/log'
-
-const root = process.cwd()
+import { BuildConfig } from '../../lib'
 
 export interface BuildMetrics {
     [key: string]: string
 }
 
-export const measureBuildStats = async (verbose?: boolean): Promise<BuildMetrics> => {
-    const bundleMetrics = await bundleSize()
-    const ssrMetrics = await ssrStats(verbose)
-    const lighthouseMetrics = await lighthouseStats(verbose)
+export const measureBuildStats = async (
+    buildConfig: BuildConfig,
+    verbose?: boolean,
+): Promise<BuildMetrics> => {
+    const bundleMetrics = await bundleSize(buildConfig)
+    const ssrMetrics = await ssrStats(buildConfig, verbose)
+    const lighthouseMetrics = await lighthouseStats(buildConfig, verbose)
 
     return {
         ...bundleMetrics,
@@ -23,7 +25,7 @@ export const measureBuildStats = async (verbose?: boolean): Promise<BuildMetrics
     }
 }
 
-export const writeBuildStats = async (metrics: BuildMetrics) => {
+export const writeBuildStats = async (buildConfig: BuildConfig, metrics: BuildMetrics) => {
     // TeamCity expects key-value pairs written to the console
 
     Object.keys(metrics).forEach(key => {
@@ -45,14 +47,14 @@ export const writeBuildStats = async (metrics: BuildMetrics) => {
 
     const fileContent = titleRow + '\n' + valueRow
 
-    const statsFilePath = path.resolve(root, 'build-stats.csv')
+    const statsFilePath = path.resolve(buildConfig.BASE, 'build-stats.csv')
 
     await writeFile(statsFilePath, fileContent)
 }
 
-const measureAndWriteBuildStats = async (verbose = false) => {
-    const metrics = await measureBuildStats(verbose)
-    await writeBuildStats(metrics)
+const measureAndWriteBuildStats = async (buildConfig: BuildConfig, verbose = false) => {
+    const metrics = await measureBuildStats(buildConfig, verbose)
+    await writeBuildStats(buildConfig, metrics)
 }
 
 export default measureAndWriteBuildStats

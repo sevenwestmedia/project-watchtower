@@ -71,8 +71,11 @@ export const dynamicRequire = (file: string) => {
  * Abort with an error if it only exists as TypeScript
  * @param filePath File path from project root (without extension)
  */
-export const getCustomConfigFile = <T extends {}>(filePath: string, fallback: T): T => {
-    const root = process.cwd()
+export const getCustomConfigFile = <T extends {}>(
+    root: string,
+    filePath: string,
+    fallback: T,
+): T => {
     const customConfigFile = path.resolve(root, filePath + '.js')
     const customConfigFileTS = path.resolve(root, filePath + '.ts')
 
