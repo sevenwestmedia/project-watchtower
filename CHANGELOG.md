@@ -1,5 +1,8 @@
 # Changelog
 
+## vNext
+- Add support for -p argument to specify project directory
+
 ## [v0.12.3] - 26/2/2018
 - Support using TypeScript path mappings and configuring base directory for webpack config
 

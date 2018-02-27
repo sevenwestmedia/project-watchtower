@@ -1,11 +1,7 @@
 import * as React from 'react'
 import { renderToString } from 'react-dom/server'
 
-import {
-    createServer,
-    getCssAssetHtml,
-    getJsAssetHtml,
-} from 'project-watchtower/lib/runtime/server'
+import { createServer, getCssAssetHtml, getJsAssetHtml } from '../../lib/runtime/server'
 
 import App from '../common/App'
 

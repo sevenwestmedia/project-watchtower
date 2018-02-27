@@ -75,8 +75,8 @@
     "@types/webpack" "*"
 
 "@types/history@*":
-  version "4.6.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/history/-/history-4.6.0.tgz#093d67ed780d889c9543f6dca24ebee0b6b9fc45"
+  version "4.6.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/history/-/history-4.6.2.tgz#12cfaba693ba20f114ed5765467ff25fdf67ddb0"
 
 "@types/html-minifier@*":
   version "1.1.30"
@@ -106,12 +106,12 @@
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/node/-/node-8.0.45.tgz#89fad82439d5624e1b5c6b42f0f5d85136dcdecc"
 
 "@types/node@^6.0.46":
-  version "6.0.80"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/node/-/node-6.0.80.tgz#914a75799605b4609bd9a2918c865ba3c4141367"
+  version "6.0.101"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/node/-/node-6.0.101.tgz#0c5911cfb434af4a51c0a499931fe6423207d921"
 
 "@types/node@^8.0.10":
-  version "8.0.10"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/node/-/node-8.0.10.tgz#12efec9183b072d5f951cf86395a4c780f868a17"
+  version "8.9.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/node/-/node-8.9.4.tgz#dfd327582a06c114eb6e0441fa3d6fab35edad48"
 
 "@types/opn@^3.0.28":
   version "3.0.28"
@@ -123,9 +123,9 @@
   version "15.5.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/prop-types/-/prop-types-15.5.2.tgz#3c6b8dceb2906cc87fe4358e809f9d20c8d59be1"
 
-"@types/react-dom@^16.0.3":
-  version "16.0.3"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-dom/-/react-dom-16.0.3.tgz#8accad7eabdab4cca3e1a56f5ccb57de2da0ff64"
+"@types/react-dom@^16.0.4":
+  version "16.0.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-dom/-/react-dom-16.0.4.tgz#2e8fd45f5443780ed49bf2cdd9809e6091177a7d"
   dependencies:
     "@types/node" "*"
     "@types/react" "*"
@@ -151,23 +151,16 @@
     "@types/react" "*"
     "@types/react-router" "*"
 
-"@types/react-router@*":
-  version "4.0.14"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-router/-/react-router-4.0.14.tgz#dd650f40bbb20ad1fec26471707665908efa9e9f"
+"@types/react-router@*", "@types/react-router@^4.0.17":
+  version "4.0.22"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-router/-/react-router-4.0.22.tgz#2b97336eddfdf5886973539539b8ce7037cf629b"
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react-router@^4.0.17":
-  version "4.0.17"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-router/-/react-router-4.0.17.tgz#1032c800ed0da188d8a3bb38fe6afa8c917865d5"
-  dependencies:
-    "@types/history" "*"
-    "@types/react" "*"
-
-"@types/react@*", "@types/react@^16.0.25":
-  version "16.0.25"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react/-/react-16.0.25.tgz#bf696b83fe480c5e0eff4335ee39ebc95884a1ed"
+"@types/react@*", "@types/react@^16.0.38":
+  version "16.0.38"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react/-/react-16.0.38.tgz#76617433ea10274505f60bb86eddfdd0476ffdc2"
 
 "@types/relateurl@*":
   version "0.2.28"
@@ -5696,9 +5689,9 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@^16.1.1:
-  version "16.1.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/react-dom/-/react-dom-16.1.1.tgz#b2e331b6d752faf1a2d31399969399a41d8d45f8"
+react-dom@^16.2.0:
+  version "16.2.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/react-dom/-/react-dom-16.2.0.tgz#69003178601c0ca19b709b33a83369fe6124c044"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -5764,9 +5757,9 @@ react-test-renderer@^16.0.0-0, react-test-renderer@^16.1.1:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react@^16.1.1:
-  version "16.1.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/react/-/react-16.1.1.tgz#d5c4ef795507e3012282dd51261ff9c0e824fe1f"
+react@^16.2.0:
+  version "16.2.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
