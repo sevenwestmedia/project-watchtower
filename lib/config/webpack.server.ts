@@ -12,7 +12,14 @@ import { BuildConfig } from '../../lib'
 const serverBaseConfig = (buildConfig: BuildConfig): webpack.Configuration => {
     const { BASE, PUBLIC_PATH, SERVER_ENTRY, SERVER_OUTPUT } = buildConfig
 
-    const nodeModules = fs.readdirSync(path.resolve(BASE, 'node_modules'))
+    const baseDirNodeModules = path.resolve(BASE, 'node_modules')
+    // Try <base>/node_modules, if not present assume they are at
+    // <cwd>/node_modules
+    const nodeModules = fs.readdirSync(
+        fs.existsSync(baseDirNodeModules)
+            ? baseDirNodeModules
+            : path.resolve(process.cwd(), 'node_modules'),
+    )
 
     return {
         target: 'node',
