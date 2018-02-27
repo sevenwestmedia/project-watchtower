@@ -37,13 +37,11 @@ export interface PageProps {
     currentPageLocation: H.Location
 }
 
-export interface OwnProps {
+export interface PageLifecycleProviderProps extends RouteComponentProps<{}> {
     render: React.ReactElement<any> | ((pageProps: PageProps) => React.ReactElement<any>)
     onEvent: (event: PageEvent) => void
     logger?: Logger
 }
-
-type Props = OwnProps & RouteComponentProps<{}>
 
 export type LoadingStates = 'loading' | 'loaded'
 
@@ -145,7 +143,7 @@ export const withPageLifecycleEvents = (Component: React.ComponentClass<any>) =>
 }
 
 // tslint:disable-next-line:max-classes-per-file
-class PageLifecycleProvider extends React.Component<Props, {}> {
+class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps, {}> {
     static childContextTypes = {
         pageLifecycle: PropTypes.object,
         logger: PropTypes.object,
@@ -158,7 +156,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
 
     currentPageProps: object = {}
 
-    constructor(props: Props) {
+    constructor(props: PageLifecycleProviderProps) {
         super(props)
 
         this.isRouting = true
@@ -270,7 +268,7 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
         }
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    componentWillReceiveProps(nextProps: PageLifecycleProviderProps) {
         // We only care about pathname, not any of the other location info
         if (this.props.location.pathname !== nextProps.location.pathname) {
             if (this.props.logger) {
@@ -322,6 +320,8 @@ class PageLifecycleProvider extends React.Component<Props, {}> {
     }
 }
 
-const PageLifecycleProviderWithRouter = withRouter<OwnProps>(PageLifecycleProvider)
+const PageLifecycleProviderWithRouter = withRouter<PageLifecycleProviderProps>(
+    PageLifecycleProvider,
+)
 
 export { PageLifecycleProviderWithRouter as PageLifecycleProvider }
