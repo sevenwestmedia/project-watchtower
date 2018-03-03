@@ -19,7 +19,7 @@ export const isFastMode = () => process.env.START_FAST_MODE === 'true'
 
 export const expressNoop: express.RequestHandler = (_res, _req, next) => next()
 
-export const getDefaultHtmlMiddleware = (buildConfig: BuildConfig, logNotFound = false) => {
+export const getDefaultHtmlMiddleware = (buildConfig: BuildConfig, logNotFound = true) => {
     // on production we just serve the generated index.html
     if (isProduction) {
         const indexPath = path.resolve(buildConfig.CLIENT_OUTPUT, 'index.html')
@@ -72,11 +72,11 @@ export const createServer: CreateServerType = (options = defaultOptions) => {
     const { earlyMiddlewareHook, middlewareHook, callback, startListening = true } = options
     const app = express()
     app.disable('x-powered-by')
+    const buildConfig = getConfig(process.env.PROJECT_DIR || process.cwd())
 
     if (process.env.NODE_ENV !== 'production' && isWatchMode()) {
         // tslint:disable-next-line no-var-requires
         const { getHotReloadMiddleware } = require('../../server/dev')
-        const buildConfig = getConfig(process.env.PROJECT_DIR || process.cwd())
         app.use(getHotReloadMiddleware(buildConfig))
     }
 
@@ -110,7 +110,7 @@ export const createServer: CreateServerType = (options = defaultOptions) => {
 
     // if the server does not use server-side rendering, just respond with index.html
     // for each request not handled in other middlewares
-    app.get('*', getDefaultHtmlMiddleware(config))
+    app.get('*', getDefaultHtmlMiddleware(buildConfig))
 
     if (!startListening) {
         return app
