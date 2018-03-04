@@ -1,14 +1,19 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { ChildProcess } from 'child_process'
-import { forkPromise } from '../runtime/util/process'
+import { forkPromise } from '../util/process'
 import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
 
 /**
  * Runs the jest test runner
  * @param params Jest options
  */
-const test = async (buildConfig: BuildConfig, ...params: string[]): Promise<ChildProcess> => {
+const test = async (
+    log: Logger,
+    buildConfig: BuildConfig,
+    ...params: string[]
+): Promise<ChildProcess> => {
     const jestBin = resolveJest(buildConfig.BASE)
     if (!jestBin) {
         throw new Error('Unable to resolve jest')
@@ -32,7 +37,7 @@ const test = async (buildConfig: BuildConfig, ...params: string[]): Promise<Chil
 
     args = args.concat(params)
 
-    return forkPromise(jestBin, args, {
+    return forkPromise(log, jestBin, args, {
         env: {
             ...process.env,
             NODE_ENV: 'test',

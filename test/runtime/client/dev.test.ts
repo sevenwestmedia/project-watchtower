@@ -3,10 +3,9 @@
  */
 
 import { cssHotReload } from '../../../lib/runtime/client/dev'
-import { delay } from '../../../lib/runtime/util/time'
+import { delay } from '../../../lib/util/time'
 
 describe('lib/client/dev', () => {
-
     it('cssHotReload', async () => {
         const origSuccess = () => {}
 
@@ -15,13 +14,13 @@ describe('lib/client/dev', () => {
          * @testEnvironment comment setting is released:
          * https://github.com/facebook/jest/commit/62c4e9a7f5e9c36d2427843d933250cf1909336a
          */
-        const window = (global as any).window = {
+        const window = ((global as any).window = {
             setTimeout,
-        }
+        })
 
-        const reporter = (window as any).__webpack_hot_middleware_reporter__ = {
+        const reporter = ((window as any).__webpack_hot_middleware_reporter__ = {
             success: origSuccess,
-        }
+        })
 
         cssHotReload()
 
@@ -32,5 +31,4 @@ describe('lib/client/dev', () => {
 
         // TODO actually call function once we have a JSDOM environment
     })
-
 })

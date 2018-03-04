@@ -5,8 +5,10 @@ import bundleSize from '../../lib/stats/bundle-size'
 import ssrStats from '../../lib/stats/ssr-stats'
 import lighthouseStats from '../../lib/stats/lighthouse'
 import { getConfig } from '../../lib/runtime/config/config'
+import { createConsoleLogger } from '../../lib/runtime/universal'
 
-const buildConfig = getConfig(process.cwd())
+const log = createConsoleLogger()
+const buildConfig = getConfig(log, process.cwd())
 
 // Increase test timeout because builds might take a while
 ;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 90000
@@ -16,12 +18,12 @@ describe('stats', () => {
         const port = await getTestPort()
         process.env.PORT = port.toString()
 
-        await clean(buildConfig)
-        await build(buildConfig)
+        await clean(log, buildConfig)
+        await build(log, buildConfig)
     })
 
     it('bundle-size', async () => {
-        const metrics = await bundleSize(buildConfig)
+        const metrics = await bundleSize(log, buildConfig)
 
         const total = metrics.bundle_size_total
         const main = metrics.bundle_size_main
@@ -40,7 +42,7 @@ describe('stats', () => {
     })
 
     it('ssr-stats', async () => {
-        const metrics = await ssrStats(buildConfig)
+        const metrics = await ssrStats(log, buildConfig)
 
         const documentSize = metrics.home_ssr_document_size
         const domSize = metrics.home_ssr_dom_size
@@ -56,7 +58,7 @@ describe('stats', () => {
     })
 
     it('lighthouse', async () => {
-        const metrics = await lighthouseStats(buildConfig)
+        const metrics = await lighthouseStats(log, buildConfig)
 
         expect(metrics.home_first_meaningful_paint).toBeDefined()
         expect(metrics.home_speed_index).toBeDefined()

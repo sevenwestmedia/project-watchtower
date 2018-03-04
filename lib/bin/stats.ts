@@ -1,10 +1,11 @@
 import buildStats from '../stats'
 import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
 
-const stats = (buildConfig: BuildConfig, ...params: string[]) => {
+const stats = (log: Logger, buildConfig: BuildConfig, ...params: string[]) => {
     const verbose = params.indexOf('verbose') !== -1
 
-    return buildStats(buildConfig, verbose)
+    return buildStats(log, buildConfig, verbose)
 }
 
 export default stats

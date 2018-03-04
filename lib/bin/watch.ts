@@ -5,6 +5,7 @@ import start from './start'
 import { default as watchServer, WatchServer } from '../watch/server'
 import { StartParam, WatchParam } from '../types'
 import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
 
 /**
  * Rebuilds the client on changes
@@ -14,6 +15,7 @@ import { BuildConfig } from '../../lib'
  * - client: Only run client without a server
  */
 const watch = async (
+    log: Logger,
     buildConfig: BuildConfig,
     ...args: WatchParam[]
 ): Promise<ChildProcess | WatchServer> => {
@@ -29,21 +31,21 @@ const watch = async (
         additionalStartParams.push('inspect')
     }
 
-    await clean(buildConfig)
+    await clean(log, buildConfig)
 
     const isServerWatch = HAS_SERVER && args.indexOf('server') !== -1
 
     if (isServerWatch) {
-        return watchServer(buildConfig)
+        return watchServer(log, buildConfig)
     }
 
     const clientMode = !HAS_SERVER || args.indexOf('client') !== -1
 
     if (clientMode) {
-        return start(buildConfig, 'watch', 'client', ...additionalStartParams)
+        return start(log, buildConfig, 'watch', 'client', ...additionalStartParams)
     } else {
-        await build(buildConfig, 'server', 'dev')
-        return start(buildConfig, 'watch', ...additionalStartParams)
+        await build(log, buildConfig, 'server', 'dev')
+        return start(log, buildConfig, 'watch', ...additionalStartParams)
     }
 }
 

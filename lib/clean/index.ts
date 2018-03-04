@@ -1,15 +1,15 @@
 import * as rimraf from 'rimraf'
-import { logError } from '../util/log'
+import { Logger } from '../runtime/universal'
 
-const clean: (paths: string | string[]) => Promise<any> = paths => {
+const clean: (log: Logger, paths: string | string[]) => Promise<any> = (log, paths) => {
     if (Array.isArray(paths)) {
-        return Promise.all(paths.map(path => clean(path)))
+        return Promise.all(paths.map(path => clean(log, path)))
     }
 
     return new Promise((resolve, reject) => {
         rimraf(paths, err => {
             if (err) {
-                logError('Clean error:', err)
+                log.error({ err }, 'Clean error')
                 reject(err)
             } else {
                 resolve()

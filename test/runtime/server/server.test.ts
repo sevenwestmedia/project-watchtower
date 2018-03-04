@@ -4,9 +4,10 @@ import { getDefaultHtmlMiddleware, createServer } from '../../../lib/runtime/ser
 import { getConfig } from '../../../lib/runtime/config/config'
 import { createConsoleLogger } from '../../../lib/runtime/universal'
 
-const config = getConfig(__dirname)
-config.SERVER_PUBLIC_DIR = path.resolve(__dirname, '..', '..', 'demo', 'public')
 const log = createConsoleLogger()
+const config = getConfig(log, __dirname)
+
+config.SERVER_PUBLIC_DIR = path.resolve(__dirname, '..', '..', 'demo', 'public')
 
 describe('runtime/server/server', () => {
     it('getDefaultHtmlMiddleware', () => {

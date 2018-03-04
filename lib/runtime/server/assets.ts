@@ -4,15 +4,17 @@ import { Assets } from '../../types'
 import { BuildConfig } from '../../../lib'
 import { getConfig } from '../../../lib/runtime/config/config'
 import { getBaseDir } from '../../../lib/runtime/server/base-dir'
+import { createConsoleLogger } from '../universal'
 
 let assets: Assets
 
 let assetsLoaded = false
 
 const getAssetsFile = (buildConfig: BuildConfig) => path.resolve(buildConfig.BASE, 'assets.json')
+const log = createConsoleLogger()
 
 const ensureAssets = () => {
-    const buildConfig = getConfig(getBaseDir())
+    const buildConfig = getConfig(log, getBaseDir())
     if (assetsLoaded) {
         return
     }

@@ -33,16 +33,16 @@ export type CreateServerOptions = {
 export type CreateServerType = (options: CreateServerOptions) => express.Express
 
 export const createServer: CreateServerType = options => {
-    const config = getConfig(getBaseDir())
+    const config = getConfig(options.log, getBaseDir())
     const { earlyMiddlewareHook, middlewareHook, callback, startListening = true } = options
     const app = express()
     app.disable('x-powered-by')
-    const buildConfig = getConfig(process.env.PROJECT_DIR || process.cwd())
+    const buildConfig = getConfig(options.log, process.env.PROJECT_DIR || process.cwd())
 
     if (process.env.NODE_ENV !== 'production' && isWatchMode()) {
         // tslint:disable-next-line no-var-requires
         const { getHotReloadMiddleware } = require('../../server/dev')
-        app.use(getHotReloadMiddleware(buildConfig))
+        app.use(getHotReloadMiddleware(options.log, buildConfig))
     }
 
     app.use(createEnsureRequestLogMiddleware(options.log))

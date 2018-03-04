@@ -4,10 +4,10 @@ import * as http from 'http'
 import * as dotenv from 'dotenv'
 import { getPort } from '../runtime/server/server'
 import { waitForConnection, findFreePort } from '../runtime/util/network'
-import { forkPromise } from '../runtime/util/process'
-import { log } from '../util/log'
-import { getTimeMs, timeout } from '../runtime/util/time'
+import { forkPromise } from '../util/process'
+import { getTimeMs, timeout } from '../util/time'
 import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
 
 dotenv.config()
 
@@ -71,6 +71,7 @@ export interface StatsRunDetails {
 export type StatsFn = (details: StatsRunDetails) => Promise<any>
 
 export const runStatsOnServer = async (
+    log: Logger,
     buildConfig: BuildConfig,
     statsFn: StatsFn,
     verbose = false,
@@ -78,15 +79,15 @@ export const runStatsOnServer = async (
     const { SERVER_OUTPUT, HAS_SERVER, STATS_ENV, STATS_PAGES } = buildConfig
 
     if (!HAS_SERVER) {
-        log('Skipping server-based stats because the application has no server')
+        log.info('Skipping server-based stats because the application has no server')
         return
     }
 
     const port = await findFreePort(getPort(buildConfig))
 
     const serverEntryFile = path.resolve(SERVER_OUTPUT, 'server.js')
-
     const devServer = await forkPromise(
+        log,
         serverEntryFile,
         [],
         {

@@ -1,12 +1,13 @@
 import * as Lighthouse from 'lighthouse'
-import { log, logError, prettyJson } from '../util/log'
 import { BuildMetrics } from './'
 import { runStatsOnServer } from './server'
-import { formatTimeMs, timeout } from '../runtime/util/time'
+import { formatTimeMs, timeout } from '../util/time'
 import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
 
-export const runLighthouse = async (url: string) => {
+export const runLighthouse = async (log: Logger, url: string) => {
     try {
+        log.debug({ url }, 'Running lighthouse')
         const results = await Lighthouse(
             url,
             {
@@ -25,30 +26,36 @@ export const runLighthouse = async (url: string) => {
 
         return results
     } catch (err) {
-        logError('Could not run lighthouse!', err)
+        log.error({ err }, 'Could not run lighthouse!')
 
         return undefined
     }
 }
 
 const lighthouseStats = async (
+    log: Logger,
     buildConfig: BuildConfig,
     verbose = false,
 ): Promise<BuildMetrics> => {
     if (!buildConfig.HAS_SERVER) {
-        log('Skipping lighthouse performance metrics because the application has no server')
+        log.info('Skipping lighthouse performance metrics because the application has no server')
         return {}
     }
 
-    log('Measuring lighthouse performance metrics...')
+    log.info('Measuring lighthouse performance metrics...')
 
     const stats: BuildMetrics = {}
 
     try {
         await runStatsOnServer(
+            log,
             buildConfig,
             async ({ page, url }) => {
-                const lighthouseResult = await timeout(runLighthouse(url), 120000)
+                console.warn('STATS callback')
+
+                const lighthouseResult = await timeout(runLighthouse(log, url), 120000)
+                console.warn('LIGHTHOUSE RESULT')
+                console.warn(lighthouseResult)
 
                 const addLighthouseValue = (lighthouseKey: string, statsKey: string) => {
                     const result =
@@ -81,11 +88,11 @@ const lighthouseStats = async (
             verbose,
         )
 
-        log(`Lighthouse stats: ${prettyJson(stats)}`)
+        log.info(stats, `Lighthouse stats`)
 
         return stats
     } catch (err) {
-        logError('Error measuring lighthouse stats', err)
+        log.error({ err }, 'Error measuring lighthouse stats')
         return {}
     }
 }

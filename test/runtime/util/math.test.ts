@@ -1,4 +1,7 @@
-import { average, getSequenceAverage } from '../../../lib/runtime/util/math'
+import { average, getSequenceAverage } from '../../../lib/util/math'
+import { createConsoleLogger } from '../../../lib/runtime/universal'
+
+const log = createConsoleLogger()
 
 describe('util/math', () => {
     it('average', () => {
@@ -9,7 +12,7 @@ describe('util/math', () => {
     it('getSequenceAverage', async () => {
         let i = 1
         const iteration = async () => i++
-        const avg = await getSequenceAverage(iteration, 2)
+        const avg = await getSequenceAverage(log, iteration, 2)
         expect(avg).toBe(1.5)
     })
 })

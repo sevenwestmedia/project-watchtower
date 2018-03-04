@@ -7,7 +7,7 @@
         "registry": "https://nexus.swmdigital.io/repository/js-private"
     },
     "scripts": {
-        "clean": "npm run clean:lighthouse && rimraf dist-es {lib,test}/**/*.{js,map,d.ts}",
+        "clean": "npm run clean:lighthouse && rimraf dist-es \"{lib,test}/**/*.{js,map,d.ts}\"",
         "lint": "tslint 'lib/**/*.ts' --type-check --project ./tsconfig.json -e '**/*.d.ts'",
         "lint:prettier": "prettier --single-quote=true --tab-width=4 --trailing-comma=all --use-tabs=false --print-width=100 --no-semi --write \"./lib/**/*.ts\" \"./lib/**/*.tsx\" \"./server/**/*.ts\" \"./server/**/*.tsx\"",
         "build": "tsc && tsc -p ./tsconfig-es2015.json",
@@ -17,7 +17,7 @@
         "build:demo": "yarn pwt build -p demo",
         "prestart:demo": "npm run clean:lighthouse && yarn build",
         "start:demo": "yarn pwt watch -p demo",
-        "start:ssrdemo": "ENABLE_SSR=true&& yarn pwt watch -p demo",
+        "start:ssrdemo": "ENABLE_SSR=true yarn pwt watch -p demo",
         "pretest:base": "npm run clean:lighthouse",
         "test:base": "jest --runInBand --forceExit --config jest.json",
         "test": "npm run build:debug && npm run test:base -- --silent",

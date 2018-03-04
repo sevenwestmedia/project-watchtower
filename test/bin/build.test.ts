@@ -6,14 +6,17 @@ import { getAbsoluteAssetPath, getAssetLocations } from '../../lib/runtime/serve
 import { getConfig } from '../../lib/runtime/config/config'
 
 // Increase test timeout because builds might take a while
+import { createConsoleLogger } from '../../lib/runtime/universal'
 ;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000
+
+const log = createConsoleLogger()
 
 describe('bin/build', () => {
     it('will build', async () => {
-        const buildConfig = getConfig(process.cwd())
+        const buildConfig = getConfig(log, process.cwd())
         const { BASE, SERVER_OUTPUT } = buildConfig
-        await clean(buildConfig)
-        await build(buildConfig)
+        await clean(log, buildConfig)
+        await build(log, buildConfig)
 
         const filePath = path.resolve(SERVER_OUTPUT, 'server.js')
         expect(fs.existsSync(filePath)).toBe(true)

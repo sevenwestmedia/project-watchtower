@@ -1,7 +1,6 @@
-import { formatTimeMs, getTimeMs, delay } from '../../../lib/runtime/util/time'
+import { formatTimeMs, getTimeMs, delay } from '../../../lib/util/time'
 
 describe('util/time', () => {
-
     it('formatTimeMs', () => {
         expect(formatTimeMs(1.23)).toBe('1')
     })
@@ -11,5 +10,4 @@ describe('util/time', () => {
     })
 
     it('delay', () => delay(100))
-
 })

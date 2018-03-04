@@ -3,33 +3,36 @@ import lint from './lint'
 import test from './test'
 import { ENVIRONMENTS, getWebpackConfig, TARGETS } from '../build/build'
 import clean from '../clean'
-import { failPromisesLate } from '../runtime/util/async'
+import { failPromisesLate } from '../util/async'
 import { webpackPromise } from '../util/webpack'
 import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
 import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
 
 const buildTarget = (
+    log: Logger,
     buildConfig: BuildConfig,
     target: BuildTarget,
     environment: BuildEnvironment = 'prod',
 ) => {
-    const config = getWebpackConfig(buildConfig, target, environment)
+    const config = getWebpackConfig(log, buildConfig, target, environment)
 
     if (!config) {
         return Promise.reject(`Could not load webpack configuration for ${target}/${environment}!`)
     }
 
-    return webpackPromise(config)
+    return webpackPromise(log, config)
 }
 
 const cleanAndBuild = (
+    log: Logger,
     buildConfig: BuildConfig,
     target: BuildTarget,
     environment: BuildEnvironment = 'prod',
 ) => {
     const cleanTarget = target === 'server' ? buildConfig.SERVER_OUTPUT : buildConfig.CLIENT_OUTPUT
 
-    return clean(cleanTarget).then(() => buildTarget(buildConfig, target, environment))
+    return clean(log, cleanTarget).then(() => buildTarget(log, buildConfig, target, environment))
 }
 
 const getBuildEnvironment = (args: BuildParam[]) => {
@@ -71,22 +74,24 @@ const getBuildTargets = (buildConfig: BuildConfig, args: BuildParam[]) => {
  *  - complete: runs clean, lint and test before building
  *  - p: the root of the build, used for config discovery
  */
-const build = async (buildConfig: BuildConfig, ...args: BuildParam[]) => {
+const build = async (log: Logger, buildConfig: BuildConfig, ...args: BuildParam[]) => {
     const targets = getBuildTargets(buildConfig, args)
     const environment = getBuildEnvironment(args)
 
     if (args.indexOf('complete') !== -1) {
-        await cleanBin(buildConfig)
-        await lint(buildConfig)
-        await test(buildConfig, '--silent', '--coverage')
+        await cleanBin(log, buildConfig)
+        await lint(log, buildConfig)
+        await test(log, buildConfig, '--silent', '--coverage')
         // we have to fail promises late because otherwise the build servers would hang
         // if we exit the process before all webpack builds are completed
         return failPromisesLate(
-            targets.map(target => buildTarget(buildConfig, target, environment)),
+            log,
+            targets.map(target => buildTarget(log, buildConfig, target, environment)),
         )
     } else {
         return failPromisesLate(
-            targets.map(target => cleanAndBuild(buildConfig, target, environment)),
+            log,
+            targets.map(target => cleanAndBuild(log, buildConfig, target, environment)),
         )
     }
 }

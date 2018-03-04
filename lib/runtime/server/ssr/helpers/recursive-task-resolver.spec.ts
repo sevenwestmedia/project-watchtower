@@ -1,6 +1,7 @@
 import resolveAllData from './recursive-task-resolver'
-import { PromiseTracker } from '../../../universal'
-import { testLogger } from '../helpers/test-logger'
+import { PromiseTracker, createConsoleLogger } from '../../../universal'
+
+const testLogger = createConsoleLogger()
 
 describe('Recursive Task Resolver', () => {
     it('Should abort after 5 tries', done => {

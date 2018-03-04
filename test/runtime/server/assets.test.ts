@@ -11,8 +11,10 @@ import {
     getAbsoluteAssetPath,
 } from '../../../lib/runtime/server/assets'
 import { getConfig } from '../../../lib/runtime/config/config'
+import { createConsoleLogger } from '../../../lib/runtime/universal'
 
-const buildConfig = getConfig(process.cwd())
+const log = createConsoleLogger()
+const buildConfig = getConfig(log, process.cwd())
 
 const assets = {
     main: {
@@ -26,7 +28,7 @@ const assets = {
 
 describe('server/assets initial', () => {
     it('initial asset location values', async () => {
-        await clean(buildConfig)
+        await clean(log, buildConfig)
         expect(getAssetLocations()).toEqual({
             main: {
                 js: '/static/js/main.js',

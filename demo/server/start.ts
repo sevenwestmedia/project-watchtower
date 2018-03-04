@@ -32,6 +32,7 @@ createServer({
                     return store
                 },
             })
+
             app.get('*', ssrMiddleware)
         }
     },

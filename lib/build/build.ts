@@ -2,7 +2,6 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as webpack from 'webpack'
 import { dynamicRequire } from '../runtime/util/fs'
-import { log, logError } from '../util/log'
 import { BuildEnvironment, BuildTarget } from '../types'
 import webpackClientDevConfig from '../config/webpack.client.dev'
 import webpackClientDebugConfig from '../config/webpack.client.debug'
@@ -11,6 +10,7 @@ import webpackServerDevConfig from '../config/webpack.server.dev'
 import webpackServerDebugConfig from '../config/webpack.server.debug'
 import webpackServerProdConfig from '../config/webpack.server.prod'
 import { BuildConfig } from '../index'
+import { Logger } from '../runtime/universal'
 
 export const TARGETS: BuildTarget[] = ['server', 'client']
 
@@ -22,17 +22,18 @@ export const ENVIRONMENTS: BuildEnvironment[] = ['dev', 'prod', 'debug']
  * config/webpack.<target>.<environment>.js, or the default one otherwise
  */
 export const getWebpackConfig = (
+    log: Logger,
     buildConfig: BuildConfig,
     target: BuildTarget,
     environment: BuildEnvironment,
 ): webpack.Configuration | undefined => {
     if (TARGETS.indexOf(target) === -1) {
-        logError(`Unknown target: "${target}"! ` + `Known values are: ${TARGETS.join(', ')}`)
+        log.error(`Unknown target: "${target}"! ` + `Known values are: ${TARGETS.join(', ')}`)
         return undefined
     }
 
     if (ENVIRONMENTS.indexOf(environment) === -1) {
-        logError(
+        log.error(
             `Unknown environment: "${environment}"! ` +
                 `Known values are: ${ENVIRONMENTS.join(', ')}`,
         )
@@ -48,21 +49,21 @@ export const getWebpackConfig = (
         if (fs.existsSync(customConfigFile + '.js')) {
             // using dynamicRequire to support bundling project-watchtower with webpack
             config = dynamicRequire(customConfigFile).default
-            log('Using custom config file ' + customConfigFile)
+            log.info('Using custom config file ' + customConfigFile)
         } else {
-            log('Building ' + configFileName + '...')
+            log.info('Building ' + configFileName + '...')
 
             switch (target) {
                 case 'server':
                     switch (environment) {
                         case 'dev':
-                            return webpackServerDevConfig(buildConfig)
+                            return webpackServerDevConfig(log, buildConfig)
 
                         case 'debug':
-                            return webpackServerDebugConfig(buildConfig)
+                            return webpackServerDebugConfig(log, buildConfig)
 
                         case 'prod':
-                            return webpackServerProdConfig(buildConfig)
+                            return webpackServerProdConfig(log, buildConfig)
 
                         default:
                             throw new Error(`Invalid build target: ${target} ${environment}`)
@@ -71,13 +72,13 @@ export const getWebpackConfig = (
                 case 'client':
                     switch (environment) {
                         case 'dev':
-                            return webpackClientDevConfig(buildConfig)
+                            return webpackClientDevConfig(log, buildConfig)
 
                         case 'debug':
-                            return webpackClientDebugConfig(buildConfig)
+                            return webpackClientDebugConfig(log, buildConfig)
 
                         case 'prod':
-                            return webpackClientProdConfig(buildConfig)
+                            return webpackClientProdConfig(log, buildConfig)
 
                         default:
                             throw new Error(`Invalid build target: ${target} ${environment}`)
@@ -89,8 +90,8 @@ export const getWebpackConfig = (
         }
 
         return config
-    } catch (e) {
-        logError('Error loading webpack config!', e)
+    } catch (err) {
+        log.error({ err }, 'Error loading webpack config!')
         return undefined
     }
 }

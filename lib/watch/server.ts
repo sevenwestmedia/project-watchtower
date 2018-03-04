@@ -10,6 +10,7 @@ import { openBrowser, getHotReloadMiddleware } from '../server/dev'
 import { getPort } from '../runtime/server/server'
 import { waitForConnection } from '../runtime/util/network'
 import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
 
 dotenv.config()
 
@@ -28,7 +29,7 @@ export interface WatchServer {
     close: () => void
 }
 
-const watchServer = (buildConfig: BuildConfig, port?: number) =>
+const watchServer = (log: Logger, buildConfig: BuildConfig, port?: number) =>
     new Promise<WatchServer>(resolve => {
         const serverPort = port || getPort(buildConfig)
         const devServerPort = serverPort + 1
@@ -36,7 +37,7 @@ const watchServer = (buildConfig: BuildConfig, port?: number) =>
         let devServer: ChildProcess
         let devServerAvailable: Promise<any>
 
-        const serverCompiler = webpack(getWebpackConfig(buildConfig, 'server', 'dev'))
+        const serverCompiler = webpack(getWebpackConfig(log, buildConfig, 'server', 'dev'))
 
         const watching = serverCompiler.watch(
             {
@@ -56,7 +57,7 @@ const watchServer = (buildConfig: BuildConfig, port?: number) =>
 
         const app = express()
 
-        app.use(getHotReloadMiddleware(buildConfig))
+        app.use(getHotReloadMiddleware(log, buildConfig))
 
         app.use(async (_req, _res, next) => {
             await devServerAvailable

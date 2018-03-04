@@ -3,7 +3,7 @@ export interface LogObject {
 }
 
 export interface ErrorObject extends LogObject {
-    err: Error
+    err?: Error
 }
 
 export interface Logger {
@@ -30,7 +30,7 @@ const log = (level: string, args: any[]) => {
     }
 
     if (typeof args[0] === 'string') {
-        console.log(level, args[0])
+        return console.log(level, args[0])
     }
 
     console.log(level, args[1], args[0])

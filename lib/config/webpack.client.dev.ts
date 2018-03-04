@@ -6,10 +6,11 @@ import clientBaseConfig from './webpack.client'
 import devConfig from './webpack.dev'
 import getWebpackHooks from './webpack-hooks'
 import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
 
 /** Webpack config for the client in development */
-const config = (buildConfig: BuildConfig): webpack.Configuration => {
-    const webpackHooks = getWebpackHooks(buildConfig.BASE)
+const config = (log: Logger, buildConfig: BuildConfig): webpack.Configuration => {
+    const webpackHooks = getWebpackHooks(log, buildConfig.BASE)
     return merge(
         baseConfig(buildConfig),
         webpackHooks.base || {},

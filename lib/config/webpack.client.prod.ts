@@ -6,10 +6,11 @@ import clientBaseConfig from './webpack.client'
 import prodConfig from './webpack.prod'
 import getWebpackHooks from './webpack-hooks'
 import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
 
 /** Webpack config for the client in production */
-const config = (buildConfig: BuildConfig): webpack.Configuration => {
-    const webpackHooks = getWebpackHooks(buildConfig.BASE)
+const config = (log: Logger, buildConfig: BuildConfig): webpack.Configuration => {
+    const webpackHooks = getWebpackHooks(log, buildConfig.BASE)
 
     const chunkFilename = buildConfig.STATIC_RESOURCE_NAMES
         ? buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js'

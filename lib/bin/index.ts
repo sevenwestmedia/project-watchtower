@@ -7,9 +7,9 @@ import stats from './stats'
 import test from './test'
 import watch from './watch'
 
-import { log, logError } from '../util/log'
 import { BuildParam, StartParam, WatchParam } from '../types'
 import { getConfig } from '../runtime/config/config'
+import { cliLogger } from '../util/log'
 
 const args = process.argv.slice(2)
 
@@ -18,7 +18,7 @@ const commandArgs = args.slice(1)
 
 const exitOnError = (result: Promise<any>) => {
     result.catch(e => {
-        logError(e || 'Error occurred, exiting...')
+        cliLogger.error({ err: e }, 'Error occurred, exiting...')
         process.exit(1)
     })
 }
@@ -40,47 +40,47 @@ if (projectSwitchIndex !== -1) {
     }
 }
 
-const buildConfig = getConfig(workingDirectory)
+const buildConfig = getConfig(cliLogger, workingDirectory)
 
 switch (command) {
     case 'build':
-        exitAfter(build(buildConfig, ...(commandArgs as BuildParam[])))
+        exitAfter(build(cliLogger, buildConfig, ...(commandArgs as BuildParam[])))
         break
 
     case 'coverage':
-        exitAfter(test(buildConfig, '--coverage', ...commandArgs))
+        exitAfter(test(cliLogger, buildConfig, '--coverage', ...commandArgs))
         break
 
     case 'clean':
-        exitAfter(clean(buildConfig, ...commandArgs))
+        exitAfter(clean(cliLogger, buildConfig, ...commandArgs))
         break
 
     case 'explore-bundle':
-        exitOnError(exploreBundle(buildConfig, ...commandArgs))
+        exitOnError(exploreBundle(cliLogger, buildConfig, ...commandArgs))
         break
 
     case 'lint':
-        exitAfter(lint(buildConfig, ...commandArgs))
+        exitAfter(lint(cliLogger, buildConfig, ...commandArgs))
         break
 
     case 'start':
-        exitOnError(start(buildConfig, ...(commandArgs as StartParam[])))
+        exitOnError(start(cliLogger, buildConfig, ...(commandArgs as StartParam[])))
         break
 
     case 'stats':
-        exitAfter(stats(buildConfig, ...commandArgs))
+        exitAfter(stats(cliLogger, buildConfig, ...commandArgs))
         break
 
     case 'test':
-        exitAfter(test(buildConfig, ...commandArgs))
+        exitAfter(test(cliLogger, buildConfig, ...commandArgs))
         break
 
     case 'watch':
-        exitOnError(watch(buildConfig, ...(commandArgs as WatchParam[])))
+        exitOnError(watch(cliLogger, buildConfig, ...(commandArgs as WatchParam[])))
         break
 
     default:
-        log(`
+        cliLogger.info(`
 ## Project Watchtower
 
 Scripts:

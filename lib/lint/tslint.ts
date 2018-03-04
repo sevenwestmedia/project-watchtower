@@ -1,10 +1,15 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { ChildProcess } from 'child_process'
-import { forkPromise } from '../runtime/util/process'
+import { forkPromise } from '../util/process'
 import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
 
-const tslint = (buildConfig: BuildConfig, ...paths: string[]): Promise<ChildProcess> => {
+const tslint = (
+    log: Logger,
+    buildConfig: BuildConfig,
+    ...paths: string[]
+): Promise<ChildProcess> => {
     // we have to wrap all glob patterns in single quotes
     // see https://github.com/palantir/tslint/issues/2204
 
@@ -24,7 +29,7 @@ const tslint = (buildConfig: BuildConfig, ...paths: string[]): Promise<ChildProc
         args.push(`'${x}'`)
     })
 
-    return forkPromise(executable, args)
+    return forkPromise(log, executable, args)
 }
 
 function resolveTsLint(root: string): string | undefined {

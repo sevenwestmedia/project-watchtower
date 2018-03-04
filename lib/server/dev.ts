@@ -6,11 +6,15 @@ import * as opn from 'opn'
 import { getPort } from '../runtime/server/server'
 import { getWebpackConfig } from '../build/build'
 import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
 
-export type HotReloadMiddleware = (buildConfig: BuildConfig) => express.RequestHandler[]
+export type HotReloadMiddleware = (
+    log: Logger,
+    buildConfig: BuildConfig,
+) => express.RequestHandler[]
 
-export const getHotReloadMiddleware: HotReloadMiddleware = buildConfig => {
-    const config = getWebpackConfig(buildConfig, 'client', 'dev')
+export const getHotReloadMiddleware: HotReloadMiddleware = (log, buildConfig) => {
+    const config = getWebpackConfig(log, buildConfig, 'client', 'dev')
     const compiler = webpack(config)
 
     const dev = webpackDevMiddleware(compiler, {

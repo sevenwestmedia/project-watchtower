@@ -1,6 +1,7 @@
 import * as path from 'path'
 import { getCustomConfigFile } from '../util/fs'
 import { BuildConfig, BuildConfigOverride } from '../../types'
+import { Logger } from '../universal'
 
 const defaultConfig = (root: string): BuildConfig => ({
     ASSETS_PATH_PREFIX: 'static/',
@@ -24,10 +25,10 @@ const defaultConfig = (root: string): BuildConfig => ({
     STATS_PAGES: { home: '/' },
 })
 
-const customConfig = (root: string) =>
-    getCustomConfigFile<BuildConfigOverride>(root, 'config/config', {})
+const customConfig = (log: Logger, root: string) =>
+    getCustomConfigFile<BuildConfigOverride>(log, root, 'config/config', {})
 
-export const getConfig = (root: string) => ({
+export const getConfig = (log: Logger, root: string) => ({
     ...defaultConfig(root),
-    ...customConfig,
+    ...customConfig(log, root),
 })

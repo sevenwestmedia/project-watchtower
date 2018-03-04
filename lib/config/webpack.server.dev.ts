@@ -5,10 +5,11 @@ import serverBaseConfig from './webpack.server'
 import devConfig from './webpack.dev'
 import getWebpackHooks from './webpack-hooks'
 import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
 
 /** Webpack config for the server in development */
-const config = (buildConfig: BuildConfig): webpack.Configuration => {
-    const webpackHooks = getWebpackHooks(buildConfig.BASE)
+const config = (log: Logger, buildConfig: BuildConfig): webpack.Configuration => {
+    const webpackHooks = getWebpackHooks(log, buildConfig.BASE)
 
     return merge(
         baseConfig(buildConfig),
