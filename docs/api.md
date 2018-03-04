@@ -75,11 +75,12 @@ import { renderApp } from './render-server'
 import { renderHtml } from 'server/render-html'
 
 export const startServer = () => {
-    // Do any server configuration here
-    return createServer((app) => {
-        // Register additional routes here
-
-        // If you want server side rendering support, register the ssr middleware here
+    return createServer(options?: {
+        /** Early middleware hook is before static middleswares etc */
+        earlyMiddlewareHook?: (app: express.Express) => void,
+        middlewareHook?: (app: express.Express) => void,
+        callback?: () => void,
+        startListening?: boolean,
     })
 }
 
