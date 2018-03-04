@@ -1,4 +1,4 @@
-import { Request, Response, Express } from 'express'
+import { Request, RequestHandler, Express } from 'express'
 import * as redux from 'redux'
 import {
     ServerSideRenderOptions,
@@ -12,6 +12,7 @@ import { PromiseCompletionSource, Logger } from '../../universal'
 import { getAssetLocations } from '../../server'
 import { HelmetData } from 'react-helmet'
 import { CreateReduxStore } from '../ssr'
+import { hasLog } from '../middleware/ensure-request-log-middleware'
 
 export interface RenderContext<AdditionalState = object> {
     completionNotifier: PromiseCompletionSource<{}>
@@ -19,51 +20,48 @@ export interface RenderContext<AdditionalState = object> {
     additionalState: AdditionalState
 }
 
-export type RenderRequest = Request & { log: Logger }
-export type RenderApp<ReduxState extends object, SsrRequest extends RenderRequest> = (
+export type RenderApp<ReduxState extends object> = (
     params: {
         log: Logger
         store: redux.Store<ReduxState>
         context: RenderContext
-        req: SsrRequest
+        req: Request
     },
 ) => JSX.Element
-export type RenderHtml<ReduxState extends object, SsrRequest extends RenderRequest> = (
+export type RenderHtml<ReduxState extends object> = (
     params: {
         head: HelmetData | undefined
         renderMarkup: RenderMarkup
         reduxState: ReduxState
         assets: Assets
         context: RenderContext
-        req: SsrRequest
+        req: Request
     },
 ) => string
 
-export type ServerSideRenderMiddlewareOptions<
-    ReduxState extends object,
-    SsrRequest extends RenderRequest
-> = {
+export type ServerSideRenderMiddlewareOptions<ReduxState extends object> = {
     app: Express
     ssrTimeoutMs: number
-    renderApp: RenderApp<ReduxState, SsrRequest>
-    renderHtml: RenderHtml<ReduxState, SsrRequest>
+    renderApp: RenderApp<ReduxState>
+    renderHtml: RenderHtml<ReduxState>
     errorLocation: string
-    createReduxStore: CreateReduxStore<ReduxState, SsrRequest>
+    createReduxStore: CreateReduxStore<ReduxState>
 }
 
-export const createSsrMiddleware = <
-    ReduxState extends object,
-    SsrRequest extends RenderRequest = RenderRequest
->(
-    options: ServerSideRenderMiddlewareOptions<ReduxState, SsrRequest>,
-) => {
+export const createSsrMiddleware = <ReduxState extends object>(
+    options: ServerSideRenderMiddlewareOptions<ReduxState>,
+): RequestHandler => {
     const assets = getAssetLocations()
 
-    return async (req: SsrRequest, response: Response) => {
+    return async (req, response, next) => {
+        if (!hasLog(req)) {
+            console.error('Skipping SSR middleware due to missing req.log key')
+            return next()
+        }
         let renderContext: RenderContext
         const additionalState: object = {}
 
-        const ssrOptions: ServerSideRenderOptions<ReduxState, SsrRequest> = {
+        const ssrOptions: ServerSideRenderOptions<ReduxState> = {
             log: req.log,
             errorLocation: options.errorLocation,
             ssrTimeoutMs: options.ssrTimeoutMs,
@@ -90,7 +88,7 @@ export const createSsrMiddleware = <
                 },
             },
         }
-        const pageRenderResult = await renderPageContents<ReduxState, SsrRequest>(ssrOptions, req)
+        const pageRenderResult = await renderPageContents<ReduxState>(ssrOptions, req)
 
         const createPageMarkup = (result: StatusServerRenderResult<ReduxState>) =>
             options.renderHtml({
