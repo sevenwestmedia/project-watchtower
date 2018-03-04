@@ -1,5 +1,5 @@
 import { load } from 'cheerio'
-import { log, logError, prettyJson } from '../runtime/util/log'
+import { log, logError, prettyJson } from '../util/log'
 import { BuildMetrics } from './'
 import { formatFileSize } from '../runtime/util/fs'
 import { formatTimeMs, timeout } from '../runtime/util/time'

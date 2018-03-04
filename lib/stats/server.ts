@@ -5,7 +5,7 @@ import * as dotenv from 'dotenv'
 import { getPort } from '../runtime/server/server'
 import { waitForConnection, findFreePort } from '../runtime/util/network'
 import { forkPromise } from '../runtime/util/process'
-import { log } from '../runtime/util/log'
+import { log } from '../util/log'
 import { getTimeMs, timeout } from '../runtime/util/time'
 import { BuildConfig } from '../../lib'
 

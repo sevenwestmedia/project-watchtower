@@ -1,5 +1,5 @@
 import * as Lighthouse from 'lighthouse'
-import { log, logError, prettyJson } from '../runtime/util/log'
+import { log, logError, prettyJson } from '../util/log'
 import { BuildMetrics } from './'
 import { runStatsOnServer } from './server'
 import { formatTimeMs, timeout } from '../runtime/util/time'

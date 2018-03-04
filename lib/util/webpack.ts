@@ -1,5 +1,5 @@
 import * as webpack from 'webpack'
-import { log, logError } from '../runtime/util/log'
+import { log, logError } from '../util/log'
 
 export const webpackStatsConfig: webpack.Stats.ToStringOptionsObject = {
     errors: true,

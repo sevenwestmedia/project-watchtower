@@ -1,6 +1,6 @@
 import tslint from '../lint/tslint'
 import sassLint from '../lint/sass-lint'
-import { log } from '../runtime/util/log'
+import { log } from '../util/log'
 import { BuildConfig } from '../../lib'
 
 /**

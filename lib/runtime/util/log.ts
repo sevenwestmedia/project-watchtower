@@ -1,35 +1,48 @@
+export interface LogObject {
+    [key: string]: any
+}
+
+export interface ErrorObject extends LogObject {
+    err: Error
+}
+
 export interface Logger {
-    trace(msg: string | { [key: string]: any }): void
-    trace(obj: { [key: string]: any }, msg: string): void
-    debug(msg: string | { [key: string]: any }): void
-    debug(obj: { [key: string]: any }, msg: string): void
-    info(msg: string | { [key: string]: any }): void
-    info(obj: { [key: string]: any }, msg: string): void
+    trace(msg: string | LogObject): void
+    trace(obj: LogObject, msg: string): void
+    debug(msg: string | LogObject): void
+    debug(obj: LogObject, msg: string): void
+    info(msg: string | LogObject): void
+    info(obj: LogObject, msg: string): void
     warn(msg: string): void
-    warn(obj: { [key: string]: any }, msg: string): void
+    warn(obj: LogObject, msg: string): void
     error(msg: string): void
-    error<T extends { err: Error }>(obj: T, msg: string): void
+    error(obj: ErrorObject, msg: string): void
     fatal(msg: string): void
-    fatal<T extends { err: Error }>(obj: T, msg: string): void
+    fatal(obj: ErrorObject, msg: string): void
+
+    child(childObj: LogObject): Logger
 }
 
-const logStack = (error: any) => {
-    if (error && error.stack) {
-        // tslint:disable-next-line no-console
-        console.log(error.stack)
+// tslint:disable:no-console
+const log = (level: string, args: any[]) => {
+    if (args.length === 0) {
+        return
     }
+
+    if (typeof args[0] === 'string') {
+        console.log(level, args[0])
+    }
+
+    console.log(level, args[1], args[0])
 }
 
-export const log = (message: any, ...additional: any[]) =>
-    // tslint:disable-next-line no-console
-    console.log(message, ...additional)
-
-export const logError = (message: any, ...additional: any[]) => {
-    // tslint:disable-next-line no-console
-    console.error(message, ...additional)
-
-    logStack(message)
-    additional.forEach(x => logStack(x))
-}
-
-export const prettyJson = (obj: any) => JSON.stringify(obj, undefined, 2)
+export const createConsoleLogger = (): Logger => ({
+    child: createConsoleLogger,
+    trace: (...args: any[]) => log('TRACE', args),
+    debug: (...args: any[]) => log('DEBUG', args),
+    info: (...args: any[]) => log('INFO', args),
+    warn: (...args: any[]) => log('WARN', args),
+    error: (...args: any[]) => log('ERROR', args),
+    fatal: (...args: any[]) => log('FATAL', args),
+})
+// tslint:enable:no-console

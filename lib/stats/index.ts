@@ -3,7 +3,7 @@ import bundleSize from './bundle-size'
 import ssrStats from './ssr-stats'
 import lighthouseStats from './lighthouse'
 import { writeFile } from '../runtime/util/fs'
-import { log } from '../runtime/util/log'
+import { log } from '../util/log'
 import { BuildConfig } from '../../lib'
 
 export interface BuildMetrics {

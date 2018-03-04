@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { log, logError, prettyJson } from '../runtime/util/log'
+import { log, logError, prettyJson } from '../util/log'
 import { BuildMetrics } from './'
 import { getFileSize, readFile, formatFileSize } from '../runtime/util/fs'
 import { getAbsoluteAssetPath } from '../runtime/server/assets'
