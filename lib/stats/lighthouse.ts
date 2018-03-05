@@ -1,9 +1,12 @@
+import * as fs from 'fs'
+import * as path from 'path'
 import * as lighthouse from 'lighthouse'
 import { BuildMetrics } from './'
 import { runStatsOnServer } from './server'
 import { formatTimeMs, timeout } from '../util/time'
 import { BuildConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
+import { promisify } from 'util'
 
 export const runLighthouse = async (log: Logger, url: string) => {
     try {
@@ -85,7 +88,18 @@ const lighthouseStats = async (
             verbose,
         )
 
-        log.info({ stats, lighthouseResult }, `Lighthouse results`)
+        log.info({ stats }, `Lighthouse stats`)
+
+        if (lighthouseResult) {
+            const reportPath = path.resolve(buildConfig.BASE, 'lighthouse-report.json')
+            log.info(
+                `Lighthouse results written to '${reportPath}', you can view them visually at https://googlechrome.github.io/lighthouse/viewer/`,
+            )
+            await promisify(fs.writeFile)(
+                reportPath,
+                JSON.stringify(lighthouseResult, undefined, 4),
+            )
+        }
 
         return stats
     } catch (err) {
