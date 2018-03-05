@@ -1,4 +1,4 @@
-import * as Lighthouse from 'lighthouse'
+import * as lighthouse from 'lighthouse'
 import { BuildMetrics } from './'
 import { runStatsOnServer } from './server'
 import { formatTimeMs, timeout } from '../util/time'
@@ -8,7 +8,7 @@ import { Logger } from '../runtime/universal'
 export const runLighthouse = async (log: Logger, url: string) => {
     try {
         log.debug({ url }, 'Running lighthouse')
-        const results = await Lighthouse(
+        const results = await lighthouse(
             url,
             {
                 output: 'json',
@@ -45,17 +45,14 @@ const lighthouseStats = async (
     log.info('Measuring lighthouse performance metrics...')
 
     const stats: BuildMetrics = {}
+    let lighthouseResult: Lighthouse.LighthouseResults | undefined
 
     try {
         await runStatsOnServer(
             log,
             buildConfig,
             async ({ page, url }) => {
-                console.warn('STATS callback')
-
-                const lighthouseResult = await timeout(runLighthouse(log, url), 120000)
-                console.warn('LIGHTHOUSE RESULT')
-                console.warn(lighthouseResult)
+                lighthouseResult = await timeout(runLighthouse(log, url), 120000)
 
                 const addLighthouseValue = (lighthouseKey: string, statsKey: string) => {
                     const result =
@@ -88,7 +85,7 @@ const lighthouseStats = async (
             verbose,
         )
 
-        log.info(stats, `Lighthouse stats`)
+        log.info({ stats, lighthouseResult }, `Lighthouse results`)
 
         return stats
     } catch (err) {

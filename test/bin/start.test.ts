@@ -35,7 +35,7 @@ describe('bin/start', () => {
     })
 
     // can't test in TypeScript land because it requires the internal server in JavaScript
-    it.skip('will start the client', async () => {
+    it('will start the client', async () => {
         const port = await getTestPort()
         process.env.PORT = port.toString()
         const childProcess = await start(log, buildConfig, 'prod', 'client')

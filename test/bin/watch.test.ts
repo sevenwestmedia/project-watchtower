@@ -22,7 +22,7 @@ describe('bin/watch', () => {
     })
 
     // can't test in TypeScript land because it requires the internal server in JavaScript
-    it.skip('will watch the client', async () => {
+    it('will watch the client', async () => {
         const port = await getTestPort()
         process.env.PORT = port.toString()
         const childProcess: any = await watch(log, buildConfig, 'client')
