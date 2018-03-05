@@ -4,7 +4,7 @@ import { findFreePort } from '../util/network'
 import { getConfig } from '../config/config'
 import { BuildConfig } from '../../types'
 import { getBaseDir } from '../../../lib/runtime/server/base-dir'
-import { getDefaultHtmlMiddleware } from './middleware/default-gtml-middleware'
+import { getDefaultHtmlMiddleware } from './middleware/default-html-middleware'
 import { Logger } from '../universal'
 import { createEnsureRequestLogMiddleware } from './middleware/ensure-request-log-middleware'
 
