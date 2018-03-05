@@ -10,7 +10,8 @@ let assets: Assets
 
 let assetsLoaded = false
 
-const getAssetsFile = (buildConfig: BuildConfig) => path.resolve(buildConfig.BASE, 'assets.json')
+export const getAssetsFile = (buildConfig: BuildConfig) =>
+    path.resolve(buildConfig.BASE, 'assets.json')
 const log = createConsoleLogger()
 
 const ensureAssets = () => {

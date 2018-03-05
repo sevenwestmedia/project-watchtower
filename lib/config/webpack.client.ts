@@ -9,14 +9,15 @@ import * as DotenvPlugin from 'webpack-dotenv-plugin'
 import { updateAssetLocations } from '../runtime/server/assets'
 import { Assets } from '../types'
 import { BuildConfig } from '../../lib'
+import { getAssetsFile } from '../runtime/server'
 
 type EntryPoints = {
     [name: string]: string[]
 }
 
-const plugins: webpack.Plugin[] = [
+const getPlugins = (buildConfig: BuildConfig) => [
     new AssetsPlugin({
-        filename: 'assets.json',
+        filename: path.relative(process.cwd(), getAssetsFile(buildConfig)),
         processOutput: assets => {
             updateAssetLocations((assets as any) as Assets)
             return JSON.stringify(assets)
@@ -67,12 +68,13 @@ const clientBaseConfig = (buildConfig: BuildConfig) => {
     }
     const env = path.resolve(BASE, '.env')
     const envDefault = path.resolve(BASE, '.env.default')
+    const plugins = getPlugins(buildConfig)
 
-    if (fs.existsSync(env) && fs.existsSync(envDefault)) {
+    if (fs.existsSync(env) || fs.existsSync(envDefault)) {
         plugins.push(
             new DotenvPlugin({
-                path: '.env',
-                sample: '.env.default',
+                path: path.relative(process.cwd(), env),
+                sample: path.relative(process.cwd(), envDefault),
             }),
         )
     }
