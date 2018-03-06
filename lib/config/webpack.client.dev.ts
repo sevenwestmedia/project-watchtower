@@ -4,34 +4,33 @@ import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import baseConfig from './webpack.base'
 import clientBaseConfig from './webpack.client'
 import devConfig from './webpack.dev'
-import getWebpackHooks from './webpack-hooks'
-import { BuildConfig } from '../../lib'
-import { Logger } from '../runtime/universal'
+import getWebpackHooks, { getHook } from './webpack-hooks'
+import { CreateWebpackConfig } from './index'
 
 /** Webpack config for the client in development */
-const config = (log: Logger, buildConfig: BuildConfig): webpack.Configuration => {
-    const webpackHooks = getWebpackHooks(log, buildConfig.BASE)
+const config: CreateWebpackConfig = options => {
+    const webpackHooks = getWebpackHooks(options.log, options.buildConfig.BASE)
     return merge(
-        baseConfig(buildConfig),
-        webpackHooks.base || {},
-        clientBaseConfig(buildConfig),
-        webpackHooks.client || {},
+        baseConfig(options),
+        getHook(webpackHooks.base, options),
+        clientBaseConfig(options),
+        getHook(webpackHooks.client, options),
         devConfig,
-        webpackHooks.dev || {},
+        getHook(webpackHooks.dev, options),
         {
             entry: {
                 main: ['webpack-hot-middleware/client?noInfo=true'],
             },
             output: {
-                filename: buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js',
-                chunkFilename: buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js',
+                filename: options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js',
+                chunkFilename: options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js',
             },
             plugins: [
-                new ExtractTextPlugin(buildConfig.ASSETS_PATH_PREFIX + 'css/[name].css'),
+                new ExtractTextPlugin(options.buildConfig.ASSETS_PATH_PREFIX + 'css/[name].css'),
                 new webpack.HotModuleReplacementPlugin(),
             ],
         },
-        webpackHooks.clientDev || {},
+        getHook(webpackHooks.clientDev, options),
     )
 }
 

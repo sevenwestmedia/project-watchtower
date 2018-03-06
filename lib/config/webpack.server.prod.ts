@@ -1,24 +1,22 @@
-import * as webpack from 'webpack'
 import * as merge from 'webpack-merge'
 import baseConfig from './webpack.base'
 import serverBaseConfig from './webpack.server'
 import prodConfig from './webpack.prod'
-import getWebpackHooks from './webpack-hooks'
-import { BuildConfig } from '../../lib'
-import { Logger } from '../runtime/universal'
+import getWebpackHooks, { getHook } from './webpack-hooks'
+import { CreateWebpackConfig } from './index'
 
 /** Webpack config for the server in production */
-const config = (log: Logger, buildConfig: BuildConfig): webpack.Configuration => {
-    const webpackHooks = getWebpackHooks(log, buildConfig.BASE)
+const config: CreateWebpackConfig = options => {
+    const webpackHooks = getWebpackHooks(options.log, options.buildConfig.BASE)
 
     return merge(
-        baseConfig(buildConfig),
-        webpackHooks.base || {},
-        serverBaseConfig(buildConfig),
-        webpackHooks.server || {},
-        prodConfig,
-        webpackHooks.prod || {},
-        webpackHooks.serverProd || {},
+        baseConfig(options),
+        getHook(webpackHooks.base, options),
+        serverBaseConfig(options),
+        getHook(webpackHooks.server, options),
+        prodConfig(options),
+        getHook(webpackHooks.prod, options),
+        getHook(webpackHooks.serverProd, options),
     )
 }
 

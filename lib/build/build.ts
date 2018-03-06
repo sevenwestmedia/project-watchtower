@@ -11,6 +11,7 @@ import webpackServerDebugConfig from '../config/webpack.server.debug'
 import webpackServerProdConfig from '../config/webpack.server.prod'
 import { BuildConfig } from '../index'
 import { Logger } from '../runtime/universal'
+import { CreateWebpackConfigOptions, CreateWebpackConfig } from '../config/index'
 
 export const TARGETS: BuildTarget[] = ['server', 'client']
 
@@ -44,11 +45,19 @@ export const getWebpackConfig = (
     const customConfigFile = path.resolve(buildConfig.BASE, 'config', configFileName)
 
     let config: webpack.Configuration
+    const createWebpackConfigOptions: CreateWebpackConfigOptions = {
+        log,
+        buildConfig,
+    }
 
     try {
         if (fs.existsSync(customConfigFile + '.js')) {
             // using dynamicRequire to support bundling project-watchtower with webpack
-            config = dynamicRequire(customConfigFile).default
+            const customConfig = dynamicRequire(customConfigFile).default
+            config =
+                typeof customConfig === 'function'
+                    ? (customConfig as CreateWebpackConfig)(createWebpackConfigOptions)
+                    : customConfig
             log.info('Using custom config file ' + customConfigFile)
         } else {
             log.info('Building ' + configFileName + '...')
@@ -57,13 +66,13 @@ export const getWebpackConfig = (
                 case 'server':
                     switch (environment) {
                         case 'dev':
-                            return webpackServerDevConfig(log, buildConfig)
+                            return webpackServerDevConfig(createWebpackConfigOptions)
 
                         case 'debug':
-                            return webpackServerDebugConfig(log, buildConfig)
+                            return webpackServerDebugConfig(createWebpackConfigOptions)
 
                         case 'prod':
-                            return webpackServerProdConfig(log, buildConfig)
+                            return webpackServerProdConfig(createWebpackConfigOptions)
 
                         default:
                             throw new Error(`Invalid build target: ${target} ${environment}`)
@@ -72,13 +81,13 @@ export const getWebpackConfig = (
                 case 'client':
                     switch (environment) {
                         case 'dev':
-                            return webpackClientDevConfig(log, buildConfig)
+                            return webpackClientDevConfig(createWebpackConfigOptions)
 
                         case 'debug':
-                            return webpackClientDebugConfig(log, buildConfig)
+                            return webpackClientDebugConfig(createWebpackConfigOptions)
 
                         case 'prod':
-                            return webpackClientProdConfig(log, buildConfig)
+                            return webpackClientProdConfig(createWebpackConfigOptions)
 
                         default:
                             throw new Error(`Invalid build target: ${target} ${environment}`)

@@ -1,7 +1,8 @@
 import * as webpack from 'webpack'
+import { CreateWebpackConfig } from './index'
 
 /** Webpack settings for all production builds */
-const prodConfig: webpack.Configuration = {
+const prodConfig: CreateWebpackConfig = () => ({
     devtool: 'source-map',
     resolve: {
         alias: {
@@ -28,6 +29,6 @@ const prodConfig: webpack.Configuration = {
             minimize: true,
         }),
     ],
-}
+})
 
 export default prodConfig

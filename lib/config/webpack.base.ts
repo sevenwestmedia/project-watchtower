@@ -2,6 +2,7 @@ import * as webpack from 'webpack'
 import { version as tsVersion } from 'typescript'
 import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader'
 import { BuildConfig } from '../../lib'
+import { CreateWebpackConfig } from './index'
 
 const disableTypeCheck = process.env.START_FAST_MODE === 'true'
 
@@ -20,7 +21,7 @@ export const fileLoaderConfig = (buildConfig: BuildConfig) => ({
  * - compile TypeScript to JavaScript
  * - handle static files (images and fonts)
  */
-const baseConfig = (buildConfig: BuildConfig): webpack.Configuration => ({
+const baseConfig: CreateWebpackConfig = options => ({
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '*'],
         // force linked dependencies to use the project's node_modules
@@ -41,12 +42,12 @@ const baseConfig = (buildConfig: BuildConfig): webpack.Configuration => ({
                     module: tsVersion > '2.4' ? 'esnext' : 'es2015',
                 },
             },
-            fileLoaderConfig(buildConfig),
+            fileLoaderConfig(options.buildConfig),
             {
                 test: /\.(eot|woff|woff2)(\?.*)?$/,
                 loader: 'file-loader',
                 options: {
-                    name: buildConfig.ASSETS_PATH_PREFIX + 'fonts/[name].[ext]',
+                    name: options.buildConfig.ASSETS_PATH_PREFIX + 'fonts/[name].[ext]',
                 },
             },
             {

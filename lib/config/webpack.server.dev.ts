@@ -1,24 +1,22 @@
-import * as webpack from 'webpack'
 import * as merge from 'webpack-merge'
 import baseConfig from './webpack.base'
 import serverBaseConfig from './webpack.server'
 import devConfig from './webpack.dev'
-import getWebpackHooks from './webpack-hooks'
-import { BuildConfig } from '../../lib'
-import { Logger } from '../runtime/universal'
+import getWebpackHooks, { getHook } from './webpack-hooks'
+import { CreateWebpackConfig } from './index'
 
 /** Webpack config for the server in development */
-const config = (log: Logger, buildConfig: BuildConfig): webpack.Configuration => {
-    const webpackHooks = getWebpackHooks(log, buildConfig.BASE)
+const config: CreateWebpackConfig = options => {
+    const webpackHooks = getWebpackHooks(options.log, options.buildConfig.BASE)
 
     return merge(
-        baseConfig(buildConfig),
-        webpackHooks.base || {},
-        serverBaseConfig(buildConfig),
-        webpackHooks.server || {},
+        baseConfig(options),
+        getHook(webpackHooks.base, options),
+        serverBaseConfig(options),
+        getHook(webpackHooks.server, options),
         devConfig,
-        webpackHooks.dev || {},
-        webpackHooks.serverDev || {},
+        getHook(webpackHooks.dev, options),
+        getHook(webpackHooks.serverDev, options),
     )
 }
 

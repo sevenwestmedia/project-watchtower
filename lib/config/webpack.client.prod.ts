@@ -1,32 +1,30 @@
-import * as webpack from 'webpack'
 import * as merge from 'webpack-merge'
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import baseConfig from './webpack.base'
 import clientBaseConfig from './webpack.client'
 import prodConfig from './webpack.prod'
-import getWebpackHooks from './webpack-hooks'
-import { BuildConfig } from '../../lib'
-import { Logger } from '../runtime/universal'
+import getWebpackHooks, { getHook } from './webpack-hooks'
+import { CreateWebpackConfig } from './index'
 
 /** Webpack config for the client in production */
-const config = (log: Logger, buildConfig: BuildConfig): webpack.Configuration => {
-    const webpackHooks = getWebpackHooks(log, buildConfig.BASE)
+const config: CreateWebpackConfig = options => {
+    const webpackHooks = getWebpackHooks(options.log, options.buildConfig.BASE)
 
-    const chunkFilename = buildConfig.STATIC_RESOURCE_NAMES
-        ? buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js'
-        : buildConfig.ASSETS_PATH_PREFIX + 'js/[name]_[chunkhash].js'
+    const chunkFilename = options.buildConfig.STATIC_RESOURCE_NAMES
+        ? options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js'
+        : options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name]_[chunkhash].js'
 
-    const cssFilename = buildConfig.STATIC_RESOURCE_NAMES
-        ? buildConfig.ASSETS_PATH_PREFIX + 'css/[name].css'
-        : buildConfig.ASSETS_PATH_PREFIX + 'css/[name].[contenthash:8].css'
+    const cssFilename = options.buildConfig.STATIC_RESOURCE_NAMES
+        ? options.buildConfig.ASSETS_PATH_PREFIX + 'css/[name].css'
+        : options.buildConfig.ASSETS_PATH_PREFIX + 'css/[name].[contenthash:8].css'
 
     return merge(
-        baseConfig(buildConfig),
-        webpackHooks.base || {},
-        clientBaseConfig(buildConfig),
-        webpackHooks.client || {},
-        prodConfig,
-        webpackHooks.prod || {},
+        baseConfig(options),
+        getHook(webpackHooks.base, options),
+        clientBaseConfig(options),
+        getHook(webpackHooks.client, options),
+        prodConfig(options),
+        getHook(webpackHooks.prod, options),
         {
             output: {
                 filename: chunkFilename,
@@ -34,7 +32,7 @@ const config = (log: Logger, buildConfig: BuildConfig): webpack.Configuration =>
             },
             plugins: [new ExtractTextPlugin(cssFilename)],
         },
-        webpackHooks.clientProd || {},
+        getHook(webpackHooks.clientProd, options),
     )
 }
 

@@ -1,4 +1,5 @@
 import * as webpack from 'webpack'
+import { CreateWebpackConfig } from '../config/index'
 
 /** Created assets in the webpack build */
 export interface Assets {
@@ -80,17 +81,17 @@ export type BuildConfigOverride = Partial<BuildConfig>
 
 /** Override the webpack config per target and environment */
 export interface WebpackHooks {
-    base?: webpack.Configuration
-    server?: webpack.Configuration
-    client?: webpack.Configuration
-    dev?: webpack.Configuration
-    prod?: webpack.Configuration
-    serverDev?: webpack.Configuration
-    serverProd?: webpack.Configuration
-    serverDebug?: webpack.Configuration
-    clientDev?: webpack.Configuration
-    clientProd?: webpack.Configuration
-    clientDebug?: webpack.Configuration
+    base?: webpack.Configuration | CreateWebpackConfig
+    server?: webpack.Configuration | CreateWebpackConfig
+    client?: webpack.Configuration | CreateWebpackConfig
+    dev?: webpack.Configuration | CreateWebpackConfig
+    prod?: webpack.Configuration | CreateWebpackConfig
+    serverDev?: webpack.Configuration | CreateWebpackConfig
+    serverProd?: webpack.Configuration | CreateWebpackConfig
+    serverDebug?: webpack.Configuration | CreateWebpackConfig
+    clientDev?: webpack.Configuration | CreateWebpackConfig
+    clientProd?: webpack.Configuration | CreateWebpackConfig
+    clientDebug?: webpack.Configuration | CreateWebpackConfig
 }
 
 export type BuildTarget = 'server' | 'client'

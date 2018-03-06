@@ -9,8 +9,8 @@ import { BuildConfig } from '../../lib'
  * - treat everything in node_modules as an external dependency
  * - add source-map-support to every file
  */
-const serverBaseConfig = (buildConfig: BuildConfig): webpack.Configuration => {
-    const { BASE, PUBLIC_PATH, SERVER_ENTRY, SERVER_OUTPUT } = buildConfig
+const serverBaseConfig = (options: { buildConfig: BuildConfig }): webpack.Configuration => {
+    const { BASE, PUBLIC_PATH, SERVER_ENTRY, SERVER_OUTPUT } = options.buildConfig
 
     const baseDirNodeModules = path.resolve(BASE, 'node_modules')
     // Try <base>/node_modules, if not present assume they are at
@@ -47,9 +47,9 @@ const serverBaseConfig = (buildConfig: BuildConfig): webpack.Configuration => {
             // treat deep imports as externals as well
             const moduleName = request.split('/')[0]
 
-            if (buildConfig.SERVER_BUNDLE_ALL) {
+            if (options.buildConfig.SERVER_BUNDLE_ALL) {
                 callback(undefined, undefined)
-            } else if (buildConfig.SERVER_INCLUDE_IN_BUNDLE.indexOf(moduleName) !== -1) {
+            } else if (options.buildConfig.SERVER_INCLUDE_IN_BUNDLE.indexOf(moduleName) !== -1) {
                 callback(undefined, undefined)
             } else if (nodeModules.indexOf(moduleName) !== -1) {
                 callback(null, 'commonjs ' + request)

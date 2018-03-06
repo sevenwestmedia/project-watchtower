@@ -10,6 +10,7 @@ import { updateAssetLocations } from '../runtime/server/assets'
 import { Assets } from '../types'
 import { BuildConfig } from '../../lib'
 import { getAssetsFile } from '../runtime/server'
+import { CreateWebpackConfig } from './index'
 
 type EntryPoints = {
     [name: string]: string[]
@@ -48,7 +49,7 @@ const getPlugins = (buildConfig: BuildConfig) => [
  * - Create assets.json that maps the created assets to their locations
  * - Create vendor chunk with everything from node_modules except for SWM modules
  */
-const clientBaseConfig = (buildConfig: BuildConfig) => {
+const clientBaseConfig: CreateWebpackConfig = options => {
     const {
         BASE,
         CLIENT_ENTRY,
@@ -57,7 +58,7 @@ const clientBaseConfig = (buildConfig: BuildConfig) => {
         CSS_AUTOPREFIXER,
         PUBLIC_PATH,
         SERVER_PUBLIC_DIR,
-    } = buildConfig
+    } = options.buildConfig
 
     const entry: EntryPoints = {
         main: [CLIENT_ENTRY],
@@ -68,7 +69,7 @@ const clientBaseConfig = (buildConfig: BuildConfig) => {
     }
     const env = path.resolve(BASE, '.env')
     const envDefault = path.resolve(BASE, '.env.default')
-    const plugins = getPlugins(buildConfig)
+    const plugins = getPlugins(options.buildConfig)
 
     if (fs.existsSync(env) && fs.existsSync(envDefault)) {
         plugins.push(
