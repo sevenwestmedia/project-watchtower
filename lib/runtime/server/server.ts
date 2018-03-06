@@ -37,7 +37,11 @@ export const createServer: CreateServerType = options => {
     const { earlyMiddlewareHook, middlewareHook, callback, startListening = true } = options
     const app = express()
     app.disable('x-powered-by')
-    const buildConfig = getConfig(options.log, process.env.PROJECT_DIR || process.cwd())
+
+    // buildConfig is used for build time config, for example hot reload, and the PORT
+    // in local development. In production the port will come from the environment, not
+    // this config object
+    const buildConfig = getConfig(options.log, process.env.PROJECT_DIR || getBaseDir())
 
     if (process.env.NODE_ENV !== 'production' && isWatchMode()) {
         // tslint:disable-next-line no-var-requires
@@ -89,7 +93,7 @@ export const createServer: CreateServerType = options => {
             if (process.env.NODE_ENV !== 'production' && isWatchMode()) {
                 // tslint:disable-next-line no-var-requires
                 const { openBrowser } = require('../../server/dev')
-                openBrowser(config, usePort)
+                openBrowser(buildConfig, usePort)
             }
             if (callback) {
                 callback()
@@ -99,7 +103,7 @@ export const createServer: CreateServerType = options => {
         app.set('server', server)
     }
 
-    const port = getPort(config)
+    const port = getPort(buildConfig)
 
     if (isProduction) {
         listen(port)
