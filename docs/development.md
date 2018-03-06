@@ -10,8 +10,7 @@ Run the following commands:
 
 To remove container run
 ```
-docker stop chrome-headless
-docker rm chrome-headless
+docker rm -f chrome-headless
 ```
 
 
