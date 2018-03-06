@@ -70,7 +70,7 @@ const clientBaseConfig = (buildConfig: BuildConfig) => {
     const envDefault = path.resolve(BASE, '.env.default')
     const plugins = getPlugins(buildConfig)
 
-    if (fs.existsSync(env) || fs.existsSync(envDefault)) {
+    if (fs.existsSync(env) && fs.existsSync(envDefault)) {
         plugins.push(
             new DotenvPlugin({
                 path: path.relative(process.cwd(), env),

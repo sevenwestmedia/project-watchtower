@@ -26,6 +26,12 @@ const customConfig: BuildConfigOverride = {
 export default customConfig
 ```
 
+You can also default export a function with the below signature which which allows you to consume the current project root
+
+```ts
+(root: string) => BuildConfigOverride
+```
+
 If you provide a `/config/config.ts` in TypeScript, make sure it is transpiled to JavaScript before any `pwt` command is run or any of Project Watchtower's middlewares are used. This can be done in the `prepare` script in your project's `package.json`. Project Watchtower will throw an error if it detects a TypeScript configuration file, but not the transpiled JavaScript artifact.
 
 The complete default configuration is located in `project-watchtower/lib/runtime/config/config.ts`

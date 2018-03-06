@@ -82,7 +82,11 @@ export const getCustomConfigFile = <T extends {}>(
 
     if (existsSync(customConfigFile)) {
         // using dynamicRequire to support bundling project-watchtower with webpack
-        return dynamicRequire(customConfigFile).default
+        const config = dynamicRequire(customConfigFile).default
+        if (typeof config === 'function') {
+            return config(root)
+        }
+        return config
     }
 
     // We don't dynamically compile because that would add more runtime
