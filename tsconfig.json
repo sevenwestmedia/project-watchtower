@@ -25,5 +25,6 @@
         "inlineSources": true,
         "declaration": true,
         "typeRoots": ["node_modules/@types", "@types"]
-    }
+    },
+    "include": ["lib"]
 }
