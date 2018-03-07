@@ -11,6 +11,7 @@ import { getPort } from '../runtime/server/server'
 import { waitForConnection } from '../runtime/util/network'
 import { BuildConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
+import { setBaseDir } from '../runtime/server/base-dir'
 
 dotenv.config()
 
@@ -31,6 +32,11 @@ export interface WatchServer {
 
 const watchServer = (log: Logger, buildConfig: BuildConfig, port?: number) =>
     new Promise<WatchServer>(resolve => {
+        // When running in local dev, we have a different process.cwd() than
+        // when running in production. This allows static files and such to resolve
+        setBaseDir(buildConfig.SERVER_OUTPUT)
+        process.env.PROJECT_DIR = buildConfig.BASE
+
         const serverPort = port || getPort(buildConfig)
         const devServerPort = serverPort + 1
 

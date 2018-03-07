@@ -28,6 +28,7 @@
         "prestart:demo": "npm run clean:lighthouse && yarn build",
         "start:demo": "yarn pwt watch -p demo",
         "start:ssrdemo": "ENABLE_SSR=true yarn pwt watch -p demo",
+        "start-server:ssrdemo": "ENABLE_SSR=true yarn pwt watch server -p demo",
         "test:demo": "yarn pwt test -p demo",
         "prestats:demo": "yarn build:demo",
         "stats:demo": "yarn pwt stats -p demo",
