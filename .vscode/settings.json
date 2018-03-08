@@ -8,11 +8,16 @@
         "**/.DS_Store": true,
         "**/*.map": true,
         "**/*.js": {
+            "when": "$(basename).tsx"
+        },
+        "**/*.d.ts": {
+            "when": "$(basename).tsx"
+        },
+        "**/*?.js": {
             "when": "$(basename).ts"
         },
-        "lib/**/*.d.ts": true,
-        "{lib,demo}/**/*.js": {
-            "when": "$(basename).tsx"
+        "**/*?.d.ts": {
+            "when": "$(basename).ts"
         }
     },
     "search.exclude": {
@@ -28,8 +33,5 @@
     "prettier.trailingComma": "all",
     "editor.formatOnSave": true,
     "prettier.printWidth": 100,
-    "prettier.disableLanguages": [
-        "json",
-        "markdown"
-    ]
+    "prettier.disableLanguages": ["json", "markdown"]
 }

@@ -4,33 +4,34 @@ import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import baseConfig from './webpack.base'
 import clientBaseConfig from './webpack.client'
 import devConfig from './webpack.dev'
-import CONFIG from '../runtime/config/config'
-import webpackHooks from './webpack-hooks'
-
-const { ASSETS_PATH_PREFIX } = CONFIG
+import getWebpackHooks, { getHook } from './webpack-hooks'
+import { CreateWebpackConfig } from './index'
 
 /** Webpack config for the client in development */
-const config: webpack.Configuration = merge(
-    baseConfig,
-    webpackHooks.base || {},
-    clientBaseConfig,
-    webpackHooks.client || {},
-    devConfig,
-    webpackHooks.dev || {},
-    {
-        entry: {
-            main: ['webpack-hot-middleware/client?noInfo=true'],
+const config: CreateWebpackConfig = options => {
+    const webpackHooks = getWebpackHooks(options.log, options.buildConfig.BASE)
+    return merge(
+        baseConfig(options),
+        getHook(webpackHooks.base, options),
+        clientBaseConfig(options),
+        getHook(webpackHooks.client, options),
+        devConfig,
+        getHook(webpackHooks.dev, options),
+        {
+            entry: {
+                main: ['webpack-hot-middleware/client?noInfo=true'],
+            },
+            output: {
+                filename: options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js',
+                chunkFilename: options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js',
+            },
+            plugins: [
+                new ExtractTextPlugin(options.buildConfig.ASSETS_PATH_PREFIX + 'css/[name].css'),
+                new webpack.HotModuleReplacementPlugin(),
+            ],
         },
-        output: {
-            filename: ASSETS_PATH_PREFIX + 'js/[name].js',
-            chunkFilename: ASSETS_PATH_PREFIX + 'js/[name].js',
-        },
-        plugins: [
-            new ExtractTextPlugin(ASSETS_PATH_PREFIX + 'css/[name].css'),
-            new webpack.HotModuleReplacementPlugin(),
-        ],
-    },
-    webpackHooks.clientDev || {},
-)
+        getHook(webpackHooks.clientDev, options),
+    )
+}
 
 export default config

@@ -1,20 +1,19 @@
-import * as path from 'path'
 import * as webpack from 'webpack'
 import { version as tsVersion } from 'typescript'
 import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader'
-import CONFIG from '../runtime/config/config'
+import { BuildConfig } from '../../lib'
+import { CreateWebpackConfig } from './index'
 
-const { BASE, MODULE_PATHS, ASSETS_PATH_PREFIX } = CONFIG
 const disableTypeCheck = process.env.START_FAST_MODE === 'true'
 
-export const fileLoaderConfig = {
+export const fileLoaderConfig = (buildConfig: BuildConfig) => ({
     test: /\.(ico|jpg|png|gif|otf|webp|svg|ttf)(\?.*)?$/,
     exclude: /\/favicon.ico$/,
     loader: 'file-loader',
     options: {
-        name: ASSETS_PATH_PREFIX + 'media/[name].[hash:8].[ext]',
+        name: buildConfig.ASSETS_PATH_PREFIX + 'media/[name].[hash:8].[ext]',
     },
-}
+})
 
 /**
  * Base webpack configuration that is shared by the server and the client
@@ -22,10 +21,9 @@ export const fileLoaderConfig = {
  * - compile TypeScript to JavaScript
  * - handle static files (images and fonts)
  */
-const baseConfig: webpack.Configuration = {
+const baseConfig: CreateWebpackConfig = options => ({
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '*'],
-        modules: MODULE_PATHS,
         // force linked dependencies to use the project's node_modules
         // https://github.com/webpack/webpack/issues/985#issuecomment-261497772
         symlinks: false,
@@ -34,18 +32,8 @@ const baseConfig: webpack.Configuration = {
     module: {
         rules: [
             {
-                test: /\.js$/,
-                enforce: 'pre',
-                loader: 'source-map-loader',
-                include: [
-                    path.resolve(BASE, 'node_modules', 'swm-component-library'),
-                    path.resolve(BASE, 'node_modules', 'redux-data-loader'),
-                ],
-            },
-            {
                 test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader',
-                exclude: /node_modules\/(?!swm-component-library)/,
                 options: {
                     transpileOnly: disableTypeCheck,
                     useTranspileModule: disableTypeCheck,
@@ -54,12 +42,12 @@ const baseConfig: webpack.Configuration = {
                     module: tsVersion > '2.4' ? 'esnext' : 'es2015',
                 },
             },
-            fileLoaderConfig,
+            fileLoaderConfig(options.buildConfig),
             {
                 test: /\.(eot|woff|woff2)(\?.*)?$/,
                 loader: 'file-loader',
                 options: {
-                    name: ASSETS_PATH_PREFIX + 'fonts/[name].[ext]',
+                    name: options.buildConfig.ASSETS_PATH_PREFIX + 'fonts/[name].[ext]',
                 },
             },
             {
@@ -69,6 +57,6 @@ const baseConfig: webpack.Configuration = {
         ],
     },
     plugins: [new CheckerPlugin(), new webpack.NoEmitOnErrorsPlugin()],
-}
+})
 
 export default baseConfig

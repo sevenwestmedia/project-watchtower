@@ -1,36 +1,44 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import CONFIG from '../config/config'
 import { Assets } from '../../types'
+import { BuildConfig } from '../../../lib'
+import { getConfig } from '../../../lib/runtime/config/config'
+import { getBaseDir } from '../../../lib/runtime/server/base-dir'
+import { createConsoleLogger } from '../universal'
 
-const { ASSETS_PATH_PREFIX, BASE, CLIENT_OUTPUT, PUBLIC_PATH } = CONFIG
-const assetsFile = path.resolve(BASE, 'assets.json')
-const watchMode = process.env.START_WATCH_MODE === 'true'
-
-let assets: Assets = {
-    main: {
-        js: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'js/main.js',
-        css: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'css/main.css',
-    },
-    vendor: {
-        js: PUBLIC_PATH + ASSETS_PATH_PREFIX + 'js/vendor.js',
-    },
-}
+let assets: Assets
 
 let assetsLoaded = false
 
+export const getAssetsFile = (buildConfig: BuildConfig) =>
+    path.resolve(buildConfig.BASE, 'assets.json')
+const log = createConsoleLogger()
+
 const ensureAssets = () => {
+    const buildConfig = getConfig(log, getBaseDir())
     if (assetsLoaded) {
         return
     }
     try {
-        const assetsFileContents = fs.readFileSync(assetsFile)
+        const assetsFileContents = fs.readFileSync(getAssetsFile(buildConfig))
         assets = JSON.parse(assetsFileContents.toString())
         assetsLoaded = true
     } catch (e) {
         // do nothing
+        // Create defaults
+        assets = {
+            main: {
+                js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/main.js',
+                css: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'css/main.css',
+            },
+            vendor: {
+                js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/vendor.js',
+            },
+        }
     }
 }
+
+const watchMode = process.env.START_WATCH_MODE === 'true'
 
 export const updateAssetLocations = (newAssets: Assets) => {
     assets = newAssets
@@ -74,11 +82,11 @@ export const addAssetsToHtml = (html: string) => {
     return modifiedHtml
 }
 
-export const getAbsoluteAssetPath = (asset: string) => {
-    let relativeAsset = asset.slice(PUBLIC_PATH.length)
+export const getAbsoluteAssetPath = (buildConfig: BuildConfig, asset: string) => {
+    let relativeAsset = asset.slice(buildConfig.PUBLIC_PATH.length)
     if (relativeAsset[0] === '/') {
         relativeAsset = relativeAsset.slice(1)
     }
 
-    return path.resolve(CLIENT_OUTPUT, relativeAsset)
+    return path.resolve(buildConfig.CLIENT_OUTPUT, relativeAsset)
 }

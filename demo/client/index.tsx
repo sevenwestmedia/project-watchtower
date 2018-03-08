@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { cssHotReload } from 'project-watchtower/lib/runtime/client'
+import { cssHotReload } from '../../lib/runtime/client'
 
 import { App } from '../common/App'
 

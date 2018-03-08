@@ -3,18 +3,21 @@ import bundleSize from './bundle-size'
 import ssrStats from './ssr-stats'
 import lighthouseStats from './lighthouse'
 import { writeFile } from '../runtime/util/fs'
-import { log } from '../runtime/util/log'
-
-const root = process.cwd()
+import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
 
 export interface BuildMetrics {
     [key: string]: string
 }
 
-export const measureBuildStats = async (verbose?: boolean): Promise<BuildMetrics> => {
-    const bundleMetrics = await bundleSize()
-    const ssrMetrics = await ssrStats(verbose)
-    const lighthouseMetrics = await lighthouseStats(verbose)
+export const measureBuildStats = async (
+    log: Logger,
+    buildConfig: BuildConfig,
+    verbose?: boolean,
+): Promise<BuildMetrics> => {
+    const bundleMetrics = await bundleSize(log, buildConfig)
+    const ssrMetrics = await ssrStats(log, buildConfig, verbose)
+    const lighthouseMetrics = await lighthouseStats(log, buildConfig, verbose)
 
     return {
         ...bundleMetrics,
@@ -23,11 +26,15 @@ export const measureBuildStats = async (verbose?: boolean): Promise<BuildMetrics
     }
 }
 
-export const writeBuildStats = async (metrics: BuildMetrics) => {
+export const writeBuildStats = async (
+    log: Logger,
+    buildConfig: BuildConfig,
+    metrics: BuildMetrics,
+) => {
     // TeamCity expects key-value pairs written to the console
 
     Object.keys(metrics).forEach(key => {
-        log(`##teamcity[buildStatisticValue key='${key}' value='${metrics[key]}']`)
+        log.info(`##teamcity[buildStatisticValue key='${key}' value='${metrics[key]}']`)
     })
 
     // Jenkins wants a CSV file
@@ -45,14 +52,18 @@ export const writeBuildStats = async (metrics: BuildMetrics) => {
 
     const fileContent = titleRow + '\n' + valueRow
 
-    const statsFilePath = path.resolve(root, 'build-stats.csv')
+    const statsFilePath = path.resolve(buildConfig.BASE, 'build-stats.csv')
 
-    await writeFile(statsFilePath, fileContent)
+    await writeFile(log, statsFilePath, fileContent)
 }
 
-const measureAndWriteBuildStats = async (verbose = false) => {
-    const metrics = await measureBuildStats(verbose)
-    await writeBuildStats(metrics)
+const measureAndWriteBuildStats = async (
+    log: Logger,
+    buildConfig: BuildConfig,
+    verbose = false,
+) => {
+    const metrics = await measureBuildStats(log, buildConfig, verbose)
+    await writeBuildStats(log, buildConfig, metrics)
 }
 
 export default measureAndWriteBuildStats

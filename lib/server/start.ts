@@ -1,6 +1,7 @@
 import { createServer } from '../runtime/server/server'
-import { log } from '../runtime/util/log'
+import { createConsoleLogger } from '../runtime/universal'
 
-log('Starting Project Watchtower internal server...')
+const log = createConsoleLogger()
+log.info('Starting Project Watchtower internal server...')
 
-createServer()
+createServer({ log })

@@ -8,4 +8,4 @@
 export * from './server/assets'
 export * from './server/server'
 
-export { default as config } from './config/config'
+export { getConfig } from './config/config'

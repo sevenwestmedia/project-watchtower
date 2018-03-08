@@ -20,12 +20,12 @@ import {
     ComponentWithLifecycle,
     PageEvent,
 } from './PageLifecycleProvider'
-import { PromiseCompletionSource } from '../../universal'
+import { PromiseCompletionSource, createConsoleLogger } from '../../universal'
 import Page from '../Page/Page'
 import { PageAdditionalProps } from '../Page/PageAdditionalProps'
-import { testLogger } from '../../server/ssr/helpers/test-logger'
 
 configure({ adapter: new Adapter() })
+const testLogger = createConsoleLogger()
 
 interface TestData {
     bar: string

@@ -75,11 +75,12 @@ import { renderApp } from './render-server'
 import { renderHtml } from 'server/render-html'
 
 export const startServer = () => {
-    // Do any server configuration here
-    return createServer((app) => {
-        // Register additional routes here
-
-        // If you want server side rendering support, register the ssr middleware here
+    return createServer(options?: {
+        /** Early middleware hook is before static middleswares etc */
+        earlyMiddlewareHook?: (app: express.Express) => void,
+        middlewareHook?: (app: express.Express) => void,
+        callback?: () => void,
+        startListening?: boolean,
     })
 }
 
@@ -137,14 +138,14 @@ default clean(paths: string | string[]) => Promise<any>
 `project-watchtower/lib/config`
 
 ```ts
-base: webpack.Configuration
-clientBase: webpack.Configuration
-clientDev: webpack.Configuration
-clientDebug: webpack.Configuration
-clientProd: webpack.Configuration
-serverDev: webpack.Configuration
-serverDebug: webpack.Configuration
-serverProd: webpack.Configuration
+base: (buildConfig: BuildConfig) => webpack.Configuration
+clientBase: (buildConfig: BuildConfig) => webpack.Configuration
+clientDev: (buildConfig: BuildConfig) => webpack.Configuration
+clientDebug: (buildConfig: BuildConfig) => webpack.Configuration
+clientProd: (buildConfig: BuildConfig) => webpack.Configuration
+serverDev: (buildConfig: BuildConfig) => webpack.Configuration
+serverDebug:(buildConfig: BuildConfig) =>  webpack.Configuration
+serverProd: (buildConfig: BuildConfig) => webpack.Configuration
 devBase: webpack.Configuration
 prodBase: webpack.Configuration
 ```
@@ -160,9 +161,9 @@ sassLint(...paths: string[]): Promise<any>
 `project-watchtower/lib/server`
 
 ```ts
-getHotReloadMiddleware() => express.RequestHandler[]
+getHotReloadMiddleware(buildConfig: BuildConfig) => express.RequestHandler[]
 
-openBrowser(port?: number)
+openBrowser(buildConfig: BuildConfig, port?: number)
 ```
 
 `project-watchtower/lib/stats`

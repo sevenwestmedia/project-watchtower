@@ -1,12 +1,11 @@
 import { ChildProcess } from 'child_process'
-import CONFIG from '../runtime/config/config'
 import clean from './clean'
 import build from './build'
 import start from './start'
 import { default as watchServer, WatchServer } from '../watch/server'
 import { StartParam, WatchParam } from '../types'
-
-const { HAS_SERVER } = CONFIG
+import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
 
 /**
  * Rebuilds the client on changes
@@ -15,7 +14,12 @@ const { HAS_SERVER } = CONFIG
  * - fast: disables type checking
  * - client: Only run client without a server
  */
-const watch = async (...args: WatchParam[]): Promise<ChildProcess | WatchServer> => {
+const watch = async (
+    log: Logger,
+    buildConfig: BuildConfig,
+    ...args: WatchParam[]
+): Promise<ChildProcess | WatchServer> => {
+    const { HAS_SERVER } = buildConfig
     const additionalStartParams: StartParam[] = []
 
     if (args.indexOf('fast') !== -1) {
@@ -27,21 +31,21 @@ const watch = async (...args: WatchParam[]): Promise<ChildProcess | WatchServer>
         additionalStartParams.push('inspect')
     }
 
-    await clean()
+    await clean(log, buildConfig)
 
     const isServerWatch = HAS_SERVER && args.indexOf('server') !== -1
 
     if (isServerWatch) {
-        return watchServer()
+        return watchServer(log, buildConfig)
     }
 
     const clientMode = !HAS_SERVER || args.indexOf('client') !== -1
 
     if (clientMode) {
-        return start('watch', 'client', ...additionalStartParams)
+        return start(log, buildConfig, 'watch', 'client', ...additionalStartParams)
     } else {
-        await build('server', 'dev')
-        return start('watch', ...additionalStartParams)
+        await build(log, buildConfig, 'server', 'dev')
+        return start(log, buildConfig, 'watch', ...additionalStartParams)
     }
 }
 

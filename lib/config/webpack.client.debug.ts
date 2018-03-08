@@ -1,15 +1,16 @@
-import * as webpack from 'webpack'
 import * as merge from 'webpack-merge'
 import clientDevConfig from './webpack.client.dev'
-import webpackHooks from './webpack-hooks'
+import getWebpackHooks, { getHook } from './webpack-hooks'
+import { CreateWebpackConfig } from './index'
 
 /** Webpack config for the client to improve debugging */
-const config: webpack.Configuration = merge(
-    clientDevConfig,
-    {
-        devtool: 'source-map',
-    },
-    webpackHooks.clientDebug || {},
-)
+const config: CreateWebpackConfig = options =>
+    merge(
+        clientDevConfig(options),
+        {
+            devtool: 'source-map',
+        },
+        getHook(getWebpackHooks(options.log, options.buildConfig.BASE).clientDebug, options),
+    )
 
 export default config

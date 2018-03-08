@@ -1,17 +1,23 @@
-import { log, logError, prettyJson } from '../../../lib/runtime/util/log'
+import { prettyJson } from '../../../lib/util/log'
+import { createConsoleLogger } from '../../../lib/runtime/universal'
+
+const recursive = {}
+;(recursive as any).recursive = recursive
+const log = createConsoleLogger()
 
 describe('util/log', () => {
-
     it('log', () => {
-        log('a', undefined, { foo: 'bar' })
+        log.info({ recursive, foo: 'bar' }, 'a')
     })
 
     it('logError', () => {
-        logError('a', undefined, { foo: 'bar' })
-        logError({
-            toString: () => 'error string',
-            stack: ['a', 'b', 'c'],
-        })
+        log.error({ recursive, foo: 'bar' }, 'a')
+        log.error(
+            {
+                err: new Error('Oops'),
+            },
+            'Oops',
+        )
     })
 
     it('prettyJson', () => {
@@ -20,13 +26,13 @@ describe('util/log', () => {
         }
         const json = prettyJson(obj)
         expect(json).toBe(
-`{
+            `{
   "foo": "bar"
-}`)
+}`,
+        )
 
         expect(prettyJson(undefined)).toBe(undefined)
         expect(prettyJson(false)).toBe('false')
         expect(prettyJson(null)).toBe('null')
     })
-
 })

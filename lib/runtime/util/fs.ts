@@ -1,12 +1,12 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { logError } from './log'
+import { Logger } from '../universal'
 
-export const readFile = (filePath: string) =>
+export const readFile = (log: Logger, filePath: string) =>
     new Promise<string>((resolve, reject) => {
         fs.readFile(filePath, 'utf8', (err, data) => {
             if (err) {
-                logError('Error reading file', filePath, err)
+                log.error({ err, filePath }, 'Error reading file')
                 reject(err)
             } else {
                 resolve(data)
@@ -14,11 +14,11 @@ export const readFile = (filePath: string) =>
         })
     })
 
-export const getFileSize = (filePath: string) =>
+export const getFileSize = (log: Logger, filePath: string) =>
     new Promise<number>((resolve, reject) => {
         fs.stat(filePath, (err, stats) => {
             if (err) {
-                logError('Error getting file size', filePath, err)
+                log.error({ err, filePath }, 'Error getting file size')
                 reject(err)
             } else {
                 resolve(stats.size)
@@ -26,11 +26,11 @@ export const getFileSize = (filePath: string) =>
         })
     })
 
-export const writeFile = (filePath: string, fileContent: string) =>
+export const writeFile = (log: Logger, filePath: string, fileContent: string) =>
     new Promise((resolve, reject) => {
         fs.writeFile(filePath, fileContent, err => {
             if (err) {
-                logError('Error writing file', err)
+                log.error({ err, filePath }, 'Error writing file')
                 reject(err)
             } else {
                 resolve()
@@ -71,19 +71,29 @@ export const dynamicRequire = (file: string) => {
  * Abort with an error if it only exists as TypeScript
  * @param filePath File path from project root (without extension)
  */
-export const getCustomConfigFile = <T extends {}>(filePath: string, fallback: T): T => {
-    const root = process.cwd()
+export const getCustomConfigFile = <T extends {}>(
+    log: Logger,
+    root: string,
+    filePath: string,
+    fallback: T,
+): T => {
     const customConfigFile = path.resolve(root, filePath + '.js')
     const customConfigFileTS = path.resolve(root, filePath + '.ts')
 
     if (existsSync(customConfigFile)) {
         // using dynamicRequire to support bundling project-watchtower with webpack
-        return dynamicRequire(customConfigFile).default
+        const config = dynamicRequire(customConfigFile).default
+        if (typeof config === 'function') {
+            return config(root)
+        }
+        return config
     }
 
+    // We don't dynamically compile because that would add more runtime
+    // dependencies to watchtower.
     if (existsSync(customConfigFileTS)) {
-        logError(filePath + ' only found as TypeScript file.')
-        logError('Please make sure to compile all TS files in the /config folder to JS!')
+        log.error(filePath + ' only found as TypeScript file.')
+        log.error('Please make sure to compile all TS files in the /config folder to JS!')
         process.exit(1)
     }
 

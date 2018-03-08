@@ -1,14 +1,18 @@
 import * as webpack from 'webpack'
 import { printWebpackStats } from '../../lib/util/webpack'
+import { createConsoleLogger } from '../../lib/runtime/universal'
+
+const log = createConsoleLogger()
 
 describe('util/webpack', () => {
-
     it('printWebpackStats', () => {
-        const stats = {
+        const stats: webpack.Stats = {
             toString: () => 'stats',
-        } as webpack.Stats
+            hasErrors: () => false,
+            hasWarnings: () => false,
+            toJson: () => "{ stats: 'as json' }",
+        }
 
-        printWebpackStats(stats)
+        printWebpackStats(log, stats)
     })
-
 })

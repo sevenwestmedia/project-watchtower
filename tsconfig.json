@@ -12,6 +12,8 @@
         "noUnusedParameters": true,
         "jsx": "react",
         "importHelpers": true,
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
         "lib": [
             "dom",
             "es5",
@@ -22,7 +24,6 @@
         ],
         "inlineSources": true,
         "declaration": true,
-        "baseUrl": "./",
         "typeRoots": ["node_modules/@types", "@types"]
     },
     "include": ["lib"]

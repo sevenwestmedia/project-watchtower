@@ -1,11 +1,11 @@
 import * as path from 'path'
-import { ChildProcess, ForkOptions } from 'child_process'
 import * as dotenv from 'dotenv'
-import CONFIG from '../runtime/config/config'
-import { forkPromise } from '../runtime/util/process'
+import { ChildProcess, ForkOptions } from 'child_process'
+import { forkPromise } from '../util/process'
 import { StartParam } from '../types'
-
-const { HAS_SERVER, SERVER_OUTPUT } = CONFIG
+import { BuildConfig } from '../../lib'
+import { setBaseDir } from '../runtime/server/base-dir'
+import { Logger } from '../runtime/universal'
 
 /**
  * Starts the pre-built server with the environment variables
@@ -15,7 +15,17 @@ const { HAS_SERVER, SERVER_OUTPUT } = CONFIG
  * - fast: Disables server-side rendering and type checking
  * - prod: Sets NODE_ENV to "production"
  */
-const start = (...args: StartParam[]): Promise<ChildProcess> => {
+const start = (
+    log: Logger,
+    buildConfig: BuildConfig,
+    ...args: StartParam[]
+): Promise<ChildProcess> => {
+    // When running in local dev, we have a different process.cwd() than
+    // when running in production. This allows static files and such to resolve
+    const { HAS_SERVER, SERVER_OUTPUT } = buildConfig
+    setBaseDir(SERVER_OUTPUT)
+    process.env.PROJECT_DIR = buildConfig.BASE
+
     if (args.indexOf('watch') !== -1) {
         process.env.START_WATCH_MODE = 'true'
     }
@@ -40,7 +50,9 @@ const start = (...args: StartParam[]): Promise<ChildProcess> => {
         ? path.resolve(__dirname, '..', 'server', 'start.js')
         : path.resolve(SERVER_OUTPUT, 'server.js')
 
-    dotenv.config()
+    dotenv.config({
+        path: path.join(buildConfig.BASE, '.env'),
+    })
 
     const execArgv: string[] = process.execArgv.filter(
         (arg: string) => arg.indexOf('--debug') !== 0 && arg.indexOf('--inspect') !== 0,
@@ -58,7 +70,7 @@ const start = (...args: StartParam[]): Promise<ChildProcess> => {
         execArgv,
     }
 
-    return forkPromise(serverPath, [], options, true)
+    return forkPromise(log, serverPath, [], options, true)
 }
 
 export default start

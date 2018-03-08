@@ -1,7 +1,6 @@
-import { BuildConfigOverride } from 'project-watchtower/lib/types'
+import { BuildConfigOverride, BuildConfig } from '../../lib/types'
+export { BuildConfig }
 
-const config: BuildConfigOverride = {
-
-}
+const config = (_root: string): BuildConfigOverride => ({})
 
 export default config

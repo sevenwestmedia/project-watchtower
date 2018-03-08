@@ -1,6 +1,4 @@
 import { load } from 'cheerio'
-import CONFIG from '../../../lib/runtime/config/config'
-CONFIG.PUBLIC_PATH = '/baz/'
 
 import * as path from 'path'
 import clean from '../../../lib/bin/clean'
@@ -12,6 +10,11 @@ import {
     addAssetsToHtml,
     getAbsoluteAssetPath,
 } from '../../../lib/runtime/server/assets'
+import { getConfig } from '../../../lib/runtime/config/config'
+import { createConsoleLogger } from '../../../lib/runtime/universal'
+
+const log = createConsoleLogger()
+const buildConfig = getConfig(log, process.cwd())
 
 const assets = {
     main: {
@@ -25,21 +28,20 @@ const assets = {
 
 describe('server/assets initial', () => {
     it('initial asset location values', async () => {
-        await clean()
+        await clean(log, buildConfig)
         expect(getAssetLocations()).toEqual({
             main: {
-                js: '/baz/static/js/main.js',
-                css: '/baz/static/css/main.css',
+                js: '/static/js/main.js',
+                css: '/static/css/main.css',
             },
             vendor: {
-                js: '/baz/static/js/vendor.js',
+                js: '/static/js/vendor.js',
             },
         })
     })
 })
 
 describe('server/assets', () => {
-
     beforeEach(() => {
         updateAssetLocations(assets)
     })
@@ -52,15 +54,27 @@ describe('server/assets', () => {
         const html = getCssAssetHtml()
         const doc = load(html)
         expect(doc('link').length).toBe(1)
-        expect(doc('link').first().attr('href')).toContain(assets.main.css)
+        expect(
+            doc('link')
+                .first()
+                .attr('href'),
+        ).toContain(assets.main.css)
     })
 
     it('getJsAssetHtml', () => {
         const html = getJsAssetHtml()
         const doc = load(html)
         expect(doc('script').length).toBe(2)
-        expect(doc('script').first().attr('src')).toBe(assets.vendor.js)
-        expect(doc('script').last().attr('src')).toBe(assets.main.js)
+        expect(
+            doc('script')
+                .first()
+                .attr('src'),
+        ).toBe(assets.vendor.js)
+        expect(
+            doc('script')
+                .last()
+                .attr('src'),
+        ).toBe(assets.main.js)
     })
 
     it('addAssetsToHtml', () => {
@@ -75,10 +89,22 @@ describe('server/assets', () => {
 
         const doc = load(html)
         expect(doc('link').length).toBe(1)
-        expect(doc('link').first().attr('href')).toContain(assets.main.css)
+        expect(
+            doc('link')
+                .first()
+                .attr('href'),
+        ).toContain(assets.main.css)
         expect(doc('script').length).toBe(2)
-        expect(doc('script').first().attr('src')).toBe(assets.vendor.js)
-        expect(doc('script').last().attr('src')).toBe(assets.main.js)
+        expect(
+            doc('script')
+                .first()
+                .attr('src'),
+        ).toBe(assets.vendor.js)
+        expect(
+            doc('script')
+                .last()
+                .attr('src'),
+        ).toBe(assets.main.js)
     })
 
     it('addAssetsToHtml - already present', () => {
@@ -101,8 +127,7 @@ describe('server/assets', () => {
     })
 
     it('getAbsoluteAssetPath', () => {
-        const assetPath = path.resolve(CONFIG.CLIENT_OUTPUT, 'foo/bar')
-        expect(getAbsoluteAssetPath('/baz/foo/bar')).toBe(assetPath)
+        const assetPath = path.resolve(buildConfig.CLIENT_OUTPUT, 'foo/bar')
+        expect(getAbsoluteAssetPath(buildConfig, '/foo/bar')).toBe(assetPath)
     })
-
 })

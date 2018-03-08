@@ -168,6 +168,8 @@ client/**/*.js
 client/**/*.d.ts
 test/**/*.js
 test/**/*.d.ts
+demo/**/*.js
+demo/**/*.d.ts
 build/**
 dist/**
 dist-es/**
@@ -175,3 +177,4 @@ public/assets
 assets.json
 build-stats.csv
 *.tgz
+demo/lighthouse-report.json

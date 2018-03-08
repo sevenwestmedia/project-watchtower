@@ -1,5 +1,5 @@
 import * as webpack from 'webpack'
-import { log, logError } from '../runtime/util/log'
+import { Logger } from '../runtime/universal'
 
 export const webpackStatsConfig: webpack.Stats.ToStringOptionsObject = {
     errors: true,
@@ -11,20 +11,20 @@ export const webpackStatsConfig: webpack.Stats.ToStringOptionsObject = {
     children: false,
 }
 
-export const printWebpackStats = (stats: webpack.Stats) => {
+export const printWebpackStats = (log: Logger, stats: webpack.Stats) => {
     const statsString = stats.toString(webpackStatsConfig)
 
-    log(statsString)
+    log.info(statsString)
 }
 
-export const webpackPromise = (config: webpack.Configuration) =>
+export const webpackPromise = (log: Logger, config: webpack.Configuration) =>
     new Promise((resolve, reject) => {
         webpack(config).run((err, stats) => {
             if (err) {
-                logError(err)
+                log.error({ err }, 'Failed to compile')
                 reject(err)
             } else {
-                printWebpackStats(stats)
+                printWebpackStats(log, stats)
 
                 if (stats.hasErrors()) {
                     reject()

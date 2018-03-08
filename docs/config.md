@@ -71,9 +71,6 @@ export interface BuildConfig {
     /** List paths to exclude from linting */
     LINT_EXCLUDE: string[]
 
-    /** Paths where modules are resolved */
-    MODULE_PATHS: string[]
-
     /** Default port for the server (when process.env.PORT is not set) */
     PORT: number
 
@@ -123,18 +120,11 @@ Default configuration:
     CSS_AUTOPREFIXER: ['last 2 versions'],
     HAS_SERVER: true,
     LINT_EXCLUDE: [],
-    MODULE_PATHS: [
-        root,
-        path.resolve(root, 'node_modules'),
-        path.resolve(root, 'common'),
-        path.resolve(root, 'app'),
-    ],
     PUBLIC_PATH: '/',
     PORT: 3000,
     /** if true, all externals will be bundled */
     SERVER_BUNDLE_ALL: false,
     SERVER_INCLUDE_IN_BUNDLE: [
-        'swm-component-library',
         'project-watchtower',
     ],
     SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
@@ -143,15 +133,12 @@ Default configuration:
     STATIC_RESOURCE_NAMES: false,
     STATS_ENV: {},
     STATS_PAGES: { home: '/' },
-    WATCH_IGNORE: /node_modules(?!.+swm-component-library)/,
 }
 ```
 
 ## Configuration file templates
 
 Project Watchtower offers several templates for configuration files around tooling and building:
-
-```
 
 ### TSLint: tslint.json
 
@@ -161,6 +148,30 @@ Project Watchtower offers several templates for configuration files around tooli
         "project-watchtower/presets/tslint"
     ]
 }
+
+```
+
+### Jest: jest.config.js & jest.debug.config.js
+
+If either of the above config files exist in the root they will be used
+
+``` js
+var baseConfig = require('project-watchtower/presets/jest/jest.json')
+
+module.exports = Object.assign({}, baseConfig, {
+    verbose: true,
+    rootDir: '.',
+    snapshotSerializers: ['enzyme-to-json/serializer'],
+    moduleNameMapper: {
+        '\\.(s?css|png|svg|jpg|eot|woff|woff2)$':
+            '<rootDir>/node_modules/project-watchtower/lib/test/test-mapper.js',
+        '^bundle-loader':
+            '<rootDir>/node_modules/project-watchtower/lib/test/bundle-loader-mapper.js'
+    },
+    transform: {
+        '.tsx?': '<rootDir>/node_modules/ts-jest/preprocessor.js'
+    }
+})
 
 ```
 

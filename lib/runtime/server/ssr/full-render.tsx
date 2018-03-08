@@ -1,5 +1,6 @@
 import * as redux from 'redux'
 import thunk from 'redux-thunk'
+import { Request } from 'express'
 
 import { PromiseTracker, elapsed, Logger } from '../../universal'
 import resolveAllData from './helpers/recursive-task-resolver'
@@ -7,7 +8,6 @@ import { createResponse, routerContextHandler } from './router-context-handler'
 import * as ServerRenderResults from './server-render-results'
 import renderToString, { CreateAppElement } from './render-app-to-string'
 import { WatchtowerEvents } from './render-events'
-import { RenderRequest } from '../ssr'
 
 export { PromiseTracker }
 export interface RenderOptions {
@@ -17,17 +17,14 @@ export interface RenderOptions {
     events?: WatchtowerEvents
 }
 
-export type CreateReduxStore<ReduxState extends object, SsrRequest extends RenderRequest> = (
+export type CreateReduxStore<ReduxState extends object> = (
     middlewares: redux.Middleware[],
-    req: SsrRequest,
+    req: Request,
 ) => Promise<redux.Store<ReduxState>>
 
-export interface ServerSideRenderOptions<
-    ReduxState extends object,
-    SsrRequest extends RenderRequest
-> extends RenderOptions {
+export interface ServerSideRenderOptions<ReduxState extends object> extends RenderOptions {
     ssrTimeoutMs: number
-    createReduxStore: CreateReduxStore<ReduxState, SsrRequest>
+    createReduxStore: CreateReduxStore<ReduxState>
 }
 
 // tslint:disable:trailing-comma
@@ -41,9 +38,9 @@ export interface Assets {
     }
 }
 
-async function renderPageContents<T extends object, SsrRequest extends RenderRequest>(
-    options: ServerSideRenderOptions<T, SsrRequest>,
-    req: SsrRequest,
+async function renderPageContents<T extends object>(
+    options: ServerSideRenderOptions<T>,
+    req: Request,
 ): Promise<ServerRenderResults.ServerRenderResult<T>> {
     const { url: currentLocation } = req
     const START_FAST_MODE = process.env.START_FAST_MODE === 'true'

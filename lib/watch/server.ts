@@ -9,17 +9,15 @@ import { getWebpackConfig } from '../build/build'
 import { openBrowser, getHotReloadMiddleware } from '../server/dev'
 import { getPort } from '../runtime/server/server'
 import { waitForConnection } from '../runtime/util/network'
-import CONFIG from '../runtime/config/config'
+import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
+import { setBaseDir } from '../runtime/server/base-dir'
 
-dotenv.config()
-
-const { SERVER_OUTPUT, WATCH_IGNORE } = CONFIG
-
-const restartServer = (oldServer?: ChildProcess) => {
+const restartServer = (buildConfig: BuildConfig, oldServer?: ChildProcess) => {
     if (oldServer) {
         oldServer.kill()
     }
-    return fork(path.resolve(SERVER_OUTPUT, 'server.js'), [], {
+    return fork(path.resolve(buildConfig.SERVER_OUTPUT, 'server.js'), [], {
         env: process.env,
     })
 }
@@ -30,26 +28,34 @@ export interface WatchServer {
     close: () => void
 }
 
-const watchServer = (port?: number) =>
+const watchServer = (log: Logger, buildConfig: BuildConfig, port?: number) =>
     new Promise<WatchServer>(resolve => {
-        const serverPort = port || getPort()
+        // When running in local dev, we have a different process.cwd() than
+        // when running in production. This allows static files and such to resolve
+        setBaseDir(buildConfig.SERVER_OUTPUT)
+        process.env.PROJECT_DIR = buildConfig.BASE
+
+        dotenv.config({
+            path: path.join(buildConfig.BASE, '.env'),
+        })
+
+        const serverPort = port || getPort(buildConfig)
         const devServerPort = serverPort + 1
 
         let devServer: ChildProcess
         let devServerAvailable: Promise<any>
 
-        const serverCompiler = webpack(getWebpackConfig('server', 'dev'))
+        const serverCompiler = webpack(getWebpackConfig(log, buildConfig, 'server', 'dev'))
 
         const watching = serverCompiler.watch(
             {
                 aggregateTimeout: 10000,
-                ignored: WATCH_IGNORE,
             },
             () => {
                 if (!devServer) {
-                    setTimeout(() => openBrowser(devServerPort), 2000)
+                    setTimeout(() => openBrowser(buildConfig, devServerPort), 2000)
                 }
-                devServer = restartServer(devServer)
+                devServer = restartServer(buildConfig, devServer)
 
                 setTimeout(() => {
                     devServerAvailable = waitForConnection(serverPort)
@@ -59,7 +65,7 @@ const watchServer = (port?: number) =>
 
         const app = express()
 
-        app.use(getHotReloadMiddleware())
+        app.use(getHotReloadMiddleware(log, buildConfig))
 
         app.use(async (_req, _res, next) => {
             await devServerAvailable

@@ -1,16 +1,24 @@
+import * as fs from 'fs'
 import * as path from 'path'
 import { ChildProcess } from 'child_process'
-import clean from './clean'
-import { forkPromise } from '../runtime/util/process'
-
-const root = process.cwd()
-const jestBin = path.resolve(root, 'node_modules', 'jest', 'bin', 'jest.js')
+import { forkPromise } from '../util/process'
+import { BuildConfig } from '../../lib'
+import { Logger } from '../runtime/universal'
 
 /**
  * Runs the jest test runner
  * @param params Jest options
  */
-const test = async (...params: string[]): Promise<ChildProcess> => {
+const test = async (
+    log: Logger,
+    buildConfig: BuildConfig,
+    ...params: string[]
+): Promise<ChildProcess> => {
+    const jestBin = resolveJest(buildConfig.BASE)
+    if (!jestBin) {
+        throw new Error('Unable to resolve jest')
+    }
+
     let args: string[] = []
 
     const debugIndex = params.indexOf('debug')
@@ -22,32 +30,58 @@ const test = async (...params: string[]): Promise<ChildProcess> => {
         if (params.indexOf('--runInBand') === -1) {
             args.push('--runInBand')
         }
-    } else {
-        await clean()
     }
-
-    const configDefined = params.some(param => param.indexOf('--config') === 0)
-
-    if (!configDefined) {
-        args = args.concat([
-            '--config',
-            isDebug
-                ? 'node_modules/project-watchtower/presets/jest/jest-js.json'
-                : 'node_modules/project-watchtower/presets/jest/jest.json',
-        ])
-    }
+    args = appendConfigArgs(buildConfig, args, params, isDebug)
 
     const options = isDebug ? { execArgv: ['--inspect'] } : {}
 
     args = args.concat(params)
 
-    return forkPromise(jestBin, args, {
+    return forkPromise(log, jestBin, args, {
         env: {
             ...process.env,
             NODE_ENV: 'test',
         },
         ...options,
     })
+}
+
+function appendConfigArgs(
+    buildConfig: BuildConfig,
+    args: string[],
+    params: string[],
+    isDebug: boolean,
+) {
+    const configDefined = params.some(param => param.indexOf('--config') === 0)
+    if (configDefined) {
+        return args
+    }
+
+    if (isDebug && fs.existsSync(path.resolve(buildConfig.BASE, 'jest.debug.config.js'))) {
+        return args.concat(['--config', 'jest.debug.config.js'])
+    }
+    if (fs.existsSync(path.resolve(buildConfig.BASE, 'jest.config.js'))) {
+        return args.concat(['--config', 'jest.config.js'])
+    }
+
+    return args.concat([
+        '--config',
+        isDebug
+            ? 'node_modules/project-watchtower/presets/jest/jest-js.json'
+            : 'node_modules/project-watchtower/presets/jest/jest.json',
+    ])
+}
+
+function resolveJest(root: string): string | undefined {
+    if (root === '/') {
+        return undefined
+    }
+    const jestPath = path.resolve(root, 'node_modules', 'jest', 'bin', 'jest.js')
+    if (fs.existsSync(jestPath)) {
+        return jestPath
+    }
+
+    return resolveJest(path.resolve(root, '..'))
 }
 
 export default test

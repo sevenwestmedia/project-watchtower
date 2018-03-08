@@ -5,7 +5,7 @@ Project Watchtower exposes the `project-watchtower` and `pwt` executables
 ### build
 
 ```
-pwt build [complete] [<target>] [<environment>]
+pwt build [complete] [<target>] [<environment>] [-p <project dir>]
 ```
 
 * `complete`: Runs clean, lint and test before building
@@ -19,7 +19,7 @@ Leaving the environment out builds for production by default.
 ### clean
 
 ```
-pwt clean [<glob> ...]
+pwt clean [<glob> ...] [-p <project dir>]
 ```
 
 Cleans the default paths `SERVER_OUTPUT`, `CLIENT_OUTPUT` as well as all `.js` and `.maps` files in `/client`, `/server` and `/common`. You can pass in additional glob patterns to be cleaned.
@@ -27,13 +27,13 @@ Cleans the default paths `SERVER_OUTPUT`, `CLIENT_OUTPUT` as well as all `.js` a
 ### coverage
 
 ```
-pwt coverage [<jest option> ...]
+pwt coverage [-p <project dir>] [<jest option> ...]
 ```
 
 ### explore-bundle
 
 ```
-pwt explore-bundle [disableHoisting]
+pwt explore-bundle [disableHoisting] [-p <project dir>]
 ```
 
 Opens the `webpack-bundle-analyzer` for the client production bundle.
@@ -43,7 +43,7 @@ Opens the `webpack-bundle-analyzer` for the client production bundle.
 ### lint
 
 ```
-pwt lint [tslint] [sass-lint] [<glob> ...]
+pwt lint [tslint] [sass-lint] [-p <project dir>] [<glob> ...]
 ```
 
 Runs `tslint` and/or `sass-lint` against the project.
@@ -56,7 +56,7 @@ By default all `.ts`/`.tsx` and all `.scss` files are checked. You can supply cu
 ### start
 
 ```
-pwt start [watch] [fast] [prod] [debug] [inspect] [client]
+pwt start [watch] [fast] [prod] [debug] [inspect] [client] [-p <project dir>]
 ```
 
 *   `watch`: Enable watch mode and rebuild client after changes
@@ -69,7 +69,7 @@ pwt start [watch] [fast] [prod] [debug] [inspect] [client]
 ### stats
 
 ```
-pwt stats [verbose]
+pwt stats [verbose] [-p <project dir>]
 ```
 
 Measures build metrics and saves them to `build-stats.csv`
@@ -123,7 +123,7 @@ On build servers with access to Google Chrome through a Docker container, the fo
 ### test
 
 ```
-pwt test [debug] [<jest option> ...]
+pwt test [debug] [-p <project dir>] [<jest option> ...]
 ```
 
 *   `debug`: Runs the tests in debugging mode to use breakpoints. **This is incompatible with ts-jest so all TypeScript test files will have to be compiled to JavaScript first!**
@@ -131,7 +131,7 @@ pwt test [debug] [<jest option> ...]
 ### watch
 
 ```
-pwt watch [server] [client] [fast] [inspect]
+pwt watch [server] [client] [fast] [inspect] [-p <project dir>]
 ```
 
 Builds the server in dev mode, then watches and rebuilds the client
