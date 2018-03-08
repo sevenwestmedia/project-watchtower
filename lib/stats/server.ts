@@ -9,8 +9,6 @@ import { getTimeMs, timeout } from '../util/time'
 import { BuildConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
 
-dotenv.config()
-
 export interface SSRStats {
     size: number
     time: number
@@ -82,6 +80,10 @@ export const runStatsOnServer = async (
         log.info('Skipping server-based stats because the application has no server')
         return
     }
+
+    dotenv.config({
+        path: buildConfig.BASE,
+    })
 
     const port = await findFreePort(getPort(buildConfig))
 

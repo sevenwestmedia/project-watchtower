@@ -50,7 +50,9 @@ const start = (
         ? path.resolve(__dirname, '..', 'server', 'start.js')
         : path.resolve(SERVER_OUTPUT, 'server.js')
 
-    dotenv.config()
+    dotenv.config({
+        path: buildConfig.BASE,
+    })
 
     const execArgv: string[] = process.execArgv.filter(
         (arg: string) => arg.indexOf('--debug') !== 0 && arg.indexOf('--inspect') !== 0,

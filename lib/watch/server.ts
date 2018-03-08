@@ -13,8 +13,6 @@ import { BuildConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
 import { setBaseDir } from '../runtime/server/base-dir'
 
-dotenv.config()
-
 const restartServer = (buildConfig: BuildConfig, oldServer?: ChildProcess) => {
     if (oldServer) {
         oldServer.kill()
@@ -36,6 +34,10 @@ const watchServer = (log: Logger, buildConfig: BuildConfig, port?: number) =>
         // when running in production. This allows static files and such to resolve
         setBaseDir(buildConfig.SERVER_OUTPUT)
         process.env.PROJECT_DIR = buildConfig.BASE
+
+        dotenv.config({
+            path: buildConfig.BASE,
+        })
 
         const serverPort = port || getPort(buildConfig)
         const devServerPort = serverPort + 1
