@@ -13,6 +13,7 @@ import { getAssetLocations } from '../../server'
 import { HelmetData } from 'react-helmet'
 import { CreateReduxStore } from '../ssr'
 import { hasLog } from '../middleware/ensure-request-log-middleware'
+import { getRuntimeConfig } from '../../config/config'
 
 export interface RenderContext<AdditionalState = object> {
     completionNotifier: PromiseCompletionSource<{}>
@@ -40,7 +41,7 @@ export type RenderHtml<ReduxState extends object> = (
 ) => string
 
 export type ServerSideRenderMiddlewareOptions<ReduxState extends object> = {
-    app: Express
+    app: Express & { log: Logger }
     ssrTimeoutMs: number
     renderApp: RenderApp<ReduxState>
     renderHtml: RenderHtml<ReduxState>
@@ -51,7 +52,8 @@ export type ServerSideRenderMiddlewareOptions<ReduxState extends object> = {
 export const createSsrMiddleware = <ReduxState extends object>(
     options: ServerSideRenderMiddlewareOptions<ReduxState>,
 ): RequestHandler => {
-    const assets = getAssetLocations()
+    const runtimeConfig = getRuntimeConfig(options.app.log)
+    const assets = getAssetLocations(runtimeConfig)
 
     return async (req, response, next) => {
         if (!hasLog(req)) {

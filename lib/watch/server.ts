@@ -11,7 +11,6 @@ import { getPort } from '../runtime/server/server'
 import { waitForConnection, findFreePort } from '../runtime/util/network'
 import { BuildConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
-import { setBaseDir } from '../runtime/server/base-dir'
 
 const restartServer = (buildConfig: BuildConfig, port: number, oldServer?: ChildProcess) => {
     if (oldServer) {
@@ -35,7 +34,6 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
     new Promise<WatchServer>(async resolve => {
         // When running in local dev, we have a different process.cwd() than
         // when running in production. This allows static files and such to resolve
-        setBaseDir(buildConfig.SERVER_OUTPUT)
         process.env.PROJECT_DIR = buildConfig.BASE
 
         dotenv.config({

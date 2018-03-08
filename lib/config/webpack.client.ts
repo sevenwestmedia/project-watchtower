@@ -18,7 +18,7 @@ type EntryPoints = {
 
 const getPlugins = (buildConfig: BuildConfig) => [
     new AssetsPlugin({
-        filename: path.relative(process.cwd(), getAssetsFile(buildConfig)),
+        filename: path.relative(process.cwd(), getAssetsFile(buildConfig.OUTPUT)),
         processOutput: assets => {
             updateAssetLocations((assets as any) as Assets)
             return JSON.stringify(assets)

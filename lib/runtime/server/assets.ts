@@ -1,40 +1,25 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { Assets } from '../../types'
-import { BuildConfig } from '../../../lib'
-import { getConfig } from '../../../lib/runtime/config/config'
-import { getBaseDir } from '../../../lib/runtime/server/base-dir'
-import { createConsoleLogger } from '../universal'
+import { RuntimeConfig } from '../../../lib'
 
 let assets: Assets
 
 let assetsLoaded = false
 
-export const getAssetsFile = (buildConfig: BuildConfig) =>
-    path.resolve(buildConfig.BASE, 'assets.json')
-const log = createConsoleLogger()
+export const getAssetsFile = (base: string) => path.resolve(base, 'assets.json')
 
-const ensureAssets = () => {
-    const buildConfig = getConfig(log, getBaseDir())
+const ensureAssets = (runtimeConfig: RuntimeConfig) => {
     if (assetsLoaded) {
         return
     }
+    const assetsFile = getAssetsFile(runtimeConfig.BASE)
     try {
-        const assetsFileContents = fs.readFileSync(getAssetsFile(buildConfig))
+        const assetsFileContents = fs.readFileSync(assetsFile)
         assets = JSON.parse(assetsFileContents.toString())
         assetsLoaded = true
     } catch (e) {
-        // do nothing
-        // Create defaults
-        assets = {
-            main: {
-                js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/main.js',
-                css: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'css/main.css',
-            },
-            vendor: {
-                js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/vendor.js',
-            },
-        }
+        throw new Error(`Cannot read assets file from ${assetsFile}`)
     }
 }
 
@@ -45,8 +30,8 @@ export const updateAssetLocations = (newAssets: Assets) => {
     assetsLoaded = true
 }
 
-export const getAssetLocations = () => {
-    ensureAssets()
+export const getAssetLocations = (runtimeConfig: RuntimeConfig) => {
+    ensureAssets(runtimeConfig)
     return assets
 }
 
@@ -54,39 +39,39 @@ export const getAssetLocations = () => {
  * Returns a HTML snippet for all CSS assets
  * We add the timestamp in watch mode to support hot reloading with the ExtractTextWebpackPlugin
  */
-export const getCssAssetHtml = () => {
-    ensureAssets()
+export const getCssAssetHtml = (runtimeConfig: RuntimeConfig) => {
+    ensureAssets(runtimeConfig)
     return `<link rel="stylesheet" type="text/css" id="css-main" href="${assets.main.css}${watchMode
         ? '?' + Date.now()
         : ''}" />`
 }
 
 /** Returns a HTML snippet for all JavaScript assets */
-export const getJsAssetHtml = () => {
-    ensureAssets()
+export const getJsAssetHtml = (runtimeConfig: RuntimeConfig) => {
+    ensureAssets(runtimeConfig)
     return `<script src="${assets.vendor.js}"></script>
     <script src="${assets.main.js}" async></script>`
 }
 
 /** Inserts all assets into a given HTML document string */
-export const addAssetsToHtml = (html: string) => {
-    ensureAssets()
+export const addAssetsToHtml = (html: string, runtimeConfig: RuntimeConfig) => {
+    ensureAssets(runtimeConfig)
     let modifiedHtml = html
 
     if (html.indexOf(assets.main.css) === -1) {
-        modifiedHtml = modifiedHtml.replace('</head>', getCssAssetHtml() + '</head>')
+        modifiedHtml = modifiedHtml.replace('</head>', getCssAssetHtml(runtimeConfig) + '</head>')
     }
     if (html.indexOf(assets.main.js) === -1) {
-        modifiedHtml = modifiedHtml.replace('</body>', getJsAssetHtml() + '</body>')
+        modifiedHtml = modifiedHtml.replace('</body>', getJsAssetHtml(runtimeConfig) + '</body>')
     }
     return modifiedHtml
 }
 
-export const getAbsoluteAssetPath = (buildConfig: BuildConfig, asset: string) => {
-    let relativeAsset = asset.slice(buildConfig.PUBLIC_PATH.length)
+export const getAbsoluteAssetPath = (runtimeConfig: RuntimeConfig, asset: string) => {
+    let relativeAsset = asset.slice(runtimeConfig.ASSETS_PATH.length)
     if (relativeAsset[0] === '/') {
         relativeAsset = relativeAsset.slice(1)
     }
 
-    return path.resolve(buildConfig.CLIENT_OUTPUT, relativeAsset)
+    return path.resolve(runtimeConfig.ASSETS_PATH, relativeAsset)
 }

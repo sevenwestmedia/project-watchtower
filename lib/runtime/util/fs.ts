@@ -2,6 +2,14 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { Logger } from '../universal'
 
+export const readFileSync = (log: Logger, filePath: string) => {
+    try {
+        return fs.readFileSync(filePath, 'utf8')
+    } catch (err) {
+        log.error({ err, filePath }, 'Error reading file')
+        throw err
+    }
+}
 export const readFile = (log: Logger, filePath: string) =>
     new Promise<string>((resolve, reject) => {
         fs.readFile(filePath, 'utf8', (err, data) => {

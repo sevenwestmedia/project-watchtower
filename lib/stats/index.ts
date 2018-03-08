@@ -5,6 +5,7 @@ import lighthouseStats from './lighthouse'
 import { writeFile } from '../runtime/util/fs'
 import { BuildConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
+import { getRuntimeConfigFromBuildConfig } from '../runtime/config/config'
 
 export interface BuildMetrics {
     [key: string]: string
@@ -15,7 +16,8 @@ export const measureBuildStats = async (
     buildConfig: BuildConfig,
     verbose?: boolean,
 ): Promise<BuildMetrics> => {
-    const bundleMetrics = await bundleSize(log, buildConfig)
+    const runtimeConfig = getRuntimeConfigFromBuildConfig(buildConfig)
+    const bundleMetrics = await bundleSize(log, runtimeConfig)
     const ssrMetrics = await ssrStats(log, buildConfig, verbose)
     const lighthouseMetrics = await lighthouseStats(log, buildConfig, verbose)
 

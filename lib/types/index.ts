@@ -12,17 +12,24 @@ export interface Assets {
     }
 }
 
+export interface RuntimeConfig {
+    /** The url prefix which static files can load from */
+    ASSETS_PATH_PREFIX: string
+
+    /** The path where the static files are resolved from */
+    ASSETS_PATH: string
+
+    /** Path to public files */
+    SERVER_PUBLIC_DIR: string | false
+
+    /** The root to look for index.html and other root files */
+    BASE: string
+}
+
 /** Application build configuration */
 export interface BuildConfig {
     /** Prefix for all assets (JS, CSS, media, fonts) with trailing slash */
     ASSETS_PATH_PREFIX: string
-
-    /** The location where assets are resolved from
-     * default is the working directory is the server output directory.
-     *
-     * If this is not the case, set to the same value as CLIENT_OUTPUT
-     */
-    ASSETS_ROOT: string
 
     /** root path of your application */
     BASE: string
