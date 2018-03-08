@@ -36,7 +36,7 @@ const watchServer = (log: Logger, buildConfig: BuildConfig, port?: number) =>
         process.env.PROJECT_DIR = buildConfig.BASE
 
         dotenv.config({
-            path: buildConfig.BASE,
+            path: path.join(buildConfig.BASE, '.env'),
         })
 
         const serverPort = port || getPort(buildConfig)

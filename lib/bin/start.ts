@@ -24,10 +24,10 @@ const start = (
     // when running in production. This allows static files and such to resolve
     const { HAS_SERVER, SERVER_OUTPUT } = buildConfig
     setBaseDir(SERVER_OUTPUT)
+    process.env.PROJECT_DIR = buildConfig.BASE
 
     if (args.indexOf('watch') !== -1) {
         process.env.START_WATCH_MODE = 'true'
-        process.env.PROJECT_DIR = buildConfig.BASE
     }
 
     if (args.indexOf('fast') !== -1) {
@@ -51,7 +51,7 @@ const start = (
         : path.resolve(SERVER_OUTPUT, 'server.js')
 
     dotenv.config({
-        path: buildConfig.BASE,
+        path: path.join(buildConfig.BASE, '.env'),
     })
 
     const execArgv: string[] = process.execArgv.filter(

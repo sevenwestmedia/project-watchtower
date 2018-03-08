@@ -82,7 +82,7 @@ export const runStatsOnServer = async (
     }
 
     dotenv.config({
-        path: buildConfig.BASE,
+        path: path.join(buildConfig.BASE, '.env'),
     })
 
     const port = await findFreePort(getPort(buildConfig))
