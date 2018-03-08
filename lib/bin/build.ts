@@ -30,7 +30,7 @@ const cleanAndBuild = (
     target: BuildTarget,
     environment: BuildEnvironment = 'prod',
 ) => {
-    const cleanTarget = target === 'server' ? buildConfig.SERVER_OUTPUT : buildConfig.CLIENT_OUTPUT
+    const cleanTarget = buildConfig.OUTPUT
 
     return clean(log, cleanTarget).then(() => buildTarget(log, buildConfig, target, environment))
 }

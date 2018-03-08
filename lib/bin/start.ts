@@ -4,7 +4,6 @@ import { ChildProcess, ForkOptions } from 'child_process'
 import { forkPromise } from '../util/process'
 import { StartParam } from '../types'
 import { BuildConfig } from '../../lib'
-import { setBaseDir } from '../runtime/server/base-dir'
 import { Logger } from '../runtime/universal'
 
 /**
@@ -22,8 +21,7 @@ const start = (
 ): Promise<ChildProcess> => {
     // When running in local dev, we have a different process.cwd() than
     // when running in production. This allows static files and such to resolve
-    const { HAS_SERVER, SERVER_OUTPUT } = buildConfig
-    setBaseDir(SERVER_OUTPUT)
+    const { HAS_SERVER, OUTPUT } = buildConfig
     process.env.PROJECT_DIR = buildConfig.BASE
 
     if (args.indexOf('watch') !== -1) {
@@ -48,7 +46,7 @@ const start = (
 
     const serverPath = clientMode
         ? path.resolve(__dirname, '..', 'server', 'start.js')
-        : path.resolve(SERVER_OUTPUT, 'server.js')
+        : path.resolve(OUTPUT, 'server.js')
 
     dotenv.config({
         path: path.join(buildConfig.BASE, '.env'),

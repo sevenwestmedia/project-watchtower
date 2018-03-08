@@ -33,8 +33,8 @@ export interface BuildConfig {
     /** file for client polyfills if needed */
     CLIENT_POLYFILLS: string | false
 
-    /** output directory for the client build */
-    CLIENT_OUTPUT: string
+    /** output directory for the build */
+    OUTPUT: string
 
     /** Autoprefixer browser compatibilty  */
     CSS_AUTOPREFIXER: string[]
@@ -59,9 +59,6 @@ export interface BuildConfig {
 
     /** modules which the server build includes in the bundle */
     SERVER_INCLUDE_IN_BUNDLE: string[]
-
-    /** output directory of the server */
-    SERVER_OUTPUT: string
 
     /** directory that is served as static resources */
     SERVER_PUBLIC_DIR: string | false

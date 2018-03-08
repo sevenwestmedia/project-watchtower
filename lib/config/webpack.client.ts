@@ -53,7 +53,7 @@ const clientBaseConfig: CreateWebpackConfig = options => {
     const {
         BASE,
         CLIENT_ENTRY,
-        CLIENT_OUTPUT,
+        OUTPUT,
         CLIENT_POLYFILLS,
         CSS_AUTOPREFIXER,
         PUBLIC_PATH,
@@ -96,7 +96,7 @@ const clientBaseConfig: CreateWebpackConfig = options => {
     return {
         entry,
         output: {
-            path: CLIENT_OUTPUT,
+            path: OUTPUT,
             publicPath: PUBLIC_PATH,
         },
         module: {
