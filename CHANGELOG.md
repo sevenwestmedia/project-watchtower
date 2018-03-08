@@ -1,6 +1,6 @@
 # Changelog
 
-## vNext
+## [v0.12.4] - 8/3/2018
 - Add support for -p argument to specify project directory
 
 ## [v0.12.3] - 26/2/2018
