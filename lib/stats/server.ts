@@ -85,7 +85,7 @@ export const runStatsOnServer = async (
         path: path.join(buildConfig.BASE, '.env'),
     })
 
-    const port = await findFreePort(getPort(buildConfig))
+    const port = await findFreePort(getPort(buildConfig.DEV_SERVER_PORT))
 
     const serverEntryFile = path.resolve(SERVER_OUTPUT, 'server.js')
     const devServer = await forkPromise(

@@ -12,8 +12,15 @@ export { getDefaultHtmlMiddleware }
 
 const isProduction = process.env.NODE_ENV === 'production'
 
-export const getPort = (buildConfig: BuildConfig, fallbackPort?: number) =>
-    parseInt(process.env.PORT || '', 10) || fallbackPort || buildConfig.PORT
+export const getPort = (fallbackPort?: number) => {
+    const port = parseInt(process.env.PORT || '', 10) || fallbackPort
+
+    if (!port) {
+        throw new Error('No port specified, set one through the PORT environmental variable')
+    }
+
+    return port
+}
 
 export const isWatchMode = () => process.env.START_WATCH_MODE === 'true'
 
@@ -93,7 +100,7 @@ export const createServer: CreateServerType = options => {
             if (process.env.NODE_ENV !== 'production' && isWatchMode()) {
                 // tslint:disable-next-line no-var-requires
                 const { openBrowser } = require('../../server/dev')
-                openBrowser(buildConfig, usePort)
+                openBrowser(usePort)
             }
             if (callback) {
                 callback()
@@ -103,7 +110,7 @@ export const createServer: CreateServerType = options => {
         app.set('server', server)
     }
 
-    const port = getPort(buildConfig)
+    const port = getPort()
 
     if (isProduction) {
         listen(port)

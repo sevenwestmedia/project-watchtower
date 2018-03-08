@@ -45,8 +45,8 @@ export interface BuildConfig {
     /** List paths to exclude from linting */
     LINT_EXCLUDE: string[]
 
-    /** Default port for the server (when process.env.PORT is not set) */
-    PORT: number
+    /** Default port for the dev server (when process.env.PORT is not set) */
+    DEV_SERVER_PORT: number
 
     /** URL prefix for all resources */
     PUBLIC_PATH: string

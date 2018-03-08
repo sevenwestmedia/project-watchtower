@@ -8,17 +8,20 @@ import * as dotenv from 'dotenv'
 import { getWebpackConfig } from '../build/build'
 import { openBrowser, getHotReloadMiddleware } from '../server/dev'
 import { getPort } from '../runtime/server/server'
-import { waitForConnection } from '../runtime/util/network'
+import { waitForConnection, findFreePort } from '../runtime/util/network'
 import { BuildConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
 import { setBaseDir } from '../runtime/server/base-dir'
 
-const restartServer = (buildConfig: BuildConfig, oldServer?: ChildProcess) => {
+const restartServer = (buildConfig: BuildConfig, port: number, oldServer?: ChildProcess) => {
     if (oldServer) {
         oldServer.kill()
     }
-    return fork(path.resolve(buildConfig.SERVER_OUTPUT, 'server.js'), [], {
-        env: process.env,
+    return fork(path.resolve(buildConfig.OUTPUT, 'server.js'), [], {
+        env: {
+            ...process.env,
+            PORT: port,
+        },
     })
 }
 
@@ -28,8 +31,8 @@ export interface WatchServer {
     close: () => void
 }
 
-const watchServer = (log: Logger, buildConfig: BuildConfig, port?: number) =>
-    new Promise<WatchServer>(resolve => {
+const watchServer = (log: Logger, buildConfig: BuildConfig) =>
+    new Promise<WatchServer>(async resolve => {
         // When running in local dev, we have a different process.cwd() than
         // when running in production. This allows static files and such to resolve
         setBaseDir(buildConfig.SERVER_OUTPUT)
@@ -39,8 +42,8 @@ const watchServer = (log: Logger, buildConfig: BuildConfig, port?: number) =>
             path: path.join(buildConfig.BASE, '.env'),
         })
 
-        const serverPort = port || getPort(buildConfig)
-        const devServerPort = serverPort + 1
+        const serverPort = getPort(buildConfig.DEV_SERVER_PORT)
+        const devServerPort = await findFreePort(serverPort + 1)
 
         let devServer: ChildProcess
         let devServerAvailable: Promise<any>
@@ -53,9 +56,9 @@ const watchServer = (log: Logger, buildConfig: BuildConfig, port?: number) =>
             },
             () => {
                 if (!devServer) {
-                    setTimeout(() => openBrowser(buildConfig, devServerPort), 2000)
+                    setTimeout(() => openBrowser(serverPort), 2000)
                 }
-                devServer = restartServer(buildConfig, devServer)
+                devServer = restartServer(buildConfig, devServerPort, devServer)
 
                 setTimeout(() => {
                     devServerAvailable = waitForConnection(serverPort)

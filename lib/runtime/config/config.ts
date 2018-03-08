@@ -14,7 +14,7 @@ const defaultConfig = (root: string): BuildConfig => ({
     HAS_SERVER: true,
     LINT_EXCLUDE: [],
     PUBLIC_PATH: '/',
-    PORT: 3000,
+    DEV_SERVER_PORT: 3000,
     SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
     SERVER_BUNDLE_ALL: false,
     SERVER_INCLUDE_IN_BUNDLE: ['project-watchtower'],
