@@ -12,7 +12,7 @@ export const expressNoop: express.RequestHandler = (_res, _req, next) => next()
 export const getDefaultHtmlMiddleware = (
     log: Logger,
     buildConfig: BuildConfig,
-    logNotFound = true,
+    logNotFound = false,
 ) => {
     // on production we just serve the generated index.html
     if (isProduction) {
