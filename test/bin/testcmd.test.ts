@@ -18,17 +18,4 @@ describe('bin/test', () => {
             'math.test.ts', // make sure to not recursively test this file
         )
     })
-
-    it('will test in debug mode', async () => {
-        await test(
-            log,
-            buildConfig,
-            'debug',
-            '--config',
-            'jest.json',
-            '--testRegex',
-            '\\.(spec|test)\\.js$',
-            'math.test.js', // make sure to not recursively test this file
-        )
-    })
 })

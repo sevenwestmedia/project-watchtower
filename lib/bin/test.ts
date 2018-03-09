@@ -7,13 +7,13 @@ import { Logger } from '../runtime/universal'
 
 /**
  * Runs the jest test runner
- * @param params Jest options
+ * @param params [--debug] [--debug-brk] [--port debugPort] [...Jest options]
  */
-const test = async (
+async function test(
     log: Logger,
     buildConfig: BuildConfig,
     ...params: string[]
-): Promise<ChildProcess> => {
+): Promise<ChildProcess> {
     const jestBin = resolveJest(buildConfig.BASE)
     if (!jestBin) {
         throw new Error('Unable to resolve jest')
@@ -22,11 +22,18 @@ const test = async (
     let args: string[] = []
 
     const debugIndex = params.indexOf('debug')
+    const debugBrkIndex = params.indexOf('debug-brk')
     let port = 5858
     const isDebug = debugIndex !== -1
+    const isDebugBrk = debugBrkIndex !== -1
 
-    if (isDebug) {
-        params.splice(debugIndex, 1)
+    if (isDebug || isDebugBrk) {
+        if (isDebug) {
+            params.splice(debugIndex, 1)
+        }
+        if (isDebugBrk) {
+            params.splice(debugBrkIndex, 1)
+        }
         const portIndex = params.indexOf('--port')
         if (portIndex !== -1) {
             port = Number(params[portIndex + 1])
@@ -37,9 +44,11 @@ const test = async (
             args.push('--runInBand')
         }
     }
-    args = appendConfigArgs(buildConfig, args, params, isDebug)
+    args = appendConfigArgs(buildConfig, args, params, isDebug || isDebugBrk)
 
-    const options = isDebug ? { execArgv: [`--inspect-brk=${port}`] } : {}
+    const options = isDebug
+        ? { execArgv: [`--inspect=${port}`] }
+        : isDebugBrk ? { execArgv: [`--inspect-brk=${port}`] } : {}
 
     args = args.concat(params)
 

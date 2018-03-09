@@ -92,7 +92,7 @@ Scripts:
     lint [tslint] [sass-lint] [-p <project dir>] [<glob> ...]
     start [watch] [fast] [prod] [debug] [inspect] [client] [-p <project dir>]
     stats [verbose] [-p <project dir>]
-    test [debug] [-p <project dir>] [<jest options> ...]
+    test [debug] [debug-brk] [--port <debugPort>] [-p <project dir>] [<jest options> ...]
     watch [server] [client] [fast] [inspect] [-p <project dir>]
 
 Refer to docs/cli.md for the full API documentation

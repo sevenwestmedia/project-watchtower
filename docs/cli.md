@@ -123,10 +123,11 @@ On build servers with access to Google Chrome through a Docker container, the fo
 ### test
 
 ```
-pwt test [debug] [-p <project dir>] [<jest option> ...]
+pwt test [debug] [debug-brk] [--port <debug port>] [-p <project dir>] [<jest option> ...]
 ```
 
-*   `debug`: Runs the tests in debugging mode to use breakpoints. **This is incompatible with ts-jest so all TypeScript test files will have to be compiled to JavaScript first!**
+*   `debug`: Runs the tests in debugging mode to use breakpoints.
+*   `debug-brk`: Runs the tests in debugging mode to use breakpoints and tells node to wait for debugger to attach before starting execution.
 
 ### watch
 
