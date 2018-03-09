@@ -178,3 +178,4 @@ assets.json
 build-stats.csv
 *.tgz
 demo/lighthouse-report.json
+lighthouse-report.json

@@ -12,19 +12,34 @@
             "windows": {
                 "runtimeExecutable": "npm.cmd"
             },
-            "runtimeArgs": [
-                "run-script",
-                "test:debug"
-            ],
+            "runtimeArgs": ["run-script", "test:debug", "--", "--port", "5858"],
             "port": 5858,
             "timeout": 60000,
             "smartStep": true,
             "trace": "sm",
-            "outFiles": [
-                "${workspaceRoot}/test/**/*.js",
-                "${workspaceRoot}/lib/**/*.js"
+            "console": "internalConsole"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug current file",
+            "runtimeExecutable": "npm",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "test:debug",
+                "--",
+                "--port",
+                "5858",
+                "${fileBasenameNoExtension}"
             ],
-            "preLaunchTask": "build:debug"
+            "port": 5858,
+            "timeout": 60000,
+            "smartStep": true,
+            "console": "internalConsole",
+            "outputCapture": "std"
         },
         {
             "type": "node",

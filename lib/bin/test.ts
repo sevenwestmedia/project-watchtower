@@ -22,10 +22,16 @@ const test = async (
     let args: string[] = []
 
     const debugIndex = params.indexOf('debug')
+    let port = 5858
     const isDebug = debugIndex !== -1
 
     if (isDebug) {
         params.splice(debugIndex, 1)
+        const portIndex = params.indexOf('--port')
+        if (portIndex !== -1) {
+            port = Number(params[portIndex + 1])
+            params.splice(portIndex, 2)
+        }
 
         if (params.indexOf('--runInBand') === -1) {
             args.push('--runInBand')
@@ -33,7 +39,7 @@ const test = async (
     }
     args = appendConfigArgs(buildConfig, args, params, isDebug)
 
-    const options = isDebug ? { execArgv: ['--inspect'] } : {}
+    const options = isDebug ? { execArgv: [`--inspect-brk=${port}`] } : {}
 
     args = args.concat(params)
 
@@ -60,16 +66,14 @@ function appendConfigArgs(
     if (isDebug && fs.existsSync(path.resolve(buildConfig.BASE, 'jest.debug.config.js'))) {
         return args.concat(['--config', 'jest.debug.config.js'])
     }
+    if (isDebug && fs.existsSync(path.resolve(buildConfig.BASE, 'jest.debug.config.json'))) {
+        return args.concat(['--config', 'jest.debug.config.json'])
+    }
     if (fs.existsSync(path.resolve(buildConfig.BASE, 'jest.config.js'))) {
         return args.concat(['--config', 'jest.config.js'])
     }
 
-    return args.concat([
-        '--config',
-        isDebug
-            ? 'node_modules/project-watchtower/presets/jest/jest-js.json'
-            : 'node_modules/project-watchtower/presets/jest/jest.json',
-    ])
+    return args.concat(['--config', path.resolve(__dirname, '../../presets/jest/jest.json')])
 }
 
 function resolveJest(root: string): string | undefined {

@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "inlineSourceMap": false,
         "removeComments": false,
         "sourceMap": true,
         "noImplicitAny": true,
@@ -22,7 +23,7 @@
             "es2015.symbol",
             "es2015.symbol.wellknown"
         ],
-        "inlineSources": true,
+        "inlineSources": false,
         "declaration": true,
         "typeRoots": ["node_modules/@types", "@types"]
     },
