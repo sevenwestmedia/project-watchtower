@@ -13,6 +13,9 @@ import { Logger } from '../runtime/universal'
  * - watch: Enables watch mode
  * - fast: Disables server-side rendering and type checking
  * - prod: Sets NODE_ENV to "production"
+ * - debug: Starts with debugging enabled
+ * - debug-brk: Starts with debugging and waits for debugger to attach
+ * - --debug-port <port>: The port to debug on
  */
 const start = (
     log: Logger,
@@ -41,10 +44,17 @@ const start = (
     }
 
     const isDebug = args.indexOf('debug') !== -1
-    const isInspect = args.indexOf('inspect') !== -1
+    const isDebugBrk = args.indexOf('debug-brk') !== -1
+    let debugPort = 5858
 
-    if (isDebug || isInspect) {
+    if (isDebug || isDebugBrk) {
         env.START_DEBUG_MODE = 'true'
+    }
+
+    const portIndex = args.indexOf('--debug-port')
+    if (portIndex !== -1) {
+        debugPort = Number(args[portIndex + 1])
+        args.slice(portIndex, 2)
     }
 
     const clientMode = !HAS_SERVER || args.indexOf('client') !== -1
@@ -58,14 +68,15 @@ const start = (
     })
 
     const execArgv: string[] = process.execArgv.filter(
-        (arg: string) => arg.indexOf('--debug') !== 0 && arg.indexOf('--inspect') !== 0,
+        (arg: string) => arg.indexOf('--inspect') !== 0,
     )
 
     if (isDebug) {
-        execArgv.push('--debug')
+        execArgv.push(`--inspect=${debugPort}`)
     }
-    if (isInspect) {
-        execArgv.push('--inspect')
+
+    if (isDebugBrk) {
+        execArgv.push(`--inspect-brk=${debugPort}`)
     }
 
     const options: ForkOptions = {

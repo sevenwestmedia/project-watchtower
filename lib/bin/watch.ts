@@ -29,10 +29,6 @@ const watch = async (
         env.START_FAST_MODE = 'true'
     }
 
-    if (args.indexOf('inspect') !== -1) {
-        additionalStartParams.push('inspect')
-    }
-
     await clean(log, buildConfig)
 
     const isServerWatch = HAS_SERVER && args.indexOf('server') !== -1
