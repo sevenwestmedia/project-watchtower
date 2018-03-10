@@ -35,10 +35,10 @@ export type CreateServerOptions = {
     callback?: () => void
     startListening?: boolean
 }
-export type CreateServerType = (options: CreateServerOptions) => Promise<express.Express>
+export type CreateServerType = (options: CreateServerOptions) => express.Express
 
-export const createServer: CreateServerType = async options => {
-    const config = await getRuntimeConfig(options.log)
+export const createServer: CreateServerType = options => {
+    const config = getRuntimeConfig(options.log)
 
     const { earlyMiddlewareHook, middlewareHook, callback, startListening = true } = options
     // To save the user passing the log to both create server and the SSR middleware

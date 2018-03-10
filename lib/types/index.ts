@@ -22,6 +22,9 @@ export interface RuntimeConfig {
     /** Path to public files */
     SERVER_PUBLIC_DIR: string | false
 
+    /** Client url path to public */
+    PUBLIC_PATH: string
+
     /** The root to look for index.html and other root files */
     BASE: string
 }

@@ -38,6 +38,7 @@ export const getRuntimeConfigFromBuildConfig = (buildConfig: BuildConfig): Runti
     ASSETS_PATH: path.join(buildConfig.OUTPUT, buildConfig.ASSETS_PATH_PREFIX),
     BASE: buildConfig.OUTPUT,
     SERVER_PUBLIC_DIR: buildConfig.SERVER_PUBLIC_DIR,
+    PUBLIC_PATH: buildConfig.PUBLIC_PATH,
 })
 
 export const getRuntimeConfig = (log: Logger): RuntimeConfig => {

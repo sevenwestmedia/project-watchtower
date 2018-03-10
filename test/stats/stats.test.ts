@@ -4,11 +4,12 @@ import { getTestPort } from '../test-helpers'
 import bundleSize from '../../lib/stats/bundle-size'
 import ssrStats from '../../lib/stats/ssr-stats'
 import lighthouseStats from '../../lib/stats/lighthouse'
-import { getConfig } from '../../lib/runtime/config/config'
+import { getConfig, getRuntimeConfigFromBuildConfig } from '../../lib/runtime/config/config'
 import { createConsoleLogger } from '../../lib/runtime/universal'
 
 const log = createConsoleLogger()
 const buildConfig = getConfig(log, process.cwd())
+const runtimeConfig = getRuntimeConfigFromBuildConfig(buildConfig)
 
 // Increase test timeout because builds might take a while
 ;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 90000

@@ -1,0 +1,295 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageLifecycleProvider can pass extra data to pages 1`] = `
+Array [
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "location": Object {
+        "hash": "",
+        "key": "...",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    },
+    "timeStamp": 0,
+    "type": "page-load-started",
+  },
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "home": "isHome",
+      "location": Object {
+        "hash": "",
+        "key": "...",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "pageExtra": "Some extra page data",
+    },
+    "timeStamp": 0,
+    "type": "page-load-complete",
+  },
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "foo": "isFoo",
+      "location": Object {
+        "hash": "",
+        "key": "...",
+        "pathname": "/foo",
+        "search": "",
+        "state": undefined,
+      },
+    },
+    "timeStamp": 0,
+    "type": "page-load-started",
+  },
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "foo": "isFoo",
+      "location": Object {
+        "hash": "",
+        "key": "...",
+        "pathname": "/foo",
+        "search": "",
+        "state": undefined,
+      },
+    },
+    "timeStamp": 0,
+    "type": "page-load-complete",
+  },
+]
+`;
+
+exports[`PageLifecycleProvider can pass extra data to pages 2`] = `
+"<TestPage path=\\"/foo\\" extraProps={{...}}>
+  <WithPageLifecycleProps pageProperties={{...}} page={[Function]}>
+    <Page pageProperties={{...}} page={[Function]} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
+      <div>
+        Page location: 
+        /foo
+        Page state: 
+        loaded
+      </div>
+    </Page>
+  </WithPageLifecycleProps>
+</TestPage>"
+`;
+
+exports[`PageLifecycleProvider raises completed event after data loaded and content re-rendered 1`] = `
+Array [
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "location": Object {
+        "hash": "",
+        "key": "...",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    },
+    "timeStamp": 0,
+    "type": "page-load-started",
+  },
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "location": Object {
+        "hash": "",
+        "key": "...",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    },
+    "timeStamp": 0,
+    "type": "page-load-complete",
+  },
+]
+`;
+
+exports[`PageLifecycleProvider raises completed event after data loaded and content re-rendered 2`] = `
+"<TestPage path=\\"/\\">
+  <WithPageLifecycleProps pageProperties={[undefined]} page={[Function]}>
+    <Page pageProperties={[undefined]} page={[Function]} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
+      <div>
+        Page location: 
+        /
+        Page state: 
+        loaded
+      </div>
+    </Page>
+  </WithPageLifecycleProps>
+</TestPage>"
+`;
+
+exports[`PageLifecycleProvider raises completed event after lazy loaded page has completed load data 1`] = `
+Array [
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "location": Object {
+        "hash": "",
+        "key": "...",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    },
+    "timeStamp": 0,
+    "type": "page-load-started",
+  },
+]
+`;
+
+exports[`PageLifecycleProvider raises completed event after lazy loaded page has completed load data 2`] = `""`;
+
+exports[`PageLifecycleProvider raises completed event after lazy loaded page has completed load data 3`] = `
+Array [
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "location": Object {
+        "hash": "",
+        "key": "...",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    },
+    "timeStamp": 0,
+    "type": "page-load-started",
+  },
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "location": Object {
+        "hash": "",
+        "key": "...",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    },
+    "timeStamp": 0,
+    "type": "page-load-complete",
+  },
+]
+`;
+
+exports[`PageLifecycleProvider raises completed event after lazy loaded page has completed load data 4`] = `""`;
+
+exports[`PageLifecycleProvider raises events when page navigated 1`] = `
+Array [
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "location": Object {
+        "hash": "",
+        "key": "...",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    },
+    "timeStamp": 0,
+    "type": "page-load-started",
+  },
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "location": Object {
+        "hash": "",
+        "key": "...",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    },
+    "timeStamp": 0,
+    "type": "page-load-complete",
+  },
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "location": Object {
+        "hash": "",
+        "key": "...",
+        "pathname": "/foo",
+        "search": "",
+        "state": undefined,
+      },
+    },
+    "timeStamp": 0,
+    "type": "page-load-started",
+  },
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "location": Object {
+        "hash": "",
+        "key": "...",
+        "pathname": "/foo",
+        "search": "",
+        "state": undefined,
+      },
+    },
+    "timeStamp": 0,
+    "type": "page-load-complete",
+  },
+]
+`;
+
+exports[`PageLifecycleProvider raises events when page navigated 2`] = `
+"<TestPage path=\\"/foo\\">
+  <WithPageLifecycleProps pageProperties={[undefined]} page={[Function]}>
+    <Page pageProperties={[undefined]} page={[Function]} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
+      <div>
+        Page location: 
+        /foo
+        Page state: 
+        loaded
+      </div>
+    </Page>
+  </WithPageLifecycleProps>
+</TestPage>"
+`;
+
+exports[`PageLifecycleProvider raises loading event after render 1`] = `
+Array [
+  Object {
+    "originator": "PageEvents",
+    "payload": Object {
+      "location": Object {
+        "hash": "",
+        "key": "...",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    },
+    "timeStamp": 0,
+    "type": "page-load-started",
+  },
+]
+`;
+
+exports[`PageLifecycleProvider raises loading event after render 2`] = `
+"<TestPage path=\\"/\\">
+  <WithPageLifecycleProps pageProperties={[undefined]} page={[Function]}>
+    <Page pageProperties={[undefined]} page={[Function]} currentPageState=\\"loading\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
+      <div>
+        Page location: 
+        /
+        Page state: 
+        loading
+      </div>
+    </Page>
+  </WithPageLifecycleProps>
+</TestPage>"
+`;

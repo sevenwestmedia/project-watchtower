@@ -9,10 +9,10 @@ const log = createConsoleLogger()
 describe('bin/clean', () => {
     it('will clean', async () => {
         const buildConfig = getConfig(log, process.cwd())
-        const filePath = path.resolve(buildConfig.CLIENT_OUTPUT, 'foo.js')
+        const filePath = path.resolve(buildConfig.OUTPUT, 'foo.js')
 
         try {
-            fs.mkdirSync(buildConfig.CLIENT_OUTPUT)
+            fs.mkdirSync(buildConfig.OUTPUT)
         } catch (e) {
             // do nothing
         }

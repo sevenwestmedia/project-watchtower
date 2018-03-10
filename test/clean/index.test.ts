@@ -8,10 +8,10 @@ const log = createConsoleLogger()
 const buildConfig = getConfig(log, process.cwd())
 
 const doClean = async (paths: string | string[]) => {
-    const filePath = path.resolve(buildConfig.CLIENT_OUTPUT, 'foo.js')
+    const filePath = path.resolve(buildConfig.OUTPUT, 'foo.js')
 
     try {
-        fs.mkdirSync(buildConfig.CLIENT_OUTPUT)
+        fs.mkdirSync(buildConfig.OUTPUT)
     } catch (e) {
         // do nothing
     }
@@ -24,7 +24,7 @@ const doClean = async (paths: string | string[]) => {
 
 describe('lib/clean', () => {
     it('will clean', async () => {
-        await doClean(buildConfig.CLIENT_OUTPUT)
-        await doClean([buildConfig.CLIENT_OUTPUT])
+        await doClean(buildConfig.OUTPUT)
+        await doClean([buildConfig.OUTPUT])
     })
 })

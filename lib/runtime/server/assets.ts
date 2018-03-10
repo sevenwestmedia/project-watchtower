@@ -68,7 +68,8 @@ export const addAssetsToHtml = (html: string, runtimeConfig: RuntimeConfig) => {
 }
 
 export const getAbsoluteAssetPath = (runtimeConfig: RuntimeConfig, asset: string) => {
-    let relativeAsset = asset.slice(runtimeConfig.ASSETS_PATH.length)
+    const staticPath = runtimeConfig.PUBLIC_PATH + runtimeConfig.ASSETS_PATH_PREFIX
+    let relativeAsset = asset.slice(staticPath.length)
     if (relativeAsset[0] === '/') {
         relativeAsset = relativeAsset.slice(1)
     }

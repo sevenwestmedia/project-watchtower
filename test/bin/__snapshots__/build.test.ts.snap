@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`bin/build will build 1`] = `
+"{
+  \\"BASE\\": \\".\\",
+  \\"ASSETS_PATH\\": \\"static/\\",
+  \\"ASSETS_PATH_PREFIX\\": \\"static/\\",
+  \\"SERVER_PUBLIC_DIR\\": \\"public/\\",
+  \\"PUBLIC_PATH\\": \\"/\\"
+}"
+`;

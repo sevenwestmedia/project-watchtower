@@ -30,6 +30,7 @@ const buildTarget = (
             ASSETS_PATH: buildConfig.ASSETS_PATH_PREFIX,
             ASSETS_PATH_PREFIX: buildConfig.ASSETS_PATH_PREFIX,
             SERVER_PUBLIC_DIR: buildConfig.SERVER_PUBLIC_DIR === false ? false : 'public/',
+            PUBLIC_PATH: buildConfig.PUBLIC_PATH,
         }
         // On success write out watchtower config
         return writeFile(
