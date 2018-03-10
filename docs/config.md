@@ -121,7 +121,7 @@ Default configuration:
     HAS_SERVER: true,
     LINT_EXCLUDE: [],
     PUBLIC_PATH: '/',
-    PORT: 3000,
+    DEV_SERVER_PORT: 3000,
     /** if true, all externals will be bundled */
     SERVER_BUNDLE_ALL: false,
     SERVER_INCLUDE_IN_BUNDLE: [

@@ -64,7 +64,10 @@ const start = (
     }
 
     const options: ForkOptions = {
-        env: process.env,
+        env: {
+            ...process.env,
+            PORT: buildConfig.DEV_SERVER_PORT,
+        },
         execArgv,
     }
 
