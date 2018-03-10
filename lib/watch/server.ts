@@ -40,8 +40,8 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
             path: path.join(buildConfig.BASE, '.env'),
         })
 
-        const serverPort = getPort(buildConfig.DEV_SERVER_PORT)
-        const devServerPort = await findFreePort(serverPort + 1)
+        const hostPort = await findFreePort(getPort(buildConfig.DEV_SERVER_PORT))
+        const devServerPort = await findFreePort(hostPort + 1)
 
         let devServer: ChildProcess
         let devServerAvailable: Promise<any>
@@ -54,12 +54,12 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
             },
             () => {
                 if (!devServer) {
-                    setTimeout(() => openBrowser(serverPort), 2000)
+                    setTimeout(() => openBrowser(hostPort), 2000)
                 }
                 devServer = restartServer(buildConfig, devServerPort, devServer)
 
                 setTimeout(() => {
-                    devServerAvailable = waitForConnection(serverPort)
+                    devServerAvailable = waitForConnection(devServerPort)
                 }, 100)
             },
         )
@@ -73,9 +73,9 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
             next()
         })
 
-        app.use(proxyMiddleware('http://localhost:' + serverPort))
+        app.use(proxyMiddleware('http://localhost:' + devServerPort))
 
-        const server = app.listen(devServerPort, () => {
+        const server = app.listen(hostPort, () => {
             resolve({
                 app,
                 server,

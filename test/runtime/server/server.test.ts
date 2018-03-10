@@ -3,6 +3,7 @@ import * as path from 'path'
 import { getDefaultHtmlMiddleware, createServer } from '../../../lib/runtime/server/server'
 import { getConfig } from '../../../lib/runtime/config/config'
 import { createConsoleLogger } from '../../../lib/runtime/universal'
+import { getTestPort } from '../../test-helpers'
 
 const log = createConsoleLogger()
 const config = getConfig(log, __dirname)
@@ -14,8 +15,10 @@ describe('runtime/server/server', () => {
         getDefaultHtmlMiddleware(log, config)
     })
 
-    it('createServer', () =>
-        new Promise(resolve => {
+    it('createServer', async () => {
+        process.env.PORT = (await getTestPort()).toString()
+
+        return new Promise(resolve => {
             const app = createServer({
                 log,
                 callback: () => {
@@ -23,5 +26,6 @@ describe('runtime/server/server', () => {
                     resolve()
                 },
             })
-        }))
+        })
+    })
 })

@@ -17,8 +17,8 @@ describe('watch/server', () => {
         await clean(log, buildConfig)
         await build(log, buildConfig)
         const port = await getTestPort()
-        process.env.PORT = port.toString()
-        const watch = await watchServer(log, buildConfig, port)
+        buildConfig.DEV_SERVER_PORT = port
+        const watch = await watchServer(log, buildConfig)
         await waitForConnection(port)
         watch.close()
     })
