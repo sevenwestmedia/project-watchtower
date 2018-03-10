@@ -12,14 +12,23 @@ import { waitForConnection, findFreePort } from '../runtime/util/network'
 import { BuildConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
 
-const restartServer = (buildConfig: BuildConfig, port: number, oldServer?: ChildProcess) => {
+const restartServer = (
+    buildConfig: BuildConfig,
+    port: number,
+    projectDir: string,
+    oldServer?: ChildProcess,
+) => {
     if (oldServer) {
         oldServer.kill()
     }
+
+    // When running in local dev, we have a different process.cwd() than
+    // when running in production. This allows static files and such to resolve
     return fork(path.resolve(buildConfig.OUTPUT, 'server.js'), [], {
         env: {
             ...process.env,
             PORT: port,
+            PROJECT_DIR: projectDir,
         },
     })
 }
@@ -32,10 +41,6 @@ export interface WatchServer {
 
 const watchServer = (log: Logger, buildConfig: BuildConfig) =>
     new Promise<WatchServer>(async resolve => {
-        // When running in local dev, we have a different process.cwd() than
-        // when running in production. This allows static files and such to resolve
-        process.env.PROJECT_DIR = buildConfig.BASE
-
         dotenv.config({
             path: path.join(buildConfig.BASE, '.env'),
         })
@@ -56,7 +61,7 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
                 if (!devServer) {
                     setTimeout(() => openBrowser(hostPort), 2000)
                 }
-                devServer = restartServer(buildConfig, devServerPort, devServer)
+                devServer = restartServer(buildConfig, devServerPort, buildConfig.BASE, devServer)
 
                 setTimeout(() => {
                     devServerAvailable = waitForConnection(devServerPort)

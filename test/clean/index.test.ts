@@ -6,6 +6,7 @@ import { createConsoleLogger } from '../../lib/runtime/universal'
 
 const log = createConsoleLogger()
 const buildConfig = getConfig(log, process.cwd())
+buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/clean')
 
 const doClean = async (paths: string | string[]) => {
     const filePath = path.resolve(buildConfig.OUTPUT, 'foo.js')

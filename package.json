@@ -13,7 +13,7 @@
         "build": "tsc && tsc -p ./tsconfig-es2015.json",
         "build:complete": "npm run clean && npm run lint && npm run build && npm run test -- --coverage --verbose",
         "pretest:base": "npm run clean:lighthouse",
-        "test:base": "jest --runInBand --forceExit --config jest.json",
+        "test:base": "jest --config jest.json",
         "test": "npm run test:base -- --silent",
         "pretest:debug": "npm run build",
         "test:debug": "yarn pwt test debug",

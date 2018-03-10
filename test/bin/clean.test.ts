@@ -9,6 +9,8 @@ const log = createConsoleLogger()
 describe('bin/clean', () => {
     it('will clean', async () => {
         const buildConfig = getConfig(log, process.cwd())
+        buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/binclean')
+
         const filePath = path.resolve(buildConfig.OUTPUT, 'foo.js')
 
         try {

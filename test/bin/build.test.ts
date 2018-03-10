@@ -14,6 +14,8 @@ const log = createConsoleLogger()
 describe('bin/build', () => {
     it('will build', async () => {
         const buildConfig = getConfig(log, process.cwd())
+        buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/binbuild')
+
         const runtimeConfig = getRuntimeConfigFromBuildConfig(buildConfig)
         const { OUTPUT } = buildConfig
         await clean(log, buildConfig)

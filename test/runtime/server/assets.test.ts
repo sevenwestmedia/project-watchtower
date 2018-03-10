@@ -15,6 +15,8 @@ import { createConsoleLogger } from '../../../lib/runtime/universal'
 
 const log = createConsoleLogger()
 const buildConfig = getConfig(log, process.cwd())
+buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/assets')
+
 const runtimeConfig = getRuntimeConfigFromBuildConfig(buildConfig)
 
 const assets = {

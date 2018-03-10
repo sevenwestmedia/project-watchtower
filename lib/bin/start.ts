@@ -17,30 +17,35 @@ import { Logger } from '../runtime/universal'
 const start = (
     log: Logger,
     buildConfig: BuildConfig,
+    startEnv: NodeJS.ProcessEnv,
     ...args: StartParam[]
 ): Promise<ChildProcess> => {
     // When running in local dev, we have a different process.cwd() than
     // when running in production. This allows static files and such to resolve
     const { HAS_SERVER, OUTPUT } = buildConfig
-    process.env.PROJECT_DIR = buildConfig.BASE
+    const env: NodeJS.ProcessEnv = {
+        ...process.env,
+        ...startEnv,
+        PROJECT_DIR: buildConfig.BASE,
+        NODE_ENV:
+            args.indexOf('prod') !== -1 ? 'production' : process.env.NODE_ENV || 'development',
+        PORT: buildConfig.DEV_SERVER_PORT.toString(),
+    }
 
     if (args.indexOf('watch') !== -1) {
-        process.env.START_WATCH_MODE = 'true'
+        env.START_WATCH_MODE = 'true'
     }
 
     if (args.indexOf('fast') !== -1) {
-        process.env.START_FAST_MODE = 'true'
+        env.START_FAST_MODE = 'true'
     }
 
     const isDebug = args.indexOf('debug') !== -1
     const isInspect = args.indexOf('inspect') !== -1
 
     if (isDebug || isInspect) {
-        process.env.START_DEBUG_MODE = 'true'
+        env.START_DEBUG_MODE = 'true'
     }
-
-    process.env.NODE_ENV =
-        args.indexOf('prod') !== -1 ? 'production' : process.env.NODE_ENV || 'development'
 
     const clientMode = !HAS_SERVER || args.indexOf('client') !== -1
 
@@ -64,10 +69,7 @@ const start = (
     }
 
     const options: ForkOptions = {
-        env: {
-            ...process.env,
-            PORT: buildConfig.DEV_SERVER_PORT,
-        },
+        env,
         execArgv,
     }
 

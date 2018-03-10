@@ -64,7 +64,7 @@ switch (command) {
         break
 
     case 'start':
-        exitOnError(start(cliLogger, buildConfig, ...(commandArgs as StartParam[])))
+        exitOnError(start(cliLogger, buildConfig, {}, ...(commandArgs as StartParam[])))
         break
 
     case 'stats':
@@ -76,7 +76,7 @@ switch (command) {
         break
 
     case 'watch':
-        exitOnError(watch(cliLogger, buildConfig, ...(commandArgs as WatchParam[])))
+        exitOnError(watch(cliLogger, buildConfig, {}, ...(commandArgs as WatchParam[])))
         break
 
     default:
