@@ -20,7 +20,7 @@ describe('bin/start', () => {
 
     it('will start the server', async () => {
         const port = await getTestPort()
-        process.env.PORT = port.toString()
+        buildConfig.DEV_SERVER_PORT = port
         const childProcess = await start(
             log,
             buildConfig,
@@ -37,7 +37,7 @@ describe('bin/start', () => {
     // can't test in TypeScript land because it requires the internal server in JavaScript
     it('will start the client', async () => {
         const port = await getTestPort()
-        process.env.PORT = port.toString()
+        buildConfig.DEV_SERVER_PORT = port
         const childProcess = await start(log, buildConfig, 'prod', 'client')
         await waitForConnection(port)
         childProcess.kill()

@@ -15,7 +15,7 @@ const buildConfig = getConfig(log, process.cwd())
 describe('bin/watch', () => {
     it('will watch', async () => {
         const port = await getTestPort()
-        process.env.PORT = port.toString()
+        buildConfig.DEV_SERVER_PORT = port
         const childProcess: any = await watch(log, buildConfig)
         await waitForConnection(port)
         childProcess.kill()
@@ -24,7 +24,7 @@ describe('bin/watch', () => {
     // can't test in TypeScript land because it requires the internal server in JavaScript
     it('will watch the client', async () => {
         const port = await getTestPort()
-        process.env.PORT = port.toString()
+        buildConfig.DEV_SERVER_PORT = port
         const childProcess: any = await watch(log, buildConfig, 'client')
         await waitForConnection(port)
         childProcess.kill()
