@@ -23,21 +23,18 @@ describe('stats', () => {
     })
 
     it('bundle-size', async () => {
-        const metrics = await bundleSize(log, buildConfig)
+        const metrics = await bundleSize(log, runtimeConfig)
 
-        const total = metrics.bundle_size_total
         const main = metrics.bundle_size_main
         const vendor = metrics.bundle_size_vendor
         const css = metrics.bundle_size_css
 
-        expect(total).toBeDefined()
         expect(main).toBeDefined()
         expect(vendor).toBeDefined()
         expect(css).toBeDefined()
 
-        expect(+main + +vendor).toBeCloseTo(+total, 0.1)
-
-        expect(+total).not.toBeCloseTo(0)
+        expect(+main).not.toBeCloseTo(0)
+        expect(+vendor).not.toBeCloseTo(0)
         expect(+css).not.toBeCloseTo(0)
     })
 
