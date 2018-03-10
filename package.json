@@ -78,6 +78,7 @@
         "enzyme-to-json": "^3.2.2",
         "express": "^4.15.3",
         "glamor": "^2.20.40",
+        "mkdirp": "^0.5.1",
         "prettier": "^1.7.4",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
