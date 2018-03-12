@@ -49,6 +49,15 @@ export const createServer: CreateServerType = options => {
 
     app.disable('x-powered-by')
 
+    // For server hot reload, we need to load default assets
+    if (process.env.LOAD_DEFAULT_ASSETS && process.env.PROJECT_DIR) {
+        const buildConfig = getConfig(options.log, process.env.PROJECT_DIR || process.cwd())
+
+        // When running in dev mode, we don't use assets.json so we need to prime
+        // the assets location
+        setDefaultAssets(buildConfig)
+    }
+
     // buildConfig is used for build time config, for example hot reload, and the PORT
     // in local development. In production the port will come from the environment, not
     // this config object

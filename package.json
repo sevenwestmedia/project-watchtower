@@ -32,6 +32,7 @@
         "debug:ssrdemo": "ENABLE_SSR=true yarn pwt start debug -p demo",
         "predebug-brk:ssrdemo": "yarn build:demo",
         "debug-brk:ssrdemo": "ENABLE_SSR=true yarn pwt start debug-brk -p demo",
+        "prewatch-server:ssrdemo": "yarn build:demo",
         "watch-server:ssrdemo": "ENABLE_SSR=true yarn pwt watch server -p demo",
         "test:demo": "yarn pwt test -p demo",
         "prestats:demo": "yarn build:demo",

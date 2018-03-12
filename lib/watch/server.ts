@@ -29,6 +29,7 @@ const restartServer = (
             ...process.env,
             PORT: port,
             PROJECT_DIR: projectDir,
+            LOAD_DEFAULT_ASSETS: true,
         },
     })
 }
@@ -52,7 +53,9 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
         let devServerAvailable: Promise<any>
 
         const serverCompiler = webpack(getWebpackConfig(log, buildConfig, 'server', 'dev'))
-
+        serverCompiler.plugin('invalid', () => {
+            log.info('Server changed, rebuilding and restarting server...')
+        })
         const watching = serverCompiler.watch(
             {
                 aggregateTimeout: 10000,
