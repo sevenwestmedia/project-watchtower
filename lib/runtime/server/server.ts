@@ -4,7 +4,7 @@ import { getConfig, getRuntimeConfig } from '../config/config'
 import { getDefaultHtmlMiddleware } from './middleware/default-html-middleware'
 import { Logger } from '../universal'
 import { createEnsureRequestLogMiddleware } from './middleware/ensure-request-log-middleware'
-import { updateAssetLocations } from './assets'
+import { setDefaultAssets } from './assets'
 
 export { getDefaultHtmlMiddleware }
 
@@ -57,15 +57,7 @@ export const createServer: CreateServerType = options => {
 
         // When running in dev mode, we don't use assets.json so we need to prime
         // the assets location
-        updateAssetLocations({
-            main: {
-                js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/main.js',
-                css: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'css/main.css',
-            },
-            vendor: {
-                js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/vendor.js',
-            },
-        })
+        setDefaultAssets(buildConfig)
 
         // tslint:disable-next-line no-var-requires
         const { getHotReloadMiddleware } = require('../../server/dev')

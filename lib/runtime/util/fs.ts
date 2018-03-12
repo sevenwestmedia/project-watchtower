@@ -10,6 +10,7 @@ export const readFileSync = (log: Logger, filePath: string) => {
         throw err
     }
 }
+
 export const readFile = (log: Logger, filePath: string) =>
     new Promise<string>((resolve, reject) => {
         fs.readFile(filePath, 'utf8', (err, data) => {

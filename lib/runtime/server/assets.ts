@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { Assets } from '../../types'
-import { RuntimeConfig } from '../../../lib'
+import { RuntimeConfig, BuildConfig } from '../../../lib'
 
 let assets: Assets
 
@@ -24,6 +24,20 @@ const ensureAssets = (runtimeConfig: RuntimeConfig) => {
 }
 
 const watchMode = process.env.START_WATCH_MODE === 'true'
+
+export const setDefaultAssets = (buildConfig: BuildConfig) => {
+    // When running in dev mode, we don't use assets.json so we need to prime
+    // the assets location
+    updateAssetLocations({
+        main: {
+            js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/main.js',
+            css: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'css/main.css',
+        },
+        vendor: {
+            js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/vendor.js',
+        },
+    })
+}
 
 export const updateAssetLocations = (newAssets: Assets) => {
     assets = newAssets
