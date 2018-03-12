@@ -39,12 +39,12 @@ export const setDefaultAssets = (buildConfig: BuildConfig) => {
     })
 }
 
-export const updateAssetLocations = (newAssets: Assets) => {
+export function updateAssetLocations(newAssets: Assets) {
     assets = newAssets
     assetsLoaded = true
 }
 
-export const getAssetLocations = (runtimeConfig: RuntimeConfig) => {
+export function getAssetLocations(runtimeConfig: RuntimeConfig) {
     ensureAssets(runtimeConfig)
     return assets
 }
