@@ -81,7 +81,7 @@ const start = (
     const options: ForkOptions = {
         env: {
             ...process.env,
-            env,
+            ...env,
         },
         execArgv,
     }
