@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.12.5] - 13/3/2018
+No changes
+
 ## [v0.12.4] - 8/3/2018
 - Add support for -p argument to specify project directory
 
