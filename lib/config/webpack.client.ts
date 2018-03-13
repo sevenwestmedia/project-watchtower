@@ -5,7 +5,6 @@ import * as autoprefixer from 'autoprefixer'
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as AssetsPlugin from 'assets-webpack-plugin'
 import * as HtmlPlugin from 'html-webpack-plugin'
-import * as DotenvPlugin from 'webpack-dotenv-plugin'
 import { updateAssetLocations } from '../runtime/server/assets'
 import { Assets } from '../types'
 import { BuildConfig } from '../../lib'
@@ -51,7 +50,6 @@ const getPlugins = (buildConfig: BuildConfig) => [
  */
 const clientBaseConfig: CreateWebpackConfig = options => {
     const {
-        BASE,
         CLIENT_ENTRY,
         OUTPUT,
         CLIENT_POLYFILLS,
@@ -67,18 +65,7 @@ const clientBaseConfig: CreateWebpackConfig = options => {
     if (CLIENT_POLYFILLS && fs.existsSync(CLIENT_POLYFILLS)) {
         entry.vendor = [CLIENT_POLYFILLS]
     }
-    const env = path.resolve(BASE, '.env')
-    const envDefault = path.resolve(BASE, '.env.default')
     const plugins = getPlugins(options.buildConfig)
-
-    if (fs.existsSync(env) && fs.existsSync(envDefault)) {
-        plugins.push(
-            new DotenvPlugin({
-                path: path.relative(process.cwd(), env),
-                sample: path.relative(process.cwd(), envDefault),
-            }),
-        )
-    }
 
     if (SERVER_PUBLIC_DIR) {
         const indexHtml = path.resolve(SERVER_PUBLIC_DIR, 'index.html')
