@@ -1,7 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as webpack from 'webpack'
-import * as DotenvPlugin from 'webpack-dotenv-plugin'
 import { BuildConfig } from '../../lib'
 
 /**
@@ -21,19 +20,6 @@ const serverBaseConfig = (options: { buildConfig: BuildConfig }): webpack.Config
             ? baseDirNodeModules
             : path.resolve(process.cwd(), 'node_modules'),
     )
-
-    const env = path.resolve(BASE, '.env')
-    const envDefault = path.resolve(BASE, '.env.default')
-    const plugins: webpack.Plugin[] = []
-
-    if (fs.existsSync(env) && fs.existsSync(envDefault)) {
-        plugins.push(
-            new DotenvPlugin({
-                path: path.relative(process.cwd(), env),
-                sample: path.relative(process.cwd(), envDefault),
-            }),
-        )
-    }
 
     return {
         target: 'node',
