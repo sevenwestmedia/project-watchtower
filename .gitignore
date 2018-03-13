@@ -177,6 +177,6 @@ public/assets
 assets.json
 build-stats.csv
 *.tgz
-demo/lighthouse-report.json
-lighthouse-report.json
+demo/lighthouse-report*.json
+lighthouse-report*.json
 test-dist

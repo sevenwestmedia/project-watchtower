@@ -83,23 +83,24 @@ const lighthouseStats = async (
                     if (perfResult && typeof perfResult.score === 'number') {
                         stats[`${page}_perf_score`] = perfResult.score.toFixed(1)
                     }
+
+                    const reportPath = path.resolve(
+                        buildConfig.BASE,
+                        `lighthouse-report_${page}.json`,
+                    )
+                    log.info(
+                        `Lighthouse results written to '${reportPath}', you can view them visually at https://googlechrome.github.io/lighthouse/viewer/`,
+                    )
+                    await promisify(fs.writeFile)(
+                        reportPath,
+                        JSON.stringify(lighthouseResult, undefined, 4),
+                    )
                 }
+
+                log.info({ stats }, `Lighthouse stats`)
             },
             verbose,
         )
-
-        log.info({ stats }, `Lighthouse stats`)
-
-        if (lighthouseResult) {
-            const reportPath = path.resolve(buildConfig.BASE, 'lighthouse-report.json')
-            log.info(
-                `Lighthouse results written to '${reportPath}', you can view them visually at https://googlechrome.github.io/lighthouse/viewer/`,
-            )
-            await promisify(fs.writeFile)(
-                reportPath,
-                JSON.stringify(lighthouseResult, undefined, 4),
-            )
-        }
 
         return stats
     } catch (err) {
