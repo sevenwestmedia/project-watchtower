@@ -27,7 +27,6 @@ const start = (
     // when running in production. This allows static files and such to resolve
     const { HAS_SERVER, OUTPUT } = buildConfig
     const env: NodeJS.ProcessEnv = {
-        ...process.env,
         ...startEnv,
         PROJECT_DIR: buildConfig.BASE,
         NODE_ENV:
@@ -80,7 +79,10 @@ const start = (
     }
 
     const options: ForkOptions = {
-        env,
+        env: {
+            ...process.env,
+            env,
+        },
         execArgv,
     }
 
