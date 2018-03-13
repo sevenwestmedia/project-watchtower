@@ -10,6 +10,7 @@ import { renderHtml } from './render-html'
 
 const log = createConsoleLogger()
 
+// tslint:disable-next-line:no-empty-interface
 interface AppState {}
 
 createServer({

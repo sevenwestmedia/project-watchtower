@@ -1,19 +1,24 @@
-import * as path from 'path'
 import * as express from 'express'
 import { findFreePort } from '../util/network'
-import { getConfig } from '../config/config'
-import { BuildConfig } from '../../types'
-import { getBaseDir } from '../../../lib/runtime/server/base-dir'
+import { getConfig, getRuntimeConfig } from '../config/config'
 import { getDefaultHtmlMiddleware } from './middleware/default-html-middleware'
 import { Logger } from '../universal'
 import { createEnsureRequestLogMiddleware } from './middleware/ensure-request-log-middleware'
+import { setDefaultAssets } from './assets'
 
 export { getDefaultHtmlMiddleware }
 
 const isProduction = process.env.NODE_ENV === 'production'
 
-export const getPort = (buildConfig: BuildConfig, fallbackPort?: number) =>
-    parseInt(process.env.PORT || '', 10) || fallbackPort || buildConfig.PORT
+export const getPort = (fallbackPort?: number) => {
+    const port = parseInt(process.env.PORT || '', 10) || fallbackPort
+
+    if (!port) {
+        throw new Error('No port specified, set one through the PORT environmental variable')
+    }
+
+    return port
+}
 
 export const isWatchMode = () => process.env.START_WATCH_MODE === 'true'
 
@@ -25,25 +30,44 @@ export type CreateServerOptions = {
     /**
      * Early middleware hook is before static middleswares etc
      */
-    earlyMiddlewareHook?: (app: express.Express) => void
-    middlewareHook?: (app: express.Express) => void
+    earlyMiddlewareHook?: (app: express.Express & { log: Logger }) => void
+    middlewareHook?: (app: express.Express & { log: Logger }) => void
     callback?: () => void
     startListening?: boolean
 }
 export type CreateServerType = (options: CreateServerOptions) => express.Express
 
 export const createServer: CreateServerType = options => {
-    const config = getConfig(options.log, getBaseDir())
+    const config = getRuntimeConfig(options.log)
+
     const { earlyMiddlewareHook, middlewareHook, callback, startListening = true } = options
-    const app = express()
+    // To save the user passing the log to both create server and the SSR middleware
+    // we make the log available on the app, so when the app is passed through
+    // the ssr middleware can access the logger
+    const app: express.Express & { log: Logger } = express() as any
+    app.log = options.log
+
     app.disable('x-powered-by')
+
+    // For server hot reload, we need to load default assets
+    if (process.env.LOAD_DEFAULT_ASSETS && process.env.PROJECT_DIR) {
+        const buildConfig = getConfig(options.log, process.env.PROJECT_DIR || process.cwd())
+
+        // When running in dev mode, we don't use assets.json so we need to prime
+        // the assets location
+        setDefaultAssets(buildConfig)
+    }
 
     // buildConfig is used for build time config, for example hot reload, and the PORT
     // in local development. In production the port will come from the environment, not
     // this config object
-    const buildConfig = getConfig(options.log, process.env.PROJECT_DIR || getBaseDir())
-
     if (process.env.NODE_ENV !== 'production' && isWatchMode()) {
+        const buildConfig = getConfig(options.log, process.env.PROJECT_DIR || process.cwd())
+
+        // When running in dev mode, we don't use assets.json so we need to prime
+        // the assets location
+        setDefaultAssets(buildConfig)
+
         // tslint:disable-next-line no-var-requires
         const { getHotReloadMiddleware } = require('../../server/dev')
         app.use(getHotReloadMiddleware(options.log, buildConfig))
@@ -62,7 +86,7 @@ export const createServer: CreateServerType = options => {
             : `/${config.ASSETS_PATH_PREFIX}`
     app.use(
         assetsPathPrefixWithLeadingSlash,
-        express.static(path.join(config.BASE, config.ASSETS_PATH_PREFIX), {
+        express.static(config.ASSETS_PATH, {
             index: false,
         }),
     )
@@ -81,7 +105,7 @@ export const createServer: CreateServerType = options => {
 
     // if the server does not use server-side rendering, just respond with index.html
     // for each request not handled in other middlewares
-    app.get('*', getDefaultHtmlMiddleware(options.log, buildConfig))
+    app.get('*', getDefaultHtmlMiddleware(options.log, config))
 
     if (!startListening) {
         return app
@@ -93,7 +117,7 @@ export const createServer: CreateServerType = options => {
             if (process.env.NODE_ENV !== 'production' && isWatchMode()) {
                 // tslint:disable-next-line no-var-requires
                 const { openBrowser } = require('../../server/dev')
-                openBrowser(buildConfig, usePort)
+                openBrowser(usePort)
             }
             if (callback) {
                 callback()
@@ -103,7 +127,7 @@ export const createServer: CreateServerType = options => {
         app.set('server', server)
     }
 
-    const port = getPort(buildConfig)
+    const port = getPort()
 
     if (isProduction) {
         listen(port)

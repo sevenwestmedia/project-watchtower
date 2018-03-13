@@ -17,18 +17,16 @@ import { Logger } from '../runtime/universal'
 const watch = async (
     log: Logger,
     buildConfig: BuildConfig,
+    watchProcessEnv: NodeJS.ProcessEnv,
     ...args: WatchParam[]
 ): Promise<ChildProcess | WatchServer> => {
     const { HAS_SERVER } = buildConfig
     const additionalStartParams: StartParam[] = []
+    const env: NodeJS.ProcessEnv = { ...watchProcessEnv }
 
     if (args.indexOf('fast') !== -1) {
         additionalStartParams.push('fast')
-        process.env.START_FAST_MODE = 'true'
-    }
-
-    if (args.indexOf('inspect') !== -1) {
-        additionalStartParams.push('inspect')
+        env.START_FAST_MODE = 'true'
     }
 
     await clean(log, buildConfig)
@@ -42,10 +40,10 @@ const watch = async (
     const clientMode = !HAS_SERVER || args.indexOf('client') !== -1
 
     if (clientMode) {
-        return start(log, buildConfig, 'watch', 'client', ...additionalStartParams)
+        return start(log, buildConfig, env, 'watch', 'client', ...additionalStartParams)
     } else {
         await build(log, buildConfig, 'server', 'dev')
-        return start(log, buildConfig, 'watch', ...additionalStartParams)
+        return start(log, buildConfig, env, 'watch', ...additionalStartParams)
     }
 }
 

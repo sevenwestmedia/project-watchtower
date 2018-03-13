@@ -12,17 +12,27 @@ export interface Assets {
     }
 }
 
+export interface RuntimeConfig {
+    /** The url prefix which static files can load from */
+    ASSETS_PATH_PREFIX: string
+
+    /** The path where the static files are resolved from */
+    ASSETS_PATH: string
+
+    /** Path to public files */
+    SERVER_PUBLIC_DIR: string | false
+
+    /** Client url path to public */
+    PUBLIC_PATH: string
+
+    /** The root to look for index.html and other root files */
+    BASE: string
+}
+
 /** Application build configuration */
 export interface BuildConfig {
     /** Prefix for all assets (JS, CSS, media, fonts) with trailing slash */
     ASSETS_PATH_PREFIX: string
-
-    /** The location where assets are resolved from
-     * default is the working directory is the server output directory.
-     *
-     * If this is not the case, set to the same value as CLIENT_OUTPUT
-     */
-    ASSETS_ROOT: string
 
     /** root path of your application */
     BASE: string
@@ -33,8 +43,8 @@ export interface BuildConfig {
     /** file for client polyfills if needed */
     CLIENT_POLYFILLS: string | false
 
-    /** output directory for the client build */
-    CLIENT_OUTPUT: string
+    /** output directory for the build */
+    OUTPUT: string
 
     /** Autoprefixer browser compatibilty  */
     CSS_AUTOPREFIXER: string[]
@@ -45,8 +55,8 @@ export interface BuildConfig {
     /** List paths to exclude from linting */
     LINT_EXCLUDE: string[]
 
-    /** Default port for the server (when process.env.PORT is not set) */
-    PORT: number
+    /** Default port for the dev server (when process.env.PORT is not set) */
+    DEV_SERVER_PORT: number
 
     /** URL prefix for all resources */
     PUBLIC_PATH: string
@@ -59,9 +69,6 @@ export interface BuildConfig {
 
     /** modules which the server build includes in the bundle */
     SERVER_INCLUDE_IN_BUNDLE: string[]
-
-    /** output directory of the server */
-    SERVER_OUTPUT: string
 
     /** directory that is served as static resources */
     SERVER_PUBLIC_DIR: string | false
@@ -100,6 +107,14 @@ export type BuildEnvironment = 'dev' | 'prod' | 'debug'
 
 export type BuildParam = BuildTarget | BuildEnvironment | 'complete'
 
-export type StartParam = 'fast' | 'watch' | 'prod' | 'debug' | 'client' | 'inspect'
+export type StartParam =
+    | 'fast'
+    | 'watch'
+    | 'prod'
+    | 'debug'
+    | 'debug-brk'
+    | 'client'
+    | '--debug-port'
+    | number
 
-export type WatchParam = 'server' | 'fast' | 'client' | 'inspect'
+export type WatchParam = 'server' | 'fast' | 'client'

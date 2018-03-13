@@ -10,11 +10,14 @@ import {
     addAssetsToHtml,
     getAbsoluteAssetPath,
 } from '../../../lib/runtime/server/assets'
-import { getConfig } from '../../../lib/runtime/config/config'
+import { getConfig, getRuntimeConfigFromBuildConfig } from '../../../lib/runtime/config/config'
 import { createConsoleLogger } from '../../../lib/runtime/universal'
 
 const log = createConsoleLogger()
 const buildConfig = getConfig(log, process.cwd())
+buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/assets')
+
+const runtimeConfig = getRuntimeConfigFromBuildConfig(buildConfig)
 
 const assets = {
     main: {
@@ -27,17 +30,9 @@ const assets = {
 }
 
 describe('server/assets initial', () => {
-    it('initial asset location values', async () => {
+    it('throws when no assets have been specified', async () => {
         await clean(log, buildConfig)
-        expect(getAssetLocations()).toEqual({
-            main: {
-                js: '/static/js/main.js',
-                css: '/static/css/main.css',
-            },
-            vendor: {
-                js: '/static/js/vendor.js',
-            },
-        })
+        expect(() => getAssetLocations(runtimeConfig)).toThrow()
     })
 })
 
@@ -47,11 +42,11 @@ describe('server/assets', () => {
     })
 
     it('getAssetLocations', () => {
-        expect(getAssetLocations()).toEqual(assets)
+        expect(getAssetLocations(runtimeConfig)).toEqual(assets)
     })
 
     it('getCssAssetHtml', () => {
-        const html = getCssAssetHtml()
+        const html = getCssAssetHtml(runtimeConfig)
         const doc = load(html)
         expect(doc('link').length).toBe(1)
         expect(
@@ -62,7 +57,7 @@ describe('server/assets', () => {
     })
 
     it('getJsAssetHtml', () => {
-        const html = getJsAssetHtml()
+        const html = getJsAssetHtml(runtimeConfig)
         const doc = load(html)
         expect(doc('script').length).toBe(2)
         expect(
@@ -85,7 +80,7 @@ describe('server/assets', () => {
 <body>
 </body>
 </html>`
-        const html = addAssetsToHtml(htmlTemplate)
+        const html = addAssetsToHtml(htmlTemplate, runtimeConfig)
 
         const doc = load(html)
         expect(doc('link').length).toBe(1)
@@ -119,7 +114,7 @@ describe('server/assets', () => {
 <script src="${assets.main.js}"></script>
 </body>
 </html>`
-        const html = addAssetsToHtml(htmlTemplate)
+        const html = addAssetsToHtml(htmlTemplate, runtimeConfig)
 
         const doc = load(html)
         expect(doc('link').length).toBe(1)
@@ -127,7 +122,8 @@ describe('server/assets', () => {
     })
 
     it('getAbsoluteAssetPath', () => {
-        const assetPath = path.resolve(buildConfig.CLIENT_OUTPUT, 'foo/bar')
-        expect(getAbsoluteAssetPath(buildConfig, '/foo/bar')).toBe(assetPath)
+        const assetPath = path.resolve(buildConfig.OUTPUT, 'static/foo/bar.js')
+
+        expect(getAbsoluteAssetPath(runtimeConfig, '/static/foo/bar.js')).toBe(assetPath)
     })
 })

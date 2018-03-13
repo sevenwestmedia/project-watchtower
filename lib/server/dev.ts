@@ -3,7 +3,6 @@ import * as webpack from 'webpack'
 import * as webpackDevMiddleware from 'webpack-dev-middleware'
 import * as webpackHotMiddleware from 'webpack-hot-middleware'
 import * as opn from 'opn'
-import { getPort } from '../runtime/server/server'
 import { getWebpackConfig } from '../build/build'
 import { BuildConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
@@ -31,10 +30,10 @@ export const getHotReloadMiddleware: HotReloadMiddleware = (log, buildConfig) =>
     return [dev, hot]
 }
 
-export const openBrowser = (buildConfig: BuildConfig, port?: number) => {
+export const openBrowser = (port: number) => {
     if (process.env.NODE_ENV === 'test') {
         return
     }
-    const usePort = port || getPort(buildConfig)
-    opn(`http://localhost:${usePort}`)
+
+    opn(`http://localhost:${port}`)
 }

@@ -74,7 +74,7 @@ export const runStatsOnServer = async (
     statsFn: StatsFn,
     verbose = false,
 ) => {
-    const { SERVER_OUTPUT, HAS_SERVER, STATS_ENV, STATS_PAGES } = buildConfig
+    const { OUTPUT, HAS_SERVER, STATS_ENV, STATS_PAGES } = buildConfig
 
     if (!HAS_SERVER) {
         log.info('Skipping server-based stats because the application has no server')
@@ -85,9 +85,9 @@ export const runStatsOnServer = async (
         path: path.join(buildConfig.BASE, '.env'),
     })
 
-    const port = await findFreePort(getPort(buildConfig))
+    const port = await findFreePort(getPort(buildConfig.DEV_SERVER_PORT))
 
-    const serverEntryFile = path.resolve(SERVER_OUTPUT, 'server.js')
+    const serverEntryFile = path.resolve(OUTPUT, 'server.js')
     const devServer = await forkPromise(
         log,
         serverEntryFile,

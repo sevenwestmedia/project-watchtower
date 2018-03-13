@@ -8,17 +8,29 @@ import * as dotenv from 'dotenv'
 import { getWebpackConfig } from '../build/build'
 import { openBrowser, getHotReloadMiddleware } from '../server/dev'
 import { getPort } from '../runtime/server/server'
-import { waitForConnection } from '../runtime/util/network'
+import { waitForConnection, findFreePort } from '../runtime/util/network'
 import { BuildConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
-import { setBaseDir } from '../runtime/server/base-dir'
 
-const restartServer = (buildConfig: BuildConfig, oldServer?: ChildProcess) => {
+const restartServer = (
+    buildConfig: BuildConfig,
+    port: number,
+    projectDir: string,
+    oldServer?: ChildProcess,
+) => {
     if (oldServer) {
         oldServer.kill()
     }
-    return fork(path.resolve(buildConfig.SERVER_OUTPUT, 'server.js'), [], {
-        env: process.env,
+
+    // When running in local dev, we have a different process.cwd() than
+    // when running in production. This allows static files and such to resolve
+    return fork(path.resolve(buildConfig.OUTPUT, 'server.js'), [], {
+        env: {
+            ...process.env,
+            PORT: port,
+            PROJECT_DIR: projectDir,
+            LOAD_DEFAULT_ASSETS: true,
+        },
     })
 }
 
@@ -28,37 +40,34 @@ export interface WatchServer {
     close: () => void
 }
 
-const watchServer = (log: Logger, buildConfig: BuildConfig, port?: number) =>
-    new Promise<WatchServer>(resolve => {
-        // When running in local dev, we have a different process.cwd() than
-        // when running in production. This allows static files and such to resolve
-        setBaseDir(buildConfig.SERVER_OUTPUT)
-        process.env.PROJECT_DIR = buildConfig.BASE
-
+const watchServer = (log: Logger, buildConfig: BuildConfig) =>
+    new Promise<WatchServer>(async resolve => {
         dotenv.config({
             path: path.join(buildConfig.BASE, '.env'),
         })
 
-        const serverPort = port || getPort(buildConfig)
-        const devServerPort = serverPort + 1
+        const hostPort = await findFreePort(getPort(buildConfig.DEV_SERVER_PORT))
+        const devServerPort = await findFreePort(hostPort + 1)
 
         let devServer: ChildProcess
         let devServerAvailable: Promise<any>
 
         const serverCompiler = webpack(getWebpackConfig(log, buildConfig, 'server', 'dev'))
-
+        serverCompiler.plugin('invalid', () => {
+            log.info('Server changed, rebuilding and restarting server...')
+        })
         const watching = serverCompiler.watch(
             {
                 aggregateTimeout: 10000,
             },
             () => {
                 if (!devServer) {
-                    setTimeout(() => openBrowser(buildConfig, devServerPort), 2000)
+                    setTimeout(() => openBrowser(hostPort), 2000)
                 }
-                devServer = restartServer(buildConfig, devServer)
+                devServer = restartServer(buildConfig, devServerPort, buildConfig.BASE, devServer)
 
                 setTimeout(() => {
-                    devServerAvailable = waitForConnection(serverPort)
+                    devServerAvailable = waitForConnection(devServerPort)
                 }, 100)
             },
         )
@@ -72,9 +81,9 @@ const watchServer = (log: Logger, buildConfig: BuildConfig, port?: number) =>
             next()
         })
 
-        app.use(proxyMiddleware('http://localhost:' + serverPort))
+        app.use(proxyMiddleware('http://localhost:' + devServerPort))
 
-        const server = app.listen(devServerPort, () => {
+        const server = app.listen(hostPort, () => {
             resolve({
                 app,
                 server,

@@ -33,10 +33,20 @@ export interface BinType {
     clean: BinPromiseType
     exploreBundle: BinPromiseType
     lint: BinPromiseType
-    start: (log: Logger, buildConfig: BuildConfig, ...args: StartParam[]) => Promise<ChildProcess>
+    start: (
+        log: Logger,
+        buildConfig: BuildConfig,
+        startEnv: NodeJS.ProcessEnv,
+        ...args: StartParam[]
+    ) => Promise<ChildProcess>
     stats: BinPromiseType
     test: BinPromiseType
-    watch: (log: Logger, buildConfig: BuildConfig, ...args: WatchParam[]) => Promise<any>
+    watch: (
+        log: Logger,
+        buildConfig: BuildConfig,
+        watchProcessEnv: NodeJS.ProcessEnv,
+        ...args: WatchParam[]
+    ) => Promise<any>
 }
 
 export const bin: BinType = {

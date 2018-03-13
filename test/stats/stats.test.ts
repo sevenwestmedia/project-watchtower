@@ -1,14 +1,20 @@
+import * as fs from 'fs'
+import * as path from 'path'
 import clean from '../../lib/bin/clean'
 import build from '../../lib/bin/build'
-import { getTestPort } from '../test-helpers'
+import stats from '../../lib/bin/stats'
 import bundleSize from '../../lib/stats/bundle-size'
 import ssrStats from '../../lib/stats/ssr-stats'
 import lighthouseStats from '../../lib/stats/lighthouse'
-import { getConfig } from '../../lib/runtime/config/config'
+import { getTestPort } from '../test-helpers'
+import { getConfig, getRuntimeConfigFromBuildConfig } from '../../lib/runtime/config/config'
 import { createConsoleLogger } from '../../lib/runtime/universal'
 
 const log = createConsoleLogger()
 const buildConfig = getConfig(log, process.cwd())
+buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/stats')
+
+const runtimeConfig = getRuntimeConfigFromBuildConfig(buildConfig)
 
 // Increase test timeout because builds might take a while
 ;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 90000
@@ -16,28 +22,25 @@ const buildConfig = getConfig(log, process.cwd())
 describe('stats', () => {
     beforeAll(async () => {
         const port = await getTestPort()
-        process.env.PORT = port.toString()
+        buildConfig.DEV_SERVER_PORT = port
 
         await clean(log, buildConfig)
         await build(log, buildConfig)
     })
 
     it('bundle-size', async () => {
-        const metrics = await bundleSize(log, buildConfig)
+        const metrics = await bundleSize(log, runtimeConfig)
 
-        const total = metrics.bundle_size_total
         const main = metrics.bundle_size_main
         const vendor = metrics.bundle_size_vendor
         const css = metrics.bundle_size_css
 
-        expect(total).toBeDefined()
         expect(main).toBeDefined()
         expect(vendor).toBeDefined()
         expect(css).toBeDefined()
 
-        expect(+main + +vendor).toBeCloseTo(+total, 0.1)
-
-        expect(+total).not.toBeCloseTo(0)
+        expect(+main).not.toBeCloseTo(0)
+        expect(+vendor).not.toBeCloseTo(0)
         expect(+css).not.toBeCloseTo(0)
     })
 
@@ -66,5 +69,14 @@ describe('stats', () => {
         expect(metrics.home_consistently_interactive).toBeDefined()
         expect(metrics.home_dom_size).toBeDefined()
         expect(metrics.home_perf_score).toBeDefined()
+    })
+
+    it('cli', async () => {
+        await clean(log, buildConfig)
+        await build(log, buildConfig)
+        await stats(log, buildConfig, 'verbose')
+
+        const filePath = path.resolve(process.cwd(), 'build-stats.csv')
+        expect(fs.existsSync(filePath)).toBe(true)
     })
 })

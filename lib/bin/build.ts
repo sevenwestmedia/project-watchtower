@@ -1,3 +1,4 @@
+import * as path from 'path'
 import cleanBin from './clean'
 import lint from './lint'
 import test from './test'
@@ -6,8 +7,10 @@ import clean from '../clean'
 import { failPromisesLate } from '../util/async'
 import { webpackPromise } from '../util/webpack'
 import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
-import { BuildConfig } from '../../lib'
+import { BuildConfig, RuntimeConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
+import { writeFile } from '../runtime/util/fs'
+import { watchtowerConfigFilename } from '../runtime/config/config'
 
 const buildTarget = (
     log: Logger,
@@ -21,7 +24,21 @@ const buildTarget = (
         return Promise.reject(`Could not load webpack configuration for ${target}/${environment}!`)
     }
 
-    return webpackPromise(log, config)
+    return webpackPromise(log, config).then(() => {
+        const runtimeConfig: RuntimeConfig = {
+            BASE: '.',
+            ASSETS_PATH: buildConfig.ASSETS_PATH_PREFIX,
+            ASSETS_PATH_PREFIX: buildConfig.ASSETS_PATH_PREFIX,
+            SERVER_PUBLIC_DIR: buildConfig.SERVER_PUBLIC_DIR === false ? false : 'public/',
+            PUBLIC_PATH: buildConfig.PUBLIC_PATH,
+        }
+        // On success write out watchtower config
+        return writeFile(
+            log,
+            path.join(buildConfig.OUTPUT, watchtowerConfigFilename),
+            JSON.stringify(runtimeConfig, undefined, 2),
+        )
+    })
 }
 
 const cleanAndBuild = (
@@ -30,7 +47,7 @@ const cleanAndBuild = (
     target: BuildTarget,
     environment: BuildEnvironment = 'prod',
 ) => {
-    const cleanTarget = target === 'server' ? buildConfig.SERVER_OUTPUT : buildConfig.CLIENT_OUTPUT
+    const cleanTarget = buildConfig.OUTPUT
 
     return clean(log, cleanTarget).then(() => buildTarget(log, buildConfig, target, environment))
 }

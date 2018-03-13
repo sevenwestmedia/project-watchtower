@@ -3,7 +3,7 @@ import * as path from 'path'
 import clean from '../../lib/bin/clean'
 import build from '../../lib/bin/build'
 import { getAbsoluteAssetPath, getAssetLocations } from '../../lib/runtime/server/assets'
-import { getConfig } from '../../lib/runtime/config/config'
+import { getConfig, getRuntimeConfigFromBuildConfig } from '../../lib/runtime/config/config'
 
 // Increase test timeout because builds might take a while
 import { createConsoleLogger } from '../../lib/runtime/universal'
@@ -14,22 +14,29 @@ const log = createConsoleLogger()
 describe('bin/build', () => {
     it('will build', async () => {
         const buildConfig = getConfig(log, process.cwd())
-        const { BASE, SERVER_OUTPUT } = buildConfig
+        buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/binbuild')
+
+        const runtimeConfig = getRuntimeConfigFromBuildConfig(buildConfig)
+        const { OUTPUT } = buildConfig
         await clean(log, buildConfig)
         await build(log, buildConfig)
 
-        const filePath = path.resolve(SERVER_OUTPUT, 'server.js')
+        const filePath = path.resolve(OUTPUT, 'server.js')
         expect(fs.existsSync(filePath)).toBe(true)
 
-        const assetsPath = path.resolve(BASE, 'assets.json')
+        const assetsPath = path.resolve(OUTPUT, 'assets.json')
         expect(fs.existsSync(assetsPath)).toBe(true)
 
-        const assets = getAssetLocations()
+        const watchtowerConfig = path.resolve(OUTPUT, 'watchtower.config')
+        expect(fs.existsSync(assetsPath)).toBe(true)
+
+        const assets = getAssetLocations(runtimeConfig)
 
         const files = [assets.main.js, assets.main.css, assets.vendor.js].map(f =>
-            getAbsoluteAssetPath(buildConfig, f),
+            getAbsoluteAssetPath(runtimeConfig, f),
         )
 
+        expect(fs.readFileSync(watchtowerConfig).toString()).toMatchSnapshot()
         files.forEach(f => {
             expect(fs.existsSync(f)).toBe(true)
         })

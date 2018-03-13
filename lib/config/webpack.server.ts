@@ -11,7 +11,7 @@ import { BuildConfig } from '../../lib'
  * - add source-map-support to every file
  */
 const serverBaseConfig = (options: { buildConfig: BuildConfig }): webpack.Configuration => {
-    const { BASE, PUBLIC_PATH, SERVER_ENTRY, SERVER_OUTPUT } = options.buildConfig
+    const { BASE, PUBLIC_PATH, SERVER_ENTRY, OUTPUT } = options.buildConfig
 
     const baseDirNodeModules = path.resolve(BASE, 'node_modules')
     // Try <base>/node_modules, if not present assume they are at
@@ -41,7 +41,7 @@ const serverBaseConfig = (options: { buildConfig: BuildConfig }): webpack.Config
             main: [SERVER_ENTRY],
         },
         output: {
-            path: SERVER_OUTPUT,
+            path: OUTPUT,
             publicPath: PUBLIC_PATH,
             filename: 'server.js',
         },

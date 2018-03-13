@@ -1,5 +1,3 @@
 {
-    "extends": [
-        "project-watchtower/presets/tslint"
-    ]
+    "extends": ["../presets/tslint"]
 }

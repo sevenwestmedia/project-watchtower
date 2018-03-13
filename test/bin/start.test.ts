@@ -1,3 +1,4 @@
+import * as path from 'path'
 import clean from '../../lib/bin/clean'
 import build from '../../lib/bin/build'
 import start from '../../lib/bin/start'
@@ -12,6 +13,8 @@ import { createConsoleLogger } from '../../lib/runtime/universal'
 const log = createConsoleLogger()
 const buildConfig = getConfig(log, process.cwd())
 
+buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/binstart')
+
 describe('bin/start', () => {
     beforeAll(async () => {
         await clean(log, buildConfig)
@@ -20,16 +23,8 @@ describe('bin/start', () => {
 
     it('will start the server', async () => {
         const port = await getTestPort()
-        process.env.PORT = port.toString()
-        const childProcess = await start(
-            log,
-            buildConfig,
-            'watch',
-            'fast',
-            'prod',
-            'debug',
-            'inspect',
-        )
+        buildConfig.DEV_SERVER_PORT = port
+        const childProcess = await start(log, buildConfig, {}, 'watch')
         await waitForConnection(port)
         childProcess.kill()
     })
@@ -37,8 +32,8 @@ describe('bin/start', () => {
     // can't test in TypeScript land because it requires the internal server in JavaScript
     it('will start the client', async () => {
         const port = await getTestPort()
-        process.env.PORT = port.toString()
-        const childProcess = await start(log, buildConfig, 'prod', 'client')
+        buildConfig.DEV_SERVER_PORT = port
+        const childProcess = await start(log, buildConfig, {}, 'prod', 'client')
         await waitForConnection(port)
         childProcess.kill()
     })
