@@ -6,6 +6,7 @@ import * as opn from 'opn'
 import { getWebpackConfig } from '../build/build'
 import { BuildConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
+import * as AssetsPlugin from 'assets-webpack-plugin'
 
 export type HotReloadMiddleware = (
     log: Logger,
@@ -14,6 +15,13 @@ export type HotReloadMiddleware = (
 
 export const getHotReloadMiddleware: HotReloadMiddleware = (log, buildConfig) => {
     const config = getWebpackConfig(log, buildConfig, 'client', 'dev')
+    if (!config) {
+        throw new Error('Unable to load webpack config')
+    }
+
+    if (config.plugins) {
+        config.plugins = config.plugins.filter(plugin => !(plugin instanceof AssetsPlugin))
+    }
     const compiler = webpack(config)
 
     const dev = webpackDevMiddleware(compiler, {
