@@ -14,15 +14,12 @@ import { mount, configure } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
 import * as H from 'history'
 
-import {
-    PageLifecycleProvider,
-    withPageLifecycleEvents,
-    ComponentWithLifecycle,
-    PageEvent,
-} from './PageLifecycleProvider'
+import { PageLifecycleProvider, PageEvent } from './PageLifecycleProvider'
 import { PromiseCompletionSource, createConsoleLogger } from '../../universal'
 import Page from '../Page/Page'
 import { PageAdditionalProps } from '../Page/PageAdditionalProps'
+import { withPageLifecycleEvents } from './withPageLifecycle'
+import { ComponentWithLifecycle } from './ComponentWithLifeCycle'
 
 configure({ adapter: new Adapter() })
 const testLogger = createConsoleLogger()

@@ -1,9 +1,10 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
-import { withRouter, RouteComponentProps } from 'react-router'
 import * as H from 'history'
+import { withRouter, RouteComponentProps } from 'react-router'
 import { PageLifecycle } from './PageLifecycle'
 import { Logger } from '../../universal'
+import { LoadingStates } from './withPageLifecycle'
 
 export interface PageLifecycleEvent<T> {
     type: string
@@ -43,107 +44,9 @@ export interface PageLifecycleProviderProps extends RouteComponentProps<{}> {
     logger?: Logger
 }
 
-export type LoadingStates = 'loading' | 'loaded'
-
-export type LifecycleState = {
-    currentPageState: LoadingStates
-    currentPageLocation: H.Location
-}
-export type PageLifecycleProps = LifecycleState & PageProps
-
-export type StateChangeCallback = (state: LifecycleState) => void
-export type RouteChangeCallback = (location: H.Location) => void
-
-// tslint:disable-next-line:max-classes-per-file
-export class ComponentWithLifecycle<P, S> extends React.Component<P & PageLifecycleProps, S> {
-    context: {
-        pageLifecycle: PageLifecycle
-    }
-}
-
-type LifecycleComponent<T> =
-    | React.ComponentClass<PageLifecycleProps & T>
-    | React.SFC<PageLifecycleProps & T>
-
-// tslint:disable-next-line:only-arrow-functions
-export const withPageLifecycleProps = function<T>(
-    Component: LifecycleComponent<T>,
-): React.ComponentClass<T> {
-    // tslint:disable-next-line:max-classes-per-file
-    return class WithPageLifecycleProps extends React.Component<T, LifecycleState> {
-        static contextTypes = {
-            pageLifecycle: PropTypes.object,
-            logger: PropTypes.object,
-        }
-
-        context: {
-            pageLifecycle: PageLifecycle
-            logger: Logger | undefined
-        }
-
-        state: LifecycleState
-
-        constructor(props: T, context: { pageLifecycle: PageLifecycle }) {
-            super(props, context)
-
-            if (!context) {
-                return
-            }
-            this.state = {
-                currentPageState: context.pageLifecycle.currentPageState,
-                currentPageLocation: context.pageLifecycle.currentPageLocation,
-            }
-        }
-
-        componentWillMount() {
-            if (!this.context.pageLifecycle) {
-                return
-            }
-            this.context.pageLifecycle.onPageStateChanged(this.pageStateChanged)
-        }
-
-        componentWillUnmount() {
-            this.context.pageLifecycle.offPageStateChanged(this.pageStateChanged)
-        }
-
-        pageStateChanged = (pageState: LifecycleState) => {
-            if (this.context.logger) {
-                this.context.logger.trace(
-                    {
-                        currentPageState: pageState.currentPageState,
-                        currentPageLocation: pageState.currentPageLocation,
-                    },
-                    'Setting pageState on WithPageLifecycle',
-                )
-            }
-            this.setState(pageState)
-        }
-
-        render() {
-            return (
-                <Component
-                    {...this.props}
-                    currentPageState={this.state.currentPageState}
-                    currentPageLocation={this.state.currentPageLocation}
-                    beginLoadingData={this.context.pageLifecycle.beginLoadingData}
-                    endLoadingData={this.context.pageLifecycle.endLoadingData}
-                />
-            )
-        }
-    }
-}
-
-export const withPageLifecycleEvents = (Component: React.ComponentClass<any>) => {
-    Component.contextTypes = {
-        ...Component.contextTypes,
-        pageLifecycle: PropTypes.object,
-    }
-
-    return Component
-}
-
-// tslint:disable-next-line:max-classes-per-file
 class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps, {}> {
+    static displayName = 'PageLifecycleProvider'
+
     static childContextTypes = {
         pageLifecycle: PropTypes.object,
         logger: PropTypes.object,

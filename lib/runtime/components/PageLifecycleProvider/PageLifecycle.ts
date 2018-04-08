@@ -1,14 +1,16 @@
 import * as H from 'history'
+import { PageProps } from './PageLifecycleProvider'
 import {
     PageLifecycleProps,
     StateChangeCallback,
     RouteChangeCallback,
     LoadingStates,
-    PageProps,
     LifecycleState,
-} from './PageLifecycleProvider'
+} from './withPageLifecycle'
 
 export class PageLifecycle implements PageLifecycleProps, PageProps {
+    static displayName = 'PageLifecycle'
+
     /** Adds data to the page */
     updatePageProps: (props: object) => void
     pageRenderComplete: () => void
