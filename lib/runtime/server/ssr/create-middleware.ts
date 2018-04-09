@@ -96,7 +96,7 @@ export const createSsrMiddleware = <ReduxState extends object>(
                 },
             },
         }
-        const pageRenderResult = await renderPageContents<ReduxState>(ssrOptions, req.url, req)
+        const pageRenderResult = await renderPageContents<ReduxState>(ssrOptions, req)
 
         const createPageMarkup = (result: StatusServerRenderResult<ReduxState>) =>
             options.renderHtml({

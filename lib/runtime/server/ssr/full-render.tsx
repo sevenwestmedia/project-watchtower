@@ -40,9 +40,9 @@ export interface Assets {
 
 export async function renderPageContents<T extends object>(
     options: ServerSideRenderOptions<T>,
-    renderLocation: string,
     req: Request,
 ): Promise<ServerRenderResults.ServerRenderResult<T>> {
+    let renderLocation = req.url
     const START_FAST_MODE = process.env.START_FAST_MODE === 'true'
     const startTime = process.hrtime()
     const promiseTracker = new PromiseTracker()
@@ -79,8 +79,14 @@ export async function renderPageContents<T extends object>(
 
             return result
         } catch (err) {
+            // If we are already rendering the error location, bail
+            if (renderLocation === options.errorLocation) {
+                throw err
+            }
             options.log.error(err)
-            const errorRender = performSinglePassLocationRender(options.errorLocation)
+            // Overwrite the render location with the error location
+            renderLocation = options.errorLocation
+            const errorRender = performSinglePassLocationRender(renderLocation)
 
             return createResponse({
                 renderResult: errorRender,
