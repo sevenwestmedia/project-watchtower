@@ -18,6 +18,8 @@ export interface LoggerProps {
 }
 
 export class LogProvider extends React.Component<LoggerProps, {}> {
+    static displayName = 'LogProvider'
+
     static childContextTypes = {
         logger: PropTypes.any,
     }

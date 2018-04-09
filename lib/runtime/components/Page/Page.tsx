@@ -1,11 +1,11 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
-import {
-    withPageLifecycleProps,
-    PageLifecycleProps,
-} from '../PageLifecycleProvider/PageLifecycleProvider'
 import { Logger } from '../../util/log'
 import { PageLifecycle } from '../PageLifecycleProvider/PageLifecycle'
+import {
+    PageLifecycleProps,
+    withPageLifecycleProps,
+} from '../PageLifecycleProvider/withPageLifecycle'
 
 export interface Props {
     page: React.ReactElement<any> | ((pageProps: PageLifecycleProps) => React.ReactElement<any>)
@@ -14,6 +14,8 @@ export interface Props {
 
 export default withPageLifecycleProps(
     class Page extends React.PureComponent<Props & PageLifecycleProps, {}> {
+        static displayName = `Page`
+
         static contextTypes = {
             // Seems like context cannot be exported, this is a runtime react thing anyways
             pageLifecycle: PropTypes.object,
