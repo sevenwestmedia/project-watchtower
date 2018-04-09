@@ -9,13 +9,15 @@
  * pcs.resolve('data')
  */
 export class PromiseCompletionSource<T> {
-    resolve: (result: T) => Promise<void>
-    reject: (error: Error) => Promise<void>
     completed: boolean = false
-
     private _promise: Promise<T>
 
     constructor(private autoReset = false) {}
+
+    resolve: (result: T) => Promise<void> = () =>
+        Promise.reject('Nothing is observing this PromiseCompletionSource, cannot resolve')
+    reject: (error: Error) => Promise<void> = () =>
+        Promise.reject('Nothing is observing this PromiseCompletionSource, cannot reject')
 
     get promise(): Promise<T> {
         if (!this.autoReset && this._promise) {
