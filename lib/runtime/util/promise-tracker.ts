@@ -9,6 +9,14 @@ export class PromiseTracker {
         this.promises.push(promise)
     }
 
+    untrack(promise: PromiseLike<any>) {
+        const index = this.promises.indexOf(promise)
+        if (index === -1) {
+            return
+        }
+        this.promises.splice(index, 1)
+    }
+
     middleware(): redux.Middleware {
         return () => next => (action: any) => {
             const result = next(action)
