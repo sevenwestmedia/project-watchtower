@@ -7,8 +7,12 @@ import { StaticRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { functionTimer, Logger, LogProvider } from '../../universal'
 import { StaticRouterContext } from './router-context-handler'
+import { PromiseTracker } from './full-render'
 
-export type CreateAppElement = (store: redux.Store<any>) => React.ReactElement<any>
+export type CreateAppElement = (
+    store: redux.Store<any>,
+    promiseTracker: PromiseTracker,
+) => React.ReactElement<any>
 
 export interface RenderMarkup {
     html: string
@@ -27,6 +31,7 @@ export default (
     store: redux.Store<any>,
     log: Logger,
     appRender: CreateAppElement,
+    promiseTracker: PromiseTracker,
 ): RenderPassResult => {
     // first create a context for <StaticRouter>, it's where we keep the
     // results of rendering for the second pass if necessary
@@ -43,7 +48,7 @@ export default (
                         <Provider store={store}>
                             <LogProvider logger={log}>
                                 <StaticRouter location={currentLocation} context={context}>
-                                    {appRender(store)}
+                                    {appRender(store, promiseTracker)}
                                 </StaticRouter>
                             </LogProvider>
                         </Provider>,

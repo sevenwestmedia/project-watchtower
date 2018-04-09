@@ -38,11 +38,11 @@ export interface Assets {
     }
 }
 
-async function renderPageContents<T extends object>(
+export async function renderPageContents<T extends object>(
     options: ServerSideRenderOptions<T>,
+    renderLocation: string,
     req: Request,
 ): Promise<ServerRenderResults.ServerRenderResult<T>> {
-    const { url: currentLocation } = req
     const START_FAST_MODE = process.env.START_FAST_MODE === 'true'
     const startTime = process.hrtime()
     const promiseTracker = new PromiseTracker()
@@ -65,7 +65,7 @@ async function renderPageContents<T extends object>(
     }
 
     const performSinglePassLocationRender = (location: string) =>
-        renderToString(location, store, options.log, options.appRender)
+        renderToString(location, store, options.log, options.appRender, promiseTracker)
 
     const render = (location: string): ServerRenderResults.ServerRenderResult<T> => {
         // We need to capture the store before we render
@@ -76,15 +76,6 @@ async function renderPageContents<T extends object>(
             const renderResult = performSinglePassLocationRender(location)
 
             const result = routerContextHandler(renderResult, startTime, storeStateAtRenderTime)
-
-            if (options.events && options.events.renderPerformed) {
-                try {
-                    options.events.renderPerformed(promiseTracker)
-                } catch (err) {
-                    // External event failed. Just log and continue
-                    options.log.error({ err }, 'renderPerformed event failed')
-                }
-            }
 
             return result
         } catch (err) {
@@ -97,6 +88,15 @@ async function renderPageContents<T extends object>(
                 startTime,
                 statusCode: 500,
             })
+        } finally {
+            if (options.events && options.events.renderPerformed) {
+                try {
+                    options.events.renderPerformed(promiseTracker)
+                } catch (err) {
+                    // External event failed. Just log and continue
+                    options.log.error({ err }, 'renderPerformed event failed')
+                }
+            }
         }
     }
 
@@ -118,7 +118,7 @@ async function renderPageContents<T extends object>(
     }
 
     try {
-        const initialRenderResult = render(currentLocation)
+        const initialRenderResult = render(renderLocation)
 
         // If we have not rendered successfully just return the render result
         if (initialRenderResult.type !== ServerRenderResults.ServerRenderResultType.Success) {
@@ -137,7 +137,7 @@ async function renderPageContents<T extends object>(
         const dataResolved = await resolveAllData(
             options.log,
             promiseTracker,
-            () => render(currentLocation),
+            () => render(renderLocation),
             initialRenderResult,
             10,
             options.ssrTimeoutMs,
@@ -146,7 +146,7 @@ async function renderPageContents<T extends object>(
         if (dataResolved.type === ServerRenderResults.ServerRenderResultType.Success) {
             if (dataResolved.reduxState !== store.getState()) {
                 options.log.debug('Store has changed since initial SSR, doing another pass')
-                return render(currentLocation)
+                return render(renderLocation)
             }
         }
 
@@ -163,5 +163,3 @@ async function renderPageContents<T extends object>(
         return failure
     }
 }
-
-export default renderPageContents
