@@ -67,7 +67,7 @@ Array [
 
 exports[`PageLifecycleProvider can pass extra data to pages 2`] = `
 "<TestPage path=\\"/foo\\" extraProps={{...}}>
-  <WithPageLifecycleProps pageProperties={{...}} page={[Function]}>
+  <withPageLifecycleProps(Page) pageProperties={{...}} page={[Function]}>
     <Page pageProperties={{...}} page={[Function]} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
       <div>
         Page location: 
@@ -76,7 +76,7 @@ exports[`PageLifecycleProvider can pass extra data to pages 2`] = `
         loaded
       </div>
     </Page>
-  </WithPageLifecycleProps>
+  </withPageLifecycleProps(Page)>
 </TestPage>"
 `;
 
@@ -115,7 +115,7 @@ Array [
 
 exports[`PageLifecycleProvider raises completed event after data loaded and content re-rendered 2`] = `
 "<TestPage path=\\"/\\">
-  <WithPageLifecycleProps pageProperties={[undefined]} page={[Function]}>
+  <withPageLifecycleProps(Page) pageProperties={[undefined]} page={[Function]}>
     <Page pageProperties={[undefined]} page={[Function]} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
       <div>
         Page location: 
@@ -124,7 +124,7 @@ exports[`PageLifecycleProvider raises completed event after data loaded and cont
         loaded
       </div>
     </Page>
-  </WithPageLifecycleProps>
+  </withPageLifecycleProps(Page)>
 </TestPage>"
 `;
 
@@ -247,7 +247,7 @@ Array [
 
 exports[`PageLifecycleProvider raises events when page navigated 2`] = `
 "<TestPage path=\\"/foo\\">
-  <WithPageLifecycleProps pageProperties={[undefined]} page={[Function]}>
+  <withPageLifecycleProps(Page) pageProperties={[undefined]} page={[Function]}>
     <Page pageProperties={[undefined]} page={[Function]} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
       <div>
         Page location: 
@@ -256,7 +256,7 @@ exports[`PageLifecycleProvider raises events when page navigated 2`] = `
         loaded
       </div>
     </Page>
-  </WithPageLifecycleProps>
+  </withPageLifecycleProps(Page)>
 </TestPage>"
 `;
 
@@ -281,7 +281,7 @@ Array [
 
 exports[`PageLifecycleProvider raises loading event after render 2`] = `
 "<TestPage path=\\"/\\">
-  <WithPageLifecycleProps pageProperties={[undefined]} page={[Function]}>
+  <withPageLifecycleProps(Page) pageProperties={[undefined]} page={[Function]}>
     <Page pageProperties={[undefined]} page={[Function]} currentPageState=\\"loading\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
       <div>
         Page location: 
@@ -290,6 +290,6 @@ exports[`PageLifecycleProvider raises loading event after render 2`] = `
         loading
       </div>
     </Page>
-  </WithPageLifecycleProps>
+  </withPageLifecycleProps(Page)>
 </TestPage>"
 `;
