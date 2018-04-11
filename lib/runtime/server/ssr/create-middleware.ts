@@ -67,9 +67,15 @@ export const createSsrMiddleware = <ReduxState extends object>(
             log: req.log,
             errorLocation: options.errorLocation,
             ssrTimeoutMs: options.ssrTimeoutMs,
-            appRender: store => {
+            appRender: (store, promiseTracker) => {
+                // If we have previously rendered, we need to not bother tracking the
+                // previous completion notifier
+                if (renderContext) {
+                    promiseTracker.untrack(renderContext.completionNotifier.promise)
+                }
+
                 renderContext = {
-                    completionNotifier: new PromiseCompletionSource<{}>(),
+                    completionNotifier: new PromiseCompletionSource(),
                     triggeredLoad: false,
                     additionalState,
                 }

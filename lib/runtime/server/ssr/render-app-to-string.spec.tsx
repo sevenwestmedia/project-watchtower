@@ -6,7 +6,7 @@ import * as React from 'react'
 import * as redux from 'redux'
 import { Route, Switch } from 'react-router-dom'
 import renderToString from './render-app-to-string'
-import { createConsoleLogger } from '../../universal'
+import { createConsoleLogger, PromiseTracker } from '../../universal'
 
 const Home: React.SFC<{}> = () => <div>Home</div>
 const TestApp: React.SFC<{}> = () => (
@@ -18,7 +18,13 @@ const TestApp: React.SFC<{}> = () => (
 it('renders app callback with router', () => {
     const store = redux.createStore(() => ({}))
 
-    const renderResult = renderToString('/', store, createConsoleLogger(), _ => <TestApp />)
+    const renderResult = renderToString(
+        '/',
+        store,
+        createConsoleLogger(),
+        _ => <TestApp />,
+        new PromiseTracker(),
+    )
 
     expect(renderResult.renderMarkup).toMatchSnapshot()
 })

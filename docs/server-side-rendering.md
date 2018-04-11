@@ -110,10 +110,6 @@ Within a `renderApp` render you can optionally set a statusCode using react-rout
 A function which creates the redux store for the request
 
 
-
-
-
-
 ### Express and async handlers
 If a middleware happens to reject in an async handler it may be useful to catch. Here is a simple wrapper which does this if needed.
 
@@ -142,3 +138,13 @@ export const wrapAsyncHandler = (handler: RequestHandler | ErrorRequestHandler) 
     return tryHandler
 }
 ```
+
+## Tracking async work
+Watchtower includes work tracking in redux, but is extensible. If you want to notify watchtower that work has started you can set `context.triggeredLoad` to true inside the `renderApp` function.
+
+Then once data has finished loading you need to execute `context.completionNotifier.resolve({})`.
+
+NOTE: If you reject the completion notifier it signals to watchtower data loading critically failed and it will simply return a 500 status with no content rendered.
+
+## Error handling
+Watchtower handles server side rendering failures for you, when the render pass throws watchtower will re-render using the provided `errorLocation` prop.
