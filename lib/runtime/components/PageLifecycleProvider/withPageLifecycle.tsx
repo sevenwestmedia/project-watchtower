@@ -61,7 +61,7 @@ export function withPageLifecycleProps<T>(
             }
         }
 
-        componentWillMount() {
+        componentDidMount() {
             if (!this.context.pageLifecycle) {
                 return
             }
