@@ -49,7 +49,6 @@ class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps, 
 
     static childContextTypes = {
         pageLifecycle: PropTypes.object,
-        logger: PropTypes.object,
     }
 
     raiseStartOnRender: boolean
@@ -167,7 +166,6 @@ class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps, 
     getChildContext() {
         return {
             pageLifecycle: this.pageLifecycle,
-            logger: this.props.logger,
         }
     }
 
