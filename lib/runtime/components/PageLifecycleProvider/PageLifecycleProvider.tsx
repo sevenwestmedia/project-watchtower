@@ -70,6 +70,7 @@ class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps, 
             this.endLoadingData,
             'loading',
             this.props.location,
+            this.props.logger,
         )
     }
 

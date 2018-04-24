@@ -4,7 +4,6 @@ import * as H from 'history'
 
 import { PageProps } from './PageLifecycleProvider'
 import { PageLifecycle } from './PageLifecycle'
-import { Logger } from '../../universal'
 import { getDisplayName } from '../../util/getDisplayName'
 
 export type LifecycleComponent<T> =
@@ -39,12 +38,10 @@ export function withPageLifecycleProps<T>(
 
         static contextTypes = {
             pageLifecycle: PropTypes.object,
-            logger: PropTypes.object,
         }
 
         context: {
             pageLifecycle: PageLifecycle
-            logger: Logger | undefined
         }
 
         state: LifecycleState
@@ -73,8 +70,8 @@ export function withPageLifecycleProps<T>(
         }
 
         pageStateChanged = (pageState: LifecycleState) => {
-            if (this.context.logger) {
-                this.context.logger.trace(
+            if (this.context.pageLifecycle.logger) {
+                this.context.pageLifecycle.logger.trace(
                     {
                         currentPageState: pageState.currentPageState,
                         currentPageLocation: pageState.currentPageLocation,
