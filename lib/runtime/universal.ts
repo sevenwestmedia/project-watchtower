@@ -1,4 +1,4 @@
-export * from './components/LogProvider/LogProvider'
+export * from './components/LogProvider'
 export * from './components/Page/Page'
 export * from './components/PageLifecycleProvider/PageLifecycleProvider'
 

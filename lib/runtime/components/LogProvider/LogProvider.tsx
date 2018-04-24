@@ -2,17 +2,6 @@ import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { Logger } from '../../util/log'
 
-/**
- * Makes the provider logger available through context.logger
- */
-export function addLog<T extends React.ComponentClass<any>>(component: T): T {
-    component.contextTypes = {
-        logger: PropTypes.any,
-        ...component.contextTypes,
-    }
-    return component
-}
-
 export interface LoggerProps {
     logger: Logger
 }
@@ -21,7 +10,7 @@ export class LogProvider extends React.Component<LoggerProps, {}> {
     static displayName = 'LogProvider'
 
     static childContextTypes = {
-        logger: PropTypes.any,
+        logger: PropTypes.object,
     }
 
     getChildContext() {
@@ -29,6 +18,7 @@ export class LogProvider extends React.Component<LoggerProps, {}> {
 
         return { logger }
     }
+
     render() {
         return React.Children.only(this.props.children)
     }
