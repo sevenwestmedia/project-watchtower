@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types'
 
 import { LoggerProps } from '../../universal'
 
-export function addLog<T>(
+export function withLog<T>(
     Component: React.ComponentType<T & LoggerProps>,
 ): React.ComponentClass<T> {
     return class WithLog extends React.Component<T> {

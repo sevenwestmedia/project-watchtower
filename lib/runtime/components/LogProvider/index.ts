@@ -1,2 +1,2 @@
-export { addLog } from './add-log'
+export { withLog } from './with-log'
 export { LogProvider, LoggerProps } from './LogProvider'
