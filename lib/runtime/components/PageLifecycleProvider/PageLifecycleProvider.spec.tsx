@@ -20,6 +20,7 @@ import Page from '../Page/Page'
 import { PageAdditionalProps } from '../Page/PageAdditionalProps'
 import { withPageLifecycleEvents } from './withPageLifecycle'
 import { ComponentWithLifecycle } from './ComponentWithLifeCycle'
+import { LogProvider } from '../LogProvider/LogProvider'
 
 configure({ adapter: new Adapter() })
 const testLogger = createConsoleLogger()
@@ -97,11 +98,12 @@ describe('PageLifecycleProvider', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/']} initialIndex={0}>
-                    <PageLifecycleProvider
-                        logger={testLogger}
-                        onEvent={event => pageEvents.push(event)}
-                        render={<testComponents.TestPage path="/" />}
-                    />
+                    <LogProvider logger={testLogger}>
+                        <PageLifecycleProvider
+                            onEvent={event => pageEvents.push(event)}
+                            render={<testComponents.TestPage path="/" />}
+                        />
+                    </LogProvider>
                 </MemoryRouter>
             </Provider>,
         )
@@ -133,34 +135,35 @@ describe('PageLifecycleProvider', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/', '/foo']} initialIndex={0}>
-                    <PageLifecycleProvider
-                        logger={testLogger}
-                        onEvent={event => pageEvents.push(event)}
-                        render={
-                            <Route
-                                render={props => {
-                                    history = props.history
-                                    return (
-                                        <div>
-                                            {props.location.pathname === '/' && (
-                                                <PageAdditionalProps
-                                                    pageProperties={{
-                                                        pageExtra: 'Some extra page data',
-                                                    }}
+                    <LogProvider logger={testLogger}>
+                        <PageLifecycleProvider
+                            onEvent={event => pageEvents.push(event)}
+                            render={
+                                <Route
+                                    render={props => {
+                                        history = props.history
+                                        return (
+                                            <div>
+                                                {props.location.pathname === '/' && (
+                                                    <PageAdditionalProps
+                                                        pageProperties={{
+                                                            pageExtra: 'Some extra page data',
+                                                        }}
+                                                    />
+                                                )}
+                                                <testComponents.TestPage
+                                                    path={props.location.pathname}
+                                                    extraProps={
+                                                        extraPropsLookup[props.location.pathname]
+                                                    }
                                                 />
-                                            )}
-                                            <testComponents.TestPage
-                                                path={props.location.pathname}
-                                                extraProps={
-                                                    extraPropsLookup[props.location.pathname]
-                                                }
-                                            />
-                                        </div>
-                                    )
-                                }}
-                            />
-                        }
-                    />
+                                            </div>
+                                        )
+                                    }}
+                                />
+                            }
+                        />
+                    </LogProvider>
                 </MemoryRouter>
             </Provider>,
         )
@@ -199,11 +202,12 @@ describe('PageLifecycleProvider', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/']} initialIndex={0}>
-                    <PageLifecycleProvider
-                        logger={testLogger}
-                        onEvent={event => pageEvents.push(event)}
-                        render={<testComponents.TestPage path="/" />}
-                    />
+                    <LogProvider logger={testLogger}>
+                        <PageLifecycleProvider
+                            onEvent={event => pageEvents.push(event)}
+                            render={<testComponents.TestPage path="/" />}
+                        />
+                    </LogProvider>
                 </MemoryRouter>
             </Provider>,
         )
@@ -237,11 +241,13 @@ describe('PageLifecycleProvider', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/']} initialIndex={0}>
-                    <PageLifecycleProvider
-                        logger={testLogger}
-                        onEvent={event => pageEvents.push(event)}
-                        render={<Page page={<testComponents.FakeLazyLoad path="/" />} />}
-                    />
+                    <LogProvider logger={testLogger}>
+                        {' '}
+                        <PageLifecycleProvider
+                            onEvent={event => pageEvents.push(event)}
+                            render={<Page page={<testComponents.FakeLazyLoad path="/" />} />}
+                        />
+                    </LogProvider>
                 </MemoryRouter>
             </Provider>,
         )
@@ -289,20 +295,23 @@ describe('PageLifecycleProvider', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/', '/foo']} initialIndex={0}>
-                    <PageLifecycleProvider
-                        logger={testLogger}
-                        onEvent={event => pageEvents.push(event)}
-                        render={
-                            <Route
-                                render={props => {
-                                    history = props.history
-                                    return (
-                                        <testComponents.TestPage path={props.location.pathname} />
-                                    )
-                                }}
-                            />
-                        }
-                    />
+                    <LogProvider logger={testLogger}>
+                        <PageLifecycleProvider
+                            onEvent={event => pageEvents.push(event)}
+                            render={
+                                <Route
+                                    render={props => {
+                                        history = props.history
+                                        return (
+                                            <testComponents.TestPage
+                                                path={props.location.pathname}
+                                            />
+                                        )
+                                    }}
+                                />
+                            }
+                        />
+                    </LogProvider>
                 </MemoryRouter>
             </Provider>,
         )

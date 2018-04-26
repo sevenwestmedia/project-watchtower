@@ -7,7 +7,6 @@ import {
     LoadingStates,
     LifecycleState,
 } from './withPageLifecycle'
-import { Logger } from '../../util/log'
 
 export class PageLifecycle implements PageLifecycleProps, PageProps {
     static displayName = 'PageLifecycle'
@@ -29,7 +28,7 @@ export class PageLifecycle implements PageLifecycleProps, PageProps {
         endLoadingData: () => void,
         public currentPageState: LoadingStates,
         public currentPageLocation: H.Location,
-        public logger: Logger | undefined,
+        public enableTraceLogging: boolean,
     ) {
         this.updatePageProps = updatePageProps
         this.pageRenderComplete = onPageRender

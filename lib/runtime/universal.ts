@@ -1,3 +1,9 @@
+/**
+ * Watchtower has code which is unsafe for the client bundles.
+ *
+ * This universal file should always be safe to import from the client or server
+ */
+
 export * from './components/LogProvider'
 export * from './components/Page/Page'
 export * from './components/PageLifecycleProvider/PageLifecycleProvider'

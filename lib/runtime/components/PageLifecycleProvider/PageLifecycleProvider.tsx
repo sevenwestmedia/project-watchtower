@@ -3,8 +3,9 @@ import * as PropTypes from 'prop-types'
 import * as H from 'history'
 import { withRouter, RouteComponentProps } from 'react-router'
 import { PageLifecycle } from './PageLifecycle'
-import { Logger } from '../../universal'
 import { LoadingStates } from './withPageLifecycle'
+import { LoggerProps } from '../LogProvider/LogProvider'
+import { withLog } from '../LogProvider/with-log'
 
 export interface PageLifecycleEvent<T> {
     type: string
@@ -41,10 +42,10 @@ export interface PageProps {
 export interface PageLifecycleProviderProps extends RouteComponentProps<{}> {
     render: React.ReactElement<any> | ((pageProps: PageProps) => React.ReactElement<any>)
     onEvent: (event: PageEvent) => void
-    logger?: Logger
+    enableTraceLogging?: boolean
 }
 
-class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps, {}> {
+class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps & LoggerProps, {}> {
     static displayName = 'PageLifecycleProvider'
 
     static childContextTypes = {
@@ -58,7 +59,7 @@ class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps, 
 
     currentPageProps: object = {}
 
-    constructor(props: PageLifecycleProviderProps) {
+    constructor(props: PageLifecycleProviderProps & LoggerProps) {
         super(props)
 
         this.isRouting = true
@@ -70,7 +71,7 @@ class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps, 
             this.endLoadingData,
             'loading',
             this.props.location,
-            this.props.logger,
+            this.props.enableTraceLogging || false,
         )
     }
 
@@ -85,7 +86,7 @@ class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps, 
             currentPageState,
             currentPageLocation: this.props.location,
         }
-        if (this.props.logger) {
+        if (this.props.enableTraceLogging) {
             this.props.logger.trace(newState, 'State changed')
         }
         this.pageLifecycle.pageStateChanged(newState)
@@ -223,7 +224,7 @@ class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps, 
 }
 
 const PageLifecycleProviderWithRouter = withRouter<PageLifecycleProviderProps>(
-    PageLifecycleProvider,
+    withLog(PageLifecycleProvider),
 )
 
 export { PageLifecycleProviderWithRouter as PageLifecycleProvider }
