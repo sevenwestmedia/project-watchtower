@@ -71,7 +71,7 @@ export function withPageLifecycleProps<T>(
 
             pageStateChanged = (pageState: LifecycleState) => {
                 if (this.context.pageLifecycle.enableTraceLogging) {
-                    this.props.logger.trace(
+                    this.props.logger.debug(
                         {
                             currentPageState: pageState.currentPageState,
                             currentPageLocation: pageState.currentPageLocation,

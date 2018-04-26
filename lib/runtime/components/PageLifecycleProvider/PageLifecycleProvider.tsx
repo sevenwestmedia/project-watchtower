@@ -87,14 +87,14 @@ class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps &
             currentPageLocation: this.props.location,
         }
         if (this.props.enableTraceLogging) {
-            this.props.logger.trace(newState, 'State changed')
+            this.props.logger.debug(newState, 'State changed')
         }
         this.pageLifecycle.pageStateChanged(newState)
     }
 
     raisePageLoadStartEvent = () => {
-        if (this.props.logger) {
-            this.props.logger.trace({}, 'Rasing start load event')
+        if (this.props.enableTraceLogging) {
+            this.props.logger.debug({}, 'Rasing start load event')
         }
 
         this.stateChanged()
@@ -110,8 +110,8 @@ class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps &
     }
 
     raisePageLoadCompleteEvent = () => {
-        if (this.props.logger) {
-            this.props.logger.trace(
+        if (this.props.enableTraceLogging) {
+            this.props.logger.debug(
                 { currentPageProps: this.currentPageProps },
                 'Raising page load complete event',
             )
@@ -143,8 +143,8 @@ class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps &
 
         this.currentPageProps = { ...this.currentPageProps, ...props }
 
-        if (this.props.logger) {
-            this.props.logger.trace(
+        if (this.props.enableTraceLogging) {
+            this.props.logger.debug(
                 { currentPageProps: this.currentPageProps, existingProps, props },
                 'Updating page props',
             )
@@ -174,8 +174,8 @@ class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps &
     componentWillReceiveProps(nextProps: PageLifecycleProviderProps) {
         // We only care about pathname, not any of the other location info
         if (this.props.location.pathname !== nextProps.location.pathname) {
-            if (this.props.logger) {
-                this.props.logger.trace(
+            if (this.props.enableTraceLogging) {
+                this.props.logger.debug(
                     { oldPath: this.props.location.pathname, newPath: nextProps.location.pathname },
                     'Path changed',
                 )
@@ -192,8 +192,8 @@ class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps &
 
     beginLoadingData = () => {
         this.loadingDataCount++
-        if (this.props.logger) {
-            this.props.logger.trace(
+        if (this.props.enableTraceLogging) {
+            this.props.logger.debug(
                 { loadingDataCount: this.loadingDataCount },
                 'Begin loading data',
             )
@@ -202,8 +202,8 @@ class PageLifecycleProvider extends React.Component<PageLifecycleProviderProps &
 
     endLoadingData = () => {
         this.loadingDataCount--
-        if (this.props.logger) {
-            this.props.logger.trace({ loadingDataCount: this.loadingDataCount }, 'End loading data')
+        if (this.props.enableTraceLogging) {
+            this.props.logger.debug({ loadingDataCount: this.loadingDataCount }, 'End loading data')
         }
 
         if (this.loadingDataCount === 0) {
