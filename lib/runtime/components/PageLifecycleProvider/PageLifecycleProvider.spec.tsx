@@ -242,7 +242,6 @@ describe('PageLifecycleProvider', () => {
             <Provider store={store}>
                 <MemoryRouter initialEntries={['/']} initialIndex={0}>
                     <LogProvider logger={testLogger}>
-                        {' '}
                         <PageLifecycleProvider
                             onEvent={event => pageEvents.push(event)}
                             render={<Page page={<testComponents.FakeLazyLoad path="/" />} />}

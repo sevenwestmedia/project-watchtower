@@ -20,6 +20,6 @@ export class LogProvider extends React.Component<LoggerProps, {}> {
     }
 
     render() {
-        return React.Children.only(this.props.children)
+        return this.props.children ? React.Children.only(this.props.children) : null
     }
 }
