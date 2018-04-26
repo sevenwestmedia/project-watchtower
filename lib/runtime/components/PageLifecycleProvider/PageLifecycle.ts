@@ -7,7 +7,7 @@ import {
     LoadingStates,
     LifecycleState,
 } from './withPageLifecycle'
-import { Logger } from '../../universal'
+import { Logger } from '../../util/log'
 
 export class PageLifecycle implements PageLifecycleProps, PageProps {
     static displayName = 'PageLifecycle'
