@@ -28,6 +28,7 @@ export class PageLifecycle implements PageLifecycleProps, PageProps {
         endLoadingData: () => void,
         public currentPageState: LoadingStates,
         public currentPageLocation: H.Location,
+        public enableTraceLogging: boolean,
     ) {
         this.updatePageProps = updatePageProps
         this.pageRenderComplete = onPageRender

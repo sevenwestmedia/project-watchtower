@@ -67,16 +67,18 @@ Array [
 
 exports[`PageLifecycleProvider can pass extra data to pages 2`] = `
 "<TestPage path=\\"/foo\\" extraProps={{...}}>
-  <withPageLifecycleProps(Page) pageProperties={{...}} page={[Function]}>
-    <Page pageProperties={{...}} page={[Function]} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
-      <div>
-        Page location: 
-        /foo
-        Page state: 
-        loaded
-      </div>
-    </Page>
-  </withPageLifecycleProps(Page)>
+  <withLog(withPageLifecycleProps(Page)) pageProperties={{...}} page={[Function]}>
+    <withPageLifecycleProps(Page) pageProperties={{...}} page={[Function]} logger={{...}}>
+      <Page pageProperties={{...}} page={[Function]} logger={{...}} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
+        <div>
+          Page location: 
+          /foo
+          Page state: 
+          loaded
+        </div>
+      </Page>
+    </withPageLifecycleProps(Page)>
+  </withLog(withPageLifecycleProps(Page))>
 </TestPage>"
 `;
 
@@ -115,16 +117,18 @@ Array [
 
 exports[`PageLifecycleProvider raises completed event after data loaded and content re-rendered 2`] = `
 "<TestPage path=\\"/\\">
-  <withPageLifecycleProps(Page) pageProperties={[undefined]} page={[Function]}>
-    <Page pageProperties={[undefined]} page={[Function]} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
-      <div>
-        Page location: 
-        /
-        Page state: 
-        loaded
-      </div>
-    </Page>
-  </withPageLifecycleProps(Page)>
+  <withLog(withPageLifecycleProps(Page)) pageProperties={[undefined]} page={[Function]}>
+    <withPageLifecycleProps(Page) pageProperties={[undefined]} page={[Function]} logger={{...}}>
+      <Page pageProperties={[undefined]} page={[Function]} logger={{...}} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
+        <div>
+          Page location: 
+          /
+          Page state: 
+          loaded
+        </div>
+      </Page>
+    </withPageLifecycleProps(Page)>
+  </withLog(withPageLifecycleProps(Page))>
 </TestPage>"
 `;
 
@@ -247,16 +251,18 @@ Array [
 
 exports[`PageLifecycleProvider raises events when page navigated 2`] = `
 "<TestPage path=\\"/foo\\">
-  <withPageLifecycleProps(Page) pageProperties={[undefined]} page={[Function]}>
-    <Page pageProperties={[undefined]} page={[Function]} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
-      <div>
-        Page location: 
-        /foo
-        Page state: 
-        loaded
-      </div>
-    </Page>
-  </withPageLifecycleProps(Page)>
+  <withLog(withPageLifecycleProps(Page)) pageProperties={[undefined]} page={[Function]}>
+    <withPageLifecycleProps(Page) pageProperties={[undefined]} page={[Function]} logger={{...}}>
+      <Page pageProperties={[undefined]} page={[Function]} logger={{...}} currentPageState=\\"loaded\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
+        <div>
+          Page location: 
+          /foo
+          Page state: 
+          loaded
+        </div>
+      </Page>
+    </withPageLifecycleProps(Page)>
+  </withLog(withPageLifecycleProps(Page))>
 </TestPage>"
 `;
 
@@ -281,15 +287,17 @@ Array [
 
 exports[`PageLifecycleProvider raises loading event after render 2`] = `
 "<TestPage path=\\"/\\">
-  <withPageLifecycleProps(Page) pageProperties={[undefined]} page={[Function]}>
-    <Page pageProperties={[undefined]} page={[Function]} currentPageState=\\"loading\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
-      <div>
-        Page location: 
-        /
-        Page state: 
-        loading
-      </div>
-    </Page>
-  </withPageLifecycleProps(Page)>
+  <withLog(withPageLifecycleProps(Page)) pageProperties={[undefined]} page={[Function]}>
+    <withPageLifecycleProps(Page) pageProperties={[undefined]} page={[Function]} logger={{...}}>
+      <Page pageProperties={[undefined]} page={[Function]} logger={{...}} currentPageState=\\"loading\\" currentPageLocation={{...}} beginLoadingData={[Function]} endLoadingData={[Function]}>
+        <div>
+          Page location: 
+          /
+          Page state: 
+          loading
+        </div>
+      </Page>
+    </withPageLifecycleProps(Page)>
+  </withLog(withPageLifecycleProps(Page))>
 </TestPage>"
 `;

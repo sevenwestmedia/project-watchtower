@@ -15,11 +15,9 @@ build('server', 'prod')
 ### LogProvider / addLog
 ``` ts
 @addLog
-class YourComponent extends React.Component<{}, {}> {
-    context: { logger: Logger }
-
+class YourComponent extends React.Component<LoggerProps, {}> {
     onClick = () => {
-        this.context.logger.info('Clicked!')
+        this.props.logger.info('Clicked!')
     }
 }
 
