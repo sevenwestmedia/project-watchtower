@@ -8,16 +8,10 @@
     "suppressTaskName": true,
     "tasks": [
         {
-            "taskName": "build:demo",
-            "isBuildCommand": true,
-            "problemMatcher": "$tsc",
-            "args": ["tsc", "-p", "./demo"]
-        },
-        {
             "taskName": "build",
             "isBuildCommand": true,
             "problemMatcher": "$tsc",
-            "args": ["run", "build"]
+            "args": ["run", "compile"]
         },
         {
             "taskName": "build:debug",

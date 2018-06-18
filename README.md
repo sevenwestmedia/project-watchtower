@@ -15,6 +15,7 @@ Create-react-app is great, it is what gave us the idea for Project Watchtower, b
 ## Features
 
 * Webpack build
+    * By default it will build into a self contained /dist folder
 * Testing
 * Cleaning
 * Linting
