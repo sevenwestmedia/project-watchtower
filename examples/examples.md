@@ -1,2 +1,2 @@
 # Example projects
-Shows different watchtower usages
+Shows different watchtower usage scenarios.

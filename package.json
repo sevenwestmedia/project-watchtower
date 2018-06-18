@@ -38,7 +38,15 @@
         "build:with-server-example": "yarn pwt build -p examples/with-server",
         "watch:with-server-example": "yarn pwt watch -p examples/with-server",
         "stats:with-server-example": "yarn pwt stats verbose -p examples/with-server",
-        "expore-bundle:with-server-example": "yarn pwt explore-bundle -p examples/with-server"
+        "expore-bundle:with-server-example": "yarn pwt explore-bundle -p examples/with-server",
+        "~~~ simple-ssr ~~~": "",
+        "prebuild:simple-ssr-example": "npm run clean:lighthouse && yarn build",
+        "prewatch:simple-ssr-example": "npm run clean:lighthouse && yarn build",
+        "prestats:simple-ssr-example": "yarn build:simple-ssr-example",
+        "build:simple-ssr-example": "yarn pwt build -p examples/simple-ssr",
+        "watch:simple-ssr-example": "yarn pwt watch -p examples/simple-ssr",
+        "stats:simple-ssr-example": "yarn pwt stats verbose -p examples/simple-ssr",
+        "expore-bundle:simple-ssr-example": "yarn pwt explore-bundle -p examples/simple-ssr"
     },
     "main": "lib/index.js",
     "bin": {
@@ -63,7 +71,6 @@
         "@types/react": "^16.0.38",
         "@types/react-dom": "^16.0.4",
         "@types/react-helmet": "^5.0.3",
-        "@types/react-redux": "^5.0.13",
         "@types/react-router": "^4.0.17",
         "@types/react-router-dom": "^4.2.1",
         "@types/rimraf": "^0.0.28",
@@ -89,9 +96,8 @@
         "react-router-dom": "^4.2.2",
         "react-test-renderer": "^16.1.1",
         "redux-thunk": "^2.2.0",
-        "release-preparer": "^0.5.0",
-        "serialize-javascript": "^1.4.0",
         "tslib": "^1.7.1",
+        "serialize-javascript": "^1.4.0",
         "typescript": "^2.6.1"
     },
     "peerDependencies": {
@@ -106,8 +112,8 @@
         "react-helmet": ">=5.1.0",
         "react-router-dom": ">=4.1.0",
         "react-test-renderer": ">=15.6.0 || >= 16.0.0",
-        "redux-thunk": ">=2.2.0",
         "source-map-support": ">=0.4.0",
+        "serialize-javascript": "^1.4.0",
         "tslib": ">=1.7.0",
         "typescript": ">=2.4.0"
     },
@@ -137,7 +143,6 @@
         "sass-loader": "^6.0.6",
         "source-map-loader": "^0.2.1",
         "style-loader": "^0.18.2",
-        "throng": "^4.0.0",
         "ts-jest": "^22.0.0",
         "tslint": "5.5.0",
         "tslint-react": "3.0.0",
@@ -149,7 +154,7 @@
         "webpack-merge": "^4.1.0"
     },
     "engines": {
-        "node": ">=6.0.0"
+        "node": ">=8.0.0"
     },
     "sasslintConfig": "presets/sass-lint/.sass-lint.yml"
 }
