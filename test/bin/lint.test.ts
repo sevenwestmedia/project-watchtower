@@ -1,4 +1,5 @@
 import lint from '../../lib/bin/lint'
+import * as path from 'path'
 import { getConfig } from '../../lib/runtime/config/config'
 
 // Increase test timeout because linting might take a while
@@ -6,7 +7,8 @@ import { createConsoleLogger } from '../../lib/runtime/universal'
 ;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000
 
 const log = createConsoleLogger()
-const buildConfig = getConfig(log, process.cwd())
+const testProjectDir = path.join(process.cwd(), './test/test-project')
+const buildConfig = getConfig(log, testProjectDir)
 
 // When these tests fail, the command which was run will be in the test:verbose logs
 // just run them on the command line to get the actual errors
