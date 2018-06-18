@@ -1,0 +1,10 @@
+*/client/**/*.js
+*/client/**/*.js.map
+*/client/**/*.d.ts
+*/server/**/*.d.ts
+*/server/**/*.js
+*/server/**/*.js.map
+*/common/**/*.d.ts
+*/common/**/*.js
+*/common/**/*.js.map
+*/dist/
