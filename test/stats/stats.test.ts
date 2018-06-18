@@ -11,7 +11,8 @@ import { getConfig, getRuntimeConfigFromBuildConfig } from '../../lib/runtime/co
 import { createConsoleLogger } from '../../lib/runtime/universal'
 
 const log = createConsoleLogger()
-const buildConfig = getConfig(log, process.cwd())
+const testProjectDir = path.join(process.cwd(), './test/test-project')
+const buildConfig = getConfig(log, testProjectDir)
 buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/stats')
 
 const runtimeConfig = getRuntimeConfigFromBuildConfig(buildConfig)
@@ -23,6 +24,7 @@ describe('stats', () => {
     beforeAll(async () => {
         const port = await getTestPort()
         buildConfig.DEV_SERVER_PORT = port
+        process.env.PROJECT_DIR = './test/test-project'
 
         await clean(log, buildConfig)
         await build(log, buildConfig)
@@ -76,7 +78,7 @@ describe('stats', () => {
         await build(log, buildConfig)
         await stats(log, buildConfig, 'verbose')
 
-        const filePath = path.resolve(process.cwd(), 'build-stats.csv')
+        const filePath = path.resolve(testProjectDir, 'build-stats.csv')
         expect(fs.existsSync(filePath)).toBe(true)
     })
 })

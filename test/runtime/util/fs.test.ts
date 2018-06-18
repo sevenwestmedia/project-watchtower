@@ -43,7 +43,7 @@ describe('util/fs', () => {
     it('getCustomConfigFile', () => {
         const buildConfig = getCustomConfigFile<BuildConfigOverride>(
             log,
-            process.cwd(),
+            path.join(process.cwd(), './test/test-project'),
             'config/config',
             {},
         )
