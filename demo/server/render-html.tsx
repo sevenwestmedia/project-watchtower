@@ -1,19 +1,7 @@
-import { HelmetData } from 'react-helmet'
-import * as serialize from 'serialize-javascript'
-import { Assets, RenderMarkup } from '../../lib/runtime/server/ssr'
+import { RenderHtml } from '../../lib/runtime/server/ssr'
+import { AppState } from './start'
 
-export interface RenderHtmlProps {
-    head: HelmetData | undefined
-    renderMarkup: RenderMarkup
-    reduxState: object
-    assets: Assets
-}
-
-// Spread won't work properly without the any
-const serializeOptions: serialize.SerializeJSOptions =
-    process.env.NODE_ENV === 'production' ? {} : { space: 4 }
-
-export const renderHtml = ({ head, renderMarkup, reduxState, assets }: RenderHtmlProps) => {
+export const renderHtml: RenderHtml<AppState> = ({ head, renderMarkup, assets }) => {
     return `<!DOCTYPE html>
 <html lang="en">
     <head>
@@ -29,7 +17,6 @@ export const renderHtml = ({ head, renderMarkup, reduxState, assets }: RenderHtm
     </head>
     <body>
         <div id="root">${renderMarkup.html}</div>
-        <script>window.INITIAL_STATE = ${serialize(reduxState, serializeOptions)}</script>
         <script src="${assets.vendor.js}"></script>
         <script async src="${assets.main.js}"></script>
     </body>

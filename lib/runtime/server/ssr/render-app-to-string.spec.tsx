@@ -3,9 +3,8 @@
  */
 
 import * as React from 'react'
-import * as redux from 'redux'
 import { Route, Switch } from 'react-router-dom'
-import renderToString from './render-app-to-string'
+import { renderAppToString } from './render-app-to-string'
 import { createConsoleLogger, PromiseTracker } from '../../universal'
 
 const Home: React.SFC<{}> = () => <div>Home</div>
@@ -16,13 +15,10 @@ const TestApp: React.SFC<{}> = () => (
 )
 
 it('renders app callback with router', () => {
-    const store = redux.createStore(() => ({}))
-
-    const renderResult = renderToString(
+    const renderResult = renderAppToString(
         '/',
-        store,
         createConsoleLogger(),
-        _ => <TestApp />,
+        () => <TestApp />,
         new PromiseTracker(),
     )
 

@@ -1,18 +1,13 @@
 import * as React from 'react'
-import * as redux from 'redux'
 import { Helmet, HelmetData } from 'react-helmet'
 import { renderToString } from 'react-dom/server'
 import { renderStaticOptimized, GlamorServerResult } from 'glamor/server'
 import { StaticRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
 import { functionTimer, Logger, LogProvider } from '../../universal'
 import { StaticRouterContext } from './router-context-handler'
 import { PromiseTracker } from './full-render'
 
-export type CreateAppElement = (
-    store: redux.Store<any>,
-    promiseTracker: PromiseTracker,
-) => React.ReactElement<any>
+export type CreateAppElement = (promiseTracker: PromiseTracker) => React.ReactElement<any>
 
 export interface RenderMarkup {
     html: string
@@ -26,13 +21,12 @@ export interface RenderPassResult {
     renderMarkup: RenderMarkup
 }
 
-export default (
+export function renderAppToString(
     currentLocation: string,
-    store: redux.Store<any>,
     log: Logger,
     appRender: CreateAppElement,
     promiseTracker: PromiseTracker,
-): RenderPassResult => {
+): RenderPassResult {
     // first create a context for <StaticRouter>, it's where we keep the
     // results of rendering for the second pass if necessary
     const context: StaticRouterContext = {}
@@ -45,13 +39,11 @@ export default (
             () =>
                 renderStaticOptimized(() =>
                     renderToString(
-                        <Provider store={store}>
-                            <LogProvider logger={log}>
-                                <StaticRouter location={currentLocation} context={context}>
-                                    {appRender(store, promiseTracker)}
-                                </StaticRouter>
-                            </LogProvider>
-                        </Provider>,
+                        <LogProvider logger={log}>
+                            <StaticRouter location={currentLocation} context={context}>
+                                {appRender(promiseTracker)}
+                            </StaticRouter>
+                        </LogProvider>,
                     ),
                 ),
             log,

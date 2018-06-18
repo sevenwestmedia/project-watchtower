@@ -12,10 +12,11 @@ export interface ServerRenderResultBase {
     elapsed: string
     head: Helm.HelmetData | undefined
 }
-export interface StatusServerRenderResult<T extends object> extends ServerRenderResultBase {
+export interface StatusServerRenderResult<AdditionalState extends object>
+    extends ServerRenderResultBase {
     type: ServerRenderResultType.Success
     renderedContent: RenderMarkup
-    reduxState: T
+    additionalState: AdditionalState
     statusCode: number
 }
 

@@ -1,5 +1,4 @@
 import { Request, RequestHandler, Express } from 'express'
-import * as redux from 'redux'
 import {
     ServerSideRenderOptions,
     StatusServerRenderResult,
@@ -11,46 +10,47 @@ import {
 import { PromiseCompletionSource, Logger } from '../../universal'
 import { getAssetLocations } from '../../server'
 import { HelmetData } from 'react-helmet'
-import { CreateReduxStore } from '../ssr'
 import { hasLog } from '../middleware/ensure-request-log-middleware'
 import { getRuntimeConfig } from '../../config/config'
 
 export interface RenderContext<AdditionalState = object> {
     completionNotifier: PromiseCompletionSource<{}>
     triggeredLoad: boolean
+    /** This holds the app state which needs to be kept between SSR
+     * passes. It is essentially a state bag, it could include a redux store,
+     * or any other state store which needs to persist between render passes
+     */
     additionalState: AdditionalState
 }
 
-export type RenderApp<ReduxState extends object> = (
+export type RenderApp<AdditionalState extends object = object> = (
     params: {
         log: Logger
-        store: redux.Store<ReduxState>
-        context: RenderContext
+        context: RenderContext<AdditionalState>
         req: Request
     },
 ) => JSX.Element
-export type RenderHtml<ReduxState extends object> = (
+export type RenderHtml<AdditionalState extends object> = (
     params: {
         head: HelmetData | undefined
         renderMarkup: RenderMarkup
-        reduxState: ReduxState
         assets: Assets
-        context: RenderContext
+        context: RenderContext<AdditionalState>
         req: Request
     },
 ) => string
 
-export type ServerSideRenderMiddlewareOptions<ReduxState extends object> = {
+export type ServerSideRenderMiddlewareOptions<AdditionalState extends object> = {
     app: Express & { log: Logger }
     ssrTimeoutMs: number
-    renderApp: RenderApp<ReduxState>
-    renderHtml: RenderHtml<ReduxState>
+    setupRequest: () => AdditionalState
+    renderApp: RenderApp<AdditionalState>
+    renderHtml: RenderHtml<AdditionalState>
     errorLocation: string
-    createReduxStore: CreateReduxStore<ReduxState>
 }
 
-export const createSsrMiddleware = <ReduxState extends object>(
-    options: ServerSideRenderMiddlewareOptions<ReduxState>,
+export const createSsrMiddleware = <AdditionalState extends object>(
+    options: ServerSideRenderMiddlewareOptions<AdditionalState>,
 ): RequestHandler => {
     const runtimeConfig = getRuntimeConfig(options.app.log)
     const assets = getAssetLocations(runtimeConfig)
@@ -60,14 +60,14 @@ export const createSsrMiddleware = <ReduxState extends object>(
             console.error('Skipping SSR middleware due to missing req.log key')
             return next()
         }
-        let renderContext: RenderContext
-        const additionalState: object = {}
+        const appState = options.setupRequest()
+        let renderContext: RenderContext<AdditionalState>
 
-        const ssrOptions: ServerSideRenderOptions<ReduxState> = {
+        const ssrOptions: ServerSideRenderOptions = {
             log: req.log,
             errorLocation: options.errorLocation,
             ssrTimeoutMs: options.ssrTimeoutMs,
-            appRender: (store, promiseTracker) => {
+            appRender: promiseTracker => {
                 // If we have previously rendered, we need to not bother tracking the
                 // previous completion notifier
                 if (renderContext) {
@@ -77,12 +77,11 @@ export const createSsrMiddleware = <ReduxState extends object>(
                 renderContext = {
                     completionNotifier: new PromiseCompletionSource(),
                     triggeredLoad: false,
-                    additionalState,
+                    additionalState: appState,
                 }
 
-                return options.renderApp({ log: req.log, store, context: renderContext, req })
+                return options.renderApp({ log: req.log, context: renderContext, req })
             },
-            createReduxStore: options.createReduxStore,
             events: {
                 renderPerformed: promiseTracker => {
                     // loadAllCompleted will not fire if nothing started loading
@@ -96,13 +95,17 @@ export const createSsrMiddleware = <ReduxState extends object>(
                 },
             },
         }
-        const pageRenderResult = await renderPageContents<ReduxState>(ssrOptions, req)
 
-        const createPageMarkup = (result: StatusServerRenderResult<ReduxState>) =>
+        const pageRenderResult = await renderPageContents<AdditionalState>(
+            appState,
+            ssrOptions,
+            req,
+        )
+
+        const createPageMarkup = (result: StatusServerRenderResult<AdditionalState>) =>
             options.renderHtml({
                 head: result.head,
                 renderMarkup: result.renderedContent,
-                reduxState: result.reduxState,
                 assets,
                 context: renderContext,
                 req,
