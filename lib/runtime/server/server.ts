@@ -105,7 +105,7 @@ export const createServer: CreateServerType = options => {
 
     // if the server does not use server-side rendering, just respond with index.html
     // for each request not handled in other middlewares
-    app.get('*', getDefaultHtmlMiddleware(options.log, config))
+    app.get('*', getDefaultHtmlMiddleware(options.log, config, true))
 
     if (!startListening) {
         return app

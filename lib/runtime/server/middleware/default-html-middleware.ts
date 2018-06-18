@@ -17,6 +17,13 @@ export const getDefaultHtmlMiddleware = (
     // on production we just serve the generated index.html
     if (isProduction) {
         const indexPath = path.resolve(runtimeConfig.BASE, 'index.html')
+        if (!fs.existsSync(indexPath)) {
+            log.error('Cannot find index.html file to serve')
+            const noIndexFileMiddleware: express.RequestHandler = (_req, res) => {
+                res.status(404)
+            }
+            return noIndexFileMiddleware
+        }
         const productionMiddleware: express.RequestHandler = (_req, res) => {
             res.status(200).sendFile(indexPath)
         }
@@ -32,7 +39,9 @@ export const getDefaultHtmlMiddleware = (
             indexContent = fs.readFileSync(indexPath, 'utf8')
         } catch (e) {
             if (logNotFound) {
-                log.error({ err: e }, 'Reading index.html failed!')
+                log.warn(
+                    `Watchtower default middleware requires a html template at ${runtimeConfig.SERVER_PUBLIC_DIR}/index.html to add the JS/CSS assets to and serve`,
+                )
             }
             return expressNoop
         }
