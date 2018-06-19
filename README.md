@@ -22,8 +22,8 @@ Create-react-app is great, it is what gave us the idea for Project Watchtower, b
 * Build metrics
 * Server middlewares and helpers
     * Server side rendering support
-* Client page lifecycle events
-* Lazy loaded bundle splitting
+* Hot reloading support
+    * Including server hot reload support!
 * Standalone server for client-only applications
 
 Detailed documentation available in the [docs](./docs) folder:

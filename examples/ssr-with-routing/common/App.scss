@@ -1,0 +1,17 @@
+body {
+    font-family: sans-serif;
+}
+
+nav {
+    border-bottom: 1px solid black;
+    padding-bottom: 2px;
+    margin-bottom: 10px;
+}
+
+nav a {
+    margin: 5px;
+}
+
+nav a .active {
+    font-weight: bold;
+}
