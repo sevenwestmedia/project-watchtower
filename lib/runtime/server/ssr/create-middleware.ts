@@ -43,7 +43,7 @@ export type RenderHtml<AdditionalState extends object> = (
 export type ServerSideRenderMiddlewareOptions<AdditionalState extends object> = {
     app: Express & { log: Logger }
     ssrTimeoutMs: number
-    setupRequest: () => AdditionalState
+    setupRequest: (req: Request) => Promise<AdditionalState>
     renderApp: RenderApp<AdditionalState>
     renderHtml: RenderHtml<AdditionalState>
     errorLocation: string
@@ -60,7 +60,7 @@ export const createSsrMiddleware = <AdditionalState extends object>(
             console.error('Skipping SSR middleware due to missing req.log key')
             return next()
         }
-        const appState = options.setupRequest()
+        const appState = await options.setupRequest(req)
         let renderContext: RenderContext<AdditionalState>
 
         const ssrOptions: ServerSideRenderOptions = {
