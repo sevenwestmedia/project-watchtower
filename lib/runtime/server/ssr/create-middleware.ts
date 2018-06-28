@@ -13,44 +13,44 @@ import { HelmetData } from 'react-helmet'
 import { hasLog } from '../middleware/ensure-request-log-middleware'
 import { getRuntimeConfig } from '../../config/config'
 
-export interface RenderContext<AdditionalState = object> {
+export interface RenderContext<SSRRequestProps = object> {
     completionNotifier: PromiseCompletionSource<{}>
     triggeredLoad: boolean
     /** This holds the app state which needs to be kept between SSR
      * passes. It is essentially a state bag, it could include a redux store,
      * or any other state store which needs to persist between render passes
      */
-    additionalState: AdditionalState
+    ssrRequestProps: SSRRequestProps
 }
 
-export type RenderApp<AdditionalState extends object = object> = (
+export type RenderApp<SSRRequestProps extends object> = (
     params: {
         log: Logger
-        context: RenderContext<AdditionalState>
+        context: RenderContext<SSRRequestProps>
         req: Request
     },
 ) => JSX.Element
-export type RenderHtml<AdditionalState extends object> = (
+export type RenderHtml<SSRRequestProps extends object> = (
     params: {
         head: HelmetData | undefined
         renderMarkup: RenderMarkup
         assets: Assets
-        context: RenderContext<AdditionalState>
+        context: RenderContext<SSRRequestProps>
         req: Request
     },
 ) => string
 
-export type ServerSideRenderMiddlewareOptions<AdditionalState extends object> = {
+export type ServerSideRenderMiddlewareOptions<SSRRequestProps extends object> = {
     app: Express & { log: Logger }
     ssrTimeoutMs: number
-    setupRequest: (req: Request) => Promise<AdditionalState>
-    renderApp: RenderApp<AdditionalState>
-    renderHtml: RenderHtml<AdditionalState>
+    setupRequest: (req: Request) => Promise<SSRRequestProps>
+    renderApp: RenderApp<SSRRequestProps>
+    renderHtml: RenderHtml<SSRRequestProps>
     errorLocation: string
 }
 
-export const createSsrMiddleware = <AdditionalState extends object>(
-    options: ServerSideRenderMiddlewareOptions<AdditionalState>,
+export const createSsrMiddleware = <SSRRequestProps extends object>(
+    options: ServerSideRenderMiddlewareOptions<SSRRequestProps>,
 ): RequestHandler => {
     const runtimeConfig = getRuntimeConfig(options.app.log)
     const assets = getAssetLocations(runtimeConfig)
@@ -61,7 +61,7 @@ export const createSsrMiddleware = <AdditionalState extends object>(
             return next()
         }
         const appState = await options.setupRequest(req)
-        let renderContext: RenderContext<AdditionalState>
+        let renderContext: RenderContext<SSRRequestProps>
 
         const ssrOptions: ServerSideRenderOptions = {
             log: req.log,
@@ -77,7 +77,7 @@ export const createSsrMiddleware = <AdditionalState extends object>(
                 renderContext = {
                     completionNotifier: new PromiseCompletionSource(),
                     triggeredLoad: false,
-                    additionalState: appState,
+                    ssrRequestProps: appState,
                 }
 
                 return options.renderApp({ log: req.log, context: renderContext, req })
@@ -96,13 +96,13 @@ export const createSsrMiddleware = <AdditionalState extends object>(
             },
         }
 
-        const pageRenderResult = await renderPageContents<AdditionalState>(
+        const pageRenderResult = await renderPageContents<SSRRequestProps>(
             appState,
             ssrOptions,
             req,
         )
 
-        const createPageMarkup = (result: StatusServerRenderResult<AdditionalState>) =>
+        const createPageMarkup = (result: StatusServerRenderResult<SSRRequestProps>) =>
             options.renderHtml({
                 head: result.head,
                 renderMarkup: result.renderedContent,

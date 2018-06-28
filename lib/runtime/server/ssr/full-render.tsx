@@ -30,11 +30,11 @@ export interface Assets {
     }
 }
 
-export async function renderPageContents<AdditionalState extends object>(
-    additionalState: AdditionalState,
+export async function renderPageContents<SSRRequestProps extends object>(
+    ssrRequestProps: SSRRequestProps,
     options: ServerSideRenderOptions,
     req: Request,
-): Promise<ServerRenderResults.ServerRenderResult<AdditionalState>> {
+): Promise<ServerRenderResults.ServerRenderResult<SSRRequestProps>> {
     let renderLocation = req.url
     const startTime = process.hrtime()
     const promiseTracker = new PromiseTracker()
@@ -42,12 +42,12 @@ export async function renderPageContents<AdditionalState extends object>(
     const performSinglePassLocationRender = (location: string) =>
         renderAppToString(location, options.log, options.appRender, promiseTracker)
 
-    const render = (location: string): ServerRenderResults.ServerRenderResult<AdditionalState> => {
+    const render = (location: string): ServerRenderResults.ServerRenderResult<SSRRequestProps> => {
         // We need to capture the store before we render
         // as any changes caused by the render will not be
         // included in the rendered content
-        const storeStateAtRenderTime: AdditionalState = {
-            ...(additionalState as object),
+        const storeStateAtRenderTime: SSRRequestProps = {
+            ...(ssrRequestProps as object),
         } as any
 
         try {
@@ -68,7 +68,7 @@ export async function renderPageContents<AdditionalState extends object>(
 
             return createResponse({
                 renderResult: errorRender,
-                additionalState,
+                ssrRequestProps,
                 startTime,
                 statusCode: 500,
             })

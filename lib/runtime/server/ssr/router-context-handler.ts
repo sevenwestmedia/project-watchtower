@@ -7,34 +7,34 @@ export interface StaticRouterContext {
     statusCode?: number
 }
 
-export interface SuccessProps<AdditionalState extends object> {
+export interface SuccessProps<SSRRequestProps extends object> {
     renderResult: RenderPassResult
-    additionalState: AdditionalState
+    ssrRequestProps: SSRRequestProps
     startTime: [number, number]
     statusCode: number
 }
 
-export const createResponse = <AdditionalState extends object>({
+export const createResponse = <SSRRequestProps extends object>({
     renderResult,
-    additionalState,
+    ssrRequestProps,
     startTime,
     statusCode,
-}: SuccessProps<AdditionalState>): ServerRenderResult<AdditionalState> => {
+}: SuccessProps<SSRRequestProps>): ServerRenderResult<SSRRequestProps> => {
     return {
         type: ServerRenderResultType.Success,
         elapsed: elapsed(startTime),
         head: renderResult.head,
         renderedContent: renderResult.renderMarkup,
-        additionalState,
+        ssrRequestProps,
         statusCode,
     }
 }
 
-export const routerContextHandler = <AdditionalState extends object>(
+export const routerContextHandler = <SSRRequestProps extends object>(
     renderResult: RenderPassResult,
     startTime: [number, number],
-    additionalState: AdditionalState,
-): ServerRenderResult<AdditionalState> => {
+    ssrRequestProps: SSRRequestProps,
+): ServerRenderResult<SSRRequestProps> => {
     if (renderResult.context.url) {
         return {
             type: ServerRenderResultType.Redirect,
@@ -49,7 +49,7 @@ export const routerContextHandler = <AdditionalState extends object>(
 
     return createResponse({
         renderResult,
-        additionalState,
+        ssrRequestProps,
         startTime,
         statusCode,
     })
