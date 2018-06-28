@@ -1,15 +1,14 @@
-import * as redux from 'redux'
-import thunk from 'redux-thunk'
 import { Request } from 'express'
 
 import { PromiseTracker, elapsed, Logger } from '../../universal'
 import resolveAllData from './helpers/recursive-task-resolver'
 import { createResponse, routerContextHandler } from './router-context-handler'
 import * as ServerRenderResults from './server-render-results'
-import renderToString, { CreateAppElement } from './render-app-to-string'
+import { renderAppToString, CreateAppElement } from './render-app-to-string'
 import { WatchtowerEvents } from './render-events'
 
 export { PromiseTracker }
+
 export interface RenderOptions {
     log: Logger
     errorLocation: string
@@ -17,17 +16,10 @@ export interface RenderOptions {
     events?: WatchtowerEvents
 }
 
-export type CreateReduxStore<ReduxState extends object> = (
-    middlewares: redux.Middleware[],
-    req: Request,
-) => Promise<redux.Store<ReduxState>>
-
-export interface ServerSideRenderOptions<ReduxState extends object> extends RenderOptions {
+export interface ServerSideRenderOptions extends RenderOptions {
     ssrTimeoutMs: number
-    createReduxStore: CreateReduxStore<ReduxState>
 }
 
-// tslint:disable:trailing-comma
 export interface Assets {
     vendor: {
         js: string
@@ -38,40 +30,26 @@ export interface Assets {
     }
 }
 
-export async function renderPageContents<T extends object>(
-    options: ServerSideRenderOptions<T>,
+export async function renderPageContents<SSRRequestProps extends object>(
+    ssrRequestProps: SSRRequestProps,
+    options: ServerSideRenderOptions,
     req: Request,
-): Promise<ServerRenderResults.ServerRenderResult<T>> {
+): Promise<ServerRenderResults.ServerRenderResult<SSRRequestProps>> {
     let renderLocation = req.url
-    const START_FAST_MODE = process.env.START_FAST_MODE === 'true'
     const startTime = process.hrtime()
     const promiseTracker = new PromiseTracker()
-    let store: redux.Store<T>
-    try {
-        const promiseTrackerMiddleware: redux.Middleware = promiseTracker.middleware()
-        const thunkMiddleware: redux.Middleware = thunk.withExtraArgument({ log: options.log })
-        store = await options.createReduxStore([promiseTrackerMiddleware, thunkMiddleware], req)
-    } catch (err) {
-        const failure: ServerRenderResults.FailedRenderResult = {
-            type: ServerRenderResults.ServerRenderResultType.Failure,
-            errorMessage: 'Failed to create redux store',
-            elapsed: elapsed(startTime),
-            head: undefined,
-        }
-
-        options.log.error({ err }, failure.errorMessage)
-
-        return failure
-    }
 
     const performSinglePassLocationRender = (location: string) =>
-        renderToString(location, store, options.log, options.appRender, promiseTracker)
+        renderAppToString(location, options.log, options.appRender, promiseTracker)
 
-    const render = (location: string): ServerRenderResults.ServerRenderResult<T> => {
+    const render = (location: string): ServerRenderResults.ServerRenderResult<SSRRequestProps> => {
         // We need to capture the store before we render
         // as any changes caused by the render will not be
         // included in the rendered content
-        const storeStateAtRenderTime = store.getState()
+        const storeStateAtRenderTime: SSRRequestProps = {
+            ...(ssrRequestProps as object),
+        } as any
+
         try {
             const renderResult = performSinglePassLocationRender(location)
 
@@ -90,7 +68,7 @@ export async function renderPageContents<T extends object>(
 
             return createResponse({
                 renderResult: errorRender,
-                reduxState: storeStateAtRenderTime,
+                ssrRequestProps,
                 startTime,
                 statusCode: 500,
             })
@@ -104,23 +82,6 @@ export async function renderPageContents<T extends object>(
                 }
             }
         }
-    }
-
-    if (START_FAST_MODE) {
-        const successResult: ServerRenderResults.StatusServerRenderResult<T> = {
-            type: ServerRenderResults.ServerRenderResultType.Success,
-            renderedContent: {
-                html: '',
-                css: '',
-                ids: [],
-            },
-            reduxState: store.getState(),
-            elapsed: elapsed(startTime),
-            head: undefined,
-            statusCode: 200,
-        }
-
-        return successResult
     }
 
     try {
@@ -148,13 +109,6 @@ export async function renderPageContents<T extends object>(
             10,
             options.ssrTimeoutMs,
         )
-
-        if (dataResolved.type === ServerRenderResults.ServerRenderResultType.Success) {
-            if (dataResolved.reduxState !== store.getState()) {
-                options.log.debug('Store has changed since initial SSR, doing another pass')
-                return render(renderLocation)
-            }
-        }
 
         return dataResolved
     } catch (err) {

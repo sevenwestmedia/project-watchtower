@@ -5,7 +5,7 @@ A unified basis for web applications.
 Project Watchtower is a TypeScript first, opinionated foundation for creating universal React applications. If you are not using TypeScript then Watchtower is probably not for you. 
 
 ## Why
-Project Watchtower was built to allow our team at Seven West Media to build multiple websites built using React, Redux, WebPack with server side rendering easily. Over time the drift of our configuration became hard to keep in sync, the JavaScript community moves fast and we want to keep up.
+Project Watchtower was built to allow our team at Seven West Media to build multiple websites built using React and WebPack with server side rendering easily. Over time the drift of our configuration became hard to keep in sync, the JavaScript community moves fast and we want to keep up.
 
 We have also put a lot of effort into solving problems like server side rendering in a reusable way and wanted all of our products to benefit easily from improvements we make over time. We also use TypeScript, and many of the great community options are Babel/Flow first.
 

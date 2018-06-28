@@ -1,5 +1,3 @@
-import * as redux from 'redux'
-
 export type TrackedPromise = PromiseLike<any>
 
 export class PromiseTracker {
@@ -17,8 +15,8 @@ export class PromiseTracker {
         this.promises.splice(index, 1)
     }
 
-    middleware(): redux.Middleware {
-        return () => next => (action: any) => {
+    middleware() {
+        return () => (next: (action: any) => any) => (action: any) => {
             const result = next(action)
             // Promise.resolve must return the same promise if the arg is a promise
             // http://www.ecma-international.org/ecma-262/6.0/#sec-promise.resolve

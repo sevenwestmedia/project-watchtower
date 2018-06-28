@@ -7,34 +7,34 @@ export interface StaticRouterContext {
     statusCode?: number
 }
 
-export interface SuccessProps<T extends object> {
-    renderResult: RenderPassResult,
-    reduxState: T,
-    startTime: [number, number],
+export interface SuccessProps<SSRRequestProps extends object> {
+    renderResult: RenderPassResult
+    ssrRequestProps: SSRRequestProps
+    startTime: [number, number]
     statusCode: number
 }
 
-export const createResponse = <T extends object>({
+export const createResponse = <SSRRequestProps extends object>({
     renderResult,
-    reduxState,
+    ssrRequestProps,
     startTime,
     statusCode,
-}: SuccessProps<T>): ServerRenderResult<T> => {
+}: SuccessProps<SSRRequestProps>): ServerRenderResult<SSRRequestProps> => {
     return {
         type: ServerRenderResultType.Success,
         elapsed: elapsed(startTime),
         head: renderResult.head,
         renderedContent: renderResult.renderMarkup,
-        reduxState,
+        ssrRequestProps,
         statusCode,
     }
 }
 
-export const routerContextHandler = <T extends object>(
+export const routerContextHandler = <SSRRequestProps extends object>(
     renderResult: RenderPassResult,
     startTime: [number, number],
-    reduxState: T,
-): ServerRenderResult<T> => {
+    ssrRequestProps: SSRRequestProps,
+): ServerRenderResult<SSRRequestProps> => {
     if (renderResult.context.url) {
         return {
             type: ServerRenderResultType.Redirect,
@@ -45,13 +45,11 @@ export const routerContextHandler = <T extends object>(
         }
     }
 
-    const statusCode = renderResult.context.statusCode
-        ? renderResult.context.statusCode
-        : 200
+    const statusCode = renderResult.context.statusCode ? renderResult.context.statusCode : 200
 
     return createResponse({
         renderResult,
-        reduxState,
+        ssrRequestProps,
         startTime,
         statusCode,
     })
