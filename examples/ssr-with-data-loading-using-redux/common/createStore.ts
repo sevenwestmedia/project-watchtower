@@ -5,8 +5,8 @@ import rootReducer, { AppState } from './App.redux'
 
 export default (state?: AppState, middlewares: Middleware[] = []) => {
     if (state) {
-        return createStore(rootReducer, state, applyMiddleware(thunk, ...middlewares))
+        return createStore(rootReducer, state, applyMiddleware(...middlewares, thunk))
     }
 
-    return createStore(rootReducer, applyMiddleware(thunk, ...middlewares))
+    return createStore(rootReducer, applyMiddleware(...middlewares, thunk))
 }

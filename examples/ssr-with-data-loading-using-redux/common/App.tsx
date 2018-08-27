@@ -1,13 +1,19 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { AppState } from './App.redux'
+import { AppState, loadData, Actions } from './App.redux'
 
 import './App.scss'
+import { ThunkDispatch } from 'redux-thunk'
 
-export type Props = AppState
+export type Props = AppState & { dispatch: ThunkDispatch<AppState, null, Actions> }
 
 export const App = connect((state: AppState) => state)(
     class extends React.Component<Props> {
+        componentWillMount() {
+            if (!this.props.myData) {
+                this.props.dispatch(loadData())
+            }
+        }
         render() {
             if (this.props.loading) {
                 return <h1>Loading...</h1>

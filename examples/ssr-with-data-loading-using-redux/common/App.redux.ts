@@ -1,4 +1,4 @@
-import { Reducer, Action } from 'redux'
+import { Reducer, Action, ActionCreator } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 
 export interface AppState {
@@ -17,14 +17,16 @@ export type Actions = LoadDataStart | LoadDataComplete | LoadDataFailed
 
 const defaultState: AppState = { loading: false, failed: false }
 
-export const loadData: ThunkAction<any, AppState, any, Actions> = async dispatch => {
+export const loadData: ActionCreator<
+    ThunkAction<void, AppState, null, Actions>
+> = () => async dispatch => {
     dispatch({
         type: 'load-data-start',
     })
 
     // Fake loading of data
     const data = await new Promise<string>(resolve =>
-        setTimeout(() => resolve('Loaded data!'), 5000),
+        setTimeout(() => resolve('Loaded data!'), 500),
     )
 
     dispatch({
