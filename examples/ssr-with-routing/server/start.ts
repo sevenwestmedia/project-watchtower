@@ -15,7 +15,7 @@ createServer({
             renderApp,
             renderHtml,
             errorLocation: '/error',
-            setupRequest: () => ({}),
+            setupRequest: async () => ({}),
         })
 
         app.get('*', ssrMiddleware)

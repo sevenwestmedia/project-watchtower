@@ -7,6 +7,6 @@ The config is specified by an environmental variable on the server, and that con
 2) In server/start.ts, setupRequest is used to create the request state
     - This is because in a real scenario, config could change on each request, or more likely;
     - The server side render can load data, which will be put onto this state bag
-3) In `renderHtml.tsx` the following is interpolated into the rendered html string: `${transferState('STATE', context.additionalState)}`
+3) In `renderHtml.tsx` the following is interpolated into the rendered html string: `${transferState('STATE', context.ssrRequestProps)}`
 4) The client can now retreive this data by using `const state = getTransferredState<AppState>('STATE')`
 5) The client side render can use this state

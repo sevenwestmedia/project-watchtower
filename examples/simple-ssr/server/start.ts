@@ -17,10 +17,10 @@ createServer({
             ssrTimeoutMs: 1000,
             // You can access the current requests additional state through
             // the context key on the renderApp options object
-            renderApp: ({ context }) => renderApp(context.additionalState),
+            renderApp: ({ context }) => renderApp(context.ssrRequestProps),
             renderHtml,
             errorLocation: '/error',
-            setupRequest: () => ({
+            setupRequest: async () => ({
                 // We can setup our initial app state in setupRequest
                 // It can also be updated during each SSR pass
                 config: { greeting: process.env.GREETING || 'Ola' },

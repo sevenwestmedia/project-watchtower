@@ -14,7 +14,7 @@ export const renderHtml: RenderHtml<AppState> = ({ head, renderMarkup, assets, c
         ${head && head.script ? head.script.toString() : ''}
         ${head && head.meta ? head.meta.toString() : ''}
         ${head && head.link ? head.link.toString() : ''}
-        ${transferState('STATE', context.additionalState)}
+        ${transferState('STATE', context.ssrRequestProps)}
     </head>
     <body>
         <div id="root">${renderMarkup.html}</div>
