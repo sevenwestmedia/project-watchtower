@@ -7,12 +7,13 @@
         "registry": "https://nexus.swmdigital.io/repository/js-private"
     },
     "scripts": {
+        "install-example-dependencies": "find ./examples/ -maxdepth 1 -type d \\( ! -name examples \\) -exec bash -c \"cd '{}' && yarn\" \\;",
         "clean": "npm run clean:lighthouse && rimraf dist-es",
         "lint": "tslint 'lib/**/*.ts' --type-check --project ./tsconfig.json -e '**/*.d.ts'",
         "lint:prettier": "prettier --single-quote=true --tab-width=4 --trailing-comma=all --use-tabs=false --print-width=100 --no-semi --write \"./lib/**/*.ts\" \"./lib/**/*.tsx\" \"./server/**/*.ts\" \"./server/**/*.tsx\"",
         "build": "tsc -p ./tsconfig-cjs.json && tsc -p ./tsconfig-es2015.json",
         "compile": "tsc",
-        "build:complete": "npm run clean && npm run lint && npm run build && npm run test -- --coverage --verbose",
+        "build:complete": "npm run install-example-dependencies && npm run clean && npm run lint && npm run build && npm run test -- --coverage --verbose",
         "pretest:base": "npm run clean:lighthouse",
         "test:base": "jest --config jest.json",
         "test": "npm run test:base -- --silent",
