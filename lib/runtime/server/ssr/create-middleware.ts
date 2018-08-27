@@ -70,12 +70,6 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
             errorLocation: options.errorLocation,
             ssrTimeoutMs: options.ssrTimeoutMs,
             appRender: () => {
-                // If we have previously rendered, we need to not bother tracking the
-                // previous completion notifier
-                if (renderContext) {
-                    promiseTracker.untrack(renderContext.completionNotifier.promise)
-                }
-
                 renderContext = {
                     completionNotifier: new PromiseCompletionSource(),
                     triggeredLoad: false,
