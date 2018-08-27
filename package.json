@@ -31,7 +31,7 @@
         "build:client-only-example": "yarn pwt build -p examples/client-only",
         "watch:client-only-example": "yarn pwt watch -p examples/client-only",
         "stats:client-only-example": "yarn pwt stats verbose -p examples/client-only",
-        "expore-bundle:client-only-example": "yarn pwt explore-bundle -p examples/client-only",
+        "explore-bundle:client-only-example": "yarn pwt explore-bundle -p examples/client-only",
         "~~~ with-server ~~~": "",
         "prebuild:with-server-example": "npm run clean:lighthouse && yarn build",
         "prewatch:with-server-example": "npm run clean:lighthouse && yarn build",
@@ -39,7 +39,7 @@
         "build:with-server-example": "yarn pwt build -p examples/with-server",
         "watch:with-server-example": "yarn pwt watch server -p examples/with-server",
         "stats:with-server-example": "yarn pwt stats verbose -p examples/with-server",
-        "expore-bundle:with-server-example": "yarn pwt explore-bundle -p examples/with-server",
+        "explore-bundle:with-server-example": "yarn pwt explore-bundle -p examples/with-server",
         "~~~ simple-ssr ~~~": "",
         "prebuild:simple-ssr-example": "npm run clean:lighthouse && yarn build",
         "prewatch:simple-ssr-example": "npm run clean:lighthouse && yarn build",
@@ -47,7 +47,7 @@
         "build:simple-ssr-example": "yarn pwt build -p examples/simple-ssr",
         "watch:simple-ssr-example": "yarn pwt watch server -p examples/simple-ssr",
         "stats:simple-ssr-example": "yarn pwt stats verbose -p examples/simple-ssr",
-        "expore-bundle:simple-ssr-example": "yarn pwt explore-bundle -p examples/simple-ssr",
+        "explore-bundle:simple-ssr-example": "yarn pwt explore-bundle -p examples/simple-ssr",
         "~~~ ssr-with-routing ~~~": "",
         "prebuild:ssr-with-routing-example": "npm run clean:lighthouse && yarn build",
         "prewatch:ssr-with-routing-example": "npm run clean:lighthouse && yarn build",
@@ -55,7 +55,7 @@
         "build:ssr-with-routing-example": "yarn pwt build -p examples/ssr-with-routing",
         "watch:ssr-with-routing-example": "yarn pwt watch server -p examples/ssr-with-routing",
         "stats:ssr-with-routing-example": "yarn pwt stats verbose -p examples/ssr-with-routing",
-        "expore-bundle:ssr-with-routing-example": "yarn pwt explore-bundle -p examples/ssr-with-routing"
+        "explore-bundle:ssr-with-routing-example": "yarn pwt explore-bundle -p examples/ssr-with-routing"
     },
     "main": "lib/index.js",
     "bin": {
