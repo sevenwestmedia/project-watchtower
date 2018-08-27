@@ -31,6 +31,10 @@ export class PromiseTracker {
         return this.promises.length > 0
     }
 
+    reset() {
+        this.promises = []
+    }
+
     waitForCompletion() {
         const all = Promise.all([...this.promises])
             // Use setTimeout to put the resolution of this

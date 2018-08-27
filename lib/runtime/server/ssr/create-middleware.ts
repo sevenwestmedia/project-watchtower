@@ -12,6 +12,7 @@ import { getAssetLocations } from '../../server'
 import { HelmetData } from 'react-helmet'
 import { hasLog } from '../middleware/ensure-request-log-middleware'
 import { getRuntimeConfig } from '../../config/config'
+import { PromiseTracker } from '../../util/promise-tracker'
 
 export interface RenderContext<SSRRequestProps = object> {
     completionNotifier: PromiseCompletionSource<{}>
@@ -43,7 +44,7 @@ export type RenderHtml<SSRRequestProps extends object> = (
 export type ServerSideRenderMiddlewareOptions<SSRRequestProps extends object> = {
     app: Express & { log: Logger }
     ssrTimeoutMs: number
-    setupRequest: (req: Request) => Promise<SSRRequestProps>
+    setupRequest: (req: Request, promiseTracker: PromiseTracker) => Promise<SSRRequestProps>
     renderApp: RenderApp<SSRRequestProps>
     renderHtml: RenderHtml<SSRRequestProps>
     errorLocation: string
@@ -60,14 +61,15 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
             console.error('Skipping SSR middleware due to missing req.log key')
             return next()
         }
-        const appState = await options.setupRequest(req)
+        const promiseTracker = new PromiseTracker()
+        const appState = await options.setupRequest(req, promiseTracker)
         let renderContext: RenderContext<SSRRequestProps>
 
         const ssrOptions: ServerSideRenderOptions = {
             log: req.log,
             errorLocation: options.errorLocation,
             ssrTimeoutMs: options.ssrTimeoutMs,
-            appRender: promiseTracker => {
+            appRender: () => {
                 // If we have previously rendered, we need to not bother tracking the
                 // previous completion notifier
                 if (renderContext) {
@@ -83,7 +85,7 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
                 return options.renderApp({ log: req.log, context: renderContext, req })
             },
             events: {
-                renderPerformed: promiseTracker => {
+                renderPerformed: () => {
                     // loadAllCompleted will not fire if nothing started loading
                     // this is needed to not hang the return
                     if (
@@ -100,6 +102,7 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
             appState,
             ssrOptions,
             req,
+            promiseTracker,
         )
 
         const createPageMarkup = (result: StatusServerRenderResult<SSRRequestProps>) =>

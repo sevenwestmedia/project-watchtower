@@ -34,10 +34,12 @@ export async function renderPageContents<SSRRequestProps extends object>(
     ssrRequestProps: SSRRequestProps,
     options: ServerSideRenderOptions,
     req: Request,
+    promiseTracker: PromiseTracker,
 ): Promise<ServerRenderResults.ServerRenderResult<SSRRequestProps>> {
     let renderLocation = req.url
     const startTime = process.hrtime()
-    const promiseTracker = new PromiseTracker()
+    // Unsure we are not tracking events from previous render pass
+    promiseTracker.reset()
 
     const performSinglePassLocationRender = (location: string) =>
         renderAppToString(location, options.log, options.appRender, promiseTracker)
