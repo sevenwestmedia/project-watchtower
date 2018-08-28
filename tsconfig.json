@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "noEmit": true,
         "inlineSourceMap": false,
         "removeComments": false,
         "sourceMap": true,
@@ -26,6 +27,5 @@
         "inlineSources": false,
         "declaration": true,
         "typeRoots": ["node_modules/@types", "@types"]
-    },
-    "include": ["lib"]
+    }
 }

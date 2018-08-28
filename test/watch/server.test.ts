@@ -7,7 +7,8 @@ import { createConsoleLogger } from '../../lib/runtime/universal'
 import { waitForConnection, findFreePort } from '../../lib/runtime/util/network'
 
 const log = createConsoleLogger()
-const buildConfig = getConfig(log, process.cwd())
+const testProjectDir = path.join(process.cwd(), './test/test-project')
+const buildConfig = getConfig(log, testProjectDir)
 buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/server')
 
 // Increase test timeout because builds might take a while

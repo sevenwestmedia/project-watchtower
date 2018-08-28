@@ -13,13 +13,14 @@ const serverBaseConfig = (options: { buildConfig: BuildConfig }): webpack.Config
     const { BASE, PUBLIC_PATH, SERVER_ENTRY, OUTPUT } = options.buildConfig
 
     const baseDirNodeModules = path.resolve(BASE, 'node_modules')
-    // Try <base>/node_modules, if not present assume they are at
-    // <cwd>/node_modules
-    const nodeModules = fs.readdirSync(
-        fs.existsSync(baseDirNodeModules)
-            ? baseDirNodeModules
-            : path.resolve(process.cwd(), 'node_modules'),
-    )
+    const nodeModules: string[] = []
+    if (fs.existsSync(baseDirNodeModules)) {
+        nodeModules.push(...fs.readdirSync(baseDirNodeModules))
+    }
+    const cwdNodeModules = path.resolve(process.cwd(), 'node_modules')
+    if (fs.existsSync(cwdNodeModules)) {
+        nodeModules.push(...fs.readdirSync(cwdNodeModules))
+    }
 
     return {
         target: 'node',

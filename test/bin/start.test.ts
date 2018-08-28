@@ -11,7 +11,8 @@ import { createConsoleLogger } from '../../lib/runtime/universal'
 ;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000
 
 const log = createConsoleLogger()
-const buildConfig = getConfig(log, process.cwd())
+const testProjectDir = path.join(process.cwd(), './test/test-project')
+const buildConfig = getConfig(log, testProjectDir)
 
 buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/binstart')
 

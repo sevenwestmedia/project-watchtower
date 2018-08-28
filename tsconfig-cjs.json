@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "inlineSourceMap": false,
+        "removeComments": false,
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "target": "es5",
+        "strict": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "jsx": "react",
+        "importHelpers": true,
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "lib": [
+            "dom",
+            "es5",
+            "es2015.promise",
+            "es2015.iterable",
+            "es2015.symbol",
+            "es2015.symbol.wellknown"
+        ],
+        "inlineSources": false,
+        "declaration": true,
+        "typeRoots": ["node_modules/@types", "@types"]
+    },
+    "include": ["lib"]
+}

@@ -1,4 +1,5 @@
 import watch from '../../lib/bin/watch'
+import * as path from 'path'
 import { waitForConnection } from '../../lib/runtime/util/network'
 import { getTestPort } from '../test-helpers'
 import { getConfig } from '../../lib/runtime/config/config'
@@ -7,14 +8,18 @@ import { getConfig } from '../../lib/runtime/config/config'
 import { createConsoleLogger } from '../../lib/runtime/universal'
 ;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000
 
+const testProjectDir = path.join(process.cwd(), './test/test-project')
 const log = createConsoleLogger()
-const buildConfig = getConfig(log, process.cwd())
+const buildConfig = getConfig(log, testProjectDir)
 
 describe('bin/watch', () => {
     it('will watch', async () => {
         const port = await getTestPort()
         buildConfig.DEV_SERVER_PORT = port
-        const childProcess: any = await watch(log, buildConfig, { NODE_ENV: 'production' })
+        const childProcess: any = await watch(log, buildConfig, {
+            NODE_ENV: 'production',
+            PROJECT_DIR: testProjectDir,
+        })
         await waitForConnection(port)
         childProcess.kill()
     })
@@ -26,7 +31,10 @@ describe('bin/watch', () => {
         const childProcess: any = await watch(
             log,
             buildConfig,
-            { NODE_ENV: 'production' },
+            {
+                NODE_ENV: 'production',
+                PROJECT_DIR: testProjectDir,
+            },
             'client',
         )
         await waitForConnection(port)

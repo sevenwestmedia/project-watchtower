@@ -43,17 +43,17 @@ describe('util/fs', () => {
     it('getCustomConfigFile', () => {
         const buildConfig = getCustomConfigFile<BuildConfigOverride>(
             log,
-            process.cwd(),
+            path.resolve(__dirname, '../../test-project'),
             'config/config',
             {},
         )
         expect(buildConfig).toEqual({
-            LINT_EXCLUDE: ['demo/**', 'client/**', 'server/**', 'test/**'],
+            LINT_EXCLUDE: [],
         })
 
         const nonExistentConfig = getCustomConfigFile<BuildConfigOverride>(
             log,
-            process.cwd(),
+            path.join(__dirname, '../../test/test-project'),
             'config/foobar',
             {},
         )
