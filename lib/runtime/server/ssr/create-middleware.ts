@@ -32,14 +32,16 @@ export type RenderApp<SSRRequestProps extends object> = (
         req: Request
     },
 ) => JSX.Element
-export type RenderHtmlParams<SSRRequestProps extends object> = (
-    params: {
-        head: HelmetData | undefined
-        renderMarkup: RenderMarkup
+
+export type RenderHtmlParams<SSRRequestProps extends object> = {
+    head: HelmetData | undefined
+    renderMarkup: RenderMarkup
         pageTags: PageTags
-        context: RenderContext<SSRRequestProps>
-        req: Request
-    },
+    context: RenderContext<SSRRequestProps>
+    req: Request
+}
+export type RenderHtml<SSRRequestProps extends object> = (
+    params: RenderHtmlParams<SSRRequestProps>,
 ) => string
 
 export type CreatePageTags<SSRRequestProps> = (
@@ -71,6 +73,7 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
             console.error('Skipping SSR middleware due to missing req.log key')
             return next()
         }
+
         const promiseTracker = new PromiseTracker()
         const appState = await options.setupRequest(req, promiseTracker)
         let renderContext: RenderContext<SSRRequestProps>
