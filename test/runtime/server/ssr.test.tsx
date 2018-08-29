@@ -115,6 +115,66 @@ it(
     ),
 )
 
+it(
+    'renders error page when render of page fails',
+    ssrFixture(
+        fixture => {
+            const BrokenComponent = () => {
+                throw new Error('oops, render failed')
+            }
+
+            fixture.renderFn = ({}) => {
+                return (
+                    <div>
+                        <Route path="/" exact render={() => <BrokenComponent />} />
+                        <Route path="/error" render={() => <div>Custom error page</div>} />
+                    </div>
+                )
+            }
+
+            return fixture.server
+                .get('/')
+                .expect(500)
+                .then(res => {
+                    expect(res.text).toContain('Custom error page')
+                })
+        },
+        {
+            errorLocation: '/error',
+        },
+    ),
+)
+
+it(
+    'returns 500 with no body content when error page fails to render',
+    ssrFixture(
+        fixture => {
+            const BrokenComponent = () => {
+                throw new Error('oops, render failed')
+            }
+
+            fixture.renderFn = ({}) => {
+                return (
+                    <div>
+                        <Route path="/" exact render={() => <BrokenComponent />} />
+                        <Route path="/error" render={() => <BrokenComponent />} />
+                    </div>
+                )
+            }
+
+            return fixture.server
+                .get('/')
+                .expect(500)
+                .then(res => {
+                    expect(res.text).toBe('')
+                })
+        },
+        {
+            errorLocation: '/error',
+        },
+    ),
+)
+
 // tslint:disable-next-line:no-empty-interface
 export interface SSRState {}
 export interface Fixture {
