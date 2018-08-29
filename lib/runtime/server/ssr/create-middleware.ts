@@ -7,7 +7,7 @@ import {
     RenderMarkup,
     ServerRenderResultType,
 } from './'
-import { PromiseCompletionSource, Logger } from '../../universal'
+import { Logger } from '../../universal'
 import { HelmetData } from 'react-helmet'
 import { hasLog } from '../middleware/ensure-request-log-middleware'
 import { getRuntimeConfig } from '../../config/config'
@@ -16,8 +16,6 @@ import { getAssetLocations, getHeadAssets, getBodyAssets } from '../assets'
 import { Assets } from 'assets-webpack-plugin'
 
 export interface RenderContext<SSRRequestProps = object> {
-    completionNotifier: PromiseCompletionSource<{}>
-    triggeredLoad: boolean
     /** This holds the app state which needs to be kept between SSR
      * passes. It is essentially a state bag, it could include a redux store,
      * or any other state store which needs to persist between render passes
@@ -29,6 +27,7 @@ export type RenderApp<SSRRequestProps extends object> = (
     params: {
         log: Logger
         context: RenderContext<SSRRequestProps>
+        promiseTracker: PromiseTracker
         req: Request
     },
 ) => JSX.Element
@@ -84,31 +83,25 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
             ssrTimeoutMs: options.ssrTimeoutMs,
             appRender: () => {
                 renderContext = {
-                    completionNotifier: new PromiseCompletionSource(),
-                    triggeredLoad: false,
                     ssrRequestProps: appState,
                 }
 
-                return options.renderApp({ log: req.log, context: renderContext, req })
+                return options.renderApp({
+                    log: req.log,
+                    context: renderContext,
+                    req,
+                    promiseTracker,
+                })
             },
             events: {
-                renderPerformed: () => {
-                    // loadAllCompleted will not fire if nothing started loading
-                    // this is needed to not hang the return
-                    if (
-                        renderContext.triggeredLoad &&
-                        !renderContext.completionNotifier.completed
-                    ) {
-                        promiseTracker.track(renderContext.completionNotifier.promise)
-                    }
-                },
+                renderPerformed: () => {},
             },
         }
 
         const pageRenderResult = await renderPageContents<SSRRequestProps>(
             appState,
             ssrOptions,
-            req,
+            req.url,
             promiseTracker,
         )
 
