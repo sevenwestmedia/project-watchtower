@@ -51,8 +51,8 @@ it(
             }
         }
 
-        fixture.renderFn = ({ promiseTracker }) => {
-            return <ComponentWhichLoadsData promiseTracker={promiseTracker} />
+        fixture.renderFn = ({ context }) => {
+            return <ComponentWhichLoadsData promiseTracker={context.promiseTracker} />
         }
 
         return fixture.server
@@ -87,14 +87,16 @@ it(
                 }
             }
 
-            fixture.renderFn = ({ promiseTracker }) => {
+            fixture.renderFn = ({ context }) => {
                 return (
                     <div>
                         <Route
                             path="/"
                             exact
                             render={() => (
-                                <ComponentWhichLoadDataFails promiseTracker={promiseTracker} />
+                                <ComponentWhichLoadDataFails
+                                    promiseTracker={context.promiseTracker}
+                                />
                             )}
                         />
                         <Route path="/error" render={() => <div>Custom error page</div>} />

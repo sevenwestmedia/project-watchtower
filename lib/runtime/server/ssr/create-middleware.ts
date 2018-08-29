@@ -21,13 +21,14 @@ export interface RenderContext<SSRRequestProps = object> {
      * or any other state store which needs to persist between render passes
      */
     ssrRequestProps: SSRRequestProps
+
+    promiseTracker: PromiseTracker
 }
 
 export type RenderApp<SSRRequestProps extends object> = (
     params: {
         log: Logger
         context: RenderContext<SSRRequestProps>
-        promiseTracker: PromiseTracker
         req: Request
     },
 ) => JSX.Element
@@ -84,13 +85,13 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
             appRender: () => {
                 renderContext = {
                     ssrRequestProps: appState,
+                    promiseTracker,
                 }
 
                 return options.renderApp({
                     log: req.log,
                     context: renderContext,
                     req,
-                    promiseTracker,
                 })
             },
             events: {
