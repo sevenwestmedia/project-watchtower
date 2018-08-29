@@ -12,22 +12,6 @@ build('server', 'prod')
 
 ## React Components
 
-### LogProvider / addLog
-``` ts
-@addLog
-class YourComponent extends React.Component<LoggerProps, {}> {
-    onClick = () => {
-        this.props.logger.info('Clicked!')
-    }
-}
-
-<LogProvider logger={yourLogger}>
-    ...
-        <YourComponent />
-    ...
-</LogProvider>
-```
-
 ### PageLifecycleProvider
 See [Page Lifecycle Provider](./page-lifecycle-provider.md)
 

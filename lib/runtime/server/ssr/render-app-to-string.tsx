@@ -3,7 +3,7 @@ import { Helmet, HelmetData } from 'react-helmet'
 import { renderToString } from 'react-dom/server'
 import { renderStaticOptimized, GlamorServerResult } from 'glamor/server'
 import { StaticRouter } from 'react-router-dom'
-import { functionTimer, Logger, LogProvider } from '../../universal'
+import { functionTimer, Logger } from '../../universal'
 import { StaticRouterContext } from './router-context-handler'
 import { PromiseTracker } from './full-render'
 
@@ -39,11 +39,9 @@ export function renderAppToString(
             () =>
                 renderStaticOptimized(() =>
                     renderToString(
-                        <LogProvider logger={log}>
-                            <StaticRouter location={currentLocation} context={context}>
-                                {appRender(promiseTracker)}
-                            </StaticRouter>
-                        </LogProvider>,
+                        <StaticRouter location={currentLocation} context={context}>
+                            {appRender(promiseTracker)}
+                        </StaticRouter>,
                     ),
                 ),
             log,
