@@ -64,7 +64,6 @@ export async function renderPageContents<SSRRequestProps extends object>(
     renderLocation: string,
     promiseTracker: PromiseTracker,
 ): Promise<ServerRenderResults.ServerRenderResult<SSRRequestProps>> {
-    // let renderLocation = req.url
     const startTime = process.hrtime()
 
     const performSinglePassLocationRender = (location: string) =>

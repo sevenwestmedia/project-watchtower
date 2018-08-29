@@ -1,0 +1,9 @@
+{
+    "main": {
+        "js": "/main.js",
+        "css": "/main.css"
+    },
+    "vendor": {
+        "js": "/vendor.js"
+    }
+}
