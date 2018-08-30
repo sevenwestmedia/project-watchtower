@@ -132,7 +132,7 @@ export async function renderPageContents<SSRRequestProps extends object>(
         } catch (dataLoadErr) {
             options.log.error({ err: dataLoadErr }, 'Data load failed, rendering error location')
 
-            return renderErrorRoute(
+            return await renderErrorRoute(
                 ssrRequestProps,
                 options,
                 renderLocation,
