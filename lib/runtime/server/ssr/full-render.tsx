@@ -124,7 +124,7 @@ export async function renderPageContents<SSRRequestProps extends object>(
                 options.log,
                 promiseTracker,
                 () => render(renderLocation),
-                Promise.resolve(initialRenderResult),
+                initialRenderResult,
                 10,
                 options.ssrTimeoutMs,
             )
