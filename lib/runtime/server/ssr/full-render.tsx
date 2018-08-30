@@ -69,9 +69,7 @@ export async function renderPageContents<SSRRequestProps extends object>(
     const performSinglePassLocationRender = (location: string) =>
         renderAppToString(location, options.log, options.appRender, promiseTracker)
 
-    const render = (
-        location: string,
-    ): Promise<ServerRenderResults.ServerRenderResult<SSRRequestProps>> => {
+    const render = (location: string): ServerRenderResults.ServerRenderResult<SSRRequestProps> => {
         // Unsure we are not tracking events from previous render pass
         promiseTracker.reset()
 
@@ -87,9 +85,7 @@ export async function renderPageContents<SSRRequestProps extends object>(
 
             const result = routerContextHandler(renderResult, startTime, storeStateAtRenderTime)
 
-            return Promise.resolve(result)
-        } catch (err) {
-            return renderErrorRoute(ssrRequestProps, options, renderLocation, promiseTracker, err)
+            return result
         } finally {
             if (options.events && options.events.renderPerformed) {
                 try {
@@ -103,23 +99,26 @@ export async function renderPageContents<SSRRequestProps extends object>(
     }
 
     try {
-        const initialRenderResult = await render(renderLocation)
-
-        // If we have not rendered successfully just return the render result
-        if (initialRenderResult.type !== ServerRenderResults.ServerRenderResultType.Success) {
-            return initialRenderResult
-        }
-
-        if (options.events && options.events.beginWaitingForTasks) {
-            try {
-                options.events.beginWaitingForTasks(elapsed(startTime))
-            } catch (err) {
-                // external event failed, log and continue
-                options.log.error({ err }, 'beginWaitingForTasks threw, continuing')
-            }
-        }
-
+        // The inner try is for the initial render
+        // if it throws, then the error route will try to render
+        // which the second catch is if that route fails
         try {
+            const initialRenderResult = render(renderLocation)
+
+            // If we have not rendered successfully just return the render result
+            if (initialRenderResult.type !== ServerRenderResults.ServerRenderResultType.Success) {
+                return initialRenderResult
+            }
+
+            if (options.events && options.events.beginWaitingForTasks) {
+                try {
+                    options.events.beginWaitingForTasks(elapsed(startTime))
+                } catch (err) {
+                    // external event failed, log and continue
+                    options.log.error({ err }, 'beginWaitingForTasks threw, continuing')
+                }
+            }
+
             const dataResolved = await resolveAllData(
                 options.log,
                 promiseTracker,

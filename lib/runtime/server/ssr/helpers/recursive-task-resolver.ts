@@ -8,7 +8,7 @@ const timedOut = Symbol('Timed out')
 function innerResolve<T>(
     log: Logger,
     promiseTracker: PromiseTracker,
-    render: () => Promise<T>,
+    render: () => T,
     initialRender: T,
     numberAttempts: number,
     remainingAttempts: number,
@@ -28,7 +28,7 @@ function innerResolve<T>(
         setTimeout(() => {
             const promiseOrTimedOut = [promiseTracker.waitForCompletion(), timeoutPromise]
             Promise.race<string | typeof timedOut>(promiseOrTimedOut)
-                .then(async p => {
+                .then(p => {
                     // If we have timed out return the timed out symbol to
                     // prevent another nested render
                     if (p === timedOut) {
@@ -36,7 +36,7 @@ function innerResolve<T>(
                     }
 
                     log.debug({ component }, 'Re-rendering to trigger any child promises')
-                    const renderResult = await render()
+                    const renderResult = render()
 
                     // eslint-disable-next-line consistent-return
                     return innerResolve(
@@ -63,7 +63,7 @@ function innerResolve<T>(
 export default async function<T>(
     log: Logger,
     promiseTracker: PromiseTracker,
-    render: () => Promise<T>,
+    render: () => T,
     initialRender: T,
     numberAttempts: number,
     timeoutMs: number,

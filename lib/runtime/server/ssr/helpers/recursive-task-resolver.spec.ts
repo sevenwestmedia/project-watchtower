@@ -7,7 +7,7 @@ describe('Recursive Task Resolver', () => {
     it('Should abort after 5 tries', done => {
         const promiseTracker = new PromiseTracker()
         let count = 0
-        const render = async () => {
+        const render = () => {
             if (count++ > 5) {
                 done(new Error('Too many render calls!'))
             }
@@ -31,7 +31,7 @@ describe('Recursive Task Resolver', () => {
         const promiseTracker = new PromiseTracker()
         let count = 0
         let resolvedSecondPromise = false
-        const render = async () => {
+        const render = () => {
             if (count === 0) {
                 promiseTracker.track(new Promise(resolve => setTimeout(resolve, 10)))
             } else if (count === 1) {
