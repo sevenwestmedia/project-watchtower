@@ -11,6 +11,13 @@ export class PromiseTracker {
         if (!this.promises[currentWaitIndex]) {
             this.promises[currentWaitIndex] = []
         }
+        // Because we are buffering promises for later
+        // we need to catch any failures synchrnously.
+        // if we don't, we will get warnings about handling promises
+        // asynchronously.
+        if ((promise as any).catch) {
+            ;(promise as any).catch(() => {})
+        }
         this.promises[currentWaitIndex].push(promise)
     }
 
