@@ -3,9 +3,9 @@ import { createServer } from '../../../lib/runtime/server'
 import { createSsrMiddleware } from '../../../lib/runtime/server/ssr'
 import { createConsoleLogger } from '../../../lib/runtime/universal'
 import { renderApp } from './render-app'
-import { renderHtml } from '../../../lib/runtime/server/ssr/helpers/render-html'
 import { AppState } from '../common/App.redux'
 import createStore from '../common/createStore'
+import { renderHtml } from '../../../lib/runtime/server/ssr/helpers/render-html'
 
 const log = createConsoleLogger()
 

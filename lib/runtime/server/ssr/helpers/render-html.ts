@@ -21,6 +21,7 @@ export function renderHtml({
         <div id="root">${renderMarkup.html}</div>
         ${pageTags.body.map(bodyAsset => bodyAsset.tag).join(`
         `)}
+    )}
     </body>
 </html>`
 }
