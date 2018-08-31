@@ -34,6 +34,7 @@ async function renderErrorRoute<SSRRequestProps extends object>(
     currentRenderLocation: string,
     promiseTracker: PromiseTracker,
     err: Error,
+    startTime: [number, number],
 ): Promise<ServerRenderResults.ServerRenderResult<SSRRequestProps>> {
     // If we are already rendering the error location, bail
     // This will be caught above and a 500 will be returned
@@ -42,11 +43,12 @@ async function renderErrorRoute<SSRRequestProps extends object>(
     }
     // Overwrite the render location with the error location
     currentRenderLocation = options.errorLocation
-    const errorRender = await renderPageContents(
+    const errorRender = await renderWithErrorPageFallback(
         ssrRequestProps,
         options,
         options.errorLocation,
         promiseTracker,
+        startTime,
     )
 
     if (errorRender.type === ServerRenderResults.ServerRenderResultType.Success) {
@@ -58,6 +60,101 @@ async function renderErrorRoute<SSRRequestProps extends object>(
     return errorRender
 }
 
+function performRender<SSRRequestProps extends object>(
+    ssrRequestProps: SSRRequestProps,
+    options: ServerSideRenderOptions,
+    renderLocation: string,
+    promiseTracker: PromiseTracker,
+    startTime: [number, number],
+): ServerRenderResults.ServerRenderResult<SSRRequestProps> {
+    // We need to capture the store before we render
+    // as any changes caused by the render will not be
+    // included in the rendered content
+    const storeStateAtRenderTime: SSRRequestProps = {
+        ...(ssrRequestProps as object),
+    } as any
+
+    try {
+        const renderResult = renderAppToString(
+            renderLocation,
+            options.log,
+            options.appRender,
+            promiseTracker,
+        )
+
+        const result = routerContextHandler(renderResult, startTime, storeStateAtRenderTime)
+
+        return result
+    } finally {
+        if (options.events && options.events.renderPerformed) {
+            try {
+                options.events.renderPerformed(promiseTracker)
+            } catch (err) {
+                // External event failed. Just log and continue
+                options.log.error({ err }, 'renderPerformed event failed')
+            }
+        }
+    }
+}
+
+async function renderWithErrorPageFallback<SSRRequestProps extends object>(
+    ssrRequestProps: SSRRequestProps,
+    options: ServerSideRenderOptions,
+    renderLocation: string,
+    promiseTracker: PromiseTracker,
+    startTime: [number, number],
+) {
+    // The inner try is for the initial render
+    // if it throws, then the error route will try to render
+    // which the second catch is if that route fails
+    try {
+        const initialRenderResult = performRender(
+            ssrRequestProps,
+            options,
+            renderLocation,
+            promiseTracker,
+            startTime,
+        )
+
+        // If we have not rendered successfully just return the render result
+        if (initialRenderResult.type !== ServerRenderResults.ServerRenderResultType.Success) {
+            return initialRenderResult
+        }
+
+        if (options.events && options.events.beginWaitingForTasks) {
+            try {
+                options.events.beginWaitingForTasks(elapsed(startTime))
+            } catch (err) {
+                // external event failed, log and continue
+                options.log.error({ err }, 'beginWaitingForTasks threw, continuing')
+            }
+        }
+
+        const dataResolved = await resolveAllData(
+            options.log,
+            promiseTracker,
+            () =>
+                performRender(ssrRequestProps, options, renderLocation, promiseTracker, startTime),
+            initialRenderResult,
+            10,
+            options.ssrTimeoutMs,
+        )
+
+        return dataResolved
+    } catch (dataLoadErr) {
+        options.log.error({ err: dataLoadErr }, 'Data load failed, rendering error location')
+
+        return await renderErrorRoute(
+            ssrRequestProps,
+            options,
+            renderLocation,
+            promiseTracker,
+            dataLoadErr,
+            startTime,
+        )
+    }
+}
+
 export async function renderPageContents<SSRRequestProps extends object>(
     ssrRequestProps: SSRRequestProps,
     options: ServerSideRenderOptions,
@@ -66,80 +163,14 @@ export async function renderPageContents<SSRRequestProps extends object>(
 ): Promise<ServerRenderResults.ServerRenderResult<SSRRequestProps>> {
     const startTime = process.hrtime()
 
-    const performSinglePassLocationRender = (location: string) =>
-        renderAppToString(location, options.log, options.appRender, promiseTracker)
-
-    const render = (location: string): ServerRenderResults.ServerRenderResult<SSRRequestProps> => {
-        // Unsure we are not tracking events from previous render pass
-        promiseTracker.reset()
-
-        // We need to capture the store before we render
-        // as any changes caused by the render will not be
-        // included in the rendered content
-        const storeStateAtRenderTime: SSRRequestProps = {
-            ...(ssrRequestProps as object),
-        } as any
-
-        try {
-            const renderResult = performSinglePassLocationRender(location)
-
-            const result = routerContextHandler(renderResult, startTime, storeStateAtRenderTime)
-
-            return result
-        } finally {
-            if (options.events && options.events.renderPerformed) {
-                try {
-                    options.events.renderPerformed(promiseTracker)
-                } catch (err) {
-                    // External event failed. Just log and continue
-                    options.log.error({ err }, 'renderPerformed event failed')
-                }
-            }
-        }
-    }
-
     try {
-        // The inner try is for the initial render
-        // if it throws, then the error route will try to render
-        // which the second catch is if that route fails
-        try {
-            const initialRenderResult = render(renderLocation)
-
-            // If we have not rendered successfully just return the render result
-            if (initialRenderResult.type !== ServerRenderResults.ServerRenderResultType.Success) {
-                return initialRenderResult
-            }
-
-            if (options.events && options.events.beginWaitingForTasks) {
-                try {
-                    options.events.beginWaitingForTasks(elapsed(startTime))
-                } catch (err) {
-                    // external event failed, log and continue
-                    options.log.error({ err }, 'beginWaitingForTasks threw, continuing')
-                }
-            }
-
-            const dataResolved = await resolveAllData(
-                options.log,
-                promiseTracker,
-                () => render(renderLocation),
-                initialRenderResult,
-                10,
-                options.ssrTimeoutMs,
-            )
-
-            return dataResolved
-        } catch (dataLoadErr) {
-            options.log.error({ err: dataLoadErr }, 'Data load failed, rendering error location')
-
-            return await renderErrorRoute(
-                ssrRequestProps,
-                options,
-                renderLocation,
-                promiseTracker,
-                dataLoadErr,
-            )
-        }
+        return await renderWithErrorPageFallback(
+            ssrRequestProps,
+            options,
+            renderLocation,
+            promiseTracker,
+            startTime,
+        )
     } catch (err) {
         const failure: ServerRenderResults.FailedRenderResult = {
             type: ServerRenderResults.ServerRenderResultType.Failure,
