@@ -12,6 +12,7 @@ import { renderHtml } from '../../../lib/runtime/server/ssr/helpers/render-html'
 import { Route } from 'react-router-dom'
 
 const log = createConsoleLogger()
+Error.stackTraceLimit = Infinity
 
 it(
     'can render ssr',
@@ -169,6 +170,59 @@ it(
                 .expect(500)
                 .then(res => {
                     expect(res.text).toBe('')
+                })
+        },
+        {
+            errorLocation: '/error',
+        },
+    ),
+)
+
+it(
+    'renders error page when tracked promise is rejected already',
+    ssrFixture(
+        fixture => {
+            const dataLoadSource = new PromiseCompletionSource()
+
+            // tslint:disable-next-line:max-classes-per-file
+            class ComponentWhichLoadDataFails extends React.Component<{
+                promiseTracker: PromiseTracker
+            }> {
+                componentWillMount() {
+                    // If we don't have data, simulate loading some data
+                    if (!dataLoadSource.completed) {
+                        this.props.promiseTracker.track(dataLoadSource.promise)
+                        dataLoadSource.reject(new Error('Oops'))
+                    }
+                }
+
+                render() {
+                    return <div>Data loading</div>
+                }
+            }
+
+            fixture.renderFn = ({ context }) => {
+                return (
+                    <div>
+                        <Route
+                            path="/"
+                            exact
+                            render={() => (
+                                <ComponentWhichLoadDataFails
+                                    promiseTracker={context.promiseTracker}
+                                />
+                            )}
+                        />
+                        <Route path="/error" render={() => <div>Custom error page</div>} />
+                    </div>
+                )
+            }
+
+            return fixture.server
+                .get('/')
+                .expect(500)
+                .then(res => {
+                    expect(res.text).toContain('Custom error page')
                 })
         },
         {
