@@ -70,6 +70,7 @@ export const startServer = () => {
                 renderHtml(head, renderMarkup, reduxState, assets)
             ),
             errorLocation: '/error',
+            pageNotFoundLocation: '/page-not-found',
             createReduxStore: async (middlewares, _req) => {
                 const store = configureStore(
                     rootReducer,
@@ -140,11 +141,9 @@ export const wrapAsyncHandler = (handler: RequestHandler | ErrorRequestHandler) 
 ```
 
 ## Tracking async work
-Watchtower includes work tracking in redux, but is extensible. If you want to notify watchtower that work has started you can set `context.triggeredLoad` to true inside the `renderApp` function.
-
-Then once data has finished loading you need to execute `context.completionNotifier.resolve({})`.
-
-NOTE: If you reject the completion notifier it signals to watchtower data loading critically failed and it will simply return a 500 status with no content rendered.
+Watchtower includes work tracking in redux, but is extensible. If you want watchtower to re-render after some asynchronous work is completed, simply call `context.promiseTracker.track()` during your appRender callback.
 
 ## Error handling
-Watchtower handles server side rendering failures for you, when the render pass throws watchtower will re-render using the provided `errorLocation` prop.
+Watchtower handles server side rendering and data load failures for you, when the render pass throws watchtower will re-render using the provided `errorLocation` prop.
+
+If you would like to render a 404 page instead, simply throw or reject a tracked promise with `new Status404Error()`

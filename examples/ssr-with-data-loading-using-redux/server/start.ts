@@ -26,6 +26,7 @@ createServer({
             renderApp: ({ context }) => renderApp(context.ssrRequestProps),
             renderHtml,
             errorLocation: '/error',
+            pageNotFoundLocation: '/page-not-found',
             setupRequest: async (_, promiseTracker) => ({
                 store: createStore(undefined, [promiseTracker.middleware()]),
             }),

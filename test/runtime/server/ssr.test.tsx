@@ -10,6 +10,7 @@ import {
 } from '../../../lib/runtime/universal'
 import { renderHtml } from '../../../lib/runtime/server/ssr/helpers/render-html'
 import { Route } from 'react-router-dom'
+import { Status404Error } from '../../../lib/runtime/server/ssr/errors'
 
 const log = createConsoleLogger()
 Error.stackTraceLimit = Infinity
@@ -110,6 +111,62 @@ it(
                 .expect(500)
                 .then(res => {
                     expect(res.text).toContain('Custom error page')
+                })
+        },
+        {
+            errorLocation: '/error',
+        },
+    ),
+)
+
+it(
+    'renders 404 page when data load rejects with Status404Error',
+    ssrFixture(
+        fixture => {
+            const dataLoadSource = new PromiseCompletionSource()
+
+            // tslint:disable-next-line:max-classes-per-file
+            class ComponentWhichLoadDataFails extends React.Component<{
+                promiseTracker: PromiseTracker
+            }> {
+                componentWillMount() {
+                    // If we don't have data, simulate loading some data
+                    if (!dataLoadSource.completed) {
+                        this.props.promiseTracker.track(dataLoadSource.promise)
+                        setTimeout(() => dataLoadSource.reject(new Status404Error()), 100)
+                    }
+                }
+
+                render() {
+                    return <div>Data loading</div>
+                }
+            }
+
+            fixture.renderFn = ({ context }) => {
+                return (
+                    <div>
+                        <Route
+                            path="/"
+                            exact
+                            render={() => (
+                                <ComponentWhichLoadDataFails
+                                    promiseTracker={context.promiseTracker}
+                                />
+                            )}
+                        />
+                        <Route
+                            path="/page-not-found"
+                            render={() => <div>Custom page not found</div>}
+                        />
+                    </div>
+                )
+            }
+
+            return fixture.server
+                .get('/')
+                .expect(404)
+                .then(res => {
+                    expect(res.text).toContain('Custom page not found')
                 })
         },
         {
@@ -240,7 +297,7 @@ export interface Fixture {
 
 function ssrFixture(
     test: (fixture: Fixture) => Promise<any>,
-    options: { errorLocation?: string } = {},
+    options: { errorLocation?: string; pageNotFoundLocation?: string } = {},
 ) {
     // Return the test for Jest to run
     return async () => {
@@ -260,6 +317,7 @@ function ssrFixture(
                             renderApp: params => fixture.renderFn(params),
                             renderHtml,
                             errorLocation: options.errorLocation || '/error',
+                            pageNotFoundLocation: options.pageNotFoundLocation || '/page-not-found',
                             setupRequest: async () => ({}),
                         })
 

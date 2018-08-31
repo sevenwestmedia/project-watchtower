@@ -20,6 +20,7 @@ createServer({
             renderApp: ({ context }) => renderApp(context.ssrRequestProps),
             renderHtml,
             errorLocation: '/error',
+            pageNotFoundLocation: '/page-not-found',
             setupRequest: async () => ({
                 // We can setup our initial app state in setupRequest
                 // It can also be updated during each SSR pass

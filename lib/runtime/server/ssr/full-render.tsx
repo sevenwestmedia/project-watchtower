@@ -4,12 +4,14 @@ import { routerContextHandler } from './router-context-handler'
 import * as ServerRenderResults from './server-render-results'
 import { renderAppToString, CreateAppElement } from './render-app-to-string'
 import { WatchtowerEvents } from './render-events'
+import { Status404Error } from './errors'
 
 export { PromiseTracker }
 
 export interface RenderOptions {
     log: Logger
     errorLocation: string
+    pageNotFoundLocation: string
     appRender: CreateAppElement
     events?: WatchtowerEvents
 }
@@ -36,25 +38,30 @@ async function renderErrorRoute<SSRRequestProps extends object>(
     err: Error,
     startTime: [number, number],
 ): Promise<ServerRenderResults.ServerRenderResult<SSRRequestProps>> {
+    const errorRenderOptions =
+        err instanceof Status404Error
+            ? { location: options.pageNotFoundLocation, status: 404 }
+            : { location: options.errorLocation, status: 500 }
+
     // If we are already rendering the error location, bail
     // This will be caught above and a 500 will be returned
-    if (currentRenderLocation === options.errorLocation) {
+    if (currentRenderLocation === errorRenderOptions.location) {
         throw err
     }
     // Overwrite the render location with the error location
-    currentRenderLocation = options.errorLocation
+    currentRenderLocation = errorRenderOptions.location
     const errorRender = await renderWithErrorPageFallback(
         ssrRequestProps,
         options,
-        options.errorLocation,
+        errorRenderOptions.location,
         promiseTracker,
         startTime,
     )
 
     if (errorRender.type === ServerRenderResults.ServerRenderResultType.Success) {
         // We have successfully rendered the error page, but it still needs
-        // to be a 500
-        errorRender.statusCode = 500
+        // to be an error status code (404 or 500)
+        errorRender.statusCode = errorRenderOptions.status
     }
 
     return errorRender

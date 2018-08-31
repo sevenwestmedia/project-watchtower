@@ -60,6 +60,7 @@ export type ServerSideRenderMiddlewareOptions<SSRRequestProps extends object> = 
     renderHtml: RenderHtmlParams<SSRRequestProps>
     errorLocation: string
     createPageTags?: CreatePageTags<SSRRequestProps>
+    pageNotFoundLocation: string
 }
 
 export const createSsrMiddleware = <SSRRequestProps extends object>(
@@ -81,6 +82,7 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
         const ssrOptions: ServerSideRenderOptions = {
             log: req.log,
             errorLocation: options.errorLocation,
+            pageNotFoundLocation: options.pageNotFoundLocation,
             ssrTimeoutMs: options.ssrTimeoutMs,
             appRender: () => {
                 renderContext = {
