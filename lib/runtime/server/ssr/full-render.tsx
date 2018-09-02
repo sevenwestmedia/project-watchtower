@@ -89,7 +89,12 @@ function performRender<SSRRequestProps extends object>(
             promiseTracker,
         )
 
-        const result = routerContextHandler(renderResult, startTime, storeStateAtRenderTime)
+        const result = routerContextHandler(
+            renderResult,
+            startTime,
+            storeStateAtRenderTime,
+            renderLocation,
+        )
 
         return result
     } finally {

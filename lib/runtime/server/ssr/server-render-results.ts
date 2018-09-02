@@ -17,6 +17,8 @@ export interface StatusServerRenderResult<SSRRequestProps extends object>
     type: ServerRenderResultType.Success
     renderedContent: RenderMarkup
     ssrRequestProps: SSRRequestProps
+    /** The final render location */
+    renderLocation: string
     statusCode: number
 }
 

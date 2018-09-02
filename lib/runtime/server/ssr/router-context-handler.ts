@@ -12,6 +12,7 @@ export interface SuccessProps<SSRRequestProps extends object> {
     ssrRequestProps: SSRRequestProps
     startTime: [number, number]
     statusCode: number
+    renderLocation: string
 }
 
 export const createResponse = <SSRRequestProps extends object>({
@@ -19,6 +20,7 @@ export const createResponse = <SSRRequestProps extends object>({
     ssrRequestProps,
     startTime,
     statusCode,
+    renderLocation,
 }: SuccessProps<SSRRequestProps>): ServerRenderResult<SSRRequestProps> => {
     return {
         type: ServerRenderResultType.Success,
@@ -27,6 +29,7 @@ export const createResponse = <SSRRequestProps extends object>({
         renderedContent: renderResult.renderMarkup,
         ssrRequestProps,
         statusCode,
+        renderLocation,
     }
 }
 
@@ -34,6 +37,7 @@ export const routerContextHandler = <SSRRequestProps extends object>(
     renderResult: RenderPassResult,
     startTime: [number, number],
     ssrRequestProps: SSRRequestProps,
+    renderLocation: string,
 ): ServerRenderResult<SSRRequestProps> => {
     if (renderResult.context.url) {
         return {
@@ -52,5 +56,6 @@ export const routerContextHandler = <SSRRequestProps extends object>(
         ssrRequestProps,
         startTime,
         statusCode,
+        renderLocation,
     })
 }
