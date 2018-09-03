@@ -1,45 +1,27 @@
 import * as React from 'react'
 import { BrowserRouter, BrowserRouterProps, Route, RouteProps } from 'react-router-dom'
 import { createLocation } from 'history'
+import { getTransferredState } from '../../client/get-transferred-state'
 
 export type Props = RouteProps
-export interface State {
-    initialLocationKey: string | undefined
-    locationOverrideFromSSR: string | undefined
-}
 
-declare var watchtowerHydrateLocation: string
-const serverRouteState =
-    typeof watchtowerHydrateLocation !== 'undefined' ? watchtowerHydrateLocation : undefined
+const locationOverrideFromSSR = getTransferredState<string | undefined>(
+    'watchtower_hydrate_location',
+)
 
-class HydrateCorrectLocationFromSSR extends React.Component<Props, State> {
-    state: State = { initialLocationKey: undefined, locationOverrideFromSSR: serverRouteState }
+const HydrateCorrectLocationFromSSR: React.SFC<Props> = props => {
+    // While still on the initial route (which was hydrated), override the url
+    // if an override came from the server
+    const locationOverride =
+        props.location && locationOverrideFromSSR && props.location.key === undefined
+            ? createLocation(locationOverrideFromSSR)
+            : undefined
 
-    getDerivedStateFromProps(nextProps: Readonly<Props>, prevState: State): null | Partial<State> {
-        if (!prevState.initialLocationKey && nextProps.location) {
-            return {
-                // We need to capture the inital location key. This allows
-                // us to overwrite the current location artifically until the
-                // user navigates
-                initialLocationKey: nextProps.location.key,
-            }
-        }
-
-        return null
+    if (locationOverride) {
+        return <Route location={locationOverride}>{props.children}</Route>
     }
 
-    render() {
-        // While still on the initial route (which was hydrated), override the url
-        // if an override came from the server
-        const locationOverride =
-            this.props.location &&
-            this.state.locationOverrideFromSSR &&
-            this.state.initialLocationKey === this.props.location.key
-                ? createLocation(this.state.locationOverrideFromSSR)
-                : undefined
-
-        return <Route location={locationOverride}>{this.props.children}</Route>
-    }
+    return React.Children.only(props.children)
 }
 
 /**

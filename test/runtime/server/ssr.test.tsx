@@ -110,6 +110,7 @@ it(
                 .get('/')
                 .expect(500)
                 .then(res => {
+                    expect(res.text).toContain('watchtower_hydrate_location = "\\u002Ferror"')
                     expect(res.text).toContain('Custom error page')
                 })
         },

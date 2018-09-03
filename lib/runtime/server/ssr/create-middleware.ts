@@ -126,10 +126,22 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
                 helmetTags.push(result.head.link.toString())
             }
 
-            const pageTags: PageTags = options.createPageTags
-                ? options.createPageTags({ buildAssets, helmetTags, renderContext })
-                : {
-                      head: [...helmetTags.map(tag => ({ tag })), ...getHeadAssets(buildAssets)],
+            const stateTransfers: PageTag[] = []
+            // When watchtower renders an error, the client needs to know
+            // so it can hydrate the error location. The WatchtowerBrowserRouter takes
+            // care of this
+            if (result.renderLocation !== req.url) {
+                stateTransfers.push({
+                    tag: transferState('watchtower_hydrate_location', result.renderLocation),
+                })
+            }
+
+            const pageTags: PageTags = {
+                head: [
+                    ...helmetTags.map(tag => ({ tag })),
+                    ...getHeadAssets(buildAssets),
+                    ...stateTransfers,
+                ],
                       body: [...getBodyAssets(buildAssets)],
                   }
 
