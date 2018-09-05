@@ -75,12 +75,6 @@ See [Server Side Rendering](./server-side-rendering.md)
 ```ts
 getAssetLocations(): Assets
 
-getCssAssetHtml(): string
-
-getJsAssetHtml(): string
-
-addAssetsToHtml(html: string): string
-
 getAbsoluteAssetPath(asset: string): string
 
 createServer(options?: {
