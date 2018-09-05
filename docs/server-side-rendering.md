@@ -98,7 +98,7 @@ A function which gives you access to important state of the request and allows y
 
 The `renderContext` allows you to let watchtower know that data has been loaded in this request.
 
-**NOTE** You do *not* have to include redux's `Provider`, watchtowers `LogProvider` or react routers `StaticRouter`. These are all configured and provided by watchtower SSR
+**NOTE** You do *not* have to include react routers `StaticRouter`. These are all configured and provided by watchtower SSR
 
 If your application loads any data simply set `context.triggeredLoad = true`, this will ensure watchtower waits for you to call `context.completionNotifier.resolve({})` which will trigger another render.
 
