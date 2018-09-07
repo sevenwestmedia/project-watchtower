@@ -6,7 +6,7 @@ const prodConfig: CreateWebpackConfig = () => ({
     devtool: 'source-map',
     resolve: {
         alias: {
-            'project-watchtower/lib': 'project-watchtower/dist-es',
+            'project-watchtower/lib': 'project-watchtower/dist-es/lib',
         },
     },
     plugins: [
