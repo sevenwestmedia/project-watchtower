@@ -20,14 +20,14 @@ export interface ServerSideRenderOptions extends RenderOptions {
     ssrTimeoutMs: number
 }
 
-export interface Assets {
-    vendor: {
-        js: string
-    }
-    main: {
-        js: string
-        css: string
-    }
+export interface PageTag {
+    /** The html tag to insert into the rendered html */
+    tag: string
+}
+
+export interface PageTags {
+    head: PageTag[]
+    body: PageTag[]
 }
 
 export async function renderPageContents<SSRRequestProps extends object>(

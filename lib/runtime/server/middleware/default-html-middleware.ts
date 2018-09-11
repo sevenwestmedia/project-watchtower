@@ -1,9 +1,10 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as express from 'express'
-import { addAssetsToHtml } from '../assets'
 import { RuntimeConfig } from '../../../'
 import { Logger } from '../../universal'
+import { renderHtml } from '../ssr/helpers/render-html'
+import { getHeadAssets, getAssets, getBodyAssets } from '../assets'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -46,7 +47,19 @@ export const getDefaultHtmlMiddleware = (log: Logger, runtimeConfig: RuntimeConf
 
     const middleware: express.RequestHandler = (_req, res) => {
         if (indexContent) {
-            const indexWithAssets = addAssetsToHtml(indexContent, runtimeConfig)
+            const buildAssets = getAssets(runtimeConfig)
+            const indexWithAssets = renderHtml({
+                renderMarkup: {
+                    css: '',
+                    html: '',
+                    ids: [],
+                },
+                pageTags: {
+                    head: getHeadAssets(buildAssets),
+                    body: getBodyAssets(buildAssets),
+                },
+            })
+
             return res
                 .status(200)
                 .contentType('text/html')
@@ -55,7 +68,9 @@ export const getDefaultHtmlMiddleware = (log: Logger, runtimeConfig: RuntimeConf
 
         if (!missingIndexErrorLogged) {
             log.error(
-                `Watchtower default middleware requires a html template at ${runtimeConfig.SERVER_PUBLIC_DIR}/index.html to add the JS/CSS assets to and serve`,
+                `Watchtower default middleware requires a html template at ${
+                    runtimeConfig.SERVER_PUBLIC_DIR
+                }/index.html to add the JS/CSS assets to and serve`,
             )
             missingIndexErrorLogged = true
         }

@@ -1,7 +1,8 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { Assets } from '../../types'
 import { RuntimeConfig, BuildConfig } from '../../../lib'
+import { Assets } from 'assets-webpack-plugin'
+import { PageTag } from './ssr/full-render'
 
 let assets: Assets
 
@@ -22,8 +23,6 @@ const ensureAssets = (runtimeConfig: RuntimeConfig) => {
         throw new Error(`Cannot read assets file from ${assetsFile}`)
     }
 }
-
-const watchMode = process.env.START_WATCH_MODE === 'true'
 
 export const setDefaultAssets = (buildConfig: BuildConfig) => {
     // When running in dev mode, we don't use assets.json so we need to prime
@@ -49,38 +48,10 @@ export function getAssetLocations(runtimeConfig: RuntimeConfig) {
     return assets
 }
 
-/**
- * Returns a HTML snippet for all CSS assets
- * We add the timestamp in watch mode to support hot reloading with the ExtractTextWebpackPlugin
- */
-export const getCssAssetHtml = (runtimeConfig: RuntimeConfig) => {
+export function getAssets(runtimeConfig: RuntimeConfig) {
     ensureAssets(runtimeConfig)
-    return `<link rel="stylesheet" type="text/css" id="css-main" href="${assets.main.css}${watchMode
-        ? '?' + Date.now()
-        : ''}" />`
+    return assets
 }
-
-/** Returns a HTML snippet for all JavaScript assets */
-export const getJsAssetHtml = (runtimeConfig: RuntimeConfig) => {
-    ensureAssets(runtimeConfig)
-    return `<script src="${assets.vendor.js}"></script>
-    <script src="${assets.main.js}" async></script>`
-}
-
-/** Inserts all assets into a given HTML document string */
-export const addAssetsToHtml = (html: string, runtimeConfig: RuntimeConfig) => {
-    ensureAssets(runtimeConfig)
-    let modifiedHtml = html
-
-    if (html.indexOf(assets.main.css) === -1) {
-        modifiedHtml = modifiedHtml.replace('</head>', getCssAssetHtml(runtimeConfig) + '</head>')
-    }
-    if (html.indexOf(assets.main.js) === -1) {
-        modifiedHtml = modifiedHtml.replace('</body>', getJsAssetHtml(runtimeConfig) + '</body>')
-    }
-    return modifiedHtml
-}
-
 export const getAbsoluteAssetPath = (runtimeConfig: RuntimeConfig, asset: string) => {
     const staticPath = runtimeConfig.PUBLIC_PATH + runtimeConfig.ASSETS_PATH_PREFIX
     let relativeAsset = asset.slice(staticPath.length)
@@ -89,4 +60,33 @@ export const getAbsoluteAssetPath = (runtimeConfig: RuntimeConfig, asset: string
     }
 
     return path.resolve(runtimeConfig.ASSETS_PATH, relativeAsset)
+}
+
+export function getHeadAssets(buildAssets: Assets): PageTag[] {
+    return Object.keys(buildAssets)
+        .filter(chunkName => {
+            const chunk = buildAssets[chunkName]
+            return chunk.css
+        })
+        .map(chunkName => ({
+            tag: `<link id="css-main" type="text/css" rel="stylesheet" href="${
+                buildAssets[chunkName].css
+            }">`,
+        }))
+}
+
+export function getBodyAssets(buildAssets: Assets): PageTag[] {
+    const chunkNames = Object.keys(buildAssets)
+        // Filter assets which are not .js and not main/vendor
+        .filter(chunkName => {
+            if (chunkName === 'main' || chunkName === 'vendor') {
+                return false
+            }
+            const chunk = buildAssets[chunkName]
+            return !!chunk.js
+        })
+
+    return ['vendor', ...chunkNames, 'main'].map(chunkName => ({
+        tag: `<script src="${buildAssets[chunkName].js}"></script>`,
+    }))
 }

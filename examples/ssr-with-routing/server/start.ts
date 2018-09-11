@@ -1,8 +1,8 @@
 import { createServer } from '../../../lib/runtime/server'
 import { createSsrMiddleware } from '../../../lib/runtime/server/ssr'
 import { createConsoleLogger } from '../../../lib/runtime/universal'
+import { renderHtml } from '../../../lib/runtime/server/ssr/helpers/render-html'
 import { renderApp } from './render-app'
-import { renderHtml } from './render-html'
 
 const log = createConsoleLogger()
 
