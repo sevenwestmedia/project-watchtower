@@ -3,6 +3,8 @@
     "compilerOptions": {
         "module": "esnext",
         "outDir": "./dist-es",
-        "declaration": false
-    }
+        "declaration": false,
+        "noEmit": false
+    },
+    "include": ["lib"]
 }
