@@ -13,6 +13,7 @@ import { hasLog } from '../middleware/ensure-request-log-middleware'
 import { getRuntimeConfig } from '../../config/config'
 import { PromiseTracker } from '../../util/promise-tracker'
 import { getAssetLocations, getHeadAssets, getBodyAssets } from '../assets'
+import { Assets } from 'assets-webpack-plugin'
 
 export interface RenderContext<SSRRequestProps = object> {
     completionNotifier: PromiseCompletionSource<{}>
@@ -48,6 +49,7 @@ export type ServerSideRenderMiddlewareOptions<SSRRequestProps extends object> = 
     renderApp: RenderApp<SSRRequestProps>
     renderHtml: RenderHtmlParams<SSRRequestProps>
     errorLocation: string
+    createPageTags?: (options: { buildAssets: Assets; helmetTags: string[] }) => PageTags
 }
 
 export const createSsrMiddleware = <SSRRequestProps extends object>(
@@ -117,10 +119,12 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
                 helmetTags.push(result.head.link.toString())
             }
 
-            const pageTags: PageTags = {
-                head: [...helmetTags.map(tag => ({ tag })), ...getHeadAssets(buildAssets)],
-                body: [...getBodyAssets(buildAssets)],
-            }
+            const pageTags: PageTags = options.createPageTags
+                ? options.createPageTags({ buildAssets, helmetTags })
+                : {
+                      head: [...helmetTags.map(tag => ({ tag })), ...getHeadAssets(buildAssets)],
+                      body: [...getBodyAssets(buildAssets)],
+                  }
 
             return options.renderHtml({
                 head: result.head,
