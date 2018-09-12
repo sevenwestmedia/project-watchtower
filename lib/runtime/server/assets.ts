@@ -79,14 +79,18 @@ export function getBodyAssets(buildAssets: Assets): PageTag[] {
     const chunkNames = Object.keys(buildAssets)
         // Filter assets which are not .js and not main/vendor
         .filter(chunkName => {
-            if (chunkName === 'main' || chunkName === 'vendor') {
+            if (chunkName === 'main' || chunkName === 'vendor' || chunkName === 'manifest') {
                 return false
             }
             const chunk = buildAssets[chunkName]
             return !!chunk.js
         })
 
-    return ['vendor', ...chunkNames, 'main'].map(chunkName => ({
-        tag: `<script src="${buildAssets[chunkName].js}"></script>`,
-    }))
+    return ['manifest', 'vendor', ...chunkNames, 'main']
+        .filter(chunkName => buildAssets[chunkName])
+        .map(chunkName => {
+            return {
+                tag: `<script src="${buildAssets[chunkName].js}"></script>`,
+            }
+        })
 }
