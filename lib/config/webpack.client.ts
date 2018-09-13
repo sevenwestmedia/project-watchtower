@@ -6,7 +6,6 @@ import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as AssetsPlugin from 'assets-webpack-plugin'
 import * as HtmlPlugin from 'html-webpack-plugin'
 import { updateAssetLocations } from '../runtime/server/assets'
-import { Assets } from '../types'
 import { BuildConfig } from '../../lib'
 import { getAssetsFile } from '../runtime/server'
 import { CreateWebpackConfig } from './index'
@@ -19,7 +18,7 @@ const getPlugins = (buildConfig: BuildConfig) => [
     new AssetsPlugin({
         filename: path.relative(process.cwd(), getAssetsFile(buildConfig.OUTPUT)),
         processOutput: assets => {
-            updateAssetLocations((assets as any) as Assets)
+            updateAssetLocations(assets)
             return JSON.stringify(assets)
         },
     }),

@@ -1,17 +1,6 @@
 import * as webpack from 'webpack'
 import { CreateWebpackConfig } from '../config/index'
 
-/** Created assets in the webpack build */
-export interface Assets {
-    vendor: {
-        js: string
-    }
-    main: {
-        js: string
-        css: string
-    }
-}
-
 export interface RuntimeConfig {
     /** The url prefix which static files can load from */
     ASSETS_PATH_PREFIX: string

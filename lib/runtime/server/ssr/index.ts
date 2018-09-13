@@ -1,6 +1,6 @@
 export { WatchtowerEvents } from './render-events'
 export { RenderMarkup } from './render-app-to-string'
-export { renderPageContents, Assets, ServerSideRenderOptions } from './full-render'
+export { renderPageContents, PageTags, ServerSideRenderOptions } from './full-render'
 export {
     ServerRenderResult,
     ServerRenderResultType,
