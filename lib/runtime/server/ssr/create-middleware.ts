@@ -42,6 +42,14 @@ export type RenderHtmlParams<SSRRequestProps extends object> = (
     },
 ) => string
 
+export type CreatePageTags<SSRRequestProps> = (
+    options: {
+        buildAssets: Assets
+        helmetTags: string[]
+        renderContext: RenderContext<SSRRequestProps>
+    },
+) => PageTags
+
 export type ServerSideRenderMiddlewareOptions<SSRRequestProps extends object> = {
     app: Express & { log: Logger }
     ssrTimeoutMs: number
@@ -49,7 +57,7 @@ export type ServerSideRenderMiddlewareOptions<SSRRequestProps extends object> = 
     renderApp: RenderApp<SSRRequestProps>
     renderHtml: RenderHtmlParams<SSRRequestProps>
     errorLocation: string
-    createPageTags?: (options: { buildAssets: Assets; helmetTags: string[] }) => PageTags
+    createPageTags?: CreatePageTags<SSRRequestProps>
 }
 
 export const createSsrMiddleware = <SSRRequestProps extends object>(
@@ -120,7 +128,7 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
             }
 
             const pageTags: PageTags = options.createPageTags
-                ? options.createPageTags({ buildAssets, helmetTags })
+                ? options.createPageTags({ buildAssets, helmetTags, renderContext })
                 : {
                       head: [...helmetTags.map(tag => ({ tag })), ...getHeadAssets(buildAssets)],
                       body: [...getBodyAssets(buildAssets)],
