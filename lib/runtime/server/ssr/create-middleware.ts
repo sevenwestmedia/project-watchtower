@@ -6,6 +6,7 @@ import {
     PageTags,
     RenderMarkup,
     ServerRenderResultType,
+    transferState,
 } from './'
 import { Logger } from '../../universal'
 import { HelmetData } from 'react-helmet'
@@ -14,6 +15,7 @@ import { getRuntimeConfig } from '../../config/config'
 import { PromiseTracker } from '../../util/promise-tracker'
 import { getAssetLocations, getHeadAssets, getBodyAssets } from '../assets'
 import { Assets } from 'assets-webpack-plugin'
+import { PageTag } from './full-render'
 
 export interface RenderContext<SSRRequestProps = object> {
     /** This holds the app state which needs to be kept between SSR
@@ -36,7 +38,7 @@ export type RenderApp<SSRRequestProps extends object> = (
 export type RenderHtmlParams<SSRRequestProps extends object> = {
     head: HelmetData | undefined
     renderMarkup: RenderMarkup
-        pageTags: PageTags
+    pageTags: PageTags
     context: RenderContext<SSRRequestProps>
     req: Request
 }
@@ -57,7 +59,7 @@ export type ServerSideRenderMiddlewareOptions<SSRRequestProps extends object> = 
     ssrTimeoutMs: number
     setupRequest: (req: Request, promiseTracker: PromiseTracker) => Promise<SSRRequestProps>
     renderApp: RenderApp<SSRRequestProps>
-    renderHtml: RenderHtmlParams<SSRRequestProps>
+    renderHtml: RenderHtml<SSRRequestProps>
     errorLocation: string
     createPageTags?: CreatePageTags<SSRRequestProps>
     pageNotFoundLocation: string
@@ -142,8 +144,8 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
                     ...getHeadAssets(buildAssets),
                     ...stateTransfers,
                 ],
-                      body: [...getBodyAssets(buildAssets)],
-                  }
+                body: [...getBodyAssets(buildAssets)],
+            }
 
             return options.renderHtml({
                 head: result.head,

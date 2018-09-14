@@ -1,13 +1,6 @@
-import { RenderMarkup } from '../render-app-to-string'
-import { PageTags } from '../full-render'
+import { RenderHtml } from '../create-middleware'
 
-export function renderHtml({
-    renderMarkup,
-    pageTags,
-}: {
-    renderMarkup: RenderMarkup
-    pageTags: PageTags
-}) {
+export const renderHtml: RenderHtml<any> = ({ pageTags, renderMarkup }) => {
     return `<!DOCTYPE html>
 <html lang="en">
     <head>
