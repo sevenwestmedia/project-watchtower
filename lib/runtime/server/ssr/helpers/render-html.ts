@@ -14,7 +14,6 @@ export const renderHtml: RenderHtml<any> = ({ pageTags, renderMarkup }) => {
         <div id="root">${renderMarkup.html}</div>
         ${pageTags.body.map(bodyAsset => bodyAsset.tag).join(`
         `)}
-    )}
     </body>
 </html>`
 }
