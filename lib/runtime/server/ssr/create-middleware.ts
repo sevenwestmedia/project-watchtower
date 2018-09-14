@@ -138,14 +138,16 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
                 })
             }
 
-            const pageTags: PageTags = {
-                head: [
-                    ...helmetTags.map(tag => ({ tag })),
-                    ...getHeadAssets(buildAssets),
-                    ...stateTransfers,
-                ],
-                body: [...getBodyAssets(buildAssets)],
-            }
+            const pageTags: PageTags = options.createPageTags
+                ? options.createPageTags({ buildAssets, helmetTags, renderContext })
+                : {
+                      head: [
+                          ...helmetTags.map(tag => ({ tag })),
+                          ...getHeadAssets(buildAssets),
+                          ...stateTransfers,
+                      ],
+                      body: [...getBodyAssets(buildAssets)],
+                  }
 
             return options.renderHtml({
                 head: result.head,
