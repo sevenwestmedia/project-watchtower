@@ -1,5 +1,2 @@
 export * from './errors'
-export {
-    WatchtowerBrowserRouter,
-    Props as WatchtowerBrowserRouterProps,
-} from './watchtower-browser-router'
+export { WatchtowerBrowserRouter } from './watchtower-browser-router'
