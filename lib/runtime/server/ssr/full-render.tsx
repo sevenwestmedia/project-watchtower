@@ -2,21 +2,22 @@ import { PromiseTracker, formatElapsed, Logger } from '../../universal'
 import resolveAllData from './helpers/recursive-task-resolver'
 import { routerContextHandler } from './router-context-handler'
 import * as ServerRenderResults from './server-render-results'
-import { renderAppToString, CreateAppElement } from './render-app-to-string'
+import { renderApp, CreateAppElement } from './render-app-to-string'
 import { WatchtowerEvents } from './render-events'
 import { Status404Error } from './errors'
 
 export { PromiseTracker }
 
-export interface RenderOptions {
+export interface RenderOptions<RenderResult> {
     log: Logger
     errorLocation: string
     pageNotFoundLocation: string
     appRender: CreateAppElement
     events?: WatchtowerEvents
+    renderFn: (element: React.ReactElement<any>) => RenderResult
 }
 
-export interface ServerSideRenderOptions extends RenderOptions {
+export interface ServerSideRenderOptions<RenderResult> extends RenderOptions<RenderResult> {
     ssrTimeoutMs: number
     /** Used when the request url is re-written to reset the SSR request state */
     resetRequest: (location: string) => Promise<any>
@@ -32,14 +33,14 @@ export interface PageTags {
     body: PageTag[]
 }
 
-async function renderErrorRoute<SSRRequestProps extends object>(
+async function renderErrorRoute<SSRRequestProps extends object, RenderResult>(
     ssrRequestProps: SSRRequestProps,
-    options: ServerSideRenderOptions,
+    options: ServerSideRenderOptions<RenderResult>,
     currentRenderLocation: string,
     promiseTracker: PromiseTracker,
     err: Error,
     startTime: [number, number],
-): Promise<ServerRenderResults.ServerRenderResult<SSRRequestProps>> {
+): Promise<ServerRenderResults.ServerRenderResult<SSRRequestProps, RenderResult>> {
     const errorRenderOptions =
         err instanceof Status404Error
             ? { location: options.pageNotFoundLocation, status: 404 }
@@ -72,13 +73,13 @@ async function renderErrorRoute<SSRRequestProps extends object>(
     return errorRender
 }
 
-function performRender<SSRRequestProps extends object>(
+function performRender<SSRRequestProps extends object, RenderResult>(
     ssrRequestProps: SSRRequestProps,
-    options: ServerSideRenderOptions,
+    options: ServerSideRenderOptions<RenderResult>,
     renderLocation: string,
     promiseTracker: PromiseTracker,
     startTime: [number, number],
-): ServerRenderResults.ServerRenderResult<SSRRequestProps> {
+): ServerRenderResults.ServerRenderResult<SSRRequestProps, RenderResult> {
     // We need to capture the store before we render
     // as any changes caused by the render will not be
     // included in the rendered content
@@ -87,8 +88,9 @@ function performRender<SSRRequestProps extends object>(
     } as any
 
     try {
-        const renderResult = renderAppToString(
+        const renderResult = renderApp(
             renderLocation,
+            options.renderFn,
             options.log,
             options.appRender,
             promiseTracker,
@@ -114,9 +116,9 @@ function performRender<SSRRequestProps extends object>(
     }
 }
 
-async function renderWithErrorPageFallback<SSRRequestProps extends object>(
+async function renderWithErrorPageFallback<SSRRequestProps extends object, RenderResult>(
     ssrRequestProps: SSRRequestProps,
-    options: ServerSideRenderOptions,
+    options: ServerSideRenderOptions<RenderResult>,
     renderLocation: string,
     promiseTracker: PromiseTracker,
     startTime: [number, number],
@@ -173,12 +175,12 @@ async function renderWithErrorPageFallback<SSRRequestProps extends object>(
     }
 }
 
-export async function renderPageContents<SSRRequestProps extends object>(
+export async function renderPageContents<SSRRequestProps extends object, RenderResult>(
     ssrRequestProps: SSRRequestProps,
-    options: ServerSideRenderOptions,
+    options: ServerSideRenderOptions<RenderResult>,
     location: string,
     promiseTracker: PromiseTracker,
-): Promise<ServerRenderResults.ServerRenderResult<SSRRequestProps>> {
+): Promise<ServerRenderResults.ServerRenderResult<SSRRequestProps, RenderResult>> {
     const startTime = process.hrtime()
 
     try {

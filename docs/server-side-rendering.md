@@ -3,7 +3,7 @@ Project Watchtower also provides a large amount of server side rendering infrast
 
 Server side rendering is quite a complex issue when you take into account local development, styles, data transfer and other issues.
 
-Project-watchtower supports both glamor and scss styles.
+Project-watchtower supports scss styles.
 
 ## Usage
 By default the server entrypoint is `server/start.ts`, you can override this in `config/config.js` by setting `SERVER_ENTRY`.

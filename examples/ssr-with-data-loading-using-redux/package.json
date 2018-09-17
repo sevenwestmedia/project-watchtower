@@ -1,16 +1,16 @@
 {
-  "name": "ssr-with-data-loading-using-redux",
-  "version": "1.0.0",
-  "main": "dist/server.js",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/redux": "^3.6.0",
-    "redux": "^4.0.0"
-  },
-  "dependencies": {
-    "@types/react-redux": "^6.0.6",
-    "@types/redux-thunk": "^2.1.0",
-    "react-redux": "^5.0.7",
-    "redux-thunk": "^2.3.0"
-  }
+    "name": "ssr-with-data-loading-using-redux",
+    "version": "1.0.0",
+    "main": "dist/server.js",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/redux": "^3.6.0",
+        "@types/react-redux": "^6.0.6",
+        "@types/redux-thunk": "^2.1.0"
+    },
+    "dependencies": {
+        "redux": "^4.0.0",
+        "react-redux": "^5.0.7",
+        "redux-thunk": "^2.3.0"
+    }
 }
