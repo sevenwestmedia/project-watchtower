@@ -88,9 +88,22 @@ export function getBodyAssets(buildAssets: Assets): PageTag[] {
 
     return ['manifest', 'vendor', ...chunkNames, 'main']
         .filter(chunkName => buildAssets[chunkName])
-        .map(chunkName => {
-            return {
-                tag: `<script src="${buildAssets[chunkName].js}"></script>`,
+        .reduce<PageTag[]>((acc, chunkName) => {
+            // Turns out, webpack types are wrong, can be an array
+            const jsAsset = buildAssets[chunkName].js as string | string[]
+
+            if (Array.isArray(jsAsset)) {
+                acc.push(
+                    ...jsAsset.map(file => ({
+                        tag: `<script src="${file}"></script>`,
+                    })),
+                )
+            } else {
+                acc.push({
+                    tag: `<script src="${buildAssets[chunkName].js}"></script>`,
+                })
             }
-        })
+
+            return acc
+        }, [])
 }

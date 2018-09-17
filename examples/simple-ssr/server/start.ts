@@ -2,8 +2,8 @@ import { createServer } from '../../../lib/runtime/server'
 import { createSsrMiddleware } from '../../../lib/runtime/server/ssr'
 import { createConsoleLogger } from '../../../lib/runtime/universal'
 import { renderApp } from './render-app'
-import { renderHtml } from '../../../lib/runtime/server/ssr/helpers/render-html'
 import { AppState } from '../common/App'
+import { renderHtml } from '../../../lib/runtime/server/ssr/helpers/render-html'
 
 const log = createConsoleLogger()
 
@@ -20,6 +20,7 @@ createServer({
             renderApp: ({ context }) => renderApp(context.ssrRequestProps),
             renderHtml,
             errorLocation: '/error',
+            pageNotFoundLocation: '/page-not-found',
             setupRequest: async () => ({
                 // We can setup our initial app state in setupRequest
                 // It can also be updated during each SSR pass

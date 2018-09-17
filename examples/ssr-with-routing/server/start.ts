@@ -15,6 +15,7 @@ createServer({
             renderApp,
             renderHtml,
             errorLocation: '/error',
+            pageNotFoundLocation: '/page-not-found',
             setupRequest: async () => ({}),
         })
 

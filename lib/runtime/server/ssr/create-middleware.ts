@@ -6,23 +6,25 @@ import {
     PageTags,
     RenderMarkup,
     ServerRenderResultType,
+    transferState,
 } from './'
-import { PromiseCompletionSource, Logger } from '../../universal'
+import { Logger } from '../../universal'
 import { HelmetData } from 'react-helmet'
 import { hasLog } from '../middleware/ensure-request-log-middleware'
 import { getRuntimeConfig } from '../../config/config'
 import { PromiseTracker } from '../../util/promise-tracker'
 import { getAssetLocations, getHeadAssets, getBodyAssets } from '../assets'
 import { Assets } from 'assets-webpack-plugin'
+import { PageTag } from './full-render'
 
 export interface RenderContext<SSRRequestProps = object> {
-    completionNotifier: PromiseCompletionSource<{}>
-    triggeredLoad: boolean
     /** This holds the app state which needs to be kept between SSR
      * passes. It is essentially a state bag, it could include a redux store,
      * or any other state store which needs to persist between render passes
      */
     ssrRequestProps: SSRRequestProps
+
+    promiseTracker: PromiseTracker
 }
 
 export type RenderApp<SSRRequestProps extends object> = (
@@ -32,20 +34,23 @@ export type RenderApp<SSRRequestProps extends object> = (
         req: Request
     },
 ) => JSX.Element
-export type RenderHtmlParams<SSRRequestProps extends object> = (
-    params: {
-        head: HelmetData | undefined
-        renderMarkup: RenderMarkup
-        pageTags: PageTags
-        context: RenderContext<SSRRequestProps>
-        req: Request
-    },
+
+export type RenderHtmlParams<SSRRequestProps extends object> = {
+    head: HelmetData | undefined
+    renderMarkup: RenderMarkup
+    pageTags: PageTags
+    context: RenderContext<SSRRequestProps>
+    req: Request
+}
+export type RenderHtml<SSRRequestProps extends object> = (
+    params: RenderHtmlParams<SSRRequestProps>,
 ) => string
 
 export type CreatePageTags<SSRRequestProps> = (
     options: {
         buildAssets: Assets
         helmetTags: string[]
+        stateTransfers: PageTag[]
         renderContext: RenderContext<SSRRequestProps>
     },
 ) => PageTags
@@ -55,9 +60,10 @@ export type ServerSideRenderMiddlewareOptions<SSRRequestProps extends object> = 
     ssrTimeoutMs: number
     setupRequest: (req: Request, promiseTracker: PromiseTracker) => Promise<SSRRequestProps>
     renderApp: RenderApp<SSRRequestProps>
-    renderHtml: RenderHtmlParams<SSRRequestProps>
+    renderHtml: RenderHtml<SSRRequestProps>
     errorLocation: string
     createPageTags?: CreatePageTags<SSRRequestProps>
+    pageNotFoundLocation: string
 }
 
 export const createSsrMiddleware = <SSRRequestProps extends object>(
@@ -71,6 +77,7 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
             console.error('Skipping SSR middleware due to missing req.log key')
             return next()
         }
+
         const promiseTracker = new PromiseTracker()
         const appState = await options.setupRequest(req, promiseTracker)
         let renderContext: RenderContext<SSRRequestProps>
@@ -78,34 +85,29 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
         const ssrOptions: ServerSideRenderOptions = {
             log: req.log,
             errorLocation: options.errorLocation,
+            pageNotFoundLocation: options.pageNotFoundLocation,
             ssrTimeoutMs: options.ssrTimeoutMs,
             appRender: () => {
                 renderContext = {
-                    completionNotifier: new PromiseCompletionSource(),
-                    triggeredLoad: false,
                     ssrRequestProps: appState,
+                    promiseTracker,
                 }
 
-                return options.renderApp({ log: req.log, context: renderContext, req })
+                return options.renderApp({
+                    log: req.log,
+                    context: renderContext,
+                    req,
+                })
             },
             events: {
-                renderPerformed: () => {
-                    // loadAllCompleted will not fire if nothing started loading
-                    // this is needed to not hang the return
-                    if (
-                        renderContext.triggeredLoad &&
-                        !renderContext.completionNotifier.completed
-                    ) {
-                        promiseTracker.track(renderContext.completionNotifier.promise)
-                    }
-                },
+                renderPerformed: () => {},
             },
         }
 
         const pageRenderResult = await renderPageContents<SSRRequestProps>(
             appState,
             ssrOptions,
-            req,
+            req.url,
             promiseTracker,
         )
 
@@ -127,10 +129,24 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
                 helmetTags.push(result.head.link.toString())
             }
 
+            const stateTransfers: PageTag[] = []
+            // When watchtower renders an error, the client needs to know
+            // so it can hydrate the error location. The WatchtowerBrowserRouter takes
+            // care of this
+            if (result.renderLocation !== req.url) {
+                stateTransfers.push({
+                    tag: transferState('watchtower_hydrate_location', result.renderLocation),
+                })
+            }
+
             const pageTags: PageTags = options.createPageTags
-                ? options.createPageTags({ buildAssets, helmetTags, renderContext })
+                ? options.createPageTags({ buildAssets, helmetTags, stateTransfers, renderContext })
                 : {
-                      head: [...helmetTags.map(tag => ({ tag })), ...getHeadAssets(buildAssets)],
+                      head: [
+                          ...helmetTags.map(tag => ({ tag })),
+                          ...getHeadAssets(buildAssets),
+                          ...stateTransfers,
+                      ],
                       body: [...getBodyAssets(buildAssets)],
                   }
 

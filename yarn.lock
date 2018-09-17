@@ -10,9 +10,9 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@types/assets-webpack-plugin@^3.5.0":
-  version "3.5.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/assets-webpack-plugin/-/assets-webpack-plugin-3.5.0.tgz#a3ce3e24de5295f9939dcedb3b1737ca5ec4549a"
+"@types/assets-webpack-plugin@^3.5.1":
+  version "3.5.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/assets-webpack-plugin/-/assets-webpack-plugin-3.5.1.tgz#87f8517e0cdbf75449d99eb5cf1703f0158d31ba"
   dependencies:
     "@types/webpack" "*"
 
@@ -35,6 +35,10 @@
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/connect/-/connect-3.4.30.tgz#0a8ede309ce0ebdba2f0534e574692511dd71eb6"
   dependencies:
     "@types/node" "*"
+
+"@types/cookiejar@*":
+  version "2.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/cookiejar/-/cookiejar-2.1.0.tgz#4b7daf2c51696cfc70b942c11690528229d1a1ce"
 
 "@types/core-js@^0.9.41":
   version "0.9.46"
@@ -191,6 +195,19 @@
 "@types/source-map@*":
   version "0.5.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/source-map/-/source-map-0.5.0.tgz#dd34bbd8e32fe4e74f2e3d8ac07f8aa5b45a47ac"
+
+"@types/superagent@*":
+  version "3.8.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/superagent/-/superagent-3.8.4.tgz#24a5973c7d1a9c024b4bbda742a79267c33fb86a"
+  dependencies:
+    "@types/cookiejar" "*"
+    "@types/node" "*"
+
+"@types/supertest@^2.0.5":
+  version "2.0.5"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/supertest/-/supertest-2.0.5.tgz#18d082a667eaed22759be98f4923e0061ae70c62"
+  dependencies:
+    "@types/superagent" "*"
 
 "@types/tapable@*":
   version "0.2.3"
@@ -504,14 +521,14 @@ assert@^1.1.1, assert@^1.3.0:
   dependencies:
     util "0.10.3"
 
-assets-webpack-plugin@^3.5.1:
-  version "3.5.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/assets-webpack-plugin/-/assets-webpack-plugin-3.5.1.tgz#931ce0d66d42e88ed5e7f18d65522943c57a387d"
+assets-webpack-plugin@^3.8.1:
+  version "3.9.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/assets-webpack-plugin/-/assets-webpack-plugin-3.9.6.tgz#a8b5f68510011301d1e33121040301523d1a0be3"
   dependencies:
-    camelcase "^1.2.1"
+    camelcase "^5.0.0"
     escape-string-regexp "^1.0.3"
-    lodash.assign "^3.2.0"
-    lodash.merge "^3.3.2"
+    lodash.assign "^4.2.0"
+    lodash.merge "^4.6.1"
     mkdirp "^0.5.1"
 
 assign-symbols@^1.0.0:
@@ -1117,6 +1134,10 @@ camelcase@^4.0.0, camelcase@^4.1.0:
   version "4.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
+camelcase@^5.0.0:
+  version "5.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/camelcase/-/camelcase-5.0.0.tgz#03295527d58bd3cd4aa75363f35b2e8d97be2f42"
+
 caniuse-api@^1.5.2:
   version "1.6.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/caniuse-api/-/caniuse-api-1.6.1.tgz#b534e7c734c4f81ec5fbe8aca2ad24354b962c6c"
@@ -1398,6 +1419,12 @@ colors@~0.6.2:
   version "0.6.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/colors/-/colors-0.6.2.tgz#2423fe6678ac0c5dae8852e5d0e5be08c997abcc"
 
+combined-stream@1.0.6:
+  version "1.0.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/combined-stream/-/combined-stream-1.0.6.tgz#723e7df6e801ac5613113a7e445a9b69cb632818"
+  dependencies:
+    delayed-stream "~1.0.0"
+
 combined-stream@^1.0.5, combined-stream@~1.0.5:
   version "1.0.5"
   resolved "https://nexus.swmdigital.io/repository/js-combined/combined-stream/-/combined-stream-1.0.5.tgz#938370a57b4a51dea2c77c15d5c5fdf895164009"
@@ -1418,7 +1445,7 @@ compare-versions@^3.1.0:
   version "3.3.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/compare-versions/-/compare-versions-3.3.1.tgz#1ede3172b713c15f7c7beb98cb74d2d82576dad3"
 
-component-emitter@^1.2.1:
+component-emitter@^1.2.0, component-emitter@^1.2.1:
   version "1.2.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/component-emitter/-/component-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"
 
@@ -1497,6 +1524,10 @@ cookie-signature@1.0.6:
 cookie@0.3.1:
   version "0.3.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
+
+cookiejar@^2.1.0:
+  version "2.1.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/cookiejar/-/cookiejar-2.1.2.tgz#dd8a235530752f988f9a0844f3fc589e3111125c"
 
 copy-descriptor@^0.1.0:
   version "0.1.1"
@@ -2439,6 +2470,10 @@ extend-shallow@^3.0.0, extend-shallow@^3.0.2:
     assign-symbols "^1.0.0"
     is-extendable "^1.0.1"
 
+extend@^3.0.0:
+  version "3.0.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
+
 extend@~3.0.0, extend@~3.0.1:
   version "3.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
@@ -2673,6 +2708,14 @@ forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
 
+form-data@^2.3.1:
+  version "2.3.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/form-data/-/form-data-2.3.2.tgz#4970498be604c20c005d4f5c23aecd21d6b49099"
+  dependencies:
+    asynckit "^0.4.0"
+    combined-stream "1.0.6"
+    mime-types "^2.1.12"
+
 form-data@~2.1.1:
   version "2.1.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/form-data/-/form-data-2.1.4.tgz#33c183acf193276ecaa98143a69e94bfee1750d1"
@@ -2688,6 +2731,10 @@ form-data@~2.3.1:
     asynckit "^0.4.0"
     combined-stream "^1.0.5"
     mime-types "^2.1.12"
+
+formidable@^1.1.1:
+  version "1.2.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/formidable/-/formidable-1.2.1.tgz#70fb7ca0290ee6ff961090415f4b3df3d2082659"
 
 forwarded@~0.1.0:
   version "0.1.0"
@@ -4343,14 +4390,6 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
-lodash._arraycopy@^3.0.0:
-  version "3.0.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/lodash._arraycopy/-/lodash._arraycopy-3.0.0.tgz#76e7b7c1f1fb92547374878a562ed06a3e50f6e1"
-
-lodash._arrayeach@^3.0.0:
-  version "3.0.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/lodash._arrayeach/-/lodash._arrayeach-3.0.0.tgz#bab156b2a90d3f1bbd5c653403349e5e5933ef9e"
-
 lodash._baseassign@^3.0.0:
   version "3.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash._baseassign/-/lodash._baseassign-3.2.0.tgz#8c38a099500f215ad09e59f1722fd0c52bfe0a4e"
@@ -4361,10 +4400,6 @@ lodash._baseassign@^3.0.0:
 lodash._basecopy@^3.0.0:
   version "3.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash._basecopy/-/lodash._basecopy-3.0.1.tgz#8da0e6a876cf344c0ad8a54882111dd3c5c7ca36"
-
-lodash._basefor@^3.0.0:
-  version "3.0.3"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/lodash._basefor/-/lodash._basefor-3.0.3.tgz#7550b4e9218ef09fad24343b612021c79b4c20c2"
 
 lodash._bindcallback@^3.0.0:
   version "3.0.1"
@@ -4386,7 +4421,7 @@ lodash._isiterateecall@^3.0.0:
   version "3.0.9"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash._isiterateecall/-/lodash._isiterateecall-3.0.9.tgz#5203ad7ba425fae842460e696db9cf3e6aac057c"
 
-lodash.assign@^3.0.0, lodash.assign@^3.2.0:
+lodash.assign@^3.0.0:
   version "3.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.assign/-/lodash.assign-3.2.0.tgz#3ce9f0234b4b2223e296b8fa0ac1fee8ebca64fa"
   dependencies:
@@ -4437,18 +4472,6 @@ lodash.isequal@^4.5.0:
   version "4.5.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
 
-lodash.isplainobject@^3.0.0:
-  version "3.2.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.isplainobject/-/lodash.isplainobject-3.2.0.tgz#9a8238ae16b200432960cd7346512d0123fbf4c5"
-  dependencies:
-    lodash._basefor "^3.0.0"
-    lodash.isarguments "^3.0.0"
-    lodash.keysin "^3.0.0"
-
-lodash.istypedarray@^3.0.0:
-  version "3.0.6"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.istypedarray/-/lodash.istypedarray-3.0.6.tgz#c9a477498607501d8e8494d283b87c39281cef62"
-
 lodash.kebabcase@^4.0.0:
   version "4.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.kebabcase/-/lodash.kebabcase-4.1.1.tgz#8489b1cb0d29ff88195cceca448ff6d6cc295c36"
@@ -4461,32 +4484,13 @@ lodash.keys@^3.0.0:
     lodash.isarguments "^3.0.0"
     lodash.isarray "^3.0.0"
 
-lodash.keysin@^3.0.0:
-  version "3.0.8"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.keysin/-/lodash.keysin-3.0.8.tgz#22c4493ebbedb1427962a54b445b2c8a767fb47f"
-  dependencies:
-    lodash.isarguments "^3.0.0"
-    lodash.isarray "^3.0.0"
-
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
 
-lodash.merge@^3.3.2:
-  version "3.3.2"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.merge/-/lodash.merge-3.3.2.tgz#0d90d93ed637b1878437bb3e21601260d7afe994"
-  dependencies:
-    lodash._arraycopy "^3.0.0"
-    lodash._arrayeach "^3.0.0"
-    lodash._createassigner "^3.0.0"
-    lodash._getnative "^3.0.0"
-    lodash.isarguments "^3.0.0"
-    lodash.isarray "^3.0.0"
-    lodash.isplainobject "^3.0.0"
-    lodash.istypedarray "^3.0.0"
-    lodash.keys "^3.0.0"
-    lodash.keysin "^3.0.0"
-    lodash.toplainobject "^3.0.0"
+lodash.merge@^4.6.1:
+  version "4.6.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.merge/-/lodash.merge-4.6.1.tgz#adc25d9cb99b9391c59624f379fbba60d7111d54"
 
 lodash.mergewith@^4.6.0:
   version "4.6.0"
@@ -4503,13 +4507,6 @@ lodash.sortby@^4.7.0:
 lodash.tail@^4.1.1:
   version "4.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.tail/-/lodash.tail-4.1.1.tgz#d2333a36d9e7717c8ad2f7cacafec7c32b444664"
-
-lodash.toplainobject@^3.0.0:
-  version "3.0.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.toplainobject/-/lodash.toplainobject-3.0.0.tgz#28790ad942d293d78aa663a07ecf7f52ca04198d"
-  dependencies:
-    lodash._basecopy "^3.0.0"
-    lodash.keysin "^3.0.0"
 
 lodash.uniq@^4.5.0:
   version "4.5.0"
@@ -4655,7 +4652,7 @@ metaviewport-parser@0.2.0:
   version "0.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/metaviewport-parser/-/metaviewport-parser-0.2.0.tgz#535c3ce1ccf6223a5025fddc6a1c36505f7e7db1"
 
-methods@~1.1.2:
+methods@^1.1.1, methods@~1.1.2:
   version "1.1.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
 
@@ -4747,6 +4744,10 @@ mime@1.3.4:
 mime@^1.3.4:
   version "1.3.6"
   resolved "https://nexus.swmdigital.io/repository/js-combined/mime/-/mime-1.3.6.tgz#591d84d3653a6b0b4a3b9df8de5aa8108e72e5e0"
+
+mime@^1.4.1:
+  version "1.6.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
 
 mimic-fn@^1.0.0:
   version "1.1.0"
@@ -5768,6 +5769,10 @@ process-nextick-args@~1.0.6:
   version "1.0.7"
   resolved "https://nexus.swmdigital.io/repository/js-combined/process-nextick-args/-/process-nextick-args-1.0.7.tgz#150e20b756590ad3f91093f25a4f2ad8bff30ba3"
 
+process-nextick-args@~2.0.0:
+  version "2.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/process-nextick-args/-/process-nextick-args-2.0.0.tgz#a37d732f4271b4ab1ad070d35508e8290788ffaa"
+
 process@^0.11.10:
   version "0.11.10"
   resolved "https://nexus.swmdigital.io/repository/js-combined/process/-/process-0.11.10.tgz#7332300e840161bda3e69a1d1d91a7d4bc16f182"
@@ -5848,6 +5853,10 @@ q@^1.1.2:
 qs@6.4.0, qs@~6.4.0:
   version "6.4.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
+
+qs@^6.5.1:
+  version "6.5.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
 
 qs@~6.5.1:
   version "6.5.1"
@@ -6055,6 +6064,18 @@ readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.6, readable
     process-nextick-args "~1.0.6"
     safe-buffer "~5.1.1"
     string_decoder "~1.0.3"
+    util-deprecate "~1.0.1"
+
+readable-stream@^2.0.5:
+  version "2.3.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/readable-stream/-/readable-stream-2.3.6.tgz#b11c27d88b8ff1fbe070643cf94b0c79ae1b0aaf"
+  dependencies:
+    core-util-is "~1.0.0"
+    inherits "~2.0.3"
+    isarray "~1.0.0"
+    process-nextick-args "~2.0.0"
+    safe-buffer "~5.1.1"
+    string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
 
 readdirp@^2.0.0:
@@ -6911,6 +6932,12 @@ string_decoder@~0.10.x:
   version "0.10.31"
   resolved "https://nexus.swmdigital.io/repository/js-combined/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
 
+string_decoder@~1.1.1:
+  version "1.1.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
+  dependencies:
+    safe-buffer "~5.1.0"
+
 stringstream@~0.0.4, stringstream@~0.0.5:
   version "0.0.5"
   resolved "https://nexus.swmdigital.io/repository/js-combined/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"
@@ -6961,6 +6988,28 @@ style-loader@^0.18.2:
   dependencies:
     loader-utils "^1.0.2"
     schema-utils "^0.3.0"
+
+superagent@3.8.2:
+  version "3.8.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/superagent/-/superagent-3.8.2.tgz#e4a11b9d047f7d3efeb3bbe536d9ec0021d16403"
+  dependencies:
+    component-emitter "^1.2.0"
+    cookiejar "^2.1.0"
+    debug "^3.1.0"
+    extend "^3.0.0"
+    form-data "^2.3.1"
+    formidable "^1.1.1"
+    methods "^1.1.1"
+    mime "^1.4.1"
+    qs "^6.5.1"
+    readable-stream "^2.0.5"
+
+supertest@^3.1.0:
+  version "3.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/supertest/-/supertest-3.1.0.tgz#f9ebaf488e60f2176021ec580bdd23ad269e7bc6"
+  dependencies:
+    methods "~1.1.2"
+    superagent "3.8.2"
 
 supports-color@^2.0.0:
   version "2.0.0"

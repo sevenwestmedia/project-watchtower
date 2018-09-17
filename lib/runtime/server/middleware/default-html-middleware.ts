@@ -5,6 +5,7 @@ import { RuntimeConfig } from '../../../'
 import { Logger } from '../../universal'
 import { renderHtml } from '../ssr/helpers/render-html'
 import { getHeadAssets, getAssets, getBodyAssets } from '../assets'
+import { PromiseTracker } from '../ssr/full-render'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -45,10 +46,16 @@ export const getDefaultHtmlMiddleware = (log: Logger, runtimeConfig: RuntimeConf
         }
     }
 
-    const middleware: express.RequestHandler = (_req, res) => {
+    const middleware: express.RequestHandler = (req, res) => {
         if (indexContent) {
             const buildAssets = getAssets(runtimeConfig)
             const indexWithAssets = renderHtml({
+                head: undefined,
+                context: {
+                    ssrRequestProps: {},
+                    promiseTracker: new PromiseTracker(),
+                },
+                req,
                 renderMarkup: {
                     css: '',
                     html: '',

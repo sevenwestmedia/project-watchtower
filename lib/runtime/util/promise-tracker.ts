@@ -1,18 +1,24 @@
 export type TrackedPromise = PromiseLike<any>
 
 export class PromiseTracker {
-    promises: TrackedPromise[] = []
+    private waitIndex = 1
+    private promises: {
+        [waitIndex: number]: TrackedPromise[]
+    } = {}
 
     track(promise: PromiseLike<any>) {
-        this.promises.push(promise)
-    }
-
-    untrack(promise: PromiseLike<any>) {
-        const index = this.promises.indexOf(promise)
-        if (index === -1) {
-            return
+        const currentWaitIndex = this.waitIndex
+        if (!this.promises[currentWaitIndex]) {
+            this.promises[currentWaitIndex] = []
         }
-        this.promises.splice(index, 1)
+        // Because we are buffering promises for later
+        // we need to catch any failures synchronously.
+        // if we don't, we will get warnings about handling promises
+        // asynchronously.
+        if ((promise as any).catch) {
+            ;(promise as any).catch(() => {})
+        }
+        this.promises[currentWaitIndex].push(promise)
     }
 
     middleware() {
@@ -28,21 +34,24 @@ export class PromiseTracker {
     }
 
     hasWork() {
-        return this.promises.length > 0
-    }
+        if (!this.promises[this.waitIndex]) {
+            return false
+        }
 
-    reset() {
-        this.promises = []
+        return this.promises[this.waitIndex].length > 0
     }
 
     waitForCompletion() {
-        const all = Promise.all([...this.promises])
+        if (!this.hasWork()) {
+            return Promise.resolve()
+        }
+
+        const all = Promise.all([...this.promises[this.waitIndex++]])
             // Use setTimeout to put the resolution of this
             //  promise back onto the event loop, this can fix
             //  issues where tests have not re-rendered before
             //  trying to find elements
             .then(() => new Promise(setTimeout))
-        this.promises = []
         return all
     }
 }

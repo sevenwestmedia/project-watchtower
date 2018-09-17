@@ -8,16 +8,20 @@ import { App, AppState } from '../common/App'
 // We can get the transferred state by using the getTransferredState function
 const state = getTransferredState<AppState>('STATE')
 
-const render = () => {
-    ReactDOM.hydrate(<App config={state.config} />, document.getElementById('root'))
-}
+if (!state) {
+    console.error('State not transferred from server, cannot start client')
+} else {
+    const render = () => {
+        ReactDOM.hydrate(<App config={state.config} />, document.getElementById('root'))
+    }
 
-render()
+    render()
 
-if (module.hot) {
-    module.hot.accept('../common/App', () => {
-        setTimeout(render)
-    })
+    if (module.hot) {
+        module.hot.accept('../common/App', () => {
+            setTimeout(render)
+        })
 
-    cssHotReload()
+        cssHotReload()
+    }
 }

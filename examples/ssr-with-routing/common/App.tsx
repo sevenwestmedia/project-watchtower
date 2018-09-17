@@ -5,6 +5,7 @@ import { Home } from './Home'
 import { NavLink } from 'react-router-dom'
 import { Topic } from './Topic'
 import { Teapot } from './Teapot'
+import { NotFound } from './NotFound'
 
 export const App: React.SFC = () => (
     <div>
@@ -18,6 +19,7 @@ export const App: React.SFC = () => (
             <Route path="/" exact component={Home} />
             <Route path="/topic/:topic" component={Topic} />
             <Route path="/teapot" component={Teapot} />
+            <Route path="/page-not-found" component={NotFound} />
         </Switch>
     </div>
 )

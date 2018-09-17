@@ -3,13 +3,13 @@ import * as ReactDOM from 'react-dom'
 import { cssHotReload } from '../../../lib/runtime/client'
 
 import { App } from '../common/App'
-import { BrowserRouter } from 'react-router-dom'
+import { WatchtowerBrowserRouter } from '../../../lib/runtime/server/ssr/watchtower-browser-router'
 
 const render = () => {
     ReactDOM.hydrate(
-        <BrowserRouter>
+        <WatchtowerBrowserRouter>
             <App />
-        </BrowserRouter>,
+        </WatchtowerBrowserRouter>,
         document.getElementById('root'),
     )
 }
