@@ -15,7 +15,7 @@ describe('Recursive Task Resolver', () => {
             return ''
         }
         render()
-        resolveAllData(testLogger, promiseTracker, render, '', 5 /* attempts */, 500 /* ms */)
+        resolveAllData(testLogger, promiseTracker, render, '/', '', 5 /* attempts */, 500 /* ms */)
             .then(
                 () => done(new Error('Expected too many recurses error')),
                 err =>
@@ -48,6 +48,7 @@ describe('Recursive Task Resolver', () => {
             testLogger,
             promiseTracker,
             render,
+            '/',
             '',
             5, // attempts
             100, // ms
