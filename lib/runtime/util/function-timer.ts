@@ -6,12 +6,21 @@ const elapsed = (hrStart: [number, number]) => {
     return util.format('%ds %dms', hrEnd[0], hrEnd[1] / 1000000)
 }
 
-const functionTimer = <T>(description: string, func: () => T, logger: Logger): T => {
+const functionTimer = <T>(
+    description: string,
+    func: () => T,
+    logger: Logger,
+    logResult?: (result: T) => string,
+): T => {
     const startTime = process.hrtime()
 
     try {
         const result = func()
-        logger.debug(`${description} took ${elapsed(startTime)}`)
+        logger.debug(
+            `${description} took ${elapsed(startTime)}${
+                logResult ? `with result ${logResult(result)}` : ''
+            }}`,
+        )
         return result
     } catch (err) {
         logger.debug(`${description} threw after ${elapsed(startTime)}`)
@@ -23,12 +32,17 @@ const functionTimerAsync = async <T>(
     description: string,
     func: () => Promise<T>,
     logger: Logger,
+    logResult?: (result: T) => string,
 ): Promise<T> => {
     const startTime = process.hrtime()
 
     try {
         const result = await func()
-        logger.debug(`Async ${description} took ${elapsed(startTime)}`)
+        logger.debug(
+            `Async ${description} took ${elapsed(startTime)}${
+                logResult ? `with result ${logResult(result)}` : ''
+            }`,
+        )
         return result
     } catch (err) {
         logger.debug({ err }, `Async ${description} threw after ${elapsed(startTime)}`)
