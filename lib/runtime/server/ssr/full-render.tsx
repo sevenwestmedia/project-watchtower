@@ -1,4 +1,4 @@
-import { PromiseTracker, elapsed, Logger } from '../../universal'
+import { PromiseTracker, formatElapsed, Logger } from '../../universal'
 import resolveAllData from './helpers/recursive-task-resolver'
 import { routerContextHandler } from './router-context-handler'
 import * as ServerRenderResults from './server-render-results'
@@ -140,7 +140,7 @@ async function renderWithErrorPageFallback<SSRRequestProps extends object>(
 
         if (options.events && options.events.beginWaitingForTasks) {
             try {
-                options.events.beginWaitingForTasks(elapsed(startTime))
+                options.events.beginWaitingForTasks(formatElapsed(process.hrtime(startTime)))
             } catch (err) {
                 // external event failed, log and continue
                 options.log.error({ err, location }, 'beginWaitingForTasks threw, continuing')
@@ -193,10 +193,10 @@ export async function renderPageContents<SSRRequestProps extends object>(
         const failure: ServerRenderResults.FailedRenderResult = {
             type: ServerRenderResults.ServerRenderResultType.Failure,
             errorMessage: 'Failed to do render',
-            elapsed: elapsed(startTime),
+            elapsed: formatElapsed(process.hrtime(startTime)),
             head: undefined,
         }
-        options.log.error({ err, location }, 'Failed to render')
+        options.log.error({ err }, 'Failed to render')
 
         return failure
     }
