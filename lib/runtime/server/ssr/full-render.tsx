@@ -18,6 +18,8 @@ export interface RenderOptions {
 
 export interface ServerSideRenderOptions extends RenderOptions {
     ssrTimeoutMs: number
+    /** Used when the request url is re-written to reset the SSR request state */
+    resetRequest: (location: string) => Promise<any>
 }
 
 export interface PageTag {
@@ -48,6 +50,9 @@ async function renderErrorRoute<SSRRequestProps extends object>(
     if (currentRenderLocation === errorRenderOptions.location) {
         throw err
     }
+    // Reset the request state, don't want it for the error route
+    options.resetRequest(errorRenderOptions.location)
+
     // Overwrite the render location with the error location
     currentRenderLocation = errorRenderOptions.location
     const errorRender = await renderWithErrorPageFallback(

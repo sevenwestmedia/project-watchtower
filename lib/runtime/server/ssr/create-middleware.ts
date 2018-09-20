@@ -16,6 +16,7 @@ import { PromiseTracker } from '../../util/promise-tracker'
 import { getAssetLocations, getHeadAssets, getBodyAssets } from '../assets'
 import { Assets } from 'assets-webpack-plugin'
 import { PageTag } from './full-render'
+import * as URL from 'url'
 
 export interface RenderContext<SSRRequestProps = object> {
     /** This holds the app state which needs to be kept between SSR
@@ -79,7 +80,8 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
         }
 
         const promiseTracker = new PromiseTracker()
-        const appState = await options.setupRequest(req, promiseTracker)
+        const initialRenderLocation = req.url
+        let appState = await options.setupRequest(req, promiseTracker)
         let renderContext: RenderContext<SSRRequestProps>
 
         const ssrOptions: ServerSideRenderOptions = {
@@ -87,6 +89,11 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
             errorLocation: options.errorLocation,
             pageNotFoundLocation: options.pageNotFoundLocation,
             ssrTimeoutMs: options.ssrTimeoutMs,
+            resetRequest: async (location: string) => {
+                req.url = location
+                req.query = URL.parse(req.url, true).query
+                appState = await options.setupRequest(req, promiseTracker)
+            },
             appRender: () => {
                 renderContext = {
                     ssrRequestProps: appState,
@@ -133,7 +140,7 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
             // When watchtower renders an error, the client needs to know
             // so it can hydrate the error location. The WatchtowerBrowserRouter takes
             // care of this
-            if (result.renderLocation !== req.url) {
+            if (result.renderLocation !== initialRenderLocation) {
                 stateTransfers.push({
                     tag: transferState('watchtower_hydrate_location', result.renderLocation),
                 })
