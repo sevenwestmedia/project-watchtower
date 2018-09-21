@@ -80,7 +80,6 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
         }
 
         const promiseTracker = new PromiseTracker()
-        const initialRenderLocation = req.url
         let appState = await options.setupRequest(req, promiseTracker)
         let renderContext: RenderContext<SSRRequestProps>
 
@@ -140,7 +139,7 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
             // When watchtower renders an error, the client needs to know
             // so it can hydrate the error location. The WatchtowerBrowserRouter takes
             // care of this
-            if (result.renderLocation !== initialRenderLocation) {
+            if (result.renderLocation !== req.originalUrl) {
                 stateTransfers.push({
                     tag: transferState('watchtower_hydrate_location', result.renderLocation),
                 })
