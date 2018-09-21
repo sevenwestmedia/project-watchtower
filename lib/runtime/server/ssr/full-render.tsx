@@ -1,4 +1,4 @@
-import { PromiseTracker, elapsed, Logger } from '../../universal'
+import { PromiseTracker, formatElapsed, Logger } from '../../universal'
 import resolveAllData from './helpers/recursive-task-resolver'
 import { routerContextHandler } from './router-context-handler'
 import * as ServerRenderResults from './server-render-results'
@@ -18,6 +18,8 @@ export interface RenderOptions {
 
 export interface ServerSideRenderOptions extends RenderOptions {
     ssrTimeoutMs: number
+    /** Used when the request url is re-written to reset the SSR request state */
+    resetRequest: (location: string) => Promise<any>
 }
 
 export interface PageTag {
@@ -48,6 +50,9 @@ async function renderErrorRoute<SSRRequestProps extends object>(
     if (currentRenderLocation === errorRenderOptions.location) {
         throw err
     }
+    // Reset the request state, don't want it for the error route
+    options.resetRequest(errorRenderOptions.location)
+
     // Overwrite the render location with the error location
     currentRenderLocation = errorRenderOptions.location
     const errorRender = await renderWithErrorPageFallback(
@@ -135,10 +140,10 @@ async function renderWithErrorPageFallback<SSRRequestProps extends object>(
 
         if (options.events && options.events.beginWaitingForTasks) {
             try {
-                options.events.beginWaitingForTasks(elapsed(startTime))
+                options.events.beginWaitingForTasks(formatElapsed(process.hrtime(startTime)))
             } catch (err) {
                 // external event failed, log and continue
-                options.log.error({ err }, 'beginWaitingForTasks threw, continuing')
+                options.log.error({ err, location }, 'beginWaitingForTasks threw, continuing')
             }
         }
 
@@ -147,6 +152,7 @@ async function renderWithErrorPageFallback<SSRRequestProps extends object>(
             promiseTracker,
             () =>
                 performRender(ssrRequestProps, options, renderLocation, promiseTracker, startTime),
+            renderLocation,
             initialRenderResult,
             10,
             options.ssrTimeoutMs,
@@ -170,7 +176,7 @@ async function renderWithErrorPageFallback<SSRRequestProps extends object>(
 export async function renderPageContents<SSRRequestProps extends object>(
     ssrRequestProps: SSRRequestProps,
     options: ServerSideRenderOptions,
-    renderLocation: string,
+    location: string,
     promiseTracker: PromiseTracker,
 ): Promise<ServerRenderResults.ServerRenderResult<SSRRequestProps>> {
     const startTime = process.hrtime()
@@ -179,7 +185,7 @@ export async function renderPageContents<SSRRequestProps extends object>(
         return await renderWithErrorPageFallback(
             ssrRequestProps,
             options,
-            renderLocation,
+            location,
             promiseTracker,
             startTime,
         )
@@ -187,7 +193,7 @@ export async function renderPageContents<SSRRequestProps extends object>(
         const failure: ServerRenderResults.FailedRenderResult = {
             type: ServerRenderResults.ServerRenderResultType.Failure,
             errorMessage: 'Failed to do render',
-            elapsed: elapsed(startTime),
+            elapsed: formatElapsed(process.hrtime(startTime)),
             head: undefined,
         }
         options.log.error({ err }, 'Failed to render')

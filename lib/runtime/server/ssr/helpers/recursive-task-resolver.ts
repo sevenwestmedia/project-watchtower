@@ -9,13 +9,14 @@ function innerResolve<T>(
     log: Logger,
     promiseTracker: PromiseTracker,
     render: () => T,
+    location: string,
     initialRender: T,
     numberAttempts: number,
     remainingAttempts: number,
     timeoutPromise: Promise<any>,
 ): Promise<T | typeof timedOut> {
     if (!promiseTracker.hasWork()) {
-        log.debug({ component }, 'No work, resolving')
+        log.debug({ component, location }, 'No work, resolving')
         return Promise.resolve(initialRender)
     }
     if (!remainingAttempts || remainingAttempts <= 0) {
@@ -35,7 +36,7 @@ function innerResolve<T>(
                         return p
                     }
 
-                    log.debug({ component }, 'Re-rendering to trigger any child promises')
+                    log.debug({ component, location }, 'Re-rendering to trigger any child promises')
                     const renderResult = render()
 
                     // eslint-disable-next-line consistent-return
@@ -43,6 +44,7 @@ function innerResolve<T>(
                         log,
                         promiseTracker,
                         render,
+                        location,
                         renderResult,
                         numberAttempts,
                         remainingAttempts - 1,
@@ -64,6 +66,7 @@ export default async function<T>(
     log: Logger,
     promiseTracker: PromiseTracker,
     render: () => T,
+    location: string,
     initialRender: T,
     numberAttempts: number,
     timeoutMs: number,
@@ -74,6 +77,7 @@ export default async function<T>(
         log,
         promiseTracker,
         render,
+        location,
         initialRender,
         numberAttempts,
         numberAttempts,
@@ -82,7 +86,7 @@ export default async function<T>(
 
     if (resolved === timedOut) {
         // Fall back to just rendering again
-        log.error(`Resolving tasks timed out after ${timeoutMs}ms`)
+        log.error({ location }, `Resolving tasks timed out after ${timeoutMs}ms`)
         return render()
     }
 

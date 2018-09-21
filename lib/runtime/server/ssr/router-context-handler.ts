@@ -1,4 +1,4 @@
-import { elapsed } from '../../universal'
+import { formatElapsed } from '../../universal'
 import { ServerRenderResult, ServerRenderResultType } from './server-render-results'
 import { RenderPassResult } from './render-app-to-string'
 
@@ -24,7 +24,7 @@ export const createResponse = <SSRRequestProps extends object>({
 }: SuccessProps<SSRRequestProps>): ServerRenderResult<SSRRequestProps> => {
     return {
         type: ServerRenderResultType.Success,
-        elapsed: elapsed(startTime),
+        elapsed: formatElapsed(process.hrtime(startTime)),
         head: renderResult.head,
         renderedContent: renderResult.renderMarkup,
         ssrRequestProps,
@@ -45,7 +45,7 @@ export const routerContextHandler = <SSRRequestProps extends object>(
             head: renderResult.head,
             redirectTo: renderResult.context.url,
             isPermanent: renderResult.context.statusCode === 301,
-            elapsed: elapsed(startTime),
+            elapsed: formatElapsed(process.hrtime(startTime)),
         }
     }
 
