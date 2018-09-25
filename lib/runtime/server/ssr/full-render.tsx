@@ -4,7 +4,7 @@ import { routerContextHandler } from './router-context-handler'
 import * as ServerRenderResults from './server-render-results'
 import { renderAppToString, CreateAppElement } from './render-app-to-string'
 import { WatchtowerEvents } from './render-events'
-import { Status404Error } from './errors'
+import { Status404Error, Warning, Information } from './errors'
 
 export { PromiseTracker }
 
@@ -160,7 +160,13 @@ async function renderWithErrorPageFallback<SSRRequestProps extends object>(
 
         return dataResolved
     } catch (dataLoadErr) {
-        options.log.error({ err: dataLoadErr }, 'Data load failed, rendering error location')
+        if (dataLoadErr instanceof Information) {
+            options.log.warn({ err: dataLoadErr }, 'Data load warning, rendering error location')
+        } else if (dataLoadErr instanceof Warning) {
+            options.log.warn({ err: dataLoadErr }, 'Data load warning, rendering error location')
+        } else {
+            options.log.error({ err: dataLoadErr }, 'Data load failed, rendering error location')
+        }
 
         return await renderErrorRoute(
             ssrRequestProps,
