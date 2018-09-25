@@ -161,7 +161,7 @@ async function renderWithErrorPageFallback<SSRRequestProps extends object>(
         return dataResolved
     } catch (dataLoadErr) {
         if (dataLoadErr instanceof Information) {
-            options.log.warn({ err: dataLoadErr }, 'Data load warning, rendering error location')
+            options.log.info({ err: dataLoadErr }, 'Data load warning, rendering error location')
         } else if (dataLoadErr instanceof Warning) {
             options.log.warn({ err: dataLoadErr }, 'Data load warning, rendering error location')
         } else {
