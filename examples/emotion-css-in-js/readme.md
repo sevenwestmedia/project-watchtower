@@ -1,11 +1,23 @@
-# SSR with data loading using redux Example
-In this example, we emulate needing to load data and store it in redux, then transfer it to the client.
+# Emotion CSS in JS example
+Watchtower has a hook to override the render function used on the server.
 
-1. In `setupRequest` the redux store is created using the `promiseTracker.middleware()`.  
-This middleware will automatically track promises returned from thunks or any other middleware/action creator.
-2. Watchtower will wait until the tracked promises are completed, then will re-render to ensure no more fetches are issued. It does this recursively to support data loading as deeper components are rendered.
-3. `transferState('STATE', context.ssrRequestProps.store.getState())` serialises the redux store state into the server response
-4. The client uses `getTransferredState<AppState>('STATE')` to hydrate the redux state and initialise the store with that initial state
+When creating the SSR middleware, you can add the config key:
+
+``` ts
+import { renderStylesToString } from 'emotion-server'
+import { renderToString } from 'react-dom/server'
+
+const ssrMiddleware = createSsrMiddleware<SSRState>({
+    ...
+
+    renderFn: (element: React.ReactElement<any>) =>
+        renderStylesToString(renderToString(element)),
+})
+```
+
+The above uses emotions renderStylesToString to inject the styles into the rendered html, which will be automatically hydrated.
+
+If you were to use `extractCritical` instead, the `createSsrMiddleware` function has a second generic parameter which you can use to change the expected type of the render function to an object containing `{ ids, css, html }` which can then be used in the render html function in a typesafe way. This example uses the simpler `renderStylesToString` function which still returns a string, making it compatible with the renderToString function react provides.
 
 ## Setup
 1. Make sure you run `yarn` in this folder first to install it's dependencies
