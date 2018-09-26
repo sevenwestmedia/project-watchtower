@@ -1,0 +1,12 @@
+{
+    "name": "ssr-with-data-loading-using-redux",
+    "version": "1.0.0",
+    "main": "dist/server.js",
+    "license": "MIT",
+    "devDependencies": {},
+    "dependencies": {
+        "emotion": "^9.2.9",
+        "emotion-server": "^9.2.9",
+        "react-emotion": "^9.2.9"
+    }
+}

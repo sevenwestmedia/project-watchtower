@@ -1,6 +1,6 @@
 import { RenderHtml } from '../create-middleware'
 
-export const renderHtml: RenderHtml<any> = ({ pageTags, renderMarkup }) => {
+export const renderHtml: RenderHtml<any, string> = ({ pageTags, renderResult }) => {
     return `<!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,7 +11,7 @@ export const renderHtml: RenderHtml<any> = ({ pageTags, renderMarkup }) => {
         `)}
     </head>
     <body>
-        <div id="root">${renderMarkup.html}</div>
+        <div id="root">${renderResult}</div>
         ${pageTags.body.map(bodyAsset => bodyAsset.tag).join(`
         `)}
     </body>

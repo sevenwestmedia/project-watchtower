@@ -56,11 +56,7 @@ export const getDefaultHtmlMiddleware = (log: Logger, runtimeConfig: RuntimeConf
                     promiseTracker: new PromiseTracker(),
                 },
                 req,
-                renderMarkup: {
-                    css: '',
-                    html: '',
-                    ids: [],
-                },
+                renderResult: '',
                 pageTags: {
                     head: getHeadAssets(buildAssets),
                     body: getBodyAssets(buildAssets),

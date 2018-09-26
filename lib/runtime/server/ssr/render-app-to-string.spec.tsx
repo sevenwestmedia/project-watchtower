@@ -4,8 +4,9 @@
 
 import * as React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { renderAppToString } from './render-app-to-string'
+import { renderApp } from './render-app-to-string'
 import { createConsoleLogger, PromiseTracker } from '../../universal'
+import { renderToString } from 'react-dom/server'
 
 const Home: React.SFC<{}> = () => <div>Home</div>
 const TestApp: React.SFC<{}> = () => (
@@ -15,12 +16,13 @@ const TestApp: React.SFC<{}> = () => (
 )
 
 it('renders app callback with router', () => {
-    const renderResult = renderAppToString(
+    const renderResult = renderApp(
         '/',
+        renderToString,
         createConsoleLogger(),
         () => <TestApp />,
         new PromiseTracker(),
     )
 
-    expect(renderResult.renderMarkup).toMatchSnapshot()
+    expect(renderResult.renderResult).toMatchSnapshot()
 })

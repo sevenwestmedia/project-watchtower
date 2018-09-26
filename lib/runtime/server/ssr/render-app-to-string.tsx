@@ -1,7 +1,5 @@
 import * as React from 'react'
 import { Helmet, HelmetData } from 'react-helmet'
-import { renderToString } from 'react-dom/server'
-import { renderStaticOptimized, GlamorServerResult } from 'glamor/server'
 import { StaticRouter } from 'react-router-dom'
 import { functionTimer, Logger } from '../../universal'
 import { StaticRouterContext } from './router-context-handler'
@@ -9,40 +7,33 @@ import { PromiseTracker } from './full-render'
 
 export type CreateAppElement = (promiseTracker: PromiseTracker) => React.ReactElement<any>
 
-export interface RenderMarkup {
-    html: string
-    css: string
-    ids: string[]
-}
-
-export interface RenderPassResult {
+export interface RenderPassResult<RenderResult> {
     head: HelmetData
     context: StaticRouterContext
-    renderMarkup: RenderMarkup
+    renderResult: RenderResult
 }
 
-export function renderAppToString(
+export function renderApp<RenderResult>(
     currentLocation: string,
+    renderFn: (element: React.ReactElement<any>) => RenderResult,
     log: Logger,
     appRender: CreateAppElement,
     promiseTracker: PromiseTracker,
-): RenderPassResult {
+): RenderPassResult<RenderResult> {
     // first create a context for <StaticRouter>, it's where we keep the
     // results of rendering for the second pass if necessary
     const context: StaticRouterContext = {}
-    let renderMarkup: GlamorServerResult
+    let renderResult: RenderResult
     let head: HelmetData
 
     try {
-        renderMarkup = functionTimer(
+        renderResult = functionTimer(
             'Server side render',
             () =>
-                renderStaticOptimized(() =>
-                    renderToString(
-                        <StaticRouter location={currentLocation} context={context}>
-                            {appRender(promiseTracker)}
-                        </StaticRouter>,
-                    ),
+                renderFn(
+                    <StaticRouter location={currentLocation} context={context}>
+                        {appRender(promiseTracker)}
+                    </StaticRouter>,
                 ),
             log,
         )
@@ -52,7 +43,7 @@ export function renderAppToString(
 
     return {
         context,
-        renderMarkup,
+        renderResult,
         head,
     }
 }

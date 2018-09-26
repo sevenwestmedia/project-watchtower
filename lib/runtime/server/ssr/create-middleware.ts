@@ -1,10 +1,10 @@
+import { renderToString } from 'react-dom/server'
 import { Request, RequestHandler, Express } from 'express'
 import {
     ServerSideRenderOptions,
     StatusServerRenderResult,
     renderPageContents,
     PageTags,
-    RenderMarkup,
     ServerRenderResultType,
     transferState,
 } from './'
@@ -36,15 +36,15 @@ export type RenderApp<SSRRequestProps extends object> = (
     },
 ) => JSX.Element
 
-export type RenderHtmlParams<SSRRequestProps extends object> = {
+export type RenderHtmlParams<SSRRequestProps extends object, RenderResult> = {
     head: HelmetData | undefined
-    renderMarkup: RenderMarkup
+    renderResult: RenderResult
     pageTags: PageTags
     context: RenderContext<SSRRequestProps>
     req: Request
 }
-export type RenderHtml<SSRRequestProps extends object> = (
-    params: RenderHtmlParams<SSRRequestProps>,
+export type RenderHtml<SSRRequestProps extends object, RenderResult> = (
+    params: RenderHtmlParams<SSRRequestProps, RenderResult>,
 ) => string
 
 export type CreatePageTags<SSRRequestProps> = (
@@ -56,19 +56,20 @@ export type CreatePageTags<SSRRequestProps> = (
     },
 ) => PageTags
 
-export type ServerSideRenderMiddlewareOptions<SSRRequestProps extends object> = {
+export type ServerSideRenderMiddlewareOptions<SSRRequestProps extends object, RenderResult> = {
     app: Express & { log: Logger }
     ssrTimeoutMs: number
     setupRequest: (req: Request, promiseTracker: PromiseTracker) => Promise<SSRRequestProps>
     renderApp: RenderApp<SSRRequestProps>
-    renderHtml: RenderHtml<SSRRequestProps>
+    renderHtml: RenderHtml<SSRRequestProps, RenderResult>
     errorLocation: string
     createPageTags?: CreatePageTags<SSRRequestProps>
     pageNotFoundLocation: string
+    renderFn?: (element: React.ReactElement<any>) => RenderResult
 }
 
-export const createSsrMiddleware = <SSRRequestProps extends object>(
-    options: ServerSideRenderMiddlewareOptions<SSRRequestProps>,
+export const createSsrMiddleware = <SSRRequestProps extends object, RenderResult = string>(
+    options: ServerSideRenderMiddlewareOptions<SSRRequestProps, RenderResult>,
 ): RequestHandler => {
     const runtimeConfig = getRuntimeConfig(options.app.log)
     const buildAssets = getAssetLocations(runtimeConfig)
@@ -83,11 +84,14 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
         let appState = await options.setupRequest(req, promiseTracker)
         let renderContext: RenderContext<SSRRequestProps>
 
-        const ssrOptions: ServerSideRenderOptions = {
+        const ssrOptions: ServerSideRenderOptions<RenderResult> = {
             log: req.log,
             errorLocation: options.errorLocation,
             pageNotFoundLocation: options.pageNotFoundLocation,
             ssrTimeoutMs: options.ssrTimeoutMs,
+            // Not perfect typings, if someone specifies the render result type
+            // as something it isn't, that's their own fault
+            renderFn: options.renderFn || (renderToString as any),
             resetRequest: async (location: string) => {
                 req.url = location
                 req.query = URL.parse(req.url, true).query
@@ -110,14 +114,16 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
             },
         }
 
-        const pageRenderResult = await renderPageContents<SSRRequestProps>(
+        const pageRenderResult = await renderPageContents<SSRRequestProps, RenderResult>(
             appState,
             ssrOptions,
             req.url,
             promiseTracker,
         )
 
-        const createPageMarkup = (result: StatusServerRenderResult<SSRRequestProps>) => {
+        const createPageMarkup = (
+            result: StatusServerRenderResult<SSRRequestProps, RenderResult>,
+        ) => {
             const helmetTags: string[] = []
             if (result.head && result.head.title) {
                 helmetTags.push(result.head.title.toString())
@@ -158,7 +164,7 @@ export const createSsrMiddleware = <SSRRequestProps extends object>(
 
             return options.renderHtml({
                 head: result.head,
-                renderMarkup: result.renderedContent,
+                renderResult: result.renderedContent,
                 pageTags,
                 context: renderContext,
                 req,

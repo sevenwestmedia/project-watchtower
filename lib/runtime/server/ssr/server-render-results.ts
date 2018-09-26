@@ -1,5 +1,4 @@
 import * as Helm from 'react-helmet'
-import { RenderMarkup } from './render-app-to-string'
 
 export enum ServerRenderResultType {
     Success,
@@ -12,10 +11,10 @@ export interface ServerRenderResultBase {
     elapsed: string
     head: Helm.HelmetData | undefined
 }
-export interface StatusServerRenderResult<SSRRequestProps extends object>
+export interface StatusServerRenderResult<SSRRequestProps extends object, RenderResult>
     extends ServerRenderResultBase {
     type: ServerRenderResultType.Success
-    renderedContent: RenderMarkup
+    renderedContent: RenderResult
     ssrRequestProps: SSRRequestProps
     /** The final render location */
     renderLocation: string
@@ -33,7 +32,7 @@ export interface RedirectServerRenderResult extends ServerRenderResultBase {
     isPermanent: boolean
 }
 
-export type ServerRenderResult<T extends object> =
-    | StatusServerRenderResult<T>
+export type ServerRenderResult<T extends object, RenderResult> =
+    | StatusServerRenderResult<T, RenderResult>
     | FailedRenderResult
     | RedirectServerRenderResult
