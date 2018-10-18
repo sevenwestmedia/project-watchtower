@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import * as ReactDOM from 'react-dom'
 import { cssHotReload } from '../../../lib/runtime/client'
 import { getTransferredState } from '../../../lib/runtime/client/get-transferred-state'

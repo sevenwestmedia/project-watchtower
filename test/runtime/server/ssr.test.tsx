@@ -1,6 +1,6 @@
-import * as path from 'path'
-import * as React from 'react'
-import * as supertest from 'supertest'
+import path from 'path'
+import React from 'react'
+import supertest from 'supertest'
 import { createServer } from '../../../lib/runtime/server/server'
 import { createSsrMiddleware, RenderApp } from '../../../lib/runtime/server/ssr'
 import {

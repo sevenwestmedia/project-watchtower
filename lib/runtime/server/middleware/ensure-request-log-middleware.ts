@@ -1,4 +1,4 @@
-import * as express from 'express'
+import express from 'express'
 import { Logger } from '../../universal'
 
 export const createEnsureRequestLogMiddleware = (log: Logger): express.RequestHandler => {

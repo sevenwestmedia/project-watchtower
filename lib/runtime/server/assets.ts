@@ -1,5 +1,5 @@
-import * as fs from 'fs'
-import * as path from 'path'
+import fs from 'fs'
+import path from 'path'
 import { RuntimeConfig, BuildConfig } from '../../../lib'
 import { Assets } from 'assets-webpack-plugin'
 import { PageTag } from './ssr/full-render'

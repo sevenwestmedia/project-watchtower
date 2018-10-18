@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 const component: any = () => React.createElement('div', {}, 'bundle-loader')
 component.default = component

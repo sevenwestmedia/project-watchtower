@@ -1,4 +1,4 @@
-import * as path from 'path'
+import path from 'path'
 import cleanBin from './clean'
 import lint from './lint'
 import test from './test'

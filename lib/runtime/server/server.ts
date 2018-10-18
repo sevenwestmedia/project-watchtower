@@ -1,4 +1,4 @@
-import * as express from 'express'
+import express from 'express'
 import { findFreePort } from '../util/network'
 import { getConfig, getRuntimeConfig } from '../config/config'
 import { getDefaultHtmlMiddleware } from './middleware/default-html-middleware'

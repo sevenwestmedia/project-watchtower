@@ -1,7 +1,9 @@
-declare module "http-proxy-middleware" {
-    import * as express from 'express'
+declare module 'http-proxy-middleware' {
+    import express from 'express'
 
     function httpProxyMiddleware(address: string, config?: any): express.RequestHandler
-    namespace httpProxyMiddleware {}
+    namespace httpProxyMiddleware {
+
+    }
     export = httpProxyMiddleware
 }

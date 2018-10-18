@@ -1,4 +1,4 @@
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 
 /** Webpack settings for all development builds */
 const devConfig: webpack.Configuration = {

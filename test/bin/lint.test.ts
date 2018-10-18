@@ -1,5 +1,5 @@
 import lint from '../../lib/bin/lint'
-import * as path from 'path'
+import path from 'path'
 import { getConfig } from '../../lib/runtime/config/config'
 
 // Increase test timeout because linting might take a while

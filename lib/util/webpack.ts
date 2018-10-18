@@ -1,4 +1,4 @@
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import { Logger } from '../runtime/universal'
 
 export const webpackStatsConfig: webpack.Stats.ToStringOptionsObject = {

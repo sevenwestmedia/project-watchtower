@@ -1,4 +1,4 @@
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import { printWebpackStats } from '../../lib/util/webpack'
 import { createConsoleLogger } from '../../lib/runtime/universal'
 
