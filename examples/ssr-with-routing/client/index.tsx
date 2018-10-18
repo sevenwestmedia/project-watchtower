@@ -1,5 +1,5 @@
 import React from 'react'
-import * as ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom'
 import { cssHotReload } from '../../../lib/runtime/client'
 
 import { App } from '../common/App'

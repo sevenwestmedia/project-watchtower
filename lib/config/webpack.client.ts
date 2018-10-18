@@ -1,4 +1,4 @@
-import * as fs from 'fs'
+import fs from 'fs'
 import path from 'path'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import AssetsPlugin from 'assets-webpack-plugin'

@@ -1,5 +1,5 @@
-import * as fs from 'fs'
-import * as path from 'path'
+import fs from 'fs'
+import path from 'path'
 import clean from '../../lib/bin/clean'
 import build from '../../lib/bin/build'
 import stats from '../../lib/bin/stats'

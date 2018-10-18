@@ -1,4 +1,4 @@
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import merge from 'webpack-merge'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import { getWebpackConfig } from '../build/build'

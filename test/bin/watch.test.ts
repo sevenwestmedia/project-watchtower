@@ -1,5 +1,5 @@
 import watch from '../../lib/bin/watch'
-import * as path from 'path'
+import path from 'path'
 import { waitForConnection } from '../../lib/runtime/util/network'
 import { getTestPort } from '../test-helpers'
 import { getConfig } from '../../lib/runtime/config/config'

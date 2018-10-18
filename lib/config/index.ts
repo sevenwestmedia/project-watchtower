@@ -1,4 +1,4 @@
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import { BuildConfig } from '../index'
 import { Logger } from '../runtime/universal'
 

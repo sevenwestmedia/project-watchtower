@@ -1,4 +1,4 @@
-import * as fs from 'fs'
+import fs from 'fs'
 import path from 'path'
 import { RuntimeConfig, BuildConfig } from '../../../lib'
 import { Assets } from 'assets-webpack-plugin'

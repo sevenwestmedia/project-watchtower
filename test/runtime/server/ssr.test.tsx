@@ -1,4 +1,4 @@
-import * as path from 'path'
+import path from 'path'
 import React from 'react'
 import supertest from 'supertest'
 import { createServer } from '../../../lib/runtime/server/server'

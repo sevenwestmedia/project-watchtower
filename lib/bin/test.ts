@@ -1,4 +1,4 @@
-import * as fs from 'fs'
+import fs from 'fs'
 import path from 'path'
 import { ChildProcess } from 'child_process'
 import { forkPromise } from '../util/process'

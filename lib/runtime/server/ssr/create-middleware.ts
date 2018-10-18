@@ -16,7 +16,7 @@ import { PromiseTracker } from '../../util/promise-tracker'
 import { getAssetLocations, getHeadAssets, getBodyAssets } from '../assets'
 import { Assets } from 'assets-webpack-plugin'
 import { PageTag } from './full-render'
-import * as URL from 'url'
+import URL from 'url'
 
 export interface RenderContext<SSRRequestProps = object> {
     /** This holds the app state which needs to be kept between SSR

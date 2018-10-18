@@ -1,6 +1,6 @@
-import * as fs from 'fs'
+import fs from 'fs'
 import path from 'path'
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import { dynamicRequire } from '../runtime/util/fs'
 import { BuildEnvironment, BuildTarget } from '../types'
 import webpackClientDevConfig from '../config/webpack.client.dev'
