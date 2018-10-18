@@ -1,4 +1,4 @@
-import webpack from 'webpack'
+import * as webpack from 'webpack'
 import { getCustomConfigFile } from '../runtime/util/fs'
 import { Logger } from '../runtime/universal'
 import { WebpackHooks } from '../types'

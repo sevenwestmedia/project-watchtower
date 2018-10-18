@@ -1,4 +1,4 @@
-import path from 'path'
+import * as path from 'path'
 import { expectPromiseToFail } from '../../test-helpers'
 import { spawnPromise, forkPromise } from '../../../lib/util/process'
 import { createConsoleLogger } from '../../../lib/runtime/universal'

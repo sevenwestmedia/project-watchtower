@@ -1,4 +1,4 @@
-import path from 'path'
+import * as path from 'path'
 import { fork, ChildProcess } from 'child_process'
 import express from 'express'
 import { Server } from 'http'
@@ -53,9 +53,10 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
         let devServerAvailable: Promise<any>
 
         const serverCompiler = webpack(getWebpackConfig(log, buildConfig, 'server', 'dev'))
-        serverCompiler.plugin('invalid', () => {
-            log.info('Server changed, rebuilding and restarting server...')
-        })
+        // TODO hook originally serverCompiler.plugin
+        // serverCompiler.plugin('invalid', () => {
+        //     log.info('Server changed, rebuilding and restarting server...')
+        // })
         const watching = serverCompiler.watch(
             {
                 aggregateTimeout: 10000,

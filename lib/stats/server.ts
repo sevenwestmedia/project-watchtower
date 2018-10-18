@@ -1,5 +1,5 @@
 import * as os from 'os'
-import path from 'path'
+import * as path from 'path'
 import * as http from 'http'
 import * as dotenv from 'dotenv'
 import { getPort } from '../runtime/server/server'

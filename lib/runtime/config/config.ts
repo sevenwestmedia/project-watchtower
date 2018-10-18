@@ -1,4 +1,4 @@
-import path from 'path'
+import * as path from 'path'
 import { getCustomConfigFile, readFileSync } from '../util/fs'
 import { BuildConfig, BuildConfigOverride, RuntimeConfig } from '../../types'
 import { Logger } from '../universal'

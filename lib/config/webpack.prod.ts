@@ -1,4 +1,4 @@
-import webpack from 'webpack'
+import * as webpack from 'webpack'
 import { CreateWebpackConfig } from './index'
 
 /** Webpack settings for all production builds */

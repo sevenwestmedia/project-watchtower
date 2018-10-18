@@ -1,4 +1,4 @@
-import path from 'path'
+import * as path from 'path'
 import bundleSize from './bundle-size'
 import ssrStats from './ssr-stats'
 import lighthouseStats from './lighthouse'

@@ -1,4 +1,4 @@
-import path from 'path'
+import * as path from 'path'
 import clean from '../../../lib/bin/clean'
 import {
     updateAssetLocations,

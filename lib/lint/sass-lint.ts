@@ -1,4 +1,4 @@
-import path from 'path'
+import * as path from 'path'
 import { ChildProcess } from 'child_process'
 import { forkPromise } from '../util/process'
 import { BuildConfig } from '../../lib'

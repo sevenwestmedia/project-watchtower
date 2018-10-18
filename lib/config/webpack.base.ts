@@ -1,4 +1,4 @@
-import webpack from 'webpack'
+import * as webpack from 'webpack'
 import { version as tsVersion } from 'typescript'
 import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader'
 import { BuildConfig } from '../../lib'

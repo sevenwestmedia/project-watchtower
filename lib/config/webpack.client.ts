@@ -1,7 +1,6 @@
-import fs from 'fs'
-import path from 'path'
-import webpack from 'webpack'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import * as fs from 'fs'
+import * as path from 'path'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import AssetsPlugin from 'assets-webpack-plugin'
 import HtmlPlugin from 'html-webpack-plugin'
 import autoprefixer from 'autoprefixer'
@@ -22,24 +21,25 @@ const getPlugins = (buildConfig: BuildConfig) => [
             return JSON.stringify(assets)
         },
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: (module: { context: string }) => {
-            if (!module.context) {
-                return false
-            }
-
-            const modulePos = module.context.indexOf('node_modules')
-            if (modulePos === -1) {
-                return false
-            }
-
-            const isWatchtower = module.context.indexOf('project-watchtower', modulePos) !== -1
-
-            return !isWatchtower
-        },
-    }),
 ]
+
+const optimization = {
+    name: 'vendor',
+    minChunks: (module: { context: string }) => {
+        if (!module.context) {
+            return false
+        }
+
+        const modulePos = module.context.indexOf('node_modules')
+        if (modulePos === -1) {
+            return false
+        }
+
+        const isWatchtower = module.context.indexOf('project-watchtower', modulePos) !== -1
+
+        return !isWatchtower
+    },
+}
 
 /**
  * Base webpack config for the client that is used both in development and production
@@ -85,40 +85,41 @@ const clientBaseConfig: CreateWebpackConfig = options => {
             path: OUTPUT,
             publicPath: PUBLIC_PATH,
         },
+        optimization,
         module: {
             rules: [
                 {
                     test: /\.s?css$/,
-                    use: ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        use: [
-                            {
-                                loader: 'css-loader',
-                                options: {
-                                    sourceMap: true,
-                                },
+                    use: [
+                        process.env.NODE_ENV !== 'production'
+                            ? 'style-loader'
+                            : MiniCssExtractPlugin.loader,
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: true,
                             },
-                            {
-                                loader: 'postcss-loader',
-                                options: {
-                                    sourceMap: true,
-                                    plugins: () => [autoprefixer({ browsers: CSS_AUTOPREFIXER })],
-                                },
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: true,
+                                plugins: () => [autoprefixer({ browsers: CSS_AUTOPREFIXER })],
                             },
-                            {
-                                loader: 'resolve-url-loader',
-                                options: {
-                                    sourceMap: true,
-                                },
+                        },
+                        {
+                            loader: 'resolve-url-loader',
+                            options: {
+                                sourceMap: true,
                             },
-                            {
-                                loader: 'sass-loader',
-                                options: {
-                                    sourceMap: true,
-                                },
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true,
                             },
-                        ],
-                    }),
+                        },
+                    ],
                 },
             ],
         },

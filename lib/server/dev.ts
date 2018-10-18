@@ -1,4 +1,3 @@
-import express from 'express'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
@@ -7,6 +6,7 @@ import { getWebpackConfig } from '../build/build'
 import { BuildConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
 import AssetsPlugin from 'assets-webpack-plugin'
+import express from 'express'
 
 export type HotReloadMiddleware = (
     log: Logger,
@@ -26,7 +26,7 @@ export const getHotReloadMiddleware: HotReloadMiddleware = (log, buildConfig) =>
 
     const dev = webpackDevMiddleware(compiler, {
         publicPath: buildConfig.PUBLIC_PATH,
-        noInfo: true,
+        logLevel: 'silent',
         // do not serve index.html on / route
         // https://github.com/webpack/webpack-dev-middleware/issues/153
         index: 'foobar',

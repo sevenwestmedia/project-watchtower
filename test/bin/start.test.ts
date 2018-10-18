@@ -1,4 +1,4 @@
-import path from 'path'
+import * as path from 'path'
 import clean from '../../lib/bin/clean'
 import build from '../../lib/bin/build'
 import start from '../../lib/bin/start'

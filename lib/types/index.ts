@@ -1,4 +1,4 @@
-import webpack from 'webpack'
+import * as webpack from 'webpack'
 import { CreateWebpackConfig } from '../config/index'
 
 export interface RuntimeConfig {
