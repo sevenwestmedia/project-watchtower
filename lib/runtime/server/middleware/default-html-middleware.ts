@@ -1,5 +1,5 @@
 import * as fs from 'fs'
-import * as path from 'path'
+import path from 'path'
 import express from 'express'
 import { RuntimeConfig } from '../../../'
 import { Logger } from '../../universal'

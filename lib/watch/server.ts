@@ -1,4 +1,4 @@
-import * as path from 'path'
+import path from 'path'
 import { fork, ChildProcess } from 'child_process'
 import express from 'express'
 import { Server } from 'http'

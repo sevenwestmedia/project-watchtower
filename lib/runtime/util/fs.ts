@@ -1,5 +1,5 @@
 import * as fs from 'fs'
-import * as path from 'path'
+import path from 'path'
 import { Logger } from '../universal'
 
 export const readFileSync = (log: Logger, filePath: string) => {

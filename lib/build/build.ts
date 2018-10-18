@@ -1,5 +1,5 @@
 import * as fs from 'fs'
-import * as path from 'path'
+import path from 'path'
 import * as webpack from 'webpack'
 import { dynamicRequire } from '../runtime/util/fs'
 import { BuildEnvironment, BuildTarget } from '../types'

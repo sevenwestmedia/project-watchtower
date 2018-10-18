@@ -1,4 +1,4 @@
-import * as path from 'path'
+import path from 'path'
 import { BuildMetrics } from './'
 import { getFileSize, readFile, formatFileSize } from '../runtime/util/fs'
 import { RuntimeConfig } from '../../lib'
