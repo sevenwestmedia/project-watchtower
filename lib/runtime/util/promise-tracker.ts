@@ -45,13 +45,12 @@ export class PromiseTracker {
         if (!this.hasWork()) {
             return Promise.resolve()
         }
-
         const all = Promise.all([...this.promises[this.waitIndex++]])
             // Use setTimeout to put the resolution of this
             //  promise back onto the event loop, this can fix
             //  issues where tests have not re-rendered before
             //  trying to find elements
-            .then(() => new Promise(setTimeout))
+            .then(() => new Promise(resolve => setTimeout(resolve)))
         return all
     }
 }

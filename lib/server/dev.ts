@@ -6,7 +6,7 @@ import opn from 'opn'
 import { getWebpackConfig } from '../build/build'
 import { BuildConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
-import * as AssetsPlugin from 'assets-webpack-plugin'
+import AssetsPlugin from 'assets-webpack-plugin'
 
 export type HotReloadMiddleware = (
     log: Logger,
