@@ -69,15 +69,10 @@ const clientBaseConfig: CreateWebpackConfig = options => {
         optimization: {
             splitChunks: {
                 cacheGroups: {
-                    commons: {
+                    vendor: {
                         test: /[\\/]node_modules[\\/]/,
                         name: 'vendor',
-                        chunks: 'async',
-                    },
-                    pwt: {
-                        test: /[\\/]project-watchtower[\\/]/,
-                        name: 'pwt',
-                        chunks: 'async',
+                        chunks: 'all',
                     },
                 },
             },
@@ -87,9 +82,7 @@ const clientBaseConfig: CreateWebpackConfig = options => {
                 {
                     test: /\.s?css$/,
                     use: [
-                        process.env.NODE_ENV !== 'production'
-                            ? 'style-loader'
-                            : MiniCssExtractPlugin.loader,
+                        MiniCssExtractPlugin.loader,
                         {
                             loader: 'css-loader',
                             options: {

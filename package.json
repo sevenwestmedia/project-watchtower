@@ -162,7 +162,6 @@
         "sass-lint": "^1.10.2",
         "sass-loader": "^7.1.0",
         "source-map-loader": "^0.2.1",
-        "style-loader": "^0.18.2",
         "ts-jest": "^23.1.4",
         "tslint": "5.5.0",
         "tslint-react": "3.0.0",
