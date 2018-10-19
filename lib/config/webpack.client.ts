@@ -43,7 +43,7 @@ const clientBaseConfig: CreateWebpackConfig = options => {
     }
 
     if (CLIENT_POLYFILLS && fs.existsSync(CLIENT_POLYFILLS)) {
-        entry.vendor = [CLIENT_POLYFILLS]
+        entry.commons = [CLIENT_POLYFILLS]
     }
     const plugins = getPlugins(options.buildConfig)
 
@@ -69,6 +69,11 @@ const clientBaseConfig: CreateWebpackConfig = options => {
         optimization: {
             splitChunks: {
                 cacheGroups: {
+                    commons: {
+                        name: 'commons',
+                        chunks: 'initial',
+                        minChunks: 2,
+                    },
                     vendor: {
                         test: /[\\/]node_modules[\\/]/,
                         name: 'vendor',
