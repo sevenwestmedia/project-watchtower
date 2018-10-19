@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "baseUrl": ".",
         "noEmit": true,
         "inlineSourceMap": false,
         "removeComments": false,

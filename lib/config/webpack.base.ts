@@ -2,6 +2,7 @@ import webpack from 'webpack'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import { BuildConfig } from '../../lib'
 import { CreateWebpackConfig } from './index'
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 
 const disableTypeCheck = process.env.START_FAST_MODE === 'true'
 
@@ -47,6 +48,7 @@ const baseConfig: CreateWebpackConfig = options => ({
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '*'],
         symlinks: false,
+        plugins: [new TsconfigPathsPlugin()],
     },
     module: {
         rules: [
