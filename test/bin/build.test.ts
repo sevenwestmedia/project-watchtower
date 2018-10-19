@@ -7,7 +7,7 @@ import { getConfig, getRuntimeConfigFromBuildConfig } from '../../lib/runtime/co
 
 // Increase test timeout because builds might take a while
 import { createConsoleLogger } from '../../lib/runtime/universal'
-;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000
+;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 60000
 
 const log = createConsoleLogger()
 
