@@ -38,13 +38,20 @@ const clientBaseConfig: CreateWebpackConfig = options => {
         SERVER_PUBLIC_DIR,
     } = options.buildConfig
 
-    const entry: EntryPoints = {
-        main: [CLIENT_ENTRY],
+    let mainEntry = [CLIENT_ENTRY]
+    /*
+        https://github.com/webpack/webpack/issues/6647
+        You should not have a entrypoint for vendor. It's not an entry.
+        If you want to run two modules in order at an entrypoint, use an array.
+    */
+    if (CLIENT_POLYFILLS && fs.existsSync(CLIENT_POLYFILLS)) {
+        mainEntry = [CLIENT_POLYFILLS, CLIENT_ENTRY]
     }
 
-    if (CLIENT_POLYFILLS && fs.existsSync(CLIENT_POLYFILLS)) {
-        entry.vendor = [CLIENT_POLYFILLS]
+    const entry: EntryPoints = {
+        main: mainEntry,
     }
+
     const plugins = getPlugins(options.buildConfig)
 
     if (SERVER_PUBLIC_DIR) {
