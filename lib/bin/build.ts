@@ -11,6 +11,13 @@ import { BuildConfig, RuntimeConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
 import { writeFile } from '../runtime/util/fs'
 import { watchtowerConfigFilename } from '../runtime/config/config'
+import SpeedMeasurePlugin from 'speed-measure-webpack-plugin'
+import webpack from 'webpack'
+
+export function smp(buildConfig: BuildConfig, webpackConfig: webpack.Configuration) {
+    const smpPlugin = new SpeedMeasurePlugin()
+    return buildConfig.SMP ? smpPlugin.wrap(webpackConfig) : webpackConfig
+}
 
 const buildTarget = (
     log: Logger,
@@ -24,7 +31,7 @@ const buildTarget = (
         return Promise.reject(`Could not load webpack configuration for ${target}/${environment}!`)
     }
 
-    return webpackPromise(log, config).then(() => {
+    return webpackPromise(log, smp(buildConfig, config)).then(() => {
         const runtimeConfig: RuntimeConfig = {
             BASE: '.',
             ASSETS_PATH: buildConfig.ASSETS_PATH_PREFIX,

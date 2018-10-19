@@ -1,5 +1,4 @@
 import webpack from 'webpack'
-import SpeedMeasurePlugin from 'speed-measure-webpack-plugin'
 import { BuildConfig } from '../index'
 import { Logger } from '../runtime/universal'
 
@@ -18,9 +17,3 @@ export { getConfig } from '../runtime/config/config'
 
 export type CreateWebpackConfigOptions = { buildConfig: BuildConfig; log: Logger }
 export type CreateWebpackConfig = (options: CreateWebpackConfigOptions) => webpack.Configuration
-
-const smpPlugin = new SpeedMeasurePlugin()
-
-export function smp(options: CreateWebpackConfigOptions, webpackConfig: webpack.Configuration) {
-    return options.buildConfig.SMP ? smpPlugin.wrap(webpackConfig) : webpackConfig
-}
