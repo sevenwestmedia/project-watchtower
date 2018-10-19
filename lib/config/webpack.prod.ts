@@ -1,6 +1,6 @@
 import webpack from 'webpack'
 import { CreateWebpackConfig } from './index'
-import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
+import TerserPlugin from 'terser-webpack-plugin'
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 
 /** Webpack settings for all production builds */
@@ -14,12 +14,13 @@ const prodConfig: CreateWebpackConfig = () => ({
     },
     optimization: {
         minimizer: [
-            new UglifyJsPlugin({
+            new TerserPlugin({
                 sourceMap: true,
                 cache: true,
                 parallel: true,
-                uglifyOptions: {
-                    compress: true,
+                terserOptions: {
+                    compress: {},
+                    ie8: false,
                 },
             }),
             new OptimizeCSSAssetsPlugin({}),
