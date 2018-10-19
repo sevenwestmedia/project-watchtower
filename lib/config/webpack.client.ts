@@ -43,7 +43,7 @@ const clientBaseConfig: CreateWebpackConfig = options => {
     }
 
     if (CLIENT_POLYFILLS && fs.existsSync(CLIENT_POLYFILLS)) {
-        entry.commons = [CLIENT_POLYFILLS]
+        entry.vendor = [CLIENT_POLYFILLS]
     }
     const plugins = getPlugins(options.buildConfig)
 
@@ -69,13 +69,22 @@ const clientBaseConfig: CreateWebpackConfig = options => {
         optimization: {
             splitChunks: {
                 cacheGroups: {
-                    commons: {
-                        name: 'commons',
-                        chunks: 'initial',
-                        minChunks: 2,
-                    },
                     vendor: {
-                        test: /[\\/]node_modules[\\/]/,
+                        test: (module: { context: string }) => {
+                            if (!module.context) {
+                                return false
+                            }
+
+                            const modulePos = module.context.indexOf('node_modules')
+                            if (modulePos === -1) {
+                                return false
+                            }
+
+                            const isWatchtower =
+                                module.context.indexOf('project-watchtower', modulePos) !== -1
+
+                            return !isWatchtower
+                        },
                         name: 'vendor',
                         chunks: 'all',
                     },
