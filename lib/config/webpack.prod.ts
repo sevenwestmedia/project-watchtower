@@ -14,16 +14,13 @@ const prodConfig: CreateWebpackConfig = () => ({
     },
     optimization: {
         minimizer: [
-            // Might need to remove this, as minimizer on by default? Not sure if it does source maps
             new UglifyJsPlugin({
-                // compress: {
-                //     screw_ie8: true,
-                //     warnings: false,
-                // },
-                // mangle: {
-                //     screw_ie8: true,
-                // },
                 sourceMap: true,
+                cache: true,
+                parallel: true,
+                uglifyOptions: {
+                    compress: true,
+                },
             }),
             new OptimizeCSSAssetsPlugin({}),
         ],

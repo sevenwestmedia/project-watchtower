@@ -22,25 +22,6 @@ const getPlugins = (buildConfig: BuildConfig) => [
         },
     }),
 ]
-
-const optimization = {
-    name: 'vendor',
-    minChunks: (module: { context: string }) => {
-        if (!module.context) {
-            return false
-        }
-
-        const modulePos = module.context.indexOf('node_modules')
-        if (modulePos === -1) {
-            return false
-        }
-
-        const isWatchtower = module.context.indexOf('project-watchtower', modulePos) !== -1
-
-        return !isWatchtower
-    },
-}
-
 /**
  * Base webpack config for the client that is used both in development and production
  * - Compile SCSS to CSS and extract into external assets
@@ -85,7 +66,22 @@ const clientBaseConfig: CreateWebpackConfig = options => {
             path: OUTPUT,
             publicPath: PUBLIC_PATH,
         },
-        optimization,
+        optimization: {
+            splitChunks: {
+                cacheGroups: {
+                    commons: {
+                        test: /[\\/]node_modules[\\/]/,
+                        name: 'vendor',
+                        chunks: 'async',
+                    },
+                    pwt: {
+                        test: /[\\/]project-watchtower[\\/]/,
+                        name: 'pwt',
+                        chunks: 'async',
+                    },
+                },
+            },
+        },
         module: {
             rules: [
                 {
