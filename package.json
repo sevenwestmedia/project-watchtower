@@ -163,6 +163,7 @@
         "sass-lint": "^1.10.2",
         "sass-loader": "^7.1.0",
         "source-map-loader": "^0.2.1",
+        "speed-measure-webpack-plugin": "^1.2.3",
         "terser-webpack-plugin": "^1.1.0",
         "thread-loader": "^1.2.0",
         "ts-jest": "^23.1.4",
