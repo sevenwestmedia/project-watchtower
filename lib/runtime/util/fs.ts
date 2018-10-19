@@ -47,7 +47,7 @@ export const writeFile = (log: Logger, filePath: string, fileContent: string) =>
         })
     })
 
-export const formatFileSize = (size: number) => (size / 1024).toFixed(2)
+export const formatFileSize = (size: number) => (size / 1024).toFixed(4)
 
 export const existsSync = (file: string) => {
     try {
