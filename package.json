@@ -141,7 +141,7 @@
     "dependencies": {
         "assets-webpack-plugin": "^3.9.7",
         "autoprefixer": "^7.1.2",
-        "awesome-typescript-loader": "^5.2.1",
+        "cache-loader": "^1.2.2",
         "cheerio": "^1.0.0-rc.2",
         "css-loader": "^1.0.0",
         "dotenv": "^4.0.0",
@@ -163,7 +163,9 @@
         "sass-lint": "^1.10.2",
         "sass-loader": "^7.1.0",
         "source-map-loader": "^0.2.1",
+        "thread-loader": "^1.2.0",
         "ts-jest": "^23.1.4",
+        "ts-loader": "^5.2.2",
         "tslint": "5.5.0",
         "tslint-react": "3.0.0",
         "uglifyjs-webpack-plugin": "^2.0.1",

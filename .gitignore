@@ -180,3 +180,6 @@ build-stats.csv
 demo/lighthouse-report*.json
 lighthouse-report*.json
 test-dist
+
+#cache-loader
+.cache-loader/
