@@ -18,7 +18,7 @@ buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/stats')
 const runtimeConfig = getRuntimeConfigFromBuildConfig(buildConfig)
 
 // Increase test timeout because builds might take a while
-;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 90000
+;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 200000
 
 describe('stats', () => {
     beforeAll(async () => {
