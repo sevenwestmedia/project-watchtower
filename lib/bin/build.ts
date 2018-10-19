@@ -41,17 +41,6 @@ const buildTarget = (
     })
 }
 
-const cleanAndBuild = (
-    log: Logger,
-    buildConfig: BuildConfig,
-    target: BuildTarget,
-    environment: BuildEnvironment = 'prod',
-) => {
-    const cleanTarget = buildConfig.OUTPUT
-
-    return clean(log, cleanTarget).then(() => buildTarget(log, buildConfig, target, environment))
-}
-
 const getBuildEnvironment = (args: BuildParam[]) => {
     for (const arg of args) {
         if (typeof arg !== 'string') {
@@ -106,10 +95,11 @@ const build = async (log: Logger, buildConfig: BuildConfig, ...args: BuildParam[
             targets.map(target => buildTarget(log, buildConfig, target, environment)),
         )
     } else {
-        return failPromisesLate(
-            log,
-            targets.map(target => cleanAndBuild(log, buildConfig, target, environment)),
-        )
+        const cleanTarget = buildConfig.OUTPUT
+        await clean(log, cleanTarget)
+        for (const target of targets) {
+            await buildTarget(log, buildConfig, target, environment)
+        }
     }
 }
 
