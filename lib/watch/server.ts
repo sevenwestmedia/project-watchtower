@@ -53,10 +53,9 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
         let devServerAvailable: Promise<any>
 
         const serverCompiler = webpack(getWebpackConfig(log, buildConfig, 'server', 'dev'))
-        // TODO hook originally serverCompiler.plugin
-        // serverCompiler.plugin('invalid', () => {
-        //     log.info('Server changed, rebuilding and restarting server...')
-        // })
+        serverCompiler.hooks.watchRun.tap('invalid', () => {
+            log.info('Server changed, rebuilding and restarting server...')
+        })
         const watching = serverCompiler.watch(
             {
                 aggregateTimeout: 10000,
