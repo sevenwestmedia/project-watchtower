@@ -37,7 +37,11 @@ describe('util/fs', () => {
     })
 
     it('formatFileSize', () => {
-        expect(formatFileSize(2048)).toBe('2.0')
+        expect(formatFileSize(2048)).toBe('2.00')
+    })
+
+    it('formatFileSize 0.02', () => {
+        expect(formatFileSize(20)).toBe('0.02')
     })
 
     it('getCustomConfigFile', () => {
