@@ -1,6 +1,7 @@
 import webpack from 'webpack'
 import { version as tsVersion } from 'typescript'
 import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader'
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import { BuildConfig } from '../../lib'
 import { CreateWebpackConfig } from './index'
 
@@ -14,6 +15,11 @@ export const fileLoaderConfig = (buildConfig: BuildConfig) => ({
         name: buildConfig.ASSETS_PATH_PREFIX + 'media/[name].[hash:8].[ext]',
     },
 })
+
+const plugins = [new CheckerPlugin(), new webpack.NoEmitOnErrorsPlugin()]
+if (!disableTypeCheck) {
+    plugins.push(new ForkTsCheckerWebpackPlugin()) // fork ts checking
+}
 
 /**
  * Base webpack configuration that is shared by the server and the client
@@ -35,8 +41,7 @@ const baseConfig: CreateWebpackConfig = options => ({
                 test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader',
                 options: {
-                    transpileOnly: disableTypeCheck,
-                    useTranspileModule: disableTypeCheck,
+                    transpileOnly: true,
                     // Force >ES2015 module syntax (including dynamic imports)
                     // to enable scope hoisting
                     module: tsVersion > '2.4' ? 'esnext' : 'es2015',
@@ -56,7 +61,7 @@ const baseConfig: CreateWebpackConfig = options => ({
             },
         ],
     },
-    plugins: [new CheckerPlugin(), new webpack.NoEmitOnErrorsPlugin()],
+    plugins,
 })
 
 export default baseConfig
