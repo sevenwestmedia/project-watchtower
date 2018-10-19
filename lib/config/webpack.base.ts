@@ -19,6 +19,24 @@ if (!disableTypeCheck) {
     plugins.push(new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true })) // fork ts checking
 }
 
+const loaders = [
+    { loader: 'cache-loader' },
+    {
+        loader: 'thread-loader',
+        options: {
+            // there should be 1 cpu for the fork-ts-checker-webpack-plugin
+            workers: require('os').cpus().length - 1,
+        },
+    },
+    {
+        loader: 'ts-loader',
+        options: {
+            transpileOnly: true,
+            happyPackMode: true, // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
+        },
+    },
+]
+
 /**
  * Base webpack configuration that is shared by the server and the client
  * - load original source maps from custom SWM dependencies
@@ -28,28 +46,13 @@ if (!disableTypeCheck) {
 const baseConfig: CreateWebpackConfig = options => ({
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '*'],
+        symlinks: false,
     },
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: [
-                    { loader: 'cache-loader' },
-                    {
-                        loader: 'thread-loader',
-                        options: {
-                            // there should be 1 cpu for the fork-ts-checker-webpack-plugin
-                            workers: require('os').cpus().length - 1,
-                        },
-                    },
-                    {
-                        loader: 'ts-loader',
-                        options: {
-                            transpileOnly: true,
-                            happyPackMode: true, // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
-                        },
-                    },
-                ],
+                use: [...loaders],
             },
             fileLoaderConfig(options.buildConfig),
             {
