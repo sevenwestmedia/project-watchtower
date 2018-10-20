@@ -3,6 +3,7 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import { BuildConfig } from '../../lib'
 import { CreateWebpackConfig } from './index'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
+import os from 'os'
 
 const disableTypeCheck = process.env.START_FAST_MODE === 'true'
 
@@ -20,13 +21,16 @@ if (!disableTypeCheck) {
     plugins.push(new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true, async: false })) // fork ts checking
 }
 
+const osCpus = os.cpus().length
+const threadLoaderCpus = !disableTypeCheck ? osCpus - 1 : osCpus
+
 const loaders = [
     { loader: 'cache-loader' },
     {
         loader: 'thread-loader',
         options: {
-            // there should be 1 cpu for the fork-ts-checker-webpack-plugin
-            workers: require('os').cpus().length - 1,
+            // there should be 1 cpu for the fork-ts-checker-webpack-plugin if its enabled
+            workers: threadLoaderCpus,
         },
     },
     {
