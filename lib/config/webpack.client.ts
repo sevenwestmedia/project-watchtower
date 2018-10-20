@@ -8,7 +8,6 @@ import { updateAssetLocations } from '../runtime/server/assets'
 import { BuildConfig } from '../../lib'
 import { getAssetsFile } from '../runtime/server'
 import { CreateWebpackConfig } from './index'
-import HardSourceWebpackPlugin from 'hard-source-webpack-plugin'
 
 type EntryPoints = {
     [name: string]: string[]
@@ -22,7 +21,6 @@ const getPlugins = (buildConfig: BuildConfig) => [
             return JSON.stringify(assets)
         },
     }),
-    new HardSourceWebpackPlugin(),
 ]
 /**
  * Base webpack config for the client that is used both in development and production
