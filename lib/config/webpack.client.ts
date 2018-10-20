@@ -3,7 +3,6 @@ import path from 'path'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import AssetsPlugin from 'assets-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import AutoDllPlugin from 'autodll-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 import { updateAssetLocations } from '../runtime/server/assets'
 import { BuildConfig } from '../../lib'
@@ -21,15 +20,6 @@ const getPlugins = (buildConfig: BuildConfig) => [
         processOutput: assets => {
             updateAssetLocations(assets)
             return JSON.stringify(assets)
-        },
-    }),
-    new AutoDllPlugin({
-        inject: true, // will inject the DLL bundle to index.html
-        debug: true,
-        filename: '[name]_[hash].js',
-        path: './dll',
-        entry: {
-            vendor: ['react', 'react-dom'],
         },
     }),
     new HardSourceWebpackPlugin(),
