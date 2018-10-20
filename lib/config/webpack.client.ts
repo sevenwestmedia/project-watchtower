@@ -2,12 +2,14 @@ import fs from 'fs'
 import path from 'path'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import AssetsPlugin from 'assets-webpack-plugin'
-import HtmlPlugin from 'html-webpack-plugin'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import AutoDllPlugin from 'autodll-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 import { updateAssetLocations } from '../runtime/server/assets'
 import { BuildConfig } from '../../lib'
 import { getAssetsFile } from '../runtime/server'
 import { CreateWebpackConfig } from './index'
+import HardSourceWebpackPlugin from 'hard-source-webpack-plugin'
 
 type EntryPoints = {
     [name: string]: string[]
@@ -21,6 +23,16 @@ const getPlugins = (buildConfig: BuildConfig) => [
             return JSON.stringify(assets)
         },
     }),
+    new AutoDllPlugin({
+        inject: true, // will inject the DLL bundle to index.html
+        debug: true,
+        filename: '[name]_[hash].js',
+        path: './dll',
+        entry: {
+            vendor: ['react', 'react-dom'],
+        },
+    }),
+    new HardSourceWebpackPlugin(),
 ]
 /**
  * Base webpack config for the client that is used both in development and production
@@ -59,7 +71,7 @@ const clientBaseConfig: CreateWebpackConfig = options => {
 
         if (fs.existsSync(indexHtml)) {
             plugins.push(
-                new HtmlPlugin({
+                new HtmlWebpackPlugin({
                     inject: true,
                     template: indexHtml,
                 }),
