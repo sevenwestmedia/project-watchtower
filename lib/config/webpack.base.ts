@@ -17,7 +17,7 @@ export const fileLoaderConfig = (buildConfig: BuildConfig) => ({
 
 const plugins = [new webpack.NoEmitOnErrorsPlugin()]
 if (!disableTypeCheck) {
-    plugins.push(new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true })) // fork ts checking
+    plugins.push(new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true, async: false })) // fork ts checking
 }
 
 const loaders = [
