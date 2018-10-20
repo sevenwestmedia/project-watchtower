@@ -27,7 +27,7 @@ const osCpus = os.cpus().length
 const threadLoaderCpus = !disableTypeCheck ? osCpus - 1 : osCpus
 
 const loaders = [
-    { loader: 'cache-loader' },
+    // { loader: 'cache-loader' },
     {
         loader: 'thread-loader',
         options: {
