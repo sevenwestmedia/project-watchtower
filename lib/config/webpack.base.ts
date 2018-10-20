@@ -4,8 +4,6 @@ import { BuildConfig } from '../../lib'
 import { CreateWebpackConfig } from './index'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import os from 'os'
-import HardSourceWebpackPlugin from 'hard-source-webpack-plugin'
-
 const disableTypeCheck = process.env.START_FAST_MODE === 'true'
 
 export const fileLoaderConfig = (buildConfig: BuildConfig) => ({
@@ -17,7 +15,7 @@ export const fileLoaderConfig = (buildConfig: BuildConfig) => ({
     },
 })
 
-const plugins = [new webpack.NoEmitOnErrorsPlugin(), new HardSourceWebpackPlugin()]
+const plugins = [new webpack.NoEmitOnErrorsPlugin()]
 
 if (!disableTypeCheck) {
     plugins.push(new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true })) // fork ts checking
