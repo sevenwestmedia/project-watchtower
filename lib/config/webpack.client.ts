@@ -103,7 +103,6 @@ const clientBaseConfig: CreateWebpackConfig = options => {
                 {
                     test: /\.s?css$/,
                     use: [
-                        { loader: 'cache-loader' },
                         MiniCssExtractPlugin.loader,
                         {
                             loader: 'css-loader',
