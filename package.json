@@ -1,6 +1,6 @@
 {
     "name": "project-watchtower",
-    "version": "0.12.22",
+    "version": "0.12.23",
     "license": "MIT",
     "description": "",
     "publishConfig": {
@@ -79,6 +79,11 @@
         "project-watchtower": "bin/index.js",
         "pwt": "bin/index.js"
     },
+    "husky": {
+        "hooks": {
+            "prepare-commit-msg": "sh ./scripts/include-jira-in-commit.sh ${HUSKY_GIT_PARAMS}"
+        }
+    },
     "keywords": [],
     "devDependencies": {
         "@types/autoprefixer": "^6.7.2",
@@ -109,6 +114,7 @@
         "enzyme-adapter-react-16": "^1.1.0",
         "enzyme-to-json": "^3.2.2",
         "express": "^4.15.3",
+        "husky": "^1.1.2",
         "mkdirp": "^0.5.1",
         "prettier": "^1.13.5",
         "react": "^16.4.1",

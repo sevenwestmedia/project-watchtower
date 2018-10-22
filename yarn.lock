@@ -18,10 +18,17 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
+<<<<<<< HEAD
 "@babel/generator@7.0.0-beta.44":
   version "7.0.0-beta.44"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@babel/generator/-/generator-7.0.0-beta.44.tgz#c7e67b9b5284afcf69b309b50d7d37f3e5033d42"
   integrity sha512-5xVb7hlhjGcdkKpMXgicAVgx8syK5VJz193k0i/0sLP6DzE6lRrU1K3B/rFefgdo9LPGMAOOOAWW4jycj07ShQ==
+=======
+"@types/assets-webpack-plugin@^3.5.1":
+  version "3.5.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/assets-webpack-plugin/-/assets-webpack-plugin-3.5.1.tgz#87f8517e0cdbf75449d99eb5cf1703f0158d31ba"
+  integrity sha512-1k9O8nGBSXdQYOfgm81AoTgfJ54tUlU9GRHmSvaUJZg4ALV+mjfUhsS3IaaUu778OSoVO+gD5b6tNObHN/7iAA==
+>>>>>>> master
   dependencies:
     "@babel/types" "7.0.0-beta.44"
     jsesc "^2.5.1"
@@ -115,6 +122,14 @@
   version "0.22.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/cheerio/-/cheerio-0.22.2.tgz#539625874bc856086ad491c2fdc9b10c05ae308e"
   integrity sha512-7YJQbllem83umRzZ+ry6RZFAbBWNoHvbiW6tE5VEAJIoX6F22hrKrBw3ibRvHm2zPnOhZGrZJusAbp1zZKcLzQ==
+<<<<<<< HEAD
+=======
+
+"@types/clean-css@*":
+  version "3.4.30"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/clean-css/-/clean-css-3.4.30.tgz#0052c136f5248002428e3638b37de4a39818641d"
+  integrity sha1-AFLBNvUkgAJCjjY4s33ko5gYZB0=
+>>>>>>> master
 
 "@types/connect@*":
   version "3.4.30"
@@ -162,19 +177,33 @@
   dependencies:
     "@types/node" "*"
 
+<<<<<<< HEAD
 "@types/express@^4.16.0":
   version "4.16.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/express/-/express-4.16.0.tgz#6d8bc42ccaa6f35cf29a2b7c3333cb47b5a32a19"
   integrity sha512-TtPEYumsmSTtTetAPXlJVf3kEqb6wZK0bZojpJQrnD/djV4q1oB6QQ8aKvKqwNPACoe02GNiy5zDzcYivR5Z2w==
+=======
+"@types/express@^4.0.36":
+  version "4.0.36"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/express/-/express-4.0.36.tgz#14eb47de7ecb10319f0a2fb1cf971aa8680758c2"
+  integrity sha512-bT9q2eqH/E72AGBQKT50dh6AXzheTqigGZ1GwDiwmx7vfHff0bZOrvUWjvGpNWPNkRmX1vDF6wonG6rlpBHb1A==
+>>>>>>> master
   dependencies:
     "@types/body-parser" "*"
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
+<<<<<<< HEAD
 "@types/fork-ts-checker-webpack-plugin@^0.4.5":
   version "0.4.5"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-0.4.5.tgz#1c9ef9e096ea4e4e35550501980ac4f72e1eebd7"
   integrity sha512-xb9bErGrHZ0ypV3ls0tNekGItPoS6tSLi74zjfNOTbCcDOdG7lokSQi24DFXvvh3TwyTfVv2U9LJ172Wz82DrA==
+=======
+"@types/extract-text-webpack-plugin@^2.1.0":
+  version "2.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/extract-text-webpack-plugin/-/extract-text-webpack-plugin-2.1.0.tgz#db0eb859d1b61ea5d2a0b75ad34b4ff317a18379"
+  integrity sha1-2w64WdG2HqXSoLda00tP8xehg3k=
+>>>>>>> master
   dependencies:
     fork-ts-checker-webpack-plugin "*"
 
@@ -182,16 +211,39 @@
   version "4.6.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/history/-/history-4.6.2.tgz#12cfaba693ba20f114ed5765467ff25fdf67ddb0"
   integrity sha512-eVAb52MJ4lfPLiO9VvTgv8KaZDEIqCwhv+lXOMLlt4C1YHTShgmMULEg0RrCbnqfYd6QKfHsMp0MiX0vWISpSw==
+<<<<<<< HEAD
+=======
+
+"@types/html-minifier@*":
+  version "1.1.30"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/html-minifier/-/html-minifier-1.1.30.tgz#3b3817c27df23922f7b5aa87eff45b3ab934aec9"
+  integrity sha1-OzgXwn3yOSL3taqH7/RbOrk0rsk=
+  dependencies:
+    "@types/clean-css" "*"
+    "@types/relateurl" "*"
+    "@types/uglify-js" "*"
+
+"@types/html-webpack-plugin@^2.28.0":
+  version "2.28.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/html-webpack-plugin/-/html-webpack-plugin-2.28.0.tgz#554b61b6e883a9425577da04e8e8cc53ec7a4f53"
+  integrity sha1-VUthtuiDqUJVd9oE6OjMU+x6T1M=
+  dependencies:
+    "@types/html-minifier" "*"
+    "@types/webpack" "*"
+>>>>>>> master
 
 "@types/jest@^20.0.2":
   version "20.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/jest/-/jest-20.0.2.tgz#86c751121fb53dbd39bb1a08c45083da13f2dc67"
   integrity sha512-r9D5PKnwZiGcxkT7cej+7kq+pobFcCsj5TlWlO+AmlbwIo8u6vCWhGd0DPo8f7ANskwQaQ6vB6GqGN/DUoL3zQ==
+<<<<<<< HEAD
 
 "@types/json5@^0.0.29":
   version "0.0.29"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
+=======
+>>>>>>> master
 
 "@types/mime@*":
   version "1.3.1"
@@ -274,6 +326,14 @@
   dependencies:
     csstype "^2.2.0"
 
+<<<<<<< HEAD
+=======
+"@types/relateurl@*":
+  version "0.2.28"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/relateurl/-/relateurl-0.2.28.tgz#6bda7db8653fa62643f5ee69e9f69c11a392e3a6"
+  integrity sha1-a9p9uGU/piZD9e5p6facEaOS46Y=
+
+>>>>>>> master
 "@types/rimraf@^0.0.28":
   version "0.0.28"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/rimraf/-/rimraf-0.0.28.tgz#5562519bc7963caca8abf7f128cae3b594d41d06"
@@ -324,6 +384,24 @@
   dependencies:
     "@types/source-map" "*"
 
+<<<<<<< HEAD
+=======
+"@types/webpack-bundle-analyzer@^2.9.0":
+  version "2.9.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack-bundle-analyzer/-/webpack-bundle-analyzer-2.9.0.tgz#824f100941dde6014290eff6e1517f6addd5bfd8"
+  integrity sha512-jNyLIPXcJlrUy0jHqlxfm75QiL3okoc23+Dv6ay1IeNNWdgu4DDRq6GeIbEmf0VjLF/cf24r4Wj5UVxL3Nt5sA==
+  dependencies:
+    "@types/webpack" "*"
+
+"@types/webpack-dev-middleware@^1.9.2":
+  version "1.9.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack-dev-middleware/-/webpack-dev-middleware-1.9.2.tgz#c1d7c4a24f634da51ad76b6a211669449b80daf9"
+  integrity sha512-V4M8eQr7Zua+w2Arj33fQvzokgaNGzIvdI1ZAAtnMQGjSeytgsKOG4mGJCjXDfC9JYYJxG4SGPuht1POERhq3A==
+  dependencies:
+    "@types/connect" "*"
+    "@types/webpack" "*"
+
+>>>>>>> master
 "@types/webpack-dotenv-plugin@^2.0.0":
   version "2.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack-dotenv-plugin/-/webpack-dotenv-plugin-2.0.0.tgz#32857d64c5558363331263b51a43c0df00d30249"
@@ -336,6 +414,7 @@
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack-env/-/webpack-env-1.13.0.tgz#3044381647e11ee973c5af2e925323930f691d80"
   integrity sha1-MEQ4FkfhHulzxa8uklMjkw9pHYA=
 
+<<<<<<< HEAD
 "@types/webpack@*":
   version "3.0.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack/-/webpack-3.0.4.tgz#a115419db8bd4077fc50f5c2b5ba1b44b4e5ff48"
@@ -349,6 +428,27 @@
   version "4.4.17"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack/-/webpack-4.4.17.tgz#3da3e0823a051311ba510bdc32354888921fc8b4"
   integrity sha512-f8fHYEhlrSQJ5BHaonyatL11MYwqQ7I6QDVCT41LqIyxR7j9B2uY4cQKxDoWFC9l2NbFGsIhiJBKZ6Y6LMBFLA==
+=======
+"@types/webpack-hot-middleware@^2.15.0":
+  version "2.15.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack-hot-middleware/-/webpack-hot-middleware-2.15.0.tgz#15c93c44ff2b6369d898df7ef42a374e8ba6780e"
+  integrity sha1-Fck8RP8rY2nYmN9+9Co3ToumeA4=
+  dependencies:
+    "@types/connect" "*"
+    "@types/webpack" "*"
+
+"@types/webpack-merge@^0.0.4":
+  version "0.0.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack-merge/-/webpack-merge-0.0.4.tgz#7150eaa758591905fbbb157f88ea15cae35d1b6c"
+  integrity sha1-cVDqp1hZGQX7uxV/iOoVyuNdG2w=
+  dependencies:
+    "@types/webpack" "*"
+
+"@types/webpack@*", "@types/webpack@^3.0.4":
+  version "3.0.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/webpack/-/webpack-3.0.4.tgz#a115419db8bd4077fc50f5c2b5ba1b44b4e5ff48"
+  integrity sha512-+LjzDICeKZI4N3PUNtzpxPA44/YvhXRBU1bUPj4PlAsquaqahksiIGnZhgZfutwSwcXCIMMu/o0zgEUyWsSkaw==
+>>>>>>> master
   dependencies:
     "@types/node" "*"
     "@types/tapable" "*"
@@ -526,6 +626,7 @@ accepts@~1.3.3:
     mime-types "~2.1.11"
     negotiator "0.6.1"
 
+<<<<<<< HEAD
 accepts@~1.3.5:
   version "1.3.5"
   resolved "https://nexus.swmdigital.io/repository/js-combined/accepts/-/accepts-1.3.5.tgz#eb777df6011723a3b14e8a72c0805c8e86746bd2"
@@ -538,6 +639,12 @@ acorn-dynamic-import@^3.0.0:
   version "3.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/acorn-dynamic-import/-/acorn-dynamic-import-3.0.0.tgz#901ceee4c7faaef7e07ad2a47e890675da50a278"
   integrity sha512-zVWV8Z8lislJoOKKqdNMOB+s6+XV5WERty8MnKBeFgwA+19XJjJHs2RP5dzM57FftIs+jQnRToLiWazKr6sSWg==
+=======
+acorn-dynamic-import@^2.0.0:
+  version "2.0.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/acorn-dynamic-import/-/acorn-dynamic-import-2.0.2.tgz#c752bd210bef679501b6c6cb7fc84f8f47158cc4"
+  integrity sha1-x1K9IQvvZ5UBtsbLf8hPj0cVjMQ=
+>>>>>>> master
   dependencies:
     acorn "^5.0.0"
 
@@ -559,6 +666,14 @@ acorn@^3.0.4:
   version "3.3.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
   integrity sha1-ReN/s56No/JbruP/U2niu18iAXo=
+<<<<<<< HEAD
+=======
+
+acorn@^4.0.3:
+  version "4.0.13"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/acorn/-/acorn-4.0.13.tgz#105495ae5361d697bd195c825192e1ad7f253787"
+  integrity sha1-EFSVrlNh1pe9GVyCUZLhrX8lN4c=
+>>>>>>> master
 
 acorn@^5.0.0, acorn@^5.1.2:
   version "5.2.1"
@@ -569,11 +684,14 @@ acorn@^5.0.1:
   version "5.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/acorn/-/acorn-5.1.1.tgz#53fe161111f912ab999ee887a90a0bc52822fd75"
   integrity sha512-vOk6uEMctu0vQrvuSqFdJyqj1Q0S5VTDL79qtjo+DhRr+1mmaD+tluFSCZqhvi/JUhXSzoZN2BhtstaPEeE8cw==
+<<<<<<< HEAD
 
 acorn@^5.6.2, acorn@^5.7.3:
   version "5.7.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/acorn/-/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
   integrity sha512-T/zvzYRfbVojPWahDsE5evJdHb3oJoQfFbsrKM7w5Zcs++Tr257tia3BmMP8XYVjp1S9RZXQMh7gao96BlqZOw==
+=======
+>>>>>>> master
 
 adjust-sourcemap-loader@^1.1.0:
   version "1.1.0"
@@ -598,10 +716,17 @@ ajv-keywords@^1.0.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/ajv-keywords/-/ajv-keywords-1.5.1.tgz#314dd0a4b3368fad3dfcdc54ede6171b886daf3c"
   integrity sha1-MU3QpLM2j609/NxU7eYXG4htrzw=
 
+<<<<<<< HEAD
 ajv-keywords@^3.1.0:
   version "3.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/ajv-keywords/-/ajv-keywords-3.2.0.tgz#e86b819c602cf8821ad637413698f1dec021847a"
   integrity sha1-6GuBnGAs+IIa1jdBNpjx3sAhhHo=
+=======
+ajv-keywords@^2.0.0:
+  version "2.1.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/ajv-keywords/-/ajv-keywords-2.1.1.tgz#617997fc5f60576894c435f940d819e135b80762"
+  integrity sha1-YXmX/F9gV2iUxDX5QNgZ4TW4B2I=
+>>>>>>> master
 
 ajv@^4.7.0, ajv@^4.9.1:
   version "4.11.8"
@@ -611,7 +736,21 @@ ajv@^4.7.0, ajv@^4.9.1:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
+<<<<<<< HEAD
 ajv@^5.1.0:
+=======
+ajv@^5.0.0:
+  version "5.2.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/ajv/-/ajv-5.2.2.tgz#47c68d69e86f5d953103b0074a9430dc63da5e39"
+  integrity sha1-R8aNaehvXZUxA7AHSpQw3GPaXjk=
+  dependencies:
+    co "^4.6.0"
+    fast-deep-equal "^1.0.0"
+    json-schema-traverse "^0.3.0"
+    json-stable-stringify "^1.0.1"
+
+ajv@^5.1.0, ajv@^5.1.5:
+>>>>>>> master
   version "5.5.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/ajv/-/ajv-5.5.2.tgz#73b5eeca3fab653e3d3f9422b341ad42205dc965"
   integrity sha1-c7Xuyj+rZT49P5Qis0GtQiBdyWU=
@@ -696,6 +835,7 @@ ansi-styles@^3.1.0, ansi-styles@^3.2.0:
   version "3.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/ansi-styles/-/ansi-styles-3.2.0.tgz#c159b8d5be0f9e5a6f346dab94f16ce022161b88"
   integrity sha512-NnSOmMEYtVR2JVMIGTzynRkkaxtiq1xnFBcdQD/DnNCYPoEPsVJhM98BDyaoNOQIi7p4okdi3E27eN7GQbsUug==
+<<<<<<< HEAD
   dependencies:
     color-convert "^1.9.0"
 
@@ -703,6 +843,8 @@ ansi-styles@^3.2.1:
   version "3.2.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
   integrity sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==
+=======
+>>>>>>> master
   dependencies:
     color-convert "^1.9.0"
 
@@ -854,10 +996,17 @@ assert@^1.1.1, assert@^1.3.0:
   dependencies:
     util "0.10.3"
 
+<<<<<<< HEAD
 assets-webpack-plugin@^3.9.7:
   version "3.9.7"
   resolved "https://nexus.swmdigital.io/repository/js-combined/assets-webpack-plugin/-/assets-webpack-plugin-3.9.7.tgz#0c3c13632cc4490b2ef79fd0bbb16c69a724f364"
   integrity sha512-yxo4MlSb++B88qQFE27Wf56ykGaDHZeKcSbrstSFOOwOxv33gWXtM49+yfYPSErlXPAMT5lVy3YPIhWlIFjYQw==
+=======
+assets-webpack-plugin@^3.8.1:
+  version "3.9.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/assets-webpack-plugin/-/assets-webpack-plugin-3.9.6.tgz#a8b5f68510011301d1e33121040301523d1a0be3"
+  integrity sha512-1xdr1eSGRcZzob9fi5M8u1WNHj7KZb0sLS2fBttZXtdP4vBOYG1OFUGAxYkJuCVsETUUjWqBQrceua8RpG5/Pw==
+>>>>>>> master
   dependencies:
     camelcase "^5.0.0"
     escape-string-regexp "^1.0.3"
@@ -900,7 +1049,18 @@ async@^1.4.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
   integrity sha1-7GphrlZIDAw8skHJVhjiCJL5Zyo=
 
+<<<<<<< HEAD
 async@^2.1.4:
+=======
+async@^2.1.2:
+  version "2.6.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/async/-/async-2.6.0.tgz#61a29abb6fcc026fea77e56d1c6ec53a795951f4"
+  integrity sha512-xAfGg1/NTLBBKlHFmnd7PlmUW9KhVQIUuSrYem9xzFUZy13ScvtyGGejaae9iAVRiRq9+Cx7DPFaAAhCpyxyPw==
+  dependencies:
+    lodash "^4.14.0"
+
+async@^2.1.4, async@^2.1.5, async@^2.4.1:
+>>>>>>> master
   version "2.5.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/async/-/async-2.5.0.tgz#843190fd6b7357a0b9e1c956edddd5ec8462b54d"
   integrity sha512-e+lJAJeNWuPCNyxZKOBdaJGyLGHugXVQtrAwtuAe2vhxTYxFTKE73p8JuTmdH0qdQZtDvI4dhJwjZc5zsfIsYw==
@@ -928,6 +1088,21 @@ atob@~1.1.0:
   version "1.1.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/atob/-/atob-1.1.3.tgz#95f13629b12c3a51a5d215abdce2aa9f32f80773"
   integrity sha1-lfE2KbEsOlGl0hWr3OKqnzL4B3M=
+<<<<<<< HEAD
+=======
+
+autoprefixer@^6.3.1:
+  version "6.7.7"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/autoprefixer/-/autoprefixer-6.7.7.tgz#1dbd1c835658e35ce3f9984099db00585c782014"
+  integrity sha1-Hb0cg1ZY41zj+ZhAmdsAWFx4IBQ=
+  dependencies:
+    browserslist "^1.7.6"
+    caniuse-db "^1.0.30000634"
+    normalize-range "^0.1.2"
+    num2fraction "^1.2.2"
+    postcss "^5.2.16"
+    postcss-value-parser "^3.2.3"
+>>>>>>> master
 
 autoprefixer@^7.1.2:
   version "7.1.2"
@@ -941,6 +1116,23 @@ autoprefixer@^7.1.2:
     postcss "^6.0.6"
     postcss-value-parser "^3.2.3"
 
+<<<<<<< HEAD
+=======
+awesome-typescript-loader@^3.2.2:
+  version "3.2.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/awesome-typescript-loader/-/awesome-typescript-loader-3.2.2.tgz#f2e247cd8c129eef17c0c073d7d3a67d74a90684"
+  integrity sha512-8F8rFsOIT4HQDKXt+5Dz66qhiC2pOAbfhsbOj3DeW0LATxxBPQPx0vxCxmecfEroTyKDYBiBMod2cXrChcQa4w==
+  dependencies:
+    colors "^1.1.2"
+    enhanced-resolve "3.3.0"
+    loader-utils "^1.1.0"
+    lodash "^4.17.4"
+    micromatch "^3.0.3"
+    mkdirp "^0.5.1"
+    object-assign "^4.1.1"
+    source-map-support "^0.4.15"
+
+>>>>>>> master
 aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
@@ -956,10 +1148,17 @@ aws4@^1.2.1, aws4@^1.6.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
   integrity sha1-g+9cqGCysy5KDe7e6MdxudtXRx4=
 
+<<<<<<< HEAD
 axe-core@3.0.0-beta.2:
   version "3.0.0-beta.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/axe-core/-/axe-core-3.0.0-beta.2.tgz#82a13d371268034352bba2bcb263c5625b3e4a09"
   integrity sha512-JyMXnHDuzr6hei+mINWsR/iEyPBFSjpgF4/lUijO7QDGVKtTmdpDxc2+7X/xW+rPIwhcd72euJ2UunbRXF+1Eg==
+=======
+axe-core@2.6.1:
+  version "2.6.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/axe-core/-/axe-core-2.6.1.tgz#28772c4f76966d373acda35b9a409299dc00d1b5"
+  integrity sha512-QFfI3d+x/v92HJWGBaNfgrxdfon9/xXzd04YYfm5w5NJQOLex8qkJCctOt7+ky6e1l9zcQ5E7jsvbnTgQzyfTw==
+>>>>>>> master
 
 babar@0.0.3:
   version "0.0.3"
@@ -1084,10 +1283,17 @@ babel-helpers@^6.24.1:
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
 
+<<<<<<< HEAD
 babel-jest@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/babel-jest/-/babel-jest-23.6.0.tgz#a644232366557a2240a0c083da6b25786185a2f1"
   integrity sha512-lqKGG6LYXYu+DQh/slrQ8nxXQkEkhugdXsU6St7GmhVS7Ilc/22ArwqXNJrf0QaOBjZB0360qZMwXqDYQHXaew==
+=======
+babel-jest@^23.0.0, babel-jest@^23.4.2:
+  version "23.4.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/babel-jest/-/babel-jest-23.4.2.tgz#f276de67798a5d68f2d6e87ff518c2f6e1609877"
+  integrity sha512-wg1LJ2tzsafXqPFVgAsYsMCVD5U7kwJZAvbZIxVm27iOewsQw1BR7VZifDlMTEWVo3wasoPPyMdKXWCsfFPr3Q==
+>>>>>>> master
   dependencies:
     babel-plugin-istanbul "^4.1.6"
     babel-preset-jest "^23.2.0"
@@ -1255,6 +1461,14 @@ babylon@^6.18.0:
   version "6.18.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/babylon/-/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
   integrity sha512-q/UEjfGJ2Cm3oKV71DJz9d25TPnq5rhBVL2Q4fA5wcC3jcrdn7+SssEybFIxwAvvP+YCsCYNKughoF33GxgycQ==
+<<<<<<< HEAD
+=======
+
+balanced-match@^0.4.2:
+  version "0.4.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/balanced-match/-/balanced-match-0.4.2.tgz#cb3f3e3c732dc0f01ee70b403f302e61d7709838"
+  integrity sha1-yz8+PHMtwPAe5wtAPzAuYddwmDg=
+>>>>>>> master
 
 balanced-match@^1.0.0:
   version "1.0.0"
@@ -1315,15 +1529,23 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
+<<<<<<< HEAD
 bluebird@^3.5.1:
   version "3.5.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/bluebird/-/bluebird-3.5.2.tgz#1be0908e054a751754549c270489c1505d4ab15a"
   integrity sha512-dhHTWMI7kMx5whMQntl7Vr9C6BvV10lFXDAasnqnrMYhXVCzzk6IO9Fo2L75jXHT07WrOngL1WDXOp+yYS91Yg==
+=======
+bluebird@^3.4.7:
+  version "3.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
+  integrity sha1-eRQg1/VR7qKJdFOop3ZT+WYG1nw=
+>>>>>>> master
 
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"
   resolved "https://nexus.swmdigital.io/repository/js-combined/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
   integrity sha512-ItfYfPLkWHUjckQCk8xC+LwxgK8NYcXywGigJgSwOP8Y2iyWT4f2vsZnoOXTTbo+o5yXmIUJ4gn5538SO5S3gA==
+<<<<<<< HEAD
 
 body-parser@1.18.3:
   version "1.18.3"
@@ -1340,6 +1562,8 @@ body-parser@1.18.3:
     qs "6.5.2"
     raw-body "2.3.3"
     type-is "~1.6.16"
+=======
+>>>>>>> master
 
 boolbase@^1.0.0, boolbase@~1.0.0:
   version "1.0.0"
@@ -1410,7 +1634,28 @@ braces@^1.8.2:
     preserve "^0.2.0"
     repeat-element "^1.1.2"
 
+<<<<<<< HEAD
 braces@^2.3.0, braces@^2.3.1:
+=======
+braces@^2.2.2:
+  version "2.2.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/braces/-/braces-2.2.2.tgz#241f868c2b2690d9febeee5a7c83fbbf25d00b1b"
+  integrity sha1-JB+GjCsmkNn+vu5afIP7vyXQCxs=
+  dependencies:
+    arr-flatten "^1.0.3"
+    array-unique "^0.3.2"
+    define-property "^1.0.0"
+    extend-shallow "^2.0.1"
+    fill-range "^4.0.0"
+    isobject "^3.0.0"
+    repeat-element "^1.1.2"
+    snapdragon "^0.8.1"
+    snapdragon-node "^2.0.1"
+    split-string "^2.1.0"
+    to-regex "^3.0.1"
+
+braces@^2.3.1:
+>>>>>>> master
   version "2.3.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/braces/-/braces-2.3.2.tgz#5979fd3f14cd531565e5fa2df1abfff1dfaee729"
   integrity sha512-aNdbnj9P8PjdXU4ybaWLK2IF3jc/EoDYbC7AazW6to3TRsfXxscC9UXOB5iDiEQrkyIbWp2SLQda4+QAa7nc3w==
@@ -1501,6 +1746,17 @@ browserify-zlib@^0.2.0:
   dependencies:
     pako "~1.0.5"
 
+<<<<<<< HEAD
+=======
+browserslist@^1.3.6, browserslist@^1.5.2, browserslist@^1.7.6:
+  version "1.7.7"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/browserslist/-/browserslist-1.7.7.tgz#0bd76704258be829b2398bb50e4b62d1a166b0b9"
+  integrity sha1-C9dnBCWL6CmyOYu1Dkti0aFmsLk=
+  dependencies:
+    caniuse-db "^1.0.30000639"
+    electron-to-chromium "^1.2.7"
+
+>>>>>>> master
 browserslist@^2.1.5:
   version "2.1.5"
   resolved "https://nexus.swmdigital.io/repository/js-combined/browserslist/-/browserslist-2.1.5.tgz#e882550df3d1cd6d481c1a3e0038f2baf13a4711"
@@ -1553,6 +1809,7 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
+<<<<<<< HEAD
 
 bytes@3.0.0:
   version "3.0.0"
@@ -1597,6 +1854,8 @@ cacache@^11.0.2:
     ssri "^6.0.0"
     unique-filename "^1.1.0"
     y18n "^4.0.0"
+=======
+>>>>>>> master
 
 cache-base@^0.8.4:
   version "0.8.5"
@@ -1682,20 +1941,34 @@ camelcase@^5.0.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/camelcase/-/camelcase-5.0.0.tgz#03295527d58bd3cd4aa75363f35b2e8d97be2f42"
   integrity sha512-faqwZqnWxbxn+F1d399ygeamQNy3lPp/H9H6rNrqYh4FSVCtcY+3cub1MxA8o9mDd55mM8Aghuu/kuyYA6VTsA==
 
+<<<<<<< HEAD
 caniuse-api@^3.0.0:
   version "3.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/caniuse-api/-/caniuse-api-3.0.0.tgz#5e4d90e2274961d46291997df599e3ed008ee4c0"
   integrity sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==
+=======
+caniuse-api@^1.5.2:
+  version "1.6.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/caniuse-api/-/caniuse-api-1.6.1.tgz#b534e7c734c4f81ec5fbe8aca2ad24354b962c6c"
+  integrity sha1-tTTnxzTE+B7F++isoq0kNUuWLGw=
+>>>>>>> master
   dependencies:
     browserslist "^4.0.0"
     caniuse-lite "^1.0.0"
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
+<<<<<<< HEAD
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000890:
   version "1.0.30000893"
   resolved "https://nexus.swmdigital.io/repository/js-combined/caniuse-lite/-/caniuse-lite-1.0.30000893.tgz#284b20932bd41b93e21626975f2050cb01561986"
   integrity sha512-kOddHcTEef+NgN/fs0zmX2brHTNATVOWMEIhlZHCuwQRtXobjSw9pAECc44Op4bTBcavRjkLaPrGomknH7+Jvg==
+=======
+caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
+  version "1.0.30000698"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/caniuse-db/-/caniuse-db-1.0.30000698.tgz#623a2de3458ceca379846a8f170e7b1771c7c3a3"
+  integrity sha1-Yjot40WM7KN5hGqPFw57F3HHw6M=
+>>>>>>> master
 
 caniuse-lite@^1.0.30000684, caniuse-lite@^1.0.30000697:
   version "1.0.30000698"
@@ -1767,11 +2040,14 @@ charenc@~0.0.1:
   version "0.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
   integrity sha1-wKHS86cJLgN3S/qD8UwPxXkKhmc=
+<<<<<<< HEAD
 
 check-types@^7.3.0:
   version "7.4.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/check-types/-/check-types-7.4.0.tgz#0378ec1b9616ec71f774931a3c6516fad8c152f4"
   integrity sha512-YbulWHdfP99UfZ73NcUDlNJhEIDgm9Doq9GhpyXbF+7Aegi3CVV7qqMCKTTqJxlvEvnQBp9IA+dxsGN6xK/nSg==
+=======
+>>>>>>> master
 
 cheerio@^1.0.0-rc.2:
   version "1.0.0-rc.2"
@@ -1785,10 +2061,17 @@ cheerio@^1.0.0-rc.2:
     lodash "^4.15.0"
     parse5 "^3.0.1"
 
+<<<<<<< HEAD
 chokidar@^2.0.2, chokidar@^2.0.4:
   version "2.0.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/chokidar/-/chokidar-2.0.4.tgz#356ff4e2b0e8e43e322d18a372460bbcf3accd26"
   integrity sha512-z9n7yt9rOvIJrMhvDtDictKrkFHeihkNl6uWMmZlmL6tJtX9Cs+87oK+teBx+JIgzvbX3yZHT3eF8vpbDxHJXQ==
+=======
+chokidar@^1.7.0:
+  version "1.7.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
+  integrity sha1-eY5ol3gVHIB2tLNg5e3SjNortGg=
+>>>>>>> master
   dependencies:
     anymatch "^2.0.0"
     async-each "^1.0.0"
@@ -1821,9 +2104,15 @@ chrome-devtools-frontend@1.0.422034:
   integrity sha1-BxyM4URmt2UwMvzRrRpKaNXjy9k=
 
 chrome-launcher@^0.10.2:
+<<<<<<< HEAD
   version "0.10.5"
   resolved "https://nexus.swmdigital.io/repository/js-combined/chrome-launcher/-/chrome-launcher-0.10.5.tgz#d0aa72c11f1653e6a60dfebea171522447470ef1"
   integrity sha512-Gbzg8HlWhyuoVqflhiXwfFXhzNfNWvAkSWv2QR1Yl6mwsMo1oCLAVjp2tIySuS4lrZLEjzVx1fOy584yE76P4g==
+=======
+  version "0.10.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/chrome-launcher/-/chrome-launcher-0.10.2.tgz#f7d860ddec627b6f01015736b5ae1e33b3d165b1"
+  integrity sha512-E+kTHlGgtitPPu8Rci0E4XBasirKtTn6DjqFn8tTLp/7xCUzqb6lig9Il+HLkcudzKvT/aLxJbzbyNCe03w1AA==
+>>>>>>> master
   dependencies:
     "@types/core-js" "^0.9.41"
     "@types/mkdirp" "^0.3.29"
@@ -1845,6 +2134,14 @@ ci-info@^1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/ci-info/-/ci-info-1.0.0.tgz#dc5285f2b4e251821683681c381c3388f46ec534"
   integrity sha1-3FKF8rTiUYIWg2gcOBwziPRuxTQ=
+<<<<<<< HEAD
+=======
+
+ci-info@^1.5.0:
+  version "1.6.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/ci-info/-/ci-info-1.6.0.tgz#2ca20dbb9ceb32d4524a683303313f0304b1e497"
+  integrity sha512-vsGdkwSCDpWmP80ncATX7iea5DWQemg1UgCW5J8tqjU3lYw4FBYuj89J0CTVomA7BEfvSZd84GmHko+MxFQU2A==
+>>>>>>> master
 
 cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
   version "1.0.4"
@@ -1858,6 +2155,16 @@ circular-json@^0.3.1:
   version "0.3.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/circular-json/-/circular-json-0.3.1.tgz#be8b36aefccde8b3ca7aa2d6afc07a37242c0d2d"
   integrity sha1-vos2rvzN6LPKeqLWr8B6NyQsDS0=
+<<<<<<< HEAD
+=======
+
+clap@^1.0.9:
+  version "1.2.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/clap/-/clap-1.2.0.tgz#59c90fe3e137104746ff19469a27a634ff68c857"
+  integrity sha1-WckP4+E3EEdG/xlGmiemNP9oyFc=
+  dependencies:
+    chalk "^1.1.3"
+>>>>>>> master
 
 class-utils@^0.3.4:
   version "0.3.5"
@@ -1928,6 +2235,7 @@ cliui@^4.0.0:
     strip-ansi "^4.0.0"
     wrap-ansi "^2.0.0"
 
+<<<<<<< HEAD
 clone-deep@^2.0.1:
   version "2.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/clone-deep/-/clone-deep-2.0.2.tgz#00db3a1e173656730d1188c3d6aced6d7ea97713"
@@ -1937,6 +2245,22 @@ clone-deep@^2.0.1:
     is-plain-object "^2.0.4"
     kind-of "^6.0.0"
     shallow-clone "^1.0.0"
+=======
+clone-deep@^0.3.0:
+  version "0.3.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/clone-deep/-/clone-deep-0.3.0.tgz#348c61ae9cdbe0edfe053d91ff4cc521d790ede8"
+  integrity sha1-NIxhrpzb4O3+BT2R/0zFIdeQ7eg=
+  dependencies:
+    for-own "^1.0.0"
+    is-plain-object "^2.0.1"
+    kind-of "^3.2.2"
+    shallow-clone "^0.1.2"
+
+clone@^1.0.2:
+  version "1.0.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/clone/-/clone-1.0.2.tgz#260b7a99ebb1edfe247538175f783243cb19d149"
+  integrity sha1-Jgt6meux7f4kdTgXX3gyQ8sZ0Uk=
+>>>>>>> master
 
 closest-file-data@^0.1.4:
   version "0.1.4"
@@ -1948,10 +2272,17 @@ co@^4.6.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
   integrity sha1-bqa989hTrlTMuOR7+gvz+QMfsYQ=
 
+<<<<<<< HEAD
 coa@~2.0.1:
   version "2.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/coa/-/coa-2.0.1.tgz#f3f8b0b15073e35d70263fb1042cb2c023db38af"
   integrity sha512-5wfTTO8E2/ja4jFSxePXlG5nRu5bBtL/r1HCIpJW/lzT6yDtKl0u0Z4o/Vpz32IpKmBn7HerheEZQgA9N2DarQ==
+=======
+coa@~1.0.1:
+  version "1.0.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/coa/-/coa-1.0.4.tgz#a9ef153660d6a86a8bdec0289a5c684d217432fd"
+  integrity sha1-qe8VNmDWqGqL3sAomlxoTSF0Mv0=
+>>>>>>> master
   dependencies:
     q "^1.1.2"
 
@@ -1976,18 +2307,26 @@ color-convert@^1.9.0:
   dependencies:
     color-name "^1.1.1"
 
+<<<<<<< HEAD
 color-convert@^1.9.1:
   version "1.9.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8"
   integrity sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==
   dependencies:
     color-name "1.1.3"
+=======
+color-name@^1.0.0:
+  version "1.1.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/color-name/-/color-name-1.1.2.tgz#5c8ab72b64bd2215d617ae9559ebb148475cf98d"
+  integrity sha1-XIq3K2S9IhXWF66VWeuxSEdc+Y0=
+>>>>>>> master
 
 color-name@1.1.3, color-name@^1.1.1:
   version "1.1.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
   integrity sha1-p9BVi9icQveV3UIyj3QIMcpTvCU=
 
+<<<<<<< HEAD
 color-name@^1.0.0:
   version "1.1.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/color-name/-/color-name-1.1.2.tgz#5c8ab72b64bd2215d617ae9559ebb148475cf98d"
@@ -1997,10 +2336,17 @@ color-string@^1.5.2:
   version "1.5.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/color-string/-/color-string-1.5.3.tgz#c9bbc5f01b58b5492f3d6857459cb6590ce204cc"
   integrity sha512-dC2C5qeWoYkxki5UAXapdjqO672AM4vZuPGRQfO8b5HKuKGBbKWpITyDYN7TOFKvRW7kOgAn3746clDBMDJyQw==
+=======
+color-string@^0.3.0:
+  version "0.3.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/color-string/-/color-string-0.3.0.tgz#27d46fb67025c5c2fa25993bfbf579e47841b991"
+  integrity sha1-J9RvtnAlxcL6JZk7+/V55HhBuZE=
+>>>>>>> master
   dependencies:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
 
+<<<<<<< HEAD
 color@^3.0.0:
   version "3.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/color/-/color-3.1.0.tgz#d8e9fb096732875774c84bf922815df0308d0ffc"
@@ -2008,6 +2354,25 @@ color@^3.0.0:
   dependencies:
     color-convert "^1.9.1"
     color-string "^1.5.2"
+=======
+color@^0.11.0:
+  version "0.11.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/color/-/color-0.11.4.tgz#6d7b5c74fb65e841cd48792ad1ed5e07b904d764"
+  integrity sha1-bXtcdPtl6EHNSHkq0e1eB7kE12Q=
+  dependencies:
+    clone "^1.0.2"
+    color-convert "^1.3.0"
+    color-string "^0.3.0"
+
+colormin@^1.0.5:
+  version "1.1.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/colormin/-/colormin-1.1.2.tgz#ea2f7420a72b96881a38aae59ec124a6f7298133"
+  integrity sha1-6i90IKcrlogaOKrlnsEkpvcpgTM=
+  dependencies:
+    color "^0.11.0"
+    css-color-names "0.0.4"
+    has "^1.0.1"
+>>>>>>> master
 
 colors@0.5.x:
   version "0.5.1"
@@ -2054,6 +2419,7 @@ commander@^2.8.1, commander@^2.9.0:
   version "2.11.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/commander/-/commander-2.11.0.tgz#157152fd1e7a6c8d98a5b715cf376df928004563"
   integrity sha512-b0553uYA5YAEGgyYIGYROzKQ7X5RAqedkfjiZxwi0kL1g3bOaBNNZfYkzt/CL0umgD5wc9Jec2FbB98CjkMRvQ==
+<<<<<<< HEAD
 
 commander@~2.13.0:
   version "2.13.0"
@@ -2069,6 +2435,8 @@ commondir@^1.0.1:
   version "1.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=
+=======
+>>>>>>> master
 
 compare-versions@^3.1.0:
   version "3.3.1"
@@ -2079,6 +2447,7 @@ component-emitter@^1.2.0, component-emitter@^1.2.1:
   version "1.2.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/component-emitter/-/component-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"
   integrity sha1-E3kY1teCg/ffemt8WmPhQOaUJeY=
+<<<<<<< HEAD
 
 compose-function@^3.0.3:
   version "3.0.3"
@@ -2086,6 +2455,8 @@ compose-function@^3.0.3:
   integrity sha1-ntZ18TzFRQHTCVCkhv9qe6OrGF8=
   dependencies:
     arity-n "^1.0.4"
+=======
+>>>>>>> master
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -2096,6 +2467,7 @@ concat-stream@^1.4.6:
   version "1.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/concat-stream/-/concat-stream-1.6.0.tgz#0aac662fd52be78964d5532f694784e70110acf7"
   integrity sha1-CqxmL9Ur54lk1VMvaUeE5wEQrPc=
+<<<<<<< HEAD
   dependencies:
     inherits "^2.0.3"
     readable-stream "^2.2.2"
@@ -2105,6 +2477,8 @@ concat-stream@^1.5.0:
   version "1.6.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/concat-stream/-/concat-stream-1.6.2.tgz#904bdf194cd3122fc675c77fc4ac3d4ff0fd1a34"
   integrity sha512-27HBghJxjiZtIk3Ycvn/4kbJk/1uZuJFfuPEns6LaEvpvG1f0hTea8lilrouyo9mVc2GWdcEZ8OLoGmSADlrCw==
+=======
+>>>>>>> master
   dependencies:
     buffer-from "^1.0.0"
     inherits "^2.0.3"
@@ -2166,11 +2540,14 @@ content-type@~1.0.2:
   version "1.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/content-type/-/content-type-1.0.2.tgz#b7d113aee7a8dd27bd21133c4dc2529df1721eed"
   integrity sha1-t9ETrueo3Se9IRM8TcJSnfFyHu0=
+<<<<<<< HEAD
 
 content-type@~1.0.4:
   version "1.0.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/content-type/-/content-type-1.0.4.tgz#e138cc75e040c727b1966fe5e5f8c9aee256fe3b"
   integrity sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==
+=======
+>>>>>>> master
 
 convert-source-map@^0.3.3:
   version "0.3.5"
@@ -2181,6 +2558,7 @@ convert-source-map@^1.1.0, convert-source-map@^1.4.0:
   version "1.5.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/convert-source-map/-/convert-source-map-1.5.0.tgz#9acd70851c6d5dfdd93d9282e5edf94a03ff46b5"
   integrity sha1-ms1whRxtXf3ZPZKC5e35SgP/RrU=
+<<<<<<< HEAD
 
 convert-source-map@^1.5.1:
   version "1.6.0"
@@ -2188,6 +2566,8 @@ convert-source-map@^1.5.1:
   integrity sha512-eFu7XigvxdZ1ETfbgPBohgyQ/Z++C0eEhTor0qRwBw9unw+L0/6V8wkSuGgzdThkiS5lSpdptOQPD8Ak40a+7A==
   dependencies:
     safe-buffer "~5.1.1"
+=======
+>>>>>>> master
 
 cookie-signature@1.0.6:
   version "1.0.6"
@@ -2203,6 +2583,7 @@ cookiejar@^2.1.0:
   version "2.1.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/cookiejar/-/cookiejar-2.1.2.tgz#dd8a235530752f988f9a0844f3fc589e3111125c"
   integrity sha512-Mw+adcfzPxcPeI+0WlvRrr/3lGVO0bD75SxX6811cxSh1Wbxx7xZBGK1eVtDf6si8rg2lhnUjsVLMFMfbRIuwA==
+<<<<<<< HEAD
 
 copy-concurrently@^1.0.0:
   version "1.0.5"
@@ -2215,6 +2596,8 @@ copy-concurrently@^1.0.0:
     mkdirp "^0.5.1"
     rimraf "^2.5.4"
     run-queue "^1.0.0"
+=======
+>>>>>>> master
 
 copy-descriptor@^0.1.0:
   version "0.1.1"
@@ -2230,21 +2613,31 @@ core-js@^2.4.0:
   version "2.4.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/core-js/-/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
   integrity sha1-TekR5mew6ukSTjQlS1OupvxhjT4=
+<<<<<<< HEAD
 
 core-js@^2.5.0:
   version "2.5.7"
   resolved "https://nexus.swmdigital.io/repository/js-combined/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
   integrity sha512-RszJCAxg/PP6uzXVXL6BsxSXx/B05oJAQ2vkJRjyjrEcNVycaqOmNb5OTxZPE3xa5gwZduqza6L9JOCenh/Ecw==
+=======
+>>>>>>> master
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
+<<<<<<< HEAD
 cosmiconfig@^4.0.0:
   version "4.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/cosmiconfig/-/cosmiconfig-4.0.0.tgz#760391549580bbd2df1e562bc177b13c290972dc"
   integrity sha512-6e5vDdrXZD+t5v0L8CrurPeybg4Fmf+FCSYxXKYVAqLUtyCSbuyqE059d0kDthTNRzKVjL7QMgNpEUlsoYH3iQ==
+=======
+cosmiconfig@^2.1.0, cosmiconfig@^2.1.1:
+  version "2.1.3"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/cosmiconfig/-/cosmiconfig-2.1.3.tgz#952771eb0dddc1cb3fa2f6fbe51a522e93b3ee0a"
+  integrity sha1-lSdx6w3dwcs/ovb75RpSLpOz7go=
+>>>>>>> master
   dependencies:
     is-directory "^0.3.1"
     js-yaml "^3.9.0"
@@ -2252,6 +2645,15 @@ cosmiconfig@^4.0.0:
     require-from-string "^2.0.1"
 
 cosmiconfig@^5.0.0:
+  version "5.0.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/cosmiconfig/-/cosmiconfig-5.0.6.tgz#dca6cf680a0bd03589aff684700858c81abeeb39"
+  integrity sha512-6DWfizHriCrFWURP1/qyhsiFvYdlJzbCzmtFWh744+KyWsJo5+kPzUZZaMRSSItoYc0pxFX7gEO7ZC1/gN/7AQ==
+  dependencies:
+    is-directory "^0.3.1"
+    js-yaml "^3.9.0"
+    parse-json "^4.0.0"
+
+cosmiconfig@^5.0.6:
   version "5.0.6"
   resolved "https://nexus.swmdigital.io/repository/js-combined/cosmiconfig/-/cosmiconfig-5.0.6.tgz#dca6cf680a0bd03589aff684700858c81abeeb39"
   integrity sha512-6DWfizHriCrFWURP1/qyhsiFvYdlJzbCzmtFWh744+KyWsJo5+kPzUZZaMRSSItoYc0pxFX7gEO7ZC1/gN/7AQ==
@@ -2367,6 +2769,7 @@ css-color-names@0.0.4, css-color-names@^0.0.4:
   version "0.0.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/css-color-names/-/css-color-names-0.0.4.tgz#808adc2e79cf84738069b646cb20ec27beb629e0"
   integrity sha1-gIrcLnnPhHOAabZGyyDsJ762KeA=
+<<<<<<< HEAD
 
 css-declaration-sorter@^4.0.1:
   version "4.0.1"
@@ -2380,6 +2783,13 @@ css-loader@^1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/css-loader/-/css-loader-1.0.0.tgz#9f46aaa5ca41dbe31860e3b62b8e23c42916bf56"
   integrity sha512-tMXlTYf3mIMt3b0dDCOQFJiVvxbocJ5Ho577WiGPYPZcqVEO218L2iU22pDXzkTZCLDE+9AmGSUkWxeh/nZReA==
+=======
+
+css-loader@^0.28.4:
+  version "0.28.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/css-loader/-/css-loader-0.28.4.tgz#6cf3579192ce355e8b38d5f42dd7a1f2ec898d0f"
+  integrity sha1-bPNXkZLONV6LONX0Ldeh8uyJjQ8=
+>>>>>>> master
   dependencies:
     babel-code-frame "^6.26.0"
     css-selector-tokenizer "^0.7.0"
@@ -2474,6 +2884,7 @@ cssesc@^0.1.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/cssesc/-/cssesc-0.1.0.tgz#c814903e45623371a0477b40109aaafbeeaddbb4"
   integrity sha1-yBSQPkViM3GgR3tAEJqq++6t27Q=
 
+<<<<<<< HEAD
 cssesc@^1.0.1:
   version "1.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/cssesc/-/cssesc-1.0.1.tgz#ef7bd8d0229ed6a3a7051ff7771265fe7330e0a8"
@@ -2529,9 +2940,16 @@ cssnano-util-raw-cache@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/cssnano-util-raw-cache/-/cssnano-util-raw-cache-4.0.1.tgz#b26d5fd5f72a11dfe7a7846fb4c67260f96bf282"
   integrity sha512-qLuYtWK2b2Dy55I8ZX3ky1Z16WYsx544Q0UWViebptpwn/xDBmog2TLg4f+DBMg1rJ6JDWtn96WHbOKDWt1WQA==
+=======
+"cssnano@>=2.6.1 <4":
+  version "3.10.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/cssnano/-/cssnano-3.10.0.tgz#4f38f6cea2b9b17fa01490f23f1dc68ea65c1c38"
+  integrity sha1-Tzj2zqK5sX+gFJDyPx3GjqZcHDg=
+>>>>>>> master
   dependencies:
     postcss "^7.0.0"
 
+<<<<<<< HEAD
 cssnano-util-same-parent@^4.0.0:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/cssnano-util-same-parent/-/cssnano-util-same-parent-4.0.1.tgz#574082fb2859d2db433855835d9a8456ea18bbf3"
@@ -2541,6 +2959,12 @@ cssnano@^4.1.0:
   version "4.1.5"
   resolved "https://nexus.swmdigital.io/repository/js-combined/cssnano/-/cssnano-4.1.5.tgz#cfe5ffa722079f339ac2a6d547d88dd8ac8a498d"
   integrity sha512-+6m3g8zV87VDIMCXpDzlaXyzo9h9VrIn9o/XRU6ufH/AddZw/mHzmmmNv83+MxpX5rnVbYPxuAMYPjuDgjd9Hw==
+=======
+csso@~2.3.1:
+  version "2.3.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/csso/-/csso-2.3.2.tgz#ddd52c587033f49e94b71fc55569f252e8ff5f85"
+  integrity sha1-3dUsWHAz9J6Utx/FVWnyUuj/X4U=
+>>>>>>> master
   dependencies:
     cosmiconfig "^5.0.0"
     cssnano-preset-default "^4.0.2"
@@ -2609,6 +3033,7 @@ debug@2.6.7:
   dependencies:
     ms "2.0.0"
 
+<<<<<<< HEAD
 debug@2.6.9, debug@^2.1.2, debug@^2.2.0, debug@^2.6.9:
   version "2.6.9"
   resolved "https://nexus.swmdigital.io/repository/js-combined/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -2620,6 +3045,19 @@ debug@^2.1.1, debug@^2.3.3, debug@^2.6.8:
   version "2.6.8"
   resolved "https://nexus.swmdigital.io/repository/js-combined/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
   integrity sha1-5zFTHKLt4n0YgiJCfaF4IdaP9Pw=
+=======
+debug@^2.1.1, debug@^2.3.3, debug@^2.6.8:
+  version "2.6.8"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
+  integrity sha1-5zFTHKLt4n0YgiJCfaF4IdaP9Pw=
+  dependencies:
+    ms "2.0.0"
+
+debug@^2.2.0:
+  version "2.6.9"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
+  integrity sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==
+>>>>>>> master
   dependencies:
     ms "2.0.0"
 
@@ -2639,11 +3077,14 @@ deep-equal@^1.0.1:
   version "1.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/deep-equal/-/deep-equal-1.0.1.tgz#f5d260292b660e084eff4cdbc9f08ad3247448b5"
   integrity sha1-9dJgKStmDghO/0zbyfCK0yR0SLU=
+<<<<<<< HEAD
 
 deep-extend@^0.6.0:
   version "0.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/deep-extend/-/deep-extend-0.6.0.tgz#c4fa7c95404a17a9c3e8ca7e1537312b736330ac"
   integrity sha512-LOHxIOaPYdHlJRtCQfDIVZtfw/ufM8+rVj649RIHzcm/vGwQRXFt6OPqIFWsm2XEMrNIEtWR64sY1LEKD2vAOA==
+=======
+>>>>>>> master
 
 deep-extend@~0.4.0:
   version "0.4.2"
@@ -2654,11 +3095,14 @@ deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
   integrity sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
+<<<<<<< HEAD
 
 deepmerge@^2.0.1:
   version "2.2.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/deepmerge/-/deepmerge-2.2.1.tgz#5d3ff22a01c00f645405a2fbc17d0778a1801170"
   integrity sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==
+=======
+>>>>>>> master
 
 default-require-extensions@^2.0.0:
   version "2.0.0"
@@ -2697,6 +3141,14 @@ define-property@^2.0.2:
     is-descriptor "^1.0.2"
     isobject "^3.0.1"
 
+<<<<<<< HEAD
+=======
+defined@^1.0.0:
+  version "1.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/defined/-/defined-1.0.0.tgz#c98d9bcef75674188e110969151199e39b1fa693"
+  integrity sha1-yY2bzvdWdBiOEQlpFRGZ45sfppM=
+
+>>>>>>> master
 del@^2.0.2:
   version "2.2.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/del/-/del-2.2.2.tgz#c12c981d067846c84bcaf862cff930d907ffd1a8"
@@ -2724,11 +3176,14 @@ depd@1.1.0, depd@~1.1.0:
   version "1.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/depd/-/depd-1.1.0.tgz#e1bd82c6aab6ced965b97b88b17ed3e528ca18c3"
   integrity sha1-4b2Cxqq2ztlluXuIsX7T5SjKGMM=
+<<<<<<< HEAD
 
 depd@~1.1.2:
   version "1.1.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
   integrity sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
+=======
+>>>>>>> master
 
 des.js@^1.0.0:
   version "1.0.0"
@@ -2855,6 +3310,7 @@ domutils@1.5.1, domutils@^1.5.1:
   version "1.5.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/domutils/-/domutils-1.5.1.tgz#dcd8488a26f563d61079e48c9f7b7e32373682cf"
   integrity sha1-3NhIiib1Y9YQeeSMn3t+Mjc2gs8=
+<<<<<<< HEAD
   dependencies:
     dom-serializer "0"
     domelementtype "1"
@@ -2863,6 +3319,8 @@ domutils@^1.7.0:
   version "1.7.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/domutils/-/domutils-1.7.0.tgz#56ea341e834e06e6748af7a1cb25da67ea9f8c2a"
   integrity sha512-Lgd2XcJ/NjEw+7tFvfKxOzCYKZsdct5lczQ2ZaQY8Djz7pfAD3Gbp8ySJWtreII/vDlMVmxwa6pHmdxIYgttDg==
+=======
+>>>>>>> master
   dependencies:
     dom-serializer "0"
     domelementtype "1"
@@ -2871,6 +3329,7 @@ dot-prop@^4.1.0:
   version "4.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/dot-prop/-/dot-prop-4.1.1.tgz#a8493f0b7b5eeec82525b5c7587fa7de7ca859c1"
   integrity sha1-qEk/C3te7sglJbXHWH+n3nyoWcE=
+<<<<<<< HEAD
   dependencies:
     is-obj "^1.0.0"
 
@@ -2878,6 +3337,8 @@ dot-prop@^4.1.1:
   version "4.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/dot-prop/-/dot-prop-4.2.0.tgz#1f19e0c2e1aa0e32797c49799f2837ac6af69c57"
   integrity sha512-tUMXrxlExSW6U2EXiiKGSBVdYgtV8qlHL+C10TsW4PURY/ic+eaysnSkwB4kA/mBlCyy/IKDJ+Lc3wbWeaXtuQ==
+=======
+>>>>>>> master
   dependencies:
     is-obj "^1.0.0"
 
@@ -2902,6 +3363,7 @@ duplexer@^0.1.1:
   version "0.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
   integrity sha1-rOb/gIwc5mtX0ev5eXessCM0z8E=
+<<<<<<< HEAD
 
 duplexify@^3.4.2, duplexify@^3.6.0:
   version "3.6.1"
@@ -2912,6 +3374,8 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
+=======
+>>>>>>> master
 
 ecc-jsbn@~0.1.1:
   version "0.1.1"
@@ -2925,20 +3389,30 @@ ee-first@1.1.1:
   resolved "https://nexus.swmdigital.io/repository/js-combined/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
+<<<<<<< HEAD
 ejs@^2.6.1:
   version "2.6.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/ejs/-/ejs-2.6.1.tgz#498ec0d495655abc6f23cd61868d926464071aa0"
   integrity sha512-0xy4A/twfrRCnkhfk8ErDi5DqdAsAqeGxht4xkCUrsvhhbQNs7E+4jV0CN7+NKIY0aHE72+XvqtBIXzD31ZbXQ==
+=======
+ejs@^2.5.6:
+  version "2.5.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/ejs/-/ejs-2.5.6.tgz#479636bfa3fe3b1debd52087f0acb204b4f19c88"
+  integrity sha1-R5Y2v6P+Ox3r1SCH8KyyBLTxnIg=
+>>>>>>> master
 
 electron-to-chromium@^1.3.14:
   version "1.3.15"
   resolved "https://nexus.swmdigital.io/repository/js-combined/electron-to-chromium/-/electron-to-chromium-1.3.15.tgz#08397934891cbcfaebbd18b82a95b5a481138369"
   integrity sha1-CDl5NIkcvPrrvRi4KpW1pIETg2k=
+<<<<<<< HEAD
 
 electron-to-chromium@^1.3.79:
   version "1.3.79"
   resolved "https://nexus.swmdigital.io/repository/js-combined/electron-to-chromium/-/electron-to-chromium-1.3.79.tgz#774718f06284a4bf8f578ac67e74508fe659f13a"
   integrity sha512-LQdY3j4PxuUl6xfxiFruTSlCniTrTrzAd8/HfsLEMi0PUpaQ0Iy+Pr4N4VllDYjs0Hyu2lkTbvzqlG+PX9NsNw==
+=======
+>>>>>>> master
 
 elliptic@^6.0.0:
   version "6.4.0"
@@ -2962,11 +3436,14 @@ encodeurl@~1.0.1:
   version "1.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/encodeurl/-/encodeurl-1.0.1.tgz#79e3d58655346909fe6f0f45a5de68103b294d20"
   integrity sha1-eePVhlU0aQn+bw9Fpd5oEDspTSA=
+<<<<<<< HEAD
 
 encodeurl@~1.0.2:
   version "1.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/encodeurl/-/encodeurl-1.0.2.tgz#ad3ff4c86ec2d029322f5a02c3a9a606c95b3f59"
   integrity sha1-rT/0yG7C0CkyL1oCw6mmBslbP1k=
+=======
+>>>>>>> master
 
 encoding@^0.1.11:
   version "0.1.12"
@@ -2975,17 +3452,31 @@ encoding@^0.1.11:
   dependencies:
     iconv-lite "~0.4.13"
 
+<<<<<<< HEAD
 end-of-stream@^1.0.0, end-of-stream@^1.1.0:
   version "1.4.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/end-of-stream/-/end-of-stream-1.4.1.tgz#ed29634d19baba463b6ce6b80a37213eab71ec43"
   integrity sha512-1MkrZNvWTKCaigbn+W15elq2BB/L22nqrSY5DKlo3X6+vclJm8Bb5djXJBmEX6fS3+zCh/F4VBK5Z2KxJt4s2Q==
+=======
+enhanced-resolve@3.3.0:
+  version "3.3.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/enhanced-resolve/-/enhanced-resolve-3.3.0.tgz#950964ecc7f0332a42321b673b38dc8ff15535b3"
+  integrity sha512-2qbxE7ek3YxPJ1ML6V+satHkzHpJQKWkRHmRx6mfAoW59yP8YH8BFplbegSP+u2hBd6B6KCOpvJQ3dZAP+hkpg==
+>>>>>>> master
   dependencies:
     once "^1.4.0"
 
+<<<<<<< HEAD
 enhanced-resolve@^4.0.0, enhanced-resolve@^4.1.0:
   version "4.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/enhanced-resolve/-/enhanced-resolve-4.1.0.tgz#41c7e0bfdfe74ac1ffe1e57ad6a5c6c9f3742a7f"
   integrity sha512-F/7vkyTtyc/llOIn8oWclcB25KdRaiPBpZYDgJHgh/UHtpgT2p2eldQgtQnLtUvfMKPKxbRaQM/hHkvLHt1Vng==
+=======
+enhanced-resolve@^3.4.0:
+  version "3.4.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/enhanced-resolve/-/enhanced-resolve-3.4.1.tgz#0421e339fd71419b3da13d129b3979040230476e"
+  integrity sha1-BCHjOf1xQZs9oT0Smzl5BAIwR24=
+>>>>>>> master
   dependencies:
     graceful-fs "^4.1.2"
     memory-fs "^0.4.0"
@@ -3045,6 +3536,7 @@ errno@^0.1.3:
   version "0.1.6"
   resolved "https://nexus.swmdigital.io/repository/js-combined/errno/-/errno-0.1.6.tgz#c386ce8a6283f14fc09563b71560908c9bf53026"
   integrity sha512-IsORQDpaaSwcDP4ZZnHxgE85werpo34VYn1Ud3mq+eUsF593faR8oCZNXrROVkpFu2TsbrNhHin0aUrTsQ9vNw==
+<<<<<<< HEAD
   dependencies:
     prr "~1.0.1"
 
@@ -3052,6 +3544,8 @@ errno@~0.1.7:
   version "0.1.7"
   resolved "https://nexus.swmdigital.io/repository/js-combined/errno/-/errno-0.1.7.tgz#4684d71779ad39af177e3f007996f7c67c852618"
   integrity sha512-MfrRBDWzIWifgq6tJj60gkAwtLNb6sQPlcFrSOflcP1aFmmruKQ2wRnze/8V6kgyz7H3FF8Npzv78mZ7XLLflg==
+=======
+>>>>>>> master
   dependencies:
     prr "~1.0.1"
 
@@ -3257,6 +3751,14 @@ espree@^3.1.6:
     acorn "^5.0.1"
     acorn-jsx "^3.0.0"
 
+<<<<<<< HEAD
+=======
+esprima@^2.6.0:
+  version "2.7.3"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/esprima/-/esprima-2.7.3.tgz#96e3b70d5779f6ad49cd032673d1c312767ba581"
+  integrity sha1-luO3DVd59q1JzQMmc9HDEnZ7pYE=
+
+>>>>>>> master
 esprima@^3.1.3:
   version "3.1.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/esprima/-/esprima-3.1.3.tgz#fdca51cee6133895e3c88d535ce49dbff62a4633"
@@ -3289,11 +3791,14 @@ etag@~1.8.0:
   version "1.8.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/etag/-/etag-1.8.0.tgz#6f631aef336d6c46362b51764044ce216be3c051"
   integrity sha1-b2Ma7zNtbEY2K1F2QETOIWvjwFE=
+<<<<<<< HEAD
 
 etag@~1.8.1:
   version "1.8.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
+=======
+>>>>>>> master
 
 event-emitter@~0.3.5:
   version "0.3.5"
@@ -3344,6 +3849,22 @@ execa@^0.7.0:
   version "0.7.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/execa/-/execa-0.7.0.tgz#944becd34cc41ee32a63a9faf27ad5a65fc59777"
   integrity sha1-lEvs00zEHuMqY6n68nrVpl/Fl3c=
+<<<<<<< HEAD
+=======
+  dependencies:
+    cross-spawn "^5.0.1"
+    get-stream "^3.0.0"
+    is-stream "^1.1.0"
+    npm-run-path "^2.0.0"
+    p-finally "^1.0.0"
+    signal-exit "^3.0.0"
+    strip-eof "^1.0.0"
+
+execa@^0.9.0:
+  version "0.9.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/execa/-/execa-0.9.0.tgz#adb7ce62cf985071f60580deb4a88b9e34712d01"
+  integrity sha512-BbUMBiX4hqiHZUA5+JujIjNb6TyAlp2D5KLheMjMluwOuzcnylDL4AxZYLLn1n2AGB49eSWwyKvvEQoRpnAtmA==
+>>>>>>> master
   dependencies:
     cross-spawn "^5.0.1"
     get-stream "^3.0.0"
@@ -3395,10 +3916,17 @@ expand-range@^1.8.1:
   dependencies:
     fill-range "^2.1.0"
 
+<<<<<<< HEAD
 expect@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/expect/-/expect-23.6.0.tgz#1e0c8d3ba9a581c87bd71fb9bc8862d443425f98"
   integrity sha512-dgSoOHgmtn/aDGRVFWclQyPDKl2CQRq0hmIEoUAuQs/2rn2NcvCWcSCovm6BLeuB/7EZuLGu2QfnR+qRt5OM4w==
+=======
+expect@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/expect/-/expect-23.5.0.tgz#18999a0eef8f8acf99023fde766d9c323c2562ed"
+  integrity sha512-aG083W63tBloy8YgafWuC44EakjYe0Q6Mg35aujBPvyNU38DvLat9BVzOihNP2NZDLaCJiFNe0vejbtO6knnlA==
+>>>>>>> master
   dependencies:
     ansi-styles "^3.2.0"
     jest-diff "^23.6.0"
@@ -3518,6 +4046,23 @@ extglob@^0.3.1:
   dependencies:
     is-extglob "^1.0.0"
 
+<<<<<<< HEAD
+=======
+extglob@^1.1.0:
+  version "1.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/extglob/-/extglob-1.1.0.tgz#0678b4e2ce45c0e4e50f5e5eafb1b0dab5b4e424"
+  integrity sha1-Bni04s5FwOTlD15er7Gw2rW05CQ=
+  dependencies:
+    array-unique "^0.3.2"
+    define-property "^0.2.5"
+    expand-brackets "^2.0.1"
+    extend-shallow "^2.0.1"
+    fragment-cache "^0.2.0"
+    regex-not "^1.0.0"
+    snapdragon "^0.8.1"
+    to-regex "^2.1.0"
+
+>>>>>>> master
 extglob@^2.0.4:
   version "2.0.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/extglob/-/extglob-2.0.4.tgz#ad00fe4dc612a9232e8718711dc5cb5ab0285543"
@@ -3532,6 +4077,19 @@ extglob@^2.0.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
+<<<<<<< HEAD
+=======
+extract-text-webpack-plugin@^3.0.0:
+  version "3.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/extract-text-webpack-plugin/-/extract-text-webpack-plugin-3.0.0.tgz#90caa7907bc449f335005e3ac7532b41b00de612"
+  integrity sha1-kMqnkHvESfM1AF46x1MrQbAN5hI=
+  dependencies:
+    async "^2.4.1"
+    loader-utils "^1.1.0"
+    schema-utils "^0.3.0"
+    webpack-sources "^1.0.1"
+
+>>>>>>> master
 extsprintf@1.3.0:
   version "1.3.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/extsprintf/-/extsprintf-1.3.0.tgz#96918440e3041a7a414f8c52e3c574eb3c3e1e05"
@@ -3546,11 +4104,14 @@ fast-deep-equal@^1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/fast-deep-equal/-/fast-deep-equal-1.0.0.tgz#96256a3bc975595eb36d82e9929d060d893439ff"
   integrity sha1-liVqO8l1WV6zbYLpkp0GDYk0Of8=
+<<<<<<< HEAD
 
 fast-deep-equal@^2.0.1:
   version "2.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
   integrity sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
+=======
+>>>>>>> master
 
 fast-json-stable-stringify@^2.0.0:
   version "2.0.0"
@@ -3628,10 +4189,17 @@ file-entry-cache@^1.1.1:
     flat-cache "^1.2.1"
     object-assign "^4.0.1"
 
+<<<<<<< HEAD
 file-loader@^2.0.0:
   version "2.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/file-loader/-/file-loader-2.0.0.tgz#39749c82f020b9e85901dcff98e8004e6401cfde"
   integrity sha512-YCsBfd1ZGCyonOKLxPiKPdu+8ld9HAaMEvJewzz+b2eTF7uL5Zm/HdBF6FjCrpCMRq25Mi0U1gl4pwn2TlH7hQ==
+=======
+file-loader@^1.1.6:
+  version "1.1.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/file-loader/-/file-loader-1.1.6.tgz#7b9a8f2c58f00a77fddf49e940f7ac978a3ea0e8"
+  integrity sha512-873ztuL+/hfvXbLDJ262PGO6XjERnybJu2gW1/5j8HUfxSiFJI9Hj/DhZ50ZGRUxBvuNiazb/cM2rh9pqrxP6Q==
+>>>>>>> master
   dependencies:
     loader-utils "^1.0.2"
     schema-utils "^1.0.0"
@@ -3649,10 +4217,17 @@ fileset@^2.0.2:
     glob "^7.0.3"
     minimatch "^3.0.3"
 
+<<<<<<< HEAD
 filesize@^3.6.1:
   version "3.6.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/filesize/-/filesize-3.6.1.tgz#090bb3ee01b6f801a8a8be99d31710b3422bb317"
   integrity sha512-7KjR1vv6qnicaPMi1iiTcI85CyYwRO/PSFCu6SvqL8jN2Wjt/NIYQTFtFs7fSDCYOstUkEWIQGFUg5YZQfjlcg==
+=======
+filesize@^3.5.9:
+  version "3.5.10"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/filesize/-/filesize-3.5.10.tgz#fc8fa23ddb4ef9e5e0ab6e1e64f679a24a56761f"
+  integrity sha1-/I+iPdtO+eXgq24eZPZ5okpWdh8=
+>>>>>>> master
 
 fill-range@^2.1.0:
   version "2.2.3"
@@ -3751,6 +4326,7 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
+<<<<<<< HEAD
 flush-write-stream@^1.0.0:
   version "1.0.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/flush-write-stream/-/flush-write-stream-1.0.3.tgz#c5d586ef38af6097650b49bc41b55fabb19f35bd"
@@ -3758,6 +4334,12 @@ flush-write-stream@^1.0.0:
   dependencies:
     inherits "^2.0.1"
     readable-stream "^2.0.4"
+=======
+flatten@^1.0.2:
+  version "1.0.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
+  integrity sha1-2uRqnXj74lKSJYzB54CkHZXAN4I=
+>>>>>>> master
 
 for-in@^0.1.3:
   version "0.1.8"
@@ -3792,6 +4374,7 @@ forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
   integrity sha1-+8cfDEGt6zf5bFd60e1C2P2sypE=
+<<<<<<< HEAD
 
 fork-ts-checker-webpack-plugin@*, fork-ts-checker-webpack-plugin@^0.4.10:
   version "0.4.10"
@@ -3808,6 +4391,8 @@ fork-ts-checker-webpack-plugin@*, fork-ts-checker-webpack-plugin@^0.4.10:
     minimatch "^3.0.4"
     resolve "^1.5.0"
     tapable "^1.0.0"
+=======
+>>>>>>> master
 
 form-data@^2.3.1:
   version "2.3.2"
@@ -3845,11 +4430,14 @@ forwarded@~0.1.0:
   version "0.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/forwarded/-/forwarded-0.1.0.tgz#19ef9874c4ae1c297bcf078fde63a09b66a84363"
   integrity sha1-Ge+YdMSuHCl7zweP3mOgm2aoQ2M=
+<<<<<<< HEAD
 
 forwarded@~0.1.2:
   version "0.1.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
   integrity sha1-mMI9qxF1ZXuMBXPozszZGw/xjIQ=
+=======
+>>>>>>> master
 
 fragment-cache@^0.2.1:
   version "0.2.1"
@@ -3862,6 +4450,7 @@ fresh@0.5.0:
   version "0.5.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/fresh/-/fresh-0.5.0.tgz#f474ca5e6a9246d6fd8e0953cfa9b9c805afa78e"
   integrity sha1-9HTKXmqSRtb9jglTz6m5yAWvp44=
+<<<<<<< HEAD
 
 fresh@0.5.2:
   version "0.5.2"
@@ -3875,6 +4464,8 @@ from2@^2.1.0:
   dependencies:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
+=======
+>>>>>>> master
 
 front-matter@2.1.0:
   version "2.1.0"
@@ -4028,6 +4619,14 @@ get-stdin@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/get-stdin/-/get-stdin-4.0.1.tgz#b968c6b0a04384324902e8bf1a5df32579a450fe"
   integrity sha1-uWjGsKBDhDJJAui/Gl3zJXmkUP4=
+<<<<<<< HEAD
+=======
+
+get-stdin@^6.0.0:
+  version "6.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/get-stdin/-/get-stdin-6.0.0.tgz#9e09bf712b360ab9225e812048f71fde9c89657b"
+  integrity sha512-jp4tHawyV7+fkkSKyvjuLZswblUtz+SQKzSWnBbii16BuZksJlU1wuBYXY75r+duh/llF1ur6oNwi+2ZzjKZ7g==
+>>>>>>> master
 
 get-stream@^3.0.0:
   version "3.0.0"
@@ -4158,10 +4757,17 @@ growly@^1.3.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
   integrity sha1-8QdIy+dq+WS3yWyTxrzCivEgwIE=
 
+<<<<<<< HEAD
 gzip-size@^5.0.0:
   version "5.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/gzip-size/-/gzip-size-5.0.0.tgz#a55ecd99222f4c48fd8c01c625ce3b349d0a0e80"
   integrity sha512-5iI7omclyqrnWw4XbXAmGhPsABkSIDQonv2K0h61lybgofWa6iZyvrI3r2zsJH4P8Nb64fFVzlvfhs0g7BBxAA==
+=======
+gzip-size@^3.0.0:
+  version "3.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/gzip-size/-/gzip-size-3.0.0.tgz#546188e9bdc337f673772f81660464b389dce520"
+  integrity sha1-VGGI6b3DN/Zzdy+BZgRks4nc5SA=
+>>>>>>> master
   dependencies:
     duplexer "^0.1.1"
     pify "^3.0.0"
@@ -4219,11 +4825,14 @@ has-flag@^2.0.0:
   version "2.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/has-flag/-/has-flag-2.0.0.tgz#e8207af1cc7b30d446cc70b734b5e8be18f88d51"
   integrity sha1-6CB68cx7MNRGzHC3NLXovhj4jVE=
+<<<<<<< HEAD
 
 has-flag@^3.0.0:
   version "3.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
   integrity sha1-tdRU3CGZriJWmfNGfloH87lVuv0=
+=======
+>>>>>>> master
 
 has-unicode@^2.0.0:
   version "2.0.1"
@@ -4243,6 +4852,7 @@ has-values@^0.1.4:
   version "0.1.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/has-values/-/has-values-0.1.4.tgz#6d61de95d91dfca9b9a02089ad384bff8f62b771"
   integrity sha1-bWHeldkd/Km5oCCJrThL/49it3E=
+<<<<<<< HEAD
 
 has@^1.0.0:
   version "1.0.3"
@@ -4250,6 +4860,8 @@ has@^1.0.0:
   integrity sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
   dependencies:
     function-bind "^1.1.1"
+=======
+>>>>>>> master
 
 has@^1.0.1:
   version "1.0.1"
@@ -4305,11 +4917,14 @@ he@1.1.x:
   version "1.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
   integrity sha1-k0EP0hsAlzUVH4howvJx80J+I/0=
+<<<<<<< HEAD
 
 hex-color-regex@^1.1.0:
   version "1.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
+=======
+>>>>>>> master
 
 history@^4.7.2:
   version "4.7.2"
@@ -4363,6 +4978,7 @@ hosted-git-info@^2.1.4:
   version "2.5.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/hosted-git-info/-/hosted-git-info-2.5.0.tgz#6d60e34b3abbc8313062c3b798ef8d901a07af3c"
   integrity sha512-pNgbURSuab90KbTqvRPsseaTxOJCZBD0a7t+haSN33piP9cCM4l0CqdzAif2hUqm716UovKB2ROmiabGAKVXyg==
+<<<<<<< HEAD
 
 hsl-regex@^1.0.0:
   version "1.0.0"
@@ -4373,6 +4989,8 @@ hsla-regex@^1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/hsla-regex/-/hsla-regex-1.0.0.tgz#c1ce7a3168c8c6614033a4b5f7877f3b225f9c38"
   integrity sha1-wc56MWjIxmFAM6S194d/OyJfnDg=
+=======
+>>>>>>> master
 
 html-comment-regex@^1.1.0:
   version "1.1.1"
@@ -4405,10 +5023,17 @@ html-minifier@^3.2.3:
     relateurl "0.2.x"
     uglify-js "3.0.x"
 
+<<<<<<< HEAD
 html-webpack-plugin@^3.2.0:
   version "3.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/html-webpack-plugin/-/html-webpack-plugin-3.2.0.tgz#b01abbd723acaaa7b37b6af4492ebda03d9dd37b"
   integrity sha1-sBq71yOsqqeze2r0SS69oD2d03s=
+=======
+html-webpack-plugin@^2.30.1:
+  version "2.30.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/html-webpack-plugin/-/html-webpack-plugin-2.30.1.tgz#7f9c421b7ea91ec460f56527d78df484ee7537d5"
+  integrity sha1-f5xCG36pHsRg9WUn1430hO51N9U=
+>>>>>>> master
   dependencies:
     html-minifier "^3.2.3"
     loader-utils "^0.2.16"
@@ -4505,11 +5130,31 @@ https-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
+<<<<<<< HEAD
+=======
+
+husky@^1.1.2:
+  version "1.1.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/husky/-/husky-1.1.2.tgz#574c2bb16958db8a8120b63306efaff110525c23"
+  integrity sha512-9TdkUpBeEOjz0AnFdUN4i3w8kEbOsVs9/WSeJqWLq2OO6bcKQhVW64Zi+pVd/AMRLpN3QTINb6ZXiELczvdmqQ==
+  dependencies:
+    cosmiconfig "^5.0.6"
+    execa "^0.9.0"
+    find-up "^3.0.0"
+    get-stdin "^6.0.0"
+    is-ci "^1.2.1"
+    pkg-dir "^3.0.0"
+    please-upgrade-node "^3.1.1"
+    read-pkg "^4.0.1"
+    run-node "^1.0.0"
+    slash "^2.0.0"
+>>>>>>> master
 
 iconv-lite@0.4.13:
   version "0.4.13"
   resolved "https://nexus.swmdigital.io/repository/js-combined/iconv-lite/-/iconv-lite-0.4.13.tgz#1f88aba4ab0b1508e8312acc39345f36e992e2f2"
   integrity sha1-H4irpKsLFQjoMSrMOTRfNumS4vI=
+<<<<<<< HEAD
 
 iconv-lite@0.4.23, iconv-lite@~0.4.13:
   version "0.4.23"
@@ -4517,16 +5162,25 @@ iconv-lite@0.4.23, iconv-lite@~0.4.13:
   integrity sha512-neyTUVFtahjf0mB3dZT77u+8O0QB89jFdnBkd5P1JgYPbPaia3gXXOVL2fq8VyU2gMMD7SaN7QukTB/pmXYvDA==
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
+=======
+>>>>>>> master
 
 iconv-lite@^0.4.17:
   version "0.4.19"
   resolved "https://nexus.swmdigital.io/repository/js-combined/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
   integrity sha512-oTZqweIP51xaGPI4uPa56/Pri/480R+mo7SeU+YETByQNhDG55ycFyNLIgta9vXhILrxXDmF7ZGhqZIcuN0gJQ==
 
+<<<<<<< HEAD
 iconv-lite@^0.4.4:
   version "0.4.24"
   resolved "https://nexus.swmdigital.io/repository/js-combined/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
   integrity sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==
+=======
+iconv-lite@~0.4.13:
+  version "0.4.23"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/iconv-lite/-/iconv-lite-0.4.23.tgz#297871f63be507adcfbfca715d0cd0eed84e9a63"
+  integrity sha512-neyTUVFtahjf0mB3dZT77u+8O0QB89jFdnBkd5P1JgYPbPaia3gXXOVL2fq8VyU2gMMD7SaN7QukTB/pmXYvDA==
+>>>>>>> master
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
@@ -4546,6 +5200,7 @@ ieee754@^1.1.4:
   version "1.1.8"
   resolved "https://nexus.swmdigital.io/repository/js-combined/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
   integrity sha1-vjPUCsEO8ZJnAfbwii2G+/0a0+Q=
+<<<<<<< HEAD
 
 iferr@^0.1.5:
   version "0.1.5"
@@ -4558,6 +5213,8 @@ ignore-walk@^3.0.1:
   integrity sha512-DTVlMx3IYPe0/JJcYP7Gxg7ttZZu3IInhuEhbchuqneY9wWe5Ojy2mXLBaQFUQmo0AW2r3qG7m1mg86js+gnlQ==
   dependencies:
     minimatch "^3.0.4"
+=======
+>>>>>>> master
 
 ignore@^3.1.2:
   version "3.3.3"
@@ -4568,6 +5225,7 @@ image-ssim@^0.2.0:
   version "0.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/image-ssim/-/image-ssim-0.2.0.tgz#83b42c7a2e6e4b85505477fe6917f5dbc56420e5"
   integrity sha1-g7Qsei5uS4VQVHf+aRf128VkIOU=
+<<<<<<< HEAD
 
 import-cwd@^2.0.0:
   version "2.1.0"
@@ -4582,6 +5240,8 @@ import-from@^2.1.0:
   integrity sha1-M1238qev/VOqpHHUuAId7ja387E=
   dependencies:
     resolve-from "^3.0.0"
+=======
+>>>>>>> master
 
 import-lazy@^2.1.0:
   version "2.1.0"
@@ -4685,6 +5345,14 @@ inquirer@^3.3.0:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
+<<<<<<< HEAD
+=======
+interpret@^1.0.0:
+  version "1.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/interpret/-/interpret-1.1.0.tgz#7ed1b1410c6a0e0f78cf95d3b8440c63f78b8614"
+  integrity sha1-ftGxQQxqDg94z5XTuEQMY/eLhhQ=
+
+>>>>>>> master
 invariant@^2.2.0, invariant@^2.2.1, invariant@^2.2.2:
   version "2.2.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
@@ -4708,11 +5376,14 @@ ipaddr.js@1.3.0:
   version "1.3.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/ipaddr.js/-/ipaddr.js-1.3.0.tgz#1e03a52fdad83a8bbb2b25cbf4998b4cffcd3dec"
   integrity sha1-HgOlL9rYOou7KyXL9JmLTP/NPew=
+<<<<<<< HEAD
 
 ipaddr.js@1.8.0:
   version "1.8.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/ipaddr.js/-/ipaddr.js-1.8.0.tgz#eaa33d6ddd7ace8f7f6fe0c9ca0440e706738b1e"
   integrity sha1-6qM9bd16zo9/b+DJygRA5wZzix4=
+=======
+>>>>>>> master
 
 is-absolute-url@^2.0.0:
   version "2.1.0"
@@ -4737,11 +5408,14 @@ is-arrayish@^0.2.1:
   version "0.2.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/is-arrayish/-/is-arrayish-0.2.1.tgz#77c99840527aa8ecb1a8ba697b80645a7a926a9d"
   integrity sha1-d8mYQFJ6qOyxqLppe4BkWnqSap0=
+<<<<<<< HEAD
 
 is-arrayish@^0.3.1:
   version "0.3.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/is-arrayish/-/is-arrayish-0.3.2.tgz#4574a2ae56f7ab206896fb431eaeed066fdf8f03"
   integrity sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ==
+=======
+>>>>>>> master
 
 is-binary-path@^1.0.0:
   version "1.0.1"
@@ -4750,6 +5424,14 @@ is-binary-path@^1.0.0:
   dependencies:
     binary-extensions "^1.0.0"
 
+<<<<<<< HEAD
+=======
+is-buffer@^1.0.2:
+  version "1.1.5"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/is-buffer/-/is-buffer-1.1.5.tgz#1f3b26ef613b214b88cbca23cc6c01d87961eecc"
+  integrity sha1-Hzsm72E7IUuIy8ojzGwB2Hlh7sw=
+
+>>>>>>> master
 is-buffer@^1.1.5, is-buffer@~1.1.1:
   version "1.1.6"
   resolved "https://nexus.swmdigital.io/repository/js-combined/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
@@ -4774,6 +5456,7 @@ is-ci@^1.0.10:
   dependencies:
     ci-info "^1.0.0"
 
+<<<<<<< HEAD
 is-color-stop@^1.0.0:
   version "1.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/is-color-stop/-/is-color-stop-1.1.0.tgz#cfff471aee4dd5c9e158598fbe12967b5cdad345"
@@ -4785,6 +5468,14 @@ is-color-stop@^1.0.0:
     hsla-regex "^1.0.0"
     rgb-regex "^1.0.1"
     rgba-regex "^1.0.0"
+=======
+is-ci@^1.2.1:
+  version "1.2.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/is-ci/-/is-ci-1.2.1.tgz#e3779c8ee17fccf428488f6e281187f2e632841c"
+  integrity sha512-s6tfsaQaQi3JNciBH6shVqEDvhGut0SUXr31ag8Pd8BBbVVlcGfWhpPmEOoM6RJ5TFhbypvf5yyRw/VXW1IiWg==
+  dependencies:
+    ci-info "^1.5.0"
+>>>>>>> master
 
 is-data-descriptor@^0.1.4:
   version "0.1.4"
@@ -4959,6 +5650,16 @@ is-obj@^1.0.0:
   version "1.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/is-obj/-/is-obj-1.0.1.tgz#3e4729ac1f5fde025cd7d83a896dab9f4f67db0f"
   integrity sha1-PkcprB9f3gJc19g6iW2rn09n2w8=
+<<<<<<< HEAD
+=======
+
+is-odd@^1.0.0:
+  version "1.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/is-odd/-/is-odd-1.0.0.tgz#3b8a932eb028b3775c39bb09e91767accdb69088"
+  integrity sha1-O4qTLrAos3dcObsJ6RdnrM22kIg=
+  dependencies:
+    is-number "^3.0.0"
+>>>>>>> master
 
 is-path-cwd@^1.0.0:
   version "1.0.0"
@@ -4979,6 +5680,14 @@ is-path-inside@^1.0.0:
   dependencies:
     path-is-inside "^1.0.1"
 
+<<<<<<< HEAD
+=======
+is-plain-obj@^1.0.0:
+  version "1.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/is-plain-obj/-/is-plain-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
+  integrity sha1-caUMhCnfync8kqOQpKA7OfzVHT4=
+
+>>>>>>> master
 is-plain-object@^2.0.1:
   version "2.0.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/is-plain-object/-/is-plain-object-2.0.3.tgz#c15bf3e4b66b62d72efaf2925848663ecbc619b6"
@@ -5047,10 +5756,17 @@ is-subset@^0.1.1:
   resolved "https://nexus.swmdigital.io/repository/js-combined/is-subset/-/is-subset-0.1.1.tgz#8a59117d932de1de00f245fcdd39ce43f1e939a6"
   integrity sha1-ilkRfZMt4d4A8kX83TnOQ/HpOaY=
 
+<<<<<<< HEAD
 is-svg@^3.0.0:
   version "3.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/is-svg/-/is-svg-3.0.0.tgz#9321dbd29c212e5ca99c4fa9794c714bcafa2f75"
   integrity sha512-gi4iHK53LR2ujhLVVj+37Ykh9GLqYHX6JOVXbLAucaG/Cqw9xwdFOjDM2qeifLs1sF1npXXFvDu0r5HNgCMrzQ==
+=======
+is-svg@^2.0.0:
+  version "2.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/is-svg/-/is-svg-2.1.0.tgz#cf61090da0d9efbcab8722deba6f032208dbb0e9"
+  integrity sha1-z2EJDaDZ77yrhyLeum8DIgjbsOk=
+>>>>>>> master
   dependencies:
     html-comment-regex "^1.1.0"
 
@@ -5197,10 +5913,17 @@ jest-changed-files@^23.4.2:
   dependencies:
     throat "^4.0.0"
 
+<<<<<<< HEAD
 jest-cli@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-cli/-/jest-cli-23.6.0.tgz#61ab917744338f443ef2baa282ddffdd658a5da4"
   integrity sha512-hgeD1zRUp1E1zsiyOXjEn4LzRLWdJBV//ukAHGlx6s5mfCNJTbhbHjgxnDUXA8fsKWN/HqFFF6X5XcCwC/IvYQ==
+=======
+jest-cli@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/jest-cli/-/jest-cli-23.5.0.tgz#d316b8e34a38a610a1efc4f0403d8ef8a55e4492"
+  integrity sha512-Kxi2QH8s6NkpPgboza/plpmQ2bjUQ+MwYv7vM5rDwJz/x+NB4YoLXFikPXLWNP0JuYpMvYwITKneFljnNKhq2Q==
+>>>>>>> master
   dependencies:
     ansi-escapes "^3.0.0"
     chalk "^2.0.1"
@@ -5239,10 +5962,17 @@ jest-cli@^23.6.0:
     which "^1.2.12"
     yargs "^11.0.0"
 
+<<<<<<< HEAD
 jest-config@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-config/-/jest-config-23.6.0.tgz#f82546a90ade2d8c7026fbf6ac5207fc22f8eb1d"
   integrity sha512-i8V7z9BeDXab1+VNo78WM0AtWpBRXJLnkT+lyT+Slx/cbP5sZJ0+NDuLcmBE5hXAoK0aUp7vI+MOxR+R4d8SRQ==
+=======
+jest-config@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/jest-config/-/jest-config-23.5.0.tgz#3770fba03f7507ee15f3b8867c742e48f31a9773"
+  integrity sha512-JENhQpLaVwXWPLUkhPYgIfecHKsU8GR1vj79rS4n0LSRsHx/U2wItZKoKAd5vtt2J58JPxRq4XheG79jd4fI7Q==
+>>>>>>> master
   dependencies:
     babel-core "^6.0.0"
     babel-jest "^23.6.0"
@@ -5259,10 +5989,17 @@ jest-config@^23.6.0:
     micromatch "^2.3.11"
     pretty-format "^23.6.0"
 
+<<<<<<< HEAD
 jest-diff@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-diff/-/jest-diff-23.6.0.tgz#1500f3f16e850bb3d71233408089be099f610c7d"
   integrity sha512-Gz9l5Ov+X3aL5L37IT+8hoCUsof1CVYBb2QEkOupK64XyRR3h+uRpYIm97K7sY8diFxowR8pIGEdyfMKTixo3g==
+=======
+jest-diff@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/jest-diff/-/jest-diff-23.5.0.tgz#250651a433dd0050290a07642946cc9baaf06fba"
+  integrity sha512-Miz8GakJIz443HkGpVOAyHQgSYqcgs2zQmDJl4oV7DYrFotchdoQvxceF6LhfpRBV1LOUGcFk5Dd/ffSXVwMsA==
+>>>>>>> master
   dependencies:
     chalk "^2.0.1"
     diff "^3.2.0"
@@ -5276,10 +6013,17 @@ jest-docblock@^23.2.0:
   dependencies:
     detect-newline "^2.1.0"
 
+<<<<<<< HEAD
 jest-each@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-each/-/jest-each-23.6.0.tgz#ba0c3a82a8054387016139c733a05242d3d71575"
   integrity sha512-x7V6M/WGJo6/kLoissORuvLIeAoyo2YqLOoCDkohgJ4XOXSqOtyvr8FbInlAWS77ojBsZrafbozWoKVRdtxFCg==
+=======
+jest-each@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/jest-each/-/jest-each-23.5.0.tgz#77f7e2afe6132a80954b920006e78239862b10ba"
+  integrity sha512-8BgebQgAJmWXpYp4Qt9l3cn1Xei0kZ7JL4cs/NXh7750ATlPGzRRYbutFVJTk5B/Lt3mjHP3G3tLQLyBOCSHGA==
+>>>>>>> master
   dependencies:
     chalk "^2.0.1"
     pretty-format "^23.6.0"
@@ -5306,10 +6050,17 @@ jest-get-type@^22.1.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-get-type/-/jest-get-type-22.4.3.tgz#e3a8504d8479342dd4420236b322869f18900ce4"
   integrity sha512-/jsz0Y+V29w1chdXVygEKSz2nBoHoYqNShPe+QgxSNjAuP1i8+k4LbQNrfoliKej0P45sivkSCh7yiD6ubHS3w==
 
+<<<<<<< HEAD
 jest-haste-map@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-haste-map/-/jest-haste-map-23.6.0.tgz#2e3eb997814ca696d62afdb3f2529f5bbc935e16"
   integrity sha512-uyNhMyl6dr6HaXGHp8VF7cK6KpC6G9z9LiMNsst+rJIZ8l7wY0tk8qwjPmEghczojZ2/ZhtEdIabZ0OQRJSGGg==
+=======
+jest-haste-map@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/jest-haste-map/-/jest-haste-map-23.5.0.tgz#d4ca618188bd38caa6cb20349ce6610e194a8065"
+  integrity sha512-bt9Swigb6KZ6ZQq/fQDUwdUeHenVvZ6G/lKwJjwRGp+Fap8D4B3bND3FaeJg7vXVsLX8hXshRArbVxLop/5wLw==
+>>>>>>> master
   dependencies:
     fb-watchman "^2.0.0"
     graceful-fs "^4.1.11"
@@ -5320,10 +6071,17 @@ jest-haste-map@^23.6.0:
     micromatch "^2.3.11"
     sane "^2.0.0"
 
+<<<<<<< HEAD
 jest-jasmine2@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-jasmine2/-/jest-jasmine2-23.6.0.tgz#840e937f848a6c8638df24360ab869cc718592e0"
   integrity sha512-pe2Ytgs1nyCs8IvsEJRiRTPC0eVYd8L/dXJGU08GFuBwZ4sYH/lmFDdOL3ZmvJR8QKqV9MFuwlsAi/EWkFUbsQ==
+=======
+jest-jasmine2@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/jest-jasmine2/-/jest-jasmine2-23.5.0.tgz#05fe7f1788e650eeb5a03929e6461ea2e9f3db53"
+  integrity sha512-xMgvDUvgqKpilsGnneC9Qr+uIlROxKI3UoJcHZeUlu6AKpQyEkGh0hKbfM0NaEjX5sy7WeFQEhcp/AiWlHcc0A==
+>>>>>>> master
   dependencies:
     babel-traverse "^6.0.0"
     chalk "^2.0.1"
@@ -5338,17 +6096,31 @@ jest-jasmine2@^23.6.0:
     jest-util "^23.4.0"
     pretty-format "^23.6.0"
 
+<<<<<<< HEAD
 jest-leak-detector@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-leak-detector/-/jest-leak-detector-23.6.0.tgz#e4230fd42cf381a1a1971237ad56897de7e171de"
   integrity sha512-f/8zA04rsl1Nzj10HIyEsXvYlMpMPcy0QkQilVZDFOaPbv2ur71X5u2+C4ZQJGyV/xvVXtCCZ3wQ99IgQxftCg==
+=======
+jest-leak-detector@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/jest-leak-detector/-/jest-leak-detector-23.5.0.tgz#14ac2a785bd625160a2ea968fd5d98b7dcea3e64"
+  integrity sha512-40VsHQCIEslxg91Zg5NiZGtPeWSBLXiD6Ww+lhHlIF6u8uSQ+xgiD6NbWHFOYs1VBRI+V/ym7Q1aOtVg9tqMzQ==
+>>>>>>> master
   dependencies:
     pretty-format "^23.6.0"
 
+<<<<<<< HEAD
 jest-matcher-utils@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-matcher-utils/-/jest-matcher-utils-23.6.0.tgz#726bcea0c5294261a7417afb6da3186b4b8cac80"
   integrity sha512-rosyCHQfBcol4NsckTn01cdelzWLU9Cq7aaigDf8VwwpIRvWE/9zLgX2bON+FkEW69/0UuYslUe22SOdEf2nog==
+=======
+jest-matcher-utils@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/jest-matcher-utils/-/jest-matcher-utils-23.5.0.tgz#0e2ea67744cab78c9ab15011c4d888bdd3e49e2a"
+  integrity sha512-hmQUKUKYOExp3T8dNYK9A9copCFYKoRLcY4WDJJ0Z2u3oF6rmAhHuZtmpHBuGpASazobBxm3TXAfAXDvz2T7+Q==
+>>>>>>> master
   dependencies:
     chalk "^2.0.1"
     jest-get-type "^22.1.0"
@@ -5375,27 +6147,48 @@ jest-regex-util@^23.3.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-regex-util/-/jest-regex-util-23.3.0.tgz#5f86729547c2785c4002ceaa8f849fe8ca471bc5"
   integrity sha1-X4ZylUfCeFxAAs6qj4Sf6MpHG8U=
 
+<<<<<<< HEAD
 jest-resolve-dependencies@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-resolve-dependencies/-/jest-resolve-dependencies-23.6.0.tgz#b4526af24c8540d9a3fab102c15081cf509b723d"
   integrity sha512-EkQWkFWjGKwRtRyIwRwI6rtPAEyPWlUC2MpzHissYnzJeHcyCn1Hc8j7Nn1xUVrS5C6W5+ZL37XTem4D4pLZdA==
+=======
+jest-resolve-dependencies@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/jest-resolve-dependencies/-/jest-resolve-dependencies-23.5.0.tgz#10c4d135beb9d2256de1fedc7094916c3ad74af7"
+  integrity sha512-APZc/CjfzL8rH/wr+Gh7XJJygYaDjMQsWaJy4ZR1WaHWKude4WcfdU8xjqaNbx5NsVF2P2tVvsLbumlPXCdJOw==
+>>>>>>> master
   dependencies:
     jest-regex-util "^23.3.0"
     jest-snapshot "^23.6.0"
 
+<<<<<<< HEAD
 jest-resolve@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-resolve/-/jest-resolve-23.6.0.tgz#cf1d1a24ce7ee7b23d661c33ba2150f3aebfa0ae"
   integrity sha512-XyoRxNtO7YGpQDmtQCmZjum1MljDqUCob7XlZ6jy9gsMugHdN2hY4+Acz9Qvjz2mSsOnPSH7skBmDYCHXVZqkA==
+=======
+jest-resolve@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/jest-resolve/-/jest-resolve-23.5.0.tgz#3b8e7f67e84598f0caf63d1530bd8534a189d0e6"
+  integrity sha512-CRPc0ebG3baNKz/QicIy5rGfzYpMNm8AjEl/tDQhehq/QC4ttyauZdvAXel3qo+4Gri9ljajnxW+hWyxZbbcnQ==
+>>>>>>> master
   dependencies:
     browser-resolve "^1.11.3"
     chalk "^2.0.1"
     realpath-native "^1.0.0"
 
+<<<<<<< HEAD
 jest-runner@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-runner/-/jest-runner-23.6.0.tgz#3894bd219ffc3f3cb94dc48a4170a2e6f23a5a38"
   integrity sha512-kw0+uj710dzSJKU6ygri851CObtCD9cN8aNkg8jWJf4ewFyEa6kwmiH/r/M1Ec5IL/6VFa0wnAk6w+gzUtjJzA==
+=======
+jest-runner@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/jest-runner/-/jest-runner-23.5.0.tgz#570f7a044da91648b5bb9b6baacdd511076c71d7"
+  integrity sha512-cpBvkBTVmW1ab1thbtoh2m6VnnM0BYKhj3MEzbOTZjPfzoIjUVIxLUTDobVNOvEK7aTEb/2oiPlNoOTSNJx8mw==
+>>>>>>> master
   dependencies:
     exit "^0.1.2"
     graceful-fs "^4.1.11"
@@ -5411,10 +6204,17 @@ jest-runner@^23.6.0:
     source-map-support "^0.5.6"
     throat "^4.0.0"
 
+<<<<<<< HEAD
 jest-runtime@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-runtime/-/jest-runtime-23.6.0.tgz#059e58c8ab445917cd0e0d84ac2ba68de8f23082"
   integrity sha512-ycnLTNPT2Gv+TRhnAYAQ0B3SryEXhhRj1kA6hBPSeZaNQkJ7GbZsxOLUkwg6YmvWGdX3BB3PYKFLDQCAE1zNOw==
+=======
+jest-runtime@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/jest-runtime/-/jest-runtime-23.5.0.tgz#eb503525a196dc32f2f9974e3482d26bdf7b63ce"
+  integrity sha512-WzzYxYtoU8S1MJns0G4E3BsuFUTFBiu1qsk3iC9OTugzNQcQKt0BoOGsT7wXCKqkw/09QdV77vvaeJXST2Efgg==
+>>>>>>> master
   dependencies:
     babel-core "^6.0.0"
     babel-plugin-istanbul "^4.1.6"
@@ -5443,10 +6243,17 @@ jest-serializer@^23.0.1:
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-serializer/-/jest-serializer-23.0.1.tgz#a3776aeb311e90fe83fab9e533e85102bd164165"
   integrity sha1-o3dq6zEekP6D+rnlM+hRAr0WQWU=
 
+<<<<<<< HEAD
 jest-snapshot@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-snapshot/-/jest-snapshot-23.6.0.tgz#f9c2625d1b18acda01ec2d2b826c0ce58a5aa17a"
   integrity sha512-tM7/Bprftun6Cvj2Awh/ikS7zV3pVwjRYU2qNYS51VZHgaAMBs5l4o/69AiDHhQrj5+LA2Lq4VIvK7zYk/bswg==
+=======
+jest-snapshot@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/jest-snapshot/-/jest-snapshot-23.5.0.tgz#cc368ebd8513e1175e2a7277f37a801b7358ae79"
+  integrity sha512-NYg8MFNVyPXmnnihiltasr4t1FJEXFbZFaw1vZCowcnezIQ9P1w+yxTwjWT564QP24Zbn5L9cjxLs8d6K+pNlw==
+>>>>>>> master
   dependencies:
     babel-types "^6.0.0"
     chalk "^2.0.1"
@@ -5478,10 +6285,17 @@ jest-util@^23.4.0:
     slash "^1.0.0"
     source-map "^0.6.0"
 
+<<<<<<< HEAD
 jest-validate@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-validate/-/jest-validate-23.6.0.tgz#36761f99d1ed33fcd425b4e4c5595d62b6597474"
   integrity sha512-OFKapYxe72yz7agrDAWi8v2WL8GIfVqcbKRCLbRG9PAxtzF9b1SEDdTpytNDN12z2fJynoBwpMpvj2R39plI2A==
+=======
+jest-validate@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/jest-validate/-/jest-validate-23.5.0.tgz#f5df8f761cf43155e1b2e21d6e9de8a2852d0231"
+  integrity sha512-XmStdYhfdiDKacXX5sNqEE61Zz4/yXaPcDsKvVA0429RBu2pkQyIltCVG7UitJIEAzSs3ociQTdyseAW8VGPiA==
+>>>>>>> master
   dependencies:
     chalk "^2.0.1"
     jest-get-type "^22.1.0"
@@ -5505,9 +6319,15 @@ jest-worker@^23.2.0:
     merge-stream "^1.0.1"
 
 jest@^23.5.0:
+<<<<<<< HEAD
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest/-/jest-23.6.0.tgz#ad5835e923ebf6e19e7a1d7529a432edfee7813d"
   integrity sha512-lWzcd+HSiqeuxyhG+EnZds6iO3Y3ZEnMrfZq/OTGvF/C+Z4fPMCdhWTGSAiO2Oym9rbEXfwddHhh6jqrTF3+Lw==
+=======
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/jest/-/jest-23.5.0.tgz#80de353d156ea5ea4a7332f7962ac79135fbc62e"
+  integrity sha512-+X3Fk4rD8dTnHoIxHJymZthbtYllvSOnXAApQltvyLkHsv+fqyC/SZptUJDbXkFsqZJyyIXMySkdzerz3fv4oQ==
+>>>>>>> master
   dependencies:
     import-local "^1.0.0"
     jest-cli "^23.6.0"
@@ -5532,7 +6352,19 @@ js-tokens@^3.0.0, js-tokens@^3.0.2:
   resolved "https://nexus.swmdigital.io/repository/js-combined/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
   integrity sha1-mGbfOVECEw449/mWvOtlRDIJwls=
 
+<<<<<<< HEAD
 js-yaml@^3.12.0, js-yaml@^3.9.0:
+=======
+js-yaml@^3.4.3, js-yaml@^3.4.6, js-yaml@^3.5.1, js-yaml@^3.5.4, js-yaml@^3.7.0:
+  version "3.9.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/js-yaml/-/js-yaml-3.9.0.tgz#4ffbbf25c2ac963b8299dc74da7e3740de1c18ce"
+  integrity sha512-0LoUNELX4S+iofCT8f4uEHIiRBR+c2AINyC8qRWfC6QNruLtxVZRJaPcu/xwMgFIgDxF25tGHaDjvxzJCNE9yw==
+  dependencies:
+    argparse "^1.0.7"
+    esprima "^4.0.0"
+
+js-yaml@^3.9.0:
+>>>>>>> master
   version "3.12.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/js-yaml/-/js-yaml-3.12.0.tgz#eaed656ec8344f10f527c6bfa1b6e2244de167d1"
   integrity sha512-PIt2cnwmPfL4hKNwqeiuz4bKfnzHTBv6HyVgjahA6mPLwPDzjDWrplJBMjHUFxku/N3FlmrbyPclad+I+4mJ3A==
@@ -5540,10 +6372,17 @@ js-yaml@^3.12.0, js-yaml@^3.9.0:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+<<<<<<< HEAD
 js-yaml@^3.4.6, js-yaml@^3.5.1, js-yaml@^3.5.4, js-yaml@^3.7.0:
   version "3.9.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/js-yaml/-/js-yaml-3.9.0.tgz#4ffbbf25c2ac963b8299dc74da7e3740de1c18ce"
   integrity sha512-0LoUNELX4S+iofCT8f4uEHIiRBR+c2AINyC8qRWfC6QNruLtxVZRJaPcu/xwMgFIgDxF25tGHaDjvxzJCNE9yw==
+=======
+js-yaml@~3.7.0:
+  version "3.7.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/js-yaml/-/js-yaml-3.7.0.tgz#5c967ddd837a9bfdca5f2de84253abe8a1c03b80"
+  integrity sha1-XJZ93YN6m/3KXy3oQlOr6KHAO4A=
+>>>>>>> master
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
@@ -5587,18 +6426,30 @@ jsesc@^1.3.0:
   version "1.3.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jsesc/-/jsesc-1.3.0.tgz#46c3fec8c1892b12b0833db9bc7622176dbab34b"
   integrity sha1-RsP+yMGJKxKwgz25vHYiF226s0s=
+<<<<<<< HEAD
 
 jsesc@^2.5.1:
   version "2.5.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jsesc/-/jsesc-2.5.1.tgz#e421a2a8e20d6b0819df28908f782526b96dd1fe"
   integrity sha1-5CGiqOINawgZ3yiQj3glJrlt0f4=
+=======
+>>>>>>> master
 
 jsesc@~0.5.0:
   version "0.5.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
   integrity sha1-597mbjXW/Bb3EP6R1c9p9w8IkR0=
 
+<<<<<<< HEAD
 json-parse-better-errors@^1.0.1, json-parse-better-errors@^1.0.2:
+=======
+json-loader@^0.5.4:
+  version "0.5.7"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/json-loader/-/json-loader-0.5.7.tgz#dca14a70235ff82f0ac9a3abeb60d337a365185d"
+  integrity sha512-QLPs8Dj7lnf3e3QYS1zkCo+4ZwqOiF9d/nZnYozTISxXWCfNs9yuky5rJw4/W34s7POaNlbZmQGaB5NiXCbP4w==
+
+json-parse-better-errors@^1.0.1:
+>>>>>>> master
   version "1.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
   integrity sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw==
@@ -5607,11 +6458,14 @@ json-schema-traverse@^0.3.0:
   version "0.3.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/json-schema-traverse/-/json-schema-traverse-0.3.1.tgz#349a6d44c53a51de89b40805c5d5e59b417d3340"
   integrity sha1-NJptRMU6Ud6JtAgFxdXlm0F9M0A=
+<<<<<<< HEAD
 
 json-schema-traverse@^0.4.1:
   version "0.4.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/json-schema-traverse/-/json-schema-traverse-0.4.1.tgz#69f6a87d9513ab8bb8fe63bdb0979c448e684660"
   integrity sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==
+=======
+>>>>>>> master
 
 json-schema@0.2.3:
   version "0.2.3"
@@ -5634,6 +6488,7 @@ json5@^0.5.0, json5@^0.5.1:
   version "0.5.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
   integrity sha1-Hq3nrMASA0rYTiOWdn6tn6VJWCE=
+<<<<<<< HEAD
 
 json5@^1.0.1:
   version "1.0.1"
@@ -5641,6 +6496,8 @@ json5@^1.0.1:
   integrity sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow==
   dependencies:
     minimist "^1.2.0"
+=======
+>>>>>>> master
 
 jsonfile@^2.1.0:
   version "2.4.0"
@@ -5676,7 +6533,18 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+<<<<<<< HEAD
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
+=======
+kind-of@^2.0.1:
+  version "2.0.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/kind-of/-/kind-of-2.0.1.tgz#018ec7a4ce7e3a86cb9141be519d24c8faa981b5"
+  integrity sha1-AY7HpM5+OobLkUG+UZ0kyPqpgbU=
+  dependencies:
+    is-buffer "^1.0.2"
+
+kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0, kind-of@^3.2.2:
+>>>>>>> master
   version "3.2.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
   integrity sha1-MeohpzS6ubuw8yRm2JOupR5KPGQ=
@@ -5711,6 +6579,7 @@ kleur@^2.0.1:
   version "2.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/kleur/-/kleur-2.0.1.tgz#7cc64b0d188d0dcbc98bdcdfdda2cc10619ddce8"
   integrity sha512-Zq/jyANIJ2uX8UZjWlqLwbyhcxSXJtT/Y89lClyeZd3l++3ztL1I5SSCYrbcbwSunTjC88N3WuMk0kRDQD6gzA==
+<<<<<<< HEAD
 
 last-call-webpack-plugin@^3.0.0:
   version "3.0.0"
@@ -5719,6 +6588,8 @@ last-call-webpack-plugin@^3.0.0:
   dependencies:
     lodash "^4.17.5"
     webpack-sources "^1.1.0"
+=======
+>>>>>>> master
 
 latest-version@^3.0.0:
   version "3.1.0"
@@ -5727,6 +6598,14 @@ latest-version@^3.0.0:
   dependencies:
     package-json "^4.0.0"
 
+<<<<<<< HEAD
+=======
+lazy-cache@^0.2.3:
+  version "0.2.7"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/lazy-cache/-/lazy-cache-0.2.7.tgz#7feddf2dcb6edb77d11ef1d117ab5ffdf0ab1b65"
+  integrity sha1-f+3fLctu23fRHvHRF6tf/fCrG2U=
+
+>>>>>>> master
 lazy-cache@^1.0.3:
   version "1.0.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lazy-cache/-/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
@@ -5772,9 +6651,15 @@ lighthouse-logger@^1.0.0:
     debug "^2.6.8"
 
 lighthouse@^2.9.1:
+<<<<<<< HEAD
   version "2.9.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lighthouse/-/lighthouse-2.9.4.tgz#01aa469abaad1cfc06814293b3f6b6ba8971320f"
   integrity sha512-z+6JLc1gWXfiSCZYvhdLRKvwjC+fUBXTi+3zobRTiNwJxCJbZdePe93boKAfUHsLyVWEcihLplRXW7IV6wV2Fw==
+=======
+  version "2.9.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/lighthouse/-/lighthouse-2.9.1.tgz#8376f1c63b386c08bc0ce444d15296f36199815f"
+  integrity sha512-o0NIM/NVj15DSIbcbRHZtxBI3TuCzmag7LpT+DoVdPJqz8CxPq6NAKRisxUjMzKNrVShTnvCPE/BJqB7wxbknQ==
+>>>>>>> master
   dependencies:
     axe-core "3.0.0-beta.2"
     chrome-devtools-frontend "1.0.422034"
@@ -5815,6 +6700,19 @@ load-json-file@^1.0.0:
     pinkie-promise "^2.0.0"
     strip-bom "^2.0.0"
 
+<<<<<<< HEAD
+=======
+load-json-file@^2.0.0:
+  version "2.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/load-json-file/-/load-json-file-2.0.0.tgz#7947e42149af80d696cbf797bcaabcfe1fe29ca8"
+  integrity sha1-eUfkIUmvgNaWy/eXvKq8/h/inKg=
+  dependencies:
+    graceful-fs "^4.1.2"
+    parse-json "^2.2.0"
+    pify "^2.0.0"
+    strip-bom "^3.0.0"
+
+>>>>>>> master
 loader-runner@^2.3.0:
   version "2.3.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/loader-runner/-/loader-runner-2.3.0.tgz#f482aea82d543e07921700d5a46ef26fdac6b8a2"
@@ -5920,11 +6818,14 @@ lodash.clonedeep@^4.3.2:
   version "4.5.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
+<<<<<<< HEAD
 
 lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
+=======
+>>>>>>> master
 
 lodash.defaults@^3.1.2:
   version "3.1.2"
@@ -5938,11 +6839,14 @@ lodash.defaults@^4.0.0:
   version "4.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
   integrity sha1-0JF4cW/+pN3p5ft7N/bwgCJ0WAw=
+<<<<<<< HEAD
 
 lodash.endswith@^4.2.1:
   version "4.2.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.endswith/-/lodash.endswith-4.2.1.tgz#fed59ac1738ed3e236edd7064ec456448b37bc09"
   integrity sha1-/tWawXOO0+I27dcGTsRWRIs3vAk=
+=======
+>>>>>>> master
 
 lodash.flattendeep@^4.4.0:
   version "4.4.0"
@@ -5963,6 +6867,7 @@ lodash.isequal@^4.5.0:
   version "4.5.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
   integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
+<<<<<<< HEAD
 
 lodash.isfunction@^3.0.8:
   version "3.0.9"
@@ -5973,6 +6878,8 @@ lodash.isstring@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
   integrity sha1-1SfftUVuynzJu5XV2ur4i6VKVFE=
+=======
+>>>>>>> master
 
 lodash.kebabcase@^4.0.0:
   version "4.1.1"
@@ -6012,11 +6919,14 @@ lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
   integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
+<<<<<<< HEAD
 
 lodash.startswith@^4.2.1:
   version "4.2.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash.startswith/-/lodash.startswith-4.2.1.tgz#c598c4adce188a27e53145731cdc6c0e7177600c"
   integrity sha1-xZjErc4YiiflMUVzHNxsDnF3YAw=
+=======
+>>>>>>> master
 
 lodash.tail@^4.1.1:
   version "4.1.1"
@@ -6037,11 +6947,14 @@ lodash@^4.17.10:
   version "4.17.10"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
   integrity sha512-UejweD1pDoXu+AD825lWwp4ZGtSwgnpZxb3JDViD7StjQz+Nb/6l093lx4OQ0foGWNRoc19mWy7BzL+UAK2iVg==
+<<<<<<< HEAD
 
 lodash@^4.17.5:
   version "4.17.11"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
+=======
+>>>>>>> master
 
 longest@^1.0.1:
   version "1.0.1"
@@ -6081,6 +6994,7 @@ lru-cache@^4.0.0, lru-cache@^4.0.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
+<<<<<<< HEAD
 lru-cache@^4.1.1, lru-cache@^4.1.3:
   version "4.1.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/lru-cache/-/lru-cache-4.1.3.tgz#a1175cf3496dfc8436c156c334b4955992bce69c"
@@ -6088,6 +7002,12 @@ lru-cache@^4.1.1, lru-cache@^4.1.3:
   dependencies:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
+=======
+macaddress@^0.2.8:
+  version "0.2.8"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/macaddress/-/macaddress-0.2.8.tgz#5904dc537c39ec6dbefeae902327135fa8511f12"
+  integrity sha1-WQTcU3w57G2+/q6QIycTX6hRHxI=
+>>>>>>> master
 
 make-dir@^1.0.0:
   version "1.0.0"
@@ -6121,6 +7041,14 @@ map-visit@^0.1.5:
     lazy-cache "^2.0.1"
     object-visit "^0.3.4"
 
+<<<<<<< HEAD
+=======
+math-expression-evaluator@^1.2.14:
+  version "1.2.17"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/math-expression-evaluator/-/math-expression-evaluator-1.2.17.tgz#de819fdbcd84dccd8fae59c6aeb79615b9d266ac"
+  integrity sha1-3oGf282E3M2PrlnGrreWFbnSZqw=
+
+>>>>>>> master
 md5.js@^1.3.4:
   version "1.3.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/md5.js/-/md5.js-1.3.4.tgz#e9bdbde94a20a5ac18b04340fc5764d5b09d901d"
@@ -6225,7 +7153,30 @@ micromatch@^2.1.5, micromatch@^2.3.11:
     parse-glob "^3.0.4"
     regex-cache "^0.4.2"
 
+<<<<<<< HEAD
 micromatch@^3.1.4, micromatch@^3.1.8:
+=======
+micromatch@^3.0.3:
+  version "3.0.3"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/micromatch/-/micromatch-3.0.3.tgz#af3339640157ddad39b81a09956d8877cc4b421a"
+  integrity sha512-uTjtugrI0sC0KbJNLZtCmyrg5oFESH++4QqLUdHLrKugDbCz+9V5983YfjpfJhmxqf5f2H+JV9JJhS0brPS9TA==
+  dependencies:
+    arr-diff "^4.0.0"
+    array-unique "^0.3.2"
+    braces "^2.2.2"
+    define-property "^1.0.0"
+    extend-shallow "^2.0.1"
+    extglob "^1.1.0"
+    fragment-cache "^0.2.1"
+    kind-of "^4.0.0"
+    nanomatch "^1.2.0"
+    object.pick "^1.2.0"
+    regex-not "^1.0.0"
+    snapdragon "^0.8.1"
+    to-regex "^3.0.1"
+
+micromatch@^3.1.8:
+>>>>>>> master
   version "3.1.10"
   resolved "https://nexus.swmdigital.io/repository/js-combined/micromatch/-/micromatch-3.1.10.tgz#70859bc95c9840952f359a068a3fc49f9ecfac23"
   integrity sha512-MWikgl9n9M3w+bpsY3He8L+w9eF9338xRl8IAO5viDizwSzziFEyUzo2xrrloB64ADbTf8uA8vRqqttDTOmccg==
@@ -6261,11 +7212,14 @@ mime-db@~1.30.0:
   version "1.30.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/mime-db/-/mime-db-1.30.0.tgz#74c643da2dd9d6a45399963465b26d5ca7d71f01"
   integrity sha1-dMZD2i3Z1qRTmZY0ZbJtXKfXHwE=
+<<<<<<< HEAD
 
 mime-db@~1.36.0:
   version "1.36.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/mime-db/-/mime-db-1.36.0.tgz#5020478db3c7fe93aad7bbcc4dcf869c43363397"
   integrity sha512-L+xvyD9MkoYMXb1jAmzI/lWYAxAMCPvIBSWur0PZ5nOf5euahRLVqH//FKW9mWp2lkqUgYiXPgkzfMUFi4zVDw==
+=======
+>>>>>>> master
 
 mime-types@^2.1.12, mime-types@~2.1.17, mime-types@~2.1.7:
   version "2.1.17"
@@ -6293,25 +7247,36 @@ mime@1.3.4:
   resolved "https://nexus.swmdigital.io/repository/js-combined/mime/-/mime-1.3.4.tgz#115f9e3b6b3daf2959983cb38f149a2d40eb5d53"
   integrity sha1-EV+eO2s9rylZmDyzjxSaLUDrXVM=
 
+<<<<<<< HEAD
 mime@1.4.1:
   version "1.4.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/mime/-/mime-1.4.1.tgz#121f9ebc49e3766f311a76e1fa1c8003c4b03aa6"
   integrity sha512-KI1+qOZu5DcW6wayYHSzR/tXKCDC5Om4s1z2QJjDULzLcmf3DvzS7oluY4HCTrc+9FiKmWUgeNLg7W3uIQvxtQ==
+=======
+mime@^1.3.4:
+  version "1.3.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/mime/-/mime-1.3.6.tgz#591d84d3653a6b0b4a3b9df8de5aa8108e72e5e0"
+  integrity sha1-WR2E02U6awtKO5343lqoEI5y5eA=
+>>>>>>> master
 
 mime@^1.4.1:
   version "1.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
+<<<<<<< HEAD
 
 mime@^2.3.1:
   version "2.3.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/mime/-/mime-2.3.1.tgz#b1621c54d63b97c47d3cfe7f7215f7d64517c369"
   integrity sha512-OEUllcVoydBHGN1z84yfQDimn58pZNNNXgZlHXSboxMlFvgI6MXSWpWKpFRra7H1HxpVhHTkrghfRW49k6yjeg==
+=======
+>>>>>>> master
 
 mimic-fn@^1.0.0:
   version "1.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/mimic-fn/-/mimic-fn-1.1.0.tgz#e667783d92e89dbd342818b5230b9d62a672ad18"
   integrity sha1-5md4PZLonb00KBi1IwudYqZyrRg=
+<<<<<<< HEAD
 
 mini-css-extract-plugin@^0.4.4:
   version "0.4.4"
@@ -6321,6 +7286,8 @@ mini-css-extract-plugin@^0.4.4:
     loader-utils "^1.1.0"
     schema-utils "^1.0.0"
     webpack-sources "^1.1.0"
+=======
+>>>>>>> master
 
 minimalistic-assert@^1.0.0:
   version "1.0.0"
@@ -6353,6 +7320,7 @@ minimist@^1.1.1, minimist@^1.1.3, minimist@^1.2.0:
   version "1.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
   integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
+<<<<<<< HEAD
 
 minipass@^2.2.1, minipass@^2.3.3:
   version "2.3.4"
@@ -6400,6 +7368,8 @@ mississippi@^3.0.0:
     pumpify "^1.3.3"
     stream-each "^1.1.0"
     through2 "^2.0.0"
+=======
+>>>>>>> master
 
 mixin-deep@^1.1.3:
   version "1.2.0"
@@ -6461,10 +7431,30 @@ nan@^2.3.2:
   resolved "https://nexus.swmdigital.io/repository/js-combined/nan/-/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"
   integrity sha1-5P805slf37WuzAjeZZb0NgWn20U=
 
+<<<<<<< HEAD
 nan@^2.9.2:
   version "2.11.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/nan/-/nan-2.11.1.tgz#90e22bccb8ca57ea4cd37cc83d3819b52eea6766"
   integrity sha512-iji6k87OSXa0CcrLl9z+ZiYSuR2o+c0bGuNmXdrhTQTakxytAFsC56SArGYoiHlJlFoHSnvmhpceZJaXkVuOtA==
+=======
+nanomatch@^1.2.0:
+  version "1.2.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/nanomatch/-/nanomatch-1.2.0.tgz#76fdb3d4ae7617e37719e7a4047b840857c0cb1c"
+  integrity sha1-dv2z1K52F+N3GeekBHuECFfAyxw=
+  dependencies:
+    arr-diff "^4.0.0"
+    array-unique "^0.3.2"
+    define-property "^1.0.0"
+    extend-shallow "^2.0.1"
+    fragment-cache "^0.2.1"
+    is-extglob "^2.1.1"
+    is-odd "^1.0.0"
+    kind-of "^4.0.0"
+    object.pick "^1.2.0"
+    regex-not "^1.0.0"
+    snapdragon "^0.8.1"
+    to-regex "^3.0.1"
+>>>>>>> master
 
 nanomatch@^1.2.9:
   version "1.2.13"
@@ -6517,11 +7507,14 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
   integrity sha1-KzJxhOiZIQEXeyhWP7XnECrNDKk=
+<<<<<<< HEAD
 
 neo-async@^2.5.0:
   version "2.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/neo-async/-/neo-async-2.6.0.tgz#b9d15e4d71c6762908654b5183ed38b753340835"
   integrity sha512-MFh0d/Wa7vkKO3Y3LlacqAEeHK0mckVqzDieUKTT+KGxi+zIpeVsFxymkIiRpbpDziHc290Xr9A1O4Om7otoRA==
+=======
+>>>>>>> master
 
 no-case@^2.2.0:
   version "2.3.1"
@@ -6709,6 +7702,7 @@ normalize-range@^0.1.2:
   version "0.1.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/normalize-range/-/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
   integrity sha1-LRDAa9/TEuqXd2laTShDlFa3WUI=
+<<<<<<< HEAD
 
 normalize-url@^3.0.0:
   version "3.3.0"
@@ -6724,6 +7718,13 @@ npm-packlist@^1.1.6:
   version "1.1.12"
   resolved "https://nexus.swmdigital.io/repository/js-combined/npm-packlist/-/npm-packlist-1.1.12.tgz#22bde2ebc12e72ca482abd67afc51eb49377243a"
   integrity sha512-WJKFOVMeAlsU/pjXuqVdzU0WfgtIBCupkEVwn+1Y0ERAbUfWw8R4GjgVbaKnUjRoD2FoQbHOCbOyT5Mbs9Lw4g==
+=======
+
+normalize-url@^1.4.0:
+  version "1.9.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/normalize-url/-/normalize-url-1.9.1.tgz#2cc0d66b31ea23036458436e3620d85954c66c3c"
+  integrity sha1-LMDWazHqIwNkWENuNiDYWVTGbDw=
+>>>>>>> master
   dependencies:
     ignore-walk "^3.0.1"
     npm-bundled "^1.0.1"
@@ -6855,6 +7856,16 @@ object.omit@^2.0.0:
     for-own "^0.1.4"
     is-extendable "^0.1.1"
 
+<<<<<<< HEAD
+=======
+object.pick@^1.2.0:
+  version "1.2.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/object.pick/-/object.pick-1.2.0.tgz#b5392bee9782da6d9fb7d6afaf539779f1234c2b"
+  integrity sha1-tTkr7peC2m2ft9avr1OXefEjTCs=
+  dependencies:
+    isobject "^2.1.0"
+
+>>>>>>> master
 object.pick@^1.3.0:
   version "1.3.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/object.pick/-/object.pick-1.3.0.tgz#87a10ac4c1694bd2e1cbf53591a66141fb5dd747"
@@ -6898,10 +7909,17 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
+<<<<<<< HEAD
 opener@^1.5.1:
   version "1.5.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/opener/-/opener-1.5.1.tgz#6d2f0e77f1a0af0032aca716c2c1fbb8e7e8abed"
   integrity sha512-goYSy5c2UXE4Ra1xixabeVh1guIX/ZV/YokJksb6q2lubWu6UbvPQ20p542/sFIll1nl8JnCyK9oBaOcCWXwvA==
+=======
+opener@^1.4.3:
+  version "1.4.3"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/opener/-/opener-1.4.3.tgz#5c6da2c5d7e5831e8ffa3964950f8d6674ac90b8"
+  integrity sha1-XG2ixdflgx6P+jlklQ+NZnSskLg=
+>>>>>>> master
 
 opn@4.0.2:
   version "4.0.2"
@@ -7035,6 +8053,7 @@ pako@~1.0.5:
   version "1.0.6"
   resolved "https://nexus.swmdigital.io/repository/js-combined/pako/-/pako-1.0.6.tgz#0101211baa70c4bca4a0f63f2206e97b7dfaf258"
   integrity sha512-lQe48YPsMJAig+yngZ87Lus+NF+3mtu7DVOBu6b/gHO1YpKwIj5AWjZ/TOS7i46HD/UixzWb1zeWDZfGZ3iYcg==
+<<<<<<< HEAD
 
 parallel-transform@^1.1.0:
   version "1.1.0"
@@ -7044,6 +8063,8 @@ parallel-transform@^1.1.0:
     cyclist "~0.2.2"
     inherits "^2.0.3"
     readable-stream "^2.1.5"
+=======
+>>>>>>> master
 
 param-case@2.1.x:
   version "2.1.1"
@@ -7111,16 +8132,20 @@ parseurl@~1.3.1:
   version "1.3.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/parseurl/-/parseurl-1.3.1.tgz#c8ab8c9223ba34888aa64a297b28853bec18da56"
   integrity sha1-yKuMkiO6NIiKpkopeyiFO+wY2lY=
+<<<<<<< HEAD
 
 parseurl@~1.3.2:
   version "1.3.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/parseurl/-/parseurl-1.3.2.tgz#fc289d4ed8993119460c156253262cdc8de65bf3"
   integrity sha1-/CidTtiZMRlGDBViUyYs3I3mW/M=
+=======
+>>>>>>> master
 
 pascalcase@^0.1.1:
   version "0.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/pascalcase/-/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
   integrity sha1-s2PlXoAGym/iF4TS2yK9FdeRfxQ=
+<<<<<<< HEAD
 
 patch-package@^5.1.1:
   version "5.1.1"
@@ -7135,16 +8160,21 @@ patch-package@^5.1.1:
     slash "^1.0.0"
     tmp "^0.0.31"
     update-notifier "^2.2.0"
+=======
+>>>>>>> master
 
 path-browserify@0.0.0:
   version "0.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/path-browserify/-/path-browserify-0.0.0.tgz#a0b870729aae214005b7d5032ec2cbbb0fb4451a"
   integrity sha1-oLhwcpquIUAFt9UDLsLLuw+0RRo=
+<<<<<<< HEAD
 
 path-dirname@^1.0.0:
   version "1.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/path-dirname/-/path-dirname-1.0.2.tgz#cc33d24d525e099a5388c0336c6e32b9160609e0"
   integrity sha1-zDPSTVJeCZpTiMAzbG4yuRYGCeA=
+=======
+>>>>>>> master
 
 path-exists@^2.0.0:
   version "2.1.0"
@@ -7204,6 +8234,16 @@ path-type@^1.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
+<<<<<<< HEAD
+=======
+path-type@^2.0.0:
+  version "2.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/path-type/-/path-type-2.0.0.tgz#f012ccb8415b7096fc2daa1054c3d72389594c73"
+  integrity sha1-8BLMuEFbcJb8LaoQVMPXI4lZTHM=
+  dependencies:
+    pify "^2.0.0"
+
+>>>>>>> master
 pbkdf2@^3.0.3:
   version "3.0.14"
   resolved "https://nexus.swmdigital.io/repository/js-combined/pbkdf2/-/pbkdf2-3.0.14.tgz#a35e13c64799b06ce15320f459c230e68e73bade"
@@ -7261,6 +8301,16 @@ pkg-dir@^3.0.0:
   dependencies:
     find-up "^3.0.0"
 
+<<<<<<< HEAD
+=======
+please-upgrade-node@^3.1.1:
+  version "3.1.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/please-upgrade-node/-/please-upgrade-node-3.1.1.tgz#ed320051dfcc5024fae696712c8288993595e8ac"
+  integrity sha512-KY1uHnQ2NlQHqIJQpnh/i54rKkuxCEBx+voJIS/Mvb+L2iYd2NMotwduhKTMjfC1uKoX3VXOxLjIYG66dfJTVQ==
+  dependencies:
+    semver-compare "^1.0.0"
+
+>>>>>>> master
 pluralize@^1.2.1:
   version "1.2.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/pluralize/-/pluralize-1.2.1.tgz#d1a21483fd22bb41e58a12fa3421823140897c45"
@@ -7276,20 +8326,67 @@ posix-character-classes@^0.1.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
   integrity sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
 
+<<<<<<< HEAD
 postcss-calc@^7.0.0:
   version "7.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-calc/-/postcss-calc-7.0.0.tgz#cf0e78e1d7d9f75119b833abc786fa4b61afedda"
   integrity sha512-o04XICBwDxXVYw1TXkzxs36WRgk9OECGiSUoyYMNoFWHLAQCKKeaqhrNBTUKdStMfwik3gSLLztHebTSV5kJOA==
+=======
+postcss-calc@^5.2.0:
+  version "5.3.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-calc/-/postcss-calc-5.3.1.tgz#77bae7ca928ad85716e2fda42f261bf7c1d65b5e"
+  integrity sha1-d7rnypKK2FcW4v2kLyYb98HWW14=
+  dependencies:
+    postcss "^5.0.2"
+    postcss-message-helpers "^2.0.0"
+    reduce-css-calc "^1.2.6"
+
+postcss-colormin@^2.1.8:
+  version "2.2.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-colormin/-/postcss-colormin-2.2.2.tgz#6631417d5f0e909a3d7ec26b24c8a8d1e4f96e4b"
+  integrity sha1-ZjFBfV8OkJo9fsJrJMio0eT5bks=
+  dependencies:
+    colormin "^1.0.5"
+    postcss "^5.0.13"
+    postcss-value-parser "^3.2.3"
+
+postcss-convert-values@^2.3.4:
+  version "2.6.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-convert-values/-/postcss-convert-values-2.6.1.tgz#bbd8593c5c1fd2e3d1c322bb925dcae8dae4d62d"
+  integrity sha1-u9hZPFwf0uPRwyK7kl3K6Nrk1i0=
+  dependencies:
+    postcss "^5.0.11"
+    postcss-value-parser "^3.1.2"
+
+postcss-discard-comments@^2.0.4:
+  version "2.0.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-discard-comments/-/postcss-discard-comments-2.0.4.tgz#befe89fafd5b3dace5ccce51b76b81514be00e3d"
+  integrity sha1-vv6J+v1bPazlzM5Rt2uBUUvgDj0=
+  dependencies:
+    postcss "^5.0.14"
+
+postcss-discard-duplicates@^2.0.1:
+  version "2.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-discard-duplicates/-/postcss-discard-duplicates-2.1.0.tgz#b9abf27b88ac188158a5eb12abcae20263b91932"
+  integrity sha1-uavye4isGIFYpesSq8riAmO5GTI=
+>>>>>>> master
   dependencies:
     css-unit-converter "^1.1.1"
     postcss "^7.0.2"
     postcss-selector-parser "^5.0.0-rc.3"
     postcss-value-parser "^3.3.0"
 
+<<<<<<< HEAD
 postcss-colormin@^4.0.2:
   version "4.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-colormin/-/postcss-colormin-4.0.2.tgz#93cd1fa11280008696887db1a528048b18e7ed99"
   integrity sha512-1QJc2coIehnVFsz0otges8kQLsryi4lo19WD+U5xCWvXd0uw/Z+KKYnbiNDCnO9GP+PvErPHCG0jNvWTngk9Rw==
+=======
+postcss-discard-empty@^2.0.1:
+  version "2.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-discard-empty/-/postcss-discard-empty-2.1.0.tgz#d2b4bd9d5ced5ebd8dcade7640c7d7cd7f4f92b5"
+  integrity sha1-0rS9nVztXr2Nyt52QMfXzX9PkrU=
+>>>>>>> master
   dependencies:
     browserslist "^4.0.0"
     color "^3.0.0"
@@ -7297,60 +8394,110 @@ postcss-colormin@^4.0.2:
     postcss "^7.0.0"
     postcss-value-parser "^3.0.0"
 
+<<<<<<< HEAD
 postcss-convert-values@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-convert-values/-/postcss-convert-values-4.0.1.tgz#ca3813ed4da0f812f9d43703584e449ebe189a7f"
   integrity sha512-Kisdo1y77KUC0Jmn0OXU/COOJbzM8cImvw1ZFsBgBgMgb1iL23Zs/LXRe3r+EZqM3vGYKdQ2YJVQ5VkJI+zEJQ==
+=======
+postcss-discard-overridden@^0.1.1:
+  version "0.1.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-discard-overridden/-/postcss-discard-overridden-0.1.1.tgz#8b1eaf554f686fb288cd874c55667b0aa3668d58"
+  integrity sha1-ix6vVU9ob7KIzYdMVWZ7CqNmjVg=
+>>>>>>> master
   dependencies:
     postcss "^7.0.0"
     postcss-value-parser "^3.0.0"
 
+<<<<<<< HEAD
 postcss-discard-comments@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-discard-comments/-/postcss-discard-comments-4.0.1.tgz#30697735b0c476852a7a11050eb84387a67ef55d"
   integrity sha512-Ay+rZu1Sz6g8IdzRjUgG2NafSNpp2MSMOQUb+9kkzzzP+kh07fP0yNbhtFejURnyVXSX3FYy2nVNW1QTnNjgBQ==
+=======
+postcss-discard-unused@^2.2.1:
+  version "2.2.3"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-discard-unused/-/postcss-discard-unused-2.2.3.tgz#bce30b2cc591ffc634322b5fb3464b6d934f4433"
+  integrity sha1-vOMLLMWR/8Y0Mitfs0ZLbZNPRDM=
+>>>>>>> master
   dependencies:
     postcss "^7.0.0"
 
+<<<<<<< HEAD
 postcss-discard-duplicates@^4.0.2:
   version "4.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-discard-duplicates/-/postcss-discard-duplicates-4.0.2.tgz#3fe133cd3c82282e550fc9b239176a9207b784eb"
   integrity sha512-ZNQfR1gPNAiXZhgENFfEglF93pciw0WxMkJeVmw8eF+JZBbMD7jp6C67GqJAXVZP2BWbOztKfbsdmMp/k8c6oQ==
+=======
+postcss-filter-plugins@^2.0.0:
+  version "2.0.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-filter-plugins/-/postcss-filter-plugins-2.0.2.tgz#6d85862534d735ac420e4a85806e1f5d4286d84c"
+  integrity sha1-bYWGJTTXNaxCDkqFgG4fXUKG2Ew=
+>>>>>>> master
   dependencies:
     postcss "^7.0.0"
 
+<<<<<<< HEAD
 postcss-discard-empty@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-discard-empty/-/postcss-discard-empty-4.0.1.tgz#c8c951e9f73ed9428019458444a02ad90bb9f765"
   integrity sha512-B9miTzbznhDjTfjvipfHoqbWKwd0Mj+/fL5s1QOz06wufguil+Xheo4XpOnc4NqKYBCNqqEzgPv2aPBIJLox0w==
+=======
+postcss-load-config@^1.2.0:
+  version "1.2.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-load-config/-/postcss-load-config-1.2.0.tgz#539e9afc9ddc8620121ebf9d8c3673e0ce50d28a"
+  integrity sha1-U56a/J3chiASHr+djDZz4M5Q0oo=
+>>>>>>> master
   dependencies:
     postcss "^7.0.0"
 
+<<<<<<< HEAD
 postcss-discard-overridden@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-discard-overridden/-/postcss-discard-overridden-4.0.1.tgz#652aef8a96726f029f5e3e00146ee7a4e755ff57"
   integrity sha512-IYY2bEDD7g1XM1IDEsUT4//iEYCxAmP5oDSFMVU/JVvT7gh+l4fmjciLqGgwjdWpQIdb0Che2VX00QObS5+cTg==
+=======
+postcss-load-options@^1.2.0:
+  version "1.2.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-load-options/-/postcss-load-options-1.2.0.tgz#b098b1559ddac2df04bc0bb375f99a5cfe2b6d8c"
+  integrity sha1-sJixVZ3awt8EvAuzdfmaXP4rbYw=
+>>>>>>> master
   dependencies:
     postcss "^7.0.0"
 
+<<<<<<< HEAD
 postcss-load-config@^2.0.0:
   version "2.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-load-config/-/postcss-load-config-2.0.0.tgz#f1312ddbf5912cd747177083c5ef7a19d62ee484"
   integrity sha512-V5JBLzw406BB8UIfsAWSK2KSwIJ5yoEIVFb4gVkXci0QdKgA24jLmHZ/ghe/GgX0lJ0/D1uUK1ejhzEY94MChQ==
+=======
+postcss-load-plugins@^2.3.0:
+  version "2.3.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-load-plugins/-/postcss-load-plugins-2.3.0.tgz#745768116599aca2f009fad426b00175049d8d92"
+  integrity sha1-dFdoEWWZrKLwCfrUJrABdQSdjZI=
+>>>>>>> master
   dependencies:
     cosmiconfig "^4.0.0"
     import-cwd "^2.0.0"
 
+<<<<<<< HEAD
 postcss-loader@^3.0.0:
   version "3.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-loader/-/postcss-loader-3.0.0.tgz#6b97943e47c72d845fa9e03f273773d4e8dd6c2d"
   integrity sha512-cLWoDEY5OwHcAjDnkyRQzAXfs2jrKjXpO/HQFcc5b5u/r7aa471wdmChmwfnv7x2u840iat/wi0lQ5nbRgSkUA==
+=======
+postcss-loader@^2.0.6:
+  version "2.0.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-loader/-/postcss-loader-2.0.6.tgz#8c7e0055a3df1889abc6bad52dd45b2f41bbc6fc"
+  integrity sha512-HIq7yy1hh9KI472Y38iSRV4WupZUNy6zObkxQM/ZuInoaE2+PyX4NcO6jjP5HG5mXL7j5kcNEl0fAG4Kva7O9w==
+>>>>>>> master
   dependencies:
     loader-utils "^1.1.0"
     postcss "^7.0.0"
     postcss-load-config "^2.0.0"
     schema-utils "^1.0.0"
 
+<<<<<<< HEAD
 postcss-merge-longhand@^4.0.6:
   version "4.0.7"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-merge-longhand/-/postcss-merge-longhand-4.0.7.tgz#77430fa60e36745887c1c725ab3782c40f48363d"
@@ -7377,20 +8524,66 @@ postcss-minify-font-values@^4.0.2:
   version "4.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-minify-font-values/-/postcss-minify-font-values-4.0.2.tgz#cd4c344cce474343fac5d82206ab2cbcb8afd5a6"
   integrity sha512-j85oO6OnRU9zPf04+PZv1LYIYOprWm6IA6zkXkrJXyRveDEuQggG6tvoy8ir8ZwjLxLuGfNkCZEQG7zan+Hbtg==
+=======
+postcss-merge-idents@^2.1.5:
+  version "2.1.7"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-merge-idents/-/postcss-merge-idents-2.1.7.tgz#4c5530313c08e1d5b3bbf3d2bbc747e278eea270"
+  integrity sha1-TFUwMTwI4dWzu/PSu8dH4njuonA=
+  dependencies:
+    has "^1.0.1"
+    postcss "^5.0.10"
+    postcss-value-parser "^3.1.1"
+
+postcss-merge-longhand@^2.0.1:
+  version "2.0.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-merge-longhand/-/postcss-merge-longhand-2.0.2.tgz#23d90cd127b0a77994915332739034a1a4f3d658"
+  integrity sha1-I9kM0Sewp3mUkVMyc5A0oaTz1lg=
+  dependencies:
+    postcss "^5.0.4"
+
+postcss-merge-rules@^2.0.3:
+  version "2.1.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-merge-rules/-/postcss-merge-rules-2.1.2.tgz#d1df5dfaa7b1acc3be553f0e9e10e87c61b5f721"
+  integrity sha1-0d9d+qexrMO+VT8OnhDofGG19yE=
+  dependencies:
+    browserslist "^1.5.2"
+    caniuse-api "^1.5.2"
+    postcss "^5.0.4"
+    postcss-selector-parser "^2.2.2"
+    vendors "^1.0.0"
+
+postcss-message-helpers@^2.0.0:
+  version "2.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-message-helpers/-/postcss-message-helpers-2.0.0.tgz#a4f2f4fab6e4fe002f0aed000478cdf52f9ba60e"
+  integrity sha1-pPL0+rbk/gAvCu0ABHjN9S+bpg4=
+
+postcss-minify-font-values@^1.0.2:
+  version "1.0.5"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-minify-font-values/-/postcss-minify-font-values-1.0.5.tgz#4b58edb56641eba7c8474ab3526cafd7bbdecb69"
+  integrity sha1-S1jttWZB66fIR0qzUmyv17vey2k=
+>>>>>>> master
   dependencies:
     postcss "^7.0.0"
     postcss-value-parser "^3.0.0"
 
+<<<<<<< HEAD
 postcss-minify-gradients@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-minify-gradients/-/postcss-minify-gradients-4.0.1.tgz#6da95c6e92a809f956bb76bf0c04494953e1a7dd"
   integrity sha512-pySEW3E6Ly5mHm18rekbWiAjVi/Wj8KKt2vwSfVFAWdW6wOIekgqxKxLU7vJfb107o3FDNPkaYFCxGAJBFyogA==
+=======
+postcss-minify-gradients@^1.0.1:
+  version "1.0.5"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-minify-gradients/-/postcss-minify-gradients-1.0.5.tgz#5dbda11373703f83cfb4a3ea3881d8d75ff5e6e1"
+  integrity sha1-Xb2hE3NwP4PPtKPqOIHY11/15uE=
+>>>>>>> master
   dependencies:
     cssnano-util-get-arguments "^4.0.0"
     is-color-stop "^1.0.0"
     postcss "^7.0.0"
     postcss-value-parser "^3.0.0"
 
+<<<<<<< HEAD
 postcss-minify-params@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-minify-params/-/postcss-minify-params-4.0.1.tgz#5b2e2d0264dd645ef5d68f8fec0d4c38c1cf93d2"
@@ -7407,6 +8600,22 @@ postcss-minify-selectors@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-minify-selectors/-/postcss-minify-selectors-4.0.1.tgz#a891c197977cc37abf60b3ea06b84248b1c1e9cd"
   integrity sha512-8+plQkomve3G+CodLCgbhAKrb5lekAnLYuL1d7Nz+/7RANpBEVdgBkPNwljfSKvZ9xkkZTZITd04KP+zeJTJqg==
+=======
+postcss-minify-params@^1.0.4:
+  version "1.2.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-minify-params/-/postcss-minify-params-1.2.2.tgz#ad2ce071373b943b3d930a3fa59a358c28d6f1f3"
+  integrity sha1-rSzgcTc7lDs9kwo/pZo1jCjW8fM=
+  dependencies:
+    alphanum-sort "^1.0.1"
+    postcss "^5.0.2"
+    postcss-value-parser "^3.0.2"
+    uniqs "^2.0.0"
+
+postcss-minify-selectors@^2.0.4:
+  version "2.1.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-minify-selectors/-/postcss-minify-selectors-2.1.1.tgz#b2c6a98c0072cf91b932d1a496508114311735bf"
+  integrity sha1-ssapjAByz5G5MtGkllCBFDEXNb8=
+>>>>>>> master
   dependencies:
     alphanum-sort "^1.0.0"
     has "^1.0.0"
@@ -7444,13 +8653,21 @@ postcss-modules-values@^1.3.0:
     icss-replace-symbols "^1.1.0"
     postcss "^6.0.1"
 
+<<<<<<< HEAD
 postcss-normalize-charset@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-normalize-charset/-/postcss-normalize-charset-4.0.1.tgz#8b35add3aee83a136b0471e0d59be58a50285dd4"
   integrity sha512-gMXCrrlWh6G27U0hF3vNvR3w8I1s2wOBILvA87iNXaPvSNo5uZAMYsZG7XjCUf1eVxuPfyL4TJ7++SGZLc9A3g==
+=======
+postcss-normalize-charset@^1.1.0:
+  version "1.1.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-normalize-charset/-/postcss-normalize-charset-1.1.1.tgz#ef9ee71212d7fe759c78ed162f61ed62b5cb93f1"
+  integrity sha1-757nEhLX/nWceO0WL2HtYrXLk/E=
+>>>>>>> master
   dependencies:
     postcss "^7.0.0"
 
+<<<<<<< HEAD
 postcss-normalize-display-values@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-normalize-display-values/-/postcss-normalize-display-values-4.0.1.tgz#d9a83d47c716e8a980f22f632c8b0458cfb48a4c"
@@ -7511,68 +8728,117 @@ postcss-normalize-url@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-normalize-url/-/postcss-normalize-url-4.0.1.tgz#10e437f86bc7c7e58f7b9652ed878daaa95faae1"
   integrity sha512-p5oVaF4+IHwu7VpMan/SSpmpYxcJMtkGppYf0VbdH5B6hN8YNmVyJLuY9FmLQTzY3fag5ESUUHDqM+heid0UVA==
+=======
+postcss-normalize-url@^3.0.7:
+  version "3.0.8"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-normalize-url/-/postcss-normalize-url-3.0.8.tgz#108f74b3f2fcdaf891a2ffa3ea4592279fc78222"
+  integrity sha1-EI90s/L82viRov+j6kWSJ5/HgiI=
+>>>>>>> master
   dependencies:
     is-absolute-url "^2.0.0"
     normalize-url "^3.0.0"
     postcss "^7.0.0"
     postcss-value-parser "^3.0.0"
 
+<<<<<<< HEAD
 postcss-normalize-whitespace@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-normalize-whitespace/-/postcss-normalize-whitespace-4.0.1.tgz#d14cb639b61238418ac8bc8d3b7bdd65fc86575e"
   integrity sha512-U8MBODMB2L+nStzOk6VvWWjZgi5kQNShCyjRhMT3s+W9Jw93yIjOnrEkKYD3Ul7ChWbEcjDWmXq0qOL9MIAnAw==
+=======
+postcss-ordered-values@^2.1.0:
+  version "2.2.3"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-ordered-values/-/postcss-ordered-values-2.2.3.tgz#eec6c2a67b6c412a8db2042e77fe8da43f95c11d"
+  integrity sha1-7sbCpntsQSqNsgQud/6NpD+VwR0=
+>>>>>>> master
   dependencies:
     postcss "^7.0.0"
     postcss-value-parser "^3.0.0"
 
+<<<<<<< HEAD
 postcss-ordered-values@^4.1.1:
   version "4.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-ordered-values/-/postcss-ordered-values-4.1.1.tgz#2e3b432ef3e489b18333aeca1f1295eb89be9fc2"
   integrity sha512-PeJiLgJWPzkVF8JuKSBcylaU+hDJ/TX3zqAMIjlghgn1JBi6QwQaDZoDIlqWRcCAI8SxKrt3FCPSRmOgKRB97Q==
+=======
+postcss-reduce-idents@^2.2.2:
+  version "2.4.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-reduce-idents/-/postcss-reduce-idents-2.4.0.tgz#c2c6d20cc958284f6abfbe63f7609bf409059ad3"
+  integrity sha1-wsbSDMlYKE9qv75j92Cb9AkFmtM=
+>>>>>>> master
   dependencies:
     cssnano-util-get-arguments "^4.0.0"
     postcss "^7.0.0"
     postcss-value-parser "^3.0.0"
 
+<<<<<<< HEAD
 postcss-reduce-initial@^4.0.2:
   version "4.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-reduce-initial/-/postcss-reduce-initial-4.0.2.tgz#bac8e325d67510ee01fa460676dc8ea9e3b40f15"
   integrity sha512-epUiC39NonKUKG+P3eAOKKZtm5OtAtQJL7Ye0CBN1f+UQTHzqotudp+hki7zxXm7tT0ZAKDMBj1uihpPjP25ug==
+=======
+postcss-reduce-initial@^1.0.0:
+  version "1.0.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-reduce-initial/-/postcss-reduce-initial-1.0.1.tgz#68f80695f045d08263a879ad240df8dd64f644ea"
+  integrity sha1-aPgGlfBF0IJjqHmtJA343WT2ROo=
+>>>>>>> master
   dependencies:
     browserslist "^4.0.0"
     caniuse-api "^3.0.0"
     has "^1.0.0"
     postcss "^7.0.0"
 
+<<<<<<< HEAD
 postcss-reduce-transforms@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-reduce-transforms/-/postcss-reduce-transforms-4.0.1.tgz#8600d5553bdd3ad640f43bff81eb52f8760d4561"
   integrity sha512-sZVr3QlGs0pjh6JAIe6DzWvBaqYw05V1t3d9Tp+VnFRT5j+rsqoWsysh/iSD7YNsULjq9IAylCznIwVd5oU/zA==
+=======
+postcss-reduce-transforms@^1.0.3:
+  version "1.0.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-reduce-transforms/-/postcss-reduce-transforms-1.0.4.tgz#ff76f4d8212437b31c298a42d2e1444025771ae1"
+  integrity sha1-/3b02CEkN7McKYpC0uFEQCV3GuE=
+>>>>>>> master
   dependencies:
     cssnano-util-get-match "^4.0.0"
     has "^1.0.0"
     postcss "^7.0.0"
     postcss-value-parser "^3.0.0"
 
+<<<<<<< HEAD
 postcss-selector-parser@^3.0.0:
   version "3.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-selector-parser/-/postcss-selector-parser-3.1.1.tgz#4f875f4afb0c96573d5cf4d74011aee250a7e865"
   integrity sha1-T4dfSvsMllc9XPTXQBGu4lCn6GU=
+=======
+postcss-selector-parser@^2.0.0, postcss-selector-parser@^2.2.2:
+  version "2.2.3"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-selector-parser/-/postcss-selector-parser-2.2.3.tgz#f9437788606c3c9acee16ffe8d8b16297f27bb90"
+  integrity sha1-+UN3iGBsPJrO4W/+jYsWKX8nu5A=
+>>>>>>> master
   dependencies:
     dot-prop "^4.1.1"
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
+<<<<<<< HEAD
 postcss-selector-parser@^5.0.0-rc.3:
   version "5.0.0-rc.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-selector-parser/-/postcss-selector-parser-5.0.0-rc.3.tgz#c4525dcc8eb90166c53dcbf0cb9317ceff5a15b5"
   integrity sha512-kBl1vc+zJgWCBmmxEXE2/15tmmYdD50lO5r6tLNXEx3K4LtszdLFaSNo8SNVuoI+BGODbWhavoG/n1DrYphBsw==
+=======
+postcss-svgo@^2.1.1:
+  version "2.1.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-svgo/-/postcss-svgo-2.1.6.tgz#b6df18aa613b666e133f08adb5219c2684ac108d"
+  integrity sha1-tt8YqmE7Zm4TPwittSGcJoSsEI0=
+>>>>>>> master
   dependencies:
     babel-eslint "^8.2.3"
     cssesc "^1.0.1"
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
+<<<<<<< HEAD
 postcss-svgo@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-svgo/-/postcss-svgo-4.0.1.tgz#5628cdb38f015de6b588ce6d0bf0724b492b581d"
@@ -7587,6 +8853,12 @@ postcss-unique-selectors@^4.0.1:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-unique-selectors/-/postcss-unique-selectors-4.0.1.tgz#9446911f3289bfd64c6d680f073c03b1f9ee4bac"
   integrity sha512-+JanVaryLo9QwZjKrmJgkI4Fn8SBgRO6WXQBJi7KiAVPlmxikB5Jzc4EvXMT2H0/m0RjrVVm9rGNhZddm/8Spg==
+=======
+postcss-unique-selectors@^2.0.2:
+  version "2.0.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-unique-selectors/-/postcss-unique-selectors-2.0.2.tgz#981d57d29ddcb33e7b1dfe1fd43b8649f933ca1d"
+  integrity sha1-mB1X0p3csz57Hf4f1DuGSfkzyh0=
+>>>>>>> master
   dependencies:
     alphanum-sort "^1.0.0"
     postcss "^7.0.0"
@@ -7602,7 +8874,20 @@ postcss-value-parser@^3.2.3, postcss-value-parser@^3.3.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-value-parser/-/postcss-value-parser-3.3.0.tgz#87f38f9f18f774a4ab4c8a232f5c5ce8872a9d15"
   integrity sha1-h/OPnxj3dKSrTIojL1xc6IcqnRU=
 
+<<<<<<< HEAD
 postcss@^5.2.15:
+=======
+postcss-zindex@^2.0.1:
+  version "2.2.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/postcss-zindex/-/postcss-zindex-2.2.0.tgz#d2109ddc055b91af67fc4cb3b025946639d2af22"
+  integrity sha1-0hCd3AVbka9n/EyzsCWUZjnSryI=
+  dependencies:
+    has "^1.0.1"
+    postcss "^5.0.4"
+    uniqs "^2.0.0"
+
+postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0.14, postcss@^5.0.16, postcss@^5.0.2, postcss@^5.0.4, postcss@^5.0.5, postcss@^5.0.6, postcss@^5.0.8, postcss@^5.2.15, postcss@^5.2.16:
+>>>>>>> master
   version "5.2.17"
   resolved "https://nexus.swmdigital.io/repository/js-combined/postcss/-/postcss-5.2.17.tgz#cf4f597b864d65c8a492b2eabe9d706c879c388b"
   integrity sha1-z09Ze4ZNZcikkrLqvp1wbIecOIs=
@@ -7667,10 +8952,17 @@ pretty-error@^2.0.2:
     renderkid "^2.0.1"
     utila "~0.4"
 
+<<<<<<< HEAD
 pretty-format@^23.6.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/pretty-format/-/pretty-format-23.6.0.tgz#5eaac8eeb6b33b987b7fe6097ea6a8a146ab5760"
   integrity sha512-zf9NV1NSlDLDjycnwm6hpFATCGl/K1lt0R/GdkAK2O5LN/rwJoB+Mh93gGJjut4YbmecbfgLWVGSTCr0Ewvvbw==
+=======
+pretty-format@^23.5.0:
+  version "23.5.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/pretty-format/-/pretty-format-23.5.0.tgz#0f9601ad9da70fe690a269cd3efca732c210687c"
+  integrity sha512-iFLvYTXOn+C/s7eV+pr4E8DD7lYa2/klXMEz+lvH14qSDWAJ7S+kFmMe1SIWesATHQxopHTxRcB2nrpExhzaBA==
+>>>>>>> master
   dependencies:
     ansi-regex "^3.0.0"
     ansi-styles "^3.2.0"
@@ -7679,11 +8971,14 @@ private@^0.1.6:
   version "0.1.7"
   resolved "https://nexus.swmdigital.io/repository/js-combined/private/-/private-0.1.7.tgz#68ce5e8a1ef0a23bb570cc28537b5332aba63ef1"
   integrity sha1-aM5eih7woju1cMwoU3tTMqumPvE=
+<<<<<<< HEAD
 
 private@^0.1.8:
   version "0.1.8"
   resolved "https://nexus.swmdigital.io/repository/js-combined/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
   integrity sha512-VvivMrbvd2nKkiG38qjULzlc+4Vx4wm/whI9pQD35YrARNnhxeiRktSOhSukRLFNlzg6Br/cJPet5J/u19r/mg==
+=======
+>>>>>>> master
 
 process-nextick-args@~1.0.6:
   version "1.0.7"
@@ -7704,11 +8999,14 @@ progress@^1.1.8:
   version "1.1.8"
   resolved "https://nexus.swmdigital.io/repository/js-combined/progress/-/progress-1.1.8.tgz#e260c78f6161cdd9b0e56cc3e0a85de17c7a57be"
   integrity sha1-4mDHj2Fhzdmw5WzD4Khd4Xx6V74=
+<<<<<<< HEAD
 
 promise-inflight@^1.0.1:
   version "1.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/promise-inflight/-/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"
   integrity sha1-mEcocL8igTL8vdhoEputEsPAKeM=
+=======
+>>>>>>> master
 
 promise@^7.1.1:
   version "7.3.1"
@@ -7838,6 +9136,17 @@ qs@~6.5.1:
   version "6.5.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
   integrity sha512-eRzhrN1WSINYCDCbrz796z37LOe3m5tmW7RQf6oBntukAG1nmovJvhnwHHRMAfeoItc1m2Hk02WER2aQ/iqs+A==
+<<<<<<< HEAD
+=======
+
+query-string@^4.1.0:
+  version "4.3.4"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/query-string/-/query-string-4.3.4.tgz#bbb693b9ca915c232515b228b1a02b609043dbeb"
+  integrity sha1-u7aTucqRXCMlFbIosaArYJBD2+s=
+  dependencies:
+    object-assign "^4.1.0"
+    strict-uri-encode "^1.0.0"
+>>>>>>> master
 
 querystring-es3@^0.2.0:
   version "0.2.1"
@@ -8033,6 +9342,17 @@ read-pkg-up@^1.0.1:
     find-up "^1.0.0"
     read-pkg "^1.0.0"
 
+<<<<<<< HEAD
+=======
+read-pkg-up@^2.0.0:
+  version "2.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/read-pkg-up/-/read-pkg-up-2.0.0.tgz#6b72a8048984e0c41e79510fd5e9fa99b3b549be"
+  integrity sha1-a3KoBImE4MQeeVEP1en6mbO1Sb4=
+  dependencies:
+    find-up "^2.0.0"
+    read-pkg "^2.0.0"
+
+>>>>>>> master
 read-pkg@^1.0.0:
   version "1.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/read-pkg/-/read-pkg-1.1.0.tgz#f5ffaa5ecd29cb31c0474bca7d756b6bb29e3f28"
@@ -8042,10 +9362,17 @@ read-pkg@^1.0.0:
     normalize-package-data "^2.3.2"
     path-type "^1.0.0"
 
+<<<<<<< HEAD
 "readable-stream@1 || 2", readable-stream@^2.0.0, readable-stream@^2.0.4, readable-stream@^2.0.5, readable-stream@^2.1.5:
   version "2.3.6"
   resolved "https://nexus.swmdigital.io/repository/js-combined/readable-stream/-/readable-stream-2.3.6.tgz#b11c27d88b8ff1fbe070643cf94b0c79ae1b0aaf"
   integrity sha512-tQtKA9WIAhBF3+VLAseyMqZeBjW0AHJoxOtYqSUZNJxauErmLbVm2FW1y+J/YA9dUrAC39ITejlZWhVIwawkKw==
+=======
+read-pkg@^2.0.0:
+  version "2.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/read-pkg/-/read-pkg-2.0.0.tgz#8ef1c0623c6a6db0dc6713c4bfac46332b2368f8"
+  integrity sha1-jvHAYjxqbbDcZxPEv6xGMysjaPg=
+>>>>>>> master
   dependencies:
     core-util-is "~1.0.0"
     inherits "~2.0.3"
@@ -8054,6 +9381,15 @@ read-pkg@^1.0.0:
     safe-buffer "~5.1.1"
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
+
+read-pkg@^4.0.1:
+  version "4.0.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/read-pkg/-/read-pkg-4.0.1.tgz#963625378f3e1c4d48c85872b5a6ec7d5d093237"
+  integrity sha1-ljYlN48+HE1IyFhytabsfV0JMjc=
+  dependencies:
+    normalize-package-data "^2.3.2"
+    parse-json "^4.0.0"
+    pify "^3.0.0"
 
 readable-stream@1.0:
   version "1.0.34"
@@ -8078,6 +9414,22 @@ readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.6, readable
     string_decoder "~1.0.3"
     util-deprecate "~1.0.1"
 
+<<<<<<< HEAD
+=======
+readable-stream@^2.0.5:
+  version "2.3.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/readable-stream/-/readable-stream-2.3.6.tgz#b11c27d88b8ff1fbe070643cf94b0c79ae1b0aaf"
+  integrity sha512-tQtKA9WIAhBF3+VLAseyMqZeBjW0AHJoxOtYqSUZNJxauErmLbVm2FW1y+J/YA9dUrAC39ITejlZWhVIwawkKw==
+  dependencies:
+    core-util-is "~1.0.0"
+    inherits "~2.0.3"
+    isarray "~1.0.0"
+    process-nextick-args "~2.0.0"
+    safe-buffer "~5.1.1"
+    string_decoder "~1.1.1"
+    util-deprecate "~1.0.1"
+
+>>>>>>> master
 readdirp@^2.0.0:
   version "2.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/readdirp/-/readdirp-2.1.0.tgz#4ed0ad060df3073300c48440373f72d1cc642d78"
@@ -8112,6 +9464,25 @@ redent@^1.0.0:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
 
+<<<<<<< HEAD
+=======
+reduce-css-calc@^1.2.6:
+  version "1.3.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/reduce-css-calc/-/reduce-css-calc-1.3.0.tgz#747c914e049614a4c9cfbba629871ad1d2927716"
+  integrity sha1-dHyRTgSWFKTJz7umKYca0dKSdxY=
+  dependencies:
+    balanced-match "^0.4.2"
+    math-expression-evaluator "^1.2.14"
+    reduce-function-call "^1.0.1"
+
+reduce-function-call@^1.0.1:
+  version "1.0.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
+  integrity sha1-WiAL+S4ON3UXUv5FsKszD9S2vpk=
+  dependencies:
+    balanced-match "^0.4.2"
+
+>>>>>>> master
 regenerate@^1.2.1:
   version "1.3.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/regenerate/-/regenerate-1.3.2.tgz#d1941c67bad437e1be76433add5b385f95b19260"
@@ -8134,6 +9505,14 @@ regex-cache@^0.4.2:
   dependencies:
     is-equal-shallow "^0.1.3"
 
+<<<<<<< HEAD
+=======
+regex-not@^0.1.1:
+  version "0.1.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/regex-not/-/regex-not-0.1.2.tgz#bc7f1c4944b1188353d07deeb912b94e0ade25db"
+  integrity sha1-vH8cSUSxGINT0H3uuRK5TgreJds=
+
+>>>>>>> master
 regex-not@^1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/regex-not/-/regex-not-1.0.0.tgz#42f83e39771622df826b02af176525d6a5f157f9"
@@ -8305,10 +9684,17 @@ require-directory@^2.1.1:
   resolved "https://nexus.swmdigital.io/repository/js-combined/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
   integrity sha1-jGStX9MNqxyXbiNE/+f3kqam30I=
 
+<<<<<<< HEAD
 require-from-string@^2.0.1:
   version "2.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/require-from-string/-/require-from-string-2.0.2.tgz#89a7fdd938261267318eafe14f9c32e598c36909"
   integrity sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==
+=======
+require-from-string@^1.1.0:
+  version "1.2.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/require-from-string/-/require-from-string-1.2.1.tgz#529c9ccef27380adfec9a2f965b649bbee636418"
+  integrity sha1-UpyczvJzgK3+yaL5ZbZJu+5jZBg=
+>>>>>>> master
 
 require-main-filename@^1.0.1:
   version "1.0.1"
@@ -8350,10 +9736,17 @@ resolve-pathname@^2.2.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/resolve-pathname/-/resolve-pathname-2.2.0.tgz#7e9ae21ed815fd63ab189adeee64dc831eefa879"
   integrity sha512-bAFz9ld18RzJfddgrO2e/0S2O81710++chRMUxHjXOYKF6jTAMrUNZrEZ1PvV0zlhfjidm08iRPdTLPno1FuRg==
 
+<<<<<<< HEAD
 resolve-url-loader@^3.0.0:
   version "3.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/resolve-url-loader/-/resolve-url-loader-3.0.0.tgz#c47eeca1fc8d62b08dc2eef12b3af5af3e775c74"
   integrity sha512-ZzRUnpu+pLkrN2ZBsEEifOD6W+9ZNtdIu+kY3vs+11PwuZ2WykxbAY9qO+S9SmasSDRllxNdSm9IhN8HU4xGKg==
+=======
+resolve-url-loader@^2.1.0:
+  version "2.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/resolve-url-loader/-/resolve-url-loader-2.1.0.tgz#27c95cc16a4353923fdbdc2dbaf5eef22232c477"
+  integrity sha1-J8lcwWpDU5I/29wtuvXu8iIyxHc=
+>>>>>>> master
   dependencies:
     adjust-sourcemap-loader "^1.1.0"
     camelcase "^4.1.0"
@@ -8381,6 +9774,7 @@ resolve@^1.3.2:
   version "1.3.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/resolve/-/resolve-1.3.3.tgz#655907c3469a8680dc2de3a275a8fdd69691f0e5"
   integrity sha1-ZVkHw0aahoDcLeOidaj91paR8OU=
+<<<<<<< HEAD
   dependencies:
     path-parse "^1.0.5"
 
@@ -8388,6 +9782,8 @@ resolve@^1.5.0:
   version "1.8.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/resolve/-/resolve-1.8.1.tgz#82f1ec19a423ac1fbd080b0bab06ba36e84a7a26"
   integrity sha512-AicPrAC7Qu1JxPCZ9ZgCZlY35QgFnNqc+0LtbRNxnVw4TXvjQ72wnuL9JQcEBgXkI9JM8MsT9kaQoHcpCRJOYA==
+=======
+>>>>>>> master
   dependencies:
     path-parse "^1.0.5"
 
@@ -8491,12 +9887,19 @@ run-async@^2.2.0:
   dependencies:
     is-promise "^2.1.0"
 
+<<<<<<< HEAD
 run-queue@^1.0.0, run-queue@^1.0.3:
   version "1.0.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/run-queue/-/run-queue-1.0.3.tgz#e848396f057d223f24386924618e25694161ec47"
   integrity sha1-6Eg5bwV9Ij8kOGkkYY4laUFh7Ec=
   dependencies:
     aproba "^1.1.1"
+=======
+run-node@^1.0.0:
+  version "1.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/run-node/-/run-node-1.0.0.tgz#46b50b946a2aa2d4947ae1d886e9856fd9cabe5e"
+  integrity sha512-kc120TBlQ3mih1LSzdAJXo4xn/GWS2ec0l3S+syHDXP9uRr0JAT8Qd3mdMuyjqCzeZktgP3try92cEgf9Nks8A==
+>>>>>>> master
 
 rx-lite-aggregates@^4.0.8:
   version "4.0.8"
@@ -8514,16 +9917,27 @@ rx-lite@^3.1.2:
   version "3.1.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/rx-lite/-/rx-lite-3.1.2.tgz#19ce502ca572665f3b647b10939f97fd1615f102"
   integrity sha1-Gc5QLKVyZl87ZHsQk5+X/RYV8QI=
+<<<<<<< HEAD
 
 safe-buffer@5.1.2, safe-buffer@^5.1.2:
   version "5.1.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
   integrity sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==
+=======
+>>>>>>> master
 
 safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
   integrity sha512-kKvNJn6Mm93gAczWVJg7wH+wGYWNrDHdWvpUmHyEsgCtIwwo3bqPtV4tR5tuPaUhTOo/kvhVwd8XwwOllGYkbg==
+<<<<<<< HEAD
+=======
+
+safe-buffer@~5.0.1:
+  version "5.0.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/safe-buffer/-/safe-buffer-5.0.1.tgz#d263ca54696cd8a306b5ca6551e92de57918fbe7"
+  integrity sha1-0mPKVGls2KMGtcplUekt5XkY++c=
+>>>>>>> master
 
 safe-regex@^1.1.0:
   version "1.1.0"
@@ -8581,10 +9995,17 @@ sass-lint@^1.10.2:
     path-is-absolute "^1.0.0"
     util "^0.10.3"
 
+<<<<<<< HEAD
 sass-loader@^7.1.0:
   version "7.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/sass-loader/-/sass-loader-7.1.0.tgz#16fd5138cb8b424bf8a759528a1972d72aad069d"
   integrity sha512-+G+BKGglmZM2GUSfT9TLuEp6tzehHPjAMoRRItOojWIqIGPloVCMhNIQuG639eJ+y033PaGTSjLaTHts8Kw79w==
+=======
+sass-loader@^6.0.6:
+  version "6.0.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/sass-loader/-/sass-loader-6.0.6.tgz#e9d5e6c1f155faa32a4b26d7a9b7107c225e40f9"
+  integrity sha512-c3/Zc+iW+qqDip6kXPYLEgsAu2lf4xz0EZDplB7EmSUMda12U1sGJPetH55B/j9eu0bTtKzKlNPWWyYC7wFNyQ==
+>>>>>>> master
   dependencies:
     clone-deep "^2.0.1"
     loader-utils "^1.0.1"
@@ -8598,10 +10019,17 @@ sax@^1.2.1, sax@^1.2.4, sax@~1.2.4:
   resolved "https://nexus.swmdigital.io/repository/js-combined/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
 
+<<<<<<< HEAD
 schema-utils@^0.4.2, schema-utils@^0.4.4, schema-utils@^0.4.5:
   version "0.4.7"
   resolved "https://nexus.swmdigital.io/repository/js-combined/schema-utils/-/schema-utils-0.4.7.tgz#ba74f597d2be2ea880131746ee17d0a093c68187"
   integrity sha512-v/iwU6wvwGK8HbU9yi3/nhGzP0yGSuhQMzL6ySiec1FSrZZDkhm4noOSWzrNFo/jEc+SJY6jRTwuwbSXJPDUnQ==
+=======
+schema-utils@^0.3.0:
+  version "0.3.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/schema-utils/-/schema-utils-0.3.0.tgz#f5877222ce3e931edae039f17eb3716e7137f8cf"
+  integrity sha1-9YdyIs4+kx7a4DnxfrNxbnE3+M8=
+>>>>>>> master
   dependencies:
     ajv "^6.1.0"
     ajv-keywords "^3.1.0"
@@ -8623,6 +10051,11 @@ scss-tokenizer@^0.2.3:
     js-base64 "^2.1.8"
     source-map "^0.4.2"
 
+semver-compare@^1.0.0:
+  version "1.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/semver-compare/-/semver-compare-1.0.0.tgz#0dee216a1c941ab37e9efb1788f6afc5ff5537fc"
+  integrity sha1-De4hahyUGrN+nvsXiPavxf9VN/w=
+
 semver-diff@^2.0.0:
   version "2.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/semver-diff/-/semver-diff-2.1.0.tgz#4bbb8437c8d37e4b0cf1a68fd726ec6d645d6d36"
@@ -8634,11 +10067,14 @@ semver-diff@^2.0.0:
   version "5.4.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/semver/-/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
   integrity sha512-WfG/X9+oATh81XtllIo/I8gOiY9EXRdv1cQdyykeXK17YcUW3EXUAi2To4pcH6nZtJPr7ZOpM5OMyWJZm+8Rsg==
+<<<<<<< HEAD
 
 semver@^5.0.1:
   version "5.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
   integrity sha512-RS9R6R35NYgQn++fkDWaOmqGoj4Ek9gGs+DPxNUZKuwE183xjJroKvyo1IzVFeXvUrvmALy6FWD5xrdJT25gMg==
+=======
+>>>>>>> master
 
 semver@^5.0.3, semver@^5.1.0, semver@~5.3.0:
   version "5.3.0"
@@ -8749,11 +10185,14 @@ setprototypeof@1.0.3:
   version "1.0.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/setprototypeof/-/setprototypeof-1.0.3.tgz#66567e37043eeb4f04d91bd658c0cbefb55b8e04"
   integrity sha1-ZlZ+NwQ+608E2RvWWMDL77VbjgQ=
+<<<<<<< HEAD
 
 setprototypeof@1.1.0:
   version "1.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/setprototypeof/-/setprototypeof-1.1.0.tgz#d0bd85536887b6fe7c0d818cb962d9d91c54e656"
   integrity sha512-BvE/TwpZX4FXExxOxZyRGQQv651MSwmWKZGqvmPcRIjDqWub67kTKuIMx43cZZrS/cBBzwBcNDWoFxt2XEFIpQ==
+=======
+>>>>>>> master
 
 sha.js@^2.4.0, sha.js@^2.4.8:
   version "2.4.9"
@@ -8763,10 +10202,17 @@ sha.js@^2.4.0, sha.js@^2.4.8:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
+<<<<<<< HEAD
 shallow-clone@^1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/shallow-clone/-/shallow-clone-1.0.0.tgz#4480cd06e882ef68b2ad88a3ea54832e2c48b571"
   integrity sha512-oeXreoKR/SyNJtRJMAKPDSvd28OqEwG4eR/xc856cRGBII7gX9lvAqDxusPm0846z/w/hWYjI1NpKwJ00NHzRA==
+=======
+shallow-clone@^0.1.2:
+  version "0.1.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/shallow-clone/-/shallow-clone-0.1.2.tgz#5909e874ba77106d73ac414cfec1ffca87d97060"
+  integrity sha1-WQnodLp3EG1zrEFM/sH/yofZcGA=
+>>>>>>> master
   dependencies:
     is-extendable "^0.1.1"
     kind-of "^5.0.0"
@@ -8803,6 +10249,7 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
+<<<<<<< HEAD
 
 simple-swizzle@^0.2.2:
   version "0.2.2"
@@ -8810,6 +10257,8 @@ simple-swizzle@^0.2.2:
   integrity sha1-pNprY1/8zMoz9w0Xy5JZLeleVXo=
   dependencies:
     is-arrayish "^0.3.1"
+=======
+>>>>>>> master
 
 sisteransi@^0.1.1:
   version "0.1.1"
@@ -8820,6 +10269,14 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
   integrity sha1-xB8vbDn8FtHNF61LXYlhFK5HDVU=
+<<<<<<< HEAD
+=======
+
+slash@^2.0.0:
+  version "2.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/slash/-/slash-2.0.0.tgz#de552851a1759df3a8f206535442f5ec4ddeab44"
+  integrity sha512-ZYKh3Wh2z1PpEXWr0MpSBZ0V6mZHAQfYevttO11c51CaWjGTaadiKZ+wVt1PbMlDV5qhMFslpZCemhwOK7C89A==
+>>>>>>> master
 
 slice-ansi@0.0.4:
   version "0.0.4"
@@ -8875,6 +10332,21 @@ sntp@2.x.x:
   dependencies:
     hoek "4.x.x"
 
+<<<<<<< HEAD
+=======
+sort-keys@^1.0.0:
+  version "1.1.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/sort-keys/-/sort-keys-1.1.2.tgz#441b6d4d346798f1b4e49e8920adfba0e543f9ad"
+  integrity sha1-RBttTTRnmPG05J6JIK37oOVD+a0=
+  dependencies:
+    is-plain-obj "^1.0.0"
+
+source-list-map@^0.1.7:
+  version "0.1.8"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/source-list-map/-/source-list-map-0.1.8.tgz#c550b2ab5427f6b3f21f5afead88c4f5587b2106"
+  integrity sha1-xVCyq1Qn9rPyH1r+rYjE9Vh7IQY=
+
+>>>>>>> master
 source-list-map@^2.0.0:
   version "2.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/source-list-map/-/source-list-map-2.0.0.tgz#aaa47403f7b245a92fbc97ea08f250d6087ed085"
@@ -8986,6 +10458,7 @@ spdx-license-ids@^1.0.2:
   version "1.2.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/spdx-license-ids/-/spdx-license-ids-1.2.2.tgz#c9df7a3424594ade6bd11900d596696dc06bac57"
   integrity sha1-yd96NCRZSt5r0RkA1ZZpbcBrrFc=
+<<<<<<< HEAD
 
 speed-measure-webpack-plugin@^1.2.3:
   version "1.2.3"
@@ -8993,6 +10466,8 @@ speed-measure-webpack-plugin@^1.2.3:
   integrity sha512-p+taQ69VkRUXYMoZOx2nxV/Tz8tt79ahctoZJyJDHWP7fEYvwFNf5Pd73k5kZ6auu0pTsPNLEUwWpM8mCk85Zw==
   dependencies:
     chalk "^2.0.1"
+=======
+>>>>>>> master
 
 speedline@1.3.0:
   version "1.3.0"
@@ -9005,6 +10480,16 @@ speedline@1.3.0:
     loud-rejection "^1.6.0"
     meow "^3.7.0"
 
+<<<<<<< HEAD
+=======
+split-string@^2.1.0:
+  version "2.1.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/split-string/-/split-string-2.1.1.tgz#af4b06d821560426446c3cd931cda618940d37d0"
+  integrity sha1-r0sG2CFWBCZEbDzZMc2mGJQNN9A=
+  dependencies:
+    extend-shallow "^2.0.1"
+
+>>>>>>> master
 split-string@^3.0.2:
   version "3.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/split-string/-/split-string-3.1.0.tgz#7cb09dda3a86585705c64b39a6466038682e8fe2"
@@ -9073,6 +10558,7 @@ static-extend@^0.1.1:
   version "1.3.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
   integrity sha1-+vUbnrdKrvOzrPStX2Gr8ky3uT4=
+<<<<<<< HEAD
 
 "statuses@>= 1.4.0 < 2":
   version "1.5.0"
@@ -9083,6 +10569,8 @@ statuses@~1.4.0:
   version "1.4.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/statuses/-/statuses-1.4.0.tgz#bb73d446da2796106efcc1b601a253d6c46bd087"
   integrity sha512-zhSCtt8v2NDrRlPQpCNtw/heZLtfUDqxBM1udqikb/Hbk52LK4nQSwr10u77iopCW5LsyHpuXS0GnEc48mLeew==
+=======
+>>>>>>> master
 
 stdout-stream@^1.4.0:
   version "1.4.0"
@@ -9123,10 +10611,17 @@ stream-http@^2.7.2:
     to-arraybuffer "^1.0.0"
     xtend "^4.0.0"
 
+<<<<<<< HEAD
 stream-shift@^1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/stream-shift/-/stream-shift-1.0.0.tgz#d5c752825e5367e786f78e18e445ea223a155952"
   integrity sha1-1cdSgl5TZ+eG944Y5EXqIjoVWVI=
+=======
+strict-uri-encode@^1.0.0:
+  version "1.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
+  integrity sha1-J5siXfHVgrH1TmWt3UNS4Y+qBxM=
+>>>>>>> master
 
 string-length@^2.0.0:
   version "2.0.0"
@@ -9225,10 +10720,17 @@ strip-json-comments@~2.0.1:
   resolved "https://nexus.swmdigital.io/repository/js-combined/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
 
+<<<<<<< HEAD
 stylehacks@^4.0.0:
   version "4.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/stylehacks/-/stylehacks-4.0.1.tgz#3186595d047ab0df813d213e51c8b94e0b9010f2"
   integrity sha512-TK5zEPeD9NyC1uPIdjikzsgWxdQQN/ry1X3d1iOz1UkYDCmcr928gWD1KHgyC27F50UnE0xCTrBOO1l6KR8M4w==
+=======
+style-loader@^0.18.2:
+  version "0.18.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/style-loader/-/style-loader-0.18.2.tgz#cc31459afbcd6d80b7220ee54b291a9fd66ff5eb"
+  integrity sha512-WPpJPZGUxWYHWIUMNNOYqql7zh85zGmr84FdTVWq52WTIkqlW9xSxD3QYWi/T31cqn9UNSsietVEgGn2aaSCzw==
+>>>>>>> master
   dependencies:
     browserslist "^4.0.0"
     postcss "^7.0.0"
@@ -9284,6 +10786,7 @@ supports-color@^4.1.0:
   dependencies:
     has-flag "^2.0.0"
 
+<<<<<<< HEAD
 supports-color@^5.3.0, supports-color@^5.4.0, supports-color@^5.5.0:
   version "5.5.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/supports-color/-/supports-color-5.5.0.tgz#e2e69a44ac8772f78a1ec0b35b689df6530efc8f"
@@ -9295,6 +10798,12 @@ svgo@^1.0.0:
   version "1.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/svgo/-/svgo-1.1.1.tgz#12384b03335bcecd85cfa5f4e3375fed671cb985"
   integrity sha512-GBkJbnTuFpM4jFbiERHDWhZc/S/kpHToqmZag3aEBjPYK44JAN2QBjvrGIxLOoCyMZjuFQIfTO2eJd8uwLY/9g==
+=======
+svgo@^0.7.0:
+  version "0.7.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/svgo/-/svgo-0.7.2.tgz#9f5772413952135c6fefbf40afe6a4faa88b4bb5"
+  integrity sha1-n1dyQTlSE1xv779Ar+ak+qiLS7U=
+>>>>>>> master
   dependencies:
     coa "~2.0.1"
     colors "~1.1.2"
@@ -9328,10 +10837,22 @@ table@^3.7.8:
     slice-ansi "0.0.4"
     string-width "^2.0.0"
 
+<<<<<<< HEAD
 tapable@^1.0.0, tapable@^1.1.0:
   version "1.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/tapable/-/tapable-1.1.0.tgz#0d076a172e3d9ba088fd2272b2668fb8d194b78c"
   integrity sha512-IlqtmLVaZA2qab8epUXbVWRn3aB1imbDMJtjB3nu4X0NqPkcY/JH9ZtCBWKHWPxs8Svi9tyo8w2dBoi07qZbBA==
+=======
+tapable@^0.2.5:
+  version "0.2.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/tapable/-/tapable-0.2.6.tgz#206be8e188860b514425375e6f1ae89bfb01fd8d"
+  integrity sha1-IGvo4YiGC1FEJTdebxrom/sB/Y0=
+
+tapable@^0.2.7:
+  version "0.2.8"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/tapable/-/tapable-0.2.8.tgz#99372a5c999bf2df160afc0d74bed4f47948cd22"
+  integrity sha1-mTcqXJmb8t8WCvwNdL7U9HlIzSI=
+>>>>>>> master
 
 tar-pack@^3.4.0:
   version "3.4.1"
@@ -9421,6 +10942,7 @@ text-table@~0.2.0:
   version "0.2.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
+<<<<<<< HEAD
 
 thread-loader@^1.2.0:
   version "1.2.0"
@@ -9430,11 +10952,14 @@ thread-loader@^1.2.0:
     async "^2.3.0"
     loader-runner "^2.3.0"
     loader-utils "^1.1.0"
+=======
+>>>>>>> master
 
 throat@^4.0.0:
   version "4.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/throat/-/throat-4.1.0.tgz#89037cbc92c56ab18926e6ba4cbb200e15672a6a"
   integrity sha1-iQN8vJLFarGJJua6TLsgDhVnKmo=
+<<<<<<< HEAD
 
 through2@^2.0.0:
   version "2.0.3"
@@ -9443,11 +10968,21 @@ through2@^2.0.0:
   dependencies:
     readable-stream "^2.1.5"
     xtend "~4.0.1"
+=======
+>>>>>>> master
 
 through@^2.3.6:
   version "2.3.8"
   resolved "https://nexus.swmdigital.io/repository/js-combined/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=
+<<<<<<< HEAD
+=======
+
+time-stamp@^2.0.0:
+  version "2.0.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/time-stamp/-/time-stamp-2.0.0.tgz#95c6a44530e15ba8d6f4a3ecb8c3a3fac46da357"
+  integrity sha1-lcakRTDhW6jW9KPsuMOj+sRto1c=
+>>>>>>> master
 
 timed-out@4.0.1, timed-out@^4.0.0:
   version "4.0.1"
@@ -9494,11 +11029,14 @@ to-fast-properties@^1.0.1, to-fast-properties@^1.0.3:
   version "1.0.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/to-fast-properties/-/to-fast-properties-1.0.3.tgz#b83571fa4d8c25b82e231b06e3a3055de4ca1a47"
   integrity sha1-uDVx+k2MJbguIxsG46MFXeTKGkc=
+<<<<<<< HEAD
 
 to-fast-properties@^2.0.0:
   version "2.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/to-fast-properties/-/to-fast-properties-2.0.0.tgz#dc5e698cbd079265bc73e0377681a4e4e83f616e"
   integrity sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=
+=======
+>>>>>>> master
 
 to-object-path@^0.3.0:
   version "0.3.0"
@@ -9515,6 +11053,18 @@ to-regex-range@^2.1.0:
     is-number "^3.0.0"
     repeat-string "^1.6.1"
 
+<<<<<<< HEAD
+=======
+to-regex@^2.1.0:
+  version "2.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/to-regex/-/to-regex-2.1.0.tgz#e3ad3a40cfe119559a05aea43e4caefacc5e901d"
+  integrity sha1-4606QM/hGVWaBa6kPkyu+sxekB0=
+  dependencies:
+    define-property "^0.2.5"
+    extend-shallow "^2.0.1"
+    regex-not "^0.1.1"
+
+>>>>>>> master
 to-regex@^3.0.1:
   version "3.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/to-regex/-/to-regex-3.0.1.tgz#15358bee4a2c83bd76377ba1dc049d0f18837aae"
@@ -9562,11 +11112,14 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha1-yy4SAwZ+DI3h9hQJS5/kVwTqYAM=
+<<<<<<< HEAD
 
 tryer@^1.0.0:
   version "1.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
   integrity sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==
+=======
+>>>>>>> master
 
 tryit@^1.0.1:
   version "1.0.3"
@@ -9618,11 +11171,14 @@ tslib@^1.7.1:
   version "1.7.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/tslib/-/tslib-1.7.1.tgz#bc8004164691923a79fe8378bbeb3da2017538ec"
   integrity sha1-vIAEFkaRkjp5/oN4u+s9ogF1OOw=
+<<<<<<< HEAD
 
 tslib@^1.9.0, tslib@^1.9.3:
   version "1.9.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
+=======
+>>>>>>> master
 
 tslint-react@3.0.0:
   version "3.0.0"
@@ -9697,15 +11253,23 @@ typedarray@^0.0.6:
   resolved "https://nexus.swmdigital.io/repository/js-combined/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
+<<<<<<< HEAD
 typescript@^3.1.3:
   version "3.1.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/typescript/-/typescript-3.1.3.tgz#01b70247a6d3c2467f70c45795ef5ea18ce191d5"
   integrity sha512-+81MUSyX+BaSo+u2RbozuQk/UWx6hfG0a5gHu4ANEM4sU96XbuIyAB+rWBW1u70c6a5QuZfuYICn3s2UjuHUpA==
+=======
+typescript@^3.0.1:
+  version "3.0.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/typescript/-/typescript-3.0.1.tgz#43738f29585d3a87575520a4b93ab6026ef11fdb"
+  integrity sha512-zQIMOmC+372pC/CCVLqnQ0zSBiY7HHodU7mpQdjiZddek4GMj31I3dUJ7gAs9o65X7mnRma6OokOkc6f9jjfBg==
+>>>>>>> master
 
 ua-parser-js@^0.7.18, ua-parser-js@^0.7.9:
   version "0.7.18"
   resolved "https://nexus.swmdigital.io/repository/js-combined/ua-parser-js/-/ua-parser-js-0.7.18.tgz#a7bfd92f56edfb117083b69e31d2aa8882d4b1ed"
   integrity sha512-LtzwHlVHwFGTptfNSgezHp7WUlwiqb0gA9AALRbKaERfxwJoiX0A73QbTToxteIAuIaFshhgIZfqK8s7clqgnA==
+<<<<<<< HEAD
 
 uglify-es@^3.3.4:
   version "3.3.9"
@@ -9714,6 +11278,8 @@ uglify-es@^3.3.4:
   dependencies:
     commander "~2.13.0"
     source-map "~0.6.1"
+=======
+>>>>>>> master
 
 uglify-js@3.0.x:
   version "3.0.24"
@@ -9738,6 +11304,7 @@ uglify-to-browserify@~1.0.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
   integrity sha1-bgkk1r2mta/jSeOabWMoUKD4grc=
 
+<<<<<<< HEAD
 uglifyjs-webpack-plugin@^1.2.4:
   version "1.3.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-1.3.0.tgz#75f548160858163a08643e086d5fefe18a5d67de"
@@ -9751,6 +11318,16 @@ uglifyjs-webpack-plugin@^1.2.4:
     uglify-es "^3.3.4"
     webpack-sources "^1.1.0"
     worker-farm "^1.5.2"
+=======
+uglifyjs-webpack-plugin@^0.4.6:
+  version "0.4.6"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-0.4.6.tgz#b951f4abb6bd617e66f63eb891498e391763e309"
+  integrity sha1-uVH0q7a9YX5m9j64kUmOORdj4wk=
+  dependencies:
+    source-map "^0.5.6"
+    uglify-js "^2.8.29"
+    webpack-sources "^1.0.1"
+>>>>>>> master
 
 uid-number@^0.0.6:
   version "0.0.6"
@@ -9781,11 +11358,22 @@ uniq@^1.0.1:
   version "1.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/uniq/-/uniq-1.0.1.tgz#b31c5ae8254844a3a8281541ce2b04b865a734ff"
   integrity sha1-sxxa6CVIRKOoKBVBzisEuGWnNP8=
+<<<<<<< HEAD
+=======
+
+uniqid@^4.0.0:
+  version "4.1.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/uniqid/-/uniqid-4.1.1.tgz#89220ddf6b751ae52b5f72484863528596bb84c1"
+  integrity sha1-iSIN32t1GuUrX3JISGNShZa7hME=
+  dependencies:
+    macaddress "^0.2.8"
+>>>>>>> master
 
 uniqs@^2.0.0:
   version "2.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/uniqs/-/uniqs-2.0.0.tgz#ffede4b36b25290696e6e165d4a59edb998e6b02"
   integrity sha1-/+3ks2slKQaW5uFl1KWe25mOawI=
+<<<<<<< HEAD
 
 unique-filename@^1.1.0:
   version "1.1.1"
@@ -9800,6 +11388,8 @@ unique-slug@^2.0.0:
   integrity sha512-n9cU6+gITaVu7VGj1Z8feKMmfAjEAQGhwD9fE3zvpRRa0wEIx8ODYkVGfSc94M2OX00tUFV8wH3zYbm1I8mxFg==
   dependencies:
     imurmurhash "^0.1.4"
+=======
+>>>>>>> master
 
 unique-string@^1.0.0:
   version "1.0.0"
@@ -9817,11 +11407,14 @@ unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
   integrity sha1-sr9O6FFKrmFltIF4KdIbLvSZBOw=
+<<<<<<< HEAD
 
 unquote@~1.1.1:
   version "1.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/unquote/-/unquote-1.1.1.tgz#8fded7324ec6e88a0ff8b905e7c098cdc086d544"
   integrity sha1-j97XMk7G6IoP+LkF58CYzcCG1UQ=
+=======
+>>>>>>> master
 
 unset-value@^0.1.1:
   version "0.1.2"
@@ -9835,11 +11428,14 @@ unzip-response@^2.0.1:
   version "2.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/unzip-response/-/unzip-response-2.0.1.tgz#d2f0f737d16b0615e72a6935ed04214572d56f97"
   integrity sha1-0vD3N9FrBhXnKmk17QQhRXLVb5c=
+<<<<<<< HEAD
 
 upath@^1.0.5:
   version "1.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/upath/-/upath-1.1.0.tgz#35256597e46a581db4793d0ce47fa9aebfc9fabd"
   integrity sha512-bzpH/oBhoS/QI/YtbkqCg6VEiPYjSZtrHQM6/QnJS6OL9pKUFLqb3aFh4Scvwm45+7iAgiMkLhSbaZxUqmrprw==
+=======
+>>>>>>> master
 
 update-notifier@^2.1.0:
   version "2.2.0"
@@ -9875,6 +11471,7 @@ upper-case@^1.1.1:
   version "1.1.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/upper-case/-/upper-case-1.1.3.tgz#f6b4501c2ec4cdd26ba78be7222961de77621598"
   integrity sha1-9rRQHC7EzdJrp4vnIilh3ndiFZg=
+<<<<<<< HEAD
 
 uri-js@^4.2.2:
   version "4.2.2"
@@ -9882,6 +11479,8 @@ uri-js@^4.2.2:
   integrity sha512-KY9Frmirql91X2Qgjry0Wd4Y+YTdrdZheS8TFwvkbLWf/G5KNJDCh6pKL5OZctEW4+0Baa5idK2ZQuELRwPznQ==
   dependencies:
     punycode "^2.1.0"
+=======
+>>>>>>> master
 
 urix@^0.1.0, urix@~0.1.0:
   version "0.1.0"
@@ -9953,11 +11552,14 @@ utils-merge@1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/utils-merge/-/utils-merge-1.0.0.tgz#0294fb922bb9375153541c4f7096231f287c8af8"
   integrity sha1-ApT7kiu5N1FTVBxPcJYjHyh8ivg=
+<<<<<<< HEAD
 
 utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
+=======
+>>>>>>> master
 
 uuid@3.0.0:
   version "3.0.0"
@@ -9968,11 +11570,14 @@ uuid@^3.0.0, uuid@^3.1.0:
   version "3.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
   integrity sha512-DIWtzUkw04M4k3bf1IcpS2tngXEL26YUD2M0tMDUpnUrz2hgzUBlD55a4FjdLGPvfHxS6uluGWvaVEqgBcVa+g==
+<<<<<<< HEAD
 
 uuid@^3.3.2:
   version "3.3.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
+=======
+>>>>>>> master
 
 validate-npm-package-license@^3.0.1:
   version "3.0.1"
@@ -9991,11 +11596,14 @@ vary@~1.1.1:
   version "1.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/vary/-/vary-1.1.1.tgz#67535ebb694c1d52257457984665323f587e8d37"
   integrity sha1-Z1Neu2lMHVIldFeYRmUyP1h+jTc=
+<<<<<<< HEAD
 
 vary@~1.1.2:
   version "1.1.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
+=======
+>>>>>>> master
 
 vendors@^1.0.0:
   version "1.0.1"
@@ -10040,10 +11648,17 @@ watch@~0.18.0:
     exec-sh "^0.2.0"
     minimist "^1.2.0"
 
+<<<<<<< HEAD
 watchpack@^1.5.0:
   version "1.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/watchpack/-/watchpack-1.6.0.tgz#4bc12c2ebe8aa277a71f1d3f14d685c7b446cd00"
   integrity sha512-i6dHe3EyLjMmDlU1/bGQpEw25XSjkJULPuAVKCbNRefQVq48yXKUpwg538F7AZTf9kyr57zj++pQFltUa5H7yA==
+=======
+watchpack@^1.4.0:
+  version "1.4.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/watchpack/-/watchpack-1.4.0.tgz#4a1472bcbb952bd0a9bb4036801f954dfb39faac"
+  integrity sha1-ShRyvLuVK9Cpu0A2gB+VTfs5+qw=
+>>>>>>> master
   dependencies:
     chokidar "^2.0.2"
     graceful-fs "^4.1.2"
@@ -10054,6 +11669,7 @@ webidl-conversions@^4.0.1, webidl-conversions@^4.0.2:
   resolved "https://nexus.swmdigital.io/repository/js-combined/webidl-conversions/-/webidl-conversions-4.0.2.tgz#a855980b1f0b6b359ba1d5d9fb39ae941faa63ad"
   integrity sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==
 
+<<<<<<< HEAD
 webpack-bundle-analyzer@^3.0.3:
   version "3.0.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/webpack-bundle-analyzer/-/webpack-bundle-analyzer-3.0.3.tgz#dbc7fff8f52058b6714a20fddf309d0790e3e0a0"
@@ -10068,14 +11684,36 @@ webpack-bundle-analyzer@^3.0.3:
     filesize "^3.6.1"
     gzip-size "^5.0.0"
     lodash "^4.17.10"
+=======
+webpack-bundle-analyzer@^2.9.0:
+  version "2.9.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/webpack-bundle-analyzer/-/webpack-bundle-analyzer-2.9.0.tgz#b58bc34cc30b27ffdbaf3d00bf27aba6fa29c6e3"
+  integrity sha1-tYvDTMMLJ//brz0AvyerpvopxuM=
+  dependencies:
+    acorn "^5.1.1"
+    chalk "^1.1.3"
+    commander "^2.9.0"
+    ejs "^2.5.6"
+    express "^4.15.2"
+    filesize "^3.5.9"
+    gzip-size "^3.0.0"
+    lodash "^4.17.4"
+>>>>>>> master
     mkdirp "^0.5.1"
     opener "^1.5.1"
     ws "^6.0.0"
 
+<<<<<<< HEAD
 webpack-dev-middleware@^3.4.0:
   version "3.4.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/webpack-dev-middleware/-/webpack-dev-middleware-3.4.0.tgz#1132fecc9026fd90f0ecedac5cbff75d1fb45890"
   integrity sha512-Q9Iyc0X9dP9bAsYskAVJ/hmIZZQwf/3Sy4xCAZgL5cUkjZmUZLt4l5HpbST/Pdgjn3u6pE7u5OdGd1apgzRujA==
+=======
+webpack-dev-middleware@^1.12.0:
+  version "1.12.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/webpack-dev-middleware/-/webpack-dev-middleware-1.12.0.tgz#d34efefb2edda7e1d3b5dbe07289513219651709"
+  integrity sha1-007++y7dp+HTtdvgcolRMhllFwk=
+>>>>>>> master
   dependencies:
     memory-fs "~0.4.1"
     mime "^2.3.1"
@@ -10089,24 +11727,39 @@ webpack-dotenv-plugin@^2.0.2:
   dependencies:
     dotenv-safe "^4.0.4"
 
+<<<<<<< HEAD
 webpack-hot-middleware@^2.24.3:
   version "2.24.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/webpack-hot-middleware/-/webpack-hot-middleware-2.24.3.tgz#5bb76259a8fc0d97463ab517640ba91d3382d4a6"
   integrity sha512-pPlmcdoR2Fn6UhYjAhp1g/IJy1Yc9hD+T6O9mjRcWV2pFbBjIFoJXhP0CoD0xPOhWJuWXuZXGBga9ybbOdzXpg==
+=======
+webpack-hot-middleware@^2.18.2:
+  version "2.18.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/webpack-hot-middleware/-/webpack-hot-middleware-2.18.2.tgz#84dee643f037c3d59c9de142548430371aa8d3b2"
+  integrity sha512-dB7uOnUWsojZIAC6Nwi5v3tuaQNd2i7p4vF5LsJRyoTOgr2fRYQdMKQxRZIZZaz0cTPBX8rvcWU1A6/n7JTITg==
+>>>>>>> master
   dependencies:
     ansi-html "0.0.7"
     html-entities "^1.2.0"
     querystring "^0.2.0"
     strip-ansi "^3.0.0"
 
+<<<<<<< HEAD
 webpack-log@^2.0.0:
   version "2.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/webpack-log/-/webpack-log-2.0.0.tgz#5b7928e0637593f119d32f6227c1e0ac31e1b47f"
   integrity sha512-cX8G2vR/85UYG59FgkoMamwHUIkSSlV3bBMRsbxVXVUk2j6NleCKjQ/WE9eYg9WY4w25O9w8wKP4rzNZFmUcUg==
+=======
+webpack-merge@^4.1.0:
+  version "4.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/webpack-merge/-/webpack-merge-4.1.0.tgz#6ad72223b3e0b837e531e4597c199f909361511e"
+  integrity sha1-atciI7PguDflMeRZfBmfkJNhUR4=
+>>>>>>> master
   dependencies:
     ansi-colors "^3.0.0"
     uuid "^3.3.2"
 
+<<<<<<< HEAD
 webpack-merge@^4.1.4:
   version "4.1.4"
   resolved "https://nexus.swmdigital.io/repository/js-combined/webpack-merge/-/webpack-merge-4.1.4.tgz#0fde38eabf2d5fd85251c24a5a8c48f8a3f4eb7b"
@@ -10118,10 +11771,17 @@ webpack-sources@^1.1.0, webpack-sources@^1.3.0:
   version "1.3.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/webpack-sources/-/webpack-sources-1.3.0.tgz#2a28dcb9f1f45fe960d8f1493252b5ee6530fa85"
   integrity sha512-OiVgSrbGu7NEnEvQJJgdSFPl2qWKkWq5lHMhgiToIiN9w34EBnjYzSYs+VbL5KoYiLNtFFa7BZIKxRED3I32pA==
+=======
+webpack-sources@^1.0.1:
+  version "1.1.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/webpack-sources/-/webpack-sources-1.1.0.tgz#a101ebae59d6507354d71d8013950a3a8b7a5a54"
+  integrity sha512-aqYp18kPphgoO5c/+NaUvEeACtZjMESmDChuD3NBciVpah3XpMEU9VAAtIaB1BsfJWWTSdv8Vv1m3T0aRk2dUw==
+>>>>>>> master
   dependencies:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
+<<<<<<< HEAD
 webpack@4.20.2:
   version "4.20.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/webpack/-/webpack-4.20.2.tgz#89f6486b6bb276a91b0823453d377501fc625b5a"
@@ -10139,6 +11799,23 @@ webpack@4.20.2:
     enhanced-resolve "^4.1.0"
     eslint-scope "^4.0.0"
     json-parse-better-errors "^1.0.2"
+=======
+webpack@^3.5.1:
+  version "3.10.0"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/webpack/-/webpack-3.10.0.tgz#5291b875078cf2abf42bdd23afe3f8f96c17d725"
+  integrity sha512-fxxKXoicjdXNUMY7LIdY89tkJJJ0m1Oo8PQutZ5rLgWbV5QVKI15Cn7+/IHnRTd3vfKfiwBx6SBqlorAuNA8LA==
+  dependencies:
+    acorn "^5.0.0"
+    acorn-dynamic-import "^2.0.0"
+    ajv "^5.1.5"
+    ajv-keywords "^2.0.0"
+    async "^2.1.2"
+    enhanced-resolve "^3.4.0"
+    escope "^3.6.0"
+    interpret "^1.0.0"
+    json-loader "^0.5.4"
+    json5 "^0.5.1"
+>>>>>>> master
     loader-runner "^2.3.0"
     loader-utils "^1.1.0"
     memory-fs "~0.4.1"
@@ -10173,6 +11850,14 @@ whatwg-url@^6.3.0:
     tr46 "^1.0.0"
     webidl-conversions "^4.0.1"
 
+<<<<<<< HEAD
+=======
+whet.extend@~0.9.9:
+  version "0.9.9"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/whet.extend/-/whet.extend-0.9.9.tgz#f877d5bf648c97e5aa542fadc16d6a259b9c11a1"
+  integrity sha1-+HfVv2SMl+WqVC+twW1qJZucEaE=
+
+>>>>>>> master
 which-module@^1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/which-module/-/which-module-1.0.0.tgz#bba63ca861948994ff307736089e3b96026c2a4f"
@@ -10244,6 +11929,7 @@ wordwrap@~1.0.0:
   version "1.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"
   integrity sha1-J1hIEIkUVqQXHI0CJkQa3pDLyus=
+<<<<<<< HEAD
 
 worker-farm@^1.5.2:
   version "1.6.0"
@@ -10251,6 +11937,8 @@ worker-farm@^1.5.2:
   integrity sha512-6w+3tHbM87WnSWnENBUvA2pxJPLhQUg5LKwUQHq3r+XPhIM+Gh2R5ycbwPCyuGbNg+lPgdcnQUhuC02kJCvffQ==
   dependencies:
     errno "~0.1.7"
+=======
+>>>>>>> master
 
 wrap-ansi@^2.0.0:
   version "2.1.0"
@@ -10299,10 +11987,17 @@ ws@3.3.2:
     safe-buffer "~5.1.0"
     ultron "~1.1.0"
 
+<<<<<<< HEAD
 ws@^6.0.0:
   version "6.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/ws/-/ws-6.1.0.tgz#119a9dbf92c54e190ec18d10e871d55c95cf9373"
   integrity sha512-H3dGVdGvW2H8bnYpIDc3u3LH8Wue3Qh+Zto6aXXFzvESkTVT6rAfKR6tR/+coaUvxs8yHtmNV0uioBF62ZGSTg==
+=======
+ws@^2.3.1:
+  version "2.3.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/ws/-/ws-2.3.1.tgz#6b94b3e447cb6a363f785eaf94af6359e8e81c80"
+  integrity sha1-a5Sz5EfLajY/eF6vlK9jWejoHIA=
+>>>>>>> master
   dependencies:
     async-limiter "~1.0.0"
 
@@ -10330,21 +12025,27 @@ y18n@^3.2.0, y18n@^3.2.1:
   version "3.2.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/y18n/-/y18n-3.2.1.tgz#6d15fba884c08679c0d77e88e7759e811e07fa41"
   integrity sha1-bRX7qITAhnnA136I53WegR4H+kE=
+<<<<<<< HEAD
 
 y18n@^4.0.0:
   version "4.0.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/y18n/-/y18n-4.0.0.tgz#95ef94f85ecc81d007c264e190a120f0a3c8566b"
   integrity sha512-r9S/ZyXu/Xu9q1tYlpsLIsa3EeLXXk0VwlxqTcFRfg9EhMW+17kbt9G0NrgCmhGb5vT2hyhJZLfDGx+7+5Uj/w==
+=======
+>>>>>>> master
 
 yallist@^2.1.2:
   version "2.1.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
   integrity sha1-HBH5IY8HYImkfdUS+TxmmaaoHVI=
+<<<<<<< HEAD
 
 yallist@^3.0.0, yallist@^3.0.2:
   version "3.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/yallist/-/yallist-3.0.2.tgz#8452b4bb7e83c7c188d8041c1a837c773d6d8bb9"
   integrity sha1-hFK0u36Dx8GI2AQcGoN8dz1ti7k=
+=======
+>>>>>>> master
 
 yargs-parser@7.0.0:
   version "7.0.0"
@@ -10417,6 +12118,28 @@ yargs@^7.0.0:
     y18n "^3.2.1"
     yargs-parser "^5.0.0"
 
+<<<<<<< HEAD
+=======
+yargs@^8.0.2:
+  version "8.0.2"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/yargs/-/yargs-8.0.2.tgz#6299a9055b1cefc969ff7e79c1d918dceb22c360"
+  integrity sha1-YpmpBVsc78lp/355wdkY3Osiw2A=
+  dependencies:
+    camelcase "^4.1.0"
+    cliui "^3.2.0"
+    decamelize "^1.1.1"
+    get-caller-file "^1.0.1"
+    os-locale "^2.0.0"
+    read-pkg-up "^2.0.0"
+    require-directory "^2.1.1"
+    require-main-filename "^1.0.1"
+    set-blocking "^2.0.0"
+    string-width "^2.0.0"
+    which-module "^2.0.0"
+    y18n "^3.2.1"
+    yargs-parser "^7.0.0"
+
+>>>>>>> master
 yargs@~3.10.0:
   version "3.10.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/yargs/-/yargs-3.10.0.tgz#f7ee7bd857dd7c1d2d38c0e74efbd681d1431fd1"
