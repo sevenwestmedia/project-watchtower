@@ -1,0 +1,11 @@
+{
+    "name": "bundle-splitting-using-loadable",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/server.js",
+    "license": "MIT",
+    "devDependencies": {},
+    "dependencies": {
+        "react-loadable": "^5.5.0"
+    }
+}
