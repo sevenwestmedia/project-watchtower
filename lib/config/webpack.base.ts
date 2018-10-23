@@ -35,9 +35,6 @@ const loaders = () => [
     },
     {
         loader: 'cache-loader',
-        // options: {
-        //     cacheDirectory: path.resolve(isServerBuild ? '.cache-server' : '.cache-client'),
-        // },
     },
     {
         loader: 'ts-loader',
@@ -58,7 +55,7 @@ function baseConfig(options: CreateWebpackConfigOptions) {
     return {
         resolve: {
             extensions: ['.ts', '.tsx', '.js', '*'],
-            symlinks: false,
+            // symlinks: false,
             plugins: [new TsconfigPathsPlugin()],
         },
         module: {

@@ -74,46 +74,6 @@ const clientBaseConfig: CreateWebpackConfig = options => {
             publicPath: PUBLIC_PATH,
         },
         optimization: {
-            // runtimeChunk: 'single',
-            // splitChunks: {
-            //     chunks: 'all',
-            //     maxInitialRequests: 30,
-            //     maxAsyncRequests: 50,
-            //     cacheGroups: {
-            //         commons: {
-            //             name: 'commons',
-            //             chunks: 'initial',
-            //             minChunks: 2,
-            //         },
-            //         vendor: {
-            //             test: (module: { context: string }) => {
-            //                 if (!module.context) {
-            //                     return false
-            //                 }
-
-            //                 const modulePos = module.context.indexOf('node_modules')
-            //                 if (modulePos === -1) {
-            //                     return false
-            //                 }
-
-            //                 const isWatchtower =
-            //                     module.context.indexOf('project-watchtower', modulePos) !== -1
-
-            //                 return !isWatchtower
-            //             },
-            //             name: 'vendor',
-            //             chunks: 'all',
-            //             priority: -10,
-            //             minChunks: 1,
-            //         },
-            //         default: {
-            //             minChunks: 1,
-            //             chunks: 'all',
-            //             priority: -20,
-            //             reuseExistingChunk: true,
-            //         },
-            //     },
-            // },
             splitChunks: {
                 cacheGroups: {
                     vendor: {

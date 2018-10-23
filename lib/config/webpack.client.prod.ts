@@ -9,14 +9,21 @@ import { CreateWebpackConfig } from './index'
 /** Webpack config for the client in production */
 const config: CreateWebpackConfig = options => {
     const webpackHooks = getWebpackHooks(options.log, options.buildConfig.BASE)
-
-    const chunkFilename = options.buildConfig.STATIC_RESOURCE_NAMES
+    const filename = options.buildConfig.STATIC_RESOURCE_NAMES
         ? options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js'
         : options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name]_[chunkhash].js'
+
+    const chunkFilename = options.buildConfig.STATIC_RESOURCE_NAMES
+        ? options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].chunk.js'
+        : options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name]_[chunkhash].chunk.js'
 
     const cssFilename = options.buildConfig.STATIC_RESOURCE_NAMES
         ? options.buildConfig.ASSETS_PATH_PREFIX + 'css/[name].css'
         : options.buildConfig.ASSETS_PATH_PREFIX + 'css/[name].[contenthash:8].css'
+
+    const cssChunkFilename = options.buildConfig.STATIC_RESOURCE_NAMES
+        ? options.buildConfig.ASSETS_PATH_PREFIX + 'css/[name].chunk.css'
+        : options.buildConfig.ASSETS_PATH_PREFIX + 'css/[name].[contenthash:8].chunk.css'
 
     return merge(
         baseConfig(options),
@@ -27,10 +34,15 @@ const config: CreateWebpackConfig = options => {
         getHook(webpackHooks.prod, options),
         {
             output: {
-                filename: chunkFilename,
+                filename,
                 chunkFilename,
             },
-            plugins: [new MiniCssExtractPlugin({ filename: cssFilename })],
+            plugins: [
+                new MiniCssExtractPlugin({
+                    filename: cssFilename,
+                    chunkFilename: cssChunkFilename,
+                }),
+            ],
         },
         getHook(webpackHooks.clientProd, options),
     )

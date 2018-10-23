@@ -24,7 +24,7 @@ const config: CreateWebpackConfig = options => {
             },
             output: {
                 filename: options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js',
-                chunkFilename: options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js',
+                chunkFilename: options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].chunk.js',
             },
             plugins: [
                 new MiniCssExtractPlugin({
