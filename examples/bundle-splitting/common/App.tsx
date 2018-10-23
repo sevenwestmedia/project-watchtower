@@ -3,7 +3,7 @@ import Loadable from 'react-loadable'
 import './App.scss'
 
 const LazyThings = Loadable({
-    loader: () => import('./Things'),
+    loader: () => import(/* webpackChunkName: "generateThings" */ './Things'),
     webpack: () => [require.resolveWeak('./Things') as number],
     modules: ['./Things'],
     loading: () => <p>{'Things is Loading'}</p>,
