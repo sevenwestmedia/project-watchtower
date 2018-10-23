@@ -55,7 +55,7 @@ function baseConfig(options: CreateWebpackConfigOptions) {
     return {
         resolve: {
             extensions: ['.ts', '.tsx', '.js', '*'],
-            // symlinks: false,
+            symlinks: false,
             plugins: [new TsconfigPathsPlugin()],
         },
         module: {
