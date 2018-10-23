@@ -9,6 +9,8 @@ export const webpackStatsConfig: webpack.Stats.ToStringOptionsObject = {
     chunks: false,
     chunkModules: false,
     children: false,
+    /* filter export warnings when transpileOnly:true -> https://github.com/TypeStrong/ts-loader/issues/751 */
+    warningsFilter: /export .* was not found in/,
 }
 
 export const printWebpackStats = (log: Logger, stats: webpack.Stats) => {
