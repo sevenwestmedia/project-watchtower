@@ -6,7 +6,7 @@ const LazyThings = Loadable({
     loader: () => import('./Things'),
     webpack: () => [require.resolveWeak('./Things') as number],
     modules: ['./Things'],
-    loading: () => <p>Loading</p>,
+    loading: () => <p>{'Things is Loading'}</p>,
     render(loaded, {}) {
         const Component = loaded.Things
         return <Component />

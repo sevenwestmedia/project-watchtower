@@ -235,10 +235,10 @@
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/prop-types/-/prop-types-15.5.2.tgz#3c6b8dceb2906cc87fe4358e809f9d20c8d59be1"
   integrity sha512-pQRkAVoxiuUrLq8+CDwiQX4pTCep/PmmNgBbjIwnnsd/HoYjGpR81+FFPE030lvNXgR0haaAU6eoRtztWDE4Xw==
 
-"@types/react-dom@^16.0.4":
-  version "16.0.6"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-dom/-/react-dom-16.0.6.tgz#f1a65a4e7be8ed5d123f8b3b9eacc913e35a1a3c"
-  integrity sha512-M+1zmwa5KxUpkCuxA4whlDJKYTGNvNQW4pIoCLH16xGbClicD9CzPry4y94kTjCCk/bJZCZ/GVqUsP7eKcO/mQ==
+"@types/react-dom@^16.0.9":
+  version "16.0.9"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-dom/-/react-dom-16.0.9.tgz#73ceb7abe6703822eab6600e65c5c52efd07fb91"
+  integrity sha512-4Z0bW+75zeQgsEg7RaNuS1k9MKhci7oQqZXxrV5KUGIyXZHHAAL3KA4rjhdH8o6foZ5xsRMSqkoM5A3yRVPR5w==
   dependencies:
     "@types/node" "*"
     "@types/react" "*"
@@ -249,6 +249,14 @@
   integrity sha512-0iySJNNQUN6MUKbLcZvIqlQ+GV+efQU+7cX0CSD2MqoLsMKzk70ZSOZstAIBiO2OJm8KKHzro1uVh8ZEz1TC5w==
   dependencies:
     "@types/react" "*"
+
+"@types/react-loadable@^5.4.1":
+  version "5.4.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react-loadable/-/react-loadable-5.4.1.tgz#bc76978c6d9039e5808797b5ee35f6ae18b7329f"
+  integrity sha512-nBvsWjPfBHepN5LoK/wgaunZSK9LmkKsPYum+/QrEKzUAb1yoe1/dwqTH6ZrinHDjru9LgjvXOqek9hvbq4Skw==
+  dependencies:
+    "@types/react" "*"
+    "@types/webpack" "*"
 
 "@types/react-router-dom@^4.2.1":
   version "4.2.1"
@@ -267,10 +275,17 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.3.18":
+"@types/react@*":
   version "16.3.18"
   resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react/-/react-16.3.18.tgz#bf195aed4d77dc86f06e4c9bb760214a3b822b8d"
   integrity sha512-aWTvLHzKqbVWCiee8huwf5x7Ob4n4gxDwgJT/X31HqjGVZpeUeFeSFYH5Gvi5Dmm5HKF+s+dQkwa/nnEVVzzzg==
+  dependencies:
+    csstype "^2.2.0"
+
+"@types/react@16.4.1":
+  version "16.4.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/@types/react/-/react-16.4.1.tgz#c53bbfb4a78933db587da085ac60dbf5fcf73f8f"
+  integrity sha512-uZP8Fd4f7rwHKztnOhFJYEJsKXO7opmcyKk5P9vRC8UJAx3AiWaGFiLxDqPJqzO3n3IhF/v6rdscxadarEXnag==
   dependencies:
     csstype "^2.2.0"
 
@@ -956,10 +971,10 @@ aws4@^1.2.1, aws4@^1.6.0:
   resolved "https://nexus.swmdigital.io/repository/js-combined/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
   integrity sha1-g+9cqGCysy5KDe7e6MdxudtXRx4=
 
-axe-core@3.0.0-beta.2:
-  version "3.0.0-beta.2"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/axe-core/-/axe-core-3.0.0-beta.2.tgz#82a13d371268034352bba2bcb263c5625b3e4a09"
-  integrity sha512-JyMXnHDuzr6hei+mINWsR/iEyPBFSjpgF4/lUijO7QDGVKtTmdpDxc2+7X/xW+rPIwhcd72euJ2UunbRXF+1Eg==
+axe-core@2.6.1:
+  version "2.6.1"
+  resolved "https://nexus.swmdigital.io/repository/js-combined/axe-core/-/axe-core-2.6.1.tgz#28772c4f76966d373acda35b9a409299dc00d1b5"
+  integrity sha512-QFfI3d+x/v92HJWGBaNfgrxdfon9/xXzd04YYfm5w5NJQOLex8qkJCctOt7+ky6e1l9zcQ5E7jsvbnTgQzyfTw==
 
 babar@0.0.3:
   version "0.0.3"
@@ -1379,19 +1394,6 @@ boxen@^1.0.0:
     string-width "^2.0.0"
     term-size "^0.1.0"
     widest-line "^1.0.0"
-
-boxen@^1.2.1:
-  version "1.3.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/boxen/-/boxen-1.3.0.tgz#55c6c39a8ba58d9c61ad22cd877532deb665a20b"
-  integrity sha512-TNPjfTr432qx7yOjQyaXm3dSR0MH9vXp7eT1BFSl/C51g+EFnOR9hTg1IreahGBmDNCehscshe45f+C1TBZbLw==
-  dependencies:
-    ansi-align "^2.0.0"
-    camelcase "^4.0.0"
-    chalk "^2.0.1"
-    cli-boxes "^1.0.0"
-    string-width "^2.0.0"
-    term-size "^1.2.0"
-    widest-line "^2.0.0"
 
 brace-expansion@^1.1.7:
   version "1.1.8"
@@ -2318,7 +2320,7 @@ cross-spawn@^3.0.0:
     lru-cache "^4.0.1"
     which "^1.2.9"
 
-cross-spawn@^5.0.1, cross-spawn@^5.1.0:
+cross-spawn@^5.0.1:
   version "5.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
   integrity sha1-6L0O/uWPz/b4+UUQoKVUu/ojVEk=
@@ -3919,15 +3921,6 @@ fs-extra@^1.0.0:
     jsonfile "^2.1.0"
     klaw "^1.0.0"
 
-fs-extra@^4.0.1:
-  version "4.0.3"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/fs-extra/-/fs-extra-4.0.3.tgz#0d852122e5bc5beb453fb028e9c0c9bf36340c94"
-  integrity sha512-q6rbdDd1o2mAnQreO7YADIxf/Whx4AHBiRf6d+/cVT8h44ss+lHgxf1FemcqDnQt9X3ct4McHr+JMGlYSsK7Cg==
-  dependencies:
-    graceful-fs "^4.1.2"
-    jsonfile "^4.0.0"
-    universalify "^0.1.0"
-
 fs-minipass@^1.2.5:
   version "1.2.5"
   resolved "https://nexus.swmdigital.io/repository/js-combined/fs-minipass/-/fs-minipass-1.2.5.tgz#06c277218454ec288df77ada54a03b8702aacb9d"
@@ -4103,13 +4096,6 @@ glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2, glob@~7.1.1:
     minimatch "^3.0.4"
     once "^1.3.0"
     path-is-absolute "^1.0.0"
-
-global-dirs@^0.1.0:
-  version "0.1.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/global-dirs/-/global-dirs-0.1.1.tgz#b319c0dd4607f353f3be9cca4c72fc148c49f445"
-  integrity sha1-sxnA3UYH81PzvpzKTHL8FIxJ9EU=
-  dependencies:
-    ini "^1.3.4"
 
 globals@^11.1.0:
   version "11.8.0"
@@ -4680,7 +4666,7 @@ inherits@2.0.1:
   resolved "https://nexus.swmdigital.io/repository/js-combined/inherits/-/inherits-2.0.1.tgz#b17d08d326b4423e568eff719f91b0b1cbdf69f1"
   integrity sha1-sX0I0ya0Qj5Wjv9xn5GwscvfafE=
 
-ini@^1.3.4, ini@~1.3.0:
+ini@~1.3.0:
   version "1.3.5"
   resolved "https://nexus.swmdigital.io/repository/js-combined/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
   integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
@@ -4964,14 +4950,6 @@ is-glob@^4.0.0:
   dependencies:
     is-extglob "^2.1.1"
 
-is-installed-globally@^0.1.0:
-  version "0.1.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/is-installed-globally/-/is-installed-globally-0.1.0.tgz#0dfd98f5a9111716dd535dda6492f67bf3d25a80"
-  integrity sha1-Df2Y9akRFxbdU13aZJL2e/PSWoA=
-  dependencies:
-    global-dirs "^0.1.0"
-    is-path-inside "^1.0.0"
-
 is-my-json-valid@^2.10.0:
   version "2.16.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/is-my-json-valid/-/is-my-json-valid-2.16.0.tgz#f079dd9bfdae65ee2038aae8acbc86ab109e3693"
@@ -5243,7 +5221,7 @@ jest-changed-files@^23.4.2:
   dependencies:
     throat "^4.0.0"
 
-jest-cli@^23.6.0:
+jest-cli@^23.5.0:
   version "23.6.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/jest-cli/-/jest-cli-23.6.0.tgz#61ab917744338f443ef2baa282ddffdd658a5da4"
   integrity sha512-hgeD1zRUp1E1zsiyOXjEn4LzRLWdJBV//ukAHGlx6s5mfCNJTbhbHjgxnDUXA8fsKWN/HqFFF6X5XcCwC/IvYQ==
@@ -7016,7 +6994,7 @@ os-locale@^2.0.0:
     lcid "^1.0.0"
     mem "^1.1.0"
 
-os-tmpdir@^1.0.0, os-tmpdir@^1.0.1, os-tmpdir@~1.0.1, os-tmpdir@~1.0.2:
+os-tmpdir@^1.0.0, os-tmpdir@^1.0.1, os-tmpdir@~1.0.2:
   version "1.0.2"
   resolved "https://nexus.swmdigital.io/repository/js-combined/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
   integrity sha1-u+Z0BseaqFxc/sdm/lc0VV36EnQ=
@@ -7165,20 +7143,6 @@ pascalcase@^0.1.1:
   version "0.1.1"
   resolved "https://nexus.swmdigital.io/repository/js-combined/pascalcase/-/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
   integrity sha1-s2PlXoAGym/iF4TS2yK9FdeRfxQ=
-
-patch-package@^5.1.1:
-  version "5.1.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/patch-package/-/patch-package-5.1.1.tgz#e5e82fe08bed760b773b8eb73a7bcb7c1634f802"
-  integrity sha512-bO+vfFGgTVTtv89kXWGEMIPnrYhhhMtbOnJKStfIhNWUxperVjlI++1ixksi0YPCMPGuFy9W3zsKHxIITV2r2A==
-  dependencies:
-    chalk "^1.1.3"
-    cross-spawn "^5.1.0"
-    fs-extra "^4.0.1"
-    minimist "^1.2.0"
-    rimraf "^2.6.1"
-    slash "^1.0.0"
-    tmp "^0.0.31"
-    update-notifier "^2.2.0"
 
 path-browserify@0.0.0:
   version "0.0.0"
@@ -8524,11 +8488,6 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^2.0.0"
     inherits "^2.0.1"
 
-robots-parser@^1.0.2:
-  version "1.0.2"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/robots-parser/-/robots-parser-1.0.2.tgz#9ebe25b1a2c52773cbe6f1dbe90ebc9518089009"
-  integrity sha512-c979P2TTe5Ezjg+VV5XWC59bab1w1Xyb8KLnJ5SKuwN7YH+ys8Y5KCZ2OP2J7zXVE7Yq0eYWlrqUM/urIbx9sg==
-
 rst-selector-parser@^2.2.3:
   version "2.2.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/rst-selector-parser/-/rst-selector-parser-2.2.3.tgz#81b230ea2fcc6066c89e3472de794285d9b03d91"
@@ -9451,13 +9410,6 @@ term-size@^0.1.0:
   dependencies:
     execa "^0.4.0"
 
-term-size@^1.2.0:
-  version "1.2.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/term-size/-/term-size-1.2.0.tgz#458b83887f288fc56d6fffbfad262e26638efa69"
-  integrity sha1-RYuDiH8oj8Vtb/+/rSYuJmOO+mk=
-  dependencies:
-    execa "^0.7.0"
-
 terser-webpack-plugin@^1.1.0:
   version "1.1.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/terser-webpack-plugin/-/terser-webpack-plugin-1.1.0.tgz#cf7c25a1eee25bf121f4a587bb9e004e3f80e528"
@@ -9540,13 +9492,6 @@ timsort@^0.3.0:
   version "0.3.0"
   resolved "https://nexus.swmdigital.io/repository/js-combined/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
-
-tmp@^0.0.31:
-  version "0.0.31"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/tmp/-/tmp-0.0.31.tgz#8f38ab9438e17315e5dbd8b3657e8bfb277ae4a7"
-  integrity sha1-jzirlDjhcxXl29izZX6L+yd65Kc=
-  dependencies:
-    os-tmpdir "~1.0.1"
 
 tmp@^0.0.33:
   version "0.0.33"
@@ -9930,22 +9875,6 @@ update-notifier@^2.1.0:
     semver-diff "^2.0.0"
     xdg-basedir "^3.0.0"
 
-update-notifier@^2.2.0:
-  version "2.5.0"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/update-notifier/-/update-notifier-2.5.0.tgz#d0744593e13f161e406acb1d9408b72cad08aff6"
-  integrity sha512-gwMdhgJHGuj/+wHJJs9e6PcCszpxR1b236igrOkUofGhqJuG+amlIKwApH1IW1WWl7ovZxsX49lMBWLxSdm5Dw==
-  dependencies:
-    boxen "^1.2.1"
-    chalk "^2.0.1"
-    configstore "^3.0.0"
-    import-lazy "^2.1.0"
-    is-ci "^1.0.10"
-    is-installed-globally "^0.1.0"
-    is-npm "^1.0.0"
-    latest-version "^3.0.0"
-    semver-diff "^2.0.0"
-    xdg-basedir "^3.0.0"
-
 upper-case@^1.1.1:
   version "1.1.3"
   resolved "https://nexus.swmdigital.io/repository/js-combined/upper-case/-/upper-case-1.1.3.tgz#f6b4501c2ec4cdd26ba78be7222961de77621598"
@@ -10292,13 +10221,6 @@ widest-line@^1.0.0:
   integrity sha1-DAnIXCqUaD0Nfq+O4JfVZL8OEFw=
   dependencies:
     string-width "^1.0.1"
-
-widest-line@^2.0.0:
-  version "2.0.1"
-  resolved "https://nexus.swmdigital.io/repository/js-combined/widest-line/-/widest-line-2.0.1.tgz#7438764730ec7ef4381ce4df82fb98a53142a3fc"
-  integrity sha512-Ba5m9/Fa4Xt9eb2ELXt77JxVDV8w7qQrH0zS/TWSJdLyAwQjWoOzpzj5lwVftDz6n/EOu3tNACS84v509qwnJA==
-  dependencies:
-    string-width "^2.1.1"
 
 window-size@0.1.0:
   version "0.1.0"
