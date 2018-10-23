@@ -53,16 +53,16 @@ const loaders = () => [
  */
 function baseConfig(options: CreateWebpackConfigOptions) {
     return {
-        // Issue when transpileOnly: true -> https://github.com/TypeStrong/ts-loader/issues/751
-        stats: {
-            warningsFilter: /export .* was not found in/,
-        },
         resolve: {
             extensions: ['.ts', '.tsx', '.js', '*'],
             symlinks: false,
             plugins: [new TsconfigPathsPlugin()],
         },
         module: {
+            // Issue when transpileOnly: true -> https://github.com/TypeStrong/ts-loader/issues/751
+            stats: {
+                warningsFilter: /export .* was not found in/,
+            },
             rules: [
                 {
                     test: /\.tsx?$/,
