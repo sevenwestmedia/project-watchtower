@@ -59,10 +59,6 @@ function baseConfig(options: CreateWebpackConfigOptions) {
             plugins: [new TsconfigPathsPlugin()],
         },
         module: {
-            // Issue when transpileOnly: true -> https://github.com/TypeStrong/ts-loader/issues/751
-            stats: {
-                warningsFilter: /export .* was not found in/,
-            },
             rules: [
                 {
                     test: /\.tsx?$/,
