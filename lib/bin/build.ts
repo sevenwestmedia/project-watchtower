@@ -13,18 +13,21 @@ import { writeFile } from '../runtime/util/fs'
 import { watchtowerConfigFilename } from '../runtime/config/config'
 import SpeedMeasurePlugin from 'speed-measure-webpack-plugin'
 import webpack from 'webpack'
+import { validateCache } from './cache-validator'
 
 export function smp(buildConfig: BuildConfig, webpackConfig: webpack.Configuration) {
     const smpPlugin = new SpeedMeasurePlugin()
     return buildConfig.SMP ? smpPlugin.wrap(webpackConfig) : webpackConfig
 }
 
-const buildTarget = (
+const buildTarget = async (
     log: Logger,
     buildConfig: BuildConfig,
     target: BuildTarget,
     environment: BuildEnvironment = 'prod',
 ) => {
+    await validateCache(log, false)
+
     const config = getWebpackConfig(log, buildConfig, target, environment)
 
     if (!config) {
