@@ -181,6 +181,5 @@ demo/lighthouse-report*.json
 lighthouse-report*.json
 test-dist
 
-#cache-loader & validation
-.cache-loader/
-.cache-validation
+#cache-loader & validation inside this folder
+.build-cache

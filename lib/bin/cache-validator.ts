@@ -4,6 +4,7 @@ import path from 'path'
 import rimraf from 'rimraf'
 import { Logger } from '../runtime/universal'
 import { promisify } from 'util'
+import mkdirp from 'mkdirp'
 
 type CacheLoaderValidationConfig = {
     cacheValidationConfigPath?: string
@@ -11,10 +12,15 @@ type CacheLoaderValidationConfig = {
     tsConfigPath?: string
 }
 
+const cacheDir = process.env.CACHE_DIRECTORY || ``
+const cacheDirPath = path.join(path.resolve(cacheDir), '.build-cache')
+
+export const buildCacheDirectory = cacheDirPath
+
 // default values
 let validatorConfig = {
-    cacheValidationConfigPath: '.cache-validation',
-    cacheDirectory: '.cache-loader',
+    cacheValidationConfigPath: path.join(cacheDirPath, '.build-cache-validation'),
+    cacheDirectory: cacheDirPath,
     tsConfigPath: 'tsconfig.json',
 }
 
@@ -22,6 +28,7 @@ let TRACE_MESSAGES = true
 
 const writeFile = promisify(fs.writeFile)
 const rmrf = promisify(rimraf)
+const fileExists = promisify(fs.exists)
 
 const traceLog = (log: Logger, message: string) => {
     if (TRACE_MESSAGES) {
@@ -31,7 +38,6 @@ const traceLog = (log: Logger, message: string) => {
 
 const getFileContents = async (log: Logger, file: string) => {
     const readFile = promisify(fs.readFile)
-    const fileExists = promisify(fs.exists)
     const resolvedPath = path.resolve(file)
     const exists = await fileExists(resolvedPath)
     if (exists) {
@@ -47,12 +53,24 @@ const writeContents = async (log: Logger, filePath: string, contents: CacheLoade
     const resolvedPath = path.resolve(filePath)
     const jsonStr = JSON.stringify(contents)
     traceLog(log, `[Cache-Validator] saving cacheLoaderValidation=${jsonStr}`)
+
+    const exists = await fileExists(resolvedPath)
+    if (!exists) {
+        const parentDir = path.dirname(resolvedPath)
+        mkdirp.sync(parentDir)
+    }
     return writeFile(resolvedPath, jsonStr, { encoding: 'utf8', flag: 'w+' })
 }
 
 const clearDirectory = async (log: Logger, directory: string) => {
     const resolvedDir = path.resolve(directory)
-    traceLog(log, `[Cache-Validator] clearing ${resolvedDir}`)
+
+    const exists = await fileExists(resolvedDir)
+    if (exists) {
+        log.info(`[Cache-Validator] Clearing => ${resolvedDir}`)
+    } else {
+        log.info(`[Cache-Validator] ${resolvedDir} not cleared (Does not exist)`)
+    }
     return rmrf(resolvedDir)
 }
 
@@ -90,7 +108,7 @@ const shouldClearCache = async (log: Logger) => {
             return false
         }
     }
-    log.info(`[Cache-Validator] No hash present for tsConfig, need to create one & clear cache`)
+    log.info(`[Cache-Validator] No hash present for tsConfig, one will be created`)
     return true
 }
 
@@ -98,6 +116,7 @@ export const validateCache = async (log: Logger, showTraceMessages: boolean = tr
     if (!showTraceMessages) {
         TRACE_MESSAGES = showTraceMessages
     }
+    log.info(`[Cache-Validator] cacheDirectory=${validatorConfig.cacheDirectory}`)
     const clear = await shouldClearCache(log)
     if (clear) {
         await clearDirectory(log, validatorConfig.cacheDirectory)
