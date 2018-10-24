@@ -112,6 +112,9 @@ const shouldClearCache = async (log: Logger) => {
     return true
 }
 
+/**
+ * Determines if the build cache should be cleared if the ts config has changed.
+ */
 export const validateCache = async (log: Logger, showTraceMessages: boolean = true) => {
     if (!showTraceMessages) {
         TRACE_MESSAGES = showTraceMessages
