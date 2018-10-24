@@ -12,8 +12,8 @@ type CacheLoaderValidationConfig = {
     tsConfigPath?: string
 }
 
-const cacheDir = process.env.CACHE_DIRECTORY || ``
-const cacheDirPath = path.join(path.resolve(cacheDir), '.build-cache')
+const cacheDir = process.env.CACHE_DIRECTORY || `.build-cache`
+const cacheDirPath = path.join(path.resolve(cacheDir))
 
 export const buildCacheDirectory = cacheDirPath
 
