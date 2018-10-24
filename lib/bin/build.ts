@@ -13,7 +13,7 @@ import { writeFile } from '../runtime/util/fs'
 import { watchtowerConfigFilename } from '../runtime/config/config'
 import SpeedMeasurePlugin from 'speed-measure-webpack-plugin'
 import webpack from 'webpack'
-import { validateCache } from './cache-validator'
+import { validateCache, getMd5 } from './cache-validator'
 
 export function smp(buildConfig: BuildConfig, webpackConfig: webpack.Configuration) {
     const smpPlugin = new SpeedMeasurePlugin()
@@ -26,13 +26,23 @@ const buildTarget = async (
     target: BuildTarget,
     environment: BuildEnvironment = 'prod',
 ) => {
-    await validateCache(log, false)
-
     const config = getWebpackConfig(log, buildConfig, target, environment)
 
     if (!config) {
         return Promise.reject(`Could not load webpack configuration for ${target}/${environment}!`)
     }
+
+    const configHash = await getMd5(log, 'webpackConfig', JSON.stringify(config))
+    await validateCache(
+        log,
+        {
+            project: buildConfig.BASE,
+            environment,
+            target,
+        },
+        [{ isFile: false, itemHash: configHash, hashKey: 'webpackConfig' }],
+        false,
+    )
 
     return webpackPromise(log, smp(buildConfig, config)).then(() => {
         const runtimeConfig: RuntimeConfig = {

@@ -12,6 +12,7 @@ import webpackServerProdConfig from '../config/webpack.server.prod'
 import { BuildConfig } from '../index'
 import { Logger } from '../runtime/universal'
 import { CreateWebpackConfigOptions, CreateWebpackConfig } from '../config/index'
+import { buildCacheDirectory } from '../../lib/bin/cache-validator'
 
 export const TARGETS: BuildTarget[] = ['server', 'client']
 
@@ -44,10 +45,17 @@ export const getWebpackConfig = (
     const configFileName = `webpack.${target}.${environment}`
     const customConfigFile = path.resolve(buildConfig.BASE, 'config', configFileName)
 
+    const cacheDirectory = buildCacheDirectory({
+        project: buildConfig.BASE,
+        environment,
+        target,
+    })
+
     let config: webpack.Configuration
     const createWebpackConfigOptions: CreateWebpackConfigOptions = {
         log,
         buildConfig,
+        cacheDirectory,
     }
 
     try {

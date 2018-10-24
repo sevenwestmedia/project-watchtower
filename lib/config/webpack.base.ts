@@ -4,7 +4,6 @@ import { BuildConfig } from '../../lib'
 import { CreateWebpackConfigOptions } from './index'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import os from 'os'
-import { buildCacheDirectory } from '../bin/cache-validator'
 
 const disableTypeCheck = process.env.START_FAST_MODE === 'true'
 
@@ -26,7 +25,7 @@ if (!disableTypeCheck) {
 const osCpus = os.cpus().length
 const threadLoaderCpus = !disableTypeCheck ? osCpus - 1 : osCpus
 
-const loaders = () => [
+const loaders = (cacheDirectory: string) => [
     {
         loader: 'thread-loader',
         options: {
@@ -37,7 +36,7 @@ const loaders = () => [
     {
         loader: 'cache-loader',
         options: {
-            cacheDirectory: buildCacheDirectory,
+            cacheDirectory,
         },
     },
     {
@@ -66,7 +65,7 @@ function baseConfig(options: CreateWebpackConfigOptions) {
             rules: [
                 {
                     test: /\.tsx?$/,
-                    use: [...loaders()],
+                    use: [...loaders(options.cacheDirectory)],
                 },
                 fileLoaderConfig(options.buildConfig),
                 {
