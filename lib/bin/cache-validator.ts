@@ -29,8 +29,11 @@ const cacheDir = process.env.CACHE_DIRECTORY || `.build-cache`
 const cacheDirPath = path.join(path.resolve(cacheDir))
 
 // default values
-let validatorConfig: CacheLoaderValidation = {
+let validatorConfig: CacheLoaderValidation & {
+    baseCacheDirectory: string
+} = {
     cacheValidationConfigPath: path.join(cacheDirPath, '.build-cache-validation'),
+    baseCacheDirectory: cacheDirPath,
     cacheDirectory: cacheDirPath,
     validationItems: [{ isFile: true, filePath: 'tsconfig.json', hashKey: 'tsconfigHash' }],
 }
@@ -49,6 +52,7 @@ export const configure = (log: Logger, newConfig: CacheLoaderValidation) => {
             newConfig.cacheValidationConfigPath || validatorConfig.cacheValidationConfigPath,
         cacheDirectory: newConfig.cacheDirectory || validatorConfig.cacheDirectory,
         validationItems: newConfig.validationItems || validatorConfig.validationItems,
+        baseCacheDirectory: validatorConfig.baseCacheDirectory,
     }
     traceLog(log, `[Cache-Validator] validatorConfig=${JSON.stringify(validatorConfig)}`)
 }
@@ -193,7 +197,7 @@ export const validateCache = async (
         // Project Environment Target Folder
         const petFolder = path.join(project.replace('/', '.'), `${environment}.${target}`)
 
-        const cacheDirectory = path.join(validatorConfig.cacheDirectory, petFolder)
+        const cacheDirectory = path.join(validatorConfig.baseCacheDirectory, petFolder)
 
         // Update config due to petFolder (pet = project environment target)
         configure(log, {
