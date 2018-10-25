@@ -35,6 +35,12 @@ let validatorConfig: CacheLoaderValidation = {
     validationItems: [{ isFile: true, filePath: 'tsconfig.json', hashKey: 'tsconfigHash' }],
 }
 
+const traceLog = (log: Logger, message: string) => {
+    if (TRACE_MESSAGES) {
+        log.trace(message)
+    }
+}
+
 export const configure = (log: Logger, newConfig: CacheLoaderValidation) => {
     validatorConfig = {
         cacheValidationConfigPath:
@@ -57,12 +63,6 @@ let TRACE_MESSAGES = true
 const writeFile = promisify(fs.writeFile)
 const rmrf = promisify(rimraf)
 const fileExists = promisify(fs.exists)
-
-const traceLog = (log: Logger, message: string) => {
-    if (TRACE_MESSAGES) {
-        log.trace(message)
-    }
-}
 
 const getFileContents = async (log: Logger, file: string) => {
     const readFile = promisify(fs.readFile)
