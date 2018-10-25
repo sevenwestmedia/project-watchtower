@@ -58,28 +58,46 @@ const lighthouseStats = async (
                 const addLighthouseValue = (lighthouseKey: string, statsKey: string) => {
                     const result =
                         lighthouseResult &&
-                        lighthouseResult.audits &&
-                        lighthouseResult.audits[lighthouseKey] &&
-                        (lighthouseResult.audits[lighthouseKey].rawValue as number)
+                        lighthouseResult.lhr &&
+                        lighthouseResult.lhr.audits &&
+                        lighthouseResult.lhr.audits[lighthouseKey] &&
+                        (lighthouseResult.lhr.audits[lighthouseKey].rawValue as number)
 
                     if (result !== undefined && result !== null) {
                         stats[`${page}_${statsKey}`] = formatTimeMs(+result)
                     }
                 }
 
+                addLighthouseValue('first-contentful-paint', 'first_contentful_paint')
                 addLighthouseValue('first-meaningful-paint', 'first_meaningful_paint')
-                addLighthouseValue('speed-index-metric', 'speed_index')
-                addLighthouseValue('first-interactive', 'time_to_interactive')
-                addLighthouseValue('consistently-interactive', 'consistently_interactive')
-                addLighthouseValue('dom-size', 'dom_size')
+                addLighthouseValue('first-cpu-idle', 'first_cpu_idle')
+                addLighthouseValue('estimated-input-latency', 'estimated_input_latency')
+                addLighthouseValue('interactive', 'interactive')
+                addLighthouseValue('bootup-time', 'bootup_time')
+                addLighthouseValue('network-requests', 'network_requests')
+                addLighthouseValue('total-byte-weight', 'total_byte_weight')
+                addLighthouseValue('speed-index', 'speed_index')
 
                 if (lighthouseResult) {
-                    const perfResult = lighthouseResult.reportCategories.filter(
-                        category => category.id === 'performance',
-                    )[0]
-
-                    if (perfResult && typeof perfResult.score === 'number') {
-                        stats[`${page}_perf_score`] = perfResult.score.toFixed(1)
+                    for (const category in lighthouseResult.lhr.categories) {
+                        if (lighthouseResult.lhr.categories.hasOwnProperty(category)) {
+                            stats[`${page}_category_${category}_score`] = (
+                                lighthouseResult.lhr.categories[category].score * 100
+                            ).toFixed(0)
+                        }
+                    }
+                    if (lighthouseResult.lhr.audits['dom-size']) {
+                        const domSize: any = lighthouseResult.lhr.audits['dom-size']
+                        for (const key in domSize.details.items) {
+                            if (domSize.details.items.hasOwnProperty(key)) {
+                                const statsKey = domSize.details.items[key].statistic
+                                    .toLowerCase()
+                                    .replace(/ /g, '_')
+                                stats[`${page}_${statsKey}`] = formatTimeMs(
+                                    +domSize.details.items[key].value,
+                                )
+                            }
+                        }
                     }
 
                     const reportPath = path.resolve(
