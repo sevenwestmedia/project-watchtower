@@ -32,10 +32,7 @@ const cacheDirPath = path.join(path.resolve(cacheDir))
 let validatorConfig: CacheLoaderValidation = {
     cacheValidationConfigPath: path.join(cacheDirPath, '.build-cache-validation'),
     cacheDirectory: cacheDirPath,
-    validationItems: [
-        { isFile: true, filePath: 'tsconfig.json', hashKey: 'tsconfigHash' },
-        { isFile: true, filePath: 'package.json', hashKey: 'packageHash' },
-    ],
+    validationItems: [{ isFile: true, filePath: 'tsconfig.json', hashKey: 'tsconfigHash' }],
 }
 
 export const buildCacheDirectory = (buildInfo: BuildInfo) => {
