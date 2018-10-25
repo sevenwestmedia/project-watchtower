@@ -13,18 +13,21 @@ declare namespace Lighthouse {
     }
 
     interface LighthouseResults {
-        lighthouseVersion: string
-        generatedTime: string
-        initialUrl: string
-        url: string
-        audits: {
-            [key: string]: Audit
+        lhr: {
+            lighthouseVersion: string
+            generatedTime: string
+            initialUrl: string
+            url: string
+            audits: {
+                [key: string]: Audit
+            }
+            runtimeConfig: any
+            aggregations: any[]
+            score: number
+            categories: { [key: string]: ReportCategory }
         }
         artifacts: any
-        runtimeConfig: any
-        aggregations: any[]
-        score: number
-        reportCategories: ReportCategory[]
+        report: string
     }
 
     interface Audit {
