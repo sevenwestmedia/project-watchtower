@@ -32,17 +32,19 @@ const buildTarget = async (
         return Promise.reject(`Could not load webpack configuration for ${target}/${environment}!`)
     }
 
-    const configHash = await getMd5(log, 'webpackConfig', JSON.stringify(config))
-    await validateCache(
-        log,
-        {
-            project: buildConfig.BASE,
-            environment,
-            target,
-        },
-        [{ isFile: false, itemHash: configHash, hashKey: 'webpackConfig' }],
-        false,
-    )
+    if (process.env.NODE_ENV !== 'test') {
+        const configHash = await getMd5(log, 'webpackConfig', JSON.stringify(config))
+        await validateCache(
+            log,
+            {
+                project: buildConfig.BASE,
+                environment,
+                target,
+            },
+            [{ isFile: false, itemHash: configHash, hashKey: 'webpackConfig' }],
+            false,
+        )
+    }
 
     return webpackPromise(log, smp(buildConfig, config)).then(() => {
         const runtimeConfig: RuntimeConfig = {
