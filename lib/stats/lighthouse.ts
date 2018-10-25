@@ -21,10 +21,8 @@ export const runLighthouse = async (log: Logger, url: string) => {
             },
             {
                 extends: 'lighthouse:default',
-                settings: {
-                    onlyCategories: ['performance'],
+                settings: {},
                 },
-            },
         )
 
         return results
