@@ -35,6 +35,16 @@ let validatorConfig: CacheLoaderValidation = {
     validationItems: [{ isFile: true, filePath: 'tsconfig.json', hashKey: 'tsconfigHash' }],
 }
 
+export const configure = (log: Logger, newConfig: CacheLoaderValidation) => {
+    validatorConfig = {
+        cacheValidationConfigPath:
+            newConfig.cacheValidationConfigPath || validatorConfig.cacheValidationConfigPath,
+        cacheDirectory: newConfig.cacheDirectory || validatorConfig.cacheDirectory,
+        validationItems: newConfig.validationItems || validatorConfig.validationItems,
+    }
+    traceLog(log, `[Cache-Validator] validatorConfig=${JSON.stringify(validatorConfig)}`)
+}
+
 export const buildCacheDirectory = (buildInfo: BuildInfo) => {
     const { project, environment, target } = buildInfo
     // Project Environment Target Folder
@@ -200,16 +210,6 @@ export const validateCache = async (
         await clearDirectory(log, validatorConfig.cacheDirectory)
         await writeValidationConfig(log)
     }
-}
-
-export const configure = (log: Logger, newConfig: CacheLoaderValidation) => {
-    validatorConfig = {
-        cacheValidationConfigPath:
-            newConfig.cacheValidationConfigPath || validatorConfig.cacheValidationConfigPath,
-        cacheDirectory: newConfig.cacheDirectory || validatorConfig.cacheDirectory,
-        validationItems: newConfig.validationItems || validatorConfig.validationItems,
-    }
-    traceLog(log, `[Cache-Validator] validatorConfig=${JSON.stringify(validatorConfig)}`)
 }
 
 export const writeDummyConfigFile = async (
