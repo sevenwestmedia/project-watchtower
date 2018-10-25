@@ -61,7 +61,7 @@ export const buildCacheDirectory = (buildInfo: BuildInfo) => {
     const { project, environment, target } = buildInfo
     // Project Environment Target Folder
     const petFolder = path.join(project.replace('/', '.'), `${environment}.${target}`)
-    return path.join(validatorConfig.cacheDirectory, petFolder)
+    return path.join(validatorConfig.baseCacheDirectory, petFolder)
 }
 
 const writeFile = promisify(fs.writeFile)
