@@ -35,6 +35,8 @@ let validatorConfig: CacheLoaderValidation = {
     validationItems: [{ isFile: true, filePath: 'tsconfig.json', hashKey: 'tsconfigHash' }],
 }
 
+let TRACE_MESSAGES = true
+
 const traceLog = (log: Logger, message: string) => {
     if (TRACE_MESSAGES) {
         log.trace(message)
@@ -57,8 +59,6 @@ export const buildCacheDirectory = (buildInfo: BuildInfo) => {
     const petFolder = path.join(project.replace('/', '.'), `${environment}.${target}`)
     return path.join(validatorConfig.cacheDirectory, petFolder)
 }
-
-let TRACE_MESSAGES = true
 
 const writeFile = promisify(fs.writeFile)
 const rmrf = promisify(rimraf)
