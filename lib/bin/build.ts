@@ -33,7 +33,8 @@ const buildTarget = async (
     }
 
     if (process.env.NODE_ENV !== 'test') {
-        const configHash = await getMd5(log, 'webpackConfig', JSON.stringify(config))
+        const webpackConfigString = JSON.stringify(config)
+        const configHash = await getMd5(log, 'webpackConfig', webpackConfigString)
         await validateCache(
             log,
             {

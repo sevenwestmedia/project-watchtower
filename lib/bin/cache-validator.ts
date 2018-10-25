@@ -35,7 +35,7 @@ let validatorConfig: CacheLoaderValidation & {
     cacheValidationConfigPath: path.join(cacheDirPath, '.build-cache-validation'),
     baseCacheDirectory: cacheDirPath,
     cacheDirectory: cacheDirPath,
-    validationItems: [{ isFile: true, filePath: 'tsconfig.json', hashKey: 'tsconfigHash' }],
+    validationItems: [],
 }
 
 let TRACE_MESSAGES = true
@@ -138,6 +138,12 @@ const shouldClearCache = async (log: Logger) => {
             let result = false
             await Promise.all(
                 validatorConfig.validationItems.map(async validationItem => {
+                    traceLog(
+                        log,
+                        `[Cache-Validator] processing validation Item ${JSON.stringify(
+                            validationItem,
+                        )}`,
+                    )
                     const hash = validationItem.isFile
                         ? await getMd5OfFile(log, validationItem.hashKey, validationItem.filePath)
                         : validationItem.itemHash
@@ -203,7 +209,10 @@ export const validateCache = async (
         configure(log, {
             cacheDirectory,
             cacheValidationConfigPath: path.join(cacheDirectory, '.build-cache-validation'),
-            validationItems: [...validatorConfig.validationItems, ...extraValidationItems],
+            validationItems: [
+                { isFile: true, filePath: 'tsconfig.json', hashKey: 'tsconfigHash' },
+                ...extraValidationItems,
+            ],
         })
     }
 
