@@ -60,8 +60,8 @@ const bundleSize = async (log: Logger, runtimeConfig: RuntimeConfig) => {
             acc[`bundle_${val.asset}`] = val.size.bytes.toFixed(0)
             return acc
         }, {})
-        stats.totalJs = totalJs.toFixed(0)
-        stats.totalCss = totalCss.toFixed(0)
+        stats.total_js = totalJs.toFixed(0)
+        stats.total_css = totalCss.toFixed(0)
 
         log.info(stats, 'Bundle size')
 
