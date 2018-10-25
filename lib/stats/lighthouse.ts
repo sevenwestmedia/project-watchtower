@@ -22,7 +22,7 @@ export const runLighthouse = async (log: Logger, url: string) => {
             {
                 extends: 'lighthouse:default',
                 settings: {},
-                },
+            },
         )
 
         return results
@@ -107,10 +107,7 @@ const lighthouseStats = async (
                     log.info(
                         `Lighthouse results written to '${reportPath}', you can view them visually at https://googlechrome.github.io/lighthouse/viewer/`,
                     )
-                    await promisify(fs.writeFile)(
-                        reportPath,
-                        JSON.stringify(lighthouseResult, undefined, 4),
-                    )
+                    await promisify(fs.writeFile)(reportPath, lighthouseResult.report)
                 }
 
                 log.info({ stats }, `Lighthouse stats`)
