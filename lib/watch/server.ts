@@ -1,10 +1,10 @@
-import * as path from 'path'
+import path from 'path'
 import { fork, ChildProcess } from 'child_process'
-import * as express from 'express'
+import express from 'express'
 import { Server } from 'http'
-import * as webpack from 'webpack'
-import * as proxyMiddleware from 'http-proxy-middleware'
-import * as dotenv from 'dotenv'
+import webpack from 'webpack'
+import proxyMiddleware from 'http-proxy-middleware'
+import dotenv from 'dotenv'
 import { getWebpackConfig } from '../build/build'
 import { openBrowser, getHotReloadMiddleware } from '../server/dev'
 import { getPort } from '../runtime/server/server'
@@ -53,9 +53,11 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
         let devServerAvailable: Promise<any>
 
         const serverCompiler = webpack(getWebpackConfig(log, buildConfig, 'server', 'dev'))
-        serverCompiler.plugin('invalid', () => {
-            log.info('Server changed, rebuilding and restarting server...')
+
+        serverCompiler.hooks.invalid.tap('invalid', () => {
+            log.info('🦄Server changed, rebuilding and restarting server...⭐')
         })
+
         const watching = serverCompiler.watch(
             {
                 aggregateTimeout: 10000,

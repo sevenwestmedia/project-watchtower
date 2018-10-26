@@ -1,5 +1,5 @@
-import * as fs from 'fs'
-import * as path from 'path'
+import fs from 'fs'
+import path from 'path'
 import { ChildProcess } from 'child_process'
 import { forkPromise } from '../util/process'
 import { BuildConfig } from '../../lib'
@@ -48,7 +48,9 @@ async function test(
 
     const options = isDebug
         ? { execArgv: [`--inspect=${port}`] }
-        : isDebugBrk ? { execArgv: [`--inspect-brk=${port}`] } : {}
+        : isDebugBrk
+            ? { execArgv: [`--inspect-brk=${port}`] }
+            : {}
 
     args = args.concat(params)
 

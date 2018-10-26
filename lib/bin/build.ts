@@ -1,4 +1,4 @@
-import * as path from 'path'
+import path from 'path'
 import cleanBin from './clean'
 import lint from './lint'
 import test from './test'
@@ -11,8 +11,21 @@ import { BuildConfig, RuntimeConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
 import { writeFile } from '../runtime/util/fs'
 import { watchtowerConfigFilename } from '../runtime/config/config'
+import SpeedMeasurePlugin from 'speed-measure-webpack-plugin'
+import webpack from 'webpack'
+import {
+    validateCache,
+    getMd5,
+    setupWithBuildInfo,
+    TSCONFIG_VALIDATION_ITEM,
+} from './cache-validator'
 
-const buildTarget = (
+export function smp(buildConfig: BuildConfig, webpackConfig: webpack.Configuration) {
+    const smpPlugin = new SpeedMeasurePlugin()
+    return buildConfig.SMP ? smpPlugin.wrap(webpackConfig) : webpackConfig
+}
+
+const buildTarget = async (
     log: Logger,
     buildConfig: BuildConfig,
     target: BuildTarget,
@@ -24,7 +37,27 @@ const buildTarget = (
         return Promise.reject(`Could not load webpack configuration for ${target}/${environment}!`)
     }
 
-    return webpackPromise(log, config).then(() => {
+    if (process.env.NODE_ENV !== 'test') {
+        const webpackConfigString = JSON.stringify(config)
+        const configHash = await getMd5(log, 'webpackConfig', webpackConfigString)
+
+        setupWithBuildInfo(log, {
+            validationItems: [
+                TSCONFIG_VALIDATION_ITEM,
+                { isFile: false, itemHash: configHash, hashKey: 'webpackConfig' },
+            ],
+            buildInfo: {
+                project: buildConfig.BASE,
+                environment,
+                target,
+            },
+            traceMessages: false, // pwt build doesnt have etrigan
+        })
+
+        await validateCache(log)
+    }
+
+    return webpackPromise(log, smp(buildConfig, config)).then(() => {
         const runtimeConfig: RuntimeConfig = {
             BASE: '.',
             ASSETS_PATH: buildConfig.ASSETS_PATH_PREFIX,
@@ -39,17 +72,6 @@ const buildTarget = (
             JSON.stringify(runtimeConfig, undefined, 2),
         )
     })
-}
-
-const cleanAndBuild = (
-    log: Logger,
-    buildConfig: BuildConfig,
-    target: BuildTarget,
-    environment: BuildEnvironment = 'prod',
-) => {
-    const cleanTarget = buildConfig.OUTPUT
-
-    return clean(log, cleanTarget).then(() => buildTarget(log, buildConfig, target, environment))
 }
 
 const getBuildEnvironment = (args: BuildParam[]) => {
@@ -106,10 +128,11 @@ const build = async (log: Logger, buildConfig: BuildConfig, ...args: BuildParam[
             targets.map(target => buildTarget(log, buildConfig, target, environment)),
         )
     } else {
-        return failPromisesLate(
-            log,
-            targets.map(target => cleanAndBuild(log, buildConfig, target, environment)),
-        )
+        const cleanTarget = buildConfig.OUTPUT
+        await clean(log, cleanTarget)
+        for (const target of targets) {
+            await buildTarget(log, buildConfig, target, environment)
+        }
     }
 }
 

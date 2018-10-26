@@ -1,10 +1,9 @@
-import * as fs from 'fs'
-import * as path from 'path'
-import * as webpack from 'webpack'
-import * as autoprefixer from 'autoprefixer'
-import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
-import * as AssetsPlugin from 'assets-webpack-plugin'
-import * as HtmlPlugin from 'html-webpack-plugin'
+import fs from 'fs'
+import path from 'path'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import AssetsPlugin from 'assets-webpack-plugin'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import autoprefixer from 'autoprefixer'
 import { updateAssetLocations } from '../runtime/server/assets'
 import { BuildConfig } from '../../lib'
 import { getAssetsFile } from '../runtime/server'
@@ -22,25 +21,7 @@ const getPlugins = (buildConfig: BuildConfig) => [
             return JSON.stringify(assets)
         },
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: (module: { context: string }) => {
-            if (!module.context) {
-                return false
-            }
-
-            const modulePos = module.context.indexOf('node_modules')
-            if (modulePos === -1) {
-                return false
-            }
-
-            const isWatchtower = module.context.indexOf('project-watchtower', modulePos) !== -1
-
-            return !isWatchtower
-        },
-    }),
 ]
-
 /**
  * Base webpack config for the client that is used both in development and production
  * - Compile SCSS to CSS and extract into external assets
@@ -57,13 +38,20 @@ const clientBaseConfig: CreateWebpackConfig = options => {
         SERVER_PUBLIC_DIR,
     } = options.buildConfig
 
-    const entry: EntryPoints = {
-        main: [CLIENT_ENTRY],
+    let mainEntry = [CLIENT_ENTRY]
+    /*
+        https://github.com/webpack/webpack/issues/6647
+        You should not have a entrypoint for vendor. It's not an entry.
+        If you want to run two modules in order at an entrypoint, use an array.
+    */
+    if (CLIENT_POLYFILLS && fs.existsSync(CLIENT_POLYFILLS)) {
+        mainEntry = [CLIENT_POLYFILLS, CLIENT_ENTRY]
     }
 
-    if (CLIENT_POLYFILLS && fs.existsSync(CLIENT_POLYFILLS)) {
-        entry.vendor = [CLIENT_POLYFILLS]
+    const entry: EntryPoints = {
+        main: mainEntry,
     }
+
     const plugins = getPlugins(options.buildConfig)
 
     if (SERVER_PUBLIC_DIR) {
@@ -71,7 +59,7 @@ const clientBaseConfig: CreateWebpackConfig = options => {
 
         if (fs.existsSync(indexHtml)) {
             plugins.push(
-                new HtmlPlugin({
+                new HtmlWebpackPlugin({
                     inject: true,
                     template: indexHtml,
                 }),
@@ -85,40 +73,64 @@ const clientBaseConfig: CreateWebpackConfig = options => {
             path: OUTPUT,
             publicPath: PUBLIC_PATH,
         },
+        optimization: {
+            splitChunks: {
+                cacheGroups: {
+                    vendor: {
+                        test: (module: { context: string }) => {
+                            if (!module.context) {
+                                return false
+                            }
+
+                            const modulePos = module.context.indexOf('node_modules')
+                            if (modulePos === -1) {
+                                return false
+                            }
+
+                            const isWatchtower =
+                                module.context.indexOf('project-watchtower', modulePos) !== -1
+
+                            return !isWatchtower
+                        },
+                        name: 'vendor',
+                        chunks: 'all',
+                        priority: -20,
+                    },
+                },
+            },
+        },
         module: {
             rules: [
                 {
                     test: /\.s?css$/,
-                    use: ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        use: [
-                            {
-                                loader: 'css-loader',
-                                options: {
-                                    sourceMap: true,
-                                },
+                    use: [
+                        MiniCssExtractPlugin.loader,
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: true,
                             },
-                            {
-                                loader: 'postcss-loader',
-                                options: {
-                                    sourceMap: true,
-                                    plugins: () => [autoprefixer({ browsers: CSS_AUTOPREFIXER })],
-                                },
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: true,
+                                plugins: () => [autoprefixer({ browsers: CSS_AUTOPREFIXER })],
                             },
-                            {
-                                loader: 'resolve-url-loader',
-                                options: {
-                                    sourceMap: true,
-                                },
+                        },
+                        {
+                            loader: 'resolve-url-loader',
+                            options: {
+                                sourceMap: true,
                             },
-                            {
-                                loader: 'sass-loader',
-                                options: {
-                                    sourceMap: true,
-                                },
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true,
                             },
-                        ],
-                    }),
+                        },
+                    ],
                 },
             ],
         },

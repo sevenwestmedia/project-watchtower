@@ -1,5 +1,5 @@
-import * as webpack from 'webpack'
-import * as merge from 'webpack-merge'
+import webpack from 'webpack'
+import merge from 'webpack-merge'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import { getWebpackConfig } from '../build/build'
 import { webpackPromise } from '../util/webpack'
@@ -26,7 +26,8 @@ const exploreBundle = (log: Logger, buildConfig: BuildConfig, ...args: string[])
         config.plugins =
             config.plugins &&
             config.plugins.filter(
-                plugin => !(plugin instanceof webpack.optimize.ModuleConcatenationPlugin),
+                (plugin: unknown) =>
+                    !(plugin instanceof webpack.optimize.ModuleConcatenationPlugin),
             )
     }
 

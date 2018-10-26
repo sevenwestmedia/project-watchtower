@@ -1,4 +1,4 @@
-import * as path from 'path'
+import path from 'path'
 import clean from '../../lib/bin/clean'
 import build from '../../lib/bin/build'
 import watchServer from '../../lib/watch/server'

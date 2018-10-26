@@ -1,4 +1,4 @@
-import * as rimraf from 'rimraf'
+import rimraf from 'rimraf'
 import { Logger } from '../runtime/universal'
 
 const clean: (log: Logger, paths: string | string[]) => Promise<any> = (log, paths) => {

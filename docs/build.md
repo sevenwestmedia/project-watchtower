@@ -16,7 +16,7 @@ To override the root directory (defaults to current working directory), set the 
 If you want to change the default configuration of the build process, you can add a `/config/config.js` that overrides the settings used by the default webpack configuration:
 
 ```ts
-import * as path from 'path'
+import path from 'path'
 import { BuildConfigOverride } from 'project-watchtower/lib/types'
 
 const customConfig: BuildConfigOverride = {
@@ -44,7 +44,7 @@ Add `/config/webpack-hooks.js` to your project:
 
 ```ts
 import { WebpackHooks } from 'project-watchtower/lib/types'
-import * as FooWebpackPlugin from 'foo-webpack-plugin'
+import FooWebpackPlugin from 'foo-webpack-plugin'
 
 const hooks: WebpackHooks = {
     base: {

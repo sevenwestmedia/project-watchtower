@@ -1,4 +1,4 @@
-import * as util from 'util'
+import util from 'util'
 import { Logger, LogObject } from './log'
 
 export const formatElapsed = (hrEnd: [number, number]) => {

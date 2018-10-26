@@ -1,4 +1,4 @@
-import * as serialize from 'serialize-javascript'
+import serialize from 'serialize-javascript'
 
 // This is for 2 reasons
 // 1) It is hard to read the snapshots when the urls are encoded like this

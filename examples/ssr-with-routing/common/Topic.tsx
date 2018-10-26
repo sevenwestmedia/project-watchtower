@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Helmet } from 'react-helmet'
 import { RouteComponentProps, Redirect } from 'react-router'
 import { Status404Error } from '../../../lib/runtime/server/ssr/errors'

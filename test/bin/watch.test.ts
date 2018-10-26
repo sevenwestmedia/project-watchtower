@@ -1,12 +1,12 @@
 import watch from '../../lib/bin/watch'
-import * as path from 'path'
+import path from 'path'
 import { waitForConnection } from '../../lib/runtime/util/network'
 import { getTestPort } from '../test-helpers'
 import { getConfig } from '../../lib/runtime/config/config'
 
 // Increase test timeout because builds might take a while
 import { createConsoleLogger } from '../../lib/runtime/universal'
-;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000
+;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 60000
 
 const testProjectDir = path.join(process.cwd(), './test/test-project')
 const log = createConsoleLogger()

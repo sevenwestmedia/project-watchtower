@@ -1,11 +1,12 @@
 {
     "compilerOptions": {
+        "baseUrl": ".",
         "noEmit": true,
         "inlineSourceMap": false,
         "removeComments": false,
         "sourceMap": true,
         "noImplicitAny": true,
-        "module": "commonjs",
+        "module": "esnext",
         "moduleResolution": "node",
         "target": "es5",
         "strict": true,
@@ -16,6 +17,7 @@
         "importHelpers": true,
         "skipLibCheck": true,
         "skipDefaultLibCheck": true,
+        "esModuleInterop": true,
         "lib": [
             "dom",
             "es5",

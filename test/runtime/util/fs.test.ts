@@ -1,4 +1,4 @@
-import * as path from 'path'
+import path from 'path'
 import {
     formatFileSize,
     readFile,
@@ -37,7 +37,11 @@ describe('util/fs', () => {
     })
 
     it('formatFileSize', () => {
-        expect(formatFileSize(2048)).toBe('2.0')
+        expect(formatFileSize(2048)).toBe('2.0000')
+    })
+
+    it('formatFileSize 0.02', () => {
+        expect(formatFileSize(20)).toBe('0.0195')
     })
 
     it('getCustomConfigFile', () => {

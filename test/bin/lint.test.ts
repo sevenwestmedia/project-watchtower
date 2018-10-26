@@ -1,10 +1,10 @@
 import lint from '../../lib/bin/lint'
-import * as path from 'path'
+import path from 'path'
 import { getConfig } from '../../lib/runtime/config/config'
 
 // Increase test timeout because linting might take a while
 import { createConsoleLogger } from '../../lib/runtime/universal'
-;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000
+;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 60000
 
 const log = createConsoleLogger()
 const testProjectDir = path.join(process.cwd(), './test/test-project')

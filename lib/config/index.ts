@@ -1,4 +1,4 @@
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import { BuildConfig } from '../index'
 import { Logger } from '../runtime/universal'
 
@@ -15,5 +15,9 @@ export { default as devBase } from './webpack.dev'
 export { default as prodBase } from './webpack.prod'
 export { getConfig } from '../runtime/config/config'
 
-export type CreateWebpackConfigOptions = { buildConfig: BuildConfig; log: Logger }
+export type CreateWebpackConfigOptions = {
+    buildConfig: BuildConfig
+    log: Logger
+    cacheDirectory: string
+}
 export type CreateWebpackConfig = (options: CreateWebpackConfigOptions) => webpack.Configuration

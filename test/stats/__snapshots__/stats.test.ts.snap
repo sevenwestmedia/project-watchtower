@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`stats bundle-size 1`] = `
+Object {
+  "bundle_main.css": "20",
+  "bundle_main.js": "1787",
+  "bundle_vendor.js": "101170",
+  "total_css": "20",
+  "total_js": "102957",
+}
+`;
+
+exports[`stats lighthouse 1`] = `
+Object {
+  "home_bootup_time": "0",
+  "home_category_accessibility_score": "67",
+  "home_category_best-practices_score": "87",
+  "home_category_performance_score": "100",
+  "home_category_pwa_score": "31",
+  "home_category_seo_score": "60",
+  "home_estimated_input_latency": "13",
+  "home_first_contentful_paint": "600",
+  "home_first_cpu_idle": "600",
+  "home_first_meaningful_paint": "600",
+  "home_interactive": "600",
+  "home_maximum_child_elements": "2",
+  "home_maximum_dom_depth": "3",
+  "home_network_requests": "1",
+  "home_speed_index": "600",
+  "home_total_byte_weight": "552",
+  "home_total_dom_nodes": "5",
+}
+`;
+
+exports[`stats ssr-stats 1`] = `
+Object {
+  "home_ssr_document_size": "345",
+  "home_ssr_dom_size": "5",
+  "home_ssr_loadtime": "1",
+}
+`;

@@ -1,5 +1,5 @@
-import * as fs from 'fs'
-import * as path from 'path'
+import fs from 'fs'
+import path from 'path'
 import clean from '../../lib/bin/clean'
 import build from '../../lib/bin/build'
 import { getAbsoluteAssetPath, getAssetLocations } from '../../lib/runtime/server/assets'
@@ -7,7 +7,7 @@ import { getConfig, getRuntimeConfigFromBuildConfig } from '../../lib/runtime/co
 
 // Increase test timeout because builds might take a while
 import { createConsoleLogger } from '../../lib/runtime/universal'
-;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 30000
+;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 60000
 
 const log = createConsoleLogger()
 

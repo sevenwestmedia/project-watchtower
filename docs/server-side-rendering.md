@@ -15,7 +15,7 @@ To allow the server to scale better watchtower works with Throng. You can use `S
 
 ``` ts
 // start.ts
-import * as throng from 'throng'
+import throng from 'throng'
 import { startServer } from './index'
 import { getMissingEnvVariables } from '../config/server'
 

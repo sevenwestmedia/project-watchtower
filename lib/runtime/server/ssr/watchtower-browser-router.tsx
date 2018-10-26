@@ -1,5 +1,5 @@
-import * as H from 'history'
-import * as React from 'react'
+import H from 'history'
+import React from 'react'
 import { BrowserRouter, BrowserRouterProps, Route, RouteProps } from 'react-router-dom'
 import { createLocation } from 'history'
 import { getTransferredState } from '../../client/get-transferred-state'

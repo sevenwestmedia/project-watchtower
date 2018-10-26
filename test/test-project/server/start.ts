@@ -2,7 +2,7 @@
  * For testing only
  */
 
-import * as express from 'express'
+import express from 'express'
 
 const port = parseInt(process.env.PORT || '3000', 10)
 

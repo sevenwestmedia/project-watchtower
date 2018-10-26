@@ -1,6 +1,6 @@
-import * as webpack from 'webpack'
-import * as merge from 'webpack-merge'
-import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
+import webpack from 'webpack'
+import merge from 'webpack-merge'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import baseConfig from './webpack.base'
 import clientBaseConfig from './webpack.client'
 import devConfig from './webpack.dev'
@@ -10,6 +10,7 @@ import { CreateWebpackConfig } from './index'
 /** Webpack config for the client in development */
 const config: CreateWebpackConfig = options => {
     const webpackHooks = getWebpackHooks(options.log, options.buildConfig.BASE)
+
     return merge(
         baseConfig(options),
         getHook(webpackHooks.base, options),
@@ -23,10 +24,12 @@ const config: CreateWebpackConfig = options => {
             },
             output: {
                 filename: options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js',
-                chunkFilename: options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js',
+                chunkFilename: options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].chunk.js',
             },
             plugins: [
-                new ExtractTextPlugin(options.buildConfig.ASSETS_PATH_PREFIX + 'css/[name].css'),
+                new MiniCssExtractPlugin({
+                    filename: options.buildConfig.ASSETS_PATH_PREFIX + 'css/[name].css',
+                }),
                 new webpack.HotModuleReplacementPlugin(),
             ],
         },

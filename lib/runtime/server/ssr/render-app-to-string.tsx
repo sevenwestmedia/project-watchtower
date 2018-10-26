@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Helmet, HelmetData } from 'react-helmet'
 import { StaticRouter } from 'react-router-dom'
 import { functionTimer, Logger } from '../../universal'

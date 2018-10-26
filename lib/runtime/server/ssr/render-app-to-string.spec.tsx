@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import * as React from 'react'
+import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { renderApp } from './render-app-to-string'
 import { createConsoleLogger, PromiseTracker } from '../../universal'

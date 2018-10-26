@@ -1,4 +1,4 @@
-import * as merge from 'webpack-merge'
+import merge from 'webpack-merge'
 import serverDevConfig from './webpack.server.dev'
 import webpackHooks, { getHook } from './webpack-hooks'
 import { CreateWebpackConfig } from './index'

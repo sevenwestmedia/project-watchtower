@@ -1,4 +1,4 @@
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import { CreateWebpackConfig } from '../config/index'
 
 export interface RuntimeConfig {
@@ -70,6 +70,9 @@ export interface BuildConfig {
 
     /** Pages to run build stats on, format { name: URL } */
     STATS_PAGES: { [name: string]: string }
+
+    /** Enables the SMP plugin https://www.npmjs.com/package/speed-measure-webpack-plugin */
+    SMP?: boolean
 }
 
 /** Use to override the application configuration */

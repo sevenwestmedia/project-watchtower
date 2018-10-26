@@ -1,5 +1,5 @@
-import * as fs from 'fs'
-import * as path from 'path'
+import fs from 'fs'
+import path from 'path'
 import { Logger } from '../universal'
 
 export const readFileSync = (log: Logger, filePath: string) => {
@@ -47,7 +47,7 @@ export const writeFile = (log: Logger, filePath: string, fileContent: string) =>
         })
     })
 
-export const formatFileSize = (size: number) => (size / 1024).toFixed(1)
+export const formatFileSize = (size: number) => (size / 1024).toFixed(4)
 
 export const existsSync = (file: string) => {
     try {

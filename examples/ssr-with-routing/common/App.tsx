@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import './App.scss'
 import { Switch, Route } from 'react-router'
 import { Home } from './Home'

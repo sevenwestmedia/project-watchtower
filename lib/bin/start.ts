@@ -1,5 +1,5 @@
-import * as path from 'path'
-import * as dotenv from 'dotenv'
+import path from 'path'
+import dotenv from 'dotenv'
 import { ChildProcess, ForkOptions } from 'child_process'
 import { forkPromise } from '../util/process'
 import { StartParam } from '../types'
