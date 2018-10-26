@@ -13,7 +13,12 @@ import { writeFile } from '../runtime/util/fs'
 import { watchtowerConfigFilename } from '../runtime/config/config'
 import SpeedMeasurePlugin from 'speed-measure-webpack-plugin'
 import webpack from 'webpack'
-import { validateCache, getMd5 } from './cache-validator'
+import {
+    validateCache,
+    getMd5,
+    setupWithBuildInfo,
+    TSCONFIG_VALIDATION_ITEM,
+} from './cache-validator'
 
 export function smp(buildConfig: BuildConfig, webpackConfig: webpack.Configuration) {
     const smpPlugin = new SpeedMeasurePlugin()
@@ -35,16 +40,21 @@ const buildTarget = async (
     if (process.env.NODE_ENV !== 'test') {
         const webpackConfigString = JSON.stringify(config)
         const configHash = await getMd5(log, 'webpackConfig', webpackConfigString)
-        await validateCache(
-            log,
-            {
+
+        setupWithBuildInfo(log, {
+            validationItems: [
+                TSCONFIG_VALIDATION_ITEM,
+                { isFile: false, itemHash: configHash, hashKey: 'webpackConfig' },
+            ],
+            buildInfo: {
                 project: buildConfig.BASE,
                 environment,
                 target,
             },
-            [{ isFile: false, itemHash: configHash, hashKey: 'webpackConfig' }],
-            false,
-        )
+            traceMessages: false, // pwt build doesnt have etrigan
+        })
+
+        await validateCache(log)
     }
 
     return webpackPromise(log, smp(buildConfig, config)).then(() => {
