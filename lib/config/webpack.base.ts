@@ -6,6 +6,7 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import os from 'os'
 
 const disableTypeCheck = process.env.START_FAST_MODE === 'true'
+const disableCaching = process.env.CACHING_DISABLED || false
 
 export const fileLoaderConfig = (buildConfig: BuildConfig) => ({
     test: /\.(ico|jpg|png|gif|otf|webp|svg|ttf)(\?.*)?$/,
@@ -25,28 +26,30 @@ if (!disableTypeCheck) {
 const osCpus = os.cpus().length
 const threadLoaderCpus = !disableTypeCheck ? osCpus - 1 : osCpus
 
-const loaders = (cacheDirectory: string) => [
-    {
-        loader: 'thread-loader',
-        options: {
-            // there should be 1 cpu for the fork-ts-checker-webpack-plugin if its enabled
-            workers: threadLoaderCpus,
-        },
+const threadLoader = {
+    loader: 'thread-loader',
+    options: {
+        // there should be 1 cpu for the fork-ts-checker-webpack-plugin if its enabled
+        workers: threadLoaderCpus,
     },
-    {
+}
+
+const tsLoader = {
+    loader: 'ts-loader',
+    options: {
+        transpileOnly: true,
+        happyPackMode: true, // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
+    },
+}
+
+const cacheLoader = (cacheDirectory: string) => {
+    return {
         loader: 'cache-loader',
         options: {
             cacheDirectory,
         },
-    },
-    {
-        loader: 'ts-loader',
-        options: {
-            transpileOnly: true,
-            happyPackMode: true, // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
-        },
-    },
-]
+    }
+}
 
 /**
  * Base webpack configuration that is shared by the server and the client
@@ -65,7 +68,9 @@ function baseConfig(options: CreateWebpackConfigOptions) {
             rules: [
                 {
                     test: /\.tsx?$/,
-                    use: [...loaders(options.cacheDirectory)],
+                    use: !disableCaching
+                        ? [threadLoader, cacheLoader(options.cacheDirectory), tsLoader]
+                        : [threadLoader, tsLoader],
                 },
                 fileLoaderConfig(options.buildConfig),
                 {
