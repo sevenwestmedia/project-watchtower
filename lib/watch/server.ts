@@ -54,9 +54,9 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
 
         const serverCompiler = webpack(getWebpackConfig(log, buildConfig, 'server', 'dev'))
 
-        // serverCompiler.hooks.compile.tap('invalid', () => {
-        //     log.info('Server changed, rebuilding and restarting server...')
-        // })
+        serverCompiler.hooks.invalid.tap('invalid', () => {
+            log.info('🦄Server changed, rebuilding and restarting server...⭐')
+        })
 
         const watching = serverCompiler.watch(
             {
