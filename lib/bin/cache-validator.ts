@@ -168,6 +168,11 @@ const writeContents = async (
     await writeFile(filePath, jsonStr, { encoding: 'utf8', flag: 'w+' })
 }
 
+export const deletePath = async (log: Logger, fileOrDir: string) => {
+    traceLog(log, `[Cache-Validator] rmrf ${fileOrDir}`)
+    await rmrf(fileOrDir)
+}
+
 const clearDirectory = async (log: Logger, directory: string) => {
     const exists = await fileExists(directory)
     if (exists) {
@@ -284,9 +289,4 @@ export const writeDummyConfigFile = async (
 export const writeDummyFile = async (log: Logger, file: string, contents: string) => {
     traceLog(log, `[Cache-Validator] writing dummy file ${file} with contents ${contents}`)
     await writeFile(file, contents, 'utf8')
-}
-
-export const deletePath = async (log: Logger, fileOrDir: string) => {
-    traceLog(log, `[Cache-Validator] rmrf ${fileOrDir}`)
-    await rmrf(fileOrDir)
 }
