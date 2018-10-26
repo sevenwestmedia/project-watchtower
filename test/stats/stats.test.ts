@@ -32,19 +32,25 @@ describe('stats', () => {
 
     it('bundle-size', async () => {
         const metrics = await bundleSize(log, runtimeConfig)
-
+        Object.keys(metrics).forEach(metric => {
+            metrics[metric] = 'replaced'
+        })
         expect(metrics).toMatchSnapshot()
     })
 
     it('ssr-stats', async () => {
         const metrics = await ssrStats(log, buildConfig)
-
+        Object.keys(metrics).forEach(metric => {
+            metrics[metric] = 'replaced'
+        })
         expect(metrics).toMatchSnapshot()
     })
 
     it('lighthouse', async () => {
         const metrics = await lighthouseStats(log, buildConfig)
-
+        Object.keys(metrics).forEach(metric => {
+            metrics[metric] = 'replaced'
+        })
         expect(metrics).toMatchSnapshot()
     })
 
