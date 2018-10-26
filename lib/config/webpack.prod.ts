@@ -27,9 +27,7 @@ const prodConfig: CreateWebpackConfig = () => ({
         ],
     },
     plugins: [
-        // new webpack.optimize.AggressiveSplittingPlugin(),
-        // new webpack.optimize.AggressiveMergingPlugin(),
-        // new webpack.optimize.ModuleConcatenationPlugin(),
+        new webpack.optimize.AggressiveMergingPlugin(),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
         }),
