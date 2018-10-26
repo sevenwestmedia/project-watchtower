@@ -33,47 +33,19 @@ describe('stats', () => {
     it('bundle-size', async () => {
         const metrics = await bundleSize(log, runtimeConfig)
 
-        const main = metrics.bundle_size_main
-        const css = metrics.bundle_size_css
-        const totalJs = metrics.total_js
-        const totalCss = metrics.total_css
-
-        expect(main).toBeDefined()
-        expect(css).toBeDefined()
-
-        expect(+main).not.toBeCloseTo(0)
-        expect(+css).not.toBeCloseTo(0)
-        expect(+totalJs).not.toBeCloseTo(0)
-        expect(+totalCss).not.toBeCloseTo(0)
+        expect(metrics).toMatchSnapshot()
     })
 
     it('ssr-stats', async () => {
         const metrics = await ssrStats(log, buildConfig)
 
-        const documentSize = metrics.home_ssr_document_size
-        const domSize = metrics.home_ssr_dom_size
-        const loadTime = metrics.home_ssr_loadtime
-
-        expect(documentSize).toBeDefined()
-        expect(domSize).toBeDefined()
-        expect(loadTime).toBeDefined()
-
-        expect(+documentSize).not.toBeCloseTo(0)
-        expect(+domSize).not.toBeCloseTo(0)
-        expect(+loadTime).not.toBeCloseTo(0)
+        expect(metrics).toMatchSnapshot()
     })
 
     it('lighthouse', async () => {
         const metrics = await lighthouseStats(log, buildConfig)
 
-        expect(metrics.home_first_contentful_paint).toBeDefined()
-        expect(metrics.home_first_meaningful_paint).toBeDefined()
-        expect(metrics.home_first_cpu_idle).toBeDefined()
-        expect(metrics.home_speed_index).toBeDefined()
-        expect(metrics.home_interactive).toBeDefined()
-        expect(metrics.home_maximum_dom_depth).toBeDefined()
-        expect(metrics.home_maximum_child_elements).toBeDefined()
-        expect(metrics.home_performance_score).toBeDefined()
+        expect(metrics).toMatchSnapshot()
     })
 
     it('cli', async () => {
