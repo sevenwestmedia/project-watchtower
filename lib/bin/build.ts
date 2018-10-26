@@ -37,8 +37,10 @@ const buildTarget = async (
         return Promise.reject(`Could not load webpack configuration for ${target}/${environment}!`)
     }
 
-    const disableCaching = Boolean(process.env.BUILD_CACHE_DISABLED)
-    if (process.env.NODE_ENV !== 'test' && !disableCaching) {
+    const disableCaching = String(process.env.BUILD_CACHE_DISABLED).toLowerCase() === 'true'
+    if (disableCaching) {
+        log.info(`Build Caching Disabled... BUILD_CACHE_DISABLED=${disableCaching}`)
+    } else if (process.env.NODE_ENV !== 'test' && !disableCaching) {
         const webpackConfigString = JSON.stringify(config)
         const configHash = await getMd5(log, 'webpackConfig', webpackConfigString)
 
