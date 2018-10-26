@@ -49,3 +49,9 @@ Detailed documentation available in the [docs](./docs) folder:
 * enzyme
 * react-addons-test-utils
 * typescript
+
+## Environmental Variables
+
+### Build Caching - using cache-loader
+BUILD_CACHE_DISABLED: by default this is false, setting it to true will disable build caching
+BUILD_CACHE_DIRECTORY: specfies the build cache directory, by default it is .build-cache in the working directory

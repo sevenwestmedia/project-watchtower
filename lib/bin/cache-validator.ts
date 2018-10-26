@@ -26,7 +26,7 @@ type CacheLoaderValidationFile = { [key: string]: string | boolean; cacheCleared
 type BuildInfo = { project: string; environment: BuildEnvironment; target: BuildTarget }
 
 // Configure Variables
-const cacheDir = process.env.CACHE_DIRECTORY || `.build-cache`
+const cacheDir = process.env.BUILD_CACHE_DIRECTORY || `.build-cache`
 const cacheDirPath = path.join(path.resolve(cacheDir))
 const tsConfigPath = 'tsconfig.json'
 const buildCacheValidationConfig = '.build-cache-validation'
