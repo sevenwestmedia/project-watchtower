@@ -232,7 +232,9 @@ const shouldClearCache = async (log: Logger) => {
                 }),
             )
             if (!result) {
-                log.info(`[Cache-Validator] No mismatches found`)
+                log.info(`[Cache-Validator] No mismatches found - cache not cleared`)
+                config.cacheCleared = false
+                await writeContents(log, validatorConfig.cacheValidationConfigPath, config)
             }
             return result
         }
@@ -244,7 +246,7 @@ const shouldClearCache = async (log: Logger) => {
     return true
 }
 
-const writeValidationConfig = async (log: Logger, cacheCleared: boolean) => {
+const createValidationConfig = async (log: Logger, cacheCleared: boolean) => {
     const configToWrite: CacheLoaderValidationFile = { cacheCleared }
     await Promise.all(
         validatorConfig.validationItems.map(async validationItem => {
@@ -272,7 +274,7 @@ export const validateCache = async (log: Logger) => {
     const clear = await shouldClearCache(log)
     if (clear) {
         await clearDirectory(log, validatorConfig.cacheDirectory)
-        await writeValidationConfig(log, true)
+        await createValidationConfig(log, true)
     }
 }
 
