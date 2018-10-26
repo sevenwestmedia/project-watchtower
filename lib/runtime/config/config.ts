@@ -21,7 +21,6 @@ const defaultConfig = (root: string): BuildConfig => ({
     STATIC_RESOURCE_NAMES: false,
     STATS_ENV: {},
     STATS_PAGES: { home: '/' },
-    /* SMP: true, */
 })
 
 const customConfig = (log: Logger, root: string) =>
