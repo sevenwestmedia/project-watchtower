@@ -6,7 +6,7 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import os from 'os'
 
 const disableTypeCheck = process.env.START_FAST_MODE === 'true'
-const disableCaching = process.env.CACHING_DISABLED || false
+const disableCaching = process.env.BUILD_CACHE_DISABLED || false
 
 export const fileLoaderConfig = (buildConfig: BuildConfig) => ({
     test: /\.(ico|jpg|png|gif|otf|webp|svg|ttf)(\?.*)?$/,
