@@ -1,9 +1,9 @@
 {
     "main": {
-        "js": "/main.js",
+        "js": "/main.chunk.js",
         "css": "/main.css"
     },
     "vendor": {
-        "js": "/vendor.js"
+        "js": "/vendor.chunk.js"
     }
 }
