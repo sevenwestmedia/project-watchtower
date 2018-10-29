@@ -32,26 +32,45 @@ describe('stats', () => {
 
     it('bundle-size', async () => {
         const metrics = await bundleSize(log, runtimeConfig)
-        Object.keys(metrics).forEach(metric => {
-            metrics[metric] = 'replaced'
-        })
-        expect(metrics).toMatchSnapshot()
+
+        const main = metrics.bundle_size_main
+        const vendor = metrics.bundle_size_vendor
+        const css = metrics.bundle_size_css
+
+        expect(main).toBeDefined()
+        expect(vendor).toBeDefined()
+        expect(css).toBeDefined()
+
+        expect(+main).not.toBeCloseTo(0)
+        expect(+vendor).not.toBeCloseTo(0)
+        expect(+css).not.toBeCloseTo(0)
     })
 
     it('ssr-stats', async () => {
         const metrics = await ssrStats(log, buildConfig)
-        Object.keys(metrics).forEach(metric => {
-            metrics[metric] = 'replaced'
-        })
-        expect(metrics).toMatchSnapshot()
+
+        const documentSize = metrics.home_ssr_document_size
+        const domSize = metrics.home_ssr_dom_size
+        const loadTime = metrics.home_ssr_loadtime
+
+        expect(documentSize).toBeDefined()
+        expect(domSize).toBeDefined()
+        expect(loadTime).toBeDefined()
+
+        expect(+documentSize).not.toBeCloseTo(0)
+        expect(+domSize).not.toBeCloseTo(0)
+        expect(+loadTime).not.toBeCloseTo(0)
     })
 
     it('lighthouse', async () => {
         const metrics = await lighthouseStats(log, buildConfig)
-        Object.keys(metrics).forEach(metric => {
-            metrics[metric] = 'replaced'
-        })
-        expect(metrics).toMatchSnapshot()
+
+        expect(metrics.home_first_meaningful_paint).toBeDefined()
+        expect(metrics.home_speed_index).toBeDefined()
+        expect(metrics.home_time_to_interactive).toBeDefined()
+        expect(metrics.home_consistently_interactive).toBeDefined()
+        expect(metrics.home_dom_size).toBeDefined()
+        expect(metrics.home_perf_score).toBeDefined()
     })
 
     it('cli', async () => {

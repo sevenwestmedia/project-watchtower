@@ -1,5 +1,6 @@
 import { load } from 'cheerio'
 import { BuildMetrics } from './'
+import { formatFileSize } from '../runtime/util/fs'
 import { formatTimeMs, timeout } from '../util/time'
 import { getSequenceAverage } from '../util/math'
 import { runStatsOnServer, loadSSRPage } from './server'
@@ -47,7 +48,7 @@ const ssrStats = async (
                     5,
                 )
 
-                stats[`${page}_ssr_document_size`] = size.toFixed(0)
+                stats[`${page}_ssr_document_size`] = formatFileSize(size)
                 stats[`${page}_ssr_dom_size`] = domSize.toString()
                 stats[`${page}_ssr_loadtime`] = formatTimeMs(time)
             },

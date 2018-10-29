@@ -27,8 +27,8 @@ See the [build documentation](./build.md) for details on how to customise the pr
 * build/client: Client build output directory
     * static
         * js
-            * main.js (hashed in production build)
-            * vendor.js (hashed in production build)
+            * main.chunk.js (hashed in production build)
+            * vendor.chunk.js (hashed in production build)
         * css
             * main.css (hashed in production build)
         * media

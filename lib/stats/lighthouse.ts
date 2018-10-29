@@ -21,7 +21,9 @@ export const runLighthouse = async (log: Logger, url: string) => {
             },
             {
                 extends: 'lighthouse:default',
-                settings: {},
+                settings: {
+                    onlyCategories: ['performance'],
+                },
             },
         )
 
@@ -58,46 +60,28 @@ const lighthouseStats = async (
                 const addLighthouseValue = (lighthouseKey: string, statsKey: string) => {
                     const result =
                         lighthouseResult &&
-                        lighthouseResult.lhr &&
-                        lighthouseResult.lhr.audits &&
-                        lighthouseResult.lhr.audits[lighthouseKey] &&
-                        (lighthouseResult.lhr.audits[lighthouseKey].rawValue as number)
+                        lighthouseResult.audits &&
+                        lighthouseResult.audits[lighthouseKey] &&
+                        (lighthouseResult.audits[lighthouseKey].rawValue as number)
 
                     if (result !== undefined && result !== null) {
                         stats[`${page}_${statsKey}`] = formatTimeMs(+result)
                     }
                 }
 
-                addLighthouseValue('first-contentful-paint', 'first_contentful_paint')
                 addLighthouseValue('first-meaningful-paint', 'first_meaningful_paint')
-                addLighthouseValue('first-cpu-idle', 'first_cpu_idle')
-                addLighthouseValue('estimated-input-latency', 'estimated_input_latency')
-                addLighthouseValue('interactive', 'interactive')
-                addLighthouseValue('bootup-time', 'bootup_time')
-                addLighthouseValue('network-requests', 'network_requests')
-                addLighthouseValue('total-byte-weight', 'total_byte_weight')
-                addLighthouseValue('speed-index', 'speed_index')
+                addLighthouseValue('speed-index-metric', 'speed_index')
+                addLighthouseValue('first-interactive', 'time_to_interactive')
+                addLighthouseValue('consistently-interactive', 'consistently_interactive')
+                addLighthouseValue('dom-size', 'dom_size')
 
                 if (lighthouseResult) {
-                    for (const category in lighthouseResult.lhr.categories) {
-                        if (lighthouseResult.lhr.categories.hasOwnProperty(category)) {
-                            stats[`${page}_category_${category}_score`] = (
-                                lighthouseResult.lhr.categories[category].score * 100
-                            ).toFixed(0)
-                        }
-                    }
-                    if (lighthouseResult.lhr.audits['dom-size']) {
-                        const domSize: any = lighthouseResult.lhr.audits['dom-size']
-                        for (const key in domSize.details.items) {
-                            if (domSize.details.items.hasOwnProperty(key)) {
-                                const statsKey = domSize.details.items[key].statistic
-                                    .toLowerCase()
-                                    .replace(/ /g, '_')
-                                stats[`${page}_${statsKey}`] = formatTimeMs(
-                                    +domSize.details.items[key].value,
-                                )
-                            }
-                        }
+                    const perfResult = lighthouseResult.reportCategories.filter(
+                        category => category.id === 'performance',
+                    )[0]
+
+                    if (perfResult && typeof perfResult.score === 'number') {
+                        stats[`${page}_perf_score`] = perfResult.score.toFixed(1)
                     }
 
                     const reportPath = path.resolve(
@@ -107,7 +91,10 @@ const lighthouseStats = async (
                     log.info(
                         `Lighthouse results written to '${reportPath}', you can view them visually at https://googlechrome.github.io/lighthouse/viewer/`,
                     )
-                    await promisify(fs.writeFile)(reportPath, lighthouseResult.report)
+                    await promisify(fs.writeFile)(
+                        reportPath,
+                        JSON.stringify(lighthouseResult, undefined, 4),
+                    )
                 }
 
                 log.info({ stats }, `Lighthouse stats`)
