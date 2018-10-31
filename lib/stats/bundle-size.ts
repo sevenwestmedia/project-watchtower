@@ -8,7 +8,7 @@ import { getAbsoluteAssetPath } from '../runtime/server'
 const getChunkSize = async (log: Logger, runtimeConfig: RuntimeConfig, chunkPath: string) => {
     const absolutePath = getAbsoluteAssetPath(runtimeConfig, chunkPath)
     const size = await getFileSize(log, absolutePath)
-    return formatFileSize(size)
+    return { kb: formatFileSize(size), bytes: Math.round(size) }
 }
 
 const bundleSize = async (log: Logger, runtimeConfig: RuntimeConfig) => {
@@ -17,17 +17,51 @@ const bundleSize = async (log: Logger, runtimeConfig: RuntimeConfig) => {
         const assetFile = await readFile(log, assetFilePath)
         const assets = JSON.parse(assetFile)
 
+        const jsAssets = Object.keys(assets)
+            .filter(key => {
+                return !!assets[key].js
+            })
+            .map(key => {
+                return { js: assets[key].js as string, key }
+            })
+
+        const cssAssets = Object.keys(assets)
+            .filter(key => {
+                return !!assets[key].css
+            })
+            .map(key => {
+                return { css: assets[key].css as string, key }
+            })
+
+        let totalJs = 0
+        let totalCss = 0
         const values = await Promise.all([
-            getChunkSize(log, runtimeConfig, assets.main.js),
-            getChunkSize(log, runtimeConfig, assets.vendor.js),
-            getChunkSize(log, runtimeConfig, assets.main.css),
+            ...jsAssets.map(jsAsset =>
+                getChunkSize(log, runtimeConfig, jsAsset.js).then(size => {
+                    totalJs += size.bytes
+                    return {
+                        size,
+                        asset: `${jsAsset.key}.js`,
+                    }
+                }),
+            ),
+            ...cssAssets.map(cssAsset =>
+                getChunkSize(log, runtimeConfig, cssAsset.css).then(size => {
+                    totalCss += size.bytes
+                    return {
+                        size,
+                        asset: `${cssAsset.key}.css`,
+                    }
+                }),
+            ),
         ])
 
-        const stats: BuildMetrics = {
-            bundle_size_main: values[0],
-            bundle_size_vendor: values[1],
-            bundle_size_css: values[2],
-        }
+        const stats = values.reduce<BuildMetrics>((acc, val) => {
+            acc[`bundle_${val.asset}`] = val.size.bytes.toFixed(0)
+            return acc
+        }, {})
+        stats.total_js = totalJs.toFixed(0)
+        stats.total_css = totalCss.toFixed(0)
 
         log.info(stats, 'Bundle size')
 
