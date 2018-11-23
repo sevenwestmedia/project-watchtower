@@ -2,6 +2,9 @@
     "name": "project-watchtower",
     "version": "0.12.29",
     "license": "MIT",
+    "author": {
+        "name": "Seven West Media"
+    },
     "description": "",
     "publishConfig": {
         "registry": "https://nexus.swmdigital.io/repository/js-private"
@@ -154,7 +157,6 @@
         "typescript": ">=2.4.0"
     },
     "dependencies": {
-        "@types/react-loadable": "^5.4.1",
         "assets-webpack-plugin": "^3.9.7",
         "autoprefixer": "^7.1.2",
         "cache-loader": "^1.2.2",
