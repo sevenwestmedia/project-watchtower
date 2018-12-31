@@ -1,5 +1,7 @@
 # Project Watchtower
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/sevenwestmedia-labs/project-watchtower.svg)](https://greenkeeper.io/)
+
 A unified basis for web applications.
 
 Project Watchtower is a TypeScript first, opinionated foundation for creating universal (Server Side Rendered) React applications. If you are not using TypeScript then Watchtower is probably not for you. 
