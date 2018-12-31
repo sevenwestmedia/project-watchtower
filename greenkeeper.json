@@ -1,0 +1,13 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "examples/bundle-splitting/package.json",
+        "examples/emotion-css-in-js/package.json",
+        "examples/ssr-with-data-loading-using-redux/package.json",
+        "package.json",
+        "presets/tslint/package.json"
+      ]
+    }
+  }
+}
