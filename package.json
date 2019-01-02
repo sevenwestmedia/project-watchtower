@@ -6,9 +6,6 @@
         "name": "Seven West Media"
     },
     "description": "",
-    "publishConfig": {
-        "registry": "https://nexus.swmdigital.io/repository/js-private"
-    },
     "scripts": {
         "install-example-dependencies": "find ./examples/ -maxdepth 1 -type d \\( ! -name examples \\) -exec bash -c \"cd '{}' && yarn\" \\;",
         "clean": "npm run clean:lighthouse && rimraf dist-es examples/*/client/*.d.ts examples/*/client/*.js examples/*/server/*.d.ts examples/*/server/*.js examples/*/common/*.d.ts examples/*/common/*.js",
