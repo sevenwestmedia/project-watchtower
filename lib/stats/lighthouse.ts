@@ -33,7 +33,7 @@ export const runLighthouse = async (log: Logger, url: string) => {
     }
 }
 
-const lighthouseStats = async (
+export const lighthouseStats = async (
     log: Logger,
     buildConfig: BuildConfig,
     verbose = false,
@@ -118,8 +118,6 @@ const lighthouseStats = async (
         return stats
     } catch (err) {
         log.error({ err }, 'Error measuring lighthouse stats')
-        return {}
+        throw new Error('Error measuring lighthouse stats')
     }
 }
-
-export default lighthouseStats

@@ -149,7 +149,7 @@ measureBuildStats() => Promise<BuildMetrics>
 
 writeBuildStats(metrics: BuildMetrics) => Promise<void>
 
-default measureAndWriteBuildStats() => Promise<void>
+measureAndWriteBuildStats() => Promise<void>
 ```
 
 ### Types

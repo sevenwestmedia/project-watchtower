@@ -1,7 +1,7 @@
 import path from 'path'
 import bundleSize from './bundle-size'
 import ssrStats from './ssr-stats'
-import lighthouseStats from './lighthouse'
+import { lighthouseStats } from './lighthouse'
 import { writeFile } from '../runtime/util/fs'
 import { BuildConfig } from '../../lib'
 import { Logger } from '../runtime/universal'
@@ -40,7 +40,6 @@ export const writeBuildStats = async (
     })
 
     // Jenkins wants a CSV file
-
     const keys: string[] = []
     const values: string[] = []
 
@@ -59,7 +58,7 @@ export const writeBuildStats = async (
     await writeFile(log, statsFilePath, fileContent)
 }
 
-const measureAndWriteBuildStats = async (
+export const measureAndWriteBuildStats = async (
     log: Logger,
     buildConfig: BuildConfig,
     verbose = false,
@@ -67,5 +66,3 @@ const measureAndWriteBuildStats = async (
     const metrics = await measureBuildStats(log, buildConfig, verbose)
     await writeBuildStats(log, buildConfig, metrics)
 }
-
-export default measureAndWriteBuildStats
