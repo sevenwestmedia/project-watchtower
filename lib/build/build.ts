@@ -1,18 +1,18 @@
 import fs from 'fs'
 import path from 'path'
+import { Logger } from 'typescript-log'
 import webpack from 'webpack'
-import { dynamicRequire } from '../runtime/util/fs'
-import { BuildEnvironment, BuildTarget } from '../types'
-import webpackClientDevConfig from '../config/webpack.client.dev'
+import { buildCacheDirectory } from '../bin/cache-validator'
+import { CreateWebpackConfig, CreateWebpackConfigOptions } from '../config/index'
 import webpackClientDebugConfig from '../config/webpack.client.debug'
+import webpackClientDevConfig from '../config/webpack.client.dev'
 import webpackClientProdConfig from '../config/webpack.client.prod'
-import webpackServerDevConfig from '../config/webpack.server.dev'
 import webpackServerDebugConfig from '../config/webpack.server.debug'
+import webpackServerDevConfig from '../config/webpack.server.dev'
 import webpackServerProdConfig from '../config/webpack.server.prod'
 import { BuildConfig } from '../index'
-import { Logger } from '../runtime/universal'
-import { CreateWebpackConfigOptions, CreateWebpackConfig } from '../config/index'
-import { buildCacheDirectory } from '../../lib/bin/cache-validator'
+import { dynamicRequire } from '../runtime/util/fs'
+import { BuildEnvironment, BuildTarget } from '../types'
 
 export const TARGETS: BuildTarget[] = ['server', 'client']
 
@@ -23,12 +23,41 @@ export const ENVIRONMENTS: BuildEnvironment[] = ['dev', 'prod', 'debug']
  * This will be the custom configuration if a file is present in
  * config/webpack.<target>.<environment>.js, or the default one otherwise
  */
-export const getWebpackConfig = (
+export function getWebpackConfig(
     log: Logger,
     buildConfig: BuildConfig,
     target: BuildTarget,
     environment: BuildEnvironment,
-): webpack.Configuration | undefined => {
+): webpack.Configuration | undefined {
+    const config = getWebpackConfigInternal(log, buildConfig, target, environment)
+
+    // We need to JSON.strinify config, so let's make it safe (as we can)
+    if (config && config.plugins) {
+        config.plugins.forEach(plugin => {
+            const pluginAny: any = plugin
+            if (pluginAny.toJSON) {
+                return
+            }
+
+            pluginAny.toJSON = () => {
+                const ctorName =
+                    pluginAny.__proto__ &&
+                    pluginAny.__proto__.constructor &&
+                    pluginAny.__proto__.constructor.name
+                return `Plugin: ${ctorName || pluginAny.toString()}`
+            }
+        })
+    }
+
+    return config
+}
+
+function getWebpackConfigInternal(
+    log: Logger,
+    buildConfig: BuildConfig,
+    target: BuildTarget,
+    environment: BuildEnvironment,
+): webpack.Configuration | undefined {
     if (TARGETS.indexOf(target) === -1) {
         log.error(`Unknown target: "${target}"! ` + `Known values are: ${TARGETS.join(', ')}`)
         return undefined
@@ -46,16 +75,16 @@ export const getWebpackConfig = (
     const customConfigFile = path.resolve(buildConfig.BASE, 'config', configFileName)
 
     const cacheDirectory = buildCacheDirectory({
-        project: buildConfig.BASE,
         environment,
+        project: buildConfig.BASE,
         target,
     })
 
     let config: webpack.Configuration
     const createWebpackConfigOptions: CreateWebpackConfigOptions = {
-        log,
         buildConfig,
         cacheDirectory,
+        log,
     }
 
     try {

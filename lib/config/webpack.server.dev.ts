@@ -1,9 +1,9 @@
 import merge from 'webpack-merge'
-import baseConfig from './webpack.base'
-import serverBaseConfig from './webpack.server'
-import devConfig from './webpack.dev'
-import getWebpackHooks, { getHook } from './webpack-hooks'
 import { CreateWebpackConfig } from './index'
+import getWebpackHooks, { getHook } from './webpack-hooks'
+import baseConfig from './webpack.base'
+import devConfig from './webpack.dev'
+import serverBaseConfig from './webpack.server'
 
 /** Webpack config for the server in development */
 const config: CreateWebpackConfig = options => {

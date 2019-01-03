@@ -35,14 +35,8 @@ export interface BuildConfig {
     /** output directory for the build */
     OUTPUT: string
 
-    /** Autoprefixer browser compatibilty  */
-    CSS_AUTOPREFIXER: string[]
-
     /** set to false if the application is serverless */
     HAS_SERVER: boolean
-
-    /** List paths to exclude from linting */
-    LINT_EXCLUDE: string[]
 
     /** Default port for the dev server (when process.env.PORT is not set) */
     DEV_SERVER_PORT: number
@@ -97,7 +91,7 @@ export type BuildTarget = 'server' | 'client'
 
 export type BuildEnvironment = 'dev' | 'prod' | 'debug'
 
-export type BuildParam = BuildTarget | BuildEnvironment | 'complete'
+export type BuildParam = BuildTarget | BuildEnvironment
 
 export type StartParam =
     | 'fast'

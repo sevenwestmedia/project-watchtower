@@ -1,29 +1,22 @@
+import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
 import { CreateWebpackConfig } from './index'
-import TerserPlugin from 'terser-webpack-plugin'
-import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 
 /** Webpack settings for all production builds */
 const prodConfig: CreateWebpackConfig = () => ({
-    mode: 'production',
     devtool: 'source-map',
-    resolve: {
-        alias: {
-            'project-watchtower/lib': 'project-watchtower/dist-es',
-        },
-    },
+    mode: 'production',
     optimization: {
         minimizer: [
             new TerserPlugin({
-                sourceMap: true,
                 cache: true,
                 parallel: true,
+                sourceMap: true,
                 terserOptions: {
                     compress: {},
                     ie8: false,
                 },
             }),
-            new OptimizeCSSAssetsPlugin({}),
         ],
     },
     plugins: [
@@ -32,6 +25,11 @@ const prodConfig: CreateWebpackConfig = () => ({
             minimize: true,
         }),
     ],
+    resolve: {
+        alias: {
+            'project-watchtower/lib': 'project-watchtower/dist-es',
+        },
+    },
 })
 
 export default prodConfig

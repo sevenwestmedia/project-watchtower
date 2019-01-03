@@ -1,10 +1,10 @@
 import fs from 'fs'
 import md5 from 'md5'
+import mkdirp from 'mkdirp'
 import path from 'path'
 import rimraf from 'rimraf'
-import { Logger } from '../runtime/universal'
+import { Logger } from 'typescript-log'
 import { promisify } from 'util'
-import mkdirp from 'mkdirp'
 import { BuildEnvironment, BuildTarget } from '../../lib/types'
 
 type ValidationItem =
@@ -15,15 +15,22 @@ type ValidationItem =
       }
     | { isFile: false; itemHash: string; hashKey: string }
 
-type CacheLoaderValidation = {
+interface CacheLoaderValidation {
     cacheValidationConfigPath: string
     cacheDirectory: string
     validationItems: ValidationItem[]
 }
 
-type CacheLoaderValidationFile = { [key: string]: string | boolean; cacheCleared: boolean }
+interface CacheLoaderValidationFile {
+    [key: string]: string | boolean
+    cacheCleared: boolean
+}
 
-type BuildInfo = { project: string; environment: BuildEnvironment; target: BuildTarget }
+interface BuildInfo {
+    project: string
+    environment: BuildEnvironment
+    target: BuildTarget
+}
 
 // Configure Variables
 const cacheDir = process.env.BUILD_CACHE_DIRECTORY || `.build-cache`
@@ -32,18 +39,18 @@ const tsConfigPath = 'tsconfig.json'
 const buildCacheValidationConfig = '.build-cache-validation'
 
 export const TSCONFIG_VALIDATION_ITEM: ValidationItem = {
-    isFile: true,
     filePath: tsConfigPath,
     hashKey: 'tsconfigHash',
+    isFile: true,
 }
 
 // default values
 const validatorConfig: CacheLoaderValidation & {
     baseCacheDirectory: string
 } = {
-    cacheValidationConfigPath: path.join(cacheDirPath, buildCacheValidationConfig),
     baseCacheDirectory: cacheDirPath,
     cacheDirectory: cacheDirPath,
+    cacheValidationConfigPath: path.join(cacheDirPath, buildCacheValidationConfig),
     validationItems: [TSCONFIG_VALIDATION_ITEM],
 }
 

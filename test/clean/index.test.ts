@@ -1,11 +1,11 @@
 import fs from 'fs'
-import path from 'path'
 import mkdirp from 'mkdirp'
+import path from 'path'
+import { consoleLogger } from 'typescript-log'
 import clean from '../../lib/clean'
 import { getConfig } from '../../lib/runtime/config/config'
-import { createConsoleLogger } from '../../lib/runtime/universal'
 
-const log = createConsoleLogger()
+const log = consoleLogger()
 const buildConfig = getConfig(log, process.cwd())
 buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/clean')
 

@@ -1,7 +1,7 @@
+import { consoleLogger } from 'typescript-log'
 import { average, getSequenceAverage } from '../../../lib/util/math'
-import { createConsoleLogger } from '../../../lib/runtime/universal'
 
-const log = createConsoleLogger()
+const log = consoleLogger()
 
 describe('util/math', () => {
     it('average', () => {

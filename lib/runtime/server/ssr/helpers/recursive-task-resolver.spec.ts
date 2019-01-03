@@ -1,7 +1,8 @@
+import { consoleLogger } from 'typescript-log'
+import { PromiseTracker } from '../../../universal'
 import resolveAllData from './recursive-task-resolver'
-import { PromiseTracker, createConsoleLogger } from '../../../universal'
 
-const testLogger = createConsoleLogger()
+const testLogger = consoleLogger()
 
 describe('Recursive Task Resolver', () => {
     it('Should abort after 5 tries', done => {

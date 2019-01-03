@@ -1,14 +1,12 @@
 import build from './build'
 import clean from './clean'
 import exploreBundle from './explore-bundle'
-import lint from './lint'
 import start from './start'
 import stats from './stats'
-import test from './test'
 import watch from './watch'
 
-import { BuildParam, StartParam, WatchParam } from '../types'
 import { getConfig } from '../runtime/config/config'
+import { BuildParam, StartParam, WatchParam } from '../types'
 import { cliLogger } from '../util/log'
 
 const args = process.argv.slice(2)
@@ -47,10 +45,6 @@ switch (command) {
         exitAfter(build(cliLogger, buildConfig, ...(commandArgs as BuildParam[])))
         break
 
-    case 'coverage':
-        exitAfter(test(cliLogger, buildConfig, '--coverage', ...commandArgs))
-        break
-
     case 'clean':
         exitAfter(clean(cliLogger, buildConfig, ...commandArgs))
         break
@@ -59,20 +53,12 @@ switch (command) {
         exitOnError(exploreBundle(cliLogger, buildConfig, ...commandArgs))
         break
 
-    case 'lint':
-        exitAfter(lint(cliLogger, buildConfig, ...commandArgs))
-        break
-
     case 'start':
         exitOnError(start(cliLogger, buildConfig, {}, ...(commandArgs as StartParam[])))
         break
 
     case 'stats':
         exitAfter(stats(cliLogger, buildConfig, ...commandArgs))
-        break
-
-    case 'test':
-        exitAfter(test(cliLogger, buildConfig, ...commandArgs))
         break
 
     case 'watch':
@@ -85,14 +71,11 @@ switch (command) {
 
 Scripts:
 
-    build [complete] [<target>] [<environment>] [-p <project dir>]
+    build [<target>] [<environment>] [-p <project dir>]
     clean [-p <project dir>] [<glob> ...]
-    coverage [<jest options> ...] [-p <project dir>]
     explore-bundle [disableHoisting] [-p <project dir>]
-    lint [tslint] [sass-lint] [-p <project dir>] [<glob> ...]
     start [watch] [fast] [prod] [debug] [inspect] [client] [-p <project dir>]
     stats [verbose] [-p <project dir>]
-    test [debug] [debug-brk] [--port <debugPort>] [-p <project dir>] [<jest options> ...]
     watch [server] [client] [fast] [inspect] [-p <project dir>]
 
 Refer to docs/cli.md for the full API documentation

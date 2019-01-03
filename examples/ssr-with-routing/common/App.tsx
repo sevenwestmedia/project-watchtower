@@ -1,11 +1,11 @@
 import React from 'react'
-import './App.scss'
-import { Switch, Route } from 'react-router'
-import { Home } from './Home'
+import { Route, Switch } from 'react-router'
 import { NavLink } from 'react-router-dom'
-import { Topic } from './Topic'
-import { Teapot } from './Teapot'
+import './App.scss'
+import { Home } from './Home'
 import { NotFound } from './NotFound'
+import { Teapot } from './Teapot'
+import { Topic } from './Topic'
 
 export const App: React.SFC = () => (
     <div>

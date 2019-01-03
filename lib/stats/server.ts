@@ -1,13 +1,13 @@
+import dotenv from 'dotenv'
+import http from 'http'
 import os from 'os'
 import path from 'path'
-import http from 'http'
-import dotenv from 'dotenv'
+import { Logger } from 'typescript-log'
+import { BuildConfig } from '../../lib'
 import { getPort } from '../runtime/server/server'
-import { waitForConnection, findFreePort } from '../runtime/util/network'
+import { findFreePort, waitForConnection } from '../runtime/util/network'
 import { forkPromise } from '../util/process'
 import { getTimeMs, timeout } from '../util/time'
-import { BuildConfig } from '../../lib'
-import { Logger } from '../runtime/universal'
 
 export interface SSRStats {
     size: number
@@ -31,8 +31,7 @@ const getIp = () => {
 const getServerUrl = (port: number, urlPath: string) => {
     const useUrlPath = urlPath.indexOf('/') === 0 ? urlPath : '/' + urlPath
 
-    const host = // provided by build environment, ref OPS-383
-        process.env.STATS_SERVER_ADDRESS || getIp() || 'localhost'
+    const host = process.env.STATS_SERVER_ADDRESS || getIp() || 'localhost' // provided by build environment, ref OPS-383
 
     return `http://${host}:${port}${useUrlPath}`
 }

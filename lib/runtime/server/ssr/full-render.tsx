@@ -1,10 +1,11 @@
-import { PromiseTracker, formatElapsed, Logger } from '../../universal'
+import { Logger } from 'typescript-log'
+import { formatElapsed, PromiseTracker } from '../../universal'
+import { Information, Status404Error, Warning } from './errors'
 import resolveAllData from './helpers/recursive-task-resolver'
+import { CreateAppElement, renderApp } from './render-app-to-string'
+import { WatchtowerEvents } from './render-events'
 import { routerContextHandler } from './router-context-handler'
 import * as ServerRenderResults from './server-render-results'
-import { renderApp, CreateAppElement } from './render-app-to-string'
-import { WatchtowerEvents } from './render-events'
-import { Status404Error, Warning, Information } from './errors'
 
 export { PromiseTracker }
 
@@ -199,10 +200,10 @@ export async function renderPageContents<SSRRequestProps extends object, RenderR
         )
     } catch (err) {
         const failure: ServerRenderResults.FailedRenderResult = {
-            type: ServerRenderResults.ServerRenderResultType.Failure,
-            errorMessage: 'Failed to do render',
             elapsed: formatElapsed(process.hrtime(startTime)),
+            errorMessage: 'Failed to do render',
             head: undefined,
+            type: ServerRenderResults.ServerRenderResultType.Failure,
         }
         options.log.error({ err }, 'Failed to render')
 

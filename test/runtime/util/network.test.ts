@@ -1,8 +1,8 @@
 import express from 'express'
 import {
-    waitForConnection,
     checkPortAvailability,
     findFreePort,
+    waitForConnection,
 } from '../../../lib/runtime/util/network'
 import { expectPromiseToFail, getTestPort } from '../../test-helpers'
 

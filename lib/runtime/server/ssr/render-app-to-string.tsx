@@ -1,9 +1,10 @@
 import React from 'react'
 import { Helmet, HelmetData } from 'react-helmet'
 import { StaticRouter } from 'react-router-dom'
-import { functionTimer, Logger } from '../../universal'
-import { StaticRouterContext } from './router-context-handler'
+import { Logger } from 'typescript-log'
+import { functionTimer } from '../../universal'
 import { PromiseTracker } from './full-render'
+import { StaticRouterContext } from './router-context-handler'
 
 export type CreateAppElement = (promiseTracker: PromiseTracker) => React.ReactElement<any>
 
@@ -43,7 +44,7 @@ export function renderApp<RenderResult>(
 
     return {
         context,
-        renderResult,
         head,
+        renderResult,
     }
 }

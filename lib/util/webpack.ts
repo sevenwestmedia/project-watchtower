@@ -1,14 +1,14 @@
+import { Logger } from 'typescript-log'
 import webpack from 'webpack'
-import { Logger } from '../runtime/universal'
 
 export const webpackStatsConfig: webpack.Stats.ToStringOptionsObject = {
-    errors: true,
-    warnings: true,
-    timings: true,
-    colors: true,
-    chunks: false,
-    chunkModules: false,
     children: false,
+    chunkModules: false,
+    chunks: false,
+    colors: true,
+    errors: true,
+    timings: true,
+    warnings: true,
     /* filter export warnings when transpileOnly:true -> https://github.com/TypeStrong/ts-loader/issues/751 */
     warningsFilter: /export .* was not found in/,
 }

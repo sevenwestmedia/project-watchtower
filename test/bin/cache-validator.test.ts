@@ -1,18 +1,18 @@
-import {
-    validateCache,
-    writeDummyFile,
-    writeDummyConfigFile,
-    deletePath,
-    setup,
-    setupWithBuildInfo,
-    getConfigContents,
-} from '../../lib/bin/cache-validator'
-import { createConsoleLogger } from '../../lib/runtime/universal'
+import { BuildEnvironment, BuildTarget } from 'lib'
 import mkdirp from 'mkdirp'
 import path from 'path'
-import { BuildEnvironment, BuildTarget } from 'lib'
+import { consoleLogger } from 'typescript-log'
+import {
+    deletePath,
+    getConfigContents,
+    setup,
+    setupWithBuildInfo,
+    validateCache,
+    writeDummyConfigFile,
+    writeDummyFile,
+} from '../../lib/bin/cache-validator'
 
-const log = createConsoleLogger()
+const log = consoleLogger()
 
 describe('cache-validator tests', () => {
     const TEST_CACHE_DIR = path.join(__dirname, '/cache/')
@@ -27,10 +27,10 @@ describe('cache-validator tests', () => {
 
         setup(log, {
             cacheDirectory: TEST_CACHE_DIR,
+            valiationConfigPath: TEST_VALIDATION_CONFIG_PATH,
             validationItems: [
                 { isFile: true, filePath: TS_CONFIG_PATH, hashKey: TS_CONFIG_HASH_KEY },
             ],
-            valiationConfigPath: TEST_VALIDATION_CONFIG_PATH,
         })
     })
 
@@ -80,8 +80,8 @@ describe('cache-validator tests - with build info', () => {
     const TS_CONFIG_PATH = path.join(TEST_CACHE_DIR, 'tsconfig.json')
 
     const buildInfo = {
-        project: 'some/project',
         environment: 'prod' as BuildEnvironment,
+        project: 'some/project',
         target: 'client' as BuildTarget,
     }
 
@@ -90,9 +90,9 @@ describe('cache-validator tests - with build info', () => {
 
     beforeEach(async () => {
         const config = setupWithBuildInfo(log, {
+            buildInfo,
             cacheDirectory: TEST_CACHE_DIR,
             validationItems: [{ isFile: true, filePath: TS_CONFIG_PATH, hashKey: 'tsConfig' }],
-            buildInfo,
         })
 
         cacheDirectory = config.cacheDirectory
@@ -131,8 +131,8 @@ describe('cache-validator tests - with build info', () => {
     it('dont remove cache dir as the tsconfig matches the validation config - with build info', async () => {
         await writeDummyFile(log, path.resolve(TS_CONFIG_PATH), 'aaaaaaaa')
         await writeDummyConfigFile(log, cacheValidationConfigPath, {
-            tsConfig: '3dbe00a167653a1aaee01d93e77e730e',
             cacheCleared: false,
+            tsConfig: '3dbe00a167653a1aaee01d93e77e730e',
         }) // the hash for aaa
 
         await validateCache(log)

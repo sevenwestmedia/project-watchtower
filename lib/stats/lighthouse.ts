@@ -1,12 +1,12 @@
 import fs from 'fs'
-import path from 'path'
 import lighthouse from 'lighthouse'
+import path from 'path'
+import { Logger } from 'typescript-log'
+import { promisify } from 'util'
+import { BuildConfig } from '../../lib'
+import { formatTimeMs, timeout } from '../util/time'
 import { BuildMetrics } from './'
 import { runStatsOnServer } from './server'
-import { formatTimeMs, timeout } from '../util/time'
-import { BuildConfig } from '../../lib'
-import { Logger } from '../runtime/universal'
-import { promisify } from 'util'
 
 export const runLighthouse = async (log: Logger, url: string) => {
     try {

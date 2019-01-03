@@ -16,6 +16,7 @@ export class PromiseTracker {
         // if we don't, we will get warnings about handling promises
         // asynchronously.
         if ((promise as any).catch) {
+            // tslint:disable-next-line:no-empty
             ;(promise as any).catch(() => {})
         }
         this.promises[currentWaitIndex].push(promise)
@@ -50,7 +51,7 @@ export class PromiseTracker {
             //  promise back onto the event loop, this can fix
             //  issues where tests have not re-rendered before
             //  trying to find elements
-            .then(() => new Promise(resolve => setTimeout(resolve)))
+            .then(() => new Promise(resolve => setTimeout(resolve, 0)))
         return all
     }
 }

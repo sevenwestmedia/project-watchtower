@@ -1,14 +1,14 @@
 import path from 'path'
+import { consoleLogger } from 'typescript-log'
 import clean from '../../../lib/bin/clean'
-import {
-    updateAssetLocations,
-    getAssetLocations,
-    getAbsoluteAssetPath,
-} from '../../../lib/runtime/server/assets'
 import { getConfig, getRuntimeConfigFromBuildConfig } from '../../../lib/runtime/config/config'
-import { createConsoleLogger } from '../../../lib/runtime/universal'
+import {
+    getAbsoluteAssetPath,
+    getAssetLocations,
+    updateAssetLocations,
+} from '../../../lib/runtime/server/assets'
 
-const log = createConsoleLogger()
+const log = consoleLogger()
 const buildConfig = getConfig(log, process.cwd())
 buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/assets')
 
@@ -16,8 +16,8 @@ const runtimeConfig = getRuntimeConfigFromBuildConfig(buildConfig)
 
 const assets = {
     main: {
-        js: 'foo/main.chunk.js',
         css: 'foo/css/main.css',
+        js: 'foo/main.chunk.js',
     },
     vendor: {
         js: 'foo/vendor.chunk.js',

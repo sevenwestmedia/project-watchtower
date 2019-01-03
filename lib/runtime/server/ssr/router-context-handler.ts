@@ -1,6 +1,6 @@
 import { formatElapsed } from '../../universal'
-import { ServerRenderResult, ServerRenderResultType } from './server-render-results'
 import { RenderPassResult } from './render-app-to-string'
+import { ServerRenderResult, ServerRenderResultType } from './server-render-results'
 
 export interface StaticRouterContext {
     url?: string
@@ -26,13 +26,13 @@ export const createResponse = <SSRRequestProps extends object, RenderResult>({
     RenderResult
 > => {
     return {
-        type: ServerRenderResultType.Success,
         elapsed: formatElapsed(process.hrtime(startTime)),
         head: renderResult.head,
+        renderLocation,
         renderedContent: renderResult.renderResult,
         ssrRequestProps,
         statusCode,
-        renderLocation,
+        type: ServerRenderResultType.Success,
     }
 }
 
@@ -44,21 +44,21 @@ export const routerContextHandler = <SSRRequestProps extends object, RenderResul
 ): ServerRenderResult<SSRRequestProps, RenderResult> => {
     if (renderResult.context.url) {
         return {
-            type: ServerRenderResultType.Redirect,
-            head: renderResult.head,
-            redirectTo: renderResult.context.url,
-            isPermanent: renderResult.context.statusCode === 301,
             elapsed: formatElapsed(process.hrtime(startTime)),
+            head: renderResult.head,
+            isPermanent: renderResult.context.statusCode === 301,
+            redirectTo: renderResult.context.url,
+            type: ServerRenderResultType.Redirect,
         }
     }
 
     const statusCode = renderResult.context.statusCode ? renderResult.context.statusCode : 200
 
     return createResponse({
+        renderLocation,
         renderResult,
         ssrRequestProps,
         startTime,
         statusCode,
-        renderLocation,
     })
 }

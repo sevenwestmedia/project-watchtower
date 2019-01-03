@@ -1,23 +1,23 @@
 import fs from 'fs'
 import path from 'path'
-import clean from '../../lib/bin/clean'
+import { consoleLogger } from 'typescript-log'
 import build from '../../lib/bin/build'
+import clean from '../../lib/bin/clean'
 import stats from '../../lib/bin/stats'
-import bundleSize from '../../lib/stats/bundle-size'
-import ssrStats from '../../lib/stats/ssr-stats'
-import { lighthouseStats } from '../../lib/stats/lighthouse'
-import { getTestPort } from '../test-helpers'
 import { getConfig, getRuntimeConfigFromBuildConfig } from '../../lib/runtime/config/config'
-import { createConsoleLogger } from '../../lib/runtime/universal'
+import bundleSize from '../../lib/stats/bundle-size'
+import { lighthouseStats } from '../../lib/stats/lighthouse'
+import ssrStats from '../../lib/stats/ssr-stats'
+import { getTestPort } from '../test-helpers'
 
-const log = createConsoleLogger()
+const log = consoleLogger()
 const testProjectDir = path.join(process.cwd(), './test/test-project')
 const buildConfig = getConfig(log, testProjectDir)
 buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/stats')
 
 const runtimeConfig = getRuntimeConfigFromBuildConfig(buildConfig)
 
-// Increase test timeout because builds might take a while
+    // Increase test timeout because builds might take a while
 ;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 90000
 
 describe('stats', () => {

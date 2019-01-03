@@ -1,15 +1,13 @@
-import fs from 'fs'
-import path from 'path'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import AssetsPlugin from 'assets-webpack-plugin'
+import fs from 'fs'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import autoprefixer from 'autoprefixer'
-import { updateAssetLocations } from '../runtime/server/assets'
+import path from 'path'
 import { BuildConfig } from '../../lib'
 import { getAssetsFile } from '../runtime/server'
+import { updateAssetLocations } from '../runtime/server/assets'
 import { CreateWebpackConfig } from './index'
 
-type EntryPoints = {
+interface EntryPoints {
     [name: string]: string[]
 }
 
@@ -33,7 +31,6 @@ const clientBaseConfig: CreateWebpackConfig = options => {
         CLIENT_ENTRY,
         OUTPUT,
         CLIENT_POLYFILLS,
-        CSS_AUTOPREFIXER,
         PUBLIC_PATH,
         SERVER_PUBLIC_DIR,
     } = options.buildConfig
@@ -69,14 +66,16 @@ const clientBaseConfig: CreateWebpackConfig = options => {
 
     return {
         entry,
-        output: {
-            path: OUTPUT,
-            publicPath: PUBLIC_PATH,
+        module: {
+            rules: [],
         },
         optimization: {
             splitChunks: {
                 cacheGroups: {
                     vendor: {
+                        chunks: 'all',
+                        name: 'vendor',
+                        priority: -20,
                         test: (module: { context: string }) => {
                             if (!module.context) {
                                 return false
@@ -92,47 +91,13 @@ const clientBaseConfig: CreateWebpackConfig = options => {
 
                             return !isWatchtower
                         },
-                        name: 'vendor',
-                        chunks: 'all',
-                        priority: -20,
                     },
                 },
             },
         },
-        module: {
-            rules: [
-                {
-                    test: /\.s?css$/,
-                    use: [
-                        MiniCssExtractPlugin.loader,
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                sourceMap: true,
-                            },
-                        },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                sourceMap: true,
-                                plugins: () => [autoprefixer({ browsers: CSS_AUTOPREFIXER })],
-                            },
-                        },
-                        {
-                            loader: 'resolve-url-loader',
-                            options: {
-                                sourceMap: true,
-                            },
-                        },
-                        {
-                            loader: 'sass-loader',
-                            options: {
-                                sourceMap: true,
-                            },
-                        },
-                    ],
-                },
-            ],
+        output: {
+            path: OUTPUT,
+            publicPath: PUBLIC_PATH,
         },
         plugins,
     }

@@ -9,6 +9,7 @@ import { App, AppState } from '../common/App'
 const state = getTransferredState<AppState>('STATE')
 
 if (!state) {
+    // tslint:disable-next-line:no-console
     console.error('State not transferred from server, cannot start client')
 } else {
     const render = () => {

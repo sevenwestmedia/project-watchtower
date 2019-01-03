@@ -1,17 +1,17 @@
 import fs from 'fs'
 import path from 'path'
-import clean from '../../lib/bin/clean'
+import { consoleLogger } from 'typescript-log'
 import build from '../../lib/bin/build'
-import { getAbsoluteAssetPath, getAssetLocations } from '../../lib/runtime/server/assets'
+import clean from '../../lib/bin/clean'
 import { getConfig, getRuntimeConfigFromBuildConfig } from '../../lib/runtime/config/config'
+import { getAbsoluteAssetPath, getAssetLocations } from '../../lib/runtime/server/assets'
 
-// Increase test timeout because builds might take a while
-import { createConsoleLogger } from '../../lib/runtime/universal'
-;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 60000
-
-const log = createConsoleLogger()
+const log = consoleLogger('info')
 
 describe('bin/build', () => {
+    // Increase test timeout because builds might take a while
+    jest.setTimeout(60000)
+
     it('will build', async () => {
         const testProjectDir = path.join(process.cwd(), './test/test-project')
         const buildConfig = getConfig(log, testProjectDir)
@@ -33,7 +33,7 @@ describe('bin/build', () => {
 
         const assets = getAssetLocations(runtimeConfig)
 
-        const files = [assets.main.js, assets.main.css, assets.vendor.js].map(f =>
+        const files = [assets.main.js, assets.vendor.js].map(f =>
             getAbsoluteAssetPath(runtimeConfig, f),
         )
 

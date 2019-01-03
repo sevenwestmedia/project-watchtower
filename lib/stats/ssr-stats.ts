@@ -1,10 +1,10 @@
 import { load } from 'cheerio'
-import { BuildMetrics } from './'
-import { formatTimeMs, timeout } from '../util/time'
-import { getSequenceAverage } from '../util/math'
-import { runStatsOnServer, loadSSRPage } from './server'
+import { Logger } from 'typescript-log'
 import { BuildConfig } from '../../lib'
-import { Logger } from '../runtime/universal'
+import { getSequenceAverage } from '../util/math'
+import { formatTimeMs, timeout } from '../util/time'
+import { BuildMetrics } from './'
+import { loadSSRPage, runStatsOnServer } from './server'
 
 const ssrStats = async (
     log: Logger,

@@ -1,5 +1,5 @@
 import express from 'express'
-import { Logger } from '../../universal'
+import { Logger } from 'typescript-log'
 
 export const createEnsureRequestLogMiddleware = (log: Logger): express.RequestHandler => {
     return (req, _res, next) => {

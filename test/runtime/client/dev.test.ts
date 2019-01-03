@@ -7,6 +7,7 @@ import { delay } from '../../../lib/util/time'
 
 describe('lib/client/dev', () => {
     it('cssHotReload', async () => {
+        // tslint:disable-next-line:no-empty
         const origSuccess = () => {}
 
         /*

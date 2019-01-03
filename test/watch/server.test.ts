@@ -1,12 +1,12 @@
 import path from 'path'
-import clean from '../../lib/bin/clean'
+import { consoleLogger } from 'typescript-log'
 import build from '../../lib/bin/build'
-import watchServer from '../../lib/watch/server'
+import clean from '../../lib/bin/clean'
 import { getConfig } from '../../lib/runtime/config/config'
-import { createConsoleLogger } from '../../lib/runtime/universal'
-import { waitForConnection, findFreePort } from '../../lib/runtime/util/network'
+import { findFreePort, waitForConnection } from '../../lib/runtime/util/network'
+import watchServer from '../../lib/watch/server'
 
-const log = createConsoleLogger()
+const log = consoleLogger()
 const testProjectDir = path.join(process.cwd(), './test/test-project')
 const buildConfig = getConfig(log, testProjectDir)
 buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/server')

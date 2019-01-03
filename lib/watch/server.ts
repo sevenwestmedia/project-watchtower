@@ -1,16 +1,16 @@
-import path from 'path'
-import { fork, ChildProcess } from 'child_process'
+import { ChildProcess, fork } from 'child_process'
+import dotenv from 'dotenv'
 import express from 'express'
 import { Server } from 'http'
-import webpack from 'webpack'
 import proxyMiddleware from 'http-proxy-middleware'
-import dotenv from 'dotenv'
-import { getWebpackConfig } from '../build/build'
-import { openBrowser, getHotReloadMiddleware } from '../server/dev'
-import { getPort } from '../runtime/server/server'
-import { waitForConnection, findFreePort } from '../runtime/util/network'
+import path from 'path'
+import { Logger } from 'typescript-log'
+import webpack from 'webpack'
 import { BuildConfig } from '../../lib'
-import { Logger } from '../runtime/universal'
+import { getWebpackConfig } from '../build/build'
+import { getPort } from '../runtime/server/server'
+import { findFreePort, waitForConnection } from '../runtime/util/network'
+import { getHotReloadMiddleware, openBrowser } from '../server/dev'
 
 const restartServer = (
     buildConfig: BuildConfig,
@@ -27,9 +27,9 @@ const restartServer = (
     return fork(path.resolve(buildConfig.OUTPUT, 'server.js'), [], {
         env: {
             ...process.env,
+            LOAD_DEFAULT_ASSETS: true,
             PORT: port,
             PROJECT_DIR: projectDir,
-            LOAD_DEFAULT_ASSETS: true,
         },
     })
 }
@@ -55,7 +55,7 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
         const serverCompiler = webpack(getWebpackConfig(log, buildConfig, 'server', 'dev'))
 
         serverCompiler.hooks.invalid.tap('invalid', () => {
-            log.info('🦄Server changed, rebuilding and restarting server...⭐')
+            log.info('🦄 Server changed, rebuilding and restarting server...⭐')
         })
 
         const watching = serverCompiler.watch(
@@ -88,11 +88,12 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
         const server = app.listen(hostPort, () => {
             resolve({
                 app,
-                server,
                 close: () => {
+                    // tslint:disable-next-line:no-empty
                     watching.close(() => {})
                     server.close()
                 },
+                server,
             })
         })
 

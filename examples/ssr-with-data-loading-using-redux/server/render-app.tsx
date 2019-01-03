@@ -1,7 +1,7 @@
 import React from 'react'
+import { Provider } from 'react-redux'
 import { App } from '../common/App'
 import { SSRState } from './start'
-import { Provider } from 'react-redux'
 
 export const renderApp = (state: SSRState) => {
     return (

@@ -1,6 +1,6 @@
+import { Logger } from 'typescript-log'
 import webpack from 'webpack'
 import { BuildConfig } from '../index'
-import { Logger } from '../runtime/universal'
 
 export { default as base } from './webpack.base'
 export { default as clientBase } from './webpack.client'
@@ -15,7 +15,7 @@ export { default as devBase } from './webpack.dev'
 export { default as prodBase } from './webpack.prod'
 export { getConfig } from '../runtime/config/config'
 
-export type CreateWebpackConfigOptions = {
+export interface CreateWebpackConfigOptions {
     buildConfig: BuildConfig
     log: Logger
     cacheDirectory: string

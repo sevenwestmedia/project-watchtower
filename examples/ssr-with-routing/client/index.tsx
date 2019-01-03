@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { cssHotReload } from '../../../lib/runtime/client'
 
-import { App } from '../common/App'
 import { WatchtowerBrowserRouter } from '../../../lib/runtime/server/ssr/watchtower-browser-router'
+import { App } from '../common/App'
 
 const render = () => {
     ReactDOM.hydrate(

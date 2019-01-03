@@ -1,10 +1,10 @@
+import { Logger } from 'typescript-log'
 import webpack from 'webpack'
-import merge from 'webpack-merge'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
+import merge from 'webpack-merge'
+import { BuildConfig } from '../../lib'
 import { getWebpackConfig } from '../build/build'
 import { webpackPromise } from '../util/webpack'
-import { BuildConfig } from '../../lib'
-import { Logger } from '../runtime/universal'
 
 /**
  * Opens the webpack-bundle-analyzer for the client production bundle

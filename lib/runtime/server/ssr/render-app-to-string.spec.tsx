@@ -3,10 +3,11 @@
  */
 
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import { renderApp } from './render-app-to-string'
-import { createConsoleLogger, PromiseTracker } from '../../universal'
 import { renderToString } from 'react-dom/server'
+import { Route, Switch } from 'react-router-dom'
+import { consoleLogger } from 'typescript-log'
+import { PromiseTracker } from '../../universal'
+import { renderApp } from './render-app-to-string'
 
 const Home: React.SFC<{}> = () => <div>Home</div>
 const TestApp: React.SFC<{}> = () => (
@@ -19,7 +20,7 @@ it('renders app callback with router', () => {
     const renderResult = renderApp(
         '/',
         renderToString,
-        createConsoleLogger(),
+        consoleLogger(),
         () => <TestApp />,
         new PromiseTracker(),
     )

@@ -1,5 +1,5 @@
-import { fork, ForkOptions, spawn, SpawnOptions, ChildProcess } from 'child_process'
-import { Logger } from '../runtime/universal'
+import { ChildProcess, fork, ForkOptions, spawn, SpawnOptions } from 'child_process'
+import { Logger } from 'typescript-log'
 
 // make sure all child processes are killed when the process exits
 // https://stackoverflow.com/questions/15833047/how-to-kill-all-child-processes-on-exit
@@ -10,6 +10,7 @@ const killAllChildProcesses = () => {
     childProcesses.forEach(proc => {
         try {
             proc.kill()
+            // tslint:disable-next-line:no-empty
         } catch (err) {}
     })
     childProcesses = []
@@ -58,9 +59,9 @@ export const forkPromise = (
 ) =>
     new Promise<ChildProcess>((resolve, reject) => {
         log.info(
-            `[pwt] node ${options && options.execArgv
-                ? `${options.execArgv.join(' ')} `
-                : ''}${command} ${args.join(' ')}`,
+            `[pwt] node ${
+                options && options.execArgv ? `${options.execArgv.join(' ')} ` : ''
+            }${command} ${args.join(' ')}`,
         )
 
         const proc = fork(command, args, options)

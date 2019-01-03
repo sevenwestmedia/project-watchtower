@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, Middleware } from 'redux'
+import { applyMiddleware, createStore, Middleware } from 'redux'
 
 import thunk from 'redux-thunk'
 import rootReducer, { AppState } from './App.redux'

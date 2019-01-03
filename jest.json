@@ -1,49 +1,14 @@
 {
-    "setupTestFrameworkScriptFile": "<rootDir>/lib/test/setup-tests.ts",
     "testEnvironment": "node",
     "transform": {
         ".tsx?": "ts-jest"
     },
     "testRegex": "\\.(spec|test)\\.tsx?$",
-    "moduleFileExtensions": [
-        "ts",
-        "tsx",
-        "js",
-        "json"
-    ],
-    "moduleDirectories": [
-        "node_modules",
-        "common"
-    ],
-    "testPathIgnorePatterns": [
-        "/node_modules/",
-        "/demo/",
-        "dist",
-        "dist-es"
-    ],
+    "moduleFileExtensions": ["ts", "tsx", "js", "json"],
+    "testPathIgnorePatterns": ["/node_modules/", "dist"],
     "moduleNameMapper": {
         "\\.(s?css|png|svg|jpg|eot|woff|woff2)$": "<rootDir>/lib/test/test-mapper.ts",
         "^bundle-loader": "<rootDir>/lib/test/bundle-loader-mapper.ts"
     },
-    "snapshotSerializers": [
-        "enzyme-to-json/serializer"
-    ],
-    "verbose": false,
-    "collectCoverageFrom": [
-        "**/*.{ts,tsx}",
-        "!**/*.d.ts",
-        "!**/node_modules/**",
-        "!lib/config/**",
-        "!demo/**",
-        "!server/**",
-        "!client/**",
-        "!test/**"
-    ],
-    "coverageReporters": [
-        "json",
-        "lcov",
-        "text",
-        "teamcity"
-    ],
-    "testResultsProcessor": "jest-teamcity-reporter"
+    "coverageReporters": ["json", "lcov", "text"]
 }

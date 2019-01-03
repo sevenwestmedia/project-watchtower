@@ -5,10 +5,9 @@ Project Watchtower exposes the `project-watchtower` and `pwt` executables
 ### build
 
 ```
-pwt build [complete] [<target>] [<environment>] [-p <project dir>]
+pwt build [<target>] [<environment>] [-p <project dir>]
 ```
 
-* `complete`: Runs clean, lint and test before building
 * `target`: server, client
 * `environment`: dev, debug, prod
 
@@ -24,12 +23,6 @@ pwt clean [<glob> ...] [-p <project dir>]
 
 Cleans the default paths `SERVER_OUTPUT`, `CLIENT_OUTPUT` as well as all `.js` and `.maps` files in `/client`, `/server` and `/common`. You can pass in additional glob patterns to be cleaned.
 
-### coverage
-
-```
-pwt coverage [-p <project dir>] [<jest option> ...]
-```
-
 ### explore-bundle
 
 ```
@@ -39,19 +32,6 @@ pwt explore-bundle [disableHoisting] [-p <project dir>]
 Opens the `webpack-bundle-analyzer` for the client production bundle.
 
 *   `disableHoisting`: Disable scope hosting to identify where all the modules are coming from
-
-### lint
-
-```
-pwt lint [tslint] [sass-lint] [-p <project dir>] [<glob> ...]
-```
-
-Runs `tslint` and/or `sass-lint` against the project.
-
-*   `tslint`: Only run tslint
-*   `sass-lint`: Only run sass-lint
-
-By default all `.ts`/`.tsx` and all `.scss` files are checked. You can supply custom glob patterns instead. Note that they have to contain either `.ts` or `.scss` to be mapped to the correct linter if both linters are run in the same command.
 
 ### start
 
@@ -119,15 +99,6 @@ On build servers with access to Google Chrome through a Docker container, the fo
 *   `JENKINS_URL`: Used to detect a Jenkins build server
 *   `STATS_SERVER_ADDRESS`: Host name or IP address of container that hosts the Chrome installation
 *   `TEAMCITY_VERSION`: Used to detect a TeamCity build server
-
-### test
-
-```
-pwt test [debug] [debug-brk] [--port <debug port>] [-p <project dir>] [<jest option> ...]
-```
-
-*   `debug`: Runs the tests in debugging mode to use breakpoints.
-*   `debug-brk`: Runs the tests in debugging mode to use breakpoints and tells node to wait for debugger to attach before starting execution.
 
 ### watch
 

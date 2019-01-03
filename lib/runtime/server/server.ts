@@ -1,10 +1,10 @@
 import express from 'express'
-import { findFreePort } from '../util/network'
+import { Logger } from 'typescript-log'
 import { getConfig, getRuntimeConfig } from '../config/config'
-import { getDefaultHtmlMiddleware } from './middleware/default-html-middleware'
-import { Logger } from '../universal'
-import { createEnsureRequestLogMiddleware } from './middleware/ensure-request-log-middleware'
+import { findFreePort } from '../util/network'
 import { setDefaultAssets } from './assets'
+import { getDefaultHtmlMiddleware } from './middleware/default-html-middleware'
+import { createEnsureRequestLogMiddleware } from './middleware/ensure-request-log-middleware'
 
 export { getDefaultHtmlMiddleware }
 
@@ -24,7 +24,7 @@ export const isWatchMode = () => process.env.START_WATCH_MODE === 'true'
 
 export const isFastMode = () => process.env.START_FAST_MODE === 'true'
 
-export type CreateServerOptions = {
+export interface CreateServerOptions {
     log: Logger
 
     /**

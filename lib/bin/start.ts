@@ -1,10 +1,10 @@
-import path from 'path'
-import dotenv from 'dotenv'
 import { ChildProcess, ForkOptions } from 'child_process'
-import { forkPromise } from '../util/process'
-import { StartParam } from '../types'
+import dotenv from 'dotenv'
+import path from 'path'
+import { Logger } from 'typescript-log'
 import { BuildConfig } from '../../lib'
-import { Logger } from '../runtime/universal'
+import { StartParam } from '../types'
+import { forkPromise } from '../util/process'
 
 /**
  * Starts the pre-built server with the environment variables
@@ -28,10 +28,10 @@ const start = (
     const { HAS_SERVER, OUTPUT } = buildConfig
     const env: NodeJS.ProcessEnv = {
         ...startEnv,
-        PROJECT_DIR: buildConfig.BASE,
         NODE_ENV:
             args.indexOf('prod') !== -1 ? 'production' : process.env.NODE_ENV || 'development',
         PORT: buildConfig.DEV_SERVER_PORT.toString(),
+        PROJECT_DIR: buildConfig.BASE,
     }
 
     if (args.indexOf('watch') !== -1) {

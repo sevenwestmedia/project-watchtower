@@ -1,18 +1,14 @@
 import path from 'path'
 import React from 'react'
+import { Route } from 'react-router-dom'
 import supertest from 'supertest'
+import { consoleLogger, Logger, noopLogger } from 'typescript-log'
 import { createServer } from '../../../lib/runtime/server/server'
 import { createSsrMiddleware, RenderApp } from '../../../lib/runtime/server/ssr'
-import {
-    createConsoleLogger,
-    PromiseCompletionSource,
-    PromiseTracker,
-} from '../../../lib/runtime/universal'
-import { renderHtml } from '../../../lib/runtime/server/ssr/helpers/render-html'
-import { Route } from 'react-router-dom'
 import { Status404Error } from '../../../lib/runtime/server/ssr/errors'
+import { renderHtml } from '../../../lib/runtime/server/ssr/helpers/render-html'
+import { PromiseCompletionSource, PromiseTracker } from '../../../lib/runtime/universal'
 
-const log = createConsoleLogger()
 Error.stackTraceLimit = Infinity
 
 it(
@@ -116,6 +112,7 @@ it(
         },
         {
             errorLocation: '/error',
+            log: noopLogger(),
         },
     ),
 )
@@ -202,6 +199,7 @@ it(
         },
         {
             errorLocation: '/error',
+            log: noopLogger(),
         },
     ),
 )
@@ -232,6 +230,7 @@ it(
         },
         {
             errorLocation: '/error',
+            log: noopLogger(),
         },
     ),
 )
@@ -285,6 +284,7 @@ it(
         },
         {
             errorLocation: '/error',
+            log: noopLogger(),
         },
     ),
 )
@@ -298,7 +298,7 @@ export interface Fixture {
 
 function ssrFixture(
     test: (fixture: Fixture) => Promise<any>,
-    options: { errorLocation?: string; pageNotFoundLocation?: string } = {},
+    options: { errorLocation?: string; pageNotFoundLocation?: string; log?: Logger } = {},
 ) {
     // Return the test for Jest to run
     return async () => {
@@ -308,18 +308,18 @@ function ssrFixture(
             renderFn: () => <div />,
             server: supertest(
                 createServer({
-                    log,
+                    log: options.log || consoleLogger(),
                     middlewareHook: app => {
                         // To enable SSR simply register the SSR middleware as the default
                         // express handler.
                         const ssrMiddleware = createSsrMiddleware<SSRState>({
                             app,
-                            ssrTimeoutMs: 1000,
-                            renderApp: params => fixture.renderFn(params),
-                            renderHtml,
                             errorLocation: options.errorLocation || '/error',
                             pageNotFoundLocation: options.pageNotFoundLocation || '/page-not-found',
+                            renderApp: params => fixture.renderFn(params),
+                            renderHtml,
                             setupRequest: async () => ({}),
+                            ssrTimeoutMs: 1000,
                         })
 
                         app.get('*', ssrMiddleware)

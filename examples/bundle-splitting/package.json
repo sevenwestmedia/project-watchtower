@@ -6,6 +6,7 @@
     "license": "MIT",
     "devDependencies": {},
     "dependencies": {
+        "@types/react-loadable": "^5.4.3",
         "react-loadable": "^5.5.0"
     }
 }

@@ -1,11 +1,11 @@
 import fs from 'fs'
-import path from 'path'
 import mkdirp from 'mkdirp'
+import path from 'path'
+import { consoleLogger } from 'typescript-log'
 import clean from '../../lib/bin/clean'
 import { getConfig } from '../../lib/runtime/config/config'
-import { createConsoleLogger } from '../../lib/runtime/universal'
 
-const log = createConsoleLogger()
+const log = consoleLogger()
 
 describe('bin/clean', () => {
     it('will clean', async () => {

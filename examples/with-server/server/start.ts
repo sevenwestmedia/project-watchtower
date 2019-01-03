@@ -1,7 +1,7 @@
+import { consoleLogger } from 'typescript-log'
 import { createServer } from '../../../lib/runtime/server'
-import { createConsoleLogger } from '../../../lib/runtime/universal'
 
-const log = createConsoleLogger()
+const log = consoleLogger()
 
 // tslint:disable-next-line:no-empty-interface
 export interface AppState {}

@@ -1,4 +1,4 @@
-import { Logger } from '../runtime/universal'
+import { Logger } from 'typescript-log'
 
 export const prettyJson = (obj: any) => JSON.stringify(obj, undefined, 2)
 
@@ -16,11 +16,11 @@ const log = (method: 'trace' | 'debug' | 'log' | 'warn' | 'error', args: any[]) 
 
 /** Logger interface compatible console logger, does't log level info in message */
 export const cliLogger: Logger = {
-    trace: (...args: any[]) => log('trace', args),
-    info: (...args: any[]) => log('log', args),
-    warn: (...args: any[]) => log('warn', args),
+    child: () => cliLogger,
+    debug: (...args: any[]) => log('debug', args),
     error: (...args: any[]) => log('error', args),
     fatal: (...args: any[]) => log('error', args),
-    debug: (...args: any[]) => log('debug', args),
-    child: () => cliLogger,
+    info: (...args: any[]) => log('log', args),
+    trace: (...args: any[]) => log('trace', args),
+    warn: (...args: any[]) => log('warn', args),
 }

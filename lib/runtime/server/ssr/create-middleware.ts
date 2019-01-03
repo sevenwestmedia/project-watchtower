@@ -1,22 +1,22 @@
+import { Assets } from 'assets-webpack-plugin'
+import { Express, Request, RequestHandler } from 'express'
 import { renderToString } from 'react-dom/server'
-import { Request, RequestHandler, Express } from 'express'
-import {
-    ServerSideRenderOptions,
-    StatusServerRenderResult,
-    renderPageContents,
-    PageTags,
-    ServerRenderResultType,
-    transferState,
-} from './'
-import { Logger } from '../../universal'
 import { HelmetData } from 'react-helmet'
-import { hasLog } from '../middleware/ensure-request-log-middleware'
+import { Logger } from 'typescript-log'
+import URL from 'url'
 import { getRuntimeConfig } from '../../config/config'
 import { PromiseTracker } from '../../util/promise-tracker'
-import { getAssetLocations, getHeadAssets, getBodyAssets } from '../assets'
-import { Assets } from 'assets-webpack-plugin'
+import { getAssetLocations, getBodyAssets, getHeadAssets } from '../assets'
+import { hasLog } from '../middleware/ensure-request-log-middleware'
+import {
+    PageTags,
+    renderPageContents,
+    ServerRenderResultType,
+    ServerSideRenderOptions,
+    StatusServerRenderResult,
+    transferState,
+} from './'
 import { PageTag } from './full-render'
-import URL from 'url'
 
 export interface RenderContext<SSRRequestProps = object> {
     /** This holds the app state which needs to be kept between SSR
@@ -36,7 +36,7 @@ export type RenderApp<SSRRequestProps extends object> = (
     },
 ) => JSX.Element
 
-export type RenderHtmlParams<SSRRequestProps extends object, RenderResult> = {
+export interface RenderHtmlParams<SSRRequestProps extends object, RenderResult> {
     head: HelmetData | undefined
     renderResult: RenderResult
     pageTags: PageTags
@@ -56,7 +56,7 @@ export type CreatePageTags<SSRRequestProps> = (
     },
 ) => PageTags
 
-export type ServerSideRenderMiddlewareOptions<SSRRequestProps extends object, RenderResult> = {
+export interface ServerSideRenderMiddlewareOptions<SSRRequestProps extends object, RenderResult> {
     app: Express & { log: Logger }
     ssrTimeoutMs: number
     setupRequest: (req: Request, promiseTracker: PromiseTracker) => Promise<SSRRequestProps>
@@ -76,6 +76,7 @@ export const createSsrMiddleware = <SSRRequestProps extends object, RenderResult
 
     return async (req, response, next) => {
         if (!hasLog(req)) {
+            // tslint:disable-next-line:no-console
             console.error('Skipping SSR middleware due to missing req.log key')
             return next()
         }
@@ -85,10 +86,25 @@ export const createSsrMiddleware = <SSRRequestProps extends object, RenderResult
         let renderContext: RenderContext<SSRRequestProps>
 
         const ssrOptions: ServerSideRenderOptions<RenderResult> = {
-            log: req.log,
+            appRender: () => {
+                renderContext = {
+                    promiseTracker,
+                    ssrRequestProps: appState,
+                }
+
+                return options.renderApp({
+                    context: renderContext,
+                    log: req.log,
+                    req,
+                })
+            },
             errorLocation: options.errorLocation,
+            events: {
+                // tslint:disable-next-line:no-empty
+                renderPerformed: () => {},
+            },
+            log: req.log,
             pageNotFoundLocation: options.pageNotFoundLocation,
-            ssrTimeoutMs: options.ssrTimeoutMs,
             // Not perfect typings, if someone specifies the render result type
             // as something it isn't, that's their own fault
             renderFn: options.renderFn || (renderToString as any),
@@ -97,21 +113,7 @@ export const createSsrMiddleware = <SSRRequestProps extends object, RenderResult
                 req.query = URL.parse(req.url, true).query
                 appState = await options.setupRequest(req, promiseTracker)
             },
-            appRender: () => {
-                renderContext = {
-                    ssrRequestProps: appState,
-                    promiseTracker,
-                }
-
-                return options.renderApp({
-                    log: req.log,
-                    context: renderContext,
-                    req,
-                })
-            },
-            events: {
-                renderPerformed: () => {},
-            },
+            ssrTimeoutMs: options.ssrTimeoutMs,
         }
 
         const pageRenderResult = await renderPageContents<SSRRequestProps, RenderResult>(
@@ -154,19 +156,19 @@ export const createSsrMiddleware = <SSRRequestProps extends object, RenderResult
             const pageTags: PageTags = options.createPageTags
                 ? options.createPageTags({ buildAssets, helmetTags, stateTransfers, renderContext })
                 : {
+                      body: [...getBodyAssets(buildAssets)],
                       head: [
                           ...helmetTags.map(tag => ({ tag })),
                           ...getHeadAssets(buildAssets),
                           ...stateTransfers,
                       ],
-                      body: [...getBodyAssets(buildAssets)],
                   }
 
             return options.renderHtml({
-                head: result.head,
-                renderResult: result.renderedContent,
-                pageTags,
                 context: renderContext,
+                head: result.head,
+                pageTags,
+                renderResult: result.renderedContent,
                 req,
             })
         }

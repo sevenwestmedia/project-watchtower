@@ -1,7 +1,7 @@
 import merge from 'webpack-merge'
-import serverDevConfig from './webpack.server.dev'
-import webpackHooks, { getHook } from './webpack-hooks'
 import { CreateWebpackConfig } from './index'
+import webpackHooks, { getHook } from './webpack-hooks'
+import serverDevConfig from './webpack.server.dev'
 
 /** Webpack config for the server to enable debugging */
 const config: CreateWebpackConfig = options =>
@@ -10,8 +10,8 @@ const config: CreateWebpackConfig = options =>
         {
             devtool: 'source-map',
             output: {
-                devtoolModuleFilenameTemplate: '[absolute-resource-path]',
                 devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]',
+                devtoolModuleFilenameTemplate: '[absolute-resource-path]',
             },
         },
         getHook(webpackHooks(options.log, options.buildConfig.BASE).serverDebug, options),

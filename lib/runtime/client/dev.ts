@@ -1,3 +1,4 @@
+// TODO Should this be a plugin?
 /**
  * CSS hot reloading with ExtractTextWebpack plugin
  * https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/30#issuecomment-284301283
@@ -7,6 +8,7 @@ export function cssHotReload() {
         const reporter = (window as any).__webpack_hot_middleware_reporter__
 
         if (!reporter || !reporter.success) {
+            // tslint:disable-next-line:no-console
             console.error('Error enabling hot reloading for CSS!')
         } else {
             const originalSuccess = reporter.success
@@ -26,6 +28,7 @@ export function cssHotReload() {
                 }
 
                 if (!linkNode) {
+                    // tslint:disable-next-line:no-console
                     console.error('Error in CSS hot reload: link element not found!')
                 } else {
                     const parentNode = linkNode.parentNode as Node

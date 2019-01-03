@@ -1,11 +1,11 @@
 import { ChildProcess } from 'child_process'
-import clean from './clean'
-import build from './build'
-import start from './start'
-import { default as watchServer, WatchServer } from '../watch/server'
-import { StartParam, WatchParam } from '../types'
+import { Logger } from 'typescript-log'
 import { BuildConfig } from '../../lib'
-import { Logger } from '../runtime/universal'
+import { StartParam, WatchParam } from '../types'
+import { default as watchServer, WatchServer } from '../watch/server'
+import build from './build'
+import clean from './clean'
+import start from './start'
 
 /**
  * Rebuilds the client on changes

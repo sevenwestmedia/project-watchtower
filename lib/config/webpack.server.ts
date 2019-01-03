@@ -23,26 +23,8 @@ const serverBaseConfig = (options: { buildConfig: BuildConfig }): webpack.Config
     }
 
     return {
-        target: 'node',
         entry: {
             main: [SERVER_ENTRY],
-        },
-        output: {
-            path: OUTPUT,
-            publicPath: PUBLIC_PATH,
-            filename: 'server.js',
-        },
-        module: {
-            rules: [
-                {
-                    test: /\.s?css$/,
-                    use: 'null-loader',
-                },
-            ],
-        },
-        node: {
-            __filename: true,
-            __dirname: true,
         },
         externals: (_context, request, callback) => {
             // treat deep imports as externals as well
@@ -58,13 +40,23 @@ const serverBaseConfig = (options: { buildConfig: BuildConfig }): webpack.Config
                 callback(undefined, undefined)
             }
         },
+        node: {
+            __dirname: true,
+            __filename: true,
+        },
+        output: {
+            filename: 'server.js',
+            path: OUTPUT,
+            publicPath: PUBLIC_PATH,
+        },
         plugins: [
             new webpack.BannerPlugin({
                 banner: 'require("source-map-support").install();',
-                raw: true,
                 entryOnly: false,
+                raw: true,
             }),
         ],
+        target: 'node',
     }
 }
 

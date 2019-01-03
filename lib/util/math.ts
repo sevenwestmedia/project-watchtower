@@ -1,5 +1,5 @@
+import { Logger } from 'typescript-log'
 import { delay } from './time'
-import { Logger } from '../runtime/universal'
 
 export const average = (nums: number[]) => nums.reduce((prev, cur) => prev + cur, 0) / nums.length
 

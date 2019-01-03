@@ -1,6 +1,6 @@
-import { measureAndWriteBuildStats } from '../stats'
+import { Logger } from 'typescript-log'
 import { BuildConfig } from '../../lib'
-import { Logger } from '../runtime/universal'
+import { measureAndWriteBuildStats } from '../stats'
 
 const stats = (log: Logger, buildConfig: BuildConfig, ...params: string[]) => {
     const verbose = params.indexOf('verbose') !== -1

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { RouteComponentProps, Redirect } from 'react-router'
+import { Redirect, RouteComponentProps } from 'react-router'
 import { Status404Error } from '../../../lib/runtime/server/ssr/errors'
 
 export const Topic: React.SFC<RouteComponentProps<{ topic: string }>> = props => {

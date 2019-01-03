@@ -1,31 +1,3 @@
 {
-    // Place your settings in this file to overwrite default and user settings.
-    "files.exclude": {
-        "**/.git": true,
-        "**/node_modules": false,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/.DS_Store": true,
-        "**/*.map": true,
-        "**/*.js": {
-            "when": "$(basename).tsx"
-        },
-        "**/*?.js": {
-            "when": "$(basename).ts"
-        }
-    },
-    "search.exclude": {
-        "**/node_modules": true,
-        "coverage/**": true,
-        "dist-es/**": true
-    },
-    "typescript.tsdk": "./node_modules/typescript/lib",
-    "prettier.semi": false,
-    "prettier.tabWidth": 4,
-    "prettier.useTabs": false,
-    "prettier.singleQuote": true,
-    "prettier.trailingComma": "all",
-    "editor.formatOnSave": true,
-    "prettier.printWidth": 100,
-    "prettier.disableLanguages": ["json", "markdown"]
+    "editor.formatOnSave": true
 }

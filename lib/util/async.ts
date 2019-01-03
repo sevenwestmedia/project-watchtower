@@ -1,4 +1,4 @@
-import { Logger } from '../runtime/universal'
+import { Logger } from 'typescript-log'
 
 export const failPromisesLate = (log: Logger, promises: Array<Promise<any>>): Promise<any> =>
     Promise.all(

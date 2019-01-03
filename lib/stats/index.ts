@@ -1,11 +1,11 @@
 import path from 'path'
-import bundleSize from './bundle-size'
-import ssrStats from './ssr-stats'
-import { lighthouseStats } from './lighthouse'
-import { writeFile } from '../runtime/util/fs'
+import { Logger } from 'typescript-log'
 import { BuildConfig } from '../../lib'
-import { Logger } from '../runtime/universal'
 import { getRuntimeConfigFromBuildConfig } from '../runtime/config/config'
+import { writeFile } from '../runtime/util/fs'
+import bundleSize from './bundle-size'
+import { lighthouseStats } from './lighthouse'
+import ssrStats from './ssr-stats'
 
 export interface BuildMetrics {
     [key: string]: string

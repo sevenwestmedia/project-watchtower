@@ -1,5 +1,11 @@
 {
-    "extends": [
-        "./presets/tslint"
-    ]
+    "extends": ["tslint:latest", "tslint-react", "tslint-eslint-rules", "tslint-config-prettier"],
+    "rules": {
+        "member-access": false,
+        "interface-name": false,
+        "no-implicit-dependencies": false,
+        "jsx-no-lambda": false,
+        "jsx-boolean-value": false,
+        "variable-name": false
+    }
 }

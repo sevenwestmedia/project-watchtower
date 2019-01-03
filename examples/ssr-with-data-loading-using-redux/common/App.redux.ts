@@ -1,4 +1,4 @@
-import { Reducer, Action, ActionCreator } from 'redux'
+import { Action, ActionCreator, Reducer } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 
 export interface AppState {
@@ -30,8 +30,8 @@ export const loadData: ActionCreator<
     )
 
     dispatch({
-        type: 'load-data-complete',
         payload: data,
+        type: 'load-data-complete',
     })
 }
 
@@ -40,21 +40,21 @@ const reducer: Reducer<AppState, Actions> = (state = defaultState, action) => {
         case 'load-data-start':
             return {
                 ...state,
-                loading: true,
                 failed: false,
+                loading: true,
                 myData: undefined,
             }
         case 'load-data-failed':
             return {
                 ...state,
-                loading: false,
                 failed: true,
+                loading: false,
             }
         case 'load-data-complete':
             return {
                 ...state,
-                loading: false,
                 failed: false,
+                loading: false,
                 myData: action.payload,
             }
     }

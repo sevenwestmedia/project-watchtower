@@ -1,15 +1,15 @@
+import { consoleLogger } from 'typescript-log'
 import { printWebpackStats } from '../../lib/util/webpack'
-import { createConsoleLogger } from '../../lib/runtime/universal'
 
-const log = createConsoleLogger()
+const log = consoleLogger()
 
 describe('util/webpack', () => {
     it('printWebpackStats', () => {
         const stats: any = {
-            toString: () => 'stats',
             hasErrors: () => false,
             hasWarnings: () => false,
             toJson: () => "{ stats: 'as json' }",
+            toString: () => 'stats',
         }
         printWebpackStats(log, stats)
     })

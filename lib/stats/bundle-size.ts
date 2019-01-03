@@ -1,9 +1,9 @@
 import path from 'path'
-import { BuildMetrics } from './'
-import { getFileSize, readFile, formatFileSize } from '../runtime/util/fs'
+import { Logger } from 'typescript-log'
 import { RuntimeConfig } from '../../lib'
-import { Logger } from '../runtime/universal'
 import { getAbsoluteAssetPath } from '../runtime/server'
+import { formatFileSize, getFileSize, readFile } from '../runtime/util/fs'
+import { BuildMetrics } from './'
 
 const getChunkSize = async (log: Logger, runtimeConfig: RuntimeConfig, chunkPath: string) => {
     const absolutePath = getAbsoluteAssetPath(runtimeConfig, chunkPath)
@@ -40,8 +40,8 @@ const bundleSize = async (log: Logger, runtimeConfig: RuntimeConfig) => {
                 getChunkSize(log, runtimeConfig, jsAsset.js).then(size => {
                     totalJs += size.bytes
                     return {
-                        size,
                         asset: `${jsAsset.key}.js`,
+                        size,
                     }
                 }),
             ),
@@ -49,8 +49,8 @@ const bundleSize = async (log: Logger, runtimeConfig: RuntimeConfig) => {
                 getChunkSize(log, runtimeConfig, cssAsset.css).then(size => {
                     totalCss += size.bytes
                     return {
-                        size,
                         asset: `${cssAsset.key}.css`,
+                        size,
                     }
                 }),
             ),

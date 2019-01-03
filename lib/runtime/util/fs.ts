@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import { Logger } from '../universal'
+import { Logger } from 'typescript-log'
 
 export const readFileSync = (log: Logger, filePath: string) => {
     try {

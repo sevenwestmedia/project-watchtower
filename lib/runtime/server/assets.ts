@@ -1,7 +1,7 @@
+import { Assets } from 'assets-webpack-plugin'
 import fs from 'fs'
 import path from 'path'
-import { RuntimeConfig, BuildConfig } from '../../../lib'
-import { Assets } from 'assets-webpack-plugin'
+import { BuildConfig, RuntimeConfig } from '../../../lib'
 import { PageTag } from './ssr/full-render'
 
 let assets: Assets
@@ -29,8 +29,8 @@ export const setDefaultAssets = (buildConfig: BuildConfig) => {
     // the assets location
     updateAssetLocations({
         main: {
-            js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/main.chunk.js',
             css: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'css/main.css',
+            js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/main.chunk.js',
         },
         vendor: {
             js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/vendor.chunk.js',

@@ -1,5 +1,5 @@
 import rimraf from 'rimraf'
-import { Logger } from '../runtime/universal'
+import { Logger } from 'typescript-log'
 
 const clean: (log: Logger, paths: string | string[]) => Promise<any> = (log, paths) => {
     if (Array.isArray(paths)) {

@@ -1,12 +1,12 @@
+import AssetsPlugin from 'assets-webpack-plugin'
+import express from 'express'
+import opn from 'opn'
+import { Logger } from 'typescript-log'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
-import opn from 'opn'
-import { getWebpackConfig } from '../build/build'
 import { BuildConfig } from '../../lib'
-import { Logger } from '../runtime/universal'
-import AssetsPlugin from 'assets-webpack-plugin'
-import express from 'express'
+import { getWebpackConfig } from '../build/build'
 
 export type HotReloadMiddleware = (
     log: Logger,
@@ -25,11 +25,11 @@ export const getHotReloadMiddleware: HotReloadMiddleware = (log, buildConfig) =>
     const compiler = webpack(config)
 
     const dev = webpackDevMiddleware(compiler, {
-        publicPath: buildConfig.PUBLIC_PATH,
-        logLevel: 'silent',
         // do not serve index.html on / route
         // https://github.com/webpack/webpack-dev-middleware/issues/153
         index: 'foobar',
+        logLevel: 'silent',
+        publicPath: buildConfig.PUBLIC_PATH,
         stats: 'errors-only',
     })
 

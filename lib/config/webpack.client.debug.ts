@@ -1,7 +1,7 @@
 import merge from 'webpack-merge'
-import clientDevConfig from './webpack.client.dev'
-import getWebpackHooks, { getHook } from './webpack-hooks'
 import { CreateWebpackConfig } from './index'
+import getWebpackHooks, { getHook } from './webpack-hooks'
+import clientDevConfig from './webpack.client.dev'
 
 /** Webpack config for the client to improve debugging */
 const config: CreateWebpackConfig = options =>

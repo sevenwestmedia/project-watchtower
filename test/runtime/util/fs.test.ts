@@ -1,19 +1,19 @@
 import path from 'path'
+import { consoleLogger, noopLogger } from 'typescript-log'
 import {
     formatFileSize,
-    readFile,
-    getFileSize,
-    writeFile,
     getCustomConfigFile,
+    getFileSize,
+    readFile,
+    writeFile,
 } from '../../../lib/runtime/util/fs'
-import { expectPromiseToFail } from '../../test-helpers'
 import { BuildConfigOverride } from '../../../lib/types'
-import { createConsoleLogger } from '../../../lib/runtime/universal'
+import { expectPromiseToFail } from '../../test-helpers'
 
 const packageJson = path.resolve(process.cwd(), 'package.json')
 const buildStatsFile = path.resolve(process.cwd(), 'build-stats.csv')
 
-const log = createConsoleLogger()
+const log = consoleLogger()
 
 describe('util/fs', () => {
     it('readFile', async () => {
@@ -22,7 +22,7 @@ describe('util/fs', () => {
     })
 
     it('readFile - non-existent file', async () => {
-        expectPromiseToFail(readFile(log, packageJson + 'x'))
+        expectPromiseToFail(readFile(noopLogger(), packageJson + 'x'))
     })
 
     it('getFileSize', async () => {

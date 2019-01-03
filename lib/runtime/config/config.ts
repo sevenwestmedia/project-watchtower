@@ -1,21 +1,19 @@
 import path from 'path'
-import { getCustomConfigFile, readFileSync } from '../util/fs'
+import { Logger } from 'typescript-log'
 import { BuildConfig, BuildConfigOverride, RuntimeConfig } from '../../types'
-import { Logger } from '../universal'
+import { getCustomConfigFile, readFileSync } from '../util/fs'
 
 const defaultConfig = (root: string): BuildConfig => ({
     ASSETS_PATH_PREFIX: 'static/',
     BASE: root,
     CLIENT_ENTRY: path.resolve(root, 'client', 'index.tsx'),
-    OUTPUT: path.resolve(root, 'dist'),
     CLIENT_POLYFILLS: path.resolve(root, 'client', 'polyfills.ts'),
-    CSS_AUTOPREFIXER: ['last 2 versions'],
-    HAS_SERVER: true,
-    LINT_EXCLUDE: [],
-    PUBLIC_PATH: '/',
     DEV_SERVER_PORT: 3000,
-    SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
+    HAS_SERVER: true,
+    OUTPUT: path.resolve(root, 'dist'),
+    PUBLIC_PATH: '/',
     SERVER_BUNDLE_ALL: false,
+    SERVER_ENTRY: path.resolve(root, 'server', 'start.ts'),
     SERVER_INCLUDE_IN_BUNDLE: ['project-watchtower'],
     SERVER_PUBLIC_DIR: path.resolve(root, 'public'),
     STATIC_RESOURCE_NAMES: false,
@@ -34,11 +32,11 @@ export const getConfig = (log: Logger, root: string) => ({
 export const watchtowerConfigFilename = 'watchtower.config'
 
 export const getRuntimeConfigFromBuildConfig = (buildConfig: BuildConfig): RuntimeConfig => ({
-    ASSETS_PATH_PREFIX: buildConfig.ASSETS_PATH_PREFIX,
     ASSETS_PATH: path.join(buildConfig.OUTPUT, buildConfig.ASSETS_PATH_PREFIX),
+    ASSETS_PATH_PREFIX: buildConfig.ASSETS_PATH_PREFIX,
     BASE: buildConfig.OUTPUT,
-    SERVER_PUBLIC_DIR: buildConfig.SERVER_PUBLIC_DIR,
     PUBLIC_PATH: buildConfig.PUBLIC_PATH,
+    SERVER_PUBLIC_DIR: buildConfig.SERVER_PUBLIC_DIR,
 })
 
 export const getRuntimeConfig = (log: Logger): RuntimeConfig => {

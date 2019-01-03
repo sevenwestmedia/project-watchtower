@@ -1,7 +1,7 @@
 import H from 'history'
+import { createLocation } from 'history'
 import React from 'react'
 import { BrowserRouter, BrowserRouterProps, Route, RouteProps } from 'react-router-dom'
-import { createLocation } from 'history'
 import { getTransferredState } from '../../client/get-transferred-state'
 
 const locationOverrideFromSSR = getTransferredState<string | undefined>(

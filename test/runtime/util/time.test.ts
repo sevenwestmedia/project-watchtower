@@ -1,4 +1,4 @@
-import { formatTimeMs, getTimeMs, delay } from '../../../lib/util/time'
+import { delay, formatTimeMs, getTimeMs } from '../../../lib/util/time'
 
 describe('util/time', () => {
     it('formatTimeMs', () => {

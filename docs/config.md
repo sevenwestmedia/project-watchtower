@@ -62,14 +62,8 @@ export interface BuildConfig {
     /** output directory for the client build */
     CLIENT_OUTPUT: string
 
-    /** Autoprefixer browser compatibilty  */
-    CSS_AUTOPREFIXER: string[]
-
     /** set to false if the application is serverless */
     HAS_SERVER: boolean,
-
-    /** List paths to exclude from linting */
-    LINT_EXCLUDE: string[]
 
     /** Default port for the server (when process.env.PORT is not set) */
     PORT: number
@@ -117,9 +111,7 @@ Default configuration:
     CLIENT_ENTRY: path.resolve(root, 'client', 'index.tsx'),
     CLIENT_OUTPUT: path.resolve(root, 'dist'),
     CLIENT_POLYFILLS: path.resolve(root, 'client', 'polyfills.ts'),
-    CSS_AUTOPREFIXER: ['last 2 versions'],
     HAS_SERVER: true,
-    LINT_EXCLUDE: [],
     PUBLIC_PATH: '/',
     DEV_SERVER_PORT: 3000,
     /** if true, all externals will be bundled */
@@ -133,55 +125,5 @@ Default configuration:
     STATIC_RESOURCE_NAMES: false,
     STATS_ENV: {},
     STATS_PAGES: { home: '/' },
-}
-```
-
-## Configuration file templates
-
-Project Watchtower offers several templates for configuration files around tooling and building:
-
-### TSLint: tslint.json
-
-```json
-{
-    "extends": [
-        "project-watchtower/presets/tslint"
-    ]
-}
-
-```
-
-### Jest: jest.config.js & jest.debug.config.js
-
-If either of the above config files exist in the root they will be used
-
-``` js
-var baseConfig = require('project-watchtower/presets/jest/jest.json')
-
-module.exports = Object.assign({}, baseConfig, {
-    verbose: true,
-    rootDir: '.',
-    snapshotSerializers: ['enzyme-to-json/serializer'],
-    moduleNameMapper: {
-        '\\.(s?css|png|svg|jpg|eot|woff|woff2)$':
-            '<rootDir>/node_modules/project-watchtower/lib/test/test-mapper.js',
-        '^bundle-loader':
-            '<rootDir>/node_modules/project-watchtower/lib/test/bundle-loader-mapper.js'
-    },
-    transform: {
-        '.tsx?': '<rootDir>/node_modules/ts-jest/preprocessor.js'
-    }
-})
-
-```
-
-### SASS-Lint .sass-lint.yml
-
-The sass-lint configuration can be referenced from `package.json`
-
-```json
-{
-    ...
-    "sasslintConfig": "node_modules/project-watchtower/presets/sass-lint/.sass-lint.yml"
 }
 ```

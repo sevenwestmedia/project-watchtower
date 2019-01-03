@@ -4,10 +4,10 @@ import './App.scss'
 
 const LazyThings = Loadable({
     loader: () => import(/* webpackChunkName: "ThingsChunk" */ './Things'),
-    webpack: () => [require.resolveWeak('./Things') as number],
-    modules: ['./Things'],
     loading: () => <p>{'Things is Loading'}</p>,
-    render(loaded, {}) {
+    modules: ['./Things'],
+    webpack: () => [require.resolveWeak('./Things') as number],
+    render(loaded: { Things: any }, {  }: any) {
         const Component = loaded.Things
         return <Component />
     },

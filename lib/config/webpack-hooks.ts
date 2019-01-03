@@ -1,6 +1,6 @@
+import { Logger } from 'typescript-log'
 import webpack from 'webpack'
 import { getCustomConfigFile } from '../runtime/util/fs'
-import { Logger } from '../runtime/universal'
 import { WebpackHooks } from '../types'
 import { CreateWebpackConfig, CreateWebpackConfigOptions } from './index'
 

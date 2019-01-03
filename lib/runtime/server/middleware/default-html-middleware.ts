@@ -1,11 +1,11 @@
+import express from 'express'
 import fs from 'fs'
 import path from 'path'
-import express from 'express'
+import { Logger } from 'typescript-log'
 import { RuntimeConfig } from '../../../'
-import { Logger } from '../../universal'
-import { renderHtml } from '../ssr/helpers/render-html'
-import { getHeadAssets, getAssets, getBodyAssets } from '../assets'
+import { getAssets, getBodyAssets, getHeadAssets } from '../assets'
 import { PromiseTracker } from '../ssr/full-render'
+import { renderHtml } from '../ssr/helpers/render-html'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -50,17 +50,17 @@ export const getDefaultHtmlMiddleware = (log: Logger, runtimeConfig: RuntimeConf
         if (indexContent) {
             const buildAssets = getAssets(runtimeConfig)
             const indexWithAssets = renderHtml({
-                head: undefined,
                 context: {
-                    ssrRequestProps: {},
                     promiseTracker: new PromiseTracker(),
+                    ssrRequestProps: {},
                 },
-                req,
-                renderResult: '',
+                head: undefined,
                 pageTags: {
-                    head: getHeadAssets(buildAssets),
                     body: getBodyAssets(buildAssets),
+                    head: getHeadAssets(buildAssets),
                 },
+                renderResult: '',
+                req,
             })
 
             return res

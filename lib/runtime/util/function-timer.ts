@@ -1,5 +1,5 @@
+import { Logger, LogObject } from 'typescript-log'
 import util from 'util'
-import { Logger, LogObject } from './log'
 
 export const formatElapsed = (hrEnd: [number, number]) => {
     return util.format('%ds %dms', hrEnd[0], hrEnd[1] / 1000000)
