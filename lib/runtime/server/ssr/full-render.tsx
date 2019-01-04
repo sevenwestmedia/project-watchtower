@@ -1,7 +1,7 @@
 import { Logger } from 'typescript-log'
 import { formatElapsed, PromiseTracker } from '../../universal'
 import { Information, Status404Error, Warning } from './errors'
-import resolveAllData from './helpers/recursive-task-resolver'
+import { recursiveTaskResolver } from './helpers/recursive-task-resolver'
 import { CreateAppElement, renderApp } from './render-app-to-string'
 import { WatchtowerEvents } from './render-events'
 import { routerContextHandler } from './router-context-handler'
@@ -150,7 +150,7 @@ async function renderWithErrorPageFallback<SSRRequestProps extends object, Rende
             }
         }
 
-        const dataResolved = await resolveAllData(
+        const dataResolved = await recursiveTaskResolver(
             options.log,
             promiseTracker,
             () =>

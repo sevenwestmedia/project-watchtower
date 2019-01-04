@@ -11,6 +11,7 @@ import { CreateWebpackConfig } from '../config/index'
 export * from './server/assets'
 export * from './server/server'
 export * from './universal'
+export * from './server/ssr/index'
 
 export { getConfig } from './config/config'
 

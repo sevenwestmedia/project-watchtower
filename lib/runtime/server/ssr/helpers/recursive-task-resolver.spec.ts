@@ -1,6 +1,6 @@
 import { consoleLogger } from 'typescript-log'
 import { PromiseTracker } from '../../../universal'
-import resolveAllData from './recursive-task-resolver'
+import { recursiveTaskResolver } from './recursive-task-resolver'
 
 const testLogger = consoleLogger()
 
@@ -16,7 +16,15 @@ describe('Recursive Task Resolver', () => {
             return ''
         }
         render()
-        resolveAllData(testLogger, promiseTracker, render, '/', '', 5 /* attempts */, 500 /* ms */)
+        recursiveTaskResolver(
+            testLogger,
+            promiseTracker,
+            render,
+            '/',
+            '',
+            5 /* attempts */,
+            500 /* ms */,
+        )
             .then(
                 () => done(new Error('Expected too many recurses error')),
                 err =>
@@ -45,7 +53,7 @@ describe('Recursive Task Resolver', () => {
             return ''
         }
         render()
-        resolveAllData(
+        recursiveTaskResolver(
             testLogger,
             promiseTracker,
             render,

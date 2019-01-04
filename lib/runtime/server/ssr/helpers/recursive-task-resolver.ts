@@ -63,7 +63,7 @@ function innerResolve<T>(
  * additional data loader recursively until no more data loads are triggered
  * or it times out, or it hits the max depth
  */
-export default async function<T>(
+export async function recursiveTaskResolver<T>(
     log: Logger,
     promiseTracker: PromiseTracker,
     render: () => T,
