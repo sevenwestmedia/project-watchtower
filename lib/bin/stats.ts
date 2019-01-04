@@ -1,5 +1,5 @@
+import { BuildConfig } from 'lib/runtime/server'
 import { Logger } from 'typescript-log'
-import { BuildConfig } from '../../lib'
 import { measureAndWriteBuildStats } from '../stats'
 
 const stats = (log: Logger, buildConfig: BuildConfig, ...params: string[]) => {

@@ -1,3 +1,4 @@
+import { BuildConfigOverride } from 'lib/runtime/server'
 import path from 'path'
 import { consoleLogger, noopLogger } from 'typescript-log'
 import {
@@ -7,7 +8,6 @@ import {
     readFile,
     writeFile,
 } from '../../../lib/runtime/util/fs'
-import { BuildConfigOverride } from '../../../lib/types'
 import { expectPromiseToFail } from '../../test-helpers'
 
 const packageJson = path.resolve(process.cwd(), 'package.json')

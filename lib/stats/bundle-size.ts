@@ -1,7 +1,6 @@
 import path from 'path'
 import { Logger } from 'typescript-log'
-import { RuntimeConfig } from '../../lib'
-import { getAbsoluteAssetPath } from '../runtime/server'
+import { getAbsoluteAssetPath, RuntimeConfig } from '../runtime/server'
 import { formatFileSize, getFileSize, readFile } from '../runtime/util/fs'
 import { BuildMetrics } from './'
 

@@ -1,6 +1,6 @@
 import { ChildProcess } from 'child_process'
+import { BuildConfig } from 'lib/runtime/server'
 import { Logger } from 'typescript-log'
-import { BuildConfig } from '../../lib'
 import { StartParam, WatchParam } from '../types'
 import { default as watchServer, WatchServer } from '../watch/server'
 import build from './build'

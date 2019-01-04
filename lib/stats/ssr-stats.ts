@@ -1,6 +1,6 @@
 import { load } from 'cheerio'
+import { BuildConfig } from 'lib/runtime/server'
 import { Logger } from 'typescript-log'
-import { BuildConfig } from '../../lib'
 import { getSequenceAverage } from '../util/math'
 import { formatTimeMs, timeout } from '../util/time'
 import { BuildMetrics } from './'

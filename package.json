@@ -5,8 +5,9 @@
     "author": {
         "name": "Seven West Media"
     },
-    "main": "dist/cjs/index.js",
-    "module": "dist/esm/index.js",
+    "main": "dist/cjs/runtime/server.js",
+    "module": "dist/esm/runtime/server.js",
+    "browser": "dist/esm/runtime/universal.js",
     "bin": {
         "project-watchtower": "bin/index.js",
         "pwt": "bin/index.js"

@@ -1,11 +1,11 @@
 import AssetsPlugin from 'assets-webpack-plugin'
 import express from 'express'
+import { BuildConfig } from 'lib/runtime/server'
 import opn from 'opn'
 import { Logger } from 'typescript-log'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
-import { BuildConfig } from '../../lib'
 import { getWebpackConfig } from '../build/build'
 
 export type HotReloadMiddleware = (

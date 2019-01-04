@@ -1,6 +1,6 @@
 import path from 'path'
 import { Logger } from 'typescript-log'
-import { BuildConfig, BuildConfigOverride, RuntimeConfig } from '../../types'
+import { BuildConfig, BuildConfigOverride, RuntimeConfig } from '../server'
 import { getCustomConfigFile, readFileSync } from '../util/fs'
 
 const defaultConfig = (root: string): BuildConfig => ({

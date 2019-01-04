@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { BuildConfig } from 'lib/runtime/server'
 import path from 'path'
 import { Logger } from 'typescript-log'
 import webpack from 'webpack'
@@ -10,7 +11,6 @@ import webpackClientProdConfig from '../config/webpack.client.prod'
 import webpackServerDebugConfig from '../config/webpack.server.debug'
 import webpackServerDevConfig from '../config/webpack.server.dev'
 import webpackServerProdConfig from '../config/webpack.server.prod'
-import { BuildConfig } from '../index'
 import { dynamicRequire } from '../runtime/util/fs'
 import { BuildEnvironment, BuildTarget } from '../types'
 

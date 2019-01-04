@@ -1,7 +1,7 @@
 import { Assets } from 'assets-webpack-plugin'
 import fs from 'fs'
 import path from 'path'
-import { BuildConfig, RuntimeConfig } from '../../../lib'
+import { BuildConfig, RuntimeConfig } from '../server'
 import { PageTag } from './ssr/full-render'
 
 let assets: Assets

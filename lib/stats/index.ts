@@ -1,6 +1,6 @@
+import { BuildConfig } from 'lib/runtime/server'
 import path from 'path'
 import { Logger } from 'typescript-log'
-import { BuildConfig } from '../../lib'
 import { getRuntimeConfigFromBuildConfig } from '../runtime/config/config'
 import { writeFile } from '../runtime/util/fs'
 import bundleSize from './bundle-size'

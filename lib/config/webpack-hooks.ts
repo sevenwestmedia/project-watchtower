@@ -1,7 +1,7 @@
+import { WebpackHooks } from 'lib/runtime/server'
 import { Logger } from 'typescript-log'
 import webpack from 'webpack'
 import { getCustomConfigFile } from '../runtime/util/fs'
-import { WebpackHooks } from '../types'
 import { CreateWebpackConfig, CreateWebpackConfigOptions } from './index'
 
 export const webpackHooks = (log: Logger, root: string) =>

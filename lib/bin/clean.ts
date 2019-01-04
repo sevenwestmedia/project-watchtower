@@ -1,5 +1,5 @@
+import { BuildConfig } from 'lib/runtime/server'
 import { Logger } from 'typescript-log'
-import { BuildConfig } from '../../lib'
 import doClean from '../clean'
 
 const clean = (log: Logger, buildConfig: BuildConfig, ...paths: string[]) => {

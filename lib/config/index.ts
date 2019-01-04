@@ -1,6 +1,6 @@
+import { BuildConfig } from 'lib/runtime/server'
 import { Logger } from 'typescript-log'
 import webpack from 'webpack'
-import { BuildConfig } from '../index'
 
 export { default as base } from './webpack.base'
 export { default as clientBase } from './webpack.client'

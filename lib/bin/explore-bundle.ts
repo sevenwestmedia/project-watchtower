@@ -1,8 +1,8 @@
+import { BuildConfig } from 'lib/runtime/server'
 import { Logger } from 'typescript-log'
 import webpack from 'webpack'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import merge from 'webpack-merge'
-import { BuildConfig } from '../../lib'
 import { getWebpackConfig } from '../build/build'
 import { webpackPromise } from '../util/webpack'
 

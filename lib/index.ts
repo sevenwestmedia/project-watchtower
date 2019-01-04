@@ -15,7 +15,8 @@ import * as serverModule from './server'
 import * as statsModule from './stats'
 
 import { Logger } from 'typescript-log'
-import { BuildConfig, BuildParam, StartParam, WatchParam } from './types'
+import { BuildConfig } from './runtime/server'
+import { BuildParam, StartParam, WatchParam } from './types'
 
 export * from './types'
 

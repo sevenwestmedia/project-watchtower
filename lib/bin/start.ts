@@ -1,8 +1,8 @@
 import { ChildProcess, ForkOptions } from 'child_process'
 import dotenv from 'dotenv'
+import { BuildConfig } from 'lib/runtime/server'
 import path from 'path'
 import { Logger } from 'typescript-log'
-import { BuildConfig } from '../../lib'
 import { StartParam } from '../types'
 import { forkPromise } from '../util/process'
 
