@@ -7,3 +7,4 @@
 export * from './util/promise-tracker'
 export * from './util/promise-completion-source'
 export * from './util/function-timer'
+export { WatchtowerBrowserRouter } from './server/ssr/watchtower-browser-router'

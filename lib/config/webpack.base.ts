@@ -1,9 +1,8 @@
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
-import { BuildConfig } from 'lib/runtime/server'
+import { BuildConfig, CreateWebpackConfigOptions } from 'lib/runtime/server'
 import os from 'os'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import webpack from 'webpack'
-import { CreateWebpackConfigOptions } from './index'
 
 const disableTypeCheck = process.env.START_FAST_MODE === 'true'
 const disableCaching = String(process.env.BUILD_CACHE_DISABLED).toLowerCase() === 'true'

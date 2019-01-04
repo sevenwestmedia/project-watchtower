@@ -1,5 +1,5 @@
+import { CreateWebpackConfig } from 'lib/runtime/server'
 import merge from 'webpack-merge'
-import { CreateWebpackConfig } from './index'
 import webpackHooks, { getHook } from './webpack-hooks'
 import serverDevConfig from './webpack.server.dev'
 

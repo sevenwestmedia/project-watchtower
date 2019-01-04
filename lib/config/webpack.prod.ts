@@ -1,6 +1,6 @@
+import { CreateWebpackConfig } from 'lib/runtime/server'
 import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
-import { CreateWebpackConfig } from './index'
 
 /** Webpack settings for all production builds */
 const prodConfig: CreateWebpackConfig = () => ({

@@ -2,9 +2,8 @@ import AssetsPlugin from 'assets-webpack-plugin'
 import fs from 'fs'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import path from 'path'
-import { BuildConfig, getAssetsFile } from '../runtime/server'
+import { BuildConfig, CreateWebpackConfig, getAssetsFile } from '../runtime/server'
 import { updateAssetLocations } from '../runtime/server/assets'
-import { CreateWebpackConfig } from './index'
 
 interface EntryPoints {
     [name: string]: string[]

@@ -1,5 +1,5 @@
+import { Logger } from 'typescript-log'
 import webpack from 'webpack'
-import { CreateWebpackConfig } from '../config/index'
 
 /*
  * The /runtime folder should only contain modules that do not have transitive dependencies!
@@ -8,6 +8,7 @@ import { CreateWebpackConfig } from '../config/index'
  * - be documented in the README and set as production peerDependencies
  */
 
+export * from './config'
 export * from './server/assets'
 export * from './server/server'
 export * from './universal'
@@ -100,3 +101,10 @@ export interface WebpackHooks {
     clientProd?: webpack.Configuration | CreateWebpackConfig
     clientDebug?: webpack.Configuration | CreateWebpackConfig
 }
+
+export interface CreateWebpackConfigOptions {
+    buildConfig: BuildConfig
+    log: Logger
+    cacheDirectory: string
+}
+export type CreateWebpackConfig = (options: CreateWebpackConfigOptions) => webpack.Configuration
