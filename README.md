@@ -34,8 +34,6 @@ Detailed documentation available in the [docs](./docs) folder:
 -   [Building, Running and Debugging](./docs/build.md)
 -   [Developing Project Watchtower](./docs/development.md)
 
-## Peer dependencies
-
 ### For production
 
 -   express
@@ -47,6 +45,12 @@ Detailed documentation available in the [docs](./docs) folder:
 ### For development
 
 -   typescript
+
+## FAQ
+
+### Want sass support?
+
+Check out the example at [examples/ssr-with-sass](examples/ssr-with-sass)
 
 ## Environmental Variables
 
