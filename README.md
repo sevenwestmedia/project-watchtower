@@ -2,6 +2,9 @@
 
 A unified basis for web applications.
 
+![](./JLsatellite2.jpg)  
+[Credit: Wikipedia](https://en.wikipedia.org/wiki/File:JLsatellite2.jpg)
+
 Project Watchtower is a TypeScript first, opinionated foundation for creating universal (Server Side Rendered) React applications. If you are not using TypeScript then Watchtower is probably not for you.
 
 ## Why
