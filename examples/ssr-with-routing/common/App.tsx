@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
 import { NavLink } from 'react-router-dom'
-import './App.scss'
 import { Home } from './Home'
 import { NotFound } from './NotFound'
 import { Teapot } from './Teapot'

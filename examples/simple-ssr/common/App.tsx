@@ -1,5 +1,4 @@
 import React from 'react'
-import './App.scss'
 
 export interface Props {
     config: AppState['config']

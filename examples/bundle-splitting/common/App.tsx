@@ -1,6 +1,5 @@
 import React from 'react'
 import Loadable from 'react-loadable'
-import './App.scss'
 
 const LazyThings = Loadable({
     loader: () => import(/* webpackChunkName: "ThingsChunk" */ './Things'),

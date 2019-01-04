@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Actions, AppState, loadData } from './App.redux'
 
 import { ThunkDispatch } from 'redux-thunk'
-import './App.scss'
 
 export type Props = AppState & { dispatch: ThunkDispatch<AppState, null, Actions> }
 
