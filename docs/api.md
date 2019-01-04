@@ -13,6 +13,7 @@ build('server', 'prod')
 ## React Components
 
 ### PageLifecycleProvider
+
 See [Page Lifecycle Provider](./page-lifecycle-provider.md)
 
 ## Functions, Config and Middleware
@@ -36,10 +37,6 @@ if (process.env.START_WATCH_MODE) {
 
 `project-watchtower/lib/runtime/client`
 
-```ts
-cssHotReload()
-```
-
 `project-watchtower/lib/runtime/config`
 
 ```ts
@@ -49,7 +46,7 @@ default CONFIG // application configuration
 `project-watchtower/lib/runtime/server`
 These dependencies are safe to import into a node server
 
-``` ts
+```ts
 import { createServer } from 'project-watchtower/lib/runtime/server'
 import { createSsrMiddleware } from 'project-watchtower/lib/runtime/server/ssr'
 import { configureStore, rootReducer, AppState } from 'store'
@@ -70,7 +67,6 @@ export const startServer = () => {
 
 `project-watchtower/lib/runtime/server/ssr`
 See [Server Side Rendering](./server-side-rendering.md)
-
 
 ```ts
 getAssetLocations(): Assets
@@ -120,7 +116,7 @@ clientDev: (buildConfig: BuildConfig) => webpack.Configuration
 clientDebug: (buildConfig: BuildConfig) => webpack.Configuration
 clientProd: (buildConfig: BuildConfig) => webpack.Configuration
 serverDev: (buildConfig: BuildConfig) => webpack.Configuration
-serverDebug:(buildConfig: BuildConfig) =>  webpack.Configuration
+serverDebug: (buildConfig: BuildConfig) => webpack.Configuration
 serverProd: (buildConfig: BuildConfig) => webpack.Configuration
 devBase: webpack.Configuration
 prodBase: webpack.Configuration
@@ -156,5 +152,5 @@ measureAndWriteBuildStats() => Promise<void>
 
 `project-watchtower/lib/types`
 
-*   `Assets`: Mapping of webpack assets to file locations
-*   `BuildConfig` / `BuildConfigOverride`: Basic configuration for the project
+-   `Assets`: Mapping of webpack assets to file locations
+-   `BuildConfig` / `BuildConfigOverride`: Basic configuration for the project

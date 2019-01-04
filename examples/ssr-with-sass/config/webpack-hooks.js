@@ -19,6 +19,7 @@ exports.default = {
                 {
                     test: /\.s?css$/,
                     use: [
+                        'css-hot-loader',
                         MiniCssExtractPlugin.loader,
                         {
                             loader: 'css-loader',

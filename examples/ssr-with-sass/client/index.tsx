@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { cssHotReload } from '../../../lib/runtime/client'
 import { getTransferredState } from '../../../lib/runtime/client/get-transferred-state'
 
 import { App, AppState } from '../common/App'
@@ -22,7 +21,5 @@ if (!state) {
         module.hot.accept('../common/App', () => {
             setTimeout(render)
         })
-
-        cssHotReload()
     }
 }
