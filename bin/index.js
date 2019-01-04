@@ -5,4 +5,4 @@
  * with CRLF on Windows, which breks the shebang line on linux/unix!
  */
 
-require('../dist/es2015/bin/_pwt')
+require('../dist/cjs/bin/_pwt')
