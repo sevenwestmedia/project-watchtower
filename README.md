@@ -52,14 +52,6 @@ Detailed documentation available in the [docs](./docs) folder:
 
 Check out the example at [examples/ssr-with-sass](examples/ssr-with-sass)
 
-### How to I import deep paths from watchtower?
-
-Because of the different build types, it is suggested to configure a typescript path mapping:
-
-```json
-"project-watchtower/lib/*": ["node_modules/project-watchtower/dist/esm/*"]
-```
-
 ## Environmental Variables
 
 ### Build Caching - using cache-loader
