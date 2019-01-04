@@ -6,47 +6,68 @@ See the [build documentation](./build.md) for details on how to customise the pr
 
 ### Source locations
 
-* config (optional. TypeScript has to be transpiled to JavaScript before building!)
-    * webpack.[target].[environment].js: Override configuration
-    * webpack-hooks.js: Add webpack options
-    * config.js: Override default configuration
-    * setup-tests.ts/js: Jest test setup
-* common: Application code
-* client
-    * index.tsx: Client entry file
-    * polyfills.ts: Polyfills (optional)
-* public: Public directory for assets that aren't bundled with the application
-    * index.html: HTML template for client-only mode
-* server
-    * start.ts: Server entry file
-* .env: Environment variables
-* .env.default: Definition of environment variables
+-   config (optional. TypeScript has to be transpiled to JavaScript before building!)
+    -   webpack.[target].[environment].js: Override/replaces configuration
+    -   webpack-hooks.js: Add webpack options
+    -   config.js: Override default configuration
+    -   setup-tests.ts/js: Jest test setup
+-   common: Application code
+-   client
+    -   index.tsx: Client entry file
+    -   polyfills.ts: Polyfills (optional)
+-   public: Public directory for assets that aren't bundled with the application
+    -   index.html: HTML template for client-only mode
+-   server
+    -   start.ts: Server entry file
+-   .env: Environment variables
+-   .env.default: Definition of environment variables
+
+#### Webpack hooks
+
+To add additional config (in addition to the default webpack config, you can specify a hooks file)
+
+The interface looks like this:
+
+```ts
+export interface WebpackHooks {
+    base?: webpack.Configuration | CreateWebpackConfig
+    server?: webpack.Configuration | CreateWebpackConfig
+    client?: webpack.Configuration | CreateWebpackConfig
+    dev?: webpack.Configuration | CreateWebpackConfig
+    prod?: webpack.Configuration | CreateWebpackConfig
+    serverDev?: webpack.Configuration | CreateWebpackConfig
+    serverProd?: webpack.Configuration | CreateWebpackConfig
+    serverDebug?: webpack.Configuration | CreateWebpackConfig
+    clientDev?: webpack.Configuration | CreateWebpackConfig
+    clientProd?: webpack.Configuration | CreateWebpackConfig
+    clientDebug?: webpack.Configuration | CreateWebpackConfig
+}
+```
 
 ### Output locations
 
-* build/client: Client build output directory
-    * static
-        * js
-            * main.chunk.js (hashed in production build)
-            * vendor.chunk.js (hashed in production build)
-        * css
-            * main.css (hashed in production build)
-        * media
-        * fonts
-* build/server: Server build output directory
-    * *server.js*: Main file generated for server
-    * ...
-    * index.html
-* assets.json: Mapping to the location of the generated assets
-* build-stats.csv: Generated build metrics
+-   build/client: Client build output directory
+    -   static
+        -   js
+            -   main.chunk.js (hashed in production build)
+            -   vendor.chunk.js (hashed in production build)
+        -   css
+            -   main.css (hashed in production build)
+        -   media
+        -   fonts
+-   build/server: Server build output directory
+    -   _server.js_: Main file generated for server
+    -   ...
+    -   index.html
+-   assets.json: Mapping to the location of the generated assets
+-   build-stats.csv: Generated build metrics
 
 ## Override default configuration
 
-Options for the file  `/config/config.js` (usage explained in the [build documentation](./build.md))
+Options for the file `/config/config.js` (usage explained in the [build documentation](./build.md))
 
 ```ts
 export interface BuildConfig {
-
     /** Prefix for all assets (JS, CSS, media, fonts) with trailing slash */
     ASSETS_PATH_PREFIX: string
 
@@ -63,7 +84,7 @@ export interface BuildConfig {
     CLIENT_OUTPUT: string
 
     /** set to false if the application is serverless */
-    HAS_SERVER: boolean,
+    HAS_SERVER: boolean
 
     /** Default port for the server (when process.env.PORT is not set) */
     PORT: number
@@ -97,7 +118,6 @@ export interface BuildConfig {
 
     /** Regular expression of paths to be ignored in watch mode */
     WATCH_IGNORE: RegExp
-
 }
 ```
 

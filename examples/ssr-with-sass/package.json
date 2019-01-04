@@ -1,0 +1,22 @@
+{
+  "name": "ssr-with-sass",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "node ../../dist/cjs/bin/index.js build"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^9.4.4",
+    "css-loader": "^2.1.0",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-sass": "^4.11.0",
+    "null-loader": "^0.1.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-loader": "^3.0.0",
+    "resolve-url-loader": "^3.0.0",
+    "sass-loader": "^7.1.0"
+  }
+}
