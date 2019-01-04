@@ -4,11 +4,6 @@
 *.ts
 *.tsx
 !*.d.ts
-client/
-build/
-demo/
-docs/
-public/
-server/
-test/
+node_modules/
 coverage/
+examples/
