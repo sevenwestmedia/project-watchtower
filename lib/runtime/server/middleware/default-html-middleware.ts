@@ -37,7 +37,6 @@ export const getDefaultHtmlMiddleware = (log: Logger, runtimeConfig: RuntimeConf
 
     // for development we grab the source index.html and add the assets
     let indexContent: string | undefined
-    let missingIndexErrorLogged: boolean = false
 
     if (runtimeConfig.SERVER_PUBLIC_DIR) {
         const indexPath = path.resolve(runtimeConfig.SERVER_PUBLIC_DIR, 'index.html')
@@ -47,38 +46,48 @@ export const getDefaultHtmlMiddleware = (log: Logger, runtimeConfig: RuntimeConf
     }
 
     const middleware: express.RequestHandler = (req, res) => {
+        const buildAssets = getAssets(runtimeConfig)
         if (indexContent) {
-            const buildAssets = getAssets(runtimeConfig)
-            const indexWithAssets = renderHtml({
-                context: {
-                    promiseTracker: new PromiseTracker(),
-                    ssrRequestProps: {},
-                },
-                head: undefined,
-                pageTags: {
-                    body: getBodyAssets(buildAssets),
-                    head: getHeadAssets(buildAssets),
-                },
-                renderResult: '',
-                req,
-            })
+            const withHeadTags = indexContent.replace(
+                '</head>',
+                `${getHeadAssets(buildAssets)
+                    .map(headAsset => headAsset.tag)
+                    .join('\n')}
+    </head>`,
+            )
+
+            const withBodyTags = withHeadTags.replace(
+                '</body>',
+                `${getBodyAssets(buildAssets)
+                    .map(bodyAsset => bodyAsset.tag)
+                    .join('\n')}
+    </body>`,
+            )
 
             return res
                 .status(200)
                 .contentType('text/html')
-                .send(indexWithAssets)
+                .send(withBodyTags)
         }
 
-        if (!missingIndexErrorLogged) {
-            log.error(
-                `Watchtower default middleware requires a html template at ${
-                    runtimeConfig.SERVER_PUBLIC_DIR
-                }/index.html to add the JS/CSS assets to and serve`,
-            )
-            missingIndexErrorLogged = true
-        }
+        const indexWithAssets = renderHtml({
+            context: {
+                promiseTracker: new PromiseTracker(),
+                ssrRequestProps: {},
+            },
+            head: undefined,
+            pageTags: {
+                body: getBodyAssets(buildAssets),
+                head: getHeadAssets(buildAssets),
+            },
+            renderResult: '',
+            req,
+        })
 
-        return res.status(404).send()
+        return res
+            .status(200)
+            .contentType('text/html')
+            .send(indexWithAssets)
     }
 
     return middleware
