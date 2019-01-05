@@ -135,6 +135,7 @@
         "prestats:client-only-example": "yarn build:client-only-example",
         "build:client-only-example": "yarn pwt build -p examples/client-only",
         "watch:client-only-example": "yarn pwt watch -p examples/client-only",
+        "debug:client-only-example": "yarn pwt watch debug-brk -p examples/client-only",
         "stats:client-only-example": "yarn pwt stats -p examples/client-only",
         "explore-bundle:client-only-example": "yarn pwt explore-bundle -p examples/client-only",
         "~~~ with-server ~~~": "",

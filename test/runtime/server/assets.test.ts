@@ -17,7 +17,7 @@ const runtimeConfig = getRuntimeConfigFromBuildConfig(buildConfig)
 const assets = {
     main: {
         css: 'foo/css/main.css',
-        js: 'foo/main.chunk.js',
+        js: 'foo/main.js',
     },
     vendor: {
         js: 'foo/vendor.chunk.js',

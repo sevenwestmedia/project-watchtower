@@ -1,6 +1,6 @@
 {
     "main": {
-        "js": "/main.chunk.js",
+        "js": "/main.js",
         "css": "/main.css"
     },
     "vendor": {

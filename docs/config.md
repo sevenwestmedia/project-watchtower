@@ -49,7 +49,7 @@ export interface WebpackHooks {
 -   build/client: Client build output directory
     -   static
         -   js
-            -   main.chunk.js (hashed in production build)
+            -   main.js (hashed in production build)
             -   vendor.chunk.js (hashed in production build)
         -   css
             -   main.css (hashed in production build)

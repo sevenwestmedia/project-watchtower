@@ -30,7 +30,7 @@ export const setDefaultAssets = (buildConfig: BuildConfig) => {
     updateAssetLocations({
         main: {
             css: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'css/main.css',
-            js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/main.chunk.js',
+            js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/main.js',
         },
         vendor: {
             js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/vendor.chunk.js',

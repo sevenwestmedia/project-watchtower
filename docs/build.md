@@ -96,7 +96,7 @@ export default config
 
 ## Running
 
-    pwt start [watch] [fast] [debug] [inspect] [prod]
+    pwt start [watch] [fast] [debug] [prod]
 
 Starts the server, using the environment variables defined in `.env`
 
@@ -201,79 +201,3 @@ Add the following task to `.vscode/tasks.json`:
     ]
 }
 ```
-
-### Debug tests
-
-Debugging test cases with Jest currently only works by transpiling the tests to JavaScript and then running them due to a limitation in the `ts-jest` preprocessor.
-
-In your `package.json`, add a shortcut script for project-watchtower and the TypeScript compiler:
-
-```
-"pwt": "pwt",
-"tsc": "tsc",
-```
-
-Add a debug configuration to `.vscode/launch.json`:
-
-```
-{
-    "type": "node",
-    "request": "launch",
-    "name": "Debug tests",
-    "runtimeExecutable": "npm",
-    "windows": {
-        "runtimeExecutable": "npm.cmd"
-    },
-    "runtimeArgs": [
-        "run-script",
-        "pwt",
-        "test",
-        "debug"
-    ],
-    "port": 5858,
-    "timeout": 30000,
-    "sourceMaps": true,
-    "smartStep": true,
-    "trace": "sm",
-    "preLaunchTask": "build:test:debug"
-}
-```
-
-Depending on your TypeScript configuration you might have to add the compilation target directory as `outFiles`:
-
-```
-"outFiles": [
-    "${workspaceRoot}/dist/**/*.js"
-]
-```
-
-Add a task to compile your tests to JavaScript to `.vscode/tasks.json`:
-
-```
-{
-    "taskName": "build:test:debug",
-    "args": [
-        "run",
-        "tsc",
-        "--",
-        "-p",
-        "./tsconfig-debug.json"
-    ]
-}
-```
-
-### Server profiling
-
-Start the server with
-
-```
-pwt start inspect
-```
-
-or
-
-```
-pwt watch inspect
-```
-
-Open Google Chrome and go to _chrome://inspect_, where the Node.js process will show up and allow you do to profiling.

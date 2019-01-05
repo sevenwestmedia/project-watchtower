@@ -74,9 +74,9 @@ Scripts:
     build [<target>] [<environment>] [-p <project dir>]
     clean [-p <project dir>] [<glob> ...]
     explore-bundle [disableHoisting] [-p <project dir>]
-    start [watch] [fast] [prod] [debug] [inspect] [client] [-p <project dir>]
+    start [watch] [fast] [prod] [debug] [client] [-p <project dir>]
     stats [verbose] [-p <project dir>]
-    watch [server] [client] [fast] [inspect] [-p <project dir>]
+    watch [server] [client] [fast] [debug] [-p <project dir>]
 
 Refer to docs/cli.md for the full API documentation
 `)
