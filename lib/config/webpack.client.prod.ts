@@ -13,8 +13,8 @@ const config: CreateWebpackConfig = options => {
         : options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name]_[chunkhash].js'
 
     const chunkFilename = options.buildConfig.STATIC_RESOURCE_NAMES
-        ? options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].chunk.js'
-        : options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name]_[chunkhash].chunk.js'
+        ? options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js'
+        : options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name]_[chunkhash].js'
 
     return merge(
         baseConfig(options),

@@ -22,7 +22,7 @@ const config: CreateWebpackConfig = options => {
                 main: ['webpack-hot-middleware/client?noInfo=true'],
             },
             output: {
-                chunkFilename: options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].chunk.js',
+                chunkFilename: options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js',
                 filename: options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js',
             },
             plugins: [new webpack.HotModuleReplacementPlugin()],

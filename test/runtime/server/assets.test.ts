@@ -20,7 +20,7 @@ const assets = {
         js: 'foo/main.js',
     },
     vendor: {
-        js: 'foo/vendor.chunk.js',
+        js: 'foo/vendor.js',
     },
 }
 

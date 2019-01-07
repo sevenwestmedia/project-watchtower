@@ -4,6 +4,6 @@
         "css": "/main.css"
     },
     "vendor": {
-        "js": "/vendor.chunk.js"
+        "js": "/vendor.js"
     }
 }

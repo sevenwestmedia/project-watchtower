@@ -66,8 +66,8 @@ exports.default = {
             : options.buildConfig.ASSETS_PATH_PREFIX + 'css/[name].[contenthash:8].css'
 
         const cssChunkFilename = options.buildConfig.STATIC_RESOURCE_NAMES
-            ? options.buildConfig.ASSETS_PATH_PREFIX + 'css/[name].chunk.css'
-            : options.buildConfig.ASSETS_PATH_PREFIX + 'css/[name].[contenthash:8].chunk.css'
+            ? options.buildConfig.ASSETS_PATH_PREFIX + 'css/[name].css'
+            : options.buildConfig.ASSETS_PATH_PREFIX + 'css/[name].[contenthash:8].css'
 
         return {
             plugins: [

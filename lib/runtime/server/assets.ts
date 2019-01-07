@@ -33,7 +33,7 @@ export const setDefaultAssets = (buildConfig: BuildConfig) => {
             js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/main.js',
         },
         vendor: {
-            js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/vendor.chunk.js',
+            js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/vendor.js',
         },
     })
 }
