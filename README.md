@@ -1,11 +1,11 @@
 # Project Watchtower
 
-A unified basis for web applications.
+Project Watchtower is a TypeScript first, opinionated foundation for creating universal (Server Side Rendered) React applications. If you are not using TypeScript then Watchtower is probably not for you.
+
+[![Build Status](https://travis-ci.com/sevenwestmedia/project-watchtower.svg?branch=master)](https://travis-ci.com/sevenwestmedia/project-watchtower)
 
 ![](./JLsatellite2.jpg)  
 [Credit: Wikipedia](https://en.wikipedia.org/wiki/File:JLsatellite2.jpg)
-
-Project Watchtower is a TypeScript first, opinionated foundation for creating universal (Server Side Rendered) React applications. If you are not using TypeScript then Watchtower is probably not for you.
 
 ## Why
 
@@ -48,6 +48,16 @@ Detailed documentation available in the [docs](./docs) folder:
 ### For development
 
 -   typescript
+
+## Dependencies
+
+### Stats
+
+Stats use lighthouse, using a docker image is the easiest way to get it running.
+
+```
+docker run -d -it --restart unless-stopped -p 9222:9222 --name=chrome-headless -v /tmp/chromedata:/data --shm-size=1gb alpeware/chrome-headless-stable:ver-71.0.3578.80
+```
 
 ## FAQ
 
