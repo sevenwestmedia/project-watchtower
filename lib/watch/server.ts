@@ -37,7 +37,7 @@ const restartServer = (
 export interface WatchServer {
     app: express.Express
     server: Server
-    close: () => void
+    close: () => Promise<any>
 }
 
 const watchServer = (log: Logger, buildConfig: BuildConfig) =>
@@ -89,9 +89,16 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
             resolve({
                 app,
                 close: () => {
-                    // tslint:disable-next-line:no-empty
-                    watching.close(() => {})
-                    server.close()
+                    return Promise.all([
+                        new Promise(closeResolve =>
+                            watching.close(() => {
+                                closeResolve()
+                            }),
+                        ),
+                        new Promise(closeResolve => server.close(() => closeResolve())),
+                    ]).then(() => {
+                        devServer.kill()
+                    })
                 },
                 server,
             })

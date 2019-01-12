@@ -1,6 +1,8 @@
 import path from 'path'
 import { consoleLogger } from 'typescript-log'
 
+import { ChildProcess } from 'child_process'
+import { WatchServer } from 'lib/watch/server'
 import watch from '../../lib/bin/watch'
 import { getConfig } from '../../lib/runtime/config/config'
 import { waitForConnection } from '../../lib/runtime/util/network'
@@ -17,7 +19,7 @@ describe('bin/watch', () => {
         const port = await getTestPort()
         buildConfig.DEV_SERVER_PORT = port
         process.env.TEST_BIN_DIR = path.resolve(process.cwd(), 'dist/cjs/bin')
-        let childProcess: any
+        let childProcess: ChildProcess | WatchServer | undefined
 
         try {
             childProcess = await watch(log, buildConfig, {
@@ -25,9 +27,13 @@ describe('bin/watch', () => {
                 PROJECT_DIR: testProjectDir,
             })
             await waitForConnection(port)
-        } catch (err) {
+        } finally {
             if (childProcess) {
-                childProcess.kill()
+                if ('close' in childProcess) {
+                    await childProcess.close()
+                } else {
+                    childProcess.kill()
+                }
             }
         }
     })

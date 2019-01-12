@@ -1,21 +1,24 @@
 import net from 'net'
 
-export const waitForConnection = (port: number) =>
-    new Promise(resolve => {
-        const connect = () => {
-            const socket = net.connect(
-                { port },
-                () => {
-                    socket.end()
-                    resolve()
-                },
-            )
-            socket.on('error', () => {
-                setTimeout(connect, 2000)
-            })
-        }
-        connect()
-    })
+export const waitForConnection = (port: number, timeout: number = 30000) =>
+    Promise.race([
+        new Promise(resolve => {
+            const connect = () => {
+                const socket = net.connect(
+                    { port },
+                    () => {
+                        socket.end()
+                        resolve()
+                    },
+                )
+                socket.on('error', () => {
+                    setTimeout(connect, 2000)
+                })
+            }
+            connect()
+        }),
+        new Promise(resolve => setTimeout(() => resolve(), timeout)),
+    ])
 
 const startPort = 3000
 

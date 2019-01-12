@@ -4,7 +4,7 @@ import build from '../../lib/bin/build'
 import clean from '../../lib/bin/clean'
 import { getConfig } from '../../lib/runtime/config/config'
 import { findFreePort, waitForConnection } from '../../lib/runtime/util/network'
-import watchServer from '../../lib/watch/server'
+import watchServer, { WatchServer } from '../../lib/watch/server'
 
 const log = consoleLogger()
 const testProjectDir = path.join(process.cwd(), './test/test-project')
@@ -12,7 +12,7 @@ const buildConfig = getConfig(log, testProjectDir)
 buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/server')
 
 // Increase test timeout because builds might take a while
-;(jasmine as any).DEFAULT_TIMEOUT_INTERVAL = 60000
+jest.setTimeout(60000)
 
 describe('watch/server', () => {
     it('will run', async () => {
@@ -20,8 +20,16 @@ describe('watch/server', () => {
         await build(log, buildConfig)
         const port = await findFreePort(6000)
         buildConfig.DEV_SERVER_PORT = port
-        const watch = await watchServer(log, buildConfig)
-        await waitForConnection(port)
-        watch.close()
+        let watch: WatchServer | undefined
+
+        try {
+            watch = await watchServer(log, buildConfig)
+
+            await waitForConnection(port)
+        } finally {
+            if (watch) {
+                await watch.close()
+            }
+        }
     })
 })
