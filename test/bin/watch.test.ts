@@ -15,7 +15,7 @@ const buildConfig = getConfig(log, testProjectDir)
 describe('bin/watch', () => {
     jest.setTimeout(60000)
 
-    it('will watch', async () => {
+    it.skip('will watch', async () => {
         const port = await getTestPort()
         buildConfig.DEV_SERVER_PORT = port
         process.env.TEST_BIN_DIR = path.resolve(process.cwd(), 'dist/cjs/bin')
@@ -39,7 +39,7 @@ describe('bin/watch', () => {
     })
 
     // can't test in TypeScript land because it requires the internal server in JavaScript
-    it('will watch the client', async () => {
+    it.skip('will watch the client', async () => {
         const port = await getTestPort()
         buildConfig.DEV_SERVER_PORT = port
         let childProcess: any

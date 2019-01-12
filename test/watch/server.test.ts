@@ -14,7 +14,7 @@ buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/server')
 // Increase test timeout because builds might take a while
 jest.setTimeout(60000)
 
-describe('watch/server', () => {
+describe.skip('watch/server', () => {
     it('will run', async () => {
         await clean(log, buildConfig)
         await build(log, buildConfig)
