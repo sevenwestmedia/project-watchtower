@@ -59,7 +59,7 @@ const start = (
     const clientMode = !HAS_SERVER || args.indexOf('client') !== -1
 
     const serverPath = clientMode
-        ? path.resolve(__dirname, '..', 'server', 'start.js')
+        ? path.resolve(process.env.TEST_BIN_DIR || __dirname, '..', 'server', 'start.js')
         : path.resolve(OUTPUT, 'server.js')
 
     dotenv.config({

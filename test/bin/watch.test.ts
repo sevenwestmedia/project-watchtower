@@ -16,6 +16,7 @@ describe('bin/watch', () => {
     it('will watch', async () => {
         const port = await getTestPort()
         buildConfig.DEV_SERVER_PORT = port
+        process.env.TEST_BIN_DIR = path.resolve(process.cwd(), 'dist/cjs/bin')
         let childProcess: any
 
         try {
