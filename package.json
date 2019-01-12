@@ -5,6 +5,10 @@
     "author": {
         "name": "Seven West Media"
     },
+    "repository": {
+        "type": "github",
+        "url": "https://github.com/sevenwestmedia/project-watchtower"
+    },
     "main": "dist/cjs/runtime/server.js",
     "module": "dist/esm/runtime/server.js",
     "browser": "dist/esm/runtime/universal.js",
