@@ -28,7 +28,7 @@
         "pretest": "yarn clean:lighthouse && yarn build",
         "test": "jest --config jest.json --forceExit",
         "precoverage": "yarn clean:lighthouse && yarn build",
-        "coverage": "yarn test --coverage--forceExit",
+        "coverage": "yarn test --coverage --forceExit",
         "watch": "yarn build --watch",
         "clean:lighthouse": "rimraf node_modules/lighthouse/**/*.ts",
         "pwt": "node dist/cjs/bin/index.js",
