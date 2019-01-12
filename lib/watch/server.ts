@@ -97,7 +97,9 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
                         ),
                         new Promise(closeResolve => server.close(() => closeResolve())),
                     ]).then(() => {
-                        devServer.kill()
+                        if (devServer) {
+                            devServer.kill()
+                        }
                     })
                 },
                 server,
