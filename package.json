@@ -24,7 +24,7 @@
         "build:esm": "tsc --module es2015 --target es5 --outDir dist/esm -p tsconfig.build.json",
         "build:cjs": "tsc --module commonjs --target es5 --outDir dist/cjs -p tsconfig.build.json",
         "compile": "tsc",
-        "verify": "yarn install-example-dependencies && yarn clean && yarn lint && yarn build && yarn coverage",
+        "verify": "yarn install-example-dependencies && yarn clean && yarn lint && yarn coverage",
         "pretest": "yarn clean:lighthouse && yarn build",
         "test": "jest --config jest.json",
         "precoverage": "yarn clean:lighthouse && yarn build",
