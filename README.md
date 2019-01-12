@@ -3,6 +3,7 @@
 Project Watchtower is a TypeScript first, opinionated foundation for creating universal (Server Side Rendered) React applications. If you are not using TypeScript then Watchtower is probably not for you.
 
 [![Build Status](https://travis-ci.com/sevenwestmedia/project-watchtower.svg?branch=master)](https://travis-ci.com/sevenwestmedia/project-watchtower)
+[![](https://img.shields.io/npm/v/node-knex-query-executor.svg)](https://npmjs.org/package/project-watchtower)
 
 ![](./JLsatellite2.jpg)  
 [Credit: Wikipedia](https://en.wikipedia.org/wiki/File:JLsatellite2.jpg)
