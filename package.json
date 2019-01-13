@@ -172,6 +172,7 @@
     },
     "peerDependencies": {
         "@types/webpack": ">=4.0.0",
+        "cheerio": "^1.0.0-rc.2",
         "express": ">=4.0.0",
         "react": ">= 16.0.0",
         "react-dom": ">= 16.0.0",
