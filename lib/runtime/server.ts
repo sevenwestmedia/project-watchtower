@@ -50,7 +50,10 @@ export interface BuildConfig {
     /** output directory for the build */
     OUTPUT: string
 
-    /** set to false if the application is serverless */
+    /* enables a node only server */
+    NODE_ONLY: boolean
+
+    /** set to false if the application is serverless - this is ignored if NODE_ONLY set to true */
     HAS_SERVER: boolean
 
     /** Default port for the dev server (when process.env.PORT is not set) */

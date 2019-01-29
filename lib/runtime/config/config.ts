@@ -10,6 +10,7 @@ const defaultConfig = (root: string): BuildConfig => ({
     CLIENT_POLYFILLS: path.resolve(root, 'client', 'polyfills.ts'),
     DEV_SERVER_PORT: 3000,
     HAS_SERVER: true,
+    NODE_ONLY: false,
     OUTPUT: path.resolve(root, 'dist'),
     PUBLIC_PATH: '/',
     SERVER_BUNDLE_ALL: false,

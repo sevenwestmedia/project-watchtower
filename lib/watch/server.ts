@@ -8,7 +8,7 @@ import path from 'path'
 import { Logger } from 'typescript-log'
 import webpack from 'webpack'
 import { getWebpackConfig } from '../build/build'
-import { getPort } from '../runtime/server/server'
+import { getPort } from '../runtime/server/custom-server'
 import { findFreePort, waitForConnection } from '../runtime/util/network'
 import { getHotReloadMiddleware, openBrowser } from '../server/dev'
 
@@ -40,7 +40,7 @@ export interface WatchServer {
     close: () => Promise<any>
 }
 
-const watchServer = (log: Logger, buildConfig: BuildConfig) =>
+const watchServer = (log: Logger, buildConfig: BuildConfig, nodeOnlyServer: boolean) =>
     new Promise<WatchServer>(async resolve => {
         dotenv.config({
             path: path.join(buildConfig.BASE, '.env'),
@@ -55,15 +55,15 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
         const serverCompiler = webpack(getWebpackConfig(log, buildConfig, 'server', 'dev'))
 
         serverCompiler.hooks.invalid.tap('invalid', () => {
-            log.info('🦄 Server changed, rebuilding and restarting server...⭐')
+            log.info('⭐  Server changed, rebuilding and restarting server...  ⭐ ')
         })
 
         const watching = serverCompiler.watch(
             {
-                aggregateTimeout: 10000,
+                aggregateTimeout: 500,
             },
             () => {
-                if (!devServer) {
+                if (!devServer && !nodeOnlyServer) {
                     setTimeout(() => openBrowser(hostPort), 2000)
                 }
                 devServer = restartServer(buildConfig, devServerPort, buildConfig.BASE, devServer)

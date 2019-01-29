@@ -20,7 +20,10 @@ const watch = async (
     watchProcessEnv: NodeJS.ProcessEnv,
     ...args: WatchParam[]
 ): Promise<ChildProcess | WatchServer> => {
-    const { HAS_SERVER } = buildConfig
+    const { NODE_ONLY } = buildConfig
+
+    const HAS_SERVER = NODE_ONLY ? true : buildConfig.HAS_SERVER
+
     const additionalStartParams: StartParam[] = []
     const env: NodeJS.ProcessEnv = { ...watchProcessEnv }
 
@@ -34,7 +37,7 @@ const watch = async (
     const isServerWatch = HAS_SERVER && args.indexOf('server') !== -1
 
     if (isServerWatch) {
-        return watchServer(log, buildConfig)
+        return watchServer(log, buildConfig, NODE_ONLY)
     }
 
     const clientMode = !HAS_SERVER || args.indexOf('client') !== -1

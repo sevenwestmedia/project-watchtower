@@ -1,0 +1,11 @@
+{
+    "name": "node-server-only",
+    "version": "1.0.0",
+    "main": "dist/server.js",
+    "license": "MIT",
+    "devDependencies": {},
+    "dependencies": {
+        "@types/express": "^4.16.1",
+        "express": "^4.16.4"
+    }
+}

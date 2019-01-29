@@ -9,6 +9,7 @@ import binWatch from './bin/watch'
 
 import * as buildModule from './build'
 import * as configModule from './config'
+import * as runtimeNodeServerModule from './runtime/node-server'
 import * as runtimeServerModule from './runtime/server'
 import * as universalModule from './runtime/universal'
 import * as serverModule from './server'
@@ -57,6 +58,7 @@ export const bin: BinType = {
 export const build = buildModule
 export const config = configModule
 export const runtimeServer = runtimeServerModule
+export const runtimeNodeServer = runtimeNodeServerModule
 export const universal = universalModule
 export const server = serverModule
 export const stats = statsModule
