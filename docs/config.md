@@ -83,7 +83,10 @@ export interface BuildConfig {
     /** output directory for the client build */
     CLIENT_OUTPUT: string
 
-    /** set to false if the application is serverless */
+    /* enables a node only server */
+    NODE_ONLY: boolean
+
+    /** set to false if the application is serverless - this is ignored if NODE_ONLY set to true */
     HAS_SERVER: boolean
 
     /** Default port for the server (when process.env.PORT is not set) */
@@ -131,6 +134,7 @@ Default configuration:
     CLIENT_ENTRY: path.resolve(root, 'client', 'index.tsx'),
     CLIENT_OUTPUT: path.resolve(root, 'dist'),
     CLIENT_POLYFILLS: path.resolve(root, 'client', 'polyfills.ts'),
+    NODE_ONLY: false,
     HAS_SERVER: true,
     PUBLIC_PATH: '/',
     DEV_SERVER_PORT: 3000,
