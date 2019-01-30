@@ -58,21 +58,16 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
             log.info('⭐  Server changed, rebuilding and restarting server...  ⭐')
         })
 
-        const watching = serverCompiler.watch(
-            {
-                aggregateTimeout: 500,
-            },
-            () => {
-                if (!devServer) {
-                    setTimeout(() => openBrowser(hostPort), 2000)
-                }
-                devServer = restartServer(buildConfig, devServerPort, buildConfig.BASE, devServer)
+        const watching = serverCompiler.watch({}, () => {
+            if (!devServer) {
+                setTimeout(() => openBrowser(hostPort), 2000)
+            }
+            devServer = restartServer(buildConfig, devServerPort, buildConfig.BASE, devServer)
 
-                setTimeout(() => {
-                    devServerAvailable = waitForConnection(devServerPort)
-                }, 100)
-            },
-        )
+            setTimeout(() => {
+                devServerAvailable = waitForConnection(devServerPort)
+            }, 100)
+        })
 
         const app = express()
 
