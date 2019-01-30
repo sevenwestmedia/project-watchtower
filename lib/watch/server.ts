@@ -55,24 +55,19 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
         const serverCompiler = webpack(getWebpackConfig(log, buildConfig, 'server', 'dev'))
 
         serverCompiler.hooks.invalid.tap('invalid', () => {
-            log.info('🦄 Server changed, rebuilding and restarting server...⭐')
+            log.info('⭐  Server changed, rebuilding and restarting server...  ⭐')
         })
 
-        const watching = serverCompiler.watch(
-            {
-                aggregateTimeout: 10000,
-            },
-            () => {
-                if (!devServer) {
-                    setTimeout(() => openBrowser(hostPort), 2000)
-                }
-                devServer = restartServer(buildConfig, devServerPort, buildConfig.BASE, devServer)
+        const watching = serverCompiler.watch({}, () => {
+            if (!devServer) {
+                setTimeout(() => openBrowser(hostPort), 2000)
+            }
+            devServer = restartServer(buildConfig, devServerPort, buildConfig.BASE, devServer)
 
-                setTimeout(() => {
-                    devServerAvailable = waitForConnection(devServerPort)
-                }, 100)
-            },
-        )
+            setTimeout(() => {
+                devServerAvailable = waitForConnection(devServerPort)
+            }, 100)
+        })
 
         const app = express()
 
