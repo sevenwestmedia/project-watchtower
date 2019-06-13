@@ -1,9 +1,11 @@
-import AssetsPlugin from 'assets-webpack-plugin'
 import fs from 'fs'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
 import path from 'path'
+import webpack from 'webpack'
+import AssetsPlugin from 'assets-webpack-plugin'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { BuildConfig, CreateWebpackConfig, getAssetsFile } from '../runtime/server'
 import { updateAssetLocations } from '../runtime/server/assets'
+import { getTypeScriptWebpackRule } from './ts-loader-config'
 
 interface EntryPoints {
     [name: string]: string[]
@@ -48,6 +50,7 @@ const clientBaseConfig: CreateWebpackConfig = options => {
     }
 
     const plugins = getPlugins(options.buildConfig)
+    const resolvePlugins: webpack.ResolvePlugin[] = []
 
     if (SERVER_PUBLIC_DIR) {
         const indexHtml = path.resolve(SERVER_PUBLIC_DIR, 'index.html')
@@ -65,7 +68,7 @@ const clientBaseConfig: CreateWebpackConfig = options => {
     return {
         entry,
         module: {
-            rules: [],
+            rules: [getTypeScriptWebpackRule(plugins, resolvePlugins, options, 'client')],
         },
         optimization: {
             splitChunks: {
@@ -98,6 +101,9 @@ const clientBaseConfig: CreateWebpackConfig = options => {
             publicPath: PUBLIC_PATH,
         },
         plugins,
+        resolve: {
+            plugins: resolvePlugins,
+        },
     }
 }
 
