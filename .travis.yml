@@ -20,7 +20,7 @@ jobs:
               provider: script
               skip_cleanup: true
               script:
-                  - npx semantic-release@16.0.0-beta.22
+                  - npx semantic-release
 env:
     global:
         - secure: RQQ3N68gLaLsM56g338fReF+Oees/8luU5wNzSVGgzRDjzAev690rlaxfuTWtQrC/8NrymxzPmkETl6eYpWNDlBEMOxVu8Ne0HjTZn4ocjQt6UK0eEa32qZSv2q9uLOmbGb19eDbqbMvftuRBgjaqHDAQ0kQD6A9gmcNt+KdfzeX0fvpdeeLuoM2+uwOdF/K8kd1rwGPIZh/sPkP9qCimRSpmohwD2EZKGvMEBTbu0Rbw9YjjrxPv3Yh1zAStfVFHVEkBci8RiFuevOPs6V4GBWsKsbo60N/N+CCpzvEfnvysB2mO6CirgjOkAkpGFb3ai5xAPIFmt64Ta0bDe0HlpWSVdg1BUchQeljjdB1LLpRoHVj4dc6f1dk3Xw4oZxafJsK+N6vvjCX5jO31Yw6p7o/Nqw5PcEnv4h2PrPSP1a9uvbnQIK1EuXIFUKGUpX0prTX14ERGS8eSQw3/ezeXEBxuPH02Qvr4RLwsm0pDK4T69HgXCfS0gIN4Nq66m2ZmVWvUdg6GAqNwnOwmiEuFclrJQEbwnRCZ6918B1kLxdKpRoUbBvcRnSoIlkOvCiO5kdvQLst4gMZ1B4tKKWxVHTSwc3hwcx9uTshKKRdAGaZYqwE+ISXnLTaM6MfSUiiHKTnjGQME/vd8TCiVWmyqCan8ZJOvNKoh6gPWKYJCk0=
