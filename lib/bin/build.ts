@@ -9,12 +9,7 @@ import { watchtowerConfigFilename } from '../runtime/config/config'
 import { writeFile } from '../runtime/util/fs'
 import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
 import { webpackPromise } from '../util/webpack'
-import {
-    getMd5,
-    setupWithBuildInfo,
-    TSCONFIG_VALIDATION_ITEM,
-    validateCache,
-} from './cache-validator'
+import { getMd5, setupWithBuildInfo, validateCache } from './cache-validator'
 
 export function smp(buildConfig: BuildConfig, webpackConfig: webpack.Configuration) {
     const smpPlugin = new SpeedMeasurePlugin()
@@ -48,7 +43,14 @@ const buildTarget = async (
             },
             traceMessages: false, // pwt build doesnt have etrigan
             validationItems: [
-                TSCONFIG_VALIDATION_ITEM,
+                {
+                    filePath:
+                        (target === 'server'
+                            ? buildConfig.TS_CONFIG_SERVER
+                            : buildConfig.TS_CONFIG_CLIENT) || 'tsconfig.json',
+                    hashKey: 'tsconfigHash',
+                    isFile: true,
+                },
                 { isFile: false, itemHash: configHash, hashKey: 'webpackConfig' },
             ],
         })

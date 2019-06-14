@@ -82,6 +82,9 @@ export interface BuildConfig {
 
     /** Enables the SMP plugin https://www.npmjs.com/package/speed-measure-webpack-plugin */
     SMP?: boolean
+
+    TS_CONFIG_CLIENT?: string
+    TS_CONFIG_SERVER?: string
 }
 
 /** Use to override the application configuration */

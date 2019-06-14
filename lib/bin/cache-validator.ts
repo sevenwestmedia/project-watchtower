@@ -19,6 +19,7 @@ interface CacheLoaderValidation {
     cacheValidationConfigPath: string
     cacheDirectory: string
     validationItems: ValidationItem[]
+    baseCacheDirectory: string
 }
 
 interface CacheLoaderValidationFile {
@@ -35,23 +36,14 @@ interface BuildInfo {
 // Configure Variables
 const cacheDir = process.env.BUILD_CACHE_DIRECTORY || `.build-cache`
 const cacheDirPath = path.join(path.resolve(cacheDir))
-const tsConfigPath = 'tsconfig.json'
 const buildCacheValidationConfig = '.build-cache-validation'
 
-export const TSCONFIG_VALIDATION_ITEM: ValidationItem = {
-    filePath: tsConfigPath,
-    hashKey: 'tsconfigHash',
-    isFile: true,
-}
-
 // default values
-const validatorConfig: CacheLoaderValidation & {
-    baseCacheDirectory: string
-} = {
+const validatorConfig: CacheLoaderValidation = {
     baseCacheDirectory: cacheDirPath,
     cacheDirectory: cacheDirPath,
     cacheValidationConfigPath: path.join(cacheDirPath, buildCacheValidationConfig),
-    validationItems: [TSCONFIG_VALIDATION_ITEM],
+    validationItems: [],
 }
 
 let TRACE_MESSAGES = true
@@ -66,7 +58,7 @@ export const setup = (
     log: Logger,
     options: {
         cacheDirectory?: string
-        validationItems?: ValidationItem[]
+        validationItems: ValidationItem[]
         valiationConfigPath?: string
         traceMessages?: boolean
     },
@@ -95,7 +87,7 @@ export const setupWithBuildInfo = (
     log: Logger,
     options: {
         cacheDirectory?: string
-        validationItems?: ValidationItem[]
+        validationItems: ValidationItem[]
         buildInfo: BuildInfo
         traceMessages?: boolean
     },
