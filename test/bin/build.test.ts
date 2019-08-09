@@ -33,9 +33,7 @@ describe('bin/build', () => {
 
         const assets = getAssetLocations(runtimeConfig)
 
-        const files = [assets.main.js, assets.vendor.js].map(f =>
-            getAbsoluteAssetPath(runtimeConfig, f),
-        )
+        const files = [assets.main.js].map(f => getAbsoluteAssetPath(runtimeConfig, f))
 
         expect(fs.readFileSync(watchtowerConfig).toString()).toMatchSnapshot()
         files.forEach(f => {

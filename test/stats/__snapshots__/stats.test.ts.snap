@@ -3,7 +3,6 @@
 exports[`stats bundle-size 1`] = `
 Object {
   "bundle_main.js": "replaced",
-  "bundle_vendor.js": "replaced",
   "total_css": "replaced",
   "total_js": "replaced",
 }

@@ -24,7 +24,6 @@ const getPlugins = (buildConfig: BuildConfig) => [
  * Base webpack config for the client that is used both in development and production
  * - Compile SCSS to CSS and extract into external assets
  * - Create assets.json that maps the created assets to their locations
- * - Create vendor chunk with everything from node_modules except for SWM modules
  */
 const clientBaseConfig: CreateWebpackConfig = options => {
     const {
@@ -69,32 +68,6 @@ const clientBaseConfig: CreateWebpackConfig = options => {
         entry,
         module: {
             rules: [getTypeScriptWebpackRule(plugins, resolvePlugins, options, 'client')],
-        },
-        optimization: {
-            splitChunks: {
-                cacheGroups: {
-                    vendor: {
-                        chunks: 'all',
-                        name: 'vendor',
-                        priority: -20,
-                        test: (module: { context: string }) => {
-                            if (!module.context) {
-                                return false
-                            }
-
-                            const modulePos = module.context.indexOf('node_modules')
-                            if (modulePos === -1) {
-                                return false
-                            }
-
-                            const isWatchtower =
-                                module.context.indexOf('project-watchtower', modulePos) !== -1
-
-                            return !isWatchtower
-                        },
-                    },
-                },
-            },
         },
         output: {
             path: OUTPUT,

@@ -32,9 +32,6 @@ export const setDefaultAssets = (buildConfig: BuildConfig) => {
             css: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'css/main.css',
             js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/main.js',
         },
-        vendor: {
-            js: buildConfig.PUBLIC_PATH + buildConfig.ASSETS_PATH_PREFIX + 'js/vendor.js',
-        },
     })
 }
 
@@ -76,17 +73,15 @@ export function getHeadAssets(buildAssets: Assets): PageTag[] {
 }
 
 export function getBodyAssets(buildAssets: Assets): PageTag[] {
-    const chunkNames = Object.keys(buildAssets)
-        // Filter assets which are not .js and not main/vendor
-        .filter(chunkName => {
-            if (chunkName === 'main' || chunkName === 'vendor' || chunkName === 'manifest') {
-                return false
-            }
-            const chunk = buildAssets[chunkName]
-            return !!chunk.js
-        })
+    const chunkNames = Object.keys(buildAssets).filter(chunkName => {
+        if (chunkName === 'main' || chunkName === 'manifest') {
+            return false
+        }
+        const chunk = buildAssets[chunkName]
+        return !!chunk.js
+    })
 
-    return ['manifest', 'vendor', ...chunkNames, 'main']
+    return ['manifest', ...chunkNames, 'main']
         .filter(chunkName => buildAssets[chunkName])
         .reduce<PageTag[]>((acc, chunkName) => {
             // Turns out, webpack types are wrong, can be an array

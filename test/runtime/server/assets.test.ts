@@ -19,9 +19,6 @@ const assets = {
         css: 'foo/css/main.css',
         js: 'foo/main.js',
     },
-    vendor: {
-        js: 'foo/vendor.js',
-    },
 }
 
 describe('server/assets initial', () => {
