@@ -38,10 +38,14 @@ export const getHotReloadMiddleware: HotReloadMiddleware = (log, buildConfig) =>
     return [dev, hot]
 }
 
-export const openBrowser = (port: number) => {
+export const openBrowser = async (log: Logger, port: number) => {
     if (process.env.NODE_ENV === 'test') {
         return
     }
 
-    opn(`http://localhost:${port}`)
+    try {
+        await opn(`http://localhost:${port}`)
+    } catch (e) {
+        log.warn(e, 'Opening browser failed')
+    }
 }
