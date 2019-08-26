@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import path from 'path'
 import { Logger } from 'typescript-log'
 import { getAbsoluteAssetPath, RuntimeConfig } from '../runtime/server'

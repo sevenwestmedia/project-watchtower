@@ -5,4 +5,5 @@
  * with CRLF on Windows, which breks the shebang line on linux/unix!
  */
 
+// eslint-disable-next-line no-undef
 require('../dist/cjs/bin/_pwt')

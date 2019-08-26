@@ -1,6 +1,6 @@
 import net from 'net'
 
-export const waitForConnection = (port: number, timeout: number = 30000) =>
+export const waitForConnection = (port: number, timeout = 30000) =>
     Promise.race([
         new Promise(resolve => {
             const connect = () => {

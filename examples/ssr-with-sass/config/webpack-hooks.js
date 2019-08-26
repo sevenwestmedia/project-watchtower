@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-var */
 var path = require('path')
 var autoprefixer = require('autoprefixer')
 var MiniCssExtractPlugin = require('mini-css-extract-plugin')

@@ -39,7 +39,7 @@ describe('bin/start', () => {
         buildConfig.DEV_SERVER_PORT = port
         const childProcess = await start(log, buildConfig, {}, 'prod', 'client')
         childProcess.stdout.on('data', data => {
-            // tslint:disable-next-line:no-console
+            // eslint-disable-next-line no-console
             console.log(data.toString())
         })
         await waitForConnection(port)

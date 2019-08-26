@@ -3,7 +3,7 @@ import { createServer } from '../../../lib/runtime/server'
 
 const log = consoleLogger()
 
-// tslint:disable-next-line:no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface AppState {}
 
 // Use watchtower to create an express server

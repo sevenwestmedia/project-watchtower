@@ -12,7 +12,7 @@ declare module 'autodll-webpack-plugin' {
             debug: boolean
             filename: string
             path: string
-            entry: Object
+            entry: Record<string, any>
         }
     }
 }

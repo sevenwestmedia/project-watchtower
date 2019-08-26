@@ -9,7 +9,7 @@
  * pcs.resolve('data')
  */
 export class PromiseCompletionSource<T = {}> {
-    completed: boolean = false
+    completed = false
     private _promise: Promise<T> | undefined
 
     constructor(private autoReset = false) {}

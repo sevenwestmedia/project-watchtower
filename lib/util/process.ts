@@ -10,7 +10,7 @@ const killAllChildProcesses = () => {
     childProcesses.forEach(proc => {
         try {
             proc.kill()
-            // tslint:disable-next-line:no-empty
+            // eslint-disable-next-line no-empty
         } catch (err) {}
     })
     childProcesses = []
