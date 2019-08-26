@@ -1,9 +1,9 @@
-import AssetsPlugin from 'assets-webpack-plugin'
+import open from 'open'
 import express from 'express'
-import { BuildConfig } from 'lib/runtime/server'
-import opn from 'opn'
-import { Logger } from 'typescript-log'
 import webpack from 'webpack'
+import AssetsPlugin from 'assets-webpack-plugin'
+import { BuildConfig } from 'lib/runtime/server'
+import { Logger } from 'typescript-log'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import { getWebpackConfig } from '../build/build'
@@ -44,7 +44,7 @@ export const openBrowser = async (log: Logger, port: number) => {
     }
 
     try {
-        await opn(`http://localhost:${port}`)
+        await open(`http://localhost:${port}`)
     } catch (e) {
         log.warn(e, 'Opening browser failed')
     }

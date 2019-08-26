@@ -96,7 +96,7 @@ export const runStatsOnServer = async (
                 NODE_ENV: 'production',
                 ...process.env,
                 ...STATS_ENV,
-                PORT: port,
+                PORT: port.toString(),
                 PROJECT_DIR: buildConfig.BASE,
             },
             silent: !verbose,

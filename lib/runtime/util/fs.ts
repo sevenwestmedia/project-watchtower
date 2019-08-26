@@ -73,7 +73,8 @@ export const dynamicRequire = (file: string) => {
         // to make webpack not try and bundle complete directories.
         // without the presence of above __non_webpack_require__ it would however emit a warning
         // "Critical dependency: the request of a dependency is an expression"
-        return require(file)
+        // Need to eval otherwise we get the above warning
+        return eval('module.require')(file)
     }
 }
 

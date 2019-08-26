@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders app callback with router 1`] = `"<div data-reactroot=\\"\\">Home</div>"`;
+exports[`renders app callback with router 1`] = `"<div>Home</div>"`;

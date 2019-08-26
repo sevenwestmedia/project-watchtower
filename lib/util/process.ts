@@ -31,7 +31,7 @@ export const spawnPromise = (
     new Promise<ChildProcess>((resolve, reject) => {
         log.info(`[pwt] ${command} ${args.join(' ')}`)
 
-        const proc = spawn(command, args, options)
+        const proc = spawn(command, args, options || {})
 
         proc.on('exit', code => {
             if (code === 0) {

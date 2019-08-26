@@ -38,10 +38,12 @@ describe('bin/start', () => {
         const port = await getTestPort()
         buildConfig.DEV_SERVER_PORT = port
         const childProcess = await start(log, buildConfig, {}, 'prod', 'client')
-        childProcess.stdout.on('data', data => {
-            // eslint-disable-next-line no-console
-            console.log(data.toString())
-        })
+        if (childProcess.stdout) {
+            childProcess.stdout.on('data', data => {
+                // eslint-disable-next-line no-console
+                console.log(data.toString())
+            })
+        }
         await waitForConnection(port)
         childProcess.kill()
     })

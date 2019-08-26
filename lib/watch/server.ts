@@ -27,8 +27,8 @@ const restartServer = (
     return fork(path.resolve(buildConfig.OUTPUT, 'server.js'), [], {
         env: {
             ...process.env,
-            LOAD_DEFAULT_ASSETS: true,
-            PORT: port,
+            LOAD_DEFAULT_ASSETS: 'true',
+            PORT: port.toString(),
             PROJECT_DIR: projectDir,
         },
     })
