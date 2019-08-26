@@ -9,15 +9,15 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "autoprefixer": "^9.4.4",
-    "css-hot-loader": "^1.4.3",
-    "css-loader": "^2.1.0",
-    "mini-css-extract-plugin": "^0.5.0",
-    "node-sass": "^4.11.0",
-    "null-loader": "^0.1.1",
-    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "autoprefixer": "^9.6.1",
+    "css-hot-loader": "^1.4.4",
+    "css-loader": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "null-loader": "^3.0.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
-    "resolve-url-loader": "^3.0.0",
-    "sass-loader": "^7.1.0"
+    "resolve-url-loader": "^3.1.0",
+    "sass-loader": "^7.3.1"
   }
 }
