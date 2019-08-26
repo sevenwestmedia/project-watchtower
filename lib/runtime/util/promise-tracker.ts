@@ -42,7 +42,7 @@ export class PromiseTracker {
         return this.promises[this.waitIndex].length > 0
     }
 
-    waitForCompletion() {
+    waitForCompletion(): Promise<any> {
         if (!this.hasWork()) {
             return Promise.resolve()
         }

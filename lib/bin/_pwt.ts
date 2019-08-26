@@ -37,5 +37,5 @@ proc.on('error', () => {
 })
 
 proc.on('exit', code => {
-    process.exit(code)
+    process.exit(code || undefined)
 })

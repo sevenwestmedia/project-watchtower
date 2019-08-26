@@ -36,7 +36,9 @@ it(
         // Once dataLoadSource.resolve() is called, watchtower will re-render
         // and this component will render 'Data Loaded'
         class ComponentWhichLoadsData extends React.Component<{ promiseTracker: PromiseTracker }> {
-            componentWillMount() {
+            constructor(props: { promiseTracker: PromiseTracker }) {
+                super(props)
+
                 // If we don't have data, simulate loading some data
                 if (!dataLoadSource.completed) {
                     this.props.promiseTracker.track(dataLoadSource.promise)
@@ -72,7 +74,9 @@ it(
             class ComponentWhichLoadDataFails extends React.Component<{
                 promiseTracker: PromiseTracker
             }> {
-                componentWillMount() {
+                constructor(props: { promiseTracker: PromiseTracker }) {
+                    super(props)
+
                     // If we don't have data, simulate loading some data
                     if (!dataLoadSource.completed) {
                         this.props.promiseTracker.track(dataLoadSource.promise)
@@ -127,7 +131,8 @@ it(
             class ComponentWhichLoadDataFails extends React.Component<{
                 promiseTracker: PromiseTracker
             }> {
-                componentWillMount() {
+                constructor(props: { promiseTracker: PromiseTracker }) {
+                    super(props)
                     // If we don't have data, simulate loading some data
                     if (!dataLoadSource.completed) {
                         this.props.promiseTracker.track(dataLoadSource.promise)
@@ -245,7 +250,8 @@ it(
             class ComponentWhichLoadDataFails extends React.Component<{
                 promiseTracker: PromiseTracker
             }> {
-                componentWillMount() {
+                constructor(props: { promiseTracker: PromiseTracker }) {
+                    super(props)
                     // If we don't have data, simulate loading some data
                     if (!dataLoadSource.completed) {
                         this.props.promiseTracker.track(dataLoadSource.promise)
