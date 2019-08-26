@@ -28,7 +28,11 @@ export function getTypeScriptWebpackRule(
     options.log.info(`Target ${buildTarget} using ts config file: ${configFile}`)
 
     const tsConfigPathsPluginConfig: any = {}
-    const tsLoaderOptions: any = {}
+    const tsLoaderOptions: any = {
+        compilerOptions: {
+            noEmit: false,
+        },
+    }
 
     if (configFile) {
         tsConfigPathsPluginConfig.configFile = configFile
