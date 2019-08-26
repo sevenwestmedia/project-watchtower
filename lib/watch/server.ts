@@ -11,6 +11,7 @@ import { getWebpackConfig } from '../build/build'
 import { getPort } from '../runtime/server/server'
 import { findFreePort, waitForConnection } from '../runtime/util/network'
 import { getHotReloadMiddleware, openBrowser } from '../server/dev'
+import { webpackStatsConfig } from '../util/webpack'
 
 const restartServer = (
     buildConfig: BuildConfig,
@@ -51,15 +52,30 @@ async function watchServer(log: Logger, buildConfig: BuildConfig) {
     let devServer: ChildProcess
     let devServerAvailable: Promise<any>
 
-    const serverCompiler = webpack(getWebpackConfig(log, buildConfig, 'server', 'dev'))
+    const serverConfig = getWebpackConfig(log, buildConfig, 'server', 'dev')
+    const serverCompiler = webpack(serverConfig)
 
     serverCompiler.hooks.invalid.tap('invalid', () => {
         log.info('⭐  Server changed, rebuilding and restarting server...  ⭐')
     })
 
-    const watching = serverCompiler.watch({}, () => {
+    const watching = serverCompiler.watch({}, (err, stats) => {
         if (!devServer) {
             setTimeout(() => openBrowser(log, hostPort), 2000)
+            }
+
+            if (err) {
+                log.error({ err }, 'Failed to compile')
+                return
+            } else {
+                const statsString = stats.toString(webpackStatsConfig)
+
+                log.info(statsString)
+
+                if (stats.hasErrors()) {
+                    log.error('Stats has errors')
+                    return
+                }
         }
         devServer = restartServer(buildConfig, devServerPort, buildConfig.BASE, devServer)
 

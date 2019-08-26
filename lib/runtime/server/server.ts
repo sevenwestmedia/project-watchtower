@@ -22,8 +22,6 @@ export const getPort = (fallbackPort?: number) => {
 
 export const isWatchMode = () => process.env.START_WATCH_MODE === 'true'
 
-export const isFastMode = () => process.env.START_FAST_MODE === 'true'
-
 export interface CreateServerOptions {
     log: Logger
 

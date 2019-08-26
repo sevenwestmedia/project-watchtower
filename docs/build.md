@@ -96,7 +96,7 @@ export default config
 
 ## Running
 
-    pwt start [watch] [fast] [debug] [prod]
+    pwt start [watch] [debug] [prod]
 
 Starts the server, using the environment variables defined in `.env`
 
@@ -104,7 +104,6 @@ Starts the server, using the environment variables defined in `.env`
 
 -   `NODE_ENV`: set to `"production"` or `"development` depending on the `prod` flag - in the webpack bundles the values are hardcoded depending on which mode they were built in, so this is only relevant for third-party dependencies.
 -   `START_WATCH_MODE`: set to `"true"` by the `watch` flag
--   `START_FAST_MODE`: set to `"true"` by the `fast` flag
 -   `START_DEBUG_MODE`: set to `"true"` by the `debug` flag
 
 If you want to use additional `process.env` variables in the **client** build, make sure you create a `.env` (for local) and `.env.default` file:

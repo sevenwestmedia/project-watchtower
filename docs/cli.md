@@ -36,11 +36,10 @@ Opens the `webpack-bundle-analyzer` for the client production bundle.
 ### start
 
 ```
-pwt start [watch] [fast] [prod] [debug] [client] [-p <project dir>]
+pwt start [watch] [prod] [debug] [client] [-p <project dir>]
 ```
 
 -   `watch`: Enable watch mode and rebuild client after changes
--   `fast`: Disable TypeScript type checking for faster incremental builds
 -   `prod`: Set `NODE_ENV` to `"production"`
 -   `debug`: Start node process with `--inspect` for debugging and performance measurement in _chrome://inspect_
 -   `client`: Start internal server that serves only the client
@@ -102,12 +101,11 @@ On build servers with access to Google Chrome through a Docker container, the fo
 ### watch
 
 ```
-pwt watch [server] [client] [fast] [debug] [-p <project dir>]
+pwt watch [server] [client] [debug] [-p <project dir>]
 ```
 
 Builds the server in dev mode, then watches and rebuilds the client
 
 -   `server`: Also watches and rebuilds the server
--   `fast`: Disable TypeScript type checking for faster incremental builds
 -   `client`: Only run client without a server
 -   `debug`: Start node process with `--inspect` for debugging and performance measurement in _chrome://inspect_

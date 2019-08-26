@@ -5,7 +5,6 @@ export type BuildEnvironment = 'dev' | 'prod' | 'debug'
 export type BuildParam = BuildTarget | BuildEnvironment
 
 export type StartParam =
-    | 'fast'
     | 'watch'
     | 'prod'
     | 'debug'
@@ -14,4 +13,4 @@ export type StartParam =
     | '--debug-port'
     | number
 
-export type WatchParam = 'server' | 'fast' | 'client'
+export type WatchParam = 'server' | 'client'

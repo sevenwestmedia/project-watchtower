@@ -11,7 +11,6 @@ import { forkPromise } from '../util/process'
  * defined in `.env`
  * @param args
  * - watch: Enables watch mode
- * - fast: Disables server-side rendering and type checking
  * - prod: Sets NODE_ENV to "production"
  * - debug: Starts with debugging enabled
  * - debug-brk: Starts with debugging and waits for debugger to attach
@@ -36,10 +35,6 @@ const start = (
 
     if (args.indexOf('watch') !== -1) {
         env.START_WATCH_MODE = 'true'
-    }
-
-    if (args.indexOf('fast') !== -1) {
-        env.START_FAST_MODE = 'true'
     }
 
     const isDebug = args.indexOf('debug') !== -1

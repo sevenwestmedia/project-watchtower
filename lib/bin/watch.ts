@@ -11,7 +11,6 @@ import start from './start'
  * Rebuilds the client on changes
  * @param args
  * - server: Also watches and rebuilds server
- * - fast: disables type checking
  * - client: Only run client without a server
  */
 const watch = async (
@@ -23,11 +22,6 @@ const watch = async (
     const { HAS_SERVER } = buildConfig
     const additionalStartParams: StartParam[] = []
     const env: NodeJS.ProcessEnv = { ...watchProcessEnv }
-
-    if (args.indexOf('fast') !== -1) {
-        additionalStartParams.push('fast')
-        env.START_FAST_MODE = 'true'
-    }
 
     await clean(log, buildConfig)
 
