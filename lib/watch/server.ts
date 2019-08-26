@@ -60,7 +60,7 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
 
         const watching = serverCompiler.watch({}, () => {
             if (!devServer) {
-                setTimeout(() => openBrowser(hostPort), 2000)
+                setTimeout(() => openBrowser(log, hostPort), 2000)
             }
             devServer = restartServer(buildConfig, devServerPort, buildConfig.BASE, devServer)
 
