@@ -122,14 +122,6 @@ devBase: webpack.Configuration
 prodBase: webpack.Configuration
 ```
 
-`project-watchtower/lib/lint`
-
-```ts
-tslint(...paths: string[]): Promise<any>
-
-sassLint(...paths: string[]): Promise<any>
-```
-
 `project-watchtower/lib/server`
 
 ```ts

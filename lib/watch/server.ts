@@ -40,46 +40,46 @@ export interface WatchServer {
     close: () => Promise<any>
 }
 
-const watchServer = (log: Logger, buildConfig: BuildConfig) =>
-    new Promise<WatchServer>(async resolve => {
-        dotenv.config({
-            path: path.join(buildConfig.BASE, '.env'),
-        })
+async function watchServer(log: Logger, buildConfig: BuildConfig) {
+    dotenv.config({
+        path: path.join(buildConfig.BASE, '.env'),
+    })
 
-        const hostPort = await findFreePort(getPort(buildConfig.DEV_SERVER_PORT))
-        const devServerPort = await findFreePort(hostPort + 1)
+    const hostPort = await findFreePort(getPort(buildConfig.DEV_SERVER_PORT))
+    const devServerPort = await findFreePort(hostPort + 1)
 
-        let devServer: ChildProcess
-        let devServerAvailable: Promise<any>
+    let devServer: ChildProcess
+    let devServerAvailable: Promise<any>
 
-        const serverCompiler = webpack(getWebpackConfig(log, buildConfig, 'server', 'dev'))
+    const serverCompiler = webpack(getWebpackConfig(log, buildConfig, 'server', 'dev'))
 
-        serverCompiler.hooks.invalid.tap('invalid', () => {
-            log.info('⭐  Server changed, rebuilding and restarting server...  ⭐')
-        })
+    serverCompiler.hooks.invalid.tap('invalid', () => {
+        log.info('⭐  Server changed, rebuilding and restarting server...  ⭐')
+    })
 
-        const watching = serverCompiler.watch({}, () => {
-            if (!devServer) {
-                setTimeout(() => openBrowser(log, hostPort), 2000)
-            }
-            devServer = restartServer(buildConfig, devServerPort, buildConfig.BASE, devServer)
+    const watching = serverCompiler.watch({}, () => {
+        if (!devServer) {
+            setTimeout(() => openBrowser(log, hostPort), 2000)
+        }
+        devServer = restartServer(buildConfig, devServerPort, buildConfig.BASE, devServer)
 
-            setTimeout(() => {
-                devServerAvailable = waitForConnection(devServerPort)
-            }, 100)
-        })
+        setTimeout(() => {
+            devServerAvailable = waitForConnection(devServerPort)
+        }, 100)
+    })
 
-        const app = express()
+    const app = express()
 
-        app.use(getHotReloadMiddleware(log, buildConfig))
+    app.use(getHotReloadMiddleware(log, buildConfig))
 
-        app.use(async (_req, _res, next) => {
-            await devServerAvailable
-            next()
-        })
+    app.use(async (_req, _res, next) => {
+        await devServerAvailable
+        next()
+    })
 
-        app.use(proxyMiddleware('http://localhost:' + devServerPort))
+    app.use(proxyMiddleware('http://localhost:' + devServerPort))
 
+    const watchServer = await new Promise<WatchServer>(resolve => {
         const server = app.listen(hostPort, () => {
             resolve({
                 app,
@@ -100,8 +100,11 @@ const watchServer = (log: Logger, buildConfig: BuildConfig) =>
                 server,
             })
         })
-
-        app.set('server', server)
     })
+
+    app.set('server', watchServer)
+
+    return watchServer
+}
 
 export default watchServer

@@ -76,7 +76,7 @@ export const createSsrMiddleware = <SSRRequestProps extends object, RenderResult
 
     return async (req, response, next) => {
         if (!hasLog(req)) {
-            // tslint:disable-next-line:no-console
+            // eslint-disable-next-line no-console
             console.error('Skipping SSR middleware due to missing req.log key')
             return next()
         }

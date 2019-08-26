@@ -8,9 +8,11 @@ const log = (method: 'trace' | 'debug' | 'log' | 'warn' | 'error', args: any[]) 
         return
     }
     if (typeof args[0] === 'string') {
+        // eslint-disable-next-line no-console
         return console[method](args[0])
     }
 
+    // eslint-disable-next-line no-console
     console[method](prettyJson(args[1]), args[0])
 }
 
