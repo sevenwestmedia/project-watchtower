@@ -13,14 +13,6 @@ const env: NodeJS.ProcessEnv = {
     ...process.env,
 }
 
-// already set fast mode env variable here so that the server build also skips type checking
-if (
-    (process.argv.indexOf('watch') !== -1 && process.argv.indexOf('fast') !== -1) ||
-    process.argv.indexOf('build') !== -1
-) {
-    env.START_FAST_MODE = 'true' // fast mode when building
-}
-
 const proc = fork(filePath, process.argv.slice(2), {
     env,
     execArgv: [
