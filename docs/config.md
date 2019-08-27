@@ -50,7 +50,6 @@ export interface WebpackHooks {
     -   static
         -   js
             -   main.js (hashed in production build)
-            -   vendor.js (hashed in production build)
         -   css
             -   main.css (hashed in production build)
         -   media

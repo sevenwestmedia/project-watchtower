@@ -57,7 +57,7 @@ Measures build metrics and saves them to `build-stats.csv`
 Example:
 
 ```
-bundle_size_total,bundle_size_main,bundle_size_vendor,bundle_size_css,home_ssr_document_size,home_ssr_loadtime,home_first_meaningful_paint,home_speed_index,home_time_to_interactive
+bundle_size_total,bundle_size_main,bundle_size_css,home_ssr_document_size,home_ssr_loadtime,home_first_meaningful_paint,home_speed_index,home_time_to_interactive
 28.6,0.2,28.4,0.1,0.0,2,270,284,275
 ```
 
@@ -71,7 +71,6 @@ Stats:
 
 -   `bundle_size_total`: Total size of all JS bundles (KB)
 -   `bundle_size_main`: Size of the main JS bundle (KB)
--   `bundle_size_vendor`: Size of the vendor JS bundle (KB)
 -   `bundle_size_css`: Size of the CSS bundle (KB)
 -   `<PAGE>_ssr_document_size`: Size of the server-side rendered homepage document (KB)
 -   `<PAGE>_ssr_dom_size`: Number of DOM elements after server-side rendering
