@@ -33,7 +33,7 @@ export function getTypeScriptWebpackRule(
         compilerOptions: {
             noEmit: false,
         },
-        transpileOnly: !disableTypeCheck,
+        transpileOnly: disableTypeCheck,
         experimentalWatchApi: true,
     }
 
