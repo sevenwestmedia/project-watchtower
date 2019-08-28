@@ -71,4 +71,5 @@ Check out the example at [examples/ssr-with-sass](examples/ssr-with-sass)
 ### Build Caching - using cache-loader
 
 BUILD_CACHE_DISABLED: by default this is false, setting it to true will disable build caching
+DISABLE_TYPE_CHECKING: disables type checking
 BUILD_CACHE_DIRECTORY: specfies the build cache directory, by default it is .build-cache in the working directory

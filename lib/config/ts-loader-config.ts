@@ -4,6 +4,7 @@ import { CreateWebpackConfigOptions } from '../runtime/server'
 import { BuildTarget } from '../types'
 
 const disableCaching = String(process.env.BUILD_CACHE_DISABLED).toLowerCase() === 'true'
+const disableTypeCheck = process.env.DISABLE_TYPE_CHECKING === 'true'
 
 const cacheLoader = (cacheDirectory: string) => {
     return {
@@ -32,6 +33,8 @@ export function getTypeScriptWebpackRule(
         compilerOptions: {
             noEmit: false,
         },
+        transpileOnly: !disableTypeCheck,
+        experimentalWatchApi: true,
     }
 
     if (configFile) {
