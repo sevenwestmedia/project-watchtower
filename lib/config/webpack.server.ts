@@ -40,8 +40,17 @@ const serverBaseConfig = (options: CreateWebpackConfigOptions): webpack.Configur
             // treat deep imports as externals as well
             const moduleName = request.split('/')[0]
 
-            if (options.buildConfig.SERVER_BUNDLE_ALL) {
+            if (
+                options.buildConfig.SERVER_BUNDLE_ALL &&
+                !options.buildConfig.SERVER_BUNDLE_ALL_EXCEPT
+            ) {
                 callback(undefined, undefined)
+            } else if (options.buildConfig.SERVER_BUNDLE_ALL_EXCEPT) {
+                if (options.buildConfig.SERVER_BUNDLE_ALL_EXCEPT.indexOf(moduleName) !== -1) {
+                    callback(null, 'commonjs ' + request)
+                } else {
+                    callback(undefined, undefined)
+                }
             } else if (options.buildConfig.SERVER_INCLUDE_IN_BUNDLE.indexOf(moduleName) !== -1) {
                 callback(undefined, undefined)
             } else if (nodeModules.indexOf(moduleName) !== -1) {
