@@ -65,6 +65,9 @@ export interface BuildConfig {
     /** if true, all externals will be bundled */
     SERVER_BUNDLE_ALL: boolean
 
+    /** Include all modules, except those specified */
+    SERVER_BUNDLE_ALL_EXCEPT?: string[]
+
     /** modules which the server build includes in the bundle */
     SERVER_INCLUDE_IN_BUNDLE: string[]
 
