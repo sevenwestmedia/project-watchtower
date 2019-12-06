@@ -31,6 +31,7 @@ export interface PageTag {
 
 export interface PageTags {
     head: PageTag[]
+    preBody: PageTag[]
     body: PageTag[]
 }
 

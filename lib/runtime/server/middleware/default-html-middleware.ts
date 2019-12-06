@@ -78,6 +78,7 @@ export const getDefaultHtmlMiddleware = (log: Logger, runtimeConfig: RuntimeConf
             head: undefined,
             pageTags: {
                 body: getBodyAssets(buildAssets),
+                preBody: [],
                 head: getHeadAssets(buildAssets),
             },
             renderResult: '',
