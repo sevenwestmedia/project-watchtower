@@ -28,13 +28,11 @@ export interface RenderContext<SSRRequestProps = object> {
     promiseTracker: PromiseTracker
 }
 
-export type RenderApp<SSRRequestProps extends object> = (
-    params: {
-        log: Logger
-        context: RenderContext<SSRRequestProps>
-        req: Request
-    },
-) => JSX.Element
+export type RenderApp<SSRRequestProps extends object> = (params: {
+    log: Logger
+    context: RenderContext<SSRRequestProps>
+    req: Request
+}) => JSX.Element
 
 export interface RenderHtmlParams<SSRRequestProps extends object, RenderResult> {
     head: HelmetData | undefined
@@ -47,14 +45,12 @@ export type RenderHtml<SSRRequestProps extends object, RenderResult> = (
     params: RenderHtmlParams<SSRRequestProps, RenderResult>,
 ) => string
 
-export type CreatePageTags<SSRRequestProps> = (
-    options: {
-        buildAssets: Assets
-        helmetTags: string[]
-        stateTransfers: PageTag[]
-        renderContext: RenderContext<SSRRequestProps>
-    },
-) => PageTags
+export type CreatePageTags<SSRRequestProps> = (options: {
+    buildAssets: Assets
+    helmetTags: string[]
+    stateTransfers: PageTag[]
+    renderContext: RenderContext<SSRRequestProps>
+}) => PageTags
 
 export interface ServerSideRenderMiddlewareOptions<SSRRequestProps extends object, RenderResult> {
     app: Express & { log: Logger }
@@ -157,6 +153,7 @@ export const createSsrMiddleware = <SSRRequestProps extends object, RenderResult
                 ? options.createPageTags({ buildAssets, helmetTags, stateTransfers, renderContext })
                 : {
                       body: [...getBodyAssets(buildAssets)],
+                      preBody: [],
                       head: [
                           ...helmetTags.map(tag => ({ tag })),
                           ...getHeadAssets(buildAssets),

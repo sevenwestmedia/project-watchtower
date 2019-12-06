@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom'
 import supertest from 'supertest'
 import { consoleLogger, Logger, noopLogger } from 'typescript-log'
 import { createServer } from '../../../lib/runtime/server/server'
-import { createSsrMiddleware, RenderApp } from '../../../lib/runtime/server/ssr'
+import { createSsrMiddleware, RenderApp, CreatePageTags } from '../../../lib/runtime/server/ssr'
 import { Status404Error } from '../../../lib/runtime/server/ssr/errors'
 import { renderHtml } from '../../../lib/runtime/server/ssr/helpers/render-html'
 import { PromiseCompletionSource, PromiseTracker } from '../../../lib/runtime/universal'
@@ -295,6 +295,40 @@ it(
     ),
 )
 
+it(
+    'renders the custom tags that are passed',
+    ssrFixture(
+        fixture => {
+            return fixture.server
+                .get('/')
+                .expect(200)
+                .then(res => {
+                    expect(res.text).toEqual(`<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="test" />
+    </head>
+    <body>
+        <div>prebody</div>
+        <div id="root"><div></div></div>
+        <div>body</div>
+    </body>
+</html>`)
+                })
+        },
+        {
+            createPageTags: () => ({
+                body: [{ tag: '<div>body</div>' }],
+                head: [{ tag: '<link rel="test" />' }],
+                preBody: [{ tag: '<div>prebody</div>' }],
+            }),
+        },
+    ),
+)
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface SSRState {}
 export interface Fixture {
@@ -304,7 +338,12 @@ export interface Fixture {
 
 function ssrFixture(
     test: (fixture: Fixture) => Promise<any>,
-    options: { errorLocation?: string; pageNotFoundLocation?: string; log?: Logger } = {},
+    options: {
+        errorLocation?: string
+        pageNotFoundLocation?: string
+        log?: Logger
+        createPageTags?: CreatePageTags<{}>
+    } = {},
 ) {
     // Return the test for Jest to run
     return async () => {
@@ -326,6 +365,7 @@ function ssrFixture(
                             renderHtml,
                             setupRequest: async () => ({}),
                             ssrTimeoutMs: 1000,
+                            createPageTags: options.createPageTags,
                         })
 
                         app.get('*', ssrMiddleware)
