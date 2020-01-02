@@ -3,17 +3,7 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { CreateWebpackConfigOptions } from '../runtime/server'
 import { BuildTarget } from '../types'
 
-const disableCaching = String(process.env.BUILD_CACHE_DISABLED).toLowerCase() === 'true'
 const disableTypeCheck = process.env.DISABLE_TYPE_CHECKING === 'true'
-
-const cacheLoader = (cacheDirectory: string) => {
-    return {
-        loader: 'cache-loader',
-        options: {
-            cacheDirectory,
-        },
-    }
-}
 
 export function getTypeScriptWebpackRule(
     _plugins: webpack.Plugin[],
@@ -50,6 +40,6 @@ export function getTypeScriptWebpackRule(
 
     return {
         test: /\.tsx?$/,
-        use: !disableCaching ? [cacheLoader(options.cacheDirectory), tsLoader] : [tsLoader],
+        use: [tsLoader],
     }
 }

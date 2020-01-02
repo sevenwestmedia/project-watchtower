@@ -2,6 +2,7 @@
     "compilerOptions": {
         "baseUrl": ".",
         "noEmit": true,
+        "declaration": false,
         "inlineSourceMap": false,
         "removeComments": false,
         "sourceMap": true,
@@ -15,9 +16,11 @@
         "noUnusedParameters": true,
         "jsx": "react",
         "importHelpers": true,
+        "noEmitHelpers": true,
         "skipLibCheck": true,
         "skipDefaultLibCheck": true,
         "esModuleInterop": true,
+        "incremental": true,
         "lib": [
             "dom",
             "es5",
@@ -27,7 +30,6 @@
             "es2015.symbol.wellknown"
         ],
         "inlineSources": false,
-        "declaration": true,
         "typeRoots": ["node_modules/@types", "@types"]
     }
 }

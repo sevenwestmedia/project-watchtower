@@ -2,7 +2,6 @@ import build from './build'
 import clean from './clean'
 import exploreBundle from './explore-bundle'
 import start from './start'
-import stats from './stats'
 import watch from './watch'
 
 import { getConfig } from '../runtime/config/config'
@@ -57,10 +56,6 @@ switch (command) {
         exitOnError(start(cliLogger, buildConfig, {}, ...(commandArgs as StartParam[])))
         break
 
-    case 'stats':
-        exitAfter(stats(cliLogger, buildConfig, ...commandArgs))
-        break
-
     case 'watch':
         exitOnError(watch(cliLogger, buildConfig, {}, ...(commandArgs as WatchParam[])))
         break
@@ -75,7 +70,6 @@ Scripts:
     clean [-p <project dir>] [<glob> ...]
     explore-bundle [disableHoisting] [-p <project dir>]
     start [watch] [prod] [debug] [client] [-p <project dir>]
-    stats [verbose] [-p <project dir>]
     watch [server] [client] [debug] [-p <project dir>]
 
 Refer to docs/cli.md for the full API documentation

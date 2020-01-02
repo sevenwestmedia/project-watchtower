@@ -6,7 +6,8 @@ const LazyThings = Loadable({
     loading: () => <p>{'Things is Loading'}</p>,
     modules: ['./Things'],
     webpack: () => [require.resolveWeak('./Things') as number],
-    render(loaded: { Things: any }, {  }: any) {
+    // eslint-disable-next-line no-empty-pattern
+    render(loaded: { Things: any }, {}: any) {
         const Component = loaded.Things
         return <Component />
     },
