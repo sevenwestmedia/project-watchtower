@@ -171,3 +171,4 @@ build-stats.csv
 demo/lighthouse-report*.json
 lighthouse-report*.json
 test-dist
+tsconfig.tsbuildinfo

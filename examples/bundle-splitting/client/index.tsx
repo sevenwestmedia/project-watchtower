@@ -2,12 +2,15 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { App } from '../common/App'
+import { loadableReady } from '@loadable/component'
 
 const render = () => {
-    ReactDOM.render(<App />, document.getElementById('root'))
+    ReactDOM.hydrate(<App />, document.getElementById('root'))
 }
 
-render()
+loadableReady(() => {
+    render()
+})
 
 if (module.hot) {
     module.hot.accept('../common/App', () => {

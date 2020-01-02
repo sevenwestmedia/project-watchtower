@@ -87,9 +87,11 @@
         "explore-bundle:ssr-with-sass-example": "yarn pwt explore-bundle -p examples/ssr-with-sass"
     },
     "dependencies": {
+        "@babel/core": "^7.7.7",
         "@types/webpack": "^4.41.1",
         "@typescript-eslint/parser": "^2.14.0",
         "assets-webpack-plugin": "^3.9.10",
+        "babel-loader": "^8.0.6",
         "dotenv": "^8.2.0",
         "file-loader": "^5.0.2",
         "fork-ts-checker-webpack-plugin": "^3.1.1",

@@ -1,3 +1,5 @@
+import fs from 'fs'
+import path from 'path'
 import webpack from 'webpack'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { CreateWebpackConfigOptions } from '../runtime/server'
@@ -38,8 +40,27 @@ export function getTypeScriptWebpackRule(
         options: tsLoaderOptions,
     }
 
+    let babelConfig: string | undefined = path.resolve(options.buildConfig.BASE, `.babelrc`)
+    if (!fs.existsSync(babelConfig)) {
+        babelConfig = path.resolve(process.cwd(), `.babelrc`)
+        if (!fs.existsSync(babelConfig)) {
+            babelConfig = undefined
+        }
+    }
+
+    if (babelConfig) {
+        options.log.info(`Using babel config: ${babelConfig}`)
+    }
     return {
         test: /\.tsx?$/,
-        use: [tsLoader],
+        use: [
+            {
+                loader: 'babel-loader',
+                options: {
+                    extends: babelConfig,
+                },
+            },
+            tsLoader,
+        ],
     }
 }

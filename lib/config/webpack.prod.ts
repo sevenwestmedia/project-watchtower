@@ -12,6 +12,7 @@ const prodConfig: CreateWebpackConfig = () => ({
                 cache: true,
                 parallel: true,
                 sourceMap: true,
+                extractComments: false,
                 terserOptions: {
                     compress: {},
                     ie8: false,

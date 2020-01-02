@@ -6,7 +6,11 @@
     "license": "MIT",
     "devDependencies": {},
     "dependencies": {
-        "@types/react-loadable": "^5.5.3",
-        "react-loadable": "^5.5.0"
+        "@loadable/babel-plugin": "^5.11.0",
+        "@loadable/component": "^5.11.0",
+        "@loadable/server": "^5.11.0",
+        "@loadable/webpack-plugin": "^5.7.1",
+        "@types/loadable__component": "^5.10.0",
+        "@types/loadable__server": "^5.9.1"
     }
 }
