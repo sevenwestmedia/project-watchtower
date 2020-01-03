@@ -1,0 +1,8 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "project-watchtower": "1.6.0"
+  },
+  "changesets": []
+}
