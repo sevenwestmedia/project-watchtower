@@ -2,7 +2,6 @@
 
 Project Watchtower is a TypeScript first, opinionated foundation for creating universal (Server Side Rendered) React applications. It's point of difference is that it is highly configurable and allows you to use your own data loading, routing and other approaches.
 
-[![Build Status](https://travis-ci.com/sevenwestmedia/project-watchtower.svg?branch=master)](https://travis-ci.com/sevenwestmedia/project-watchtower)
 [![](https://img.shields.io/npm/v/project-watchtower.svg)](https://npmjs.org/package/project-watchtower)
 
 ![](./JLsatellite2.jpg)  
@@ -37,28 +36,6 @@ Detailed documentation available in the [docs](./docs) folder:
 -   [Configuration and Structure](./docs/config.md)
 -   [Building, Running and Debugging](./docs/build.md)
 -   [Developing Project Watchtower](./docs/development.md)
-
-### For production
-
--   express
--   react
--   react-dom
--   react-router-dom
--   source-map-support
-
-### For development
-
--   typescript
-
-## Dependencies
-
-### Stats
-
-Stats use lighthouse, using a docker image is the easiest way to get it running.
-
-```
-docker run -d -it --restart unless-stopped -p 9222:9222 --name=chrome-headless -v /tmp/chromedata:/data --shm-size=1gb alpeware/chrome-headless-stable:ver-71.0.3578.80
-```
 
 ## FAQ
 
