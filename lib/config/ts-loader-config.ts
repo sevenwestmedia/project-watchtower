@@ -27,6 +27,7 @@ export function getTypeScriptWebpackRule(
         },
         transpileOnly: disableTypeCheck,
         experimentalWatchApi: true,
+        projectReferences: true,
     }
 
     if (configFile) {
