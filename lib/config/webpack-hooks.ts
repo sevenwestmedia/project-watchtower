@@ -4,7 +4,12 @@ import webpack from 'webpack'
 import { getCustomConfigFile } from '../runtime/util/fs'
 
 export const webpackHooks = (log: Logger, root: string) =>
-    getCustomConfigFile<WebpackHooks>(log, root, 'config/webpack-hooks', {})
+    getCustomConfigFile<WebpackHooks>(
+        log,
+        root,
+        'config/webpack-hooks',
+        getCustomConfigFile<WebpackHooks>(log, process.cwd(), 'config/webpack-hooks', {}),
+    )
 
 export const getHook = (
     hook: webpack.Configuration | CreateWebpackConfig | undefined,
