@@ -16,7 +16,7 @@ export class PromiseTracker {
         // if we don't, we will get warnings about handling promises
         // asynchronously.
         if ((promise as any).catch) {
-            // tslint:disable-next-line:no-empty
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
             ;(promise as any).catch(() => {})
         }
         this.promises[currentWaitIndex].push(promise)

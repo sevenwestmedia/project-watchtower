@@ -111,6 +111,5 @@ export interface WebpackHooks {
 export interface CreateWebpackConfigOptions {
     buildConfig: BuildConfig
     log: Logger
-    cacheDirectory: string
 }
 export type CreateWebpackConfig = (options: CreateWebpackConfigOptions) => webpack.Configuration

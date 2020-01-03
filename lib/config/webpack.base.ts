@@ -30,10 +30,6 @@ function baseConfig(options: CreateWebpackConfigOptions): webpack.Configuration 
                     },
                     test: /\.(eot|woff|woff2)(\?.*)?$/,
                 },
-                {
-                    loader: 'raw-loader',
-                    test: /\.md$/,
-                },
             ],
         },
         plugins,

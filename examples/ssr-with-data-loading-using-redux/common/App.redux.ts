@@ -17,9 +17,12 @@ export type Actions = LoadDataStart | LoadDataComplete | LoadDataFailed
 
 const defaultState: AppState = { loading: false, failed: false }
 
-export const loadData: ActionCreator<
-    ThunkAction<void, AppState, null, Actions>
-> = () => async dispatch => {
+export const loadData: ActionCreator<ThunkAction<
+    void,
+    AppState,
+    null,
+    Actions
+>> = () => async dispatch => {
     dispatch({
         type: 'load-data-start',
     })
@@ -58,8 +61,6 @@ const reducer: Reducer<AppState, Actions> = (state = defaultState, action) => {
                 myData: action.payload,
             }
     }
-
-    return state
 }
 
 export default reducer

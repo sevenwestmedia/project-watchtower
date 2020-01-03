@@ -62,20 +62,20 @@ async function watchServer(log: Logger, buildConfig: BuildConfig) {
     const watching = serverCompiler.watch({}, (err, stats) => {
         if (!devServer) {
             setTimeout(() => openBrowser(log, hostPort), 2000)
-            }
+        }
 
-            if (err) {
-                log.error({ err }, 'Failed to compile')
+        if (err) {
+            log.error({ err }, 'Failed to compile')
+            return
+        } else {
+            const statsString = stats.toString(webpackStatsConfig)
+
+            log.info(statsString)
+
+            if (stats.hasErrors()) {
+                log.error('Stats has errors')
                 return
-            } else {
-                const statsString = stats.toString(webpackStatsConfig)
-
-                log.info(statsString)
-
-                if (stats.hasErrors()) {
-                    log.error('Stats has errors')
-                    return
-                }
+            }
         }
         devServer = restartServer(buildConfig, devServerPort, buildConfig.BASE, devServer)
 

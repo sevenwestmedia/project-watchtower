@@ -44,7 +44,7 @@ export const openBrowser = async (log: Logger, port: number) => {
     }
 
     try {
-        await open(`http://localhost:${port}`)
+        await open(`http://localhost:${port}`, { url: true })
     } catch (e) {
         log.warn(e, 'Opening browser failed')
     }

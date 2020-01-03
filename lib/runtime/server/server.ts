@@ -115,7 +115,7 @@ export const createServer: CreateServerType = options => {
             if (process.env.NODE_ENV !== 'production' && isWatchMode()) {
                 // tslint:disable-next-line no-var-requires
                 const { openBrowser } = require('../../server/dev')
-                openBrowser(usePort)
+                openBrowser(options.log, usePort)
             }
             if (callback) {
                 callback()

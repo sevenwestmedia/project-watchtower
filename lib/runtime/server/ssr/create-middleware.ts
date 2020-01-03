@@ -96,7 +96,7 @@ export const createSsrMiddleware = <SSRRequestProps extends object, RenderResult
             },
             errorLocation: options.errorLocation,
             events: {
-                // tslint:disable-next-line:no-empty
+                // eslint-disable-next-line @typescript-eslint/no-empty-function
                 renderPerformed: () => {},
             },
             log: req.log,
