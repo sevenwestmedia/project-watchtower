@@ -1,5 +1,6 @@
 import React from 'react'
-import { Helmet, HelmetData } from 'react-helmet'
+import { HelmetData } from 'react-helmet'
+import { HelmetProvider, FilledContext } from 'react-helmet-async'
 import { StaticRouter } from 'react-router-dom'
 import { Logger } from 'typescript-log'
 import { functionTimer } from '../../universal'
@@ -24,27 +25,23 @@ export function renderApp<RenderResult>(
     // first create a context for <StaticRouter>, it's where we keep the
     // results of rendering for the second pass if necessary
     const context: StaticRouterContext = {}
-    let renderResult: RenderResult
-    let head: HelmetData
-
-    try {
-        renderResult = functionTimer(
-            'Server side render',
-            () =>
-                renderFn(
+    const helmetContext = {} as FilledContext
+    const renderResult = functionTimer(
+        'Server side render',
+        () =>
+            renderFn(
+                <HelmetProvider context={helmetContext}>
                     <StaticRouter location={currentLocation} context={context}>
                         {appRender(promiseTracker)}
-                    </StaticRouter>,
-                ),
-            log,
-        )
-    } finally {
-        head = Helmet.rewind()
-    }
+                    </StaticRouter>
+                </HelmetProvider>,
+            ),
+        log,
+    )
 
     return {
         context,
-        head,
+        head: helmetContext.helmet,
         renderResult,
     }
 }

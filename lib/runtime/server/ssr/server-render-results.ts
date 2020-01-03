@@ -1,4 +1,4 @@
-import * as Helm from 'react-helmet'
+import { HelmetData } from 'react-helmet'
 
 export enum ServerRenderResultType {
     Success,
@@ -9,7 +9,7 @@ export enum ServerRenderResultType {
 export interface ServerRenderResultBase {
     type: ServerRenderResultType
     elapsed: string
-    head: Helm.HelmetData | undefined
+    head: HelmetData | undefined
 }
 export interface StatusServerRenderResult<SSRRequestProps extends object, RenderResult>
     extends ServerRenderResultBase {
