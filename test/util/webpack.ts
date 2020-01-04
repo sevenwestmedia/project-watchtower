@@ -1,5 +1,5 @@
 import { consoleLogger } from 'typescript-log'
-import { printWebpackStats } from '../../lib/util/webpack'
+import { printWebpackStats } from '@project-watchtower/cli'
 
 const log = consoleLogger()
 

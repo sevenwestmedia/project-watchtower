@@ -1,6 +1,6 @@
 import path from 'path'
 import { consoleLogger } from 'typescript-log'
-import { forkPromise, spawnPromise } from '../../../lib/util/process'
+import { forkPromise, spawnPromise } from '@project-watchtower/cli'
 import { expectPromiseToFail } from '../../test-helpers'
 
 const processExit = path.resolve(__dirname, '..', '..', '__test-data__', 'process-exit.ts')

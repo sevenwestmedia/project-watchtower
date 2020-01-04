@@ -1,35 +1,17 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "noEmit": true,
-        "declaration": false,
-        "inlineSourceMap": false,
-        "removeComments": false,
-        "sourceMap": true,
-        "noImplicitAny": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "target": "es5",
-        "strict": true,
-        "noImplicitReturns": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "jsx": "react",
-        "importHelpers": true,
-        "noEmitHelpers": true,
-        "skipLibCheck": true,
-        "skipDefaultLibCheck": true,
-        "esModuleInterop": true,
-        "incremental": true,
-        "lib": [
-            "dom",
-            "es5",
-            "es2015.promise",
-            "es2015.iterable",
-            "es2015.symbol",
-            "es2015.symbol.wellknown"
-        ],
-        "inlineSources": false,
-        "typeRoots": ["node_modules/@types", "@types"]
-    }
+    "references": [
+        {
+            "path": "./packages/cli"
+        },
+        {
+            "path": "./packages/runtime"
+        },
+        {
+            "path": "./packages/server"
+        },
+        {
+            "path": "./test"
+        }
+    ],
+    "files": []
 }

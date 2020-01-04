@@ -1,0 +1,27 @@
+{
+    "name": "@project-watchtower/cli",
+    "version": "2.0.0-beta.0",
+    "license": "MIT",
+    "author": {
+        "name": "Seven West Media"
+    },
+    "repository": {
+        "type": "github",
+        "url": "https://github.com/sevenwestmedia/project-watchtower"
+    },
+    "bin": {
+        "project-watchtower": "./index.js",
+        "pwt": "./index.js"
+    },
+    "main": "dist/index.js",
+    "description": "",
+    "keywords": [],
+    "scripts": {
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+    },
+    "peerDependencies": {
+    }
+}

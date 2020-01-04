@@ -1,8 +1,6 @@
 {
     "testEnvironment": "node",
-    "transform": {
-        ".tsx?": "ts-jest"
-    },
+    "preset": "ts-jest",
     "testRegex": "\\.(spec|test)\\.tsx?$",
     "moduleFileExtensions": ["ts", "tsx", "js", "json"],
     "testPathIgnorePatterns": ["/node_modules/", "dist"],
@@ -10,5 +8,10 @@
         "\\.(s?css|png|svg|jpg|eot|woff|woff2)$": "<rootDir>/lib/test/test-mapper.ts",
         "^bundle-loader": "<rootDir>/lib/test/bundle-loader-mapper.ts"
     },
-    "coverageReporters": ["json", "lcov", "text"]
+    "coverageReporters": ["json", "lcov", "text"],
+    "globals": {
+        "ts-jest": {
+            "tsConfig": "test/tsconfig.json"
+        }
+    }
 }

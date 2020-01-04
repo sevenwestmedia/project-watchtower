@@ -2,14 +2,14 @@ import fs from 'fs'
 import mkdirp from 'mkdirp'
 import path from 'path'
 import { consoleLogger } from 'typescript-log'
-import clean from '../../lib/bin/clean'
-import { getConfig } from '../../lib/runtime/config/config'
+import { bin } from '@project-watchtower/cli'
+import { getBuildConfig } from '@project-watchtower/server'
 
 const log = consoleLogger()
 
 describe('bin/clean', () => {
     it('will clean', async () => {
-        const buildConfig = getConfig(log, process.cwd())
+        const buildConfig = getBuildConfig(log, process.cwd())
         buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/binclean')
 
         const filePath = path.resolve(buildConfig.OUTPUT, 'foo.js')
@@ -21,7 +21,7 @@ describe('bin/clean', () => {
         }
         fs.writeFileSync(filePath, 'hello')
 
-        await clean(log, buildConfig)
+        await bin.clean(log, buildConfig)
 
         expect(fs.existsSync(filePath)).toBe(false)
     })

@@ -1,9 +1,5 @@
 import express from 'express'
-import {
-    checkPortAvailability,
-    findFreePort,
-    waitForConnection,
-} from '../../../lib/runtime/util/network'
+import { checkPortAvailability, findFreePort, waitForConnection } from '@project-watchtower/server'
 import { expectPromiseToFail, getTestPort } from '../../test-helpers'
 
 describe('util/network', () => {

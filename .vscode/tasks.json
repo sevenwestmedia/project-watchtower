@@ -1,26 +1,16 @@
 {
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
-    "version": "0.1.0",
-    "command": "yarn",
-    "isShellCommand": true,
-    "showOutput": "always",
-    "suppressTaskName": true,
+    "version": "2.0.0",
     "tasks": [
         {
-            "taskName": "build",
-            "isBuildCommand": true,
-            "problemMatcher": "$tsc",
-            "args": ["run", "compile"]
-        },
-        {
-            "taskName": "build:debug",
-            "args": ["run", "build:debug"]
-        },
-        {
-            "taskName": "test",
-            "isBuildCommand": true,
-            "args": ["run", "test"]
+            "type": "typescript",
+            "tsconfig": "tsconfig.build.json",
+            "problemMatcher": ["$tsc"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

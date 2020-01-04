@@ -1,16 +1,47 @@
 {
-    "include": ["lib"],
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-        "importHelpers": true /* Import emit helpers from 'tslib'. */,
-        "noEmit": false /* Do not emit outputs. */,
-        "declaration": true /* Generates corresponding '.d.ts' file. */,
-        "sourceMap": true /* Generates corresponding '.map' file. */,
-
-        /* Additional Checks */
-        "noUnusedLocals": true /* Report errors on unused locals. */,
-        "noUnusedParameters": true /* Report errors on unused parameters. */,
-        "noImplicitReturns": true /* Report error when not all code paths in function return a value. */,
-        "noFallthroughCasesInSwitch": true /* Report errors for fallthrough cases in switch statement. */
-    }
+    "references": [
+        {
+            "path": "./packages/cli"
+        },
+        {
+            "path": "./packages/runtime/tsconfig.json"
+        },
+        {
+            "path": "./packages/runtime/tsconfig.esm.json"
+        },
+        {
+            "path": "./packages/server/tsconfig.json"
+        },
+        {
+            "path": "./packages/server/tsconfig.esm.json"
+        },
+        {
+            "path": "./examples/bundle-splitting"
+        },
+        {
+            "path": "./examples/client-only"
+        },
+        {
+            "path": "./examples/emotion-css-in-js"
+        },
+        {
+            "path": "./examples/simple-ssr"
+        },
+        {
+            "path": "./examples/ssr-with-data-loading-using-redux"
+        },
+        {
+            "path": "./examples/ssr-with-routing"
+        },
+        {
+            "path": "./examples/ssr-with-sass"
+        },
+        {
+            "path": "./examples/with-server"
+        },
+        {
+            "path": "./test"
+        }
+    ],
+    "files": []
 }

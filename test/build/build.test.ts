@@ -1,9 +1,9 @@
 import { consoleLogger, noopLogger } from 'typescript-log'
-import { getWebpackConfig } from '../../lib/build/build'
-import { getConfig } from '../../lib/runtime/config/config'
+import { getWebpackConfig } from '@project-watchtower/cli'
+import { getBuildConfig } from '@project-watchtower/server'
 
 const log = consoleLogger()
-const buildConfig = getConfig(log, process.cwd())
+const buildConfig = getBuildConfig(log, process.cwd())
 
 describe('build/build', () => {
     it('getWebpackConfig', () => {

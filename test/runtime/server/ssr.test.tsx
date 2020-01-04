@@ -3,11 +3,15 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import supertest from 'supertest'
 import { consoleLogger, Logger, noopLogger } from 'typescript-log'
-import { createServer } from '../../../lib/runtime/server/server'
-import { createSsrMiddleware, RenderApp, CreatePageTags } from '../../../lib/runtime/server/ssr'
-import { Status404Error } from '../../../lib/runtime/server/ssr/errors'
-import { renderHtml } from '../../../lib/runtime/server/ssr/helpers/render-html'
-import { PromiseCompletionSource, PromiseTracker } from '../../../lib/runtime/universal'
+import {
+    createServer,
+    createSsrMiddleware,
+    RenderApp,
+    CreatePageTags,
+    renderHtml,
+    PromiseTracker,
+} from '@project-watchtower/server'
+import { Status404Error, PromiseCompletionSource } from '@project-watchtower/runtime'
 
 Error.stackTraceLimit = Infinity
 
@@ -186,6 +190,7 @@ it(
                 throw new Error('oops, render failed')
             }
 
+            // eslint-disable-next-line no-empty-pattern
             fixture.renderFn = ({}) => {
                 return (
                     <div>
@@ -217,6 +222,7 @@ it(
                 throw new Error('oops, render failed')
             }
 
+            // eslint-disable-next-line no-empty-pattern
             fixture.renderFn = ({}) => {
                 return (
                     <div>
