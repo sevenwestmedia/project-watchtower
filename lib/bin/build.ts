@@ -9,6 +9,7 @@ import { watchtowerConfigFilename } from '../runtime/config/config'
 import { writeFile } from '../runtime/util/fs'
 import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
 import { webpackPromise } from '../util/webpack'
+import { getMd5, setupWithBuildInfo, validateCache } from './cache-validator'
 
 export function smp(buildConfig: BuildConfig, webpackConfig: webpack.Configuration) {
     const smpPlugin = new SpeedMeasurePlugin()
@@ -25,6 +26,36 @@ const buildTarget = async (
 
     if (!config) {
         return Promise.reject(`Could not load webpack configuration for ${target}/${environment}!`)
+    }
+
+    const disableCaching = String(process.env.BUILD_CACHE_DISABLED).toLowerCase() === 'true'
+    if (disableCaching) {
+        log.info(`Build Caching Disabled... BUILD_CACHE_DISABLED=${disableCaching}`)
+    } else if (process.env.NODE_ENV !== 'test' && !disableCaching) {
+        const webpackConfigString = JSON.stringify(config)
+        const configHash = await getMd5(log, 'webpackConfig', webpackConfigString)
+
+        setupWithBuildInfo(log, {
+            buildInfo: {
+                environment,
+                project: buildConfig.BASE,
+                target,
+            },
+            traceMessages: false, // pwt build doesnt have etrigan
+            validationItems: [
+                {
+                    filePath:
+                        (target === 'server'
+                            ? buildConfig.TS_CONFIG_SERVER
+                            : buildConfig.TS_CONFIG_CLIENT) || 'tsconfig.json',
+                    hashKey: 'tsconfigHash',
+                    isFile: true,
+                },
+                { isFile: false, itemHash: configHash, hashKey: 'webpackConfig' },
+            ],
+        })
+
+        await validateCache(log)
     }
 
     return webpackPromise(log, smp(buildConfig, config)).then(() => {

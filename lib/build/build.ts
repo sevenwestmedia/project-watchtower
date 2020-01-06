@@ -3,6 +3,7 @@ import { BuildConfig, CreateWebpackConfig, CreateWebpackConfigOptions } from 'li
 import path from 'path'
 import { Logger } from 'typescript-log'
 import webpack from 'webpack'
+import { buildCacheDirectory } from '../bin/cache-validator'
 import webpackClientDebugConfig from '../config/webpack.client.debug'
 import webpackClientDevConfig from '../config/webpack.client.dev'
 import webpackClientProdConfig from '../config/webpack.client.prod'
@@ -72,9 +73,16 @@ function getWebpackConfigInternal(
     const configFileName = `webpack.${target}.${environment}`
     const customConfigFile = path.resolve(buildConfig.BASE, 'config', configFileName)
 
+    const cacheDirectory = buildCacheDirectory({
+        environment,
+        project: buildConfig.BASE,
+        target,
+    })
+
     let config: webpack.Configuration
     const createWebpackConfigOptions: CreateWebpackConfigOptions = {
         buildConfig,
+        cacheDirectory,
         log,
     }
 

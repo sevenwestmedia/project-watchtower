@@ -5,7 +5,17 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { CreateWebpackConfigOptions } from '../runtime/server'
 import { BuildTarget } from '../types'
 
+const disableCaching = String(process.env.BUILD_CACHE_DISABLED).toLowerCase() === 'true'
 const disableTypeCheck = process.env.DISABLE_TYPE_CHECKING === 'true'
+
+const cacheLoader = (cacheDirectory: string) => {
+    return {
+        loader: 'cache-loader',
+        options: {
+            cacheDirectory,
+        },
+    }
+}
 
 export function getTypeScriptWebpackRule(
     _plugins: webpack.Plugin[],
@@ -36,11 +46,6 @@ export function getTypeScriptWebpackRule(
     }
     resolvePlugins.push(new TsconfigPathsPlugin(tsConfigPathsPluginConfig))
 
-    const tsLoader = {
-        loader: 'ts-loader',
-        options: tsLoaderOptions,
-    }
-
     let babelConfig: string | undefined = path.resolve(options.buildConfig.BASE, `.babelrc`)
     if (!fs.existsSync(babelConfig)) {
         babelConfig = path.resolve(process.cwd(), `.babelrc`)
@@ -52,16 +57,22 @@ export function getTypeScriptWebpackRule(
     if (babelConfig) {
         options.log.info(`Using babel config: ${babelConfig}`)
     }
+
+    const tsLoader = {
+        loader: 'ts-loader',
+        options: tsLoaderOptions,
+    }
+    const babelLoader = {
+        loader: 'babel-loader',
+        options: {
+            extends: babelConfig,
+        },
+    }
+
     return {
         test: /\.tsx?$/,
-        use: [
-            {
-                loader: 'babel-loader',
-                options: {
-                    extends: babelConfig,
-                },
-            },
-            tsLoader,
-        ],
+        use: !disableCaching
+            ? [cacheLoader(options.cacheDirectory), babelLoader, tsLoader]
+            : [babelLoader, tsLoader],
     }
 }

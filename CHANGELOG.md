@@ -1,5 +1,11 @@
 # project-watchtower
 
+## 1.6.1-beta.2
+
+### Patch Changes
+
+-   Add caching back in
+
 ## 2.0.0-beta.1
 
 ### Patch Changes

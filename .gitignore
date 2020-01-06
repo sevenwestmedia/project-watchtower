@@ -168,7 +168,9 @@ public/assets
 assets.json
 build-stats.csv
 *.tgz
-demo/lighthouse-report*.json
-lighthouse-report*.json
 test-dist
+
 tsconfig.tsbuildinfo
+
+#cache-loader & validation inside this folder
+.build-cache
