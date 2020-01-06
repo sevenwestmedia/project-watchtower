@@ -1,12 +1,8 @@
 {
-  "mode": "pre",
-  "tag": "beta",
-  "initialVersions": {
-    "project-watchtower": "1.6.0"
-  },
-  "changesets": [
-    "beige-islands-fry",
-    "twelve-olives-burn",
-    "young-jokes-wink"
-  ]
+    "mode": "pre",
+    "tag": "beta",
+    "initialVersions": {
+        "project-watchtower": "2.0.0"
+    },
+    "changesets": ["beige-islands-fry", "twelve-olives-burn", "young-jokes-wink"]
 }
