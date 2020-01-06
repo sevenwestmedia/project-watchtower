@@ -89,8 +89,6 @@
         "explore-bundle:ssr-with-sass-example": "yarn pwt explore-bundle -p examples/ssr-with-sass"
     },
     "dependencies": {
-        "@babel/core": "^7.7.7",
-        "@types/webpack": "^4.41.1",
         "assets-webpack-plugin": "^3.9.10",
         "babel-loader": "^8.0.6",
         "dotenv": "^8.2.0",
@@ -104,14 +102,13 @@
         "terser-webpack-plugin": "^2.3.1",
         "ts-loader": "^6.2.1",
         "tsconfig-paths-webpack-plugin": "^3.2.0",
-        "typescript-log": "^1.1.1",
-        "webpack": "^4.41.5",
         "webpack-bundle-analyzer": "^3.6.0",
         "webpack-dev-middleware": "^3.7.2",
         "webpack-hot-middleware": "^2.25.0",
         "webpack-merge": "^4.2.2"
     },
     "devDependencies": {
+        "@babel/core": "^7.7.7",
         "@changesets/cli": "^2.4.1",
         "@types/assets-webpack-plugin": "^3.9.0",
         "@types/dotenv": "^8.2.0",
@@ -130,6 +127,7 @@
         "@types/serialize-javascript": "^1.5.0",
         "@types/supertest": "^2.0.8",
         "@types/terser-webpack-plugin": "^2.2.0",
+        "@types/webpack": "^4.41.1",
         "@types/webpack-bundle-analyzer": "^2.13.3",
         "@types/webpack-dev-middleware": "^2.0.3",
         "@types/webpack-dotenv-plugin": "^2.0.2",
@@ -156,17 +154,23 @@
         "supertest": "^4.0.2",
         "ts-jest": "^24.2.0",
         "tslib": "^1.10.0",
-        "typescript": "^3.7.4"
+        "typescript": "^3.7.4",
+        "typescript-log": "^1.1.1",
+        "webpack": "^4.41.5"
     },
     "peerDependencies": {
+        "@babel/core": ">=7.7.7",
+        "@types/webpack": ">=4.41.1",
         "express": ">=4.0.0",
         "react": ">= 16.0.0",
         "react-dom": ">= 16.0.0",
         "react-helmet": ">=5.1.0",
         "react-router-dom": ">=5.0.0",
-        "serialize-javascript": "^1.8.0",
+        "serialize-javascript": ">=2.0.0",
         "tslib": ">=1.10.0",
-        "typescript": ">=3.0.0"
+        "typescript": ">=3.0.0",
+        "typescript-log": ">=1.1.0",
+        "webpack": ">=4.41.5"
     },
     "engines": {
         "node": ">=10.0.0"

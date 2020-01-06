@@ -6,6 +6,7 @@ export const fileLoaderConfig = (buildConfig: BuildConfig) => ({
     loader: 'file-loader',
     options: {
         name: buildConfig.ASSETS_PATH_PREFIX + 'media/[name].[hash:8].[ext]',
+        esModule: false,
     },
     test: /\.(ico|jpg|png|gif|otf|webp|svg|ttf)(\?.*)?$/,
 })
@@ -27,6 +28,7 @@ function baseConfig(options: CreateWebpackConfigOptions): webpack.Configuration 
                     loader: 'file-loader',
                     options: {
                         name: options.buildConfig.ASSETS_PATH_PREFIX + 'fonts/[name].[ext]',
+                        esModule: false,
                     },
                     test: /\.(eot|woff|woff2)(\?.*)?$/,
                 },
