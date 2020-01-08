@@ -46,9 +46,17 @@ export function getTypeScriptWebpackRule(
     }
     resolvePlugins.push(new TsconfigPathsPlugin(tsConfigPathsPluginConfig))
 
-    let babelConfig: string | undefined = path.resolve(options.buildConfig.BASE, `.babelrc`)
+    const babelConfigFile =
+        (buildTarget === 'server'
+            ? options.buildConfig.BABEL_CONFIG_SERVER
+            : options.buildConfig.BABEL_CONFIG_CLIENT) || '.babelrc'
+
+    let babelConfig: string | undefined = fs.existsSync(babelConfigFile)
+        ? babelConfigFile
+        : path.resolve(options.buildConfig.BASE, babelConfigFile)
+
     if (!fs.existsSync(babelConfig)) {
-        babelConfig = path.resolve(process.cwd(), `.babelrc`)
+        babelConfig = path.resolve(process.cwd(), babelConfigFile)
         if (!fs.existsSync(babelConfig)) {
             babelConfig = undefined
         }

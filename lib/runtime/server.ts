@@ -88,6 +88,9 @@ export interface BuildConfig {
 
     TS_CONFIG_CLIENT?: string
     TS_CONFIG_SERVER?: string
+
+    BABEL_CONFIG_CLIENT?: string
+    BABEL_CONFIG_SERVER?: string
 }
 
 /** Use to override the application configuration */
