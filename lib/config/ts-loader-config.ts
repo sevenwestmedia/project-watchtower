@@ -51,9 +51,7 @@ export function getTypeScriptWebpackRule(
             ? options.buildConfig.BABEL_CONFIG_SERVER
             : options.buildConfig.BABEL_CONFIG_CLIENT) || '.babelrc'
 
-    let babelConfig: string | undefined = fs.existsSync(babelConfigFile)
-        ? babelConfigFile
-        : path.resolve(options.buildConfig.BASE, babelConfigFile)
+    let babelConfig: string | undefined = path.resolve(options.buildConfig.BASE, babelConfigFile)
 
     if (!fs.existsSync(babelConfig)) {
         babelConfig = path.resolve(process.cwd(), babelConfigFile)
