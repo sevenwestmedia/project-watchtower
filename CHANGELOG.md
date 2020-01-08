@@ -1,6 +1,12 @@
 # project-watchtower
 
-## 1.6.1-beta.2
+## 2.0.0-beta.3
+
+### Minor Changes
+
+-   4ec1a6d: Allow babel config to be specified separately for client and server
+
+## 2.0.0-beta.2
 
 ### Patch Changes
 
