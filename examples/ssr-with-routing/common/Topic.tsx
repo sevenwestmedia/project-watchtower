@@ -1,5 +1,5 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { Redirect, RouteComponentProps } from 'react-router'
 import { Status404Error } from '../../../lib/runtime/server/ssr/errors'
 
