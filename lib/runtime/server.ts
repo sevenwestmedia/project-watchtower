@@ -44,6 +44,10 @@ export interface BuildConfig {
     /** entry file for the client */
     CLIENT_ENTRY: string
 
+    ADDITIONAL_CIENT_ENTRIES?: {
+        [name: string]: string[]
+    }
+
     /** file for client polyfills if needed */
     CLIENT_POLYFILLS: string | false
 

@@ -48,6 +48,10 @@ const clientBaseConfig: CreateWebpackConfig = options => {
         main: mainEntry,
     }
 
+    if (options.buildConfig.ADDITIONAL_CIENT_ENTRIES) {
+        Object.assign(entry, options.buildConfig.ADDITIONAL_CIENT_ENTRIES)
+    }
+
     const plugins = getPlugins(options.buildConfig)
     const resolvePlugins: webpack.ResolvePlugin[] = []
 

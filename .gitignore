@@ -170,7 +170,7 @@ build-stats.csv
 *.tgz
 test-dist
 
-tsconfig.tsbuildinfo
+*.tsbuildinfo
 
 #cache-loader & validation inside this folder
 .build-cache
