@@ -1,5 +1,11 @@
 # project-watchtower
 
+## 2.0.0-beta.6
+
+### Major Changes
+
+-   Add ADDITIONAL_CIENT_ENTRIES config for multiple entry points
+
 ## 2.0.0-beta.5
 
 ### Major Changes
