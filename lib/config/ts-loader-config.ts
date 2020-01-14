@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import webpack from 'webpack'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
-import { CreateWebpackConfigOptions } from '../runtime/server'
+import { CreateWebpackConfigOptions, BuildConfig } from '../runtime/server'
 import { BuildTarget } from '../types'
 
 const disableCaching = String(process.env.BUILD_CACHE_DISABLED).toLowerCase() === 'true'
@@ -46,19 +46,7 @@ export function getTypeScriptWebpackRule(
     }
     resolvePlugins.push(new TsconfigPathsPlugin(tsConfigPathsPluginConfig))
 
-    const babelConfigFile =
-        (buildTarget === 'server'
-            ? options.buildConfig.BABEL_CONFIG_SERVER
-            : options.buildConfig.BABEL_CONFIG_CLIENT) || '.babelrc'
-
-    let babelConfig: string | undefined = path.resolve(options.buildConfig.BASE, babelConfigFile)
-
-    if (!fs.existsSync(babelConfig)) {
-        babelConfig = path.resolve(process.cwd(), babelConfigFile)
-        if (!fs.existsSync(babelConfig)) {
-            babelConfig = undefined
-        }
-    }
+    const babelConfig: string | undefined = getBabelConfigFile(buildTarget, options.buildConfig)
 
     if (babelConfig) {
         options.log.info(`Using babel config: ${babelConfig}`)
@@ -81,4 +69,22 @@ export function getTypeScriptWebpackRule(
             ? [cacheLoader(options.cacheDirectory), babelLoader, tsLoader]
             : [babelLoader, tsLoader],
     }
+}
+
+export function getBabelConfigFile(buildTarget: BuildTarget, buildConfig: BuildConfig) {
+    const babelConfigFile =
+        (buildTarget === 'server'
+            ? buildConfig.BABEL_CONFIG_SERVER
+            : buildConfig.BABEL_CONFIG_CLIENT) || '.babelrc'
+
+    let babelConfig: string | undefined = path.resolve(buildConfig.BASE, babelConfigFile)
+
+    if (!fs.existsSync(babelConfig)) {
+        babelConfig = path.resolve(process.cwd(), babelConfigFile)
+        if (!fs.existsSync(babelConfig)) {
+            babelConfig = undefined
+        }
+    }
+
+    return babelConfig
 }
