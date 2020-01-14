@@ -7,7 +7,7 @@ import { Logger } from 'typescript-log'
 import { promisify } from 'util'
 import { BuildEnvironment, BuildTarget } from '../../lib/types'
 
-type ValidationItem =
+export type ValidationItem =
     | {
           isFile: true
           filePath: string
