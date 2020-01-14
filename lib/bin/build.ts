@@ -10,7 +10,7 @@ import { writeFile, existsSync } from '../runtime/util/fs'
 import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
 import { webpackPromise } from '../util/webpack'
 import { getMd5, setupWithBuildInfo, validateCache, ValidationItem } from './cache-validator'
-import { getBabelConfigFile, getTsConfigFile } from 'lib/config/ts-loader-config'
+import { getBabelConfigFile, getTsConfigFile } from '../config/ts-loader-config'
 
 export function smp(buildConfig: BuildConfig, webpackConfig: webpack.Configuration) {
     const smpPlugin = new SpeedMeasurePlugin()
