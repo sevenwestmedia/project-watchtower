@@ -23,10 +23,7 @@ export function getTypeScriptWebpackRule(
     options: CreateWebpackConfigOptions,
     buildTarget: BuildTarget,
 ): webpack.RuleSetRule {
-    const configFile =
-        (buildTarget === 'server'
-            ? options.buildConfig.TS_CONFIG_SERVER
-            : options.buildConfig.TS_CONFIG_CLIENT) || 'tsconfig.json'
+    const configFile = getTsConfigFile(buildTarget, options.buildConfig)
 
     options.log.info(`Target ${buildTarget} using ts config file: ${configFile}`)
 
@@ -69,6 +66,13 @@ export function getTypeScriptWebpackRule(
             ? [cacheLoader(options.cacheDirectory), babelLoader, tsLoader]
             : [babelLoader, tsLoader],
     }
+}
+
+export function getTsConfigFile(buildTarget: string, buildConfig: BuildConfig) {
+    return (
+        (buildTarget === 'server' ? buildConfig.TS_CONFIG_SERVER : buildConfig.TS_CONFIG_CLIENT) ||
+        'tsconfig.json'
+    )
 }
 
 export function getBabelConfigFile(buildTarget: BuildTarget, buildConfig: BuildConfig) {

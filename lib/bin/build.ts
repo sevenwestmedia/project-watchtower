@@ -10,7 +10,7 @@ import { writeFile, existsSync } from '../runtime/util/fs'
 import { BuildEnvironment, BuildParam, BuildTarget } from '../types'
 import { webpackPromise } from '../util/webpack'
 import { getMd5, setupWithBuildInfo, validateCache, ValidationItem } from './cache-validator'
-import { getBabelConfigFile } from 'lib/config/ts-loader-config'
+import { getBabelConfigFile, getTsConfigFile } from 'lib/config/ts-loader-config'
 
 export function smp(buildConfig: BuildConfig, webpackConfig: webpack.Configuration) {
     const smpPlugin = new SpeedMeasurePlugin()
@@ -38,10 +38,7 @@ const buildTarget = async (
 
         const validationItems: ValidationItem[] = [
             {
-                filePath:
-                    (target === 'server'
-                        ? buildConfig.TS_CONFIG_SERVER
-                        : buildConfig.TS_CONFIG_CLIENT) || 'tsconfig.json',
+                filePath: getTsConfigFile(target, buildConfig),
                 hashKey: 'tsconfigHash',
                 isFile: true,
             },
@@ -52,7 +49,7 @@ const buildTarget = async (
         if (existsSync(yarnLockPath)) {
             validationItems.push({
                 filePath: yarnLockPath,
-                hashKey: 'tsconfigHash',
+                hashKey: 'yarnLockConfigHash',
                 isFile: true,
             })
         }
@@ -60,25 +57,17 @@ const buildTarget = async (
         if (existsSync(npmLockPath)) {
             validationItems.push({
                 filePath: npmLockPath,
-                hashKey: 'tsconfigHash',
+                hashKey: 'npmLockConfigHash',
                 isFile: true,
             })
         }
 
-        const babelClient = getBabelConfigFile('client', buildConfig)
-        const babelServer = getBabelConfigFile('server', buildConfig)
+        const babelConfig = getBabelConfigFile(target, buildConfig)
 
-        if (babelClient && existsSync(babelClient)) {
+        if (babelConfig && existsSync(babelConfig)) {
             validationItems.push({
-                filePath: babelClient,
-                hashKey: 'tsconfigHash',
-                isFile: true,
-            })
-        }
-        if (babelClient && babelServer && babelClient !== babelServer && existsSync(babelServer)) {
-            validationItems.push({
-                filePath: babelServer,
-                hashKey: 'tsconfigHash',
+                filePath: babelConfig,
+                hashKey: 'babelConfigHash',
                 isFile: true,
             })
         }
