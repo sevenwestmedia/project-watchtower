@@ -1,5 +1,11 @@
 # project-watchtower
 
+## 2.0.0-beta.7
+
+### Major Changes
+
+-   fd763aa: Expanded build cache files to cache bust when dependencies or babel config changes
+
 ## 2.0.0-beta.6
 
 ### Major Changes
