@@ -5,7 +5,7 @@ import path from 'path'
 import rimraf from 'rimraf'
 import { Logger } from 'typescript-log'
 import { promisify } from 'util'
-import { BuildEnvironment, BuildTarget } from '../../lib/types'
+import { BuildEnvironment, BuildTarget } from '..'
 
 export type ValidationItem =
     | {

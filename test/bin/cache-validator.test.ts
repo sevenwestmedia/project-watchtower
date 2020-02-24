@@ -1,16 +1,17 @@
-import { BuildEnvironment, BuildTarget } from 'lib'
 import mkdirp from 'mkdirp'
 import path from 'path'
 import { consoleLogger } from 'typescript-log'
 import {
     deletePath,
-    getConfigContents,
     setup,
-    setupWithBuildInfo,
     validateCache,
-    writeDummyConfigFile,
+    getConfigContents,
     writeDummyFile,
-} from '../../lib/bin/cache-validator'
+    writeDummyConfigFile,
+    setupWithBuildInfo,
+    BuildEnvironment,
+    BuildTarget,
+} from '@project-watchtower/cli'
 
 const log = consoleLogger()
 

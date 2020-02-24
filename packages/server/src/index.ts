@@ -97,5 +97,3 @@ export interface BuildConfig {
 
 /** Use to override the application configuration */
 export type BuildConfigOverride = Partial<BuildConfig>
-
-    cacheDirectory: string

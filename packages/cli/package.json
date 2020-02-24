@@ -19,6 +19,7 @@
     "scripts": {
     },
     "dependencies": {
+        "mkdirp": "^1.0.3"
     },
     "devDependencies": {
     },

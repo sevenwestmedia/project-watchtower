@@ -174,3 +174,6 @@ test-dist
 
 #cache-loader & validation inside this folder
 .build-cache
+tsconfig.tsbuildinfo
+
+dist

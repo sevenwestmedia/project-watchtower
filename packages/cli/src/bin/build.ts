@@ -6,6 +6,7 @@ import {
     RuntimeConfig,
     watchtowerConfigFilename,
     writeFile,
+    existsSync,
 } from '@project-watchtower/server'
 
 import { Logger } from 'typescript-log'

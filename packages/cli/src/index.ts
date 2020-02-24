@@ -9,6 +9,7 @@ import binExploreBundle from './bin/explore-bundle'
 import binStart from './bin/start'
 import binWatch from './bin/watch'
 
+export * from './bin/cache-validator'
 export * from './watch/server'
 export * from './build/build'
 export * from './clean/clean'
