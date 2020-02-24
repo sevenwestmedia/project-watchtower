@@ -22,7 +22,12 @@ const defaultConfig = (root: string): BuildConfig => ({
 })
 
 const customConfig = (log: Logger, root: string) =>
-    getCustomConfigFile<BuildConfigOverride>(log, root, 'config/config', {})
+    getCustomConfigFile<BuildConfigOverride>(
+        log,
+        root,
+        'config/config',
+        getCustomConfigFile<BuildConfigOverride>(log, process.cwd(), 'config/config', {}),
+    )
 
 export const getConfig = (log: Logger, root: string) => ({
     ...defaultConfig(root),
