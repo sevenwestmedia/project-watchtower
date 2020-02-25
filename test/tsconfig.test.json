@@ -2,9 +2,9 @@
     "extends": "../tsconfig.cjs.json",
     "include": ["**/*.ts", "**/*.tsx"],
     "compilerOptions": {
-        "noEmit": true,
-        "incremental": false,
-        "composite": false,
+        "noEmit": false,
+        "incremental": true,
+        "composite": true,
         "paths": {
             "@project-watchtower/cli": ["../packages/cli"],
             "@project-watchtower/server": ["../packages/server"],

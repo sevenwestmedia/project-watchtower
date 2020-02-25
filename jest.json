@@ -11,7 +11,7 @@
     "coverageReporters": ["json", "lcov", "text"],
     "globals": {
         "ts-jest": {
-            "tsConfig": "test/tsconfig.json"
+            "tsConfig": "test/tsconfig.test.json"
         }
     }
 }
