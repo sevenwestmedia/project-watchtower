@@ -6,11 +6,13 @@ export enum ServerRenderResultType {
     Redirect,
     PageNotFound,
 }
+
 export interface ServerRenderResultBase {
     type: ServerRenderResultType
     elapsed: string
     head: HelmetData | undefined
 }
+
 export interface StatusServerRenderResult<SSRRequestProps extends object, RenderResult>
     extends ServerRenderResultBase {
     type: ServerRenderResultType.Success

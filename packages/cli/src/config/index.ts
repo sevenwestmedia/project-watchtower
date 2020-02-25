@@ -2,7 +2,7 @@ import webpack from 'webpack'
 import { Logger } from 'typescript-log'
 import { BuildConfig } from '@project-watchtower/server'
 
-export { default as base } from './webpack.base'
+export { baseConfig } from './webpack.base'
 export { default as clientBase } from './webpack.client'
 export { default as clientDev } from './webpack.client.dev'
 export { default as clientDebug } from './webpack.client.debug'
