@@ -70,10 +70,23 @@ export function getTypeScriptWebpackRule(
 }
 
 export function getTsConfigFile(buildTarget: string, buildConfig: BuildConfig) {
-    return (
+    const tsconfigFile =
         (buildTarget === 'server' ? buildConfig.TS_CONFIG_SERVER : buildConfig.TS_CONFIG_CLIENT) ||
         'tsconfig.json'
-    )
+
+    const locations = [
+        path.resolve(buildConfig.BASE, tsconfigFile),
+        path.resolve(process.cwd(), tsconfigFile),
+    ]
+
+    const found = locations.find(location => fs.existsSync(location))
+
+    if (!found) {
+        throw new Error(`Cannot locate ${tsconfigFile}, searched:
+${locations.join('\n')}`)
+    }
+
+    return found
 }
 
 export function getBabelConfigFile(buildTarget: BuildTarget, buildConfig: BuildConfig) {

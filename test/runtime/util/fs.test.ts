@@ -52,9 +52,11 @@ describe('util/fs', () => {
             {},
         )
         expect(buildConfig).toEqual({
-            CLIENT_ENTRY: 'test/test-project/src/client/index.tsx',
+            CLIENT_ENTRY: './test/test-project/src/client/index.tsx',
             LINT_EXCLUDE: [],
-            SERVER_ENTRY: 'test/test-project/src/server/start.ts',
+            SERVER_ENTRY: './test/test-project/src/server/start.ts',
+            TS_CONFIG_CLIENT: 'test/test-project/tsconfig.json',
+            TS_CONFIG_SERVER: 'test/test-project/tsconfig.json',
         })
 
         const nonExistentConfig = getCustomConfigFile<BuildConfigOverride>(

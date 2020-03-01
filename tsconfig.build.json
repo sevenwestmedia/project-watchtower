@@ -1,7 +1,7 @@
 {
     "references": [
         {
-            "path": "./packages/cli"
+            "path": "./tsconfig.json"
         },
         {
             "path": "./packages/runtime/tsconfig.json"
@@ -38,9 +38,6 @@
         },
         {
             "path": "./examples/with-server"
-        },
-        {
-            "path": "./test"
         }
     ],
     "files": []

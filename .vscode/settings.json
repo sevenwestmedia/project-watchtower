@@ -7,5 +7,6 @@
         "**/bower_components": true,
         "**/dist": true,
         "**/*.code-search": true
-    }
+    },
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
