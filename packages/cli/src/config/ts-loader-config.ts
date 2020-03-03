@@ -2,14 +2,17 @@ import fs from 'fs'
 import path from 'path'
 import webpack from 'webpack'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
+import ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
+import { Options } from 'ts-loader'
+
 import { CreateWebpackConfigOptions } from '.'
-import { BuildTarget } from '..'
+import { BuildTarget, BuildEnvironment } from '..'
 import { BuildConfig } from '@project-watchtower/server'
 
 const disableCaching = String(process.env.BUILD_CACHE_DISABLED).toLowerCase() === 'true'
-const disableTypeCheck = process.env.DISABLE_TYPE_CHECKING === 'true'
 
-const cacheLoader = (cacheDirectory: string) => {
+function cacheLoader(cacheDirectory: string) {
     return {
         loader: 'cache-loader',
         options: {
@@ -18,22 +21,22 @@ const cacheLoader = (cacheDirectory: string) => {
     }
 }
 
-export function getTypeScriptWebpackRule(
-    _plugins: webpack.Plugin[],
-    resolvePlugins: webpack.ResolvePlugin[],
+export function getTsLoaderWebpackConfig(
     options: CreateWebpackConfigOptions,
     buildTarget: BuildTarget,
-): webpack.RuleSetRule {
+    environment: BuildEnvironment,
+): webpack.Configuration {
     const configFile = getTsConfigFile(buildTarget, options.buildConfig)
 
     options.log.info(`Target ${buildTarget} using ts config file: ${configFile}`)
 
     const tsConfigPathsPluginConfig: any = {}
-    const tsLoaderOptions: any = {
+    const tsLoaderOptions: Partial<Options> = {
         compilerOptions: {
+            // For tests, but doesn't hurt as noEmit: true doesn't work
             noEmit: false,
         },
-        transpileOnly: disableTypeCheck,
+        transpileOnly: true,
         experimentalWatchApi: true,
         projectReferences: true,
     }
@@ -42,7 +45,6 @@ export function getTypeScriptWebpackRule(
         tsConfigPathsPluginConfig.configFile = configFile
         tsLoaderOptions.configFile = configFile
     }
-    resolvePlugins.push(new TsconfigPathsPlugin(tsConfigPathsPluginConfig))
 
     const babelConfig: string | undefined = getBabelConfigFile(buildTarget, options.buildConfig)
 
@@ -61,11 +63,47 @@ export function getTypeScriptWebpackRule(
         },
     }
 
+    const forkTsCheckerNotifierOptions = {
+        title: `TypeScript (${buildTarget})`,
+        excludeWarnings: false,
+        alwaysNotify: true,
+    }
+    const forkTsCheckerNotifierWebpackPlugin = new ForkTsCheckerNotifierWebpackPlugin(
+        forkTsCheckerNotifierOptions,
+    )
+    const forceTsCheckerWebpackPluginOptions = {
+        eslint: true,
+        tsconfig: configFile,
+        useTypescriptIncrementalApi: true,
+    }
+    const forkTsCheckerPlugin = new ForkTsCheckerWebpackPlugin(forceTsCheckerWebpackPluginOptions)
+
+        // Below is for the cache validator, so it sees when these options change
+    ;(forkTsCheckerNotifierWebpackPlugin as any).toJSON = () => {
+        return `ForkTsCheckerNotifierWebpackPlugin ${JSON.stringify(forkTsCheckerNotifierOptions)}`
+    }
+    ;(forkTsCheckerPlugin as any).toJSON = () => {
+        return `ForkTsCheckerWebpackPlugin ${JSON.stringify(forceTsCheckerWebpackPluginOptions)}`
+    }
     return {
-        test: /\.tsx?$/,
-        use: !disableCaching
-            ? [cacheLoader(options.cacheDirectory), babelLoader, tsLoader]
-            : [babelLoader, tsLoader],
+        module: {
+            rules: [
+                {
+                    test: /\.tsx?$/,
+                    use: !disableCaching
+                        ? [cacheLoader(options.cacheDirectory), babelLoader, tsLoader]
+                        : [babelLoader, tsLoader],
+                },
+            ],
+        },
+        resolve: {
+            plugins: [new TsconfigPathsPlugin(tsConfigPathsPluginConfig)],
+        },
+        // TODO: Why is the notifier not working when watching?
+        plugins:
+            environment === 'dev' && process.env.NODE_ENV !== 'test'
+                ? [forkTsCheckerPlugin, forkTsCheckerNotifierWebpackPlugin]
+                : [],
     }
 }
 

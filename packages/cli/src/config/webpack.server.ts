@@ -1,8 +1,6 @@
-import fs from 'fs'
 import webpack from 'webpack'
-import path from 'path'
-import { getTypeScriptWebpackRule } from './ts-loader-config'
 import { CreateWebpackConfigOptions } from '.'
+import { createServerExternals } from './create-server-externals'
 
 /**
  * Base Webpack config for the server that is used in both development and production
@@ -10,18 +8,8 @@ import { CreateWebpackConfigOptions } from '.'
  * - treat everything in node_modules as an external dependency
  * - add source-map-support to every file
  */
-const serverBaseConfig = (options: CreateWebpackConfigOptions): webpack.Configuration => {
-    const { BASE, PUBLIC_PATH, SERVER_ENTRY, OUTPUT } = options.buildConfig
-
-    const baseDirNodeModules = path.resolve(BASE, 'node_modules')
-    const nodeModules: string[] = []
-    if (fs.existsSync(baseDirNodeModules)) {
-        nodeModules.push(...fs.readdirSync(baseDirNodeModules))
-    }
-    const cwdNodeModules = path.resolve(process.cwd(), 'node_modules')
-    if (fs.existsSync(cwdNodeModules)) {
-        nodeModules.push(...fs.readdirSync(cwdNodeModules))
-    }
+export const serverBaseConfig = (options: CreateWebpackConfigOptions): webpack.Configuration => {
+    const { PUBLIC_PATH, SERVER_ENTRY, OUTPUT } = options.buildConfig
 
     const plugins: webpack.Plugin[] = [
         new webpack.BannerPlugin({
@@ -36,32 +24,7 @@ const serverBaseConfig = (options: CreateWebpackConfigOptions): webpack.Configur
         entry: {
             main: [SERVER_ENTRY],
         },
-        externals: (_context, request, callback) => {
-            // treat deep imports as externals as well
-            const moduleName = request.split('/')[0]
-
-            if (
-                options.buildConfig.SERVER_BUNDLE_ALL &&
-                !options.buildConfig.SERVER_BUNDLE_ALL_EXCEPT
-            ) {
-                callback(undefined, undefined)
-            } else if (options.buildConfig.SERVER_BUNDLE_ALL_EXCEPT) {
-                if (options.buildConfig.SERVER_BUNDLE_ALL_EXCEPT.indexOf(moduleName) !== -1) {
-                    callback(null, 'commonjs ' + request)
-                } else {
-                    callback(undefined, undefined)
-                }
-            } else if (options.buildConfig.SERVER_INCLUDE_IN_BUNDLE.indexOf(moduleName) !== -1) {
-                callback(undefined, undefined)
-            } else if (nodeModules.indexOf(moduleName) !== -1) {
-                callback(null, 'commonjs ' + request)
-            } else {
-                callback(undefined, undefined)
-            }
-        },
-        module: {
-            rules: [getTypeScriptWebpackRule(plugins, resolvePlugins, options, 'server')],
-        },
+        externals: createServerExternals(options),
         node: {
             __dirname: true,
             __filename: true,
@@ -78,5 +41,3 @@ const serverBaseConfig = (options: CreateWebpackConfigOptions): webpack.Configur
         target: 'node',
     }
 }
-
-export default serverBaseConfig

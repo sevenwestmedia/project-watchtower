@@ -6,7 +6,6 @@ import {
     BuildConfigOverride,
     RuntimeConfig,
     getCustomConfigFile,
-    isWatchtowerServer,
     readFileSync,
     projectDir,
 } from '..'
@@ -55,13 +54,14 @@ export function getRuntimeConfigFromBuildConfig(buildConfig: BuildConfig): Runti
 }
 
 export function getRuntimeConfig(log: Logger): RuntimeConfig {
-    if (isWatchtowerServer()) {
+    const projectDirEnv = projectDir()
+    if (projectDirEnv) {
         log.debug(
-            { projectDir },
+            { projectDir: projectDirEnv },
             'Project dir specified, using build config to build runtime config',
         )
 
-        const config = getBuildConfig(log, projectDir())
+        const config = getBuildConfig(log, projectDirEnv)
         return getRuntimeConfigFromBuildConfig(config)
     }
 

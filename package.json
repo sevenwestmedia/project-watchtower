@@ -17,7 +17,7 @@
     "keywords": [],
     "scripts": {
         "lint": "eslint --ext .js,.ts .",
-        "build": "tsc -p tsconfig.build.json",
+        "build": "tsc -b tsconfig.build.json",
         "verify": "yarn lint && yarn coverage",
         "pretest": "yarn build",
         "test": "jest --config jest.json --forceExit",

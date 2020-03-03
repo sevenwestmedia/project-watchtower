@@ -4,7 +4,6 @@ import webpack from 'webpack'
 import AssetsPlugin from 'assets-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
-import { getTypeScriptWebpackRule } from './ts-loader-config'
 import { BuildConfig, getAssetsFile, updateAssetLocations } from '@project-watchtower/server'
 import { CreateWebpackConfig } from '.'
 
@@ -71,9 +70,6 @@ const clientBaseConfig: CreateWebpackConfig = options => {
 
     return {
         entry,
-        module: {
-            rules: [getTypeScriptWebpackRule(plugins, resolvePlugins, options, 'client')],
-        },
         output: {
             path: OUTPUT,
             publicPath: PUBLIC_PATH,

@@ -1,9 +1,11 @@
+import path from 'path'
 import { consoleLogger, noopLogger } from 'typescript-log'
 import { getWebpackConfig } from '@project-watchtower/cli'
 import { getBuildConfig } from '@project-watchtower/server'
 
 const log = consoleLogger()
-const buildConfig = getBuildConfig(log, process.cwd())
+const root = path.resolve(process.cwd(), 'test/test-project')
+const buildConfig = getBuildConfig(log, root)
 
 describe('build/build', () => {
     it('getWebpackConfig', () => {

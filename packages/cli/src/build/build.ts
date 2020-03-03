@@ -5,7 +5,7 @@ import { buildCacheDirectory } from '../bin/cache-validator'
 import { Logger } from 'typescript-log'
 
 import webpackClientDebugConfig from '../config/webpack.client.debug'
-import webpackClientDevConfig from '../config/webpack.client.dev'
+import { clientDevConfig } from '../config/webpack.client.dev'
 import webpackClientProdConfig from '../config/webpack.client.prod'
 import webpackServerDebugConfig from '../config/webpack.server.debug'
 import webpackServerDevConfig from '../config/webpack.server.dev'
@@ -31,8 +31,7 @@ export function getWebpackConfig(
     environment: BuildEnvironment,
 ): webpack.Configuration | undefined {
     const config = getWebpackConfigInternal(log, buildConfig, target, environment)
-
-    // We need to JSON.strinify config, so let's make it safe (as we can)
+    // We need to JSON.stringify config, so let's make it safe (as we can)
     if (config && config.plugins) {
         config.plugins.forEach(plugin => {
             const pluginAny: any = plugin
@@ -119,7 +118,7 @@ function getWebpackConfigInternal(
                 case 'client':
                     switch (environment) {
                         case 'dev':
-                            return webpackClientDevConfig(createWebpackConfigOptions)
+                            return clientDevConfig(createWebpackConfigOptions)
 
                         case 'debug':
                             return webpackClientDebugConfig(createWebpackConfigOptions)

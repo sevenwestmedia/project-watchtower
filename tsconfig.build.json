@@ -1,16 +1,13 @@
 {
+    "compilerOptions": {
+        "composite": true
+    },
     "references": [
         {
             "path": "./tsconfig.json"
         },
         {
-            "path": "./packages/runtime/tsconfig.json"
-        },
-        {
             "path": "./packages/runtime/tsconfig.esm.json"
-        },
-        {
-            "path": "./packages/server/tsconfig.json"
         },
         {
             "path": "./packages/server/tsconfig.esm.json"

@@ -24,12 +24,12 @@ export function smp(buildConfig: BuildConfig, webpackConfig: webpack.Configurati
     return buildConfig.SMP ? smpPlugin.wrap(webpackConfig) : webpackConfig
 }
 
-const buildTarget = async (
+async function buildTarget(
     log: Logger,
     buildConfig: BuildConfig,
     target: BuildTarget,
     environment: BuildEnvironment = 'prod',
-) => {
+) {
     const config = getWebpackConfig(log, buildConfig, target, environment)
 
     if (!config) {

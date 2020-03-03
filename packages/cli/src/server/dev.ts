@@ -38,7 +38,7 @@ export const getHotReloadMiddleware: HotReloadMiddleware = (log, buildConfig) =>
     return [dev, hot]
 }
 
-export const openBrowser = async (log: Logger, port: number) => {
+export async function openBrowser(log: Logger, port: number) {
     if (process.env.NODE_ENV === 'test') {
         return
     }

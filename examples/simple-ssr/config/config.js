@@ -6,7 +6,7 @@ module.exports = {
         TS_CONFIG_SERVER: 'examples/simple-ssr/tsconfig.server.json',
         TS_CONFIG_CLIENT: 'examples/simple-ssr/tsconfig.json',
         ADDITIONAL_CIENT_ENTRIES: {
-            additional: 'examples/simple-ssr/client/extra.tsx',
+            additional: './examples/simple-ssr/src/client/extra.tsx',
         },
     },
 }
