@@ -1,6 +1,6 @@
 # Project Watchtower
 
-Project Watchtower is a TypeScript first, opinionated foundation for creating universal (Server Side Rendered) React applications. It's point of difference is that it is highly configurable and allows you to use your own data loading, routing and other approaches.
+Project Watchtower is a TypeScript first foundation for creating universal (Server Side Rendered) React applications. It's point of difference is that it is highly configurable and allows you to use your own data loading, routing and other approaches.
 
 [![](https://img.shields.io/npm/v/project-watchtower.svg)](https://npmjs.org/package/project-watchtower)
 
