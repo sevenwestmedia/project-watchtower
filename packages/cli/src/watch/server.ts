@@ -2,7 +2,7 @@ import { ChildProcess, fork } from 'child_process'
 import dotenv from 'dotenv'
 import express from 'express'
 import { Server } from 'http'
-import proxyMiddleware from 'http-proxy-middleware'
+import { createProxyMiddleware } from 'http-proxy-middleware'
 import path from 'path'
 import { Logger } from 'typescript-log'
 import webpack from 'webpack'
@@ -91,7 +91,7 @@ export async function watchServer(log: Logger, buildConfig: BuildConfig) {
         next()
     })
 
-    app.use(proxyMiddleware('http://localhost:' + devServerPort))
+    app.use(createProxyMiddleware('http://localhost:' + devServerPort))
 
     const watchServer = await new Promise<WatchServer>(resolve => {
         const server = app.listen(hostPort, () => {
