@@ -15,6 +15,7 @@ export * from './build/build'
 export * from './clean/clean'
 export * from './utils/process'
 export * from './utils/webpack'
+export * from './config/index'
 
 export type BuildTarget = 'server' | 'client'
 

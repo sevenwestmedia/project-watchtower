@@ -13,6 +13,7 @@ export * from './assets'
 export * from './utils/fs'
 export * from './utils/network'
 export * from './utils/promise-tracker'
+export * from './utils/function-timer'
 
 export interface RuntimeConfig {
     /** The url prefix which static files can load from */
