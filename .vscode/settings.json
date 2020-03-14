@@ -4,7 +4,6 @@
     "typescript.preferences.importModuleSpecifier": "relative",
     "search.exclude": {
         "**/node_modules": true,
-        "**/bower_components": true,
         "**/dist": true,
         "**/*.code-search": true
     },

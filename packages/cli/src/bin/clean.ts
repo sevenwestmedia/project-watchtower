@@ -1,11 +1,11 @@
 import { Logger } from 'typescript-log'
 
-import { clean as doClean } from '../clean/clean'
+import { clean } from '../clean/clean'
 import { BuildConfig } from '@project-watchtower/server'
 
-const clean = (log: Logger, buildConfig: BuildConfig, ...paths: string[]) => {
+export function cleanCmd(log: Logger, buildConfig: BuildConfig, ...paths: string[]) {
     const { OUTPUT } = buildConfig
-    return doClean(log, [
+    return clean(log, [
         OUTPUT,
         '{client,common,server}/**/*.{js,map}',
         'assets.json',
@@ -13,5 +13,3 @@ const clean = (log: Logger, buildConfig: BuildConfig, ...paths: string[]) => {
         ...paths,
     ])
 }
-
-export default clean

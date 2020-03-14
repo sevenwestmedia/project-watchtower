@@ -10,7 +10,6 @@ export interface Props {
 // to be transferred
 export interface AppState {
     config: { greeting: string }
-    // foo: string
 }
 
 export const App: React.SFC<Props> = props => <h1>{props.config.greeting}</h1>

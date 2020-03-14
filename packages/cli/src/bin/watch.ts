@@ -3,7 +3,7 @@ import { Logger } from 'typescript-log'
 import { watchServer, WatchServer } from '../watch/server'
 
 import build from './build'
-import clean from './clean'
+import { cleanCmd } from './clean'
 import start from './start'
 
 import { StartParam, WatchParam } from '..'
@@ -25,7 +25,7 @@ async function watch(
     const additionalStartParams: StartParam[] = []
     const env: NodeJS.ProcessEnv = { ...watchProcessEnv }
 
-    await clean(log, buildConfig)
+    await cleanCmd(log, buildConfig)
 
     const isServerWatch = HAS_SERVER && args.indexOf('server') !== -1
 

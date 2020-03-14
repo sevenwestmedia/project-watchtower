@@ -1,7 +1,7 @@
 import { getBuildConfig } from '@project-watchtower/server'
 
 import build from './build'
-import clean from './clean'
+import { cleanCmd } from './clean'
 import exploreBundle from './explore-bundle'
 import start from './start'
 import watch from './watch'
@@ -46,7 +46,7 @@ switch (command) {
         break
 
     case 'clean':
-        exitAfter(clean(cliLogger, buildConfig, ...commandArgs))
+        exitAfter(cleanCmd(cliLogger, buildConfig, ...commandArgs))
         break
 
     case 'explore-bundle':
