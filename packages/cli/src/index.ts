@@ -4,7 +4,7 @@ import { BuildConfig } from '@project-watchtower/server'
 import { ChildProcess } from 'child_process'
 
 import binBuild from './bin/build'
-import binClean from './bin/clean'
+import { binClean } from './bin/clean'
 import binExploreBundle from './bin/explore-bundle'
 import binStart from './bin/start'
 import binWatch from './bin/watch'
