@@ -1,4 +1,16 @@
 {
-    "mode": "pre",
-    "tag": "beta"
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "bundle-splitting-using-loadable": "1.0.0",
+    "emotion-css-in-js": "1.0.0",
+    "ssr-with-data-loading-using-redux": "1.0.0",
+    "ssr-with-sass": "1.0.0",
+    "@project-watchtower/cli": "2.0.0-beta.7",
+    "@project-watchtower/runtime": "2.0.0-beta.7",
+    "@project-watchtower/server": "2.0.0-beta.7"
+  },
+  "changesets": [
+    "blue-bags-deliver"
+  ]
 }

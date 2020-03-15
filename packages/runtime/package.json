@@ -1,6 +1,6 @@
 {
     "name": "@project-watchtower/runtime",
-    "version": "2.0.0-beta.7",
+    "version": "2.0.0-beta.8",
     "license": "MIT",
     "author": {
         "name": "Seven West Media"
@@ -13,12 +13,8 @@
     "module": "dist/esm/index.js",
     "description": "",
     "keywords": [],
-    "scripts": {
-    },
-    "dependencies": {
-    },
-    "devDependencies": {
-    },
-    "peerDependencies": {
-    }
+    "scripts": {},
+    "dependencies": {},
+    "devDependencies": {},
+    "peerDependencies": {}
 }
