@@ -1,10 +1,13 @@
 import fs from 'fs'
 import path from 'path'
 import { consoleLogger } from 'typescript-log'
-import build from '../../lib/bin/build'
-import clean from '../../lib/bin/clean'
-import { getConfig, getRuntimeConfigFromBuildConfig } from '../../lib/runtime/config/config'
-import { getAbsoluteAssetPath, getAssetLocations } from '../../lib/runtime/server/assets'
+import { bin } from '@project-watchtower/cli'
+import {
+    getBuildConfig,
+    getRuntimeConfigFromBuildConfig,
+    getAbsoluteAssetPath,
+    getAssetLocations,
+} from '@project-watchtower/server'
 
 const log = consoleLogger('info')
 
@@ -14,13 +17,13 @@ describe('bin/build', () => {
 
     it('will build', async () => {
         const testProjectDir = path.join(process.cwd(), './test/test-project')
-        const buildConfig = getConfig(log, testProjectDir)
+        const buildConfig = getBuildConfig(log, testProjectDir)
         buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/binbuild')
 
         const runtimeConfig = getRuntimeConfigFromBuildConfig(buildConfig)
         const { OUTPUT } = buildConfig
-        await clean(log, buildConfig)
-        await build(log, buildConfig)
+        await bin.clean(log, buildConfig)
+        await bin.build(log, buildConfig)
 
         const filePath = path.resolve(OUTPUT, 'server.js')
         expect(fs.existsSync(filePath)).toBe(true)

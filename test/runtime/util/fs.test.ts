@@ -1,4 +1,4 @@
-import { BuildConfigOverride } from 'lib/runtime/server'
+import { BuildConfigOverride } from 'packages/server/src'
 import path from 'path'
 import { consoleLogger, noopLogger } from 'typescript-log'
 import {
@@ -7,7 +7,7 @@ import {
     getFileSize,
     readFile,
     writeFile,
-} from '../../../lib/runtime/util/fs'
+} from '../../../packages/server/src/utils/fs'
 import { expectPromiseToFail } from '../../test-helpers'
 
 const packageJson = path.resolve(process.cwd(), 'package.json')
@@ -52,7 +52,11 @@ describe('util/fs', () => {
             {},
         )
         expect(buildConfig).toEqual({
+            CLIENT_ENTRY: './test/test-project/src/client/index.tsx',
             LINT_EXCLUDE: [],
+            SERVER_ENTRY: './test/test-project/src/server/start.ts',
+            TS_CONFIG_CLIENT: './test/test-project/tsconfig.json',
+            TS_CONFIG_SERVER: 'test/test-project/tsconfig.json',
         })
 
         const nonExistentConfig = getCustomConfigFile<BuildConfigOverride>(

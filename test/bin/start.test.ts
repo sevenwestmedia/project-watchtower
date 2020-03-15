@@ -1,30 +1,27 @@
 import path from 'path'
-import build from '../../lib/bin/build'
-import clean from '../../lib/bin/clean'
-import start from '../../lib/bin/start'
-import { getConfig } from '../../lib/runtime/config/config'
-import { waitForConnection } from '../../lib/runtime/util/network'
+import { bin } from '@project-watchtower/cli'
+import { getBuildConfig, waitForConnection } from '@project-watchtower/server'
 import { getTestPort } from '../test-helpers'
 
 import { consoleLogger } from 'typescript-log'
 
 const log = consoleLogger()
 const testProjectDir = path.join(process.cwd(), './test/test-project')
-const buildConfig = getConfig(log, testProjectDir)
+const buildConfig = getBuildConfig(log, testProjectDir)
 
 buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/binstart')
 
 describe('bin/start', () => {
     jest.setTimeout(60000)
     beforeAll(async () => {
-        await clean(log, buildConfig)
-        await build(log, buildConfig)
+        await bin.clean(log, buildConfig)
+        await bin.build(log, buildConfig)
     })
 
     it('will start the server', async () => {
         const port = await getTestPort()
         buildConfig.DEV_SERVER_PORT = port
-        const childProcess = await start(log, buildConfig, {}, 'watch')
+        const childProcess = await bin.start(log, buildConfig, {}, 'watch')
         await waitForConnection(port)
         childProcess.kill()
     })
@@ -37,7 +34,7 @@ describe('bin/start', () => {
     it.skip('will start the client', async () => {
         const port = await getTestPort()
         buildConfig.DEV_SERVER_PORT = port
-        const childProcess = await start(log, buildConfig, {}, 'prod', 'client')
+        const childProcess = await bin.start(log, buildConfig, {}, 'prod', 'client')
         if (childProcess.stdout) {
             childProcess.stdout.on('data', data => {
                 // eslint-disable-next-line no-console

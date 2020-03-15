@@ -1,4 +1,4 @@
-import { findFreePort } from '../lib/runtime/util/network'
+import { findFreePort } from '@project-watchtower/server'
 
 export const expectPromiseToFail = (promise: Promise<any>) =>
     new Promise((resolve, reject) => {

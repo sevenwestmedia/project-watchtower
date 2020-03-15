@@ -1,0 +1,18 @@
+{
+    "extends": "../../tsconfig.cjs.json",
+    "compilerOptions": {
+        "outDir": "./dist/cjs" /* Redirect output structure to the directory. */,
+        "rootDir": "./src" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */,
+        "baseUrl": ".",
+        "paths": {
+            "@project-watchtower/runtime": ["../../packages/runtime"]
+        }
+    },
+    "references": [
+        {
+            "path": "../../packages/runtime"
+        }
+    ],
+    "include": ["src"],
+    "exclude": ["dist"]
+}

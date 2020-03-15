@@ -1,15 +1,16 @@
 import path from 'path'
 import { consoleLogger } from 'typescript-log'
-import clean from '../../../lib/bin/clean'
-import { getConfig, getRuntimeConfigFromBuildConfig } from '../../../lib/runtime/config/config'
+import { bin } from '@project-watchtower/cli'
 import {
+    getBuildConfig,
+    getRuntimeConfigFromBuildConfig,
     getAbsoluteAssetPath,
     getAssetLocations,
     updateAssetLocations,
-} from '../../../lib/runtime/server/assets'
+} from '@project-watchtower/server'
 
 const log = consoleLogger()
-const buildConfig = getConfig(log, process.cwd())
+const buildConfig = getBuildConfig(log, process.cwd())
 buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/assets')
 
 const runtimeConfig = getRuntimeConfigFromBuildConfig(buildConfig)
@@ -23,7 +24,7 @@ const assets = {
 
 describe('server/assets initial', () => {
     it('throws when no assets have been specified', async () => {
-        await clean(log, buildConfig)
+        await bin.clean(log, buildConfig)
         expect(() => getAssetLocations(runtimeConfig)).toThrow()
     })
 })

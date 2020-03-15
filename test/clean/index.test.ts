@@ -2,11 +2,11 @@ import fs from 'fs'
 import mkdirp from 'mkdirp'
 import path from 'path'
 import { consoleLogger } from 'typescript-log'
-import clean from '../../lib/clean'
-import { getConfig } from '../../lib/runtime/config/config'
+import { clean } from '@project-watchtower/cli'
+import { getBuildConfig } from '@project-watchtower/server'
 
 const log = consoleLogger()
-const buildConfig = getConfig(log, process.cwd())
+const buildConfig = getBuildConfig(log, process.cwd())
 buildConfig.OUTPUT = path.resolve(buildConfig.BASE, 'test-dist/clean')
 
 const doClean = async (paths: string | string[]) => {

@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "noEmit": false,
+        "declaration": true,
+
+        "removeComments": true,
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "target": "es5",
+        "strict": true,
+        "noImplicitReturns": true,
+        "jsx": "react",
+        "importHelpers": true,
+        "noEmitHelpers": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "incremental": true,
+        "composite": true
+    }
+}

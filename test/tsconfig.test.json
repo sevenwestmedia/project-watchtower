@@ -1,0 +1,25 @@
+{
+    "extends": "../tsconfig.cjs.json",
+    "include": ["**/*.ts", "**/*.tsx"],
+    "compilerOptions": {
+        "noEmit": false,
+        "incremental": true,
+        "composite": true,
+        "paths": {
+            "@project-watchtower/cli": ["../packages/cli"],
+            "@project-watchtower/server": ["../packages/server"],
+            "@project-watchtower/runtime": ["../packages/runtime"]
+        }
+    },
+    "references": [
+        {
+            "path": "../packages/cli"
+        },
+        {
+            "path": "../packages/server"
+        },
+        {
+            "path": "../packages/runtime"
+        }
+    ]
+}
