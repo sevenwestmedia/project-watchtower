@@ -6,7 +6,8 @@
     "build": "node ../../dist/cjs/bin/index.js build"
   },
   "author": "",
-  "license": "MIT",
+    "private": true,
+    "license": "MIT",
   "dependencies": {
     "autoprefixer": "^9.7.4",
     "css-hot-loader": "^1.4.4",
