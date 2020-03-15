@@ -1,18 +1,4 @@
 {
-  "mode": "pre",
-  "tag": "beta",
-  "initialVersions": {
-    "project-watchtower": "1.6.0"
-  },
-  "changesets": [
-    "beige-islands-fry",
-    "fair-bats-destroy",
-    "loud-monkeys-think",
-    "poor-actors-rule",
-    "poor-dragons-act",
-    "twelve-olives-burn",
-    "unlucky-flowers-wave",
-    "weak-pandas-draw",
-    "young-jokes-wink"
-  ]
+    "mode": "pre",
+    "tag": "beta"
 }
