@@ -1,5 +1,11 @@
 # @project-watchtower/server
 
+## 2.0.0-beta.10
+
+### Patch Changes
+
+-   53a78bd: Setup webpack to be able to resolve loaders relative to the cli, fixes #8
+
 ## 2.0.0-beta.9
 
 ### Patch Changes
