@@ -15,10 +15,7 @@ export function createServerExternals(
         nodeModules.push(...fs.readdirSync(cwdNodeModules))
     }
     return (_context, request, callback) => {
-        // treat deep imports as externals as well
-        const moduleName = request.split('/')[0]
-
-        if (moduleName === '@project-watchtower/cli') {
+        if (request === '@project-watchtower/cli') {
             resolveFromNodeModules()
         } else if (
             options.buildConfig.SERVER_BUNDLE_ALL &&
@@ -26,14 +23,14 @@ export function createServerExternals(
         ) {
             includeInBundle()
         } else if (options.buildConfig.SERVER_BUNDLE_ALL_EXCEPT) {
-            if (options.buildConfig.SERVER_BUNDLE_ALL_EXCEPT.indexOf(moduleName) !== -1) {
+            if (options.buildConfig.SERVER_BUNDLE_ALL_EXCEPT.includes(request)) {
                 resolveFromNodeModules()
             } else {
                 includeInBundle()
             }
-        } else if (options.buildConfig.SERVER_INCLUDE_IN_BUNDLE.indexOf(moduleName) !== -1) {
+        } else if (options.buildConfig.SERVER_INCLUDE_IN_BUNDLE.includes(request)) {
             includeInBundle()
-        } else if (nodeModules.indexOf(moduleName) !== -1) {
+        } else if (nodeModules.includes(request)) {
             resolveFromNodeModules()
         } else {
             includeInBundle()
