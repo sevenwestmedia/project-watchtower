@@ -1,5 +1,11 @@
 # @project-watchtower/server
 
+## 2.0.0-beta.11
+
+### Patch Changes
+
+-   1bf7ece: Fixed function timer being in server package, causing clients to fail when included. Increased client dev build log level
+
 ## 2.0.0-beta.10
 
 ### Patch Changes
