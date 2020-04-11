@@ -40,6 +40,12 @@ export function baseConfig(options: CreateWebpackConfigOptions): webpack.Configu
             extensions: ['.ts', '.tsx', '.js', '*'],
             plugins: [],
             symlinks: false,
+            modules: [
+                'node_modules',
+                '@project-watchtower/cli',
+                '@project-watchtower/runtime',
+                '@project-watchtower/server',
+            ],
         },
     }
 }
