@@ -1,29 +1,27 @@
 import net from 'net'
 
-export const waitForConnection = (port: number, timeout = 30000) =>
-    Promise.race([
-        new Promise(resolve => {
+export function waitForConnection(port: number, timeout = 30000) {
+    return Promise.race([
+        new Promise((resolve) => {
             const connect = () => {
-                const socket = net.connect(
-                    { port },
-                    () => {
-                        socket.end()
-                        resolve()
-                    },
-                )
+                const socket = net.connect({ port }, () => {
+                    socket.end()
+                    resolve()
+                })
                 socket.on('error', () => {
                     setTimeout(connect, 2000)
                 })
             }
             connect()
         }),
-        new Promise(resolve => setTimeout(() => resolve(), timeout)),
+        new Promise((resolve) => setTimeout(() => resolve(), timeout)),
     ])
+}
 
 const startPort = 3000
 
-export const checkPortAvailability = (port: number) =>
-    new Promise((resolve, reject) => {
+export function checkPortAvailability(port: number) {
+    return new Promise((resolve, reject) => {
         const server = net.createServer()
 
         server.on('error', () => reject())
@@ -33,8 +31,9 @@ export const checkPortAvailability = (port: number) =>
             server.close()
         })
     })
+}
 
-export const findFreePort = async (useStartPort?: number) => {
+export async function findFreePort(useStartPort?: number) {
     const testPort = useStartPort || startPort
 
     for (let i = 0; i < 100; i++) {

@@ -1,14 +1,14 @@
 import webpack from 'webpack'
 import merge from 'webpack-merge'
-import getWebpackHooks, { getHook } from './webpack-hooks'
+import { getWebpackHooks, getHook } from './webpack-hooks'
 import { baseConfig } from './webpack.base'
-import clientBaseConfig from './webpack.client'
-import devConfig from './webpack.dev'
+import { clientBaseConfig } from './webpack.client'
+import { devConfig } from './webpack.dev'
 import { CreateWebpackConfig } from '.'
 import { getTsLoaderWebpackConfig } from './ts-loader-config'
 
 /** Webpack config for the client in development */
-export const clientDevConfig: CreateWebpackConfig = options => {
+export const clientDevConfig: CreateWebpackConfig = (options) => {
     const webpackHooks = getWebpackHooks(options.log, options.buildConfig.BASE)
 
     return merge(

@@ -5,7 +5,7 @@ import { StaticRouter } from 'react-router-dom'
 import { Logger } from 'typescript-log'
 import { StaticRouterContext } from './router-context-handler'
 import { PromiseTracker } from '../utils/promise-tracker'
-import { functionTimer } from '../utils/function-timer'
+import { functionTimer } from '../../../runtime/src/function-timer'
 
 export type CreateAppElement = (promiseTracker: PromiseTracker) => React.ReactElement<any>
 

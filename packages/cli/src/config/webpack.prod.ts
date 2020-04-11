@@ -1,9 +1,9 @@
-import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
+import TerserPlugin from 'terser-webpack-plugin'
 import { CreateWebpackConfig } from '.'
 
 /** Webpack settings for all production builds */
-const prodConfig: CreateWebpackConfig = () => ({
+export const prodConfig: CreateWebpackConfig = () => ({
     devtool: 'source-map',
     mode: 'production',
     optimization: {
@@ -32,5 +32,3 @@ const prodConfig: CreateWebpackConfig = () => ({
         },
     },
 })
-
-export default prodConfig

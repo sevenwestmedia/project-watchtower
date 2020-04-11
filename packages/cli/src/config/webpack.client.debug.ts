@@ -1,10 +1,10 @@
 import merge from 'webpack-merge'
-import getWebpackHooks, { getHook } from './webpack-hooks'
+import { getWebpackHooks, getHook } from './webpack-hooks'
 import { clientDevConfig } from './webpack.client.dev'
 import { CreateWebpackConfig } from '.'
 
 /** Webpack config for the client to improve debugging */
-const config: CreateWebpackConfig = options =>
+export const clientDebugConfig: CreateWebpackConfig = (options) =>
     merge(
         clientDevConfig(options),
         {
@@ -12,5 +12,3 @@ const config: CreateWebpackConfig = options =>
         },
         getHook(getWebpackHooks(options.log, options.buildConfig.BASE).clientDebug, options),
     )
-
-export default config

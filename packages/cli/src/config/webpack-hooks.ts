@@ -4,18 +4,19 @@ import { Logger } from 'typescript-log'
 import { WebpackHooks, CreateWebpackConfig, CreateWebpackConfigOptions } from '.'
 import { getCustomConfigFile } from '@project-watchtower/server'
 
-export const webpackHooks = (log: Logger, root: string) =>
-    getCustomConfigFile<WebpackHooks>(
+export function getWebpackHooks(log: Logger, root: string) {
+    return getCustomConfigFile<WebpackHooks>(
         log,
         root,
         'config/webpack-hooks',
         getCustomConfigFile<WebpackHooks>(log, process.cwd(), 'config/webpack-hooks', {}),
     )
+}
 
-export const getHook = (
+export function getHook(
     hook: webpack.Configuration | CreateWebpackConfig | undefined,
     options: CreateWebpackConfigOptions,
-): webpack.Configuration => {
+): webpack.Configuration {
     if (hook === undefined) {
         return {}
     }
@@ -25,5 +26,3 @@ export const getHook = (
 
     return hook
 }
-
-export default webpackHooks

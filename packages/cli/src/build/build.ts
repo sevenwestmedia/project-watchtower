@@ -4,12 +4,12 @@ import webpack from 'webpack'
 import { buildCacheDirectory } from '../bin/cache-validator'
 import { Logger } from 'typescript-log'
 
-import webpackClientDebugConfig from '../config/webpack.client.debug'
+import { clientDebugConfig } from '../config/webpack.client.debug'
 import { clientDevConfig } from '../config/webpack.client.dev'
-import webpackClientProdConfig from '../config/webpack.client.prod'
-import webpackServerDebugConfig from '../config/webpack.server.debug'
-import webpackServerDevConfig from '../config/webpack.server.dev'
-import webpackServerProdConfig from '../config/webpack.server.prod'
+import { clientProdConfig } from '../config/webpack.client.prod'
+import { serverDebugConfig } from '../config/webpack.server.debug'
+import { serverDevConfig } from '../config/webpack.server.dev'
+import { serverProdConfig } from '../config/webpack.server.prod'
 
 import { BuildEnvironment, BuildTarget } from '..'
 import { CreateWebpackConfigOptions, CreateWebpackConfig } from '../config'
@@ -33,7 +33,7 @@ export function getWebpackConfig(
     const config = getWebpackConfigInternal(log, buildConfig, target, environment)
     // We need to JSON.stringify config, so let's make it safe (as we can)
     if (config && config.plugins) {
-        config.plugins.forEach(plugin => {
+        config.plugins.forEach((plugin) => {
             const pluginAny: any = plugin
             if (pluginAny.toJSON) {
                 return
@@ -103,13 +103,13 @@ function getWebpackConfigInternal(
                 case 'server':
                     switch (environment) {
                         case 'dev':
-                            return webpackServerDevConfig(createWebpackConfigOptions)
+                            return serverDevConfig(createWebpackConfigOptions)
 
                         case 'debug':
-                            return webpackServerDebugConfig(createWebpackConfigOptions)
+                            return serverDebugConfig(createWebpackConfigOptions)
 
                         case 'prod':
-                            return webpackServerProdConfig(createWebpackConfigOptions)
+                            return serverProdConfig(createWebpackConfigOptions)
 
                         default:
                             throw new Error(`Invalid build target: ${target} ${environment}`)
@@ -121,10 +121,10 @@ function getWebpackConfigInternal(
                             return clientDevConfig(createWebpackConfigOptions)
 
                         case 'debug':
-                            return webpackClientDebugConfig(createWebpackConfigOptions)
+                            return clientDebugConfig(createWebpackConfigOptions)
 
                         case 'prod':
-                            return webpackClientProdConfig(createWebpackConfigOptions)
+                            return clientProdConfig(createWebpackConfigOptions)
 
                         default:
                             throw new Error(`Invalid build target: ${target} ${environment}`)

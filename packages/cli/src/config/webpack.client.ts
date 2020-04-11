@@ -11,21 +11,12 @@ interface EntryPoints {
     [name: string]: string[]
 }
 
-const getPlugins = (buildConfig: BuildConfig) => [
-    new AssetsPlugin({
-        filename: path.relative(process.cwd(), getAssetsFile(buildConfig.OUTPUT)),
-        processOutput: assets => {
-            updateAssetLocations(assets)
-            return JSON.stringify(assets)
-        },
-    }),
-]
 /**
  * Base webpack config for the client that is used both in development and production
  * - Compile SCSS to CSS and extract into external assets
  * - Create assets.json that maps the created assets to their locations
  */
-const clientBaseConfig: CreateWebpackConfig = options => {
+export const clientBaseConfig: CreateWebpackConfig = (options) => {
     const {
         CLIENT_ENTRY,
         OUTPUT,
@@ -81,4 +72,14 @@ const clientBaseConfig: CreateWebpackConfig = options => {
     }
 }
 
-export default clientBaseConfig
+function getPlugins(buildConfig: BuildConfig) {
+    return [
+        new AssetsPlugin({
+            filename: path.relative(process.cwd(), getAssetsFile(buildConfig.OUTPUT)),
+            processOutput: (assets) => {
+                updateAssetLocations(assets)
+                return JSON.stringify(assets)
+            },
+        }),
+    ]
+}

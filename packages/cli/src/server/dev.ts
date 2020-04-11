@@ -20,7 +20,7 @@ export const getHotReloadMiddleware: HotReloadMiddleware = (log, buildConfig) =>
     }
 
     if (config.plugins) {
-        config.plugins = config.plugins.filter(plugin => !(plugin instanceof AssetsPlugin))
+        config.plugins = config.plugins.filter((plugin) => !(plugin instanceof AssetsPlugin))
     }
     const compiler = webpack(config)
 
@@ -28,7 +28,7 @@ export const getHotReloadMiddleware: HotReloadMiddleware = (log, buildConfig) =>
         // do not serve index.html on / route
         // https://github.com/webpack/webpack-dev-middleware/issues/153
         index: 'foobar',
-        logLevel: 'silent',
+        logLevel: 'warn',
         publicPath: buildConfig.PUBLIC_PATH,
         stats: 'errors-only',
     })

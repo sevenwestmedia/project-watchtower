@@ -93,18 +93,18 @@ export async function watchServer(log: Logger, buildConfig: BuildConfig) {
 
     app.use(createProxyMiddleware('http://localhost:' + devServerPort))
 
-    const watchServer = await new Promise<WatchServer>(resolve => {
+    const watchServer = await new Promise<WatchServer>((resolve) => {
         const server = app.listen(hostPort, () => {
             resolve({
                 app,
                 close: () => {
                     return Promise.all([
-                        new Promise(closeResolve =>
+                        new Promise((closeResolve) =>
                             watching.close(() => {
                                 closeResolve()
                             }),
                         ),
-                        new Promise(closeResolve => server.close(() => closeResolve())),
+                        new Promise((closeResolve) => server.close(() => closeResolve())),
                     ]).then(() => {
                         if (devServer) {
                             devServer.kill()

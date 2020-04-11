@@ -1,18 +1,18 @@
-import { Logger, LogObject } from 'typescript-log'
 import util from 'util'
+import { Logger, LogObject } from 'typescript-log'
 
-export const formatElapsed = (hrEnd: [number, number]) => {
+export function formatElapsed(hrEnd: [number, number]) {
     return util.format('%ds %dms', hrEnd[0], hrEnd[1] / 1000000)
 }
 
-export const functionTimer = <T>(
+export function functionTimer<T>(
     description: string,
     func: () => T,
     logger: Logger,
     logResult?: (result: T) => string,
     /** Adds a category to the log object */
     category?: string,
-): T => {
+): T {
     const startTime = process.hrtime()
 
     try {
@@ -47,14 +47,14 @@ export const functionTimer = <T>(
     }
 }
 
-export const functionTimerAsync = async <T>(
+export async function functionTimerAsync<T>(
     description: string,
     func: () => Promise<T>,
     logger: Logger,
     logResult?: (result: T) => string,
     /** Adds a category to the log object */
     category?: string,
-): Promise<T> => {
+): Promise<T> {
     const startTime = process.hrtime()
 
     try {

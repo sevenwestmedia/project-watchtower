@@ -1,14 +1,14 @@
 import merge from 'webpack-merge'
 
-import getWebpackHooks, { getHook } from './webpack-hooks'
+import { getWebpackHooks, getHook } from './webpack-hooks'
 import { baseConfig } from './webpack.base'
-import clientBaseConfig from './webpack.client'
-import prodConfig from './webpack.prod'
+import { clientBaseConfig } from './webpack.client'
+import { prodConfig } from './webpack.prod'
 import { CreateWebpackConfig } from '.'
 import { getTsLoaderWebpackConfig } from './ts-loader-config'
 
 /** Webpack config for the client in production */
-const config: CreateWebpackConfig = options => {
+export const clientProdConfig: CreateWebpackConfig = (options) => {
     const webpackHooks = getWebpackHooks(options.log, options.buildConfig.BASE)
     const filename = options.buildConfig.STATIC_RESOURCE_NAMES
         ? options.buildConfig.ASSETS_PATH_PREFIX + 'js/[name].js'
@@ -36,5 +36,3 @@ const config: CreateWebpackConfig = options => {
         getHook(webpackHooks.clientProd, options),
     )
 }
-
-export default config

@@ -1,13 +1,13 @@
 import merge from 'webpack-merge'
-import getWebpackHooks, { getHook } from './webpack-hooks'
+import { getWebpackHooks, getHook } from './webpack-hooks'
 import { baseConfig } from './webpack.base'
-import devConfig from './webpack.dev'
+import { devConfig } from './webpack.dev'
 import { serverBaseConfig } from './webpack.server'
 import { CreateWebpackConfig } from '.'
 import { getTsLoaderWebpackConfig } from './ts-loader-config'
 
 /** Webpack config for the server in development */
-const config: CreateWebpackConfig = options => {
+export const serverDevConfig: CreateWebpackConfig = (options) => {
     const webpackHooks = getWebpackHooks(options.log, options.buildConfig.BASE)
 
     return merge(
@@ -21,5 +21,3 @@ const config: CreateWebpackConfig = options => {
         getHook(webpackHooks.serverDev, options),
     )
 }
-
-export default config
