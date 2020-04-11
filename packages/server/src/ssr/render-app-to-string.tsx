@@ -3,9 +3,9 @@ import { HelmetData } from 'react-helmet'
 import { HelmetProvider, FilledContext } from 'react-helmet-async'
 import { StaticRouter } from 'react-router-dom'
 import { Logger } from 'typescript-log'
+import { functionTimer } from '@project-watchtower/runtime'
 import { StaticRouterContext } from './router-context-handler'
 import { PromiseTracker } from '../utils/promise-tracker'
-import { functionTimer } from '../../../runtime/src/function-timer'
 
 export type CreateAppElement = (promiseTracker: PromiseTracker) => React.ReactElement<any>
 

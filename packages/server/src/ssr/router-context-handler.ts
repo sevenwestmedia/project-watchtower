@@ -1,6 +1,6 @@
 import { RenderPassResult } from './render-app-to-string'
 import { ServerRenderResult, ServerRenderResultType } from './server-render-results'
-import { formatElapsed } from '../../../runtime/src/function-timer'
+import { formatElapsed } from '@project-watchtower/runtime'
 
 export interface StaticRouterContext {
     url?: string

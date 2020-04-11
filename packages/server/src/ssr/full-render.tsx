@@ -6,7 +6,7 @@ import { WatchtowerEvents } from './render-events'
 import { routerContextHandler } from './router-context-handler'
 import * as ServerRenderResults from './server-render-results'
 import { PromiseTracker } from '../utils/promise-tracker'
-import { formatElapsed } from '../../../runtime/src/function-timer'
+import { formatElapsed } from '@project-watchtower/runtime'
 
 export interface RenderOptions<RenderResult> {
     log: Logger
