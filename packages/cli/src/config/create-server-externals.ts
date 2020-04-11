@@ -17,23 +17,34 @@ export function createServerExternals(
     return (_context, request, callback) => {
         // treat deep imports as externals as well
         const moduleName = request.split('/')[0]
-        if (
+
+        if (moduleName === '@project-watchtower/cli') {
+            resolveFromNodeModules()
+        } else if (
             options.buildConfig.SERVER_BUNDLE_ALL &&
             !options.buildConfig.SERVER_BUNDLE_ALL_EXCEPT
         ) {
-            callback(undefined, undefined)
+            includeInBundle()
         } else if (options.buildConfig.SERVER_BUNDLE_ALL_EXCEPT) {
             if (options.buildConfig.SERVER_BUNDLE_ALL_EXCEPT.indexOf(moduleName) !== -1) {
-                callback(null, 'commonjs ' + request)
+                resolveFromNodeModules()
             } else {
-                callback(undefined, undefined)
+                includeInBundle()
             }
         } else if (options.buildConfig.SERVER_INCLUDE_IN_BUNDLE.indexOf(moduleName) !== -1) {
-            callback(undefined, undefined)
+            includeInBundle()
         } else if (nodeModules.indexOf(moduleName) !== -1) {
-            callback(null, 'commonjs ' + request)
+            resolveFromNodeModules()
         } else {
+            includeInBundle()
+        }
+
+        function includeInBundle() {
             callback(undefined, undefined)
+        }
+
+        function resolveFromNodeModules() {
+            callback(null, 'commonjs ' + request)
         }
     }
 }
