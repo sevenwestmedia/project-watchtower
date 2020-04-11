@@ -11,6 +11,8 @@
     "@project-watchtower/server": "2.0.0-beta.7"
   },
   "changesets": [
-    "blue-bags-deliver"
+    "blue-bags-deliver",
+    "cyan-adults-pull",
+    "great-phones-drop"
   ]
 }
