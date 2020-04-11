@@ -11,19 +11,20 @@ import {
     renderHtml,
     PromiseTracker,
 } from '@project-watchtower/server'
-import { Status404Error, PromiseCompletionSource } from '@project-watchtower/runtime'
+import { Status404Error } from '@project-watchtower/runtime'
+import { PromiseCompletionSource } from 'promise-completion-source'
 
 Error.stackTraceLimit = Infinity
 
 it(
     'can render ssr',
-    ssrFixture(fixture => {
+    ssrFixture((fixture) => {
         fixture.renderFn = () => <div>EXAMPLE SSR</div>
 
         return fixture.server
             .get('/')
             .expect(200)
-            .then(res => {
+            .then((res) => {
                 expect(res.text).toContain('EXAMPLE SSR')
             })
     }),
@@ -31,7 +32,7 @@ it(
 
 it(
     're-renders when data has been loaded',
-    ssrFixture(fixture => {
+    ssrFixture((fixture) => {
         const dataLoadSource = new PromiseCompletionSource()
 
         // This component uses the dataLoadSource to decide if it needs to load
@@ -62,7 +63,7 @@ it(
         return fixture.server
             .get('/')
             .expect(200)
-            .then(res => {
+            .then((res) => {
                 expect(res.text).toContain('Data loaded')
             })
     }),
@@ -71,7 +72,7 @@ it(
 it(
     'renders error page when data load rejects',
     ssrFixture(
-        fixture => {
+        (fixture) => {
             const dataLoadSource = new PromiseCompletionSource()
 
             // tslint:disable-next-line:max-classes-per-file
@@ -113,7 +114,7 @@ it(
             return fixture.server
                 .get('/')
                 .expect(500)
-                .then(res => {
+                .then((res) => {
                     expect(res.text).toContain('watchtower_hydrate_location = "\\u002Ferror"')
                     expect(res.text).toContain('Custom error page')
                 })
@@ -128,7 +129,7 @@ it(
 it(
     'renders 404 page when data load rejects with Status404Error',
     ssrFixture(
-        fixture => {
+        (fixture) => {
             const dataLoadSource = new PromiseCompletionSource()
 
             // tslint:disable-next-line:max-classes-per-file
@@ -172,7 +173,7 @@ it(
             return fixture.server
                 .get('/')
                 .expect(404)
-                .then(res => {
+                .then((res) => {
                     expect(res.text).toContain('Custom page not found')
                 })
         },
@@ -185,7 +186,7 @@ it(
 it(
     'renders error page when render of page fails',
     ssrFixture(
-        fixture => {
+        (fixture) => {
             const BrokenComponent = () => {
                 throw new Error('oops, render failed')
             }
@@ -203,7 +204,7 @@ it(
             return fixture.server
                 .get('/')
                 .expect(500)
-                .then(res => {
+                .then((res) => {
                     expect(res.text).toContain('Custom error page')
                 })
         },
@@ -217,7 +218,7 @@ it(
 it(
     'returns 500 with no body content when error page fails to render',
     ssrFixture(
-        fixture => {
+        (fixture) => {
             const BrokenComponent = () => {
                 throw new Error('oops, render failed')
             }
@@ -235,7 +236,7 @@ it(
             return fixture.server
                 .get('/')
                 .expect(500)
-                .then(res => {
+                .then((res) => {
                     expect(res.text).toBe('')
                 })
         },
@@ -249,7 +250,7 @@ it(
 it(
     'renders error page when tracked promise is rejected already',
     ssrFixture(
-        fixture => {
+        (fixture) => {
             const dataLoadSource = new PromiseCompletionSource()
 
             // tslint:disable-next-line:max-classes-per-file
@@ -290,7 +291,7 @@ it(
             return fixture.server
                 .get('/')
                 .expect(500)
-                .then(res => {
+                .then((res) => {
                     expect(res.text).toContain('Custom error page')
                 })
         },
@@ -304,11 +305,11 @@ it(
 it(
     'renders the custom tags that are passed',
     ssrFixture(
-        fixture => {
+        (fixture) => {
             return fixture.server
                 .get('/')
                 .expect(200)
-                .then(res => {
+                .then((res) => {
                     expect(res.text).toEqual(`<!DOCTYPE html>
 <html lang="en">
     <head>
@@ -360,14 +361,14 @@ function ssrFixture(
             server: supertest(
                 createServer({
                     log: options.log || consoleLogger(),
-                    middlewareHook: app => {
+                    middlewareHook: (app) => {
                         // To enable SSR simply register the SSR middleware as the default
                         // express handler.
                         const ssrMiddleware = createSsrMiddleware<SSRState>({
                             app,
                             errorLocation: options.errorLocation || '/error',
                             pageNotFoundLocation: options.pageNotFoundLocation || '/page-not-found',
-                            renderApp: params => fixture.renderFn(params),
+                            renderApp: (params) => fixture.renderFn(params),
                             renderHtml,
                             setupRequest: async () => ({}),
                             ssrTimeoutMs: 1000,

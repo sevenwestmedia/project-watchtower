@@ -28,12 +28,13 @@ export const getHotReloadMiddleware: HotReloadMiddleware = (log, buildConfig) =>
         // do not serve index.html on / route
         // https://github.com/webpack/webpack-dev-middleware/issues/153
         index: 'foobar',
-        logLevel: 'warn',
         publicPath: buildConfig.PUBLIC_PATH,
-        stats: 'errors-only',
     })
 
-    const hot = webpackHotMiddleware(compiler)
+    const hot = webpackHotMiddleware(compiler, {
+        log: (msg, ...params) =>
+            params && params.length ? log.info({ params }, msg) : log.info(msg),
+    })
 
     return [dev, hot]
 }

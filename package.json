@@ -63,7 +63,9 @@
         "watch:ssr-with-sass-example": "yarn pwt watch server -p examples/ssr-with-sass",
         "explore-bundle:ssr-with-sass-example": "yarn pwt explore-bundle -p examples/ssr-with-sass"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "promise-completion-source": "^1.0.0"
+    },
     "dependencies": {
         "@babel/core": "^7.9.0",
         "@changesets/cli": "^2.6.2",
