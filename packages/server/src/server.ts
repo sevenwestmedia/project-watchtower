@@ -62,7 +62,7 @@ export function createServer(options: CreateServerOptions): express.Express {
         setDefaultAssets(buildConfig)
 
         // tslint:disable-next-line no-var-requires
-        const { getHotReloadMiddleware } = require('../../server/dev')
+        const { getHotReloadMiddleware } = require('@project-watchtower/cli')
         app.use(getHotReloadMiddleware(options.log, buildConfig))
     }
 
@@ -125,7 +125,7 @@ export function createServer(options: CreateServerOptions): express.Express {
     if (isProduction) {
         listen(port)
     } else {
-        findFreePort(port).then(usePort => listen(usePort))
+        findFreePort(port).then((usePort) => listen(usePort))
     }
 
     return app
