@@ -109,7 +109,7 @@ export function createServer(options: CreateServerOptions): express.Express {
             options.log.info(`Server listening on port ${usePort}`)
             if (process.env.NODE_ENV !== 'production' && isWatchMode()) {
                 // tslint:disable-next-line no-var-requires
-                const { openBrowser } = require('../../server/dev')
+                const { openBrowser } = require('@project-watchtower/cli')
                 openBrowser(options.log, usePort)
             }
             if (callback) {
