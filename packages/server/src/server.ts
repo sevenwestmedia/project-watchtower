@@ -44,7 +44,7 @@ export function createServer(options: CreateServerOptions): express.Express {
     app.disable('x-powered-by')
 
     if (isWatchtowerServer()) {
-        const buildConfig = getBuildConfig(options.log, projectDir())
+        const buildConfig = getBuildConfig(options.log, projectDir() || process.cwd())
 
         // When running in dev mode, we don't use assets.json so we need to prime
         // the assets location
@@ -55,7 +55,7 @@ export function createServer(options: CreateServerOptions): express.Express {
     // in local development. In production the port will come from the environment, not
     // this config object
     if (process.env.NODE_ENV !== 'production' && isWatchMode()) {
-        const buildConfig = getBuildConfig(options.log, projectDir())
+        const buildConfig = getBuildConfig(options.log, projectDir() || process.cwd())
 
         // When running in dev mode, we don't use assets.json so we need to prime
         // the assets location

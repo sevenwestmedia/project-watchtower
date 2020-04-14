@@ -8,9 +8,11 @@ let assets: Assets
 
 let assetsLoaded = false
 
-export const getAssetsFile = (base: string) => path.resolve(base, 'assets.json')
+export function getAssetsFile(base: string) {
+    return path.resolve(base, 'assets.json')
+}
 
-const ensureAssets = (runtimeConfig: RuntimeConfig) => {
+function ensureAssets(runtimeConfig: RuntimeConfig) {
     if (assetsLoaded) {
         return
     }
@@ -24,7 +26,7 @@ const ensureAssets = (runtimeConfig: RuntimeConfig) => {
     }
 }
 
-export const setDefaultAssets = (buildConfig: BuildConfig) => {
+export function setDefaultAssets(buildConfig: BuildConfig) {
     // When running in dev mode, we don't use assets.json so we need to prime
     // the assets location
     updateAssetLocations({
@@ -49,7 +51,7 @@ export function getAssets(runtimeConfig: RuntimeConfig) {
     ensureAssets(runtimeConfig)
     return assets
 }
-export const getAbsoluteAssetPath = (runtimeConfig: RuntimeConfig, asset: string) => {
+export function getAbsoluteAssetPath(runtimeConfig: RuntimeConfig, asset: string) {
     const staticPath = runtimeConfig.PUBLIC_PATH + runtimeConfig.ASSETS_PATH_PREFIX
     let relativeAsset = asset.slice(staticPath.length)
     if (relativeAsset[0] === '/') {
@@ -61,17 +63,17 @@ export const getAbsoluteAssetPath = (runtimeConfig: RuntimeConfig, asset: string
 
 export function getHeadAssets(buildAssets: Assets): PageTag[] {
     return Object.keys(buildAssets)
-        .filter(chunkName => {
+        .filter((chunkName) => {
             const chunk = buildAssets[chunkName]
             return chunk.css
         })
-        .map(chunkName => ({
+        .map((chunkName) => ({
             tag: `<link id="css-main" type="text/css" rel="stylesheet" href="${buildAssets[chunkName].css}">`,
         }))
 }
 
 export function getBodyAssets(buildAssets: Assets): PageTag[] {
-    const chunkNames = Object.keys(buildAssets).filter(chunkName => {
+    const chunkNames = Object.keys(buildAssets).filter((chunkName) => {
         if (chunkName === 'main' || chunkName === 'manifest') {
             return false
         }
@@ -80,14 +82,14 @@ export function getBodyAssets(buildAssets: Assets): PageTag[] {
     })
 
     return ['manifest', ...chunkNames, 'main']
-        .filter(chunkName => buildAssets[chunkName])
+        .filter((chunkName) => buildAssets[chunkName])
         .reduce<PageTag[]>((acc, chunkName) => {
             // Turns out, webpack types are wrong, can be an array
             const jsAsset = buildAssets[chunkName].js as string | string[]
 
             if (Array.isArray(jsAsset)) {
                 acc.push(
-                    ...jsAsset.map(file => ({
+                    ...jsAsset.map((file) => ({
                         tag: `<script src="${file}"></script>`,
                     })),
                 )

@@ -8,7 +8,7 @@ export function isWatchtowerServer() {
 }
 
 export function projectDir() {
-    return process.env.PROJECT_DIR || process.cwd()
+    return process.env.PROJECT_DIR
 }
 
 export function isWatchMode() {

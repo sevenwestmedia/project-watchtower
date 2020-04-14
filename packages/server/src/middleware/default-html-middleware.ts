@@ -11,7 +11,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 
 export const expressNoop: express.RequestHandler = (_res, _req, next) => next()
 
-export const getDefaultHtmlMiddleware = (log: Logger, runtimeConfig: RuntimeConfig) => {
+export function getDefaultHtmlMiddleware(log: Logger, runtimeConfig: RuntimeConfig) {
     // on production we just serve the generated index.html
     if (isProduction) {
         const indexPath = path.resolve(runtimeConfig.BASE, 'index.html')
@@ -51,7 +51,7 @@ export const getDefaultHtmlMiddleware = (log: Logger, runtimeConfig: RuntimeConf
             const withHeadTags = indexContent.replace(
                 '</head>',
                 `${getHeadAssets(buildAssets)
-                    .map(headAsset => headAsset.tag)
+                    .map((headAsset) => headAsset.tag)
                     .join('\n')}
     </head>`,
             )
@@ -59,15 +59,12 @@ export const getDefaultHtmlMiddleware = (log: Logger, runtimeConfig: RuntimeConf
             const withBodyTags = withHeadTags.replace(
                 '</body>',
                 `${getBodyAssets(buildAssets)
-                    .map(bodyAsset => bodyAsset.tag)
+                    .map((bodyAsset) => bodyAsset.tag)
                     .join('\n')}
     </body>`,
             )
 
-            return res
-                .status(200)
-                .contentType('text/html')
-                .send(withBodyTags)
+            return res.status(200).contentType('text/html').send(withBodyTags)
         }
 
         const indexWithAssets = renderHtml({
@@ -85,10 +82,7 @@ export const getDefaultHtmlMiddleware = (log: Logger, runtimeConfig: RuntimeConf
             req,
         })
 
-        return res
-            .status(200)
-            .contentType('text/html')
-            .send(indexWithAssets)
+        return res.status(200).contentType('text/html').send(indexWithAssets)
     }
 
     return middleware
