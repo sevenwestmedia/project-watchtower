@@ -1,5 +1,11 @@
 # @project-watchtower/server
 
+## 2.0.0-beta.12
+
+### Patch Changes
+
+-   20829f5: Fixed issue where the root dir is incorrect for production builds
+
 ## 2.0.0-beta.11
 
 ### Patch Changes
