@@ -16,7 +16,7 @@
     "scripts": {},
     "dependencies": {
         "react-helmet-async": "^1.0.4",
-        "serialize-javascript": "^3.0.0"
+        "serialize-javascript": "^3.1.0"
     },
     "devDependencies": {},
     "peerDependencies": {
