@@ -72,10 +72,6 @@ export function getTsLoaderWebpackConfig(
         forkTsCheckerNotifierOptions,
     )
     const forceTsCheckerWebpackPluginOptions = {
-        eslint: {
-            enabled: true,
-            files: './**/*.{ts,tsx,js,jsx}',
-        },
         typescript: {
             configFile: configFile,
         },
