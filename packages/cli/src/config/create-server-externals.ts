@@ -37,7 +37,7 @@ export function createServerExternals(
         }
 
         function includeInBundle() {
-            callback(undefined, undefined)
+            callback()
         }
 
         function resolveFromNodeModules() {
