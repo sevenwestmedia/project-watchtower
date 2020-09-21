@@ -11,12 +11,12 @@ import { BuildConfig, findFreePort, getPort, waitForConnection } from '@project-
 import { openBrowser, getHotReloadMiddleware } from '../server/dev'
 import { webpackStatsConfig } from '../utils/webpack'
 
-const restartServer = (
+function restartServer(
     buildConfig: BuildConfig,
     port: number,
     projectDir: string,
     oldServer?: ChildProcess,
-) => {
+) {
     if (oldServer) {
         oldServer.kill()
     }

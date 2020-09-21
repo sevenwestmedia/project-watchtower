@@ -15,17 +15,17 @@
     "keywords": [],
     "scripts": {},
     "dependencies": {
-        "react-helmet-async": "^1.0.4",
-        "serialize-javascript": "^3.0.0"
+        "react-helmet-async": "^1.0.7",
+        "serialize-javascript": "^5.0.1"
     },
     "devDependencies": {},
     "peerDependencies": {
         "express": "^4.17.0",
         "react": ">16.6",
         "react-dom": ">16.6",
+        "react-helmet-async": "^1.0.4",
         "react-router-dom": "^5.1.2",
-        "tslib": "^1.11.0",
-        "typescript-log": "^1.1.1",
-        "react-helmet-async": "^1.0.4"
+        "tslib": "^2.0.1",
+        "typescript-log": "^2.0.0"
     }
 }
