@@ -1,5 +1,11 @@
 # @project-watchtower/runtime
 
+## 2.0.0-beta.10
+
+### Minor Changes
+
+-   b4fdcd7: Upgrade dependencies
+
 ## 2.0.0-beta.9
 
 ### Patch Changes
