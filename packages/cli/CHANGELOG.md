@@ -1,5 +1,11 @@
 # @project-watchtower/cli
 
+## 2.0.0-beta.14
+
+### Minor Changes
+
+-   def9104: Don't run lint as part of build/serve
+
 ## 2.0.0-beta.13
 
 ### Minor Changes
