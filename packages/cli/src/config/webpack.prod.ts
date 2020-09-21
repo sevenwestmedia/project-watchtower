@@ -26,9 +26,4 @@ export const prodConfig: CreateWebpackConfig = () => ({
             minimize: true,
         }),
     ],
-    resolve: {
-        alias: {
-            'project-watchtower/lib': 'project-watchtower/dist-es',
-        },
-    },
 })

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable no-var */
 import fs from 'fs'
 import path from 'path'
