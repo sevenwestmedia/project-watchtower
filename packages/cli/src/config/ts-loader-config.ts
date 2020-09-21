@@ -73,14 +73,16 @@ export function getTsLoaderWebpackConfig(
     )
     const forceTsCheckerWebpackPluginOptions = {
         eslint: {
-            files: './**/*.{ts,tsx,js,jsx}'
+            enabled: true,
+            files: './**/*.{ts,tsx,js,jsx}',
         },
-        tsconfig: configFile,
-        useTypescriptIncrementalApi: true,
+        typescript: {
+            configFile: configFile,
+        },
     }
     const forkTsCheckerPlugin = new ForkTsCheckerWebpackPlugin(forceTsCheckerWebpackPluginOptions)
 
-        // Below is for the cache validator, so it sees when these options change
+    // Below is for the cache validator, so it sees when these options change
     ;(forkTsCheckerNotifierWebpackPlugin as any).toJSON = () => {
         return `ForkTsCheckerNotifierWebpackPlugin ${JSON.stringify(forkTsCheckerNotifierOptions)}`
     }
@@ -119,7 +121,7 @@ export function getTsConfigFile(buildTarget: string, buildConfig: BuildConfig) {
         path.resolve(process.cwd(), tsconfigFile),
     ]
 
-    const found = locations.find(location => fs.existsSync(location))
+    const found = locations.find((location) => fs.existsSync(location))
 
     if (!found) {
         throw new Error(`Cannot locate ${tsconfigFile}, searched:
