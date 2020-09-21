@@ -19,7 +19,6 @@
     "scripts": {},
     "dependencies": {
         "@types/webpack-dev-middleware": "^3.7.2",
-        "@typescript-eslint/eslint-plugin": "^4.1.1",
         "assets-webpack-plugin": "^5.1.1",
         "babel-loader": "^8.1.0",
         "cache-loader": "^4.1.0",
