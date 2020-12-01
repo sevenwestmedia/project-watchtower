@@ -1,5 +1,11 @@
 # @project-watchtower/cli
 
+## 2.0.0-beta.15
+
+### Patch Changes
+
+-   9f7ba42: Fixed issue where webpack stats errors would not be surfaced to the end user
+
 ## 2.0.0-beta.14
 
 ### Minor Changes
