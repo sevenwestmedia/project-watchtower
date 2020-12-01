@@ -29,7 +29,9 @@ export const webpackPromise = (log: Logger, config: webpack.Configuration) =>
                 printWebpackStats(log, stats)
 
                 if (stats.hasErrors()) {
-                    reject()
+                    const info = stats.toJson()
+
+                    reject(info.errors)
                 } else {
                     resolve()
                 }
