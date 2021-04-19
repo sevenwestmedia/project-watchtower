@@ -109,5 +109,6 @@
         "tslib": "^2.0.1",
         "typescript": "^4.0.3",
         "typescript-log": "^2.0.0"
-    }
+    },
+    "version": "0.0.0"
 }
