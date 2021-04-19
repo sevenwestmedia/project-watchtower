@@ -1,5 +1,11 @@
 # @project-watchtower/cli
 
+## 2.0.0-beta.16
+
+### Major Changes
+
+-   426f34d: Switch from TS-loader to esbuild-loader
+
 ## 2.0.0-beta.15
 
 ### Patch Changes
