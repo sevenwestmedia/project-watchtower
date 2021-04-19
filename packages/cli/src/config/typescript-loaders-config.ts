@@ -2,48 +2,24 @@ import fs from 'fs'
 import path from 'path'
 import webpack from 'webpack'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
-import ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
-import { Options } from 'ts-loader'
 
 import { CreateWebpackConfigOptions } from '.'
 import { BuildTarget, BuildEnvironment } from '..'
 import { BuildConfig } from '@project-watchtower/server'
 
-const disableCaching = String(process.env.BUILD_CACHE_DISABLED).toLowerCase() === 'true'
-
-function cacheLoader(cacheDirectory: string) {
-    return {
-        loader: 'cache-loader',
-        options: {
-            cacheDirectory,
-        },
-    }
-}
-
-export function getTsLoaderWebpackConfig(
+export function getTypeScriptLoaderWebpackConfig(
     options: CreateWebpackConfigOptions,
     buildTarget: BuildTarget,
-    environment: BuildEnvironment,
+    _environment: BuildEnvironment,
 ): webpack.Configuration {
     const configFile = getTsConfigFile(buildTarget, options.buildConfig)
 
     options.log.info(`Target ${buildTarget} using ts config file: ${configFile}`)
 
     const tsConfigPathsPluginConfig: any = {}
-    const tsLoaderOptions: Partial<Options> = {
-        compilerOptions: {
-            // For tests, but doesn't hurt as noEmit: true doesn't work
-            noEmit: false,
-        },
-        transpileOnly: true,
-        experimentalWatchApi: true,
-        projectReferences: true,
-    }
 
     if (configFile) {
         tsConfigPathsPluginConfig.configFile = configFile
-        tsLoaderOptions.configFile = configFile
     }
 
     const babelConfig: string | undefined = getBabelConfigFile(buildTarget, options.buildConfig)
@@ -52,10 +28,6 @@ export function getTsLoaderWebpackConfig(
         options.log.info(`Using babel config: ${babelConfig}`)
     }
 
-    const tsLoader = {
-        loader: 'ts-loader',
-        options: tsLoaderOptions,
-    }
     const babelLoader = {
         loader: 'babel-loader',
         options: {
@@ -63,47 +35,27 @@ export function getTsLoaderWebpackConfig(
         },
     }
 
-    const forkTsCheckerNotifierOptions = {
-        title: `TypeScript (${buildTarget})`,
-        excludeWarnings: false,
-        alwaysNotify: true,
-    }
-    const forkTsCheckerNotifierWebpackPlugin = new ForkTsCheckerNotifierWebpackPlugin(
-        forkTsCheckerNotifierOptions,
-    )
-    const forceTsCheckerWebpackPluginOptions = {
-        typescript: {
-            configFile: configFile,
+    const esbuildLoader = {
+        loader: 'esbuild-loader',
+        options: {
+            loader: 'tsx',
+            target: 'es2015',
+            tsconfigRaw: require(configFile),
         },
     }
-    const forkTsCheckerPlugin = new ForkTsCheckerWebpackPlugin(forceTsCheckerWebpackPluginOptions)
 
-    // Below is for the cache validator, so it sees when these options change
-    ;(forkTsCheckerNotifierWebpackPlugin as any).toJSON = () => {
-        return `ForkTsCheckerNotifierWebpackPlugin ${JSON.stringify(forkTsCheckerNotifierOptions)}`
-    }
-    ;(forkTsCheckerPlugin as any).toJSON = () => {
-        return `ForkTsCheckerWebpackPlugin ${JSON.stringify(forceTsCheckerWebpackPluginOptions)}`
-    }
     return {
         module: {
             rules: [
                 {
                     test: /\.tsx?$/,
-                    use: !disableCaching
-                        ? [cacheLoader(options.cacheDirectory), babelLoader, tsLoader]
-                        : [babelLoader, tsLoader],
+                    use: [babelLoader, esbuildLoader],
                 },
             ],
         },
         resolve: {
             plugins: [new TsconfigPathsPlugin(tsConfigPathsPluginConfig)],
         },
-        // TODO: Why is the notifier not working when watching?
-        plugins:
-            environment === 'dev' && process.env.NODE_ENV !== 'test'
-                ? [forkTsCheckerPlugin, forkTsCheckerNotifierWebpackPlugin]
-                : [],
     }
 }
 

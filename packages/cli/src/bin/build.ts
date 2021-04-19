@@ -6,7 +6,6 @@ import {
     RuntimeConfig,
     watchtowerConfigFilename,
     writeFile,
-    existsSync,
 } from '@project-watchtower/server'
 
 import { Logger } from 'typescript-log'
@@ -16,8 +15,6 @@ import { clean } from '../clean/clean'
 import { ENVIRONMENTS, getWebpackConfig, TARGETS } from '../build/build'
 import { BuildEnvironment, BuildTarget, BuildParam } from '..'
 import { webpackPromise } from '../utils/webpack'
-import { getMd5, setupWithBuildInfo, validateCache, ValidationItem } from './cache-validator'
-import { getBabelConfigFile, getTsConfigFile } from '../config/ts-loader-config'
 
 export function smp(buildConfig: BuildConfig, webpackConfig: webpack.Configuration) {
     const smpPlugin = new SpeedMeasurePlugin()
@@ -34,62 +31,6 @@ async function buildTarget(
 
     if (!config) {
         return Promise.reject(`Could not load webpack configuration for ${target}/${environment}!`)
-    }
-
-    const disableCaching = String(process.env.BUILD_CACHE_DISABLED).toLowerCase() === 'true'
-    if (disableCaching) {
-        log.info(`Build Caching Disabled... BUILD_CACHE_DISABLED=${disableCaching}`)
-    } else if (process.env.NODE_ENV !== 'test' && !disableCaching) {
-        const webpackConfigString = JSON.stringify(config)
-        const configHash = await getMd5(log, 'webpackConfig', webpackConfigString)
-
-        const validationItems: ValidationItem[] = [
-            {
-                filePath: getTsConfigFile(target, buildConfig),
-                hashKey: 'tsconfigHash',
-                isFile: true,
-            },
-            { isFile: false, itemHash: configHash, hashKey: 'webpackConfig' },
-        ]
-
-        const yarnLockPath = path.resolve(process.cwd(), 'yarn.lock')
-        if (existsSync(yarnLockPath)) {
-            validationItems.push({
-                filePath: yarnLockPath,
-                hashKey: 'yarnLockConfigHash',
-                isFile: true,
-            })
-        }
-        const npmLockPath = path.resolve(process.cwd(), 'package-lock.json')
-        if (existsSync(npmLockPath)) {
-            validationItems.push({
-                filePath: npmLockPath,
-                hashKey: 'npmLockConfigHash',
-                isFile: true,
-            })
-        }
-
-        const babelConfig = getBabelConfigFile(target, buildConfig)
-
-        if (babelConfig && existsSync(babelConfig)) {
-            validationItems.push({
-                filePath: babelConfig,
-                hashKey: 'babelConfigHash',
-                isFile: true,
-            })
-        }
-
-        setupWithBuildInfo(log, {
-            buildInfo: {
-                environment,
-                project: buildConfig.BASE,
-                target,
-            },
-            traceMessages: false, // pwt build doesnt have etrigan
-            validationItems,
-        })
-
-        await validateCache(log)
     }
 
     return webpackPromise(log, smp(buildConfig, config)).then(() => {

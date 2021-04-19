@@ -7,6 +7,10 @@ Project Watchtower is a TypeScript first foundation for creating universal (Serv
 ![](./JLsatellite2.jpg)  
 [Credit: Wikipedia](https://en.wikipedia.org/wiki/File:JLsatellite2.jpg)
 
+# Deprecation notice
+
+While Project Watchtower has served us very well, https://vitejs.dev/ is an ESBuild based tool which meets all the goals which Watchtower set out to solve.
+
 ## Why
 
 Project Watchtower was built to allow our team at Seven West Media to build multiple websites built using React and WebPack with server side rendering easily. Over time the drift of our configuration became hard to keep in sync, the JavaScript community moves fast and we want to keep up.
@@ -56,8 +60,3 @@ Detailed documentation available in the [docs](./docs) folder:
 ### Want sass support?
 
 Check out the example at [examples/ssr-with-sass](examples/ssr-with-sass)
-
-## Environmental Variables
-
-BUILD_CACHE_DISABLED: by default this is false, setting it to true will disable build caching
-BUILD_CACHE_DIRECTORY: specfies the build cache directory, by default it is .build-cache in the working directory

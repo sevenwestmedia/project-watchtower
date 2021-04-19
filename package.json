@@ -84,7 +84,6 @@
         "@types/rimraf": "^3.0.0",
         "@types/serialize-javascript": "^4.0.0",
         "@types/supertest": "^2.0.10",
-        "@types/terser-webpack-plugin": "^4.2.0",
         "@types/webpack-bundle-analyzer": "^3.8.0",
         "@types/webpack-dev-middleware": "^3.7.2",
         "@types/webpack-env": "^1.15.3",
@@ -110,5 +109,6 @@
         "tslib": "^2.0.1",
         "typescript": "^4.0.3",
         "typescript-log": "^2.0.0"
-    }
+    },
+    "version": "0.0.0"
 }

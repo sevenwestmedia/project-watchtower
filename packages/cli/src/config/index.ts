@@ -30,7 +30,6 @@ export interface WebpackHooks {
 }
 
 export interface CreateWebpackConfigOptions {
-    cacheDirectory: string
     buildConfig: BuildConfig
     log: Logger
 }

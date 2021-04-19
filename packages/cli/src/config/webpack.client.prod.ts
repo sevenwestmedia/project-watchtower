@@ -5,7 +5,7 @@ import { baseConfig } from './webpack.base'
 import { clientBaseConfig } from './webpack.client'
 import { prodConfig } from './webpack.prod'
 import { CreateWebpackConfig } from '.'
-import { getTsLoaderWebpackConfig } from './ts-loader-config'
+import { getTypeScriptLoaderWebpackConfig } from './typescript-loaders-config'
 
 /** Webpack config for the client in production */
 export const clientProdConfig: CreateWebpackConfig = (options) => {
@@ -20,7 +20,7 @@ export const clientProdConfig: CreateWebpackConfig = (options) => {
 
     return merge(
         baseConfig(options),
-        getTsLoaderWebpackConfig(options, 'client', 'prod'),
+        getTypeScriptLoaderWebpackConfig(options, 'client', 'prod'),
         getHook(webpackHooks.base, options),
         clientBaseConfig(options),
         getHook(webpackHooks.client, options),
