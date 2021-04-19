@@ -1,7 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 import webpack from 'webpack'
-import { buildCacheDirectory } from '../bin/cache-validator'
 import { Logger } from 'typescript-log'
 
 import { clientDebugConfig } from '../config/webpack.client.debug'
@@ -74,16 +73,9 @@ function getWebpackConfigInternal(
     const configFileName = `webpack.${target}.${environment}`
     const customConfigFile = path.resolve(buildConfig.BASE, 'config', configFileName)
 
-    const cacheDirectory = buildCacheDirectory({
-        environment,
-        project: buildConfig.BASE,
-        target,
-    })
-
     let config: webpack.Configuration
     const createWebpackConfigOptions: CreateWebpackConfigOptions = {
         buildConfig,
-        cacheDirectory,
         log,
     }
 

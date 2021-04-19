@@ -1,6 +1,6 @@
 import webpack from 'webpack'
-import TerserPlugin from 'terser-webpack-plugin'
 import { CreateWebpackConfig } from '.'
+import { ESBuildMinifyPlugin } from 'esbuild-loader'
 
 /** Webpack settings for all production builds */
 export const prodConfig: CreateWebpackConfig = () => ({
@@ -8,15 +8,8 @@ export const prodConfig: CreateWebpackConfig = () => ({
     mode: 'production',
     optimization: {
         minimizer: [
-            new TerserPlugin({
-                cache: true,
-                parallel: true,
-                sourceMap: true,
-                extractComments: false,
-                terserOptions: {
-                    compress: {},
-                    ie8: false,
-                },
+            new ESBuildMinifyPlugin({
+                target: 'es2015',
             }),
         ],
     },

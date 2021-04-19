@@ -11,7 +11,6 @@ import binWatch from './bin/watch'
 
 export * from './server/dev'
 
-export * from './bin/cache-validator'
 export * from './watch/server'
 export * from './build/build'
 export * from './clean/clean'
