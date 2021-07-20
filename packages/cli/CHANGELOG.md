@@ -1,5 +1,11 @@
 # @project-watchtower/cli
 
+## 2.0.0-beta.17
+
+### Patch Changes
+
+-   ec65558: Switch build target for client/server
+
 ## 2.0.0-beta.16
 
 ### Major Changes
