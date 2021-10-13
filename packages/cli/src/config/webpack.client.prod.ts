@@ -6,6 +6,7 @@ import { clientBaseConfig } from './webpack.client'
 import { prodConfig } from './webpack.prod'
 import { CreateWebpackConfig } from '.'
 import { getTypeScriptLoaderWebpackConfig } from './typescript-loaders-config'
+import { ESBuildMinifyPlugin } from 'esbuild-loader'
 
 /** Webpack config for the client in production */
 export const clientProdConfig: CreateWebpackConfig = (options) => {
@@ -34,5 +35,15 @@ export const clientProdConfig: CreateWebpackConfig = (options) => {
             plugins: [],
         },
         getHook(webpackHooks.clientProd, options),
+        {
+            optimization: {
+                minimizer: [
+                    new ESBuildMinifyPlugin({
+                        target: 'es2015',
+                        format: 'iife',
+                    }),
+                ],
+            },
+        },
     )
 }
