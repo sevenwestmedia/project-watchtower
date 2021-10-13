@@ -1,5 +1,11 @@
 # @project-watchtower/cli
 
+## 2.0.0-beta.18
+
+### Major Changes
+
+-   8b4eb3d: Client-side render now uses `format: iife` to prevent global namespace pollution
+
 ## 2.0.0-beta.17
 
 ### Patch Changes
