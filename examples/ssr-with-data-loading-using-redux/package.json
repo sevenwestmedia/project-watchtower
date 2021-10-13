@@ -1,6 +1,6 @@
 {
     "name": "ssr-with-data-loading-using-redux",
-    "version": "1.0.0",
+    "version": "1.0.1-beta.0",
     "main": "dist/server.js",
     "license": "MIT",
     "private": true,

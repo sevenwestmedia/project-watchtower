@@ -1,5 +1,11 @@
 # @project-watchtower/cli
 
+## 2.0.0-beta.19
+
+### Patch Changes
+
+-   3f98adb: Bump versions for dependency updates
+
 ## 2.0.0-beta.18
 
 ### Major Changes

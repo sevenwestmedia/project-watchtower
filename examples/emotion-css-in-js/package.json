@@ -1,6 +1,6 @@
 {
     "name": "emotion-css-in-js",
-    "version": "1.0.0",
+    "version": "1.0.1-beta.0",
     "main": "dist/server.js",
     "license": "MIT",
     "private": true,
