@@ -1,5 +1,11 @@
 # @project-watchtower/server
 
+## 2.0.0-beta.14
+
+### Patch Changes
+
+-   3f98adb: Bump versions for dependency updates
+
 ## 2.0.0-beta.13
 
 ### Minor Changes

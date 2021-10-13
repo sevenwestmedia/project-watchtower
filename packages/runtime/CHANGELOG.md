@@ -1,5 +1,11 @@
 # @project-watchtower/runtime
 
+## 2.0.0-beta.11
+
+### Patch Changes
+
+-   3f98adb: Bump versions for dependency updates
+
 ## 2.0.0-beta.10
 
 ### Minor Changes
