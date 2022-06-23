@@ -14,7 +14,9 @@ import { clean } from '../clean/clean'
 
 import { ENVIRONMENTS, getWebpackConfig, TARGETS } from '../build/build'
 import { BuildEnvironment, BuildTarget, BuildParam } from '..'
-import { webpackPromise } from '../utils/webpack'
+// import { webpackPromise } from '../utils/webpack'
+import { esbuildPromise } from '../utils/esbuild'
+// import { esbuildPromise } from '../utils/esbuild'
 
 export function smp(buildConfig: BuildConfig, webpackConfig: webpack.Configuration) {
     const smpPlugin = new SpeedMeasurePlugin()
@@ -33,7 +35,7 @@ async function buildTarget(
         return Promise.reject(`Could not load webpack configuration for ${target}/${environment}!`)
     }
 
-    return webpackPromise(log, smp(buildConfig, config)).then(() => {
+    return esbuildPromise(log).then(() => {
         const runtimeConfig: RuntimeConfig = {
             ASSETS_PATH: buildConfig.ASSETS_PATH_PREFIX,
             ASSETS_PATH_PREFIX: buildConfig.ASSETS_PATH_PREFIX,
@@ -48,6 +50,22 @@ async function buildTarget(
             JSON.stringify(runtimeConfig, undefined, 2),
         )
     })
+
+    // return webpackPromise(log, smp(buildConfig, config)).then(() => {
+    //     const runtimeConfig: RuntimeConfig = {
+    //         ASSETS_PATH: buildConfig.ASSETS_PATH_PREFIX,
+    //         ASSETS_PATH_PREFIX: buildConfig.ASSETS_PATH_PREFIX,
+    //         BASE: '.',
+    //         PUBLIC_PATH: buildConfig.PUBLIC_PATH,
+    //         SERVER_PUBLIC_DIR: buildConfig.SERVER_PUBLIC_DIR === false ? false : 'public/',
+    //     }
+    //     // On success write out watchtower config
+    //     return writeFile(
+    //         log,
+    //         path.join(buildConfig.OUTPUT, watchtowerConfigFilename),
+    //         JSON.stringify(runtimeConfig, undefined, 2),
+    //     )
+    // })
 }
 
 const getBuildEnvironment = (args: BuildParam[]) => {
