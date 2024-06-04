@@ -51,6 +51,12 @@ export async function watchServer(log: Logger, buildConfig: BuildConfig) {
     let devServerAvailable: Promise<any>
 
     const serverConfig = getWebpackConfig(log, buildConfig, 'server', 'dev')
+
+    if(!serverConfig) {
+        log.error('Failed to build a webpack server config')
+        return
+    }
+
     const serverCompiler = webpack(serverConfig)
 
     serverCompiler.hooks.invalid.tap('invalid', () => {
@@ -65,7 +71,7 @@ export async function watchServer(log: Logger, buildConfig: BuildConfig) {
         if (err) {
             log.error({ err }, 'Failed to compile')
             return
-        } else {
+        } else if(stats) {
             const statsString = stats.toString(webpackStatsConfig)
 
             log.info(statsString)
@@ -101,10 +107,10 @@ export async function watchServer(log: Logger, buildConfig: BuildConfig) {
                     return Promise.all([
                         new Promise((closeResolve) =>
                             watching.close(() => {
-                                closeResolve()
+                                closeResolve({})
                             }),
                         ),
-                        new Promise((closeResolve) => server.close(() => closeResolve())),
+                        new Promise((closeResolve) => server.close(() => closeResolve({}))),
                     ]).then(() => {
                         if (devServer) {
                             devServer.kill()

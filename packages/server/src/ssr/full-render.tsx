@@ -109,7 +109,7 @@ function performRender<SSRRequestProps extends object, RenderResult>(
         if (options.events && options.events.renderPerformed) {
             try {
                 options.events.renderPerformed(promiseTracker)
-            } catch (err) {
+            } catch (err: any) {
                 // External event failed. Just log and continue
                 options.log.error({ err }, 'renderPerformed event failed')
             }
@@ -144,7 +144,7 @@ async function renderWithErrorPageFallback<SSRRequestProps extends object, Rende
         if (options.events && options.events.beginWaitingForTasks) {
             try {
                 options.events.beginWaitingForTasks(formatElapsed(process.hrtime(startTime)))
-            } catch (err) {
+            } catch (err: any) {
                 // external event failed, log and continue
                 options.log.error({ err, location }, 'beginWaitingForTasks threw, continuing')
             }
@@ -162,7 +162,7 @@ async function renderWithErrorPageFallback<SSRRequestProps extends object, Rende
         )
 
         return dataResolved
-    } catch (dataLoadErr) {
+    } catch (dataLoadErr: any) {
         if (dataLoadErr instanceof Information) {
             options.log.info({ err: dataLoadErr }, 'Data load warning, rendering error location')
         } else if (dataLoadErr instanceof Warning) {
@@ -198,7 +198,7 @@ export async function renderPageContents<SSRRequestProps extends object, RenderR
             promiseTracker,
             startTime,
         )
-    } catch (err) {
+    } catch (err: any) {
         const failure: ServerRenderResults.FailedRenderResult = {
             elapsed: formatElapsed(process.hrtime(startTime)),
             errorMessage: 'Failed to do render',

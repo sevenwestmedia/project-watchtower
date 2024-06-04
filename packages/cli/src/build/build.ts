@@ -128,7 +128,7 @@ function getWebpackConfigInternal(
         }
 
         return config
-    } catch (err) {
+    } catch (err: any) {
         log.error({ err }, 'Error loading webpack config!')
         return undefined
     }
