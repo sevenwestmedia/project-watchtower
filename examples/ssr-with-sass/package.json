@@ -20,6 +20,6 @@
         "postcss-loader": "^4.0.2",
         "resolve-url-loader": "^3.1.0",
         "sass-loader": "^10.0.2",
-        "webpack": "^4.44.2"
+        "webpack": "5.75.0"
     }
 }
