@@ -9,7 +9,7 @@ describe('util/network', () => {
         const server = app.listen(port)
 
         return waitForConnection(port).then(
-            () => new Promise(resolve => server.close(() => resolve())),
+            () => new Promise(resolve => server.close(() => resolve({}))),
         )
     })
 
@@ -24,7 +24,7 @@ describe('util/network', () => {
         return new Promise(resolve => {
             const server = app.listen(port, () => {
                 expectPromiseToFail(checkPortAvailability(port)).then(() => {
-                    server.close(() => resolve())
+                    server.close(() => resolve({}))
                 })
             })
         })
@@ -37,7 +37,7 @@ describe('util/network', () => {
             const server = app.listen(port, async () => {
                 const freePort = await findFreePort(port)
                 expect(freePort).toBeGreaterThan(port)
-                server.close(() => resolve())
+                server.close(() => resolve({}))
             })
         })
     })
