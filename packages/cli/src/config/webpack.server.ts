@@ -1,4 +1,4 @@
-import webpack from 'webpack'
+import webpack, { WebpackPluginInstance } from 'webpack'
 import { CreateWebpackConfigOptions } from '.'
 import { createServerExternals } from './create-server-externals'
 
@@ -11,14 +11,14 @@ import { createServerExternals } from './create-server-externals'
 export const serverBaseConfig = (options: CreateWebpackConfigOptions): webpack.Configuration => {
     const { PUBLIC_PATH, SERVER_ENTRY, OUTPUT } = options.buildConfig
 
-    const plugins: webpack.Plugin[] = [
+    const plugins: WebpackPluginInstance[] = [
         new webpack.BannerPlugin({
             banner: 'require("source-map-support").install();',
             entryOnly: false,
             raw: true,
         }),
     ]
-    const resolvePlugins: webpack.ResolvePlugin[] = []
+    const resolvePlugins: any[] = []
 
     return {
         entry: {
