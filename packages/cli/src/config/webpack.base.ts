@@ -46,6 +46,9 @@ export function baseConfig(options: CreateWebpackConfigOptions): webpack.Configu
                 '@project-watchtower/runtime',
                 '@project-watchtower/server',
             ],
+            fallback: {
+                util: require.resolve('util/')
+            }
         },
     }
 }

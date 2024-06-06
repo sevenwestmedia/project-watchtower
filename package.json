@@ -39,9 +39,9 @@
         "debug:client-only-example": "export NODE_OPTIONS=--openssl-legacy-provider && yarn pwt watch debug-brk -p examples/client-only",
         "explore-bundle:client-only-example": "export NODE_OPTIONS=--openssl-legacy-provider && yarn pwt explore-bundle -p examples/client-only",
         "~~~ with-server ~~~": "",
-        "build:with-server-example": "yarn pwt build -p examples/with-server",
-        "watch:with-server-example": "yarn pwt watch server -p examples/with-server",
-        "explore-bundle:with-server-example": "yarn pwt explore-bundle -p examples/with-server",
+        "build:with-server-example": "export NODE_OPTIONS=--openssl-legacy-provider && yarn pwt build -p examples/with-server",
+        "watch:with-server-example": "export NODE_OPTIONS=--openssl-legacy-provider && yarn pwt watch server -p examples/with-server",
+        "explore-bundle:with-server-example": "export NODE_OPTIONS=--openssl-legacy-provider && yarn pwt explore-bundle -p examples/with-server",
         "~~~ simple-ssr ~~~": "",
         "build:simple-ssr-example": "yarn pwt build -p examples/simple-ssr",
         "watch:simple-ssr-example": "yarn pwt watch server -p examples/simple-ssr",
@@ -109,6 +109,7 @@
         "tslib": "^2.6.2",
         "typescript": "^5.4.2",
         "typescript-log": "^2.0.0",
+        "util": "^0.12.5",
         "webpack": "^5.0.0"
     },
     "version": "0.0.0"
