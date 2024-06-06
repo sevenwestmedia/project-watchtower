@@ -10,7 +10,7 @@ export interface AppState {}
 createServer({
     log,
     // Use the middleware hook to register your own middleware
-    middlewareHook: (app: { get: (arg0: string, arg1: (_: any, res: any) => any) => void }) => {
+    middlewareHook: app => {
         // Watchtower has setup static file routes by this point
 
         // Add your own routes/middleswares

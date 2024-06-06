@@ -9,5 +9,10 @@
         "paths": {
             "@project-watchtower/server": ["../../packages/server"]
         }
-    }
+    },
+    "references": [
+        {
+            "path": "../../packages/server"
+        }
+    ]
 }

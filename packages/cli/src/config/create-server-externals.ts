@@ -1,20 +1,11 @@
 import fs from 'fs'
-import { ExternalItemFunctionData } from 'webpack'
+import { Externals } from 'webpack'
 import path from 'path'
 import { CreateWebpackConfigOptions } from '.'
 
-
-type WebpackExternalFunctionElement = ((
-    data: ExternalItemFunctionData,
-    callback: (
-        err?: null | Error,
-        result?: string | boolean | string[] | { [index: string]: any }
-    ) => void
-) => void)
-
 export function createServerExternals(
     options: CreateWebpackConfigOptions,
-): WebpackExternalFunctionElement {
+): Externals {
     const baseDirNodeModules = path.resolve(options.buildConfig.BASE, 'node_modules')
     const nodeModules: string[] = []
     if (fs.existsSync(baseDirNodeModules)) {
