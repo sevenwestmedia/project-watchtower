@@ -35,9 +35,7 @@ export function renderApp<RenderResult>(
             renderFn(
                 <HelmetProvider context={helmetContext}>
                     <StaticRouter location={currentLocation} context={context}>
-                        <>
-                            {appRender(promiseTracker)}
-                        </>
+                        {appRender(promiseTracker)}
                     </StaticRouter>
                 </HelmetProvider>,
             ),
