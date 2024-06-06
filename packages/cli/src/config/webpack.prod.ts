@@ -1,6 +1,6 @@
 import webpack from 'webpack'
 import { CreateWebpackConfig } from '.'
-import { ESBuildMinifyPlugin } from 'esbuild-loader'
+import { EsbuildPlugin } from 'esbuild-loader'
 
 /** Webpack settings for all production builds */
 export const prodConfig: CreateWebpackConfig = () => ({
@@ -8,7 +8,7 @@ export const prodConfig: CreateWebpackConfig = () => ({
     mode: 'production',
     optimization: {
         minimizer: [
-            new ESBuildMinifyPlugin({
+            new EsbuildPlugin({
                 target: 'es2015',
             }),
         ],

@@ -35,13 +35,11 @@ export function getTypeScriptLoaderWebpackConfig(
         },
     }
 
-    const esBuildTarget = buildTarget === 'client' ? 'es2015' : 'node14'
-
     const esbuildLoader = {
         loader: 'esbuild-loader',
         options: {
             loader: 'tsx',
-            target: esBuildTarget,
+            target: 'node18',
             tsconfigRaw: require(configFile),
         },
     }
