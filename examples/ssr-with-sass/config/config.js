@@ -1,9 +1,8 @@
-// eslint-disable-next-line no-undef
+// eslint-disable no-undef
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// eslint-disable-next-line no-undef
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-// eslint-disable-next-line no-undef
 module.exports = {
     // Configuration options for css-minimizer-webpack-plugin
     module: {
