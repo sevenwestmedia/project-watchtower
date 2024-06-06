@@ -1,5 +1,6 @@
 import React from 'react'
-import { HelmetProvider, HelmetServerState } from 'react-helmet-async'
+import { HelmetData } from 'react-helmet'
+import { HelmetProvider, FilledContext } from 'react-helmet-async'
 import { StaticRouter } from 'react-router-dom'
 import { Logger } from 'typescript-log'
 import { functionTimer } from '@project-watchtower/runtime'
@@ -8,12 +9,8 @@ import { PromiseTracker } from '../utils/promise-tracker'
 
 export type CreateAppElement = (promiseTracker: PromiseTracker) => React.ReactElement<any>
 
-type HelmetProviderContext = {
-    helmet?: HelmetServerState;
-}
-
 export interface RenderPassResult<RenderResult> {
-    head?: HelmetServerState
+    head: HelmetData
     context: StaticRouterContext
     renderResult: RenderResult
 }
@@ -28,7 +25,7 @@ export function renderApp<RenderResult>(
     // first create a context for <StaticRouter>, it's where we keep the
     // results of rendering for the second pass if necessary
     const context: StaticRouterContext = {}
-    const helmetContext: HelmetProviderContext = {}
+    const helmetContext = {} as FilledContext
     const renderResult = functionTimer(
         'Server side render',
         () =>

@@ -1,6 +1,7 @@
 import { Assets } from 'assets-webpack-plugin'
 import { Express, Request, RequestHandler } from 'express'
 import { renderToString } from 'react-dom/server'
+import { HelmetData } from 'react-helmet'
 import { Logger } from 'typescript-log'
 import URL from 'url'
 import { getAssetLocations, getBodyAssets, getHeadAssets } from '../assets'
@@ -16,7 +17,6 @@ import {
 import { PageTag } from './full-render'
 import { getRuntimeConfig } from '../config/config'
 import { PromiseTracker } from '../utils/promise-tracker'
-import { HelmetServerState } from 'react-helmet-async'
 
 export interface RenderContext<SSRRequestProps = object> {
     /** This holds the app state which needs to be kept between SSR
@@ -35,7 +35,7 @@ export type RenderApp<SSRRequestProps extends object> = (params: {
 }) => JSX.Element
 
 export interface RenderHtmlParams<SSRRequestProps extends object, RenderResult> {
-    head?: HelmetServerState | undefined
+    head: HelmetData | undefined
     renderResult: RenderResult
     pageTags: PageTags
     context: RenderContext<SSRRequestProps>
