@@ -1,4 +1,4 @@
-// eslint-disable no-undef
+/* eslint-disable no-undef */
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
