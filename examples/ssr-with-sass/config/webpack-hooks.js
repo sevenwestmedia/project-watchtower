@@ -32,8 +32,10 @@ exports.default = {
                         {
                             loader: 'postcss-loader',
                             options: {
+                                postcssOptions: {
+                                    plugins: () => [autoprefixer({ browsers: ['last 2 versions'] })],
+                                },
                                 sourceMap: true,
-                                plugins: () => [autoprefixer({ browsers: ['last 2 versions'] })],
                             },
                         },
                         {

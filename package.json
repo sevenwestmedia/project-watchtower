@@ -109,6 +109,7 @@
         "tslib": "^2.6.2",
         "typescript": "^5.4.2",
         "typescript-log": "^2.0.0",
+        "url": "^0.11.3",
         "util": "^0.12.5",
         "webpack": "^5.0.0"
     },

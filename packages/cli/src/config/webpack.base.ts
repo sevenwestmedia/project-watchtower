@@ -47,7 +47,8 @@ export function baseConfig(options: CreateWebpackConfigOptions): webpack.Configu
                 '@project-watchtower/server',
             ],
             fallback: {
-                util: require.resolve('util/')
+                util: require.resolve('util/'),
+                url: require.resolve('url/')
             }
         },
     }
