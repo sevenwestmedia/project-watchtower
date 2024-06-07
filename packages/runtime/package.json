@@ -14,7 +14,8 @@
     "description": "",
     "keywords": [],
     "scripts": {},
-    "dependencies": {},
-    "devDependencies": {},
-    "peerDependencies": {}
+    "dependencies": {
+        "@babel/runtime": "7.12.18"
+    },
+    "devDependencies": {}
 }

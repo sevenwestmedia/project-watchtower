@@ -6,7 +6,7 @@ import { Logger } from 'typescript-log'
 export const readFileSync = (log: Logger, filePath: string) => {
     try {
         return fs.readFileSync(filePath, 'utf8')
-    } catch (err) {
+    } catch (err: any) {
         log.error({ err, filePath }, 'Error reading file')
         throw err
     }
@@ -43,7 +43,7 @@ export const writeFile = (log: Logger, filePath: string, fileContent: string) =>
                 log.error({ err, filePath }, 'Error writing file')
                 reject(err)
             } else {
-                resolve()
+                resolve({})
             }
         })
     })

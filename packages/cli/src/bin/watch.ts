@@ -20,7 +20,7 @@ async function watch(
     buildConfig: BuildConfig,
     watchProcessEnv: NodeJS.ProcessEnv,
     ...args: WatchParam[]
-): Promise<ChildProcess | WatchServer> {
+): Promise<ChildProcess | WatchServer | undefined> {
     const { HAS_SERVER } = buildConfig
     const additionalStartParams: StartParam[] = []
     const env: NodeJS.ProcessEnv = { ...watchProcessEnv }

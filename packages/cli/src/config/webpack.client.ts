@@ -1,6 +1,5 @@
 import fs from 'fs'
 import path from 'path'
-import webpack from 'webpack'
 import AssetsPlugin from 'assets-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
@@ -44,7 +43,7 @@ export const clientBaseConfig: CreateWebpackConfig = (options) => {
     }
 
     const plugins = getPlugins(options.buildConfig)
-    const resolvePlugins: webpack.ResolvePlugin[] = []
+    const resolvePlugins: any[] = []
 
     if (SERVER_PUBLIC_DIR) {
         const indexHtml = path.resolve(SERVER_PUBLIC_DIR, 'index.html')

@@ -12,7 +12,7 @@ export function clean(log: Logger, paths: string | string[]): Promise<any> {
                 log.error({ err }, 'Clean error')
                 reject(err)
             } else {
-                resolve()
+                resolve({})
             }
         })
     })

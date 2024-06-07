@@ -3,7 +3,7 @@
 var path = require('path')
 var autoprefixer = require('autoprefixer')
 var MiniCssExtractPlugin = require('mini-css-extract-plugin')
-var OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+var CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 exports.default = {
     base: {
@@ -32,8 +32,10 @@ exports.default = {
                         {
                             loader: 'postcss-loader',
                             options: {
+                                postcssOptions: {
+                                    plugins: () => [autoprefixer({ browsers: ['last 2 versions'] })],
+                                },
                                 sourceMap: true,
-                                plugins: () => [autoprefixer({ browsers: ['last 2 versions'] })],
                             },
                         },
                         {
@@ -79,7 +81,7 @@ exports.default = {
                 }),
             ],
             optimization: {
-                minimizer: [new OptimizeCSSAssetsPlugin({})],
+                minimizer: [new CssMinimizerPlugin()],
             },
         }
     },

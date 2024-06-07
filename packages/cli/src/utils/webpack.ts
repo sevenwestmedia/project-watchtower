@@ -1,7 +1,7 @@
 import { Logger } from 'typescript-log'
 import webpack from 'webpack'
 
-export const webpackStatsConfig: webpack.Stats.ToStringOptionsObject = {
+export const webpackStatsConfig: webpack.StatsOptions = {
     children: false,
     chunkModules: false,
     chunks: false,
@@ -23,7 +23,7 @@ export const webpackPromise = (log: Logger, config: webpack.Configuration) =>
             if (err) {
                 log.error({ err }, 'Failed to compile')
                 reject(err)
-            } else {
+            } else if(stats) {
                 printWebpackStats(log, stats)
 
                 if (stats.hasErrors()) {

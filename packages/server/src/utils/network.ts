@@ -6,7 +6,7 @@ export function waitForConnection(port: number, timeout = 30000) {
             const connect = () => {
                 const socket = net.connect({ port }, () => {
                     socket.end()
-                    resolve()
+                    resolve({})
                 })
                 socket.on('error', () => {
                     setTimeout(connect, 2000)
@@ -14,7 +14,7 @@ export function waitForConnection(port: number, timeout = 30000) {
             }
             connect()
         }),
-        new Promise((resolve) => setTimeout(() => resolve(), timeout)),
+        new Promise((resolve) => setTimeout(() => resolve({}), timeout)),
     ])
 }
 
@@ -27,7 +27,7 @@ export function checkPortAvailability(port: number) {
         server.on('error', () => reject())
 
         server.listen(port, () => {
-            server.once('close', () => resolve())
+            server.once('close', () => resolve({}))
             server.close()
         })
     })

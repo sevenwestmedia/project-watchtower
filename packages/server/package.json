@@ -25,7 +25,7 @@
         "react-dom": ">16.6",
         "react-helmet-async": "^1.0.4",
         "react-router-dom": "^5.1.2",
-        "tslib": "^2.0.1",
+        "tslib": "^2.6.2",
         "typescript-log": "^2.0.0"
     }
 }

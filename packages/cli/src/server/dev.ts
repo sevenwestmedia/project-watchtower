@@ -24,6 +24,10 @@ export const getHotReloadMiddleware: HotReloadMiddleware = (log, buildConfig) =>
     }
     const compiler = webpack(config)
 
+    if(compiler === undefined) {
+        throw new Error('Unable to build compiler')
+    }
+
     const dev = webpackDevMiddleware(compiler, {
         // do not serve index.html on / route
         // https://github.com/webpack/webpack-dev-middleware/issues/153
@@ -46,7 +50,7 @@ export async function openBrowser(log: Logger, port: number) {
 
     try {
         await open(`http://localhost:${port}`, { url: true })
-    } catch (e) {
+    } catch (e: any) {
         log.warn(e, 'Opening browser failed')
     }
 }

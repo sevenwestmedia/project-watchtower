@@ -1,10 +1,11 @@
 import fs from 'fs'
-import webpack from 'webpack'
+import { Externals } from 'webpack'
 import path from 'path'
 import { CreateWebpackConfigOptions } from '.'
+
 export function createServerExternals(
     options: CreateWebpackConfigOptions,
-): webpack.ExternalsFunctionElement {
+): Externals {
     const baseDirNodeModules = path.resolve(options.buildConfig.BASE, 'node_modules')
     const nodeModules: string[] = []
     if (fs.existsSync(baseDirNodeModules)) {
@@ -14,7 +15,9 @@ export function createServerExternals(
     if (fs.existsSync(cwdNodeModules)) {
         nodeModules.push(...fs.readdirSync(cwdNodeModules))
     }
-    return (_context, request, callback) => {
+    return (data, callback) => {
+        const request = data.request
+
         if (request === '@project-watchtower/cli') {
             resolveFromNodeModules()
         } else if (
@@ -23,14 +26,14 @@ export function createServerExternals(
         ) {
             includeInBundle()
         } else if (options.buildConfig.SERVER_BUNDLE_ALL_EXCEPT) {
-            if (options.buildConfig.SERVER_BUNDLE_ALL_EXCEPT.includes(request)) {
+            if (request && options.buildConfig.SERVER_BUNDLE_ALL_EXCEPT.includes(request)) {
                 resolveFromNodeModules()
             } else {
                 includeInBundle()
             }
-        } else if (options.buildConfig.SERVER_INCLUDE_IN_BUNDLE.includes(request)) {
+        } else if (request && options.buildConfig.SERVER_INCLUDE_IN_BUNDLE.includes(request)) {
             includeInBundle()
-        } else if (nodeModules.includes(request)) {
+        } else if (request && nodeModules.includes(request)) {
             resolveFromNodeModules()
         } else {
             includeInBundle()

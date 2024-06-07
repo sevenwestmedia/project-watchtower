@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-undef
+/* eslint-disable no-undef */
 module.exports = {
     default: {
         CLIENT_ENTRY: './examples/ssr-with-sass/src/client/index.tsx',
