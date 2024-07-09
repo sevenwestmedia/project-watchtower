@@ -35,7 +35,7 @@ export function getTypeScriptLoaderWebpackConfig(
         },
     }
 
-    const esBuildTarget = buildTarget === 'client' ? 'es2015' : 'node14'
+    const esBuildTarget = buildTarget === 'client' ? 'esnext' : 'node18'
 
     const esbuildLoader = {
         loader: 'esbuild-loader',
