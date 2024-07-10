@@ -1,5 +1,11 @@
 # @project-watchtower/cli
 
+## 2.0.0-beta.22
+
+### Minor Changes
+
+-   36b4b58: Updated to compile with 'ESNext' instead of 'ES2015', and updated dependency for 'esbuild-loader'.
+
 ## 2.0.0-beta.21
 
 ### Major Changes
