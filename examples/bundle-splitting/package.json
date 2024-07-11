@@ -1,6 +1,6 @@
 {
     "name": "bundle-splitting-using-loadable",
-    "version": "2.0.0-beta.1",
+    "version": "2.0.0",
     "description": "",
     "main": "dist/server.js",
     "license": "MIT",
