@@ -111,7 +111,7 @@
         "typescript-log": "^2.0.0",
         "url": "^0.11.3",
         "util": "^0.12.5",
-        "webpack": "^5.0.0"
+        "webpack": "^5.94.0"
     },
     "version": "0.0.0"
 }
